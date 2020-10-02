@@ -1,0 +1,574 @@
+﻿using System.Runtime.InteropServices;
+using System.Reflection;
+using System.Net;
+using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Resources;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+#if !NET35
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+#endif
+
+using NEXO.Properties;
+using COMMON;
+using NEXO;
+
+namespace NEXO.Server
+{
+	[ComVisible(false)]
+	public sealed class NexoRetailerServer: NexoRetailer
+	{
+		#region constructor
+		public NexoRetailerServer()
+		{
+
+			SupportedProtocolVersions = new NexoSupportedProtocolVersions();
+			ServerProtocolVersion = new NexoProtocolVersion(NexoVersion.Short);
+			try
+			{
+				SupportedProtocolVersions.Add(ServerProtocolVersion.Value, ServerProtocolVersion);
+			}
+			catch (Exception) { }
+			AcceptedEndPoints = new NexoDictionaryOfEndPoints("ACCEPTED ENDPOINTS");
+			DeclinedEndPoints = new NexoDictionaryOfEndPoints("DECLINED ENDPOINTS");
+			AcceptedSaleID = new NexoDictionaryOfPartners("ACCEPTED SALE");
+			DeclinedSaleID = new NexoDictionaryOfPartners("DECLINED SALE");
+		}
+		#endregion
+
+		#region public properties
+		/// <summary>
+		/// Indicates whether the serve ris actually running or not
+		/// </summary>
+		public bool IsRunning { get => null != StreamServer && StreamServer.IsRunning; }
+		/// <summary>
+		/// Thread of the server
+		/// </summary>
+		public CStreamServer StreamServer { get; private set; }
+		/// <summary>
+		/// Allow duplicated messages to be received
+		/// </summary>
+		public bool AllowDuplicates { get; set; }
+		/// <summary>
+		/// Version of Nexo Retailer specifications implemented by the server
+		/// </summary>
+		public NexoProtocolVersion ServerProtocolVersion { get; }
+		/// <summary>
+		/// All supported protocol versions
+		/// </summary>
+		public NexoSupportedProtocolVersions SupportedProtocolVersions { get; }
+		/// <summary>
+		/// All end points allowed to connect
+		/// </summary>
+		public NexoDictionaryOfEndPoints AcceptedEndPoints { get; }
+		/// <summary>
+		/// All end points not allowed to connect
+		/// </summary>
+		public NexoDictionaryOfEndPoints DeclinedEndPoints { get; }
+		/// <summary>
+		/// All end points allowed to connect
+		/// </summary>
+		public NexoDictionaryOfPartners AcceptedSaleID { get; }
+		/// <summary>
+		/// All end points not allowed to connect
+		/// </summary>
+		public NexoDictionaryOfPartners DeclinedSaleID { get; }
+		/// <summary>
+		/// data used to initialise the calling environement of the server thread
+		/// </summary>
+		public NexoRetailerServerSettings Settings { get; private set; } = null;
+		/// <summary>
+		/// Indicates whether a dump of all commands processed by the server must be produced when the server stops
+		/// </summary>
+		public bool DumpOnExit { get; set; } = false;
+		/// <summary>
+		/// This indicator set to true allows the application to change the result already decided by the server component (sent through OnRequest)
+		/// CHanging the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
+		/// </summary>
+		public bool AllowChangingResults { get; set; } = false;
+		/// <summary>
+		/// server startup datetime
+		/// </summary>
+		private DateTime _startup;
+		/// <summary>
+		/// Server activity while running
+		/// </summary>
+		public NexoRetailerServerActivity Activity = new NexoRetailerServerActivity();
+		public int TimerBeforeReply { get; set; }
+		#endregion
+
+		#region private properties
+		/// <summary>
+		/// Server stopping mutex
+		/// </summary>
+		private Mutex isStoppingMutex = new Mutex(false);
+		#endregion
+
+		#region public methods
+		/// <summary>
+		/// Starts the Nexo server.
+		/// </summary>
+		/// <param name="settings">Parameters to use to run the server thread</param>
+		/// <returns>A <see cref="CThread"/> object if the serve ris started, null otherwise</returns>
+		public bool Start(NexoRetailerServerSettings settings)
+		{
+			if (IsRunning)
+				return true;
+			Settings = settings;
+			StreamServer = new CStreamServer();
+			StreamServer.StartServer(new CStreamServerStartSettings()
+			{
+				StreamServerSettings = settings.Settings,
+				ThreadData = settings.ThreadData,
+				OnConnect = OnConnect,
+				OnMessage = OnMessage,
+				OnStart = OnStart,
+				OnStop = OnStop,
+				Parameters = settings.Parameters,
+			});
+			if (null != StreamServer)
+			{
+				_startup = DateTime.Now;
+				return true;
+			}
+			return false;
+		}
+		/// <summary>
+		/// Stop the Nexo server.
+		/// </summary>
+		/// <returns>True if the thread has started, false otherwise</returns>
+		public bool Stop(bool wait = true)
+		{
+			if (!IsRunning)
+				return true;
+			if (isStoppingMutex.WaitOne(0))
+			{
+				StreamServer.StopServer();
+				StreamServer = null;
+			}
+			return true;
+		}
+		#endregion
+
+		#region private methods
+		/// <summary>
+		/// <see cref="CStreamServerStartSettings.OnStart"/>
+		/// </summary>
+		/// <param name="threadData"></param>
+		/// <param name="o"></param>
+		/// <returns></returns>
+		private bool OnStart(CThreadData threadData = null, object o = null)
+		{
+			try
+			{
+				return null != Settings.OnStart ? Settings.OnStart(threadData, o) : true;
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); return false; }
+		}
+		/// <summary>
+		/// <see cref="CStreamServerStartSettings.OnConnect"/>
+		/// </summary>
+		/// <param name="tcp"></param>
+		/// <param name="threadData"></param>
+		/// <param name="o"></param>
+		/// <returns></returns>
+		private bool OnConnect(TcpClient tcp, CThreadData threadData = null, object o = null)
+		{
+			try
+			{
+				NexoEndPoint ep = new NexoEndPoint(tcp);
+				Activity.AddEndPoint(ep);
+				// test list of accepted/refused end points
+				if (((0 == AcceptedEndPoints.Count ? true : AcceptedEndPoints.ContainsKey(ep.Key))
+					&& !DeclinedEndPoints.ContainsKey(ep.Key))
+					&& ((null == Settings.OnConnect) || (Settings.OnConnect(tcp, threadData, o))))
+				{
+					ep.AddConnection(true);
+					CLog.Add(StreamServer.Description + "EndPoint allowed to connect: " + ep.Key);
+					return true;
+				}
+				ep.AddConnection(false);
+				CLog.Add(StreamServer.Description + "EndPoint not allowed to connect: " + ep.Key, TLog.ERROR);
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			return false;
+		}
+		/// <summary>
+		/// <see cref="CStreamServerStartSettings.OnMessage"/>
+		/// </summary>
+		/// <param name="tcp"></param>
+		/// <param name="request"></param>
+		/// <param name="addBufferSize"></param>
+		/// <param name="threadData"></param>
+		/// <param name="o"></param>
+		/// <returns></returns>
+		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThreadData threadData = null, object o = null)
+		{
+			addBufferSize = true;
+			byte[] reply = null;
+			try
+			{
+				// get the XML request
+				string xml = Encoding.UTF8.GetString(request);
+				if (!string.IsNullOrEmpty(xml))
+				{
+					// save the mesage
+					Activity.AddReceivedMessage(new NexoAnyMessage(xml));
+					// try to identify the received message
+					NexoItem item = new NexoItem(xml);
+					if (item.IsValid)
+					{
+						string shortmessage = "Received " + item.Category.ToString().ToUpper() + " " + item.Type.ToString();
+						string fullmessage = shortmessage + " - Message [" + xml.Length + " bytes]: " + xml;
+
+						// create the Nexo object according to what is expected
+						NexoObjectToProcess toprocess = new NexoObjectToProcess(item);
+						if (item.IsNotification)
+						{
+							toprocess.Action = NexoNextAction.noReply;
+							toprocess.CanModifyAction = false;
+						}
+
+						else if (item.IsRequest)
+						{
+							RequestResponseType response = ProcessRequest(tcp, item);
+							toprocess.SuggestedAction = response.Action;
+							toprocess.CurrentObject.Response = response.Response;
+						}
+						else if (item.IsReply)
+						{
+							// fetch original request
+							toprocess.SuggestedAction = NexoNextAction.final;
+						}
+						else
+						{
+							toprocess.SuggestedAction = NexoNextAction.nothing;
+						}
+
+						/********************/
+
+						CLog.Add(StreamServer.Description + fullmessage + " - Action: " + toprocess.SuggestedAction.ToString());
+
+						// arrived here, let's see what to do next
+						if (null != toprocess && NexoNextAction.nothing != toprocess.SuggestedAction)
+						{
+							try
+							{
+								bool f = true;
+								// request analysis by the application
+								try
+								{
+									if (item.IsNotification)
+										Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
+									else if (item.IsRequest)
+										Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
+									else if (item.IsReply)
+										Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
+								}
+								catch (Exception ex)
+								{
+									CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceived generated an exception");
+									f = false;
+								}
+								if (f && toprocess.Action != toprocess.SuggestedAction)
+								{
+									CLog.Add(StreamServer.Description + shortmessage + " - Action has been modified by the application: " + toprocess.Action.ToString());
+								}
+								if (f)
+								{
+									// analyse decision
+									string s = null, t = null, c = null;
+									switch (toprocess.Action)
+									{
+										case NexoNextAction.sendReply:
+										case NexoNextAction.sendReplyWithError:
+											s = toprocess.CurrentObject.SerializeAndCompleteReply();
+											c = toprocess.CurrentObject.Reply.MessageHeader.MessageCategory.ToUpper();
+											t = MessageTypeEnumeration.Response.ToString().ToUpper();
+											break;
+										case NexoNextAction.sendRequest:
+											s = toprocess.NextObject.SerializeAndCompleteRequest();
+											c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
+											t = MessageTypeEnumeration.Request.ToString().ToUpper();
+											break;
+										case NexoNextAction.sendNotification:
+											s = toprocess.NextObject.SerializeAndCompleteRequest();
+											c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
+											t = MessageTypeEnumeration.Notification.ToString().ToUpper();
+											break;
+										default:
+											// nothing to do
+											break;
+									}
+									if (!string.IsNullOrEmpty(s))
+									{
+										// before sending the message fill it with missing data
+
+										CLog.Add(StreamServer.Description + "Sending " + c + " " + t + " - Message[" + s.Length + " bytes]: " + s);
+										// set message to send (or not)
+										reply = Encoding.UTF8.GetBytes(s);
+										NexoItem itemToSend = new NexoItem(s);
+										try
+										{
+											Thread.Sleep(TimerBeforeReply*CStreamClientSettings.ONESECOND);
+											Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, o);
+										}
+										catch (Exception ex)
+										{
+											CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
+										}
+									}
+								}
+							}
+							catch (Exception ex)
+							{
+								CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+							}
+						}
+						// store the replied message if any
+						if (null != reply)
+							Activity.AddSentMessage(new NexoAnyMessage(Encoding.UTF8.GetString(reply)));
+					}
+					else
+					{
+						CLog.Add(StreamServer.Description + "Invalid message received", TLog.WARNG);
+						// nothing to do
+					}
+				}
+				else
+				{
+					CLog.Add(StreamServer.Description + " - NO ACTION - Unrecognized command: " + xml, TLog.ERROR);
+				}
+			}
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				reply = null;
+			}
+			return reply;
+		}
+		/// <summary>
+		/// <see cref="CStreamServerStartSettings.OnStop"/>
+		/// </summary>
+		/// <param name="threadData"></param>
+		/// <param name="o"></param>
+		private void OnStop(CThreadData threadData = null, object o = null)
+		{
+			try
+			{
+				// should the server stop ?
+				Settings.OnStop?.Invoke(threadData, o);
+				// dump data if required
+				if (DumpOnExit)
+				{
+					// dump server
+				}
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+		}
+		/// <summary>
+		/// Processing of a request received by the server
+		/// </summary>
+		/// <param name="tcp">TCP settings of the originator of the message</param>
+		/// <param name="item">The request item received froom the client</param>
+		private RequestResponseType ProcessRequest(TcpClient tcp, NexoItem item)
+		{
+			string xml = item.ToString();
+			CLog.Add("Processing request: " + xml);
+			RequestResponseType response = new RequestResponseType();
+			response.Action = item.ReplyRequired ? NexoNextAction.sendReply : NexoNextAction.noReply;
+			// validate XML against XSD
+			bool fOK = false;
+			bool fConnected = false;
+			try
+			{
+				// save the message
+				// determine whether the request is valid or not
+				NexoRetailerServerMessageHeaderValidator mhex = new NexoRetailerServerMessageHeaderValidator(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
+				if (fOK = mhex.IsValid)
+				{
+					NexoPartner client = Activity.AddClient(new NexoPartner(tcp, ((SaleToPOIRequest)item.Item).MessageHeader));
+					NexoMessage msg = client.AddMessage(new NexoMessage((SaleToPOIRequest)item.Item, xml, true));
+					// if LoginRequest
+					if (MessageCategoryEnumeration.Login == item.Category)
+					{
+						NexoSession session = client.AddSession(new NexoSession(client));
+						// test list of accepted/refused sale
+						if ((0 == AcceptedSaleID.Count || AcceptedSaleID.ContainsKey(mhex.SaleID.Value))
+								&& !DeclinedSaleID.ContainsKey(mhex.SaleID.Value))
+						{
+							// verify protocol version
+							try
+							{
+								NexoProtocolVersion version = SupportedProtocolVersions[mhex.ProtocolVersion.Value];
+								// add the client to the list of connected clients
+								session.SetConnected();
+								Activity.AddCurrentClient(client);
+								response.Action = NexoNextAction.sendReply;
+							}
+							catch (Exception)
+							{
+								NexoErrors.UnavailableServiceTooOldProtocolVersion(response.Response, mhex.ProtocolVersion.Value, ServerProtocolVersion.Value);
+								response.Action = NexoNextAction.sendReplyWithError;
+							}
+						}
+						else
+						{
+							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "SaleID : " + mhex.SaleID.Value + " not allowed to connect");
+							response.Action = NexoNextAction.sendReplyWithError;
+						}
+					}
+					// if LogoutRequest
+					else if (MessageCategoryEnumeration.Logout == item.Category)
+					{
+						NexoSession session = client.LastSession();
+						if (null != session)
+						{
+							// arrived here the logout message has been accepted, mark the SaleID as not connected
+							session.SetDisconnected();
+							Activity.RemoveCurrentClient(client);
+							response.Action = NexoNextAction.sendReply;
+						}
+						else
+						{
+							// not already connected
+							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "Logout request was declined");
+							response.Action = NexoNextAction.sendReplyWithError;
+						}
+					}
+					else
+					{
+						// only need to verify connection
+						fConnected = Activity.Clients[client.Key].CurrentConnection.Connected;
+						if (!fConnected)
+						{
+							NexoErrors.NotAllowedForbiddenMessage(response.Response, "Not connected, the message " + msg.Key + " hasn't been processed");
+							response.Action = item.ReplyRequired ? NexoNextAction.sendReplyWithError : NexoNextAction.noReply;
+						}
+					}
+				}
+				else
+				{
+					// the request generated an error
+					response.Response = mhex.Response;
+					response.Action = item.ReplyRequired ? NexoNextAction.sendReplyWithError : NexoNextAction.noReply;
+				}
+				CLog.Add("Request is " + (fOK ? "VALID" : "INVALID") + " - Analysed next action: " + response.Action.ToString());
+			}
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "PROCESSING ABORTED");
+				response = null;
+			}
+			return response;
+		}
+		class RequestResponseType
+		{
+			public ResponseType Response = new ResponseType() { Result = ResultEnumeration.Success.ToString() };
+			public NexoNextAction Action;
+		}
+		/// <summary>
+		/// Processing of a reply received by the server (should be a device action)
+		/// </summary>
+		/// <param name="tcp">TCP settings of the originator of the message</param>
+		/// <param name="item">The request item received froom the client</param>
+		private RequestResponseType ProcessReply(TcpClient tcp, NexoItem item)
+		{
+			return null;
+			//string xml = item.ToString();
+			//CLog.Add("Processing request: " + xml);
+			//RequestResponseType response = new RequestResponseType();
+			//response.Next = item.ReplyRequired ? NexoNextAction.sendReply : NexoNextAction.noReply;
+			//// validate XML against XSD
+			//bool fOK = false;
+			//bool fConnected = false;
+			//try
+			//{
+			//	// save the message
+			//	NexoPartner client = new NexoPartner(tcp, item.Request.MessageHeader);
+			//	NexoMessage msg = new NexoMessage(item.Request, xml, true);
+			//	if (fOK = Activity.AddClientMessage(client, msg))
+			//	{
+			//		// determine whether the request is valid or not
+			//		NexoRetailerServerMessageHeaderValidator mhex = new NexoRetailerServerMessageHeaderValidator(item.Request.MessageHeader, ServerProtocolVersion);
+			//		if (fOK = mhex.IsValid)
+			//		{
+			//			// if LoginRequest
+			//			if (MessageCategoryEnumeration.Login == item.Category)
+			//			{
+			//				// verify protocol version
+			//				if (SupportedProtocolVersions.Contains(mhex.ProtocolVersion))
+			//				{
+			//					// add the client to the list of connected clients
+			//					if (fConnected = Activity.SetConnected(client, true))
+			//						response.Next = NexoNextAction.sendReply;
+			//					else
+			//					{
+			//						NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "Login was declined");
+			//						response.Next = NexoNextAction.sendReplyWithError;
+			//					}
+			//				}
+			//				else
+			//				{
+			//					NexoErrors.UnavailableServiceTooOldProtocolVersion(response.Response, mhex.ProtocolVersion.Value, ServerProtocolVersion.Value);
+			//					response.Next = NexoNextAction.sendReplyWithError;
+			//				}
+			//			}
+			//			// if LogoutRequest
+			//			else if (MessageCategoryEnumeration.Logout == item.Category)
+			//			{
+			//				// arrived here the logout message has been accepted, mark the SaleID as not connected
+			//				Activity.SetConnected(client, false);
+			//				if (fConnected = Activity.Clients[client.Key].CurrentConnection.Connected)
+			//				{
+			//					NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "Logout was declined");
+			//					response.Next = NexoNextAction.sendReplyWithError;
+			//				}
+			//			}
+			//			else
+			//			{
+			//				// only need to verify connection
+			//				fConnected = Activity.Clients[client.Key].CurrentConnection.Connected;
+			//				if (!fConnected)
+			//				{
+			//					NexoErrors.NotAllowedForbiddenMessage(response.Response, "Not connected, the message " + msg.Key + " hasn't been processed");
+			//					response.Next = NexoNextAction.sendReplyWithError;
+			//				}
+			//			}
+			//		}
+			//		else
+			//		{
+			//			// the request generated an error
+			//			response.Response = mhex.Response;
+			//			response.Next = NexoNextAction.sendReplyWithError;
+			//		}
+			//	}
+			//	else
+			//	{
+			//		NexoErrors.MessageFormatRepeatedMessage(response.Response, msg.Key);
+			//		response.Next = NexoNextAction.sendReplyWithError;
+			//	}
+			//	CLog.Add("Request is " + (fOK ? "VALID" : "INVALID") + " - Next action: " + response.Next.ToString());
+			//}
+			//catch (Exception ex)
+			//{
+			//	CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "PROCESSING ABORTED");
+			//	response = null;
+			//}
+			//return response;
+		}
+		#endregion
+	}
+}

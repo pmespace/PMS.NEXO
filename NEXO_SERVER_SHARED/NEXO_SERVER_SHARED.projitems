@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>779a6456-1e80-4818-b67a-c8cef1b0b454</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NEXO_SERVER_SHARED</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerActivity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerMessageHeaderEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerSettings.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6897a747-bfbd-46be-a4d5-b4a8bcea0e2c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NEXO</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoActivity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoPartner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoEndPoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoSession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoSetsOfObjects.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoAnyMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoDelegates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Follow-Up\NexoKey.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoAdmin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoBalanceInquiry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoBatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoCardAcquisition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoCardReaderInit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoCardReaderAPDU.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoCardReaderPowerOFF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDeviceDisplay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDeviceInputUpdate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDeviceSound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoEnableService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoGetTotals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLoyalty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoPIN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReconciliation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoStoredValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoTransmit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoAbort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDiagnosis.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoTransactionStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDeviceInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDevicePrint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLogin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLogout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoFinancial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReversal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessageHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages\EpasSaleToPOIMessages.xsd.30.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages\NexoSaleToPOIMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoErrors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoTypes.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>PMS.NEXO</id>
+    <version>1.0.0</version>
+    <title>PMS.NEXO</title>
+    <authors>philippemp31</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <repository type="git" url="https://github.com/pmespace/PMS.NEXO.git" branch="master" />
+    <projectUrl>https://github.com/pmespace/PMS.NEXO/</projectUrl>
+    <description>
+      Nexo Retailer v3.0 library supporting all messages defined inside the specifications.
+      Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
+    </description>
+    <releaseNotes>Creation</releaseNotes>
+    <copyright>PMS - philippemp31</copyright>
+    <developmentDependency>true</developmentDependency>
+    <tags>NEXO</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7">
+        <dependency id="PMS.COMMON" version="1.0.1" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
+      </group>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="PMS.COMMON" version="1.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src=".\Release\PMS.NEXO.dll" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO.xml" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
+    <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
+  </files>
+</package>

@@ -184,6 +184,7 @@ Public Class FSimulator
 			Catch ex As Exception
 				udServerDelay.Value = 0
 			End Try
+			cbSynchronous.Checked = settings.Synchronous
 		End If
 	End Sub
 
@@ -223,6 +224,8 @@ Public Class FSimulator
 		settings.TextToPrint = TextToPrint
 		settings.Infinite = cbInfinite.Checked
 		settings.ServerDelay = udServerDelay.Value
+		settings.Synchronous = cbSynchronous.Checked
+
 		json.WriteSettings(settings)
 	End Sub
 
@@ -390,6 +393,7 @@ Public Class FSimulator
 		Dim dt As DateTime = Now
 		Dim start As Integer = RichTextBox1.TextLength
 		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
+		RichTextBox1.SelectionStart = start
 		If position = Position.server Then
 			RichTextBox1.SelectionColor = lblServerHeader.ForeColor
 			RichTextBox1.SelectionAlignment = HorizontalAlignment.Right
@@ -403,7 +407,6 @@ Public Class FSimulator
 			RichTextBox1.SelectionColor = Color.Black
 			RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
 		End If
-		RichTextBox1.SelectionStart = start
 		RichTextBox1.AppendText(txt & vbCrLf)
 		RichTextBox1.SelectionLength = RichTextBox1.TextLength - start
 		RichTextBox1.ScrollToCaret()
@@ -770,7 +773,7 @@ Public Class FSimulator
 		Dim msg As String = String.Empty
 		Dim activity As ActivityEvent = ActivityEvent.none
 
-		Dim s As String = obj.Category.ToString
+		Dim s As String = obj.Type.ToString
 		If MessageCategoryEnumeration.Payment = obj.Category Then
 			Dim f As New NexoFinancial()
 			f.FromItem(obj.Item)
@@ -891,6 +894,18 @@ Public Class FSimulator
 		End If
 	End Function
 
+	Private Sub DisplaySynchronousExchange(client As NexoRetailerClient, o As NexoObject, s As String)
+		Dim q As String = o.SerializedRequest, y As String = o.SerializedReply
+		AddLine(Position.client, "SYNCHRONOUSLY SENT " & o.MessageCategory.ToString.ToUpper & " " & " REQUEST TO " & s & MessageLength(q) & vbCrLf & q)
+		If client.Received Then
+			AddLine(Position.client, "SYNCHRONOUSLY RECEIVED " & o.MessageCategory.ToString.ToUpper & " " & " RESPONSE FROM " & s & MessageLength(y) & vbCrLf & y)
+		Else
+			Dim sts As String = "TIMEOUT"
+			If client.Cancelled Then sts = "CANCELLED"
+			AddLine(Position.client, "SYNCHRONOUS  EXCHANGE FAILED WITH STATUS: " & sts)
+		End If
+	End Sub
+
 	Private Sub pbLogin_Click(sender As Object, e As EventArgs) Handles pbLogin.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogin()
@@ -907,8 +922,14 @@ Public Class FSimulator
 		Dim client As NexoRetailerClient = CurrentClient()
 		Dim f As Boolean = True
 		If f = Not IsNothing(client) Then
-			Dim t As Object = client.SendRequest(o, GetTimeout())
-			If f = Not IsNothing(t) Then
+			If cbSynchronous.Checked Then
+				If client.SendRequestSync(o, GetTimeout()) Then
+					DisplaySynchronousExchange(client, o, client.KeyServer)
+				End If
+			Else
+				Dim t As Object = client.SendRequest(o, GetTimeout())
+				If f = Not IsNothing(t) Then
+				End If
 			End If
 		End If
 		If Not f Then AddLine(Position.client, "ERROR SENDING LOGIN REQUEST" & MessageLength(s) & vbCrLf & s)
@@ -925,8 +946,14 @@ Public Class FSimulator
 		Dim client As NexoRetailerClient = CurrentClient()
 		Dim f As Boolean = True
 		If f = Not IsNothing(client) Then
-			Dim t As Object = client.SendRequest(o, GetTimeout())
-			If f = Not IsNothing(t) Then
+			If cbSynchronous.Checked Then
+				If client.SendRequestSync(o, GetTimeout()) Then
+					DisplaySynchronousExchange(client, o, client.KeyServer)
+				End If
+			Else
+				Dim t As Object = client.SendRequest(o, GetTimeout())
+				If f = Not IsNothing(t) Then
+				End If
 			End If
 		End If
 		If Not f Then AddLine(Position.client, "ERROR SENDING LOGOUT REQUEST" & MessageLength(s) & vbCrLf & s)
@@ -955,8 +982,14 @@ Public Class FSimulator
 		Dim client As NexoRetailerClient = CurrentClient()
 		Dim f As Boolean = True
 		If f = Not IsNothing(client) Then
-			Dim t As Object = client.SendRequest(o, GetTimeout())
-			If f = Not IsNothing(t) Then
+			If cbSynchronous.Checked Then
+				If client.SendRequestSync(o, GetTimeout()) Then
+					DisplaySynchronousExchange(client, o, client.KeyServer)
+				End If
+			Else
+				Dim t As Object = client.SendRequest(o, GetTimeout())
+				If f = Not IsNothing(t) Then
+				End If
 			End If
 		End If
 		If Not f Then AddLine(Position.client, "ERROR SENDING DEVICE INPUT REQUEST" & MessageLength(s) & vbCrLf & s)
@@ -986,8 +1019,14 @@ Public Class FSimulator
 				Dim client As NexoRetailerClient = CurrentClient()
 				Dim f As Boolean = True
 				If f = Not IsNothing(client) Then
-					Dim t As Object = client.SendRequest(o, GetTimeout())
-					If f = Not IsNothing(t) Then
+					If cbSynchronous.Checked Then
+						If client.SendRequestSync(o, GetTimeout()) Then
+							DisplaySynchronousExchange(client, o, client.KeyServer)
+						End If
+					Else
+						Dim t As Object = client.SendRequest(o, GetTimeout())
+						If f = Not IsNothing(t) Then
+						End If
 					End If
 				End If
 				If Not f Then AddLine(False, "ERROR SENDING DEVICE PRINT REQUEST" & MessageLength(s) & vbCrLf & s)
@@ -1013,8 +1052,14 @@ Public Class FSimulator
 				Dim client As NexoRetailerClient = CurrentClient()
 				Dim f As Boolean = True
 				If f = Not IsNothing(client) Then
-					Dim t As Object = client.SendRequest(o, GetTimeout())
-					If f = Not IsNothing(t) Then
+					If cbSynchronous.Checked Then
+						If client.SendRequestSync(o, GetTimeout()) Then
+							DisplaySynchronousExchange(client, o, client.KeyServer)
+						End If
+					Else
+						Dim t As Object = client.SendRequest(o, GetTimeout())
+						If f = Not IsNothing(t) Then
+						End If
 					End If
 				End If
 				If Not f Then AddLine(Position.client, "ERROR SENDING PAYMENT REQUEST" & MessageLength(s) & vbCrLf & s)

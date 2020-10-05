@@ -871,8 +871,8 @@ namespace NEXO
 	}
 
 	[ComVisible(true)]
-	public class NexoQueueOfObjectsToApplication: Queue<NexoObjectToProcess> { }
+	public class QueueOfNexoObjectToProcess: Queue<NexoObjectToProcess> { }
 
 	[ComVisible(true)]
-	public class NexoStackOfObjectsToApplication: Stack<NexoObjectToProcess> { }
+	public class StackOfNexoObjectToProcess: Stack<NexoObjectToProcess> { }
 }

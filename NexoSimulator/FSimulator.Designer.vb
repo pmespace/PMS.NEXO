@@ -118,6 +118,7 @@ Partial Class FSimulator
 		Me.lblFreeMessage = New System.Windows.Forms.Label()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -394,7 +395,7 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelCommands.AutoSize = True
 		Me.panelCommands.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelCommands.ColumnCount = 8
+		Me.panelCommands.ColumnCount = 9
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -402,8 +403,8 @@ Partial Class FSimulator
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 451.0!))
-		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.Controls.Add(Me.pbLogin, 0, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogout, 1, 0)
 		Me.panelCommands.Controls.Add(Me.pbRefund, 6, 0)
@@ -411,6 +412,7 @@ Partial Class FSimulator
 		Me.panelCommands.Controls.Add(Me.pbPayment, 4, 0)
 		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 2, 0)
 		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 3, 0)
+		Me.panelCommands.Controls.Add(Me.cbSynchronous, 8, 0)
 		Me.panelCommands.Location = New System.Drawing.Point(3, 226)
 		Me.panelCommands.Name = "panelCommands"
 		Me.panelCommands.RowCount = 1
@@ -1519,6 +1521,17 @@ Partial Class FSimulator
 		Me.lblFreeMessage.TabIndex = 13
 		Me.lblFreeMessage.Text = "Free message"
 		'
+		'cbSynchronous
+		'
+		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbSynchronous.AutoSize = True
+		Me.cbSynchronous.Location = New System.Drawing.Point(817, 6)
+		Me.cbSynchronous.Name = "cbSynchronous"
+		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
+		Me.cbSynchronous.TabIndex = 7
+		Me.cbSynchronous.Text = "Synchronous"
+		Me.cbSynchronous.UseVisualStyleBackColor = True
+		'
 		'FSimulator
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1697,4 +1710,5 @@ Partial Class FSimulator
 	Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
 	Friend WithEvents udServerDelay As NumericUpDown
 	Friend WithEvents Label10 As Label
+	Friend WithEvents cbSynchronous As CheckBox
 End Class

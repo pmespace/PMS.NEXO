@@ -65,16 +65,22 @@ namespace NEXO.Client
 		bool Connect(NexoRetailerClientSettings settings);
 		[DispId(102)]
 		void Disconnect();
-		[DispId(103)]
-		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT);
-		[DispId(104)]
-		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT);
-		[DispId(105)]
+		[DispId(110)]
+		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null);
+		[DispId(111)]
+		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null);
+		[DispId(120)]
+		bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT);
+		[DispId(121)]
+		bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT);
+		[DispId(200)]
 		bool SendReply(NexoObject msg);
-		[DispId(106)]
+		[DispId(201)]
 		bool SendReply(SaleToPOIResponse msg);
-		[DispId(107)]
-		object SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT);
+		[DispId(300)]
+		NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT);
+		[DispId(301)]
+		bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT);
 		#endregion
 
 		#region INexoRetailer
@@ -116,14 +122,6 @@ namespace NEXO.Client
 		#endregion
 
 		#region internal classes
-		//public enum ExchangeStatus
-		//{
-		//	_unknown,
-		//	stopped,
-		//	received,
-		//	timedout,
-		//	cancelled,
-		//}
 		/// <summary>
 		/// Describe a request and the response it eventually provoked
 		/// This class handles the lifetime of a request
@@ -159,6 +157,9 @@ namespace NEXO.Client
 		#endregion
 
 		#region public properties
+		/// <summary>
+		/// Settings given when connecting to the server
+		/// </summary>
 		public NexoRetailerClientSettings Settings { get; private set; } = null;
 		/// <summary>
 		/// Key to use for a collection
@@ -232,10 +233,11 @@ namespace NEXO.Client
 			get => _received;
 			private set
 			{
-				if (value && !_timedout && !_cancelled)
+				if (value && !_timedout && !_cancelled && !_error)
 				{
 					ActivateTimeoutTimer = false;
 					_received = value;
+					evtFinished.Set();
 				}
 			}
 		}
@@ -243,13 +245,16 @@ namespace NEXO.Client
 		/// <summary>
 		/// Timeout indicator, true means a timeout occurred while waiting the response
 		/// </summary>
-		public bool Timedout
+		public bool TimedOut
 		{
 			get => _timedout;
 			private set
 			{
-				if (value && !_received && !_cancelled)
+				if (value && !_received && !_cancelled && !_error)
+				{
 					_timedout = value;
+					evtFinished.Set();
+				}
 			}
 		}
 		private bool _timedout = false;
@@ -261,15 +266,88 @@ namespace NEXO.Client
 			get => _cancelled;
 			private set
 			{
-				if (value && !_received && !_timedout)
+				if (value && !_received && !_timedout && !_error)
+				{
 					_cancelled = value;
+					evtFinished.Set();
+				}
 			}
 		}
 		private bool _cancelled = false;
 		/// <summary>
+		/// Indicates whether the exhange is in error or not
+		/// </summary>
+		public bool Error
+		{
+			get => _error;
+			private set
+			{
+				_error = value;
+			}
+		}
+		private bool _error = false;
+		/// <summary>
 		/// Response still expected indicator, true means a response is still expected, no timeout and no cancellation yet
 		/// </summary>
-		public bool InProgress { get => null != exchange && !Timedout && !Cancelled && !Received; }
+		public bool InProgress { get => null != exchange && !Error && !TimedOut && !Cancelled && !Received; }
+		/// <summary>
+		/// Indicates whether disconnecting or not when receiving a logout acknowledgement
+		/// </summary>
+		public bool DisconnectOnLogout { get; set; } = false;
+		#endregion
+
+		#region private properties
+		/// <summary>
+		/// private properties
+		/// </summary>
+		private object myLock = new object();
+		private CThread ReceiverThread = null;
+		private CThreadEvents ReceiverEvents = new CThreadEvents();
+		private CThread DispatchThread = null;
+		private CThreadEvents DispatchEvents = new CThreadEvents();
+		private CStreamClientIO StreamIO = null;
+
+		private QueueOfNexoObjectToProcess receivedMessages = new QueueOfNexoObjectToProcess();
+		private ManualResetEvent evtStopDispatcher = new ManualResetEvent(false);
+		private ManualResetEvent evtCancelled = new ManualResetEvent(false);
+		private ManualResetEvent evtReceived = new ManualResetEvent(false);
+		private ManualResetEvent evtTimeout = new ManualResetEvent(false);
+		private Mutex isDisconnectingMutex = new Mutex(false);
+		private Exchange exchange
+		{
+			get => _exchange;
+			set
+			{
+				Received = false;
+				TimedOut = false;
+				Cancelled = false;
+				if (null != value)
+				{
+					_exchange = value;
+					evtFinished.Reset();
+					ActivateTimeoutTimer = true;
+				}
+				else
+				{
+					_exchange = value;
+					ActivateTimeoutTimer = false;
+				}
+			}
+		}
+		private Exchange _exchange = null;
+		private NexoObject lastRequestedObject { get; set; }
+		//{
+		//	get
+		//	{
+		//		NexoObject tmp = _lastobject;
+		//		_lastobject = null;
+		//		return tmp;
+		//	}
+		//	set => _lastobject = value;
+		//}
+		//private NexoObject _lastobject = null;
+		private NexoRetailerClientSettings settingsToUse { get; set; } = null;
+		private ManualResetEvent evtFinished = new ManualResetEvent(false);
 		/// <summary>
 		/// timer started when the request is sent.
 		/// when elapsed the callback function will set the timeout event
@@ -297,45 +375,6 @@ namespace NEXO.Client
 			}
 		}
 		private Timer _timeouttimer = null;
-		#endregion
-
-		#region private properties
-		/// <summary>
-		/// private properties
-		/// </summary>
-		private object myLock = new object();
-		private CThread ReceiverThread = null;
-		private CThreadEvents ReceiverEvents = new CThreadEvents();
-		private CThread DispatchThread = null;
-		private CThreadEvents DispatchEvents = new CThreadEvents();
-		private CStreamClientIO StreamIO = null;
-
-		private NexoQueueOfObjectsToApplication receivedMessages = new NexoQueueOfObjectsToApplication();
-		private ManualResetEvent evtStopDispatcher = new ManualResetEvent(false);
-		private ManualResetEvent evtCancelled = new ManualResetEvent(false);
-		private ManualResetEvent evtReceived = new ManualResetEvent(false);
-		private ManualResetEvent evtTimeout = new ManualResetEvent(false);
-		private Mutex isDisconnectingMutex = new Mutex(false);
-		private Exchange exchange
-		{
-			get => _exchange;
-			set
-			{
-				Received = false;
-				Timedout = false;
-				Cancelled = false;
-				if (null != value)
-				{
-					_exchange = value;
-					ActivateTimeoutTimer = true;
-				}
-				else
-				{
-					ActivateTimeoutTimer = false;
-				}
-			}
-		}
-		private Exchange _exchange = null;
 		#endregion
 
 		#region public methods
@@ -433,10 +472,11 @@ namespace NEXO.Client
 		/// </summary>
 		/// <param name="msg">request to send</param>
 		/// <param name="timer">timer to wait for a response (in seconds)</param>
+		/// <param name="settings">a <see cref="NexoRetailerClientSettings"/> object to use to process this peculiar message overriding settings declared when connecting to the server</param>
 		/// <returns>An object if the message has been sent, null otherwise</returns>
-		public NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		public NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null)
 		{
-			if (Connected && null != msg)
+			if (Connected && null != msg && !InProgress)
 			{
 				// set saleid and poiid if already given
 				if (!string.IsNullOrEmpty(SaleID))
@@ -448,6 +488,7 @@ namespace NEXO.Client
 					// create the new request template
 					NexoItem item = new NexoItem(msg.Request);
 					// store the request
+					settingsToUse = settings ?? Settings;
 					if (SendXML(xml, item))
 					{
 						Monitor.Enter(myLock);
@@ -455,15 +496,19 @@ namespace NEXO.Client
 						{
 							// save the exchange for later use
 							exchange = new Exchange(item, timer);
+							lastRequestedObject = msg;
 						}
 						catch (Exception ex)
 						{
 							xml = null;
 							exchange = null;
-							CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Error sending request" + MessageDescription(xml));
+							settingsToUse = null;
+							lastRequestedObject = null;
+							CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "FATAL ERROR while sending request" + MessageDescription(xml) + " - Receiving the reponse won't be reported");
 						}
 						finally { Monitor.Exit(myLock); }
-						return new NexoRetailerClientHandle(xml, exchange);
+						if (null != exchange)
+							return new NexoRetailerClientHandle(xml, exchange);
 					}
 					else
 					{
@@ -476,7 +521,7 @@ namespace NEXO.Client
 				CLog.Add(Description + "Not connected or invalid request to send", TLog.ERROR);
 			return null;
 		}
-		public NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		public NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null)
 		{
 			NexoItem item = new NexoItem(msg);
 			if (item.IsValid)
@@ -485,10 +530,51 @@ namespace NEXO.Client
 				if (null != nxo)
 				{
 					nxo.Request = msg;
-					return SendRequest(nxo, timer);
+					return SendRequest(nxo, timer, settings);
 				}
 			}
 			return null;
+		}
+		/// <summary>
+		/// Send a request synchronously, returning only when the response has been received
+		/// or the transactiion has timedout
+		/// or it has been cancelled
+		/// </summary>
+		/// <param name="msg"></param>
+		/// <param name="timer"></param>
+		/// <returns></returns>
+		public bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		{
+			NexoRetailerClientHandle handle = SendRequest(msg, timer, new NexoRetailerClientSettings());
+			if (null != handle)
+			{
+				try
+				{
+					// wait response or event
+					evtFinished.WaitOne();
+					msg.Reply = lastRequestedObject.Reply;
+					return true;
+				}
+				catch (Exception ex)
+				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Error waiting synchronous response" + MessageDescription(handle.XML));
+				}
+			}
+			return false;
+		}
+		public bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		{
+			NexoItem item = new NexoItem(msg);
+			if (item.IsValid)
+			{
+				NexoObject nxo = (NexoObject)NexoItem.AllocateObject(item.Category);
+				if (null != nxo)
+				{
+					nxo.Request = msg;
+					return SendRequestSync(nxo, timer);
+				}
+			}
+			return false;
 		}
 		/// <summary>
 		/// Send a REPLY
@@ -531,10 +617,15 @@ namespace NEXO.Client
 		/// <param name="xml">Requets to send</param>
 		/// <param name="timer">timer to wait for a response (in seconds)</param>
 		/// <returns>An object if the message has been sent, null otherwise</returns>
-		public object SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT)
+		public NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT)
 		{
 			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
 			return SendRequest(request, timer);
+		}
+		public bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT)
+		{
+			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			return SendRequestSync(request, timer);
 		}
 		#endregion
 
@@ -648,8 +739,6 @@ namespace NEXO.Client
 									// let's verify whether the reply is the one expected
 									if (null != exchange && exchange.Outgoing.MatchesRequest(item))
 									{
-										Received = true;
-
 										// this is the reply or a previous request, we mark it as being processed
 										toprocess.SuggestedAction = NexoNextAction.final;
 										// add the original request 
@@ -762,6 +851,7 @@ namespace NEXO.Client
 						((ManualResetEvent)handles[index]).Reset();
 						if (evtReceived == handles[index])
 						{
+							NexoDelegates.OnReceivedDelegate onReceived = null;
 							// get the received message
 							Monitor.Enter(myLock);
 							try
@@ -770,52 +860,88 @@ namespace NEXO.Client
 							}
 							catch (Exception) { toprocess = null; }
 							finally { Monitor.Exit(myLock); }
+							// if an action is to be performed...
 							if (null != toprocess && NexoNextAction.nothing != toprocess.Action)
 							{
 								// send that message to the caller for information or action
-								NexoDelegates.OnReceivedDelegate onReceived = null;
 								if (toprocess.Item.IsNotification)
-									onReceived = nexoRetailerClientSettings.OnReceivedNotification;
+									// receiving a notification (a request) keep standard settings
+									onReceived = Settings.OnReceivedNotification;
 								else if (toprocess.Item.IsRequest)
-									onReceived = nexoRetailerClientSettings.OnReceivedRequest;
+									// receiving a request keep standard settings
+									onReceived = Settings.OnReceivedRequest;
 								else if (toprocess.Item.IsReply)
-									onReceived = nexoRetailerClientSettings.OnReceivedReply;
+									// receiving a reply, use adapted settings
+									onReceived = settingsToUse.OnReceivedReply;
 								if (null != onReceived)
 								{
-									// inform the application of the received message waiting for next step
-									onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
-									// on return check whether a new message must be sent or not
-									switch (toprocess.Action)
+									try
 									{
-										case NexoNextAction.sendReply:
-										case NexoNextAction.sendReplyWithError:
-											SendReply(toprocess.CurrentObject.Reply);
-											break;
-										case NexoNextAction.sendRequest:
-										case NexoNextAction.sendNotification:
-											SendRequest(toprocess.NextObject.Request, toprocess.NextTimer);
-											break;
-										default:
-											if (MessageCategoryEnumeration.Logout == toprocess.Category &&
-												toprocess.Item.IsReply &&
-												toprocess.CurrentObject.Success)
+										// inform the application of the received message waiting for next step
+										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
+									}
+									catch (Exception ex)
+									{
+										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, (toprocess.Item.IsReply ? "OnReceivedReply" : toprocess.Item.IsRequest ? "OnReceivedRequest" : "OnReceivedNotification") + " exception");
+									}
+								}
+								// check what really happened on receiving the message
+								bool hasBeenReceived = NexoNextAction.final == toprocess.SuggestedAction;
+								if (hasBeenReceived)
+								{
+									lastRequestedObject.Reply = toprocess.CurrentObject.Reply;
+									Received = true;
+								}
+								// on return check whether a new message must be sent or not
+								switch (toprocess.Action)
+								{
+									case NexoNextAction.sendReply:
+									case NexoNextAction.sendReplyWithError:
+										SendReply(toprocess.CurrentObject.Reply);
+										break;
+									case NexoNextAction.final:
+									case NexoNextAction.sendRequest:
+									case NexoNextAction.sendNotification:
+										// if received message is a Logout success nothing else can happen
+										if (MessageCategoryEnumeration.Logout == toprocess.Category &&
+											toprocess.Item.IsReply &&
+											toprocess.CurrentObject.Success)
+										{
+											// if disconnect on logout, then let's disconnect
+											if (DisconnectOnLogout)
 											{
 												CLog.Add(DispatchThread.Description + "Shutting down client connection");
 												// received a successfull logout, stop the idspatcher
 												evtStopDispatcher.Set();
 											}
-											break;
-									}
+										}
+										// received message wasn't a Logout and a new request is expected to be sent
+										else if (NexoNextAction.final != toprocess.Action)
+										{
+											SendRequest(toprocess.NextObject.Request, toprocess.NextTimer);
+										}
+										break;
+									default:
+										break;
 								}
-
 							}
+							// no action to perform
 							else if (null != toprocess && NexoNextAction.nothing == toprocess.Action)
 							{
-								if (null != nexoRetailerClientSettings.OnReceivedIgnoredMessage)
-									// inform the application of the ignored message 
-									nexoRetailerClientSettings.OnReceivedIgnoredMessage(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
+								onReceived = settingsToUse.OnReceivedIgnoredMessage;
+								if (null != onReceived)
+									try
+									{
+										// inform the application of the ignored message 
+										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
+									}
+									catch (Exception ex)
+									{
+										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceivedIgnoredMessage exception");
+									}
 							}
 						}
+						// timeout or cancel (of a request)
 						else if (evtCancelled == handles[index] || evtTimeout == handles[index])
 						{
 							Exchange tmp = exchange;
@@ -828,11 +954,21 @@ namespace NEXO.Client
 							catch (Exception) { }
 							finally { Monitor.Exit(myLock); }
 							// warn the application
-							if (null != nexoRetailerClientSettings.OnSentRequestStatusChanged)
+							if (null != settingsToUse.OnSentRequestStatusChanged)
 							{
 								toprocess = new NexoObjectToProcess(tmp.Outgoing);
-								nexoRetailerClientSettings.OnSentRequestStatusChanged(tmp.Outgoing.XML, toprocess, evtTimeout == handles[index] ? NexoMessageStatus.timeout : NexoMessageStatus.cancelled, StreamIO.Tcp, threadData, o);
+								try
+								{
+									settingsToUse.OnSentRequestStatusChanged(tmp.Outgoing.XML, toprocess, evtTimeout == handles[index] ? NexoMessageStatus.timeout : NexoMessageStatus.cancelled, StreamIO.Tcp, threadData, o);
+								}
+								catch (Exception ex)
+								{
+									CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSentRequestStatusChanged exception");
+								}
 							}
+							// indicate which action has occurred
+							Cancelled = evtCancelled == handles[index];
+							TimedOut = evtTimeout == handles[index];
 						}
 						//else
 						//{
@@ -863,7 +999,7 @@ namespace NEXO.Client
 		{
 			try
 			{
-				Settings.OnSend?.Invoke(xml, item, StreamIO.Tcp, Settings.ThreadData, Settings.Parameters);
+				settingsToUse.OnSend?.Invoke(xml, item, StreamIO.Tcp, Settings.ThreadData, Settings.Parameters);
 			}
 			catch (Exception ex)
 			{

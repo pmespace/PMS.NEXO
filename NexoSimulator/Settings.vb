@@ -45,4 +45,5 @@ Public Class Settings
 	Public Property TextToPrint As String
 	Public Property Infinite As Boolean
 	Public Property ServerDelay As Integer
+	Public Property Synchronous As Boolean
 End Class

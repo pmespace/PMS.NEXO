@@ -141,6 +141,11 @@ namespace NEXO
 		/// Indicate whether serialisation events must be stored inside log file
 		/// </summary>
 		public bool LogSerialisationEvents { get; set; } = false;
+		/// <summary>
+		/// Indicates whether produced XML must be optimised or not
+		/// Optimisation allows dismissinig unchanged tags preventing them to appear in the resulting XML
+		/// </summary>
+		public bool OptimizeXml { get; set; } = true;
 		#endregion
 
 		#region public methods
@@ -284,7 +289,8 @@ namespace NEXO
 			try
 			{
 				string serialized = null;
-				Optimize(request, request.Item);
+				if (OptimizeXml)
+					Optimize(request, request.Item);
 				serialized = Serialize<SaleToPOIRequest>(request);
 				return serialized;
 			}
@@ -300,7 +306,8 @@ namespace NEXO
 			try
 			{
 				string serialized = null;
-				Optimize(reply, reply.Item);
+				if (OptimizeXml)
+					Optimize(reply, reply.Item);
 				serialized = Serialize<SaleToPOIResponse>(reply);
 				return serialized;
 			}

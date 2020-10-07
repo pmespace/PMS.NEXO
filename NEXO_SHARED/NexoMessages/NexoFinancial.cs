@@ -190,7 +190,7 @@ namespace NEXO
 	[Guid("5C61E8A0-651D-4F96-94BB-942BF557FD10")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoRefund: NexoFinancial//, INexoFinancial
+	public class NexoRefund: NexoFinancial, INexoFinancial
 	{
 		#region constructor
 		public NexoRefund()
@@ -201,7 +201,7 @@ namespace NEXO
 	}
 
 	[ComVisible(false)]
-	public class NexoFinancial: NexoService//, INexoFinancial
+	public class NexoFinancial: NexoService, INexoFinancial
 	{
 		#region constructor
 		public NexoFinancial() : base(MessageCategoryEnumeration.Payment)

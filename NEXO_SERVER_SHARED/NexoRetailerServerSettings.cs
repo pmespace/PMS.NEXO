@@ -13,29 +13,33 @@ namespace NEXO.Server
 	[ComVisible(true)]
 	public interface INexoRetailerServerSettings
 	{
+		#region INexoRetailerServerSettings
 		[DispId(1)]
 		bool IsValid { get; }
 		[DispId(2)]
-		CStreamServerSettings Settings { get; set; }
+		object Parameters { get; set; }
 		[DispId(3)]
 		CThreadData ThreadData { get; set; }
 		[DispId(4)]
+		CStreamServerSettings Settings { get; set; }
+		[DispId(10)]
 		NexoDelegates.OnStartDelegate OnStart { get; set; }
-		[DispId(5)]
-		NexoDelegates.OnConnectDelegate OnConnect { get; set; }
-		[DispId(6)]
-		NexoDelegates.OnReceivedDelegate OnReceived { get; set; }
-		[DispId(7)]
+		[DispId(11)]
+		NexoDelegates.OnReceivedDelegate OnReceivedRequest { get; set; }
+		[DispId(12)]
+		NexoDelegates.OnReceivedDelegate OnReceivedReply { get; set; }
+		[DispId(13)]
+		NexoDelegates.OnReceivedDelegate OnReceivedNotification { get; set; }
+		[DispId(14)]
 		NexoDelegates.OnSendDelegate OnSend { get; set; }
-		[DispId(8)]
+		[DispId(15)]
 		NexoDelegates.OnStopDelegate OnStop { get; set; }
-		[DispId(9)]
-		object Parameters { get; set; }
+		#endregion
 	}
 	[Guid("D2737F59-F4EE-4935-9C89-C45667C4D506")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoRetailerServerSettings//: INexoRetailerServerSettings
+	public class NexoRetailerServerSettings: INexoRetailerServerSettings
 	{
 		#region constructors
 		public NexoRetailerServerSettings() { }

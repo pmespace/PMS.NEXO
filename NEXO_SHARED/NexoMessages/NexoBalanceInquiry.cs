@@ -5,7 +5,7 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("1696448C-1139-4D01-9BFA-65BAD9952ED9")]
+	[Guid("CDC42997-48E2-4D4A-9DD4-4CEBCA16652B")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoBalanceInquiry

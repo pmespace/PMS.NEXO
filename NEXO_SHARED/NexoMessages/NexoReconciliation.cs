@@ -5,7 +5,7 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("9A3C60DD-2D50-4515-9762-4632AA45BBC5")]
+	[Guid("7ADA4C0C-EEAD-4B53-8089-A8B7491D1FB6")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoReconciliation
@@ -143,7 +143,7 @@ namespace NEXO
 		string EventsList();
 		#endregion
 	}
-	[Guid("E663E917-6B46-4C38-9DDB-30AF8E955CF2")]
+	[Guid("C09916A4-9B04-4331-BB35-C845E17E6FD0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public class NexoReconciliation: NexoService, INexoReconciliation

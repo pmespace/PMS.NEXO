@@ -983,7 +983,7 @@ namespace NEXO
 
 	[Guid("342FE081-D5F0-475B-AEC6-6374979BBDC7")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-	[ComVisible(false)]
+	[ComVisible(true)]
 	public interface INexoISOData
 	{
 		[DispId(1)]
@@ -1112,7 +1112,7 @@ namespace NEXO
 
 	[Guid("6EA56916-0B9F-48D1-B726-1F26C1897724")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-	[ComVisible(false)]
+	[ComVisible(true)]
 	public interface INexoISODateTime
 	{
 		[DispId(1)]
@@ -1366,18 +1366,14 @@ namespace NEXO
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public class NexoCurrencyCHF: NexoCurrency, INexoCurrency { public NexoCurrencyCHF() { Value = "CHF"; DecimalPlaces = 2; } }
-	//[Guid("FFDB614B-4A57-4166-8D6F-94EC7FEFE483")]
-	//[ClassInterface(ClassInterfaceType.None)]
-	//[ComVisible(true)]
-	//public class NexoCurrencySystem: NexoCurrency, INexoCurrency
-	//{
-	//	public NexoCurrencySystem()
-	//	{
-	//		var format = (NumberFormatInfo)CultureInfo.CurrentUICulture.NumberFormat.Clone();
-	//		Value = "CHF";
-	//		DecimalPlaces = (uint)CultureInfo.CurrentUICulture.NumberFormat.CurrencyDecimalDigits;
-	//	}
-	//}
+	public class NexoDefaultCurrency: NexoCurrency, INexoCurrency
+	{
+		public NexoDefaultCurrency()
+		{
+			Value = new RegionInfo(System.Globalization.CultureInfo.CurrentCulture.LCID).ISOCurrencySymbol;
+			DecimalPlaces = (uint)CultureInfo.CurrentUICulture.NumberFormat.CurrencyDecimalDigits;
+		}
+	}
 
 	[Guid("5A214D20-F45B-4EB0-ACD4-1046EA315EF4")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
@@ -1453,7 +1449,7 @@ namespace NEXO
 	[ComVisible(true)]
 	public class NexoSupportedProtocolVersions: Dictionary<string, NexoProtocolVersion> { }
 
-	[ComVisible(false)]
+	[ComVisible(true)]
 	public class NexoID: NexoLengthDrivenTextString, INexoLengthDrivenTextString
 	{
 		public NexoID(string name = "") : base(name) { RegularExpression = string.Empty; Min = 1; Max = 10; }

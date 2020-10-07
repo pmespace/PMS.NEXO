@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("NexoSimulator")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyDescription("NexoSimulator")>
+<Assembly: AssemblyCompany("PMS")>
 <Assembly: AssemblyProduct("NexoSimulator")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("PMS")>
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("2020.279.1344.0")>
-<Assembly: AssemblyFileVersion("2020.279.1344.0")>
+<Assembly: AssemblyVersion("2020.281.0832.0")>
+<Assembly: AssemblyFileVersion("2020.281.0832.0")>

@@ -19,7 +19,7 @@ namespace NEXO
 		bool AddReceivedMessage(NexoAnyMessage o);
 	}
 
-	[Guid("F251ACAA-9421-40B3-84DD-701081C933B7")]
+	[Guid("0010366D-C2CC-4685-A52A-9716D59740F3")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public abstract class NexoActivity: INexoActivity

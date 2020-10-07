@@ -5,7 +5,7 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("041378C7-7530-40FF-865C-5B2F92661375")]
+	[Guid("85FADEEB-5156-405B-87EE-54D9AE22E316")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoCardAcquisition

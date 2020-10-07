@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -13,8 +13,23 @@
       Nexo Retailer v3.0 library supporting all messages defined inside the specifications.
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
-    <releaseNotes>Creation</releaseNotes>
-    <copyright>PMS - philippemp31</copyright>
+    <releaseNotes>
+      1.0.3
+      - Updates to project properties
+      
+      1.0.2:
+      - Made objects available to COM
+      
+      1.0.1:
+      - Added support for synchronous requests sent to the server.
+      - Using this mode with the simulator always makes the request to timeout as the server tries to access the application main thread already waiting an answer.
+      Synchronous requests can't therefore be used against the local server within the same simulator instance, but can be used if using 2 simulator instances communicating with each other.
+      This is not a bug, the simulator done like that and modifying it is not the subject. You can still run 2 simulator instances to test these synchrounous requests.
+
+      1.0.0:
+      - Creation
+    </releaseNotes>
+    <copyright>PMS - philippemp31 at outlook dot com</copyright>
     <developmentDependency>true</developmentDependency>
     <tags>NEXO</tags>
     <dependencies>
@@ -30,6 +45,7 @@
   <files>
     <file src=".\Release\PMS.NEXO.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO.xml" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
   </files>

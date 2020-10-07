@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NEXO Retailer based on NEXO Retailer v3.1")]
-[assembly: AssemblyDescription("NEXO Retailer 3.1")]
+[assembly: AssemblyTitle("PMS.NEXO")]
+[assembly: AssemblyDescription("NEXO Retailer v3.0")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PME - Natixis Payment")]
-[assembly: AssemblyProduct("NEXO")]
+[assembly: AssemblyCompany("PMS")]
+[assembly: AssemblyProduct("PMS.NEXO")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("PME")]
+[assembly: AssemblyTrademark("PMS")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2020.279.0748.5")]
-[assembly: AssemblyFileVersion("2020.279.0748.5")]
+[assembly: AssemblyVersion("2020.281.0832.5")]
+[assembly: AssemblyFileVersion("2020.281.0832.5")]

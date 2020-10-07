@@ -4,7 +4,7 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("1ADB3E04-8743-492B-94C5-4F973C27B951")]
+	[Guid("91849B50-192A-4811-8BFA-A506BD74E778")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoAnyMessage

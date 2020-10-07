@@ -26,7 +26,7 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("C397D408-B60E-446C-A22C-A594D5CDB79A")]
+	[Guid("70469D2A-4EFD-4023-82BB-7F6D382A5D83")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoObject
@@ -132,7 +132,7 @@ namespace NEXO
 		string SerializeAndCompleteReply();
 		#endregion
 	}
-	[Guid("C70AB307-62C5-4A45-8BF3-9872A9480C1C")]
+	[Guid("667D198F-874E-457B-9641-C43933F336DB")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public abstract class NexoObject: NexoRetailer, INexoObject
@@ -707,7 +707,7 @@ namespace NEXO
 		sendNotification,
 	}
 
-	[Guid("B7773C1A-8091-4B2A-A54E-74E686E5F91E")]
+	[Guid("4DA003CE-49BF-4831-83EB-3DAEA2072370")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
 	public interface INexoObjectToProcess
@@ -724,7 +724,7 @@ namespace NEXO
 		NexoNextAction Action { get; set; }
 		#endregion
 	}
-	[Guid("32A08ACD-B77A-4164-B009-9941715BE94E")]
+	[Guid("195F55CA-64B2-4E61-A1DB-9964557DE450")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public class NexoObjectToProcess: INexoObjectToProcess

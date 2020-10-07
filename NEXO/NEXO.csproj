@@ -38,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\Release\PMS.NEXO.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,11 +47,11 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.Common, Version=2020.276.928.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.1\lib\net47\PMS.Common.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=2020.281.812.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.1.0.3\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.WMI, Version=2020.276.928.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.1\lib\net47\PMS.WMI.dll</HintPath>
+    <Reference Include="PMS.WMI, Version=2020.281.812.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.1.0.3\lib\net47\PMS.WMI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -82,6 +83,7 @@
   <Import Project="..\NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM copy /Y $(TargetDir)$(TargetName).tlb $(SolutionDir)TLB</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

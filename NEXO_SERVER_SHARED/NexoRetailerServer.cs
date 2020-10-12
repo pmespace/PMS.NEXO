@@ -133,6 +133,7 @@ namespace NEXO.Server
 				StreamServerSettings = settings.Settings,
 				ThreadData = settings.ThreadData,
 				OnConnect = OnConnect,
+				OnDisconnect = OnDisconnect,
 				OnMessage = OnMessage,
 				OnStart = OnStart,
 				OnStop = OnStop,
@@ -192,18 +193,47 @@ namespace NEXO.Server
 				Activity.AddEndPoint(ep);
 				// test list of accepted/refused end points
 				if (((0 == AcceptedEndPoints.Count ? true : AcceptedEndPoints.ContainsKey(ep.Key))
-					&& !DeclinedEndPoints.ContainsKey(ep.Key))
-					&& ((null == Settings.OnConnect) || (Settings.OnConnect(tcp, threadData, o))))
+					&& !DeclinedEndPoints.ContainsKey(ep.Key)))
 				{
-					ep.AddConnection(true);
-					CLog.Add(StreamServer.Description + "EndPoint allowed to connect: " + ep.Key);
-					return true;
+					bool fOK = true;
+					try
+					{
+						if (null != Settings.OnConnect)
+							fOK = Settings.OnConnect(tcp, threadData, o);
+					}
+					catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnConnect generated an exception"); }
+					if (fOK)
+					{
+						ep.AddConnection(true);
+						CLog.Add(StreamServer.Description + "EndPoint allowed to connect: " + ep.Key);
+						return true;
+					}
+					ep.AddConnection(false);
+					CLog.Add(StreamServer.Description + "EndPoint not allowed to connect: " + ep.Key, TLog.ERROR);
 				}
-				ep.AddConnection(false);
-				CLog.Add(StreamServer.Description + "EndPoint not allowed to connect: " + ep.Key, TLog.ERROR);
 			}
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
 			return false;
+		}
+		/// <summary>
+		/// <see cref="CStreamServerStartSettings.OnDisconnect"/>
+		/// </summary>
+		/// <param name="tcp"></param>
+		/// <param name="threadData"></param>
+		/// <param name="o"></param>
+		private void OnDisconnect(string tcp, CThreadData threadData = null, object o = null)
+		{
+			/* <<<>>> 
+			 * This needs to be reviewed to update activity
+			 */
+			try
+			{
+				if (null != Settings.OnDisconnect)
+				{
+					Settings.OnDisconnect(tcp, threadData, o);
+				}
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnDisconnect generated an exception"); }
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnMessage"/>
@@ -322,7 +352,7 @@ namespace NEXO.Server
 										NexoItem itemToSend = new NexoItem(s);
 										try
 										{
-											Thread.Sleep(TimerBeforeReply*CStreamClientSettings.ONESECOND);
+											Thread.Sleep(TimerBeforeReply * CStreamClientSettings.ONESECOND);
 											Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, o);
 										}
 										catch (Exception ex)

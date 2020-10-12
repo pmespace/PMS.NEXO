@@ -4,26 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C639BA7F-272B-454E-8783-D95F1930358B}</ProjectGuid>
+    <ProjectGuid>{40951913-02F5-47F3-9127-604D5B54C5EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>NexoSimulator.My.MyApplication</StartupObject>
-    <RootNamespace>NexoSimulator</RootNamespace>
-    <AssemblyName>NexoSimulator</AssemblyName>
+    <StartupObject>myXSD.My.MyApplication</StartupObject>
+    <RootNamespace>myXSD</RootNamespace>
+    <AssemblyName>myXSD</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-    <AssemblyVersion>2020.2020.204.0738</AssemblyVersion>
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <UpdatePackageVersion>False</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <AssemblyVersion>1.2020.192.1</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,11 +22,10 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\Debug\</OutputPath>
+    <OutputPath>..\..\Debug\XSD\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,11 +33,10 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>..\Release\</OutputPath>
+    <OutputPath>..\..\Release\XSD\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -63,13 +52,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=2020.286.755.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.4\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=2020.286.1037.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PMS.COMMON.1.0.5\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.WMI, Version=2020.286.755.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.4\lib\net47\PMS.WMI.dll</HintPath>
+    <Reference Include="PMS.WMI, Version=2020.286.1037.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PMS.COMMON.1.0.5\lib\net47\PMS.WMI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -96,44 +85,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected.Designer.vb">
-      <DependentUpon>Connected.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Connected.vb">
+    <Compile Include="myXSD.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Json\DeviceInput.vb" />
-    <Compile Include="Json\DevicePrint.vb" />
-    <Compile Include="FActivity.Designer.vb">
-      <DependentUpon>FActivity.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FActivity.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FAmount.Designer.vb">
-      <DependentUpon>FAmount.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FAmount.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FTextToPrint.designer.vb">
-      <DependentUpon>FTextToPrint.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FTextToPrint.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Json\Login.vb" />
-    <Compile Include="Json\Logout.vb" />
-    <Compile Include="FSimulator.Designer.vb">
-      <DependentUpon>FSimulator.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FSimulator.vb">
+    <Compile Include="myXSD.Designer.vb">
+      <DependentUpon>myXSD.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -145,24 +108,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Json\Financial.vb" />
-    <Compile Include="Settings.vb" />
+    <Compile Include="settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Connected.resx">
-      <DependentUpon>Connected.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FActivity.resx">
-      <DependentUpon>FActivity.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FAmount.resx">
-      <DependentUpon>FAmount.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FTextToPrint.resx">
-      <DependentUpon>FTextToPrint.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FSimulator.resx">
-      <DependentUpon>FSimulator.vb</DependentUpon>
+    <EmbeddedResource Include="myXSD.resx">
+      <DependentUpon>myXSD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -182,19 +132,16 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="myxsd.json" />
     <None Include="packages.config" />
+    <None Include="xsd.parameters.json" />
+    <None Include="xsd.settings.json" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NEXO\NEXO.csproj">
-      <Project>{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}</Project>
-      <Name>NEXO</Name>
+    <ProjectReference Include="..\XSDEx\XSDEx.csproj">
+      <Project>{27d1095d-9f93-4692-bce8-bec2b2ae2cd8}</Project>
+      <Name>XSDEx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy ..\Debug\*.json ..\Release /Y</PostBuildEvent>
-  </PropertyGroup>
 </Project>

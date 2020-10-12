@@ -56,10 +56,11 @@ namespace NEXO.Server
 		/// </summary>
 		public NexoDelegates.OnStartDelegate OnStart { get; set; } = null;
 		/// <summary>
-		/// Called when a client connected to the server.
+		/// Called when a client connected to the server or disconnected from the server
 		/// This function allows to initialise the client context inside the server.
 		/// </summary>
 		public NexoDelegates.OnConnectDelegate OnConnect { get; set; } = null;
+		public NexoDelegates.OnDisconnectDelegate OnDisconnect { get; set; } = null;
 		/// <summary>
 		/// Called when a message (either request, reply or event) has been received to be processed.
 		/// </summary>
@@ -90,13 +91,14 @@ namespace NEXO.Server
 		/// <param name="threadData">Thread tools to communicate and identify</param>
 		/// <param name="onStart">Function called when starting the thread to process requests</param>
 		/// <param name="onConnect">Function called when a client connects to the server</param>
+		/// <param name="onDisconnect">Function called when a client disconnects from the server</param>
 		/// <param name="onReceiveRequest">Function called to process any received request</param>
 		/// <param name="onReceiveReply">Function called to process any received reply</param>
 		/// <param name="onReceiveNotification">Function called to process any notification</param>
 		/// <param name="onSend">Function called to inform the application of the reply about to be sent</param>
 		/// <param name="onStop">Function called when stopping the thread to process requests</param>
 		/// <returns>A NexoRetailerServerSettings object</returns>
-		public static NexoRetailerServerSettings Prepare(CStreamServerSettings settings, CThreadData threadData, NexoDelegates.OnReceivedDelegate onReceiveRequest, NexoDelegates.OnReceivedDelegate onReceiveReply, NexoDelegates.OnReceivedDelegate onReceiveNotification, NexoDelegates.OnSendDelegate onSend, NexoDelegates.OnStartDelegate onStart, NexoDelegates.OnConnectDelegate onConnect, NexoDelegates.OnStopDelegate onStop)
+		public static NexoRetailerServerSettings Prepare(CStreamServerSettings settings, CThreadData threadData, NexoDelegates.OnReceivedDelegate onReceiveRequest, NexoDelegates.OnReceivedDelegate onReceiveReply, NexoDelegates.OnReceivedDelegate onReceiveNotification, NexoDelegates.OnSendDelegate onSend, NexoDelegates.OnStartDelegate onStart, NexoDelegates.OnConnectDelegate onConnect, NexoDelegates.OnDisconnectDelegate onDisconnect, NexoDelegates.OnStopDelegate onStop)
 		{
 			return new NexoRetailerServerSettings()
 			{
@@ -104,6 +106,7 @@ namespace NEXO.Server
 				ThreadData = threadData,
 				OnStart = onStart,
 				OnConnect = onConnect,
+				OnDisconnect = onDisconnect,
 				OnReceivedRequest = onReceiveRequest,
 				OnReceivedReply = onReceiveReply,
 				OnReceivedNotification = onReceiveNotification,

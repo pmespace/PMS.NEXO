@@ -49,8 +49,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReversal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessageHeader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages\EpasSaleToPOIMessages.xsd.30.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages\NexoSaleToPOIMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoErrors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoTypes.cs" />
   </ItemGroup>

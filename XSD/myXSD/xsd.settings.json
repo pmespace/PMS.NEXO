@@ -1,0 +1,26 @@
+{
+  "ParametersFileName": "xsd.parameters.json",
+  "Files": [
+    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30SaleToPOIMessages.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30CMS.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30CommonTypes.xsd"
+  ],
+  "Nmspace": "NEXO",
+  "UseTypes": true,
+  "UseElements": true,
+  "ComInterface": 1,
+  "AddDispID": true,
+  "MakeEnumComVisible": true,
+  "MakeClassComVisible": true,
+  "DeclareClassInterface": true,
+  "ConvertTypes": true,
+  "DateTimeToString": true,
+  "CreateArrayInitializer": true,
+  "GetReturnsNullIfArrayIsEmpty": true,
+  "PrivateByInternal": true,
+  "PrivateByInternalVisibility": 4096,
+  "ManageInitFlag": true,
+  "EmptyStringArrayToNull": true,
+  "CreateArrayAccessors": true,
+  "DerivedClassName": "NexoSaleToPOIMessage"
+}

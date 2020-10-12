@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("NexoSimulator")>
-<Assembly: AssemblyDescription("NexoSimulator")>
+<Assembly: AssemblyTitle("myXSD")>
+<Assembly: AssemblyDescription("myXSDEx application to create NEXO retailer C# classes")>
 <Assembly: AssemblyCompany("PMS")>
-<Assembly: AssemblyProduct("NexoSimulator")>
+<Assembly: AssemblyProduct("myXSD")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("PMS")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("6cab1692-60fe-4511-8065-395e974853ec")>
+<Assembly: Guid("ea43eebe-ca45-4801-9dba-b73d21af0a3d")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("2020.286.1333.0")>
-<Assembly: AssemblyFileVersion("2020.286.1333.0")>
+<Assembly: AssemblyVersion("2020.286.1259.1")>
+<Assembly: AssemblyFileVersion("2020.286.1259.1")>

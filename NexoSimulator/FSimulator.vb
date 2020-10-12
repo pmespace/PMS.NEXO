@@ -442,6 +442,7 @@ Public Class FSimulator
 																											 AddressOf ServerOnSend,
 																											 AddressOf ServerOnStart,
 																											 AddressOf ServerOnConnect,
+																											 AddressOf ServerOnDisconnect,
 																											 AddressOf ServerOnStop)
 			If CThread.NO_THREAD = nexoServer.Start(startType) Then
 				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER FAILED TO START"})
@@ -467,8 +468,19 @@ Public Class FSimulator
 		Return True
 	End Function
 
+	Private Sub ServerOnDisconnect(tcp As String, threadData As CThreadData, o As Object)
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
+	End Sub
+
 	Private Sub ServerOnReceivedRequest(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & toprocess.Type.ToString.ToUpper & " REQUEST" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		Dim cat As String = toprocess.Category.ToString
+		If MessageCategoryEnumeration.Payment = toprocess.Category Then
+			Dim tmp As NexoFinancial = toprocess.CurrentObject
+			If PaymentTypeEnumeration.Normal <> tmp.PaymentType Then
+				cat = tmp.PaymentType.ToString
+			End If
+		End If
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & cat.ToUpper & " REQUEST" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 
 		Select Case (toprocess.Category)
 			Case MessageCategoryEnumeration.Login
@@ -598,7 +610,7 @@ Public Class FSimulator
 					entry.Response = New ResponseType
 					entry.Response.Result = ResultEnumeration.Failure.ToString
 					entry.Response.ErrorCondition = ErrorConditionEnumeration.Cancel.ToString
-					entry.Response.AdditionalResponse = "Lecteur chèque annulée"
+					entry.Response.AdditionalResponse = "Lecture chèque annulée"
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
@@ -1107,6 +1119,7 @@ Public Class FSimulator
 																									AddressOf GatewayOnMessage,
 																									AddressOf GatewayOnStart,
 																									AddressOf GatewayOnConnect,
+																									AddressOf GatewayOnDisconnect,
 																									AddressOf GatewayOnStop)
 			'AddressOf GatewayOnStop)
 			If gateway.StartServer(startServerType) Then
@@ -1146,6 +1159,11 @@ Public Class FSimulator
 	End Function
 
 	Private Function GatewayOnConnect(tcp As TcpClient, threadData As CThreadData, o As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
+		Return True
+	End Function
+
+	Private Function GatewayOnDisconnect(tcp As String, threadData As CThreadData, o As Object) As Boolean
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
 		Return True
 	End Function

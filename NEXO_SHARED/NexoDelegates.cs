@@ -55,6 +55,14 @@ namespace NEXO
 		[ComVisible(false)]
 		public delegate bool OnConnectDelegate(TcpClient tcp, CThreadData threadData, object o);
 		/// <summary>
+		/// Function called when a client disconnects from the server
+		/// </summary>
+		/// <param name="remoteClient">The remote address being disconnected</param>
+		/// <param name="threadData">Thread ID as given by the creator of the thread</param>
+		/// <param name="o">Private parameters to pass to the thread</param>
+		[ComVisible(false)]
+		public delegate void OnDisconnectDelegate(string remoteClient, CThreadData threadData, object o);
+		/// <summary>
 		/// Called whenever a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/> has been received and needs to be processed by the application.
 		/// The function is expected to either (1) produce a reply (2) produce a new request (device) (3) do nothing.
 		/// </summary>

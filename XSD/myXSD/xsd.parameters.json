@@ -1,0 +1,36 @@
+{
+  "Conversions": {
+    "myBaseType1": {
+      "TargetType": "myTargetType",
+      "TargetProperty": "myTargetProperty"
+    },
+    "myBaseType2": {
+      "TargetType": "myTargetType",
+      "TargetProperty": "myTargetProperty"
+    }
+  },
+  "Arrays": [
+    "myArrayType1",
+    "myArrayType2"
+  ],
+  "Data": {
+    "certificateField": {
+      "Type": "System.Byte"
+    },
+    "Certificate": {
+      "Type": "System.Byte"
+    },
+    "searchORField": {
+      "Type": "SearchANDType"
+    },
+    "SearchOR": {
+      "Type": "SearchANDType"
+    },
+    "searchCriteriasField": {
+      "Type": "SearchANDType"
+    },
+    "SearchCriterias": {
+      "Type": "SearchANDType"
+    }
+  }
+}

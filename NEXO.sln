@@ -17,14 +17,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO", "NEXO\NEXO.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO35", "NEXO35\NEXO35.csproj", "{DBE66D0F-527D-44E8-8B8D-EA8DA6228F63}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NEXO_30_SHARED", "NEXO_30_SHARED\NEXO_30_SHARED.shproj", "{78BCAA0C-E640-4DC4-9028-DFC7F30DC3A7}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NEXO_31_SHARED", "NEXO_31_SHARED\NEXO_31_SHARED.shproj", "{6F8DB0CE-6132-47E2-8842-9CEAB82ECA1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XSD", "XSD", "{21D60A9E-5431-4D90-A53C-0AEAA1F00B8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSDEx", "XSD\XSDEx\XSDEx.csproj", "{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "myXSD", "XSD\myXSD\myXSD.vbproj", "{40951913-02F5-47F3-9127-604D5B54C5EC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NEXO_SHARED\NEXO_SHARED.projitems*{6897a747-bfbd-46be-a4d5-b4a8bcea0e2c}*SharedItemsImports = 13
+		NEXO_31_SHARED\NEXO_31_SHARED.projitems*{6f8db0ce-6132-47e2-8842-9ceab82eca1d}*SharedItemsImports = 13
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{779a6456-1e80-4818-b67a-c8cef1b0b454}*SharedItemsImports = 13
+		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{78bcaa0c-e640-4dc4-9028-dfc7f30dc3a7}*SharedItemsImports = 13
+		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SHARED\NEXO_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{c9fecd53-579e-4efd-b628-417b453551aa}*SharedItemsImports = 13
+		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
 		NEXO_SHARED\NEXO_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
@@ -50,9 +64,21 @@ Global
 		{DBE66D0F-527D-44E8-8B8D-EA8DA6228F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE66D0F-527D-44E8-8B8D-EA8DA6228F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE66D0F-527D-44E8-8B8D-EA8DA6228F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40951913-02F5-47F3-9127-604D5B54C5EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40951913-02F5-47F3-9127-604D5B54C5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40951913-02F5-47F3-9127-604D5B54C5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40951913-02F5-47F3-9127-604D5B54C5EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27D1095D-9F93-4692-BCE8-BEC2B2AE2CD8} = {21D60A9E-5431-4D90-A53C-0AEAA1F00B8C}
+		{40951913-02F5-47F3-9127-604D5B54C5EC} = {21D60A9E-5431-4D90-A53C-0AEAA1F00B8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2D01539-A981-428F-8F33-F80B9CF47AE6}

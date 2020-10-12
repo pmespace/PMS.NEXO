@@ -1034,6 +1034,6 @@ namespace NEXO.Client
 		#endregion
 	}
 
-	[ComVisible(true)]
+	[ComVisible(false)]
 	public class NexoRetailerClients: Dictionary<string, NexoRetailerClient> { }
 }

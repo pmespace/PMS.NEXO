@@ -318,9 +318,9 @@ namespace NEXO.Client
 			get => _exchange;
 			set
 			{
-				Received = false;
-				TimedOut = false;
-				Cancelled = false;
+				_received = false;
+				_timedout = false;
+				_cancelled = false;
 				if (null != value)
 				{
 					_exchange = value;
@@ -748,13 +748,14 @@ namespace NEXO.Client
 									}
 									else
 									{
-										CLog.Add(ReceiverThread.Description + "Received reply not matching last request, message dismissed", TLog.WARNG);
+										CLog.Add(ReceiverThread.Description + "Received reply not matching last request; message dismissed", TLog.WARNG);
 									}
 								}
 
 								// *** REQUEST, it can only be a request which has been received
 								else if (item.IsRequestValidForClient)
 								{
+									CLog.Add(ReceiverThread.Description + "Received valid request to process");
 									// next action depends on the message itself
 									if (item.ReplyRequired)
 										toprocess.SuggestedAction = NexoNextAction.sendReply;
@@ -767,7 +768,7 @@ namespace NEXO.Client
 								else
 								{
 									// the message is not passed to the application
-									CLog.Add(ReceiverThread.Description + " not valid for receiving by client; message dismised", TLog.WARNG);
+									CLog.Add(ReceiverThread.Description + "Received invalid request to process; message dismised", TLog.WARNG);
 									toprocess.CanModifyAction = false;
 								}
 
@@ -1006,6 +1007,7 @@ namespace NEXO.Client
 				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, Name + " - OnSend generated an exception, sending anyway");
 			}
 			bool f;
+			CLog.Add("Sending " + MessageDescription(xml));
 			lock (myLock)
 			{
 				f = CStream.Send(StreamIO, xml);
@@ -1021,7 +1023,7 @@ namespace NEXO.Client
 		private string MessageDescription(string msg)
 		{
 			bool f = string.IsNullOrEmpty(msg);
-			return " [" + (f ? "0" : msg.Length.ToString()) + " bytes]" + (f ? string.Empty : ": " + msg);
+			return " [" + (f ? "0" : msg.Length.ToString()) + " bytes] " + (f ? string.Empty : msg);
 		}
 		/// <summary>
 		/// Set the event for timeout

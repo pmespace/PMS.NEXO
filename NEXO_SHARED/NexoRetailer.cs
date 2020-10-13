@@ -191,7 +191,7 @@ namespace NEXO
 					ValidateXML(xml);
 					return (NxT)XmlDeserialize<NxT>(xml, BOM);
 				}
-				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+				catch (Exception ex) { /*CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);*/ }
 			// arrived here an error has occurred
 			return default;
 		}

@@ -206,13 +206,26 @@ namespace NEXO
 				replymh = Reply.MessageHeader;
 			}
 			else
+			{
+				CLog.Add("Messages do not match - Invalid message type", TLog.WARNG);
 				return false;
-			return requestmh.MessageCategory == replymh.MessageCategory
+
+			}
+			bool f = requestmh.MessageCategory == replymh.MessageCategory
 				&& requestmh.MessageClass == replymh.MessageClass
 				&& requestmh.POIID == replymh.POIID
 				&& requestmh.SaleID == replymh.SaleID
 				&& requestmh.ServiceID == replymh.ServiceID
 				&& requestmh.DeviceID == replymh.DeviceID;
+			if (!f)
+				CLog.Add("Messages do not match - " +
+					 (requestmh.MessageCategory != replymh.MessageCategory ? "Category: " + requestmh.MessageCategory.ToString() + " <> " + replymh.MessageCategory.ToString() : null) +
+					 (requestmh.MessageClass != replymh.MessageClass ? "Class: " + requestmh.MessageClass.ToString() + " <> " + replymh.MessageClass.ToString() : null) +
+					 (requestmh.POIID != replymh.POIID ? "POIID: " + requestmh.POIID + " <> " + replymh.POIID : null) +
+					 (requestmh.SaleID != replymh.SaleID ? "SaleID: " + requestmh.SaleID + " <> " + replymh.SaleID : null) +
+					 (requestmh.ServiceID != replymh.ServiceID ? "ServiceID: " + requestmh.ServiceID + " <> " + replymh.ServiceID : null) +
+					 (requestmh.DeviceID != replymh.DeviceID ? "DeviceID: " + requestmh.DeviceID + " <> " + replymh.DeviceID : null));
+			return f;
 		}
 		#endregion
 

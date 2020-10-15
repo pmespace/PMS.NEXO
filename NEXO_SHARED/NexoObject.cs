@@ -72,6 +72,8 @@ namespace NEXO
 		bool Failure { get; }
 		[DispId(7020)]
 		bool Partial { get; }
+[DispId(10053)]
+bool Unknown {get; }
 		[DispId(7021)]
 		bool Aborted { get; }
 		[DispId(7022)]
@@ -268,29 +270,30 @@ namespace NEXO
 		/// <summary>
 		/// Gives the final status of the operation
 		/// </summary>
-		public bool Success { get => null != GetResponse() ? ResultEnumeration.Success.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		public bool Failure { get => null != GetResponse() ? ResultEnumeration.Failure.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		public bool Partial { get => null != GetResponse() ? ResultEnumeration.Partial.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		public bool Success { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Success.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		public bool Failure { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Failure.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		public bool Partial { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Partial.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		public bool Unknown { get => !Success && !Failure && !Partial; }
 		/// <summary>
 		/// Indicates the error condition
 		/// </summary>
-		public bool Aborted { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Aborted.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Busy { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Busy.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Cancel { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Cancel.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool DeviceOut { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.DeviceOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InsertedCard { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InsertedCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InProgress { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InProgress.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool LoggedOut { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.LoggedOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool MessageFormat { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.MessageFormat.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool NotAllowed { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.NotAllowed.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool NotFound { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.NotFound.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool PaymentRestriction { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.PaymentRestriction.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Refusal { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Refusal.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnavailableDevice { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnavailableDevice.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnavailableService { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnavailableService.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InvalidCard { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InvalidCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnreachableHost { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnreachableHost.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool WrongPIN { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.WrongPIN.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool Aborted { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Aborted.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool Busy { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Busy.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool Cancel { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Cancel.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool DeviceOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.DeviceOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool InsertedCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InsertedCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool InProgress { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InProgress.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool LoggedOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.LoggedOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool MessageFormat { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.MessageFormat.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool NotAllowed { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotAllowed.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool NotFound { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotFound.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool PaymentRestriction { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.PaymentRestriction.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool Refusal { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Refusal.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool UnavailableDevice { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableDevice.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool UnavailableService { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableService.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool InvalidCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InvalidCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool UnreachableHost { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnreachableHost.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		public bool WrongPIN { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.WrongPIN.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
 		public bool UnknownError { get => !Success ? !Aborted && !Busy && !Cancel && !DeviceOut && !InsertedCard && !InProgress && !LoggedOut && !MessageFormat && !NotAllowed && !NotFound && !PaymentRestriction && !Refusal && !UnavailableDevice && !UnavailableService && !InvalidCard && !UnreachableHost && !WrongPIN ? true : false : false; }
 		/// <summary>
 		/// Addition response data

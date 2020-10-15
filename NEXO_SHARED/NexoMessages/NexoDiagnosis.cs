@@ -60,6 +60,8 @@ namespace NEXO
 		bool Failure { get; }
 		[DispId(10052)]
 		bool Partial { get; }
+		[DispId(10053)]
+		bool Unknown { get; }
 
 		[DispId(10060)]
 		bool Aborted { get; }

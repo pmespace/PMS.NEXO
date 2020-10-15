@@ -58,6 +58,8 @@ namespace NEXO
 		bool Failure { get; }
 		[DispId(10052)]
 		bool Partial { get; }
+		[DispId(10053)]
+		bool Unknown { get; }
 
 		[DispId(10060)]
 		bool Aborted { get; }
@@ -163,8 +165,8 @@ namespace NEXO
 		#endregion
 
 		#region shared properties
-		public TransactionStatusRequestType RequestData { get=>(TransactionStatusRequestType)RequestItem; }
-		public TransactionStatusResponseType ReplyData { get=>(TransactionStatusResponseType)ReplyItem; }
+		public TransactionStatusRequestType RequestData { get => (TransactionStatusRequestType)RequestItem; }
+		public TransactionStatusResponseType ReplyData { get => (TransactionStatusResponseType)ReplyItem; }
 		#endregion
 
 		#region request inner properties

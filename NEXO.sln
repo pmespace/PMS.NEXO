@@ -27,6 +27,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSDEx", "XSD\XSDEx\XSDEx.cs
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "myXSD", "XSD\myXSD\myXSD.vbproj", "{40951913-02F5-47F3-9127-604D5B54C5EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63391E4A-BFB7-4544-B808-2DD9BF632A40}"
+	ProjectSection(SolutionItems) = preProject
+		NUGET.nuspec = NUGET.nuspec
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NEXO_SHARED\NEXO_SHARED.projitems*{6897a747-bfbd-46be-a4d5-b4a8bcea0e2c}*SharedItemsImports = 13

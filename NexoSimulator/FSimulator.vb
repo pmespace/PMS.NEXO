@@ -683,6 +683,8 @@ Public Class FSimulator
 					Dim entry As New Financial
 					entry.SaleID = "*"
 					entry.POIID = "*"
+					entry.RequestedAmount = 1.0
+					entry.PaymentBrand = "CB"
 					entry.Response = New ResponseType
 					entry.Response.Result = ResultEnumeration.Success.ToString
 					entry.Response.ErrorCondition = Nothing
@@ -692,10 +694,13 @@ Public Class FSimulator
 					entry = New Financial
 					entry.SaleID = ""
 					entry.POIID = ""
+					entry.RequestedAmount = 1.0
+					entry.PaymentBrand = "VISA"
 					entry.Response = New ResponseType
 					entry.Response.Result = ResultEnumeration.Failure.ToString
 					entry.Response.ErrorCondition = ErrorConditionEnumeration.NotAllowed.ToString
 					entry.Response.AdditionalResponse = "Declined"
+					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
 		End Select

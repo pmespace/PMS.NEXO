@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,28 +14,31 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
-      2.0.0
-      - Removed WMI dependency
-      
-      1.1.0
+      2.0.1
       - Adjusted version number
       
+      2.0.0
+      - Removed WMI dependency
+
+      1.1.0
+      - Adjusted version number
+
       1.0.6
       - Fixed a bug in case of timeout receiving the answer from the server, using Response.xxx crashed the application
-      
+
       1.0.5
       - Fixed a bug preventing timeout to be raised in case of SendRequestSync in NexoRetailerClient
-      
+
       1.0.4
       - Updated NexoSimulator to handle client diconnections
       - A new OnDisconnect property has been added to NexoRetailerServerSettings for that matter
-      
+
       1.0.3
       - Updates to project properties
-      
+
       1.0.2:
       - Made objects available to COM
-      
+
       1.0.1:
       - Added support for synchronous requests sent to the server.
       - Using this mode with the simulator always makes the request to timeout as the server tries to access the application main thread already waiting an answer.

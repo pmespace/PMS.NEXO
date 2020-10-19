@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <Import Project="..\NEXO_30_SHARED\NEXO_30_SHARED.projitems" Label="Shared" />
+
+  <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />
+
+  <Import Project="..\NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems" Label="Shared" />
+
+  <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
+
+</Project>

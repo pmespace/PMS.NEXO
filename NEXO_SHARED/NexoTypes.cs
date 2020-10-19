@@ -1516,7 +1516,7 @@ namespace NEXO
 	public class NexoPOISerialNumber: NexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { } }
 #else
 	[ComVisible(true)]
-	public class NexoPOISerialNumber: NexoTextString, INexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { DefaultValue = WMI.WMI.MotherBoardsSerialNumber() + WMI.WMI.CpusSerialNumber(); } }
+	public class NexoPOISerialNumber: NexoTextString, INexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { DefaultValue = "SerialNumber"; } }
 #endif
 
 	[ComVisible(true)]

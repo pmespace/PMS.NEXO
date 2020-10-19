@@ -34,11 +34,8 @@
     <DocumentationFile>..\Release\PMS.NEXO35.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PMS.COMMON35, Version=2020.288.1650.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.6\lib\net35\PMS.COMMON35.dll</HintPath>
-    </Reference>
-    <Reference Include="PMS.WMI35, Version=2020.288.1611.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.1.0.6\lib\net35\PMS.WMI35.dll</HintPath>
+    <Reference Include="PMS.COMMON35, Version=2.0.7597.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.2.0.0\lib\net35\PMS.COMMON35.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -930,7 +930,7 @@ Public Class FSimulator
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(serviceid.Text)
 		o.RequestApplicationName = Environment.MachineName
-		o.RequestManufacturerID = Environment.MachineName 'WMI.MotherBoardsSerialNumber
+		o.RequestManufacturerID = Environment.MachineName
 		o.ProtocolVersion = New NexoProtocolVersion().DefaultValue
 		o.RequestData.OperatorID = New NexoOperatorID().DefaultValue
 		o.RequestCertificationCode = "NotCertified"

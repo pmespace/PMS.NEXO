@@ -353,7 +353,7 @@ namespace NEXO
 		[DispId(50)]
 		int AsInteger { get; set; }
 		[DispId(51)]
-		decimal AsDecimal { get; set; }
+		double AsDecimal { get; set; }
 		[DispId(52)]
 		uint DecimalPlaces { get; set; }
 		[DispId(53)]
@@ -397,9 +397,9 @@ namespace NEXO
 		public override int AsInteger
 		{
 			get => (int)AsDecimal;
-			set => AsDecimal = (decimal)value;
+			set => AsDecimal = (double)value;
 		}
-		public decimal AsDecimal
+		public double AsDecimal
 		{
 			get => ToDecimal();
 			set => Value = value.ToString(CultureInfo.InvariantCulture);
@@ -418,28 +418,23 @@ namespace NEXO
 		{
 			try
 			{
-				decimal d = decimal.Parse(value, CultureInfo.InvariantCulture);
+				double d = double.Parse(value, CultureInfo.InvariantCulture);
 				return d.ToString(CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return null; }
 		}
 		protected override string GetRegularExpression(string value) { return @"^" + @"[0-9]" + (0 < Mantis ? @"{1," + Mantis + @"}" : @"*") + DecimalSeparator + "?" + @"[0-9]" + (0 < DecimalPlaces ? @"{0," + DecimalPlaces + @"}" : @"*") + @"$"; }
-		private decimal ToDecimal()
+		private double ToDecimal()
 		{
-			//try
-			//{ return decimal.Parse(Value, CultureInfo.InvariantCulture); }
-			//catch (Exception)
-			//{ return 0M; }
-
 			try
 			{
-				decimal d = decimal.Parse(Value, CultureInfo.InvariantCulture);
+				double d = double.Parse(Value, CultureInfo.InvariantCulture);
 				string formattedString = d.ToString("0" + DecimalSeparator + new string('0', (int)DecimalPlaces));
-				return decimal.Parse(formattedString);
+				return double.Parse(formattedString);
 			}
 			catch (Exception)
-			{ return 0M; }
+			{ return 0; }
 		}
 		#endregion
 	}
@@ -1389,7 +1384,7 @@ namespace NEXO
 		[DispId(4)]
 		long Amount { get; set; }
 		[DispId(5)]
-		decimal AmountDecimal { get; }
+		double AmountDecimal { get; }
 		[DispId(6)]
 		bool DisplayCurrencyAfterAmount { get; set; }
 		[DispId(100)]
@@ -1408,7 +1403,7 @@ namespace NEXO
 		/// <summary>
 		/// Transaction amount in decimal format
 		/// </summary>
-		public decimal AmountDecimal { get => (decimal)(Amount / Math.Pow(10, DecimalPlaces)); }
+		public double AmountDecimal { get => (double)(Amount / Math.Pow(10, DecimalPlaces)); }
 		/// <summary>
 		/// Indicates how to display the amount, with currency after or before the amount
 		/// </summary>

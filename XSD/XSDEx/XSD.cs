@@ -168,7 +168,10 @@ namespace XSDEx
 			CJson<XSDParams> json = new CJson<XSDParams>(settings.ParametersFileName);
 			XSDParams parameters = json.ReadSettings();
 			if (null == parameters)
+			{
 				parameters = new XSDParams();
+				json.WriteSettings(parameters);
+			}
 			bool fakeConversions = false, fakeArrays = false;
 			if (null == parameters.Conversions)
 			{

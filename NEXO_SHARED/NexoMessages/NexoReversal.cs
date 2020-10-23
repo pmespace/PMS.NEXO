@@ -22,7 +22,7 @@ namespace NEXO
 		[DispId(5)]
 		string RequestSaleReferenceID { get; set; }
 		[DispId(6)]
-		decimal RequestReversedAmount { get; set; }
+		double RequestReversedAmount { get; set; }
 		[DispId(7)]
 		string RequestReversalReason { get; set; }
 		[DispId(8)]
@@ -30,7 +30,7 @@ namespace NEXO
 		[DispId(9)]
 		string ReplyPOITimestamp { get; set; }
 		[DispId(10)]
-		decimal ReplyReversedAmount { get; set; }
+		double ReplyReversedAmount { get; set; }
 		#endregion
 
 		#region inherited properties & methods
@@ -172,7 +172,7 @@ namespace NEXO
 			RequestItem = new ReversalRequestType();
 			ReplyType = typeof(ReversalResponseType);
 			ReplyItem = new ReversalResponseType();
-			RequestReversedAmount = 0M;
+			RequestReversedAmount = 0;
 		}
 		#endregion
 
@@ -202,7 +202,7 @@ namespace NEXO
 			set => RequestData.SaleData.SaleReferenceID = value;
 #endif
 		}
-		public decimal RequestReversedAmount
+		public double RequestReversedAmount
 		{
 			get => RequestData.ReversedAmountSpecified ? RequestData.ReversedAmount : 0;
 			set => RequestData.ReversedAmount = value;
@@ -225,7 +225,7 @@ namespace NEXO
 			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
 			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
-		public decimal ReplyReversedAmount
+		public double ReplyReversedAmount
 		{
 			get => ReplyData.ReversedAmountSpecified ? ReplyData.ReversedAmount : 0;
 			set => ReplyData.ReversedAmount = value;

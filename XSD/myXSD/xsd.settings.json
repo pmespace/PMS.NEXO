@@ -1,9 +1,9 @@
 {
   "ParametersFileName": "xsd.parameters.json",
   "Files": [
-    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30SaleToPOIMessages.xsd",
-    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30CMS.xsd",
-    "C:\\Users\\philippe\\Documents\\Dev\\CHECK - experimental\\NexoResources\\Resources\\nexo30CommonTypes.xsd"
+    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasSaleToPOIMessages.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasCMS.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasCommonTypes.xsd"
   ],
   "Nmspace": "NEXO",
   "UseTypes": true,

@@ -94,6 +94,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="myXSD.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -153,4 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)*.json $(OutDir) /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

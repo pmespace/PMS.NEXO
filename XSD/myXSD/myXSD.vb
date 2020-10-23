@@ -149,7 +149,10 @@ Public Class myXSD
 		'FromSettings()
 		If xsdex.AnalyseXSD(ToSettings()) Then
 			result.AppendText(xsdex.Code)
-			Clipboard.SetText(xsdex.Code)
+			Try
+				Clipboard.SetText(xsdex.Code)
+			Catch ex As Exception
+			End Try
 		End If
 		SetDefaultCursor()
 		panelSettings.Enabled = True

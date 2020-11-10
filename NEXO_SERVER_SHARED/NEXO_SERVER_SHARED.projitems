@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerMessageHeaderEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerSettings.cs" />
   </ItemGroup>
 </Project>

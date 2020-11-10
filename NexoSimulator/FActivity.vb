@@ -10,21 +10,24 @@ Public Class FActivity
 	End Sub
 
 	Private Sub FActivity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		rbCommands.Checked = True
+		rbReceivedMessages.Checked = True
 		UpdateView()
 	End Sub
 
 	Private Sub UpdateView()
-		'If rbCommands.Checked Then
-		'	efActivity.Text = server.Commands.ToString
-		'ElseIf rbConnections.Checked Then
-		'	efActivity.Text = server.Sessions.ToString
-		'ElseIf rbConnected.Checked Then
-		'	efActivity.Text = server.Connected.ToString
-		'End If
+		If rbReceivedMessages.Checked Then
+			efActivity.Text = server.Activity.ReceivedMessages.ToString
+		ElseIf rbSentMessages.Checked Then
+			efActivity.Text = server.Activity.SentMessages.ToString
+		ElseIf rbConnections.Checked Then
+			efActivity.Text = server.Activity.EndPoints.ToString
+		ElseIf rbConnected.Checked Then
+			efActivity.Text = server.Activity.Clients.ToString
+		End If
 	End Sub
 
-	Private Sub rbCommands_Click(sender As Object, e As EventArgs) Handles rbConnections.Click, rbConnected.Click, rbCommands.Click
+	Private Sub rbCommands_Click(sender As Object, e As EventArgs) Handles rbConnections.Click, rbConnected.Click, rbReceivedMessages.Click
 		UpdateView()
 	End Sub
+
 End Class

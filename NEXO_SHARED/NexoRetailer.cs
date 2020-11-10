@@ -44,7 +44,7 @@ namespace NEXO
 		public override string ToString() { return Type.ToString() + ": " + Description; }
 	}
 	[ComVisible(false)]
-	public class NexoSchemaEvents: List<NexoSchemaEvent> { }
+	public class NexoSchemaEvents : List<NexoSchemaEvent> { }
 
 	[ComVisible(false)]
 	interface INexoRetailer
@@ -78,7 +78,7 @@ namespace NEXO
 		#endregion
 	}
 	[ComVisible(false)]
-	public abstract class NexoRetailer: INexoRetailer
+	public abstract class NexoRetailer : INexoRetailer
 	{
 		#region constructors
 		protected NexoRetailer()
@@ -198,7 +198,7 @@ namespace NEXO
 		#endregion
 
 		#region internal classes
-		class UTF8StringWriter: StringWriter
+		class UTF8StringWriter : StringWriter
 		{
 			private bool BOM = false;
 			public UTF8StringWriter(bool bom) { BOM = bom; }
@@ -289,12 +289,22 @@ namespace NEXO
 			try
 			{
 				string serialized = null;
-				if (OptimizeXml)
-					Optimize(request, request.Item);
+				try
+				{
+					if (OptimizeXml)
+						Optimize(request, request.Item);
+				}
+				catch (Exception ex)
+				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request optimisation");
+				}
 				serialized = Serialize<SaleToPOIRequest>(request);
 				return serialized;
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request processing");
+			}
 			return null;
 		}
 		/// <summary>
@@ -306,12 +316,22 @@ namespace NEXO
 			try
 			{
 				string serialized = null;
-				if (OptimizeXml)
-					Optimize(reply, reply.Item);
+				try
+				{
+					if (OptimizeXml)
+						Optimize(reply, reply.Item);
+				}
+				catch (Exception ex)
+				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply optimisation");
+				}
 				serialized = Serialize<SaleToPOIResponse>(reply);
 				return serialized;
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply processing");
+			}
 			return null;
 		}
 		/// <summary>

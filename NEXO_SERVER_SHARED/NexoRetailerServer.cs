@@ -426,7 +426,8 @@ namespace NEXO.Server
 			{
 				// save the message
 				// determine whether the request is valid or not
-				NexoRetailerServerMessageHeaderValidator mhex = new NexoRetailerServerMessageHeaderValidator(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
+				//NexoRetailerServerMessageHeaderValidator mhex = new NexoRetailerServerMessageHeaderValidator(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
+				NexoMessageHeader mhex = new NexoMessageHeader(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
 				if (fOK = mhex.IsValid)
 				{
 					NexoPartner client = Activity.AddClient(new NexoPartner(tcp, ((SaleToPOIRequest)item.Item).MessageHeader));
@@ -481,7 +482,7 @@ namespace NEXO.Server
 					else
 					{
 						// only need to verify connection
-						fConnected = Activity.Clients[client.Key].CurrentConnection.Connected;
+						fConnected = (null != Activity.Clients[client.Key].CurrentConnection && Activity.Clients[client.Key].CurrentConnection.Connected);
 						if (!fConnected)
 						{
 							NexoErrors.NotAllowedForbiddenMessage(response.Response, "Not connected, the message " + msg.Key + " hasn't been processed");

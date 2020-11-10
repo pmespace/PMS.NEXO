@@ -69,7 +69,7 @@ namespace NEXO
 			SaleID = new NexoSaleID(mh.SaleID);
 			DeviceID = new NexoDeviceID(mh.DeviceID);
 			ServiceID = new NexoServiceID(mh.ServiceID);
-			ProtocolVersion = new NexoProtocolVersion(mh.ProtocolVersion);
+			ProtocolVersion = new NexoProtocolVersion() { Value = (MessageCategoryEnumeration.Login == Category ? mh.ProtocolVersion : null) };
 			ServerVersion = server;
 			Response.Result = ResultEnumeration.Success.ToString();
 		}
@@ -132,9 +132,6 @@ namespace NEXO
 			get
 			{
 				bool fOK = false;
-				NexoResult result = new NexoResult() { Value = ResultEnumeration.Success.ToString() };
-				NexoErrorCondition errorCondition = new NexoErrorCondition() { Value = null };
-				NexoAdditionalResponse additionalResponse = new NexoAdditionalResponse() { Value = null };
 				// test message specifities
 				switch (Type)
 				{

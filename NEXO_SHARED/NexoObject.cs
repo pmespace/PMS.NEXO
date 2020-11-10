@@ -31,113 +31,117 @@ namespace NEXO
 	[ComVisible(true)]
 	public interface INexoObject
 	{
-		#region INexoObject
-		[DispId(7001)]
+		#region owned
+		[DispId(10000)]
 		SaleToPOIRequest Request { get; }
-		[DispId(7002)]
+		[DispId(10001)]
 		SaleToPOIResponse Reply { get; }
-		[DispId(7003)]
-		object RequestItem { get; }
-		[DispId(7004)]
-		object ReplyItem { get; }
-		[DispId(7005)]
+
+		[DispId(10010)]
 		string SerializedRequest { get; }
-		[DispId(7006)]
+		[DispId(10011)]
 		string SerializedReply { get; }
-		[DispId(7007)]
+		[DispId(10020)]
 		ResponseType Response { get; set; }
-		[DispId(7008)]
+		[DispId(10030)]
 		MessageCategoryEnumeration MessageCategory { get; }
-		[DispId(7009)]
+		[DispId(10031)]
 		MessageClassEnumeration MessageClass { get; }
-		[DispId(7010)]
+		[DispId(10032)]
 		bool IsService { get; }
-		[DispId(7011)]
+		[DispId(10033)]
 		bool IsDevice { get; }
-		[DispId(7012)]
+		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(7013)]
+		[DispId(10035)]
 		string ProtocolVersion { get; set; }
-		[DispId(7014)]
+		[DispId(10036)]
 		string SaleID { get; set; }
-		[DispId(7015)]
+		[DispId(10037)]
 		string POIID { get; set; }
-		[DispId(7016)]
+		[DispId(10038)]
 		string ServiceID { get; set; }
-		[DispId(7017)]
+		[DispId(10039)]
 		string DeviceID { get; set; }
-		[DispId(7018)]
+
+		[DispId(10050)]
 		bool Success { get; }
-		[DispId(7019)]
+		[DispId(10051)]
 		bool Failure { get; }
-		[DispId(7020)]
+		[DispId(10052)]
 		bool Partial { get; }
-[DispId(10053)]
-bool Unknown {get; }
-		[DispId(7021)]
+		[DispId(10053)]
+		bool Unknown { get; }
+		[DispId(10054)]
 		bool Aborted { get; }
-		[DispId(7022)]
+		[DispId(10055)]
 		bool Busy { get; }
-		[DispId(7023)]
+		[DispId(10056)]
 		bool Cancel { get; }
-		[DispId(7024)]
+		[DispId(10057)]
 		bool DeviceOut { get; }
-		[DispId(7025)]
+		[DispId(10058)]
 		bool InsertedCard { get; }
-		[DispId(7026)]
+		[DispId(10059)]
 		bool InProgress { get; }
-		[DispId(7027)]
+		[DispId(10060)]
 		bool LoggedOut { get; }
-		[DispId(7028)]
+		[DispId(10061)]
 		bool MessageFormat { get; }
-		[DispId(7029)]
+		[DispId(10062)]
 		bool NotAllowed { get; }
-		[DispId(7030)]
+		[DispId(10063)]
 		bool NotFound { get; }
-		[DispId(7031)]
+		[DispId(10064)]
 		bool PaymentRestriction { get; }
-		[DispId(7032)]
+		[DispId(10065)]
 		bool Refusal { get; }
-		[DispId(7033)]
+		[DispId(10066)]
 		bool UnavailableDevice { get; }
-		[DispId(7034)]
+		[DispId(10067)]
 		bool UnavailableService { get; }
-		[DispId(7035)]
+		[DispId(10068)]
 		bool InvalidCard { get; }
-		[DispId(7036)]
+		[DispId(10069)]
 		bool UnreachableHost { get; }
-		[DispId(7037)]
+		[DispId(10070)]
 		bool WrongPIN { get; }
-		[DispId(7038)]
+		[DispId(10071)]
 		bool UnknownError { get; }
-		[DispId(7039)]
+		[DispId(10072)]
 		string AdditionalResponse { get; }
 
-		[DispId(7050)]
+		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
-		[DispId(7051)]
+		[DispId(10091)]
 		bool Utc { get; set; }
 
-		[DispId(7100)]
+		[DispId(11000)]
 		string ToString();
-		[DispId(7101)]
+		[DispId(11001)]
 		string AutoID();
-		[DispId(7102)]
-		bool RequestFromXml(string xml);
-		[DispId(7103)]
-		bool ReplyFromXml(string xml);
-		[DispId(7104)]
+		[DispId(11002)]
+		string SetDefaultCluster(string data, NexoCluster cluster);
+		[DispId(11003)]
+		string SetDefaultStringValue(string data, string defaultValue, string typeDefaultValue = "");
+		[DispId(11004)]
+		DateTime SetDefaultDateTime(DateTime dt, bool utc = false);
+		[DispId(11005)]
+		NexoISODateTime SetDefaultDateTime(NexoISODateTime dt, string defaultValue);
+		[DispId(11006)]
+		string CopyRequestStringValue(string data, string requestValue);
+		[DispId(11007)]
+		NexoCurrency SetDefaultCurrency(NexoCurrency currency, string defaultValue);
+		[DispId(11008)]
+		NexoISOLanguage2A SetDefaultLanguage(NexoISOLanguage2A language, string defaultValue);
+		[DispId(11009)]
 		bool FromItem(NexoItem item);
-		[DispId(7105)]
-		string SerializeAndCompleteRequest();
-		[DispId(7106)]
-		string SerializeAndCompleteReply();
 		#endregion
 	}
 	[Guid("667D198F-874E-457B-9641-C43933F336DB")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public abstract class NexoObject: NexoRetailer, INexoObject
+	public abstract class NexoObject : NexoRetailer, INexoObject
 	{
 		#region constructors
 		protected NexoObject(MessageCategoryEnumeration category)
@@ -152,6 +156,8 @@ bool Unknown {get; }
 			Reply.SecurityTrailer = null;
 			Reply.MessageHeader.MessageType = MessageTypeEnumeration.Response.ToString();
 			MessageCategory = category;
+			ProtocolVersion = null;
+			RequestItem = ReplyItem = null;
 		}
 		#endregion
 
@@ -175,17 +181,29 @@ bool Unknown {get; }
 			}
 		}
 		private SaleToPOIRequest _request = null;
-		public SaleToPOIResponse Reply { get; internal set; }
-		/// <summary>
-		/// request and Reply types required for optimisation
-		/// </summary>
-		public Type RequestType { get; internal set; }
-		public Type ReplyType { get; internal set; }
+		public SaleToPOIResponse Reply
+		{
+			get => _reply;
+			internal set
+			{
+				//if (null != value)
+				_reply = value;
+			}
+		}
+		private SaleToPOIResponse _reply = null;
 		/// <summary>
 		/// access to ietm data
 		/// </summary>
-		public object RequestItem { get => Request.Item; protected set => Request.Item = value; }
-		public object ReplyItem { get => Reply.Item; protected set => Reply.Item = value; }
+		protected object RequestItem
+		{
+			get => Request.Item;
+			set => Request.Item = value;
+		}
+		protected object ReplyItem
+		{
+			get => Reply.Item;
+			set => Reply.Item = value;
+		}
 		/// <summary>
 		/// Serialized request and reply
 		/// </summary>
@@ -438,34 +456,34 @@ bool Unknown {get; }
 				return new NexoISOLanguage2A() { Value = defaultValue };
 			return language;
 		}
-		/// <summary>
-		/// Set the request from an externally received XML buffer
-		/// </summary>
-		/// <param name="xml">XML buffer to deserialize</param>
-		/// <returns>true if successful, false otherwise</returns>
-		public bool RequestFromXml(string xml)
-		{
-			SaleToPOIRequest o = Deserialize<SaleToPOIRequest>(xml);
-			if (null != o)
-			{
-				Request = o;
-			}
-			return false;
-		}
-		/// <summary>
-		/// Set the reply from an externally received XML buffer
-		/// </summary>
-		/// <param name="xml">XML buffer to deserialize</param>
-		/// <returns>true if successful, false otherwise</returns>
-		public bool ReplyFromXml(string xml)
-		{
-			SaleToPOIResponse o = Deserialize<SaleToPOIResponse>(xml);
-			if (null != o)
-			{
-				Reply = o;
-			}
-			return false;
-		}
+		///// <summary>
+		///// Set the request from an externally received XML buffer
+		///// </summary>
+		///// <param name="xml">XML buffer to deserialize</param>
+		///// <returns>true if successful, false otherwise</returns>
+		//public bool RequestFromXml(string xml)
+		//{
+		//	SaleToPOIRequest o = Deserialize<SaleToPOIRequest>(xml);
+		//	if (null != o)
+		//	{
+		//		Request = o;
+		//	}
+		//	return false;
+		//}
+		///// <summary>
+		///// Set the reply from an externally received XML buffer
+		///// </summary>
+		///// <param name="xml">XML buffer to deserialize</param>
+		///// <returns>true if successful, false otherwise</returns>
+		//public bool ReplyFromXml(string xml)
+		//{
+		//	SaleToPOIResponse o = Deserialize<SaleToPOIResponse>(xml);
+		//	if (null != o)
+		//	{
+		//		Reply = o;
+		//	}
+		//	return false;
+		//}
 		/// <summary>
 		/// Allows initialising an object from an item
 		/// </summary>
@@ -486,44 +504,6 @@ bool Unknown {get; }
 				return true;
 			}
 			return false;
-		}
-		/// <summary>
-		/// Prepare a request serializing it in XML and completing it before sending it
-		/// </summary>
-		/// <returns>The request in XML, null if an error has occurred</returns>
-		public string SerializeAndCompleteRequest()
-		{
-			try
-			{
-				InternalAction error;
-				if (InternalAction.noError == (error = AutoCompleteRequestEx()))
-				{
-					return Serialize(Request);
-				}
-				else
-					CLog.Add("Request serialization failed with error code: " + error.ToString(), TLog.ERROR);
-			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
-			return null;
-		}
-		/// <summary>
-		/// Prepare a reply serializing it in XML and completing it before sending it
-		/// </summary>
-		/// <returns>The reply in XML, null if an error has occurred</returns>
-		public string SerializeAndCompleteReply()
-		{
-			try
-			{
-				InternalAction error;
-				if (InternalAction.noError == (error = AutoCompleteReplyEx()))
-				{
-					return Serialize(Reply);
-				}
-				else
-					CLog.Add("Reply serialization failed with error code: " + error.ToString(), TLog.ERROR);
-			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
-			return null;
 		}
 		#endregion
 
@@ -628,7 +608,7 @@ bool Unknown {get; }
 		}
 		/// <summary>
 		/// Hidden function, only for internal use
-		/// Allows to set the request from outside the object
+		/// Allows to set the reply from outside the object
 		/// </summary>
 		/// <param name="req"></param>
 		/// <returns>True is reset, false otherwise</returns>
@@ -656,23 +636,65 @@ bool Unknown {get; }
 			}
 			return false;
 		}
+		/// <summary>
+		/// Prepare a request serializing it in XML and completing it before sending it
+		/// </summary>
+		/// <returns>The request in XML, null if an error has occurred</returns>
+		internal string SerializeAndCompleteRequest()
+		{
+			try
+			{
+				InternalAction error;
+				if (InternalAction.noError == (error = AutoCompleteRequestEx()))
+				{
+					//if (!(RequestItem is LoginRequestType))
+					//	Request.MessageHeader.ProtocolVersion = null;
+					return Serialize(Request);
+				}
+				else
+					CLog.Add("Request serialization failed with error code: " + error.ToString(), TLog.ERROR);
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			return null;
+		}
+		/// <summary>
+		/// Prepare a reply serializing it in XML and completing it before sending it
+		/// </summary>
+		/// <returns>The reply in XML, null if an error has occurred</returns>
+		internal string SerializeAndCompleteReply()
+		{
+			try
+			{
+				InternalAction error;
+				if (InternalAction.noError == (error = AutoCompleteReplyEx()))
+				{
+					//if (!(ReplyItem is LoginRequestType))
+					//	Reply.MessageHeader.ProtocolVersion = null;
+					return Serialize(Reply);
+				}
+				else
+					CLog.Add("Reply serialization failed with error code: " + error.ToString(), TLog.ERROR);
+			}
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			return null;
+		}
 		#endregion
 	}
 
 	[ComVisible(false)]
-	public abstract class NexoService: NexoObject
+	public abstract class NexoService : NexoObject
 	{
 		protected NexoService(MessageCategoryEnumeration category) : base(category) { MessageClass = MessageClassEnumeration.Service; }
 	}
 
 	[ComVisible(false)]
-	public abstract class NexoDevice: NexoObject
+	public abstract class NexoDevice : NexoObject
 	{
 		protected NexoDevice(MessageCategoryEnumeration category) : base(category) { MessageClass = MessageClassEnumeration.Device; }
 	}
 
 	[ComVisible(false)]
-	public abstract class NexoNotification: NexoObject
+	public abstract class NexoNotification : NexoObject
 	{
 		protected NexoNotification() : base(MessageCategoryEnumeration.Event) { MessageClass = MessageClassEnumeration.Event; }
 	}
@@ -730,7 +752,7 @@ bool Unknown {get; }
 	[Guid("195F55CA-64B2-4E61-A1DB-9964557DE450")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoObjectToProcess: INexoObjectToProcess
+	public class NexoObjectToProcess : INexoObjectToProcess
 	{
 		#region constructor
 		public NexoObjectToProcess(NexoItem item)
@@ -874,8 +896,8 @@ bool Unknown {get; }
 	}
 
 	[ComVisible(true)]
-	public class QueueOfNexoObjectToProcess: Queue<NexoObjectToProcess> { }
+	public class QueueOfNexoObjectToProcess : Queue<NexoObjectToProcess> { }
 
 	[ComVisible(true)]
-	public class StackOfNexoObjectToProcess: Stack<NexoObjectToProcess> { }
+	public class StackOfNexoObjectToProcess : Stack<NexoObjectToProcess> { }
 }

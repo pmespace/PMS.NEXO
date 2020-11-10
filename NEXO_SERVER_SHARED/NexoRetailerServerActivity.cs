@@ -33,39 +33,39 @@ namespace NEXO.Server
 			_endpoints = new NexoDictionaryOfEndPoints("ENDPOINTS");
 			_currentlyconnected = new NexoDictionaryOfPartners("CONNECTED CLIENTS");
 
-#if NET35
+//#if NET35
 			EndPoints = _endpoints;
 			Clients = _clients;
 			CurrentlyConnected = _currentlyconnected;
-#else
-			EndPoints = new ReadOnlyDictionary<string, NexoEndPoint>(_endpoints);
-			Clients = new ReadOnlyDictionary<string, NexoPartner>(_clients);
-			CurrentlyConnected = new ReadOnlyDictionary<string, NexoPartner>(_currentlyconnected);
-#endif
+//#else
+//			EndPoints = new ReadOnlyDictionary<string, NexoEndPoint>(_endpoints);
+//			Clients = new ReadOnlyDictionary<string, NexoPartner>(_clients);
+//			CurrentlyConnected = new ReadOnlyDictionary<string, NexoPartner>(_currentlyconnected);
+//#endif
 
 		}
 		#endregion
 
 		#region properties
 
-#if NET35
+//#if NET35
 		public NexoDictionaryOfEndPoints EndPoints { get => _endpoints; private set => _endpoints = value; }
 		public NexoDictionaryOfPartners Clients { get => _clients; private set => _clients = value; }
 		public NexoDictionaryOfPartners CurrentlyConnected { get => _currentlyconnected; private set => _currentlyconnected = value; }
-#else
-		/// <summary>
-		/// EndPoints having tried to reach the server
-		/// </summary>
-		public ReadOnlyDictionary<string, NexoEndPoint> EndPoints { get; }
-		/// <summary>
-		/// Clients having been connected
-		/// </summary>
-		public ReadOnlyDictionary<string, NexoPartner> Clients { get; }
-		/// <summary>
-		/// Currently connected clients
-		/// </summary>
-		public ReadOnlyDictionary<string, NexoPartner> CurrentlyConnected { get; }
-#endif
+//#else
+//		/// <summary>
+//		/// EndPoints having tried to reach the server
+//		/// </summary>
+//		public ReadOnlyDictionary<string, NexoEndPoint> EndPoints { get; }
+//		/// <summary>
+//		/// Clients having been connected
+//		/// </summary>
+//		public ReadOnlyDictionary<string, NexoPartner> Clients { get; }
+//		/// <summary>
+//		/// Currently connected clients
+//		/// </summary>
+//		public ReadOnlyDictionary<string, NexoPartner> CurrentlyConnected { get; }
+//#endif
 
 		private NexoDictionaryOfEndPoints _endpoints { get; set; }
 		private NexoDictionaryOfPartners _clients { get; set; }

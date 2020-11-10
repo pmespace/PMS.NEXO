@@ -29,6 +29,7 @@ Public Class FSimulator
 	End Enum
 	Private Class Activity
 		Public Property position As Position
+		Public Property direction As Direction
 		Public Property Message As String
 		Public Property Evt As ActivityEvent
 	End Class
@@ -37,7 +38,7 @@ Public Class FSimulator
 
 	Private Sub ProcessUI(activity As Activity)
 		If ActivityEvent.none <> activity.Evt Then
-			AddLine(activity.position, activity.Message)
+			AddLine(activity.position, activity.direction, activity.Message)
 			Select Case activity.Evt
 				Case ActivityEvent.serverStopped
 					If isClosing Then
@@ -63,6 +64,11 @@ Public Class FSimulator
 		client
 		gateway
 		server
+	End Enum
+	Private Enum Direction
+		left
+		none
+		right
 	End Enum
 	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
 	Private Const SETTINGS_FILE_EXT As String = ".json"
@@ -232,16 +238,16 @@ Public Class FSimulator
 	Protected Overrides Sub WndProc(ByRef m As Message)
 		Select Case (m.Msg)
 			Case GATEWAY_STOPPED_MESSAGE
-				AddLine(Position.gateway, "GATEWAY STOPPED")
+				AddLine(Position.gateway, Direction.none, "GATEWAY STOPPED")
 				gateway = Nothing
 				SetButtons()
 			Case SERVER_STOPPED_MESSAGE
-				AddLine(Position.server, "SERVER STOPPED")
+				AddLine(Position.server, Direction.none, "SERVER STOPPED")
 				SetButtons()
 			Case CLIENT_STOPPED_MESSAGE
 				Dim c As NexoRetailerClient = GetClientFromID(m.WParam)
 				If Not IsNothing(c) Then
-					AddLine(Position.client, "CLIENT " & c.ToString & " STOPPED")
+					AddLine(Position.client, Direction.none, "CLIENT " & c.ToString & " STOPPED")
 					RemoveClient(c)
 				End If
 				ResetProcessing()
@@ -389,10 +395,16 @@ Public Class FSimulator
 		SetButtons()
 	End Sub
 
-	Private Sub AddLine(position As Position, s As String, Optional reset As Boolean = False)
+	Private Sub AddLine(position As Position, r As Direction, s As String, Optional reset As Boolean = False)
 		Dim dt As DateTime = Now
 		Dim start As Integer = RichTextBox1.TextLength
 		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
+		Select Case r
+			Case Direction.left
+				txt = "<<< " & txt & " <<<"
+			Case Direction.right
+				txt = ">>> " & txt & " >>>"
+		End Select
 		RichTextBox1.SelectionStart = start
 		If position = Position.server Then
 			RichTextBox1.SelectionColor = lblServerHeader.ForeColor
@@ -445,9 +457,9 @@ Public Class FSimulator
 																											 AddressOf ServerOnDisconnect,
 																											 AddressOf ServerOnStop)
 			If CThread.NO_THREAD = nexoServer.Start(startType) Then
-				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER FAILED TO START"})
+				RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER FAILED TO START"})
 			Else
-				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER STARTED"})
+				RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER STARTED"})
 			End If
 			SetButtons()
 		End If
@@ -459,17 +471,17 @@ Public Class FSimulator
 	End Sub
 
 	Private Function ServerOnStart(threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER IS STARTING"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER IS STARTING"})
 		Return True
 	End Function
 
 	Private Function ServerOnConnect(tcp As TcpClient, threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT CONNECTED (" & tcp.Client.RemoteEndPoint.ToString & ")"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT CONNECTED (" & tcp.Client.RemoteEndPoint.ToString & ")"})
 		Return True
 	End Function
 
 	Private Sub ServerOnDisconnect(tcp As String, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
 	End Sub
 
 	Private Sub ServerOnReceivedRequest(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
@@ -480,7 +492,7 @@ Public Class FSimulator
 				cat = tmp.PaymentType.ToString
 			End If
 		End If
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & cat.ToUpper & " REQUEST" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & cat.ToUpper & " REQUEST" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 
 		Select Case (toprocess.Category)
 			Case MessageCategoryEnumeration.Login
@@ -707,19 +719,19 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub ServerOnReceivedReply(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & toprocess.Type.ToString.ToUpper & " RESPONSE" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & toprocess.Type.ToString.ToUpper & " RESPONSE" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 	End Sub
 
 	Private Sub ServerOnReceivedNotification(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & toprocess.Type.ToString.ToUpper & " NOTIFICATION" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & toprocess.Type.ToString.ToUpper & " NOTIFICATION" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 	End Sub
 
 	Private Sub ServerOnSend(xml As String, toprocess As NexoItem, tcp As TcpClient, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SENDING " & toprocess.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.left, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SENDING " & toprocess.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 	End Sub
 
 	Private Function ServerOnStop(threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER IS STOPPING"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER IS STOPPING"})
 		Return True
 	End Function
 
@@ -765,7 +777,7 @@ Public Class FSimulator
 			}
 		If nexoClient.Connect(nexoRetailerClientSettings) Then
 			If AddClient(nexoClient) Then
-				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT " & nexoClient.KeyClient & " IS CONNECTED TO " & nexoClient.KeyServer})
+				RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT " & nexoClient.KeyClient & " IS CONNECTED TO " & nexoClient.KeyServer})
 			End If
 		Else
 			MessageBox.Show("Connection to " & settings.FullIP & " has failed")
@@ -783,7 +795,7 @@ Public Class FSimulator
 				s = f.PaymentType.ToString
 			End If
 		End If
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SENDING " & s.ToUpper & " " & obj.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SENDING " & s.ToUpper & " " & obj.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 	End Sub
 
 	Public Sub ClientOnReceived(xml As String, obj As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
@@ -804,7 +816,7 @@ Public Class FSimulator
 			status = " HAS BEEN IGNORED"
 		End If
 
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "RECEIVED " & obj.Category.ToString.ToUpper & " " & s.ToUpper & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & status & vbCrLf & xml})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.left, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "RECEIVED " & obj.Category.ToString.ToUpper & " " & s.ToUpper & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & status & vbCrLf & xml})
 
 		If NexoNextAction.nothing <> obj.SuggestedAction Then
 			Select Case obj.Type
@@ -822,10 +834,10 @@ Public Class FSimulator
 					Select Case obj.CurrentObject.MessageCategory
 						Case MessageCategoryEnumeration.Login
 							Dim nxo As NexoLogin = obj.CurrentObject
-							RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS CONNECTED (" & nxo.SaleID & ")"})
+							RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS CONNECTED (" & nxo.SaleID & ")"})
 						Case MessageCategoryEnumeration.Logout
 							Dim nxo As NexoLogout = obj.CurrentObject
-							RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID HAS BEEN DISCONNECTED (" & nxo.SaleID & ")"})
+							RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID HAS BEEN DISCONNECTED (" & nxo.SaleID & ")"})
 					End Select
 			End Select
 		End If
@@ -843,7 +855,7 @@ Public Class FSimulator
 								  {
 								  .position = Position.client,
 								  .Evt = ActivityEvent.updateConnected,
-								  .Message = "SENT MESSAGE " & obj.Category.ToString.ToUpper & " " & obj.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & " " & s & " AND HAS BEEN DISMISSED" & MessageLength(xml) & vbCrLf & xml
+								  .Message = "??? SENT MESSAGE " & obj.Category.ToString.ToUpper & " " & obj.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & " " & s & " AND HAS BEEN DISMISSED" & MessageLength(xml) & " ???" & vbCrLf & xml
 								  })
 
 		''prepare new message (abort ?)
@@ -853,10 +865,10 @@ Public Class FSimulator
 		'obj.NextObject = abort
 	End Sub
 
-	Public Function ClientOnRawReplyAsync(xml As String) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedReply, .Message = "=> RECEIVED REPLY" & MessageLength(xml) & vbCrLf & xml})
-		Return True
-	End Function
+	'Public Function ClientOnRawReplyAsync(xml As String) As Boolean
+	'	RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.server, .Evt = ActivityEvent.receivedReply, .Message = "=> RECEIVED REPLY" & MessageLength(xml) & vbCrLf & xml})
+	'	Return True
+	'End Function
 
 	Private Function FullSaleID() As String
 		If String.IsNullOrEmpty(efSaleID.Text) Then
@@ -913,13 +925,13 @@ Public Class FSimulator
 
 	Private Sub DisplaySynchronousExchange(client As NexoRetailerClient, o As NexoObject, s As String)
 		Dim q As String = o.SerializedRequest, y As String = o.SerializedReply
-		AddLine(Position.client, "SYNCHRONOUSLY SENT " & o.MessageCategory.ToString.ToUpper & " " & " REQUEST TO " & s & MessageLength(q) & vbCrLf & q)
+		AddLine(Position.client, Direction.right, "SYNCHRONOUSLY SENT " & o.MessageCategory.ToString.ToUpper & " " & " REQUEST TO " & s & MessageLength(q) & vbCrLf & q)
 		If client.Received Then
-			AddLine(Position.client, "SYNCHRONOUSLY RECEIVED " & o.MessageCategory.ToString.ToUpper & " " & " RESPONSE FROM " & s & MessageLength(y) & vbCrLf & y)
+			AddLine(Position.client, Direction.left, "SYNCHRONOUSLY RECEIVED " & o.MessageCategory.ToString.ToUpper & " " & " RESPONSE FROM " & s & MessageLength(y) & vbCrLf & y)
 		Else
 			Dim sts As String = "TIMEOUT"
 			If client.Cancelled Then sts = "CANCELLED"
-			AddLine(Position.client, "SYNCHRONOUS  EXCHANGE FAILED WITH STATUS: " & sts)
+			AddLine(Position.client, Direction.none, "SYNCHRONOUS  EXCHANGE FAILED WITH STATUS: " & sts)
 		End If
 	End Sub
 
@@ -949,7 +961,7 @@ Public Class FSimulator
 				End If
 			End If
 		End If
-		If Not f Then AddLine(Position.client, "ERROR SENDING LOGIN REQUEST" & MessageLength(s) & vbCrLf & s)
+		If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING LOGIN REQUEST" & MessageLength(s) & vbCrLf & s)
 		SetButtons()
 	End Sub
 
@@ -973,7 +985,7 @@ Public Class FSimulator
 				End If
 			End If
 		End If
-		If Not f Then AddLine(Position.client, "ERROR SENDING LOGOUT REQUEST" & MessageLength(s) & vbCrLf & s)
+		If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING LOGOUT REQUEST" & MessageLength(s) & vbCrLf & s)
 		SetButtons()
 	End Sub
 
@@ -1009,7 +1021,7 @@ Public Class FSimulator
 				End If
 			End If
 		End If
-		If Not f Then AddLine(Position.client, "ERROR SENDING DEVICE INPUT REQUEST" & MessageLength(s) & vbCrLf & s)
+		If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING DEVICE INPUT REQUEST" & MessageLength(s) & vbCrLf & s)
 		SetButtons()
 	End Sub
 
@@ -1046,7 +1058,7 @@ Public Class FSimulator
 						End If
 					End If
 				End If
-				If Not f Then AddLine(False, "ERROR SENDING DEVICE PRINT REQUEST" & MessageLength(s) & vbCrLf & s)
+				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING DEVICE PRINT REQUEST" & MessageLength(s) & vbCrLf & s)
 				SetButtons()
 		End Select
 		p = Nothing
@@ -1079,7 +1091,7 @@ Public Class FSimulator
 						End If
 					End If
 				End If
-				If Not f Then AddLine(Position.client, "ERROR SENDING PAYMENT REQUEST" & MessageLength(s) & vbCrLf & s)
+				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING PAYMENT REQUEST" & MessageLength(s) & vbCrLf & s)
 				SetButtons()
 		End Select
 	End Sub
@@ -1098,7 +1110,7 @@ Public Class FSimulator
 			If Not IsNothing(client) Then
 				Dim o As Object = client.SendRawRequest(command.Text, GetTimeout())
 				If Not IsNothing(o) Then
-					AddLine(Position.client, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
+					AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
 				End If
 			End If
 		End If
@@ -1282,7 +1294,7 @@ Public Class FSimulator
 					If f = Not IsNothing(t) Then
 					End If
 				End If
-				If Not f Then AddLine(Position.client, "ERROR SENDING REFUND REQUEST" & MessageLength(s) & vbCrLf & s)
+				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING REFUND REQUEST" & MessageLength(s) & vbCrLf & s)
 				SetButtons()
 		End Select
 		payment = Nothing

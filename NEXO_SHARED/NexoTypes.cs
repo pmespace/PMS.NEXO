@@ -80,7 +80,7 @@ namespace NEXO
 	[Guid("8F565B94-FC31-4938-BB9B-3628D74AA348")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoTextString: NexoType, INexoTextString
+	public class NexoTextString : NexoType, INexoTextString
 	{
 		#region properties
 		/// <summary>
@@ -245,7 +245,7 @@ namespace NEXO
 	[Guid("C9E4530A-BCB7-437D-B814-D3BF11026D07")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoBoolean: NexoTextString, INexoBooleanType
+	public class NexoBoolean : NexoTextString, INexoBooleanType
 	{
 		#region properties
 		public override bool TrimInput { get => true; }
@@ -293,7 +293,7 @@ namespace NEXO
 	[Guid("95B80346-5CA9-4F43-98E1-58B4A7C02736")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoInteger: NexoTextString, INexoInteger
+	public class NexoInteger : NexoTextString, INexoInteger
 	{
 		#region properties
 		public override bool TrimInput { get => true; }
@@ -318,7 +318,7 @@ namespace NEXO
 			try
 			{
 				int i = int.Parse(value);
-				return i.ToString();
+				return i.ToString(CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Value: " + value); }
 			return null;
@@ -364,7 +364,7 @@ namespace NEXO
 	[Guid("6B3992EA-EA2A-40CE-8D32-759442C3733F")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDecimal: NexoInteger, INexoDecimal
+	public class NexoDecimal : NexoInteger, INexoDecimal
 	{
 		#region properties
 		public virtual uint DecimalPlaces
@@ -419,19 +419,23 @@ namespace NEXO
 			try
 			{
 				double d = double.Parse(value, CultureInfo.InvariantCulture);
-				return d.ToString(CultureInfo.InvariantCulture);
+				return d.ToString("0.0", CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return null; }
 		}
-		protected override string GetRegularExpression(string value) { return @"^" + @"[0-9]" + (0 < Mantis ? @"{1," + Mantis + @"}" : @"*") + DecimalSeparator + "?" + @"[0-9]" + (0 < DecimalPlaces ? @"{0," + DecimalPlaces + @"}" : @"*") + @"$"; }
+		protected override string GetRegularExpression(string value)
+		{
+			string s = @"^" + @"[0-9]" + (0 < Mantis ? @"{1," + Mantis + @"}" : @"*") + DecimalSeparator + "?" + @"[0-9]" + (0 < DecimalPlaces ? @"{0," + DecimalPlaces + @"}" : @"*") + @"$";
+			return s;
+		}
 		private double ToDecimal()
 		{
 			try
 			{
 				double d = double.Parse(Value, CultureInfo.InvariantCulture);
-				string formattedString = d.ToString("0" + DecimalSeparator + new string('0', (int)DecimalPlaces));
-				return double.Parse(formattedString);
+				string formattedString = d.ToString("0" + DecimalSeparator + new string('0', (int)DecimalPlaces), CultureInfo.InvariantCulture);
+				return double.Parse(formattedString, CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return 0; }
@@ -441,7 +445,7 @@ namespace NEXO
 	[Guid("7140D640-7DEF-48A8-8C51-F348849BB383")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoSimpleAmount: NexoDecimal, INexoDecimal
+	public class NexoSimpleAmount : NexoDecimal, INexoDecimal
 	{
 		#region constructor
 		public NexoSimpleAmount() { }
@@ -466,7 +470,7 @@ namespace NEXO
 	[Guid("313ED1FA-F6E9-402D-803C-F6C2A97AEAB2")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoLabel: INexoLabel
+	public class NexoLabel : INexoLabel
 	{
 		#region constructor
 		public NexoLabel() { }
@@ -505,7 +509,7 @@ namespace NEXO
 	[Guid("DCE824A5-EF4D-4DDF-9F28-ECC997E912B8")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoEnumeration: NexoTextString, INexoEnumeration
+	public class NexoEnumeration : NexoTextString, INexoEnumeration
 	{
 		#region constructor
 		public NexoEnumeration() { }
@@ -521,7 +525,7 @@ namespace NEXO
 		/// dictionary of all labels valid in this enumeration
 		/// </summary>
 		[ComVisible(false)]
-		public class NexoLabels: Dictionary<string, NexoLabel> { public NexoLabels() : base(StringComparer.CurrentCultureIgnoreCase) { } }
+		public class NexoLabels : Dictionary<string, NexoLabel> { public NexoLabels() : base(StringComparer.CurrentCultureIgnoreCase) { } }
 		public NexoLabels Labels { get; private set; } = new NexoLabels();
 		/// <summary>
 		/// Number of labels inside the list
@@ -607,7 +611,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				//CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
 				// arrived here the value is not valid, we ignore it
 				valueToStore = null;
 			}
@@ -615,45 +619,6 @@ namespace NEXO
 		}
 		protected override string SetName(string value)
 		{
-			//			value = value.Trim();
-			//			Labels = new NexoLabels();
-			//			// load the associated values, if any...
-			//			try
-			//				{
-			//				ResourceManager rm = new ResourceManager("NEXO.Properties.NexoResources", this.GetType().Assembly);
-			//				string values = rm.GetString(value);
-			//				if (null != values)
-			//					{
-
-			//#if !NET35
-			//					// arrived here a list of values exists, we verify the format
-			//					JObject json = JObject.Parse(values);
-			//					if (null != json)
-			//						values = json.ToString();
-			//#endif
-
-			//					if (!string.IsNullOrEmpty(values))
-			//						{
-			//						// arrived here we can save a list of valid items for that data
-			//						NexoItems rootObject = CJson<NexoItems>.Deserialize(values);
-			//						foreach (string k in rootObject.Items)
-			//							try
-			//								{
-			//								string key = k.Trim();
-			//								bool defaultvalue = (1 <= key.Length && '+' == key[0]);
-			//								if (defaultvalue)
-			//									key = key.Substring(1);
-			//								Labels.Add(key, new NexoLabel(key));
-			//								if (defaultvalue)
-			//									DefaultValue = key;
-			//								}
-			//							catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
-			//						}
-			//					}
-			//				}
-			//			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
-			//			return value;
-
 			value = value.Trim();
 			Labels = new NexoLabels();
 			// load the associated values, if any...
@@ -733,7 +698,7 @@ namespace NEXO
 	[Guid("8E5E348A-9E41-44B6-AA24-366B1E0BFAEF")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCluster: NexoEnumeration, INexoCluster
+	public class NexoCluster : NexoEnumeration, INexoCluster
 	{
 		#region constructor
 		public NexoCluster() { }
@@ -867,7 +832,7 @@ namespace NEXO
 	[Guid("D9CF8D0F-FEBB-4FE8-A775-91C0BB6DBF3D")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoLengthDrivenTextString: NexoTextString, INexoLengthDrivenTextString
+	public class NexoLengthDrivenTextString : NexoTextString, INexoLengthDrivenTextString
 	{
 		#region properties
 		/// <summary>
@@ -957,7 +922,7 @@ namespace NEXO
 	[Guid("09364674-1CA8-4448-8099-35C44F32305E")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDigitString: NexoLengthDrivenTextString, INexoDigitString
+	public class NexoDigitString : NexoLengthDrivenTextString, INexoDigitString
 	{
 		#region properties
 		public override bool TrimInput { get => true; }
@@ -987,7 +952,7 @@ namespace NEXO
 		string Value { get; set; }
 	}
 	[ComVisible(false)]
-	public abstract class NexoISOData: NexoLengthDrivenTextString
+	public abstract class NexoISOData : NexoLengthDrivenTextString
 	{
 		#region properties
 		public override bool CaseInsensitive { get => true; }
@@ -1007,7 +972,7 @@ namespace NEXO
 	[Guid("D778424B-0BE8-4907-9998-FFBEE38A9D9D")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoISOCurrency3A: NexoISOData, INexoISOData
+	public class NexoISOCurrency3A : NexoISOData, INexoISOData
 	{
 		#region properties
 		public override int Min { get => 3; }
@@ -1022,7 +987,7 @@ namespace NEXO
 	[Guid("969B3F3F-C827-4244-83AE-0CA5A56CB4DA")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoISOCountry3A: NexoISOData, INexoISOData
+	public class NexoISOCountry3A : NexoISOData, INexoISOData
 	{
 		#region properties
 		public override int Min { get => 3; }
@@ -1037,7 +1002,7 @@ namespace NEXO
 	[Guid("6D548B98-DCA5-42B3-8D67-E2796A47AB40")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoISOLanguage2A: NexoISOData, INexoISOData
+	public class NexoISOLanguage2A : NexoISOData, INexoISOData
 	{
 		#region properties
 		public override bool SetToUpperCase { get => false; }
@@ -1056,7 +1021,7 @@ namespace NEXO
 		#endregion
 	}
 	[ComVisible(false)]
-	public abstract class NexoISODateTimeBase: NexoTextString
+	public abstract class NexoISODateTimeBase : NexoTextString
 	{
 		#region properties
 		public override bool TrimInput { get => true; }
@@ -1128,7 +1093,7 @@ namespace NEXO
 	[Guid("91C85C90-6D2B-4762-88BE-B96A9C275DE9")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoISODateTime: NexoISODateTimeBase, INexoISODateTime
+	public class NexoISODateTime : NexoISODateTimeBase, INexoISODateTime
 	{
 		#region properties
 		/// <summary>
@@ -1202,7 +1167,7 @@ namespace NEXO
 	[Guid("29E0D16F-F912-4176-BAFB-41A5444F4B10")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoISODate: NexoISODateTimeBase, INexoISODate
+	public class NexoISODate : NexoISODateTimeBase, INexoISODate
 	{
 		#region properties
 		#endregion
@@ -1275,7 +1240,7 @@ namespace NEXO
 	[Guid("5E5B89AB-BC0A-405D-8DDC-F35C4E92D9A6")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoByteSequence: NexoType, INexoNonStringType
+	public class NexoByteSequence : NexoType, INexoNonStringType
 	{
 		#region properties
 		/// <summary>
@@ -1329,7 +1294,7 @@ namespace NEXO
 	[Guid("DE4FC2B3-900F-4128-8330-8881A0C36275")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrency: NexoISOCurrency3A, INexoCurrency
+	public class NexoCurrency : NexoISOCurrency3A, INexoCurrency
 	{
 		#region properties
 		/// <summary>
@@ -1348,20 +1313,20 @@ namespace NEXO
 	[Guid("64799C07-C801-4276-BF3A-E6AB89A691B3")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrencyEUR: NexoCurrency, INexoCurrency { public NexoCurrencyEUR() { Value = "EUR"; DecimalPlaces = 2; } }
+	public class NexoCurrencyEUR : NexoCurrency, INexoCurrency { public NexoCurrencyEUR() { Value = "EUR"; DecimalPlaces = 2; } }
 	[Guid("29167784-C41B-47FF-B1EF-DD855D277C35")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrencyUSD: NexoCurrency, INexoCurrency { public NexoCurrencyUSD() { Value = "USD"; DecimalPlaces = 2; } }
+	public class NexoCurrencyUSD : NexoCurrency, INexoCurrency { public NexoCurrencyUSD() { Value = "USD"; DecimalPlaces = 2; } }
 	[Guid("03861903-A788-40EF-82A1-27B39C2D57E8")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrencyGBP: NexoCurrency, INexoCurrency { public NexoCurrencyGBP() { Value = "GBP"; DecimalPlaces = 2; } }
+	public class NexoCurrencyGBP : NexoCurrency, INexoCurrency { public NexoCurrencyGBP() { Value = "GBP"; DecimalPlaces = 2; } }
 	[Guid("DE5411DE-BB56-478C-94CD-32E7CD95EC97")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrencyCHF: NexoCurrency, INexoCurrency { public NexoCurrencyCHF() { Value = "CHF"; DecimalPlaces = 2; } }
-	public class NexoDefaultCurrency: NexoCurrency, INexoCurrency
+	public class NexoCurrencyCHF : NexoCurrency, INexoCurrency { public NexoCurrencyCHF() { Value = "CHF"; DecimalPlaces = 2; } }
+	public class NexoDefaultCurrency : NexoCurrency, INexoCurrency
 	{
 		public NexoDefaultCurrency()
 		{
@@ -1393,7 +1358,7 @@ namespace NEXO
 	[Guid("D63D6791-C70C-4271-8348-774BC4FEA26D")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCurrencyAmount: NexoCurrency, INexoAmount
+	public class NexoCurrencyAmount : NexoCurrency, INexoAmount
 	{
 		#region properties
 		/// <summary>
@@ -1424,28 +1389,28 @@ namespace NEXO
 	}
 
 	[ComVisible(true)]
-	public class NexoMessageType: NexoEnumeration, INexoEnumeration { public NexoMessageType() : base(TagsEnumeration.MessageType.ToString()) { Value = DefaultValue; } }
+	public class NexoMessageType : NexoEnumeration, INexoEnumeration { public NexoMessageType() : base(TagsEnumeration.MessageType.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoMessageClass: NexoEnumeration, INexoEnumeration { public NexoMessageClass() : base(TagsEnumeration.MessageClass.ToString()) { Value = DefaultValue; } }
+	public class NexoMessageClass : NexoEnumeration, INexoEnumeration { public NexoMessageClass() : base(TagsEnumeration.MessageClass.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoMessageCategory: NexoEnumeration, INexoEnumeration { public NexoMessageCategory() : base(TagsEnumeration.MessageCategory.ToString()) { Value = DefaultValue; } }
+	public class NexoMessageCategory : NexoEnumeration, INexoEnumeration { public NexoMessageCategory() : base(TagsEnumeration.MessageCategory.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoTerminalEnvironment: NexoEnumeration, INexoEnumeration { public NexoTerminalEnvironment() : base(TagsEnumeration.TerminalEnvironment.ToString()) { Value = DefaultValue; } }
+	public class NexoTerminalEnvironment : NexoEnumeration, INexoEnumeration { public NexoTerminalEnvironment() : base(TagsEnumeration.TerminalEnvironment.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoSaleCapabilities: NexoCluster, INexoCluster { public NexoSaleCapabilities() : base(TagsEnumeration.SaleCapabilities.ToString()) { Value = DefaultValue; } }
+	public class NexoSaleCapabilities : NexoCluster, INexoCluster { public NexoSaleCapabilities() : base(TagsEnumeration.SaleCapabilities.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoProtocolVersion: NexoDecimal, INexoDecimal { public NexoProtocolVersion(string v = null) : base(TagsEnumeration.ProtocolVersion.ToString()) { DefaultValue = NexoVersion.Short; Mantis = 2; DecimalPlaces = 2; Value = v ?? DefaultValue; } }
+	public class NexoProtocolVersion : NexoDecimal, INexoDecimal { public NexoProtocolVersion(string v = null) : base(TagsEnumeration.ProtocolVersion.ToString()) { DefaultValue = NexoVersion.Short; Mantis = 1; DecimalPlaces = 1; Value = v ?? DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoSupportedProtocolVersions: Dictionary<string, NexoProtocolVersion> { }
+	public class NexoSupportedProtocolVersions : Dictionary<string, NexoProtocolVersion> { }
 
 	[ComVisible(true)]
-	public class NexoID: NexoLengthDrivenTextString, INexoLengthDrivenTextString
+	public class NexoID : NexoLengthDrivenTextString, INexoLengthDrivenTextString
 	{
 		public NexoID(string name = "") : base(name) { RegularExpression = string.Empty; Min = 1; Max = 10; }
 		protected override string GetDefaultValue(string value)
@@ -1468,65 +1433,65 @@ namespace NEXO
 	}
 
 	[ComVisible(true)]
-	public class NexoServiceID: NexoID { public NexoServiceID(string v = "") : base(TagsEnumeration.ServiceID.ToString()) { Value = v; } }
+	public class NexoServiceID : NexoID { public NexoServiceID(string v = "") : base(TagsEnumeration.ServiceID.ToString()) { Value = v; } }
 
 	[ComVisible(true)]
-	public class NexoDeviceID: NexoID { public NexoDeviceID(string v = "") : base(TagsEnumeration.DeviceID.ToString()) { Value = v; } }
+	public class NexoDeviceID : NexoID { public NexoDeviceID(string v = "") : base(TagsEnumeration.DeviceID.ToString()) { Value = v; } }
 
 	[ComVisible(true)]
-	public class NexoPOIID: NexoTextString, INexoTextString { public NexoPOIID(string v) : base(TagsEnumeration.POIID.ToString()) { Value = v; } }
+	public class NexoPOIID : NexoTextString, INexoTextString { public NexoPOIID(string v) : base(TagsEnumeration.POIID.ToString()) { Value = v; } }
 
 	[ComVisible(true)]
-	public class NexoSaleID: NexoTextString, INexoTextString { public NexoSaleID(string v) : base(TagsEnumeration.SaleID.ToString()) { Value = v; } }
+	public class NexoSaleID : NexoTextString, INexoTextString { public NexoSaleID(string v) : base(TagsEnumeration.SaleID.ToString()) { Value = v; } }
 
 	[ComVisible(true)]
-	public class NexoOperatorLanguage: NexoISOLanguage2A, INexoISOData { public NexoOperatorLanguage() : base(TagsEnumeration.OperatorLanguage.ToString()) { Value = DefaultValue; } }
+	public class NexoOperatorLanguage : NexoISOLanguage2A, INexoISOData { public NexoOperatorLanguage() : base(TagsEnumeration.OperatorLanguage.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoResult: NexoEnumeration, INexoEnumeration { public NexoResult() : base(TagsEnumeration.Result.ToString()) { Value = DefaultValue; } }
+	public class NexoResult : NexoEnumeration, INexoEnumeration { public NexoResult() : base(TagsEnumeration.Result.ToString()) {/* DefaultValue = ResultEnumeration.Success.ToString(); */   } }
 
 	[ComVisible(true)]
-	public class NexoErrorCondition: NexoEnumeration, INexoEnumeration { public NexoErrorCondition() : base(TagsEnumeration.ErrorCondition.ToString()) { Value = DefaultValue; } }
+	public class NexoErrorCondition : NexoEnumeration, INexoEnumeration { public NexoErrorCondition() : base(TagsEnumeration.ErrorCondition.ToString()) { /*DefaultValue = ErrorConditionEnumeration.Value = DefaultValue;*/ } }
 
 	[ComVisible(true)]
-	public class NexoAdditionalResponse: NexoTextString, INexoTextString { public NexoAdditionalResponse() : base(TagsEnumeration.AdditionalResponse.ToString()) { } }
+	public class NexoAdditionalResponse : NexoTextString, INexoTextString { public NexoAdditionalResponse() : base(TagsEnumeration.AdditionalResponse.ToString()) { } }
 
 	[ComVisible(true)]
-	public class NexoGlobalStatus: NexoEnumeration, INexoEnumeration { public NexoGlobalStatus() : base(TagsEnumeration.GlobalStatus.ToString()) { Value = DefaultValue; } }
+	public class NexoGlobalStatus : NexoEnumeration, INexoEnumeration { public NexoGlobalStatus() : base(TagsEnumeration.GlobalStatus.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoCertificationCode: NexoTextString, INexoTextString { public NexoCertificationCode() : base(TagsEnumeration.CertificationCode.ToString()) { Value = DefaultValue = "NOT CERTIFIED"; /*CMisc.Version(CMisc.VersionType.assembly);/* Assembly.GetExecutingAssembly().GetName().Version.ToString();*/ } }
+	public class NexoCertificationCode : NexoTextString, INexoTextString { public NexoCertificationCode() : base(TagsEnumeration.CertificationCode.ToString()) { Value = DefaultValue = "NOT CERTIFIED"; /*CMisc.Version(CMisc.VersionType.assembly);/* Assembly.GetExecutingAssembly().GetName().Version.ToString();*/ } }
 
 	[ComVisible(true)]
-	public class NexoSoftwareVersion: NexoTextString, INexoTextString { public NexoSoftwareVersion() : base(TagsEnumeration.SoftwareVersion.ToString()) { Value = DefaultValue = CMisc.Version(CMisc.VersionType.assemblyInfo); } }
+	public class NexoSoftwareVersion : NexoTextString, INexoTextString { public NexoSoftwareVersion() : base(TagsEnumeration.SoftwareVersion.ToString()) { Value = DefaultValue = CMisc.Version(CMisc.VersionType.assemblyInfo); } }
 
 	[ComVisible(true)]
-	public class NexoApplicationName: NexoTextString, INexoTextString { public NexoApplicationName() : base(TagsEnumeration.ApplicationName.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
+	public class NexoApplicationName : NexoTextString, INexoTextString { public NexoApplicationName() : base(TagsEnumeration.ApplicationName.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
 
 	[ComVisible(true)]
-	public class NexoManufacturerID: NexoTextString, INexoTextString { public NexoManufacturerID() : base(TagsEnumeration.ManufacturerID.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
+	public class NexoManufacturerID : NexoTextString, INexoTextString { public NexoManufacturerID() : base(TagsEnumeration.ManufacturerID.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
 
 #if ANDROID
 	[ComVisible(true)]
 	public class NexoPOISerialNumber: NexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { } }
 #else
 	[ComVisible(true)]
-	public class NexoPOISerialNumber: NexoTextString, INexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { DefaultValue = "SerialNumber"; } }
+	public class NexoPOISerialNumber : NexoTextString, INexoTextString { public NexoPOISerialNumber() : base(TagsEnumeration.POISerialNumber.ToString()) { DefaultValue = "SerialNumber"; } }
 #endif
 
 	[ComVisible(true)]
-	public class NexoOperatorID: NexoTextString, INexoTextString { public NexoOperatorID() : base(TagsEnumeration.OperatorID.ToString()) { DefaultValue = Environment.UserName; } }
+	public class NexoOperatorID : NexoTextString, INexoTextString { public NexoOperatorID() : base(TagsEnumeration.OperatorID.ToString()) { DefaultValue = Environment.UserName; } }
 
 	[ComVisible(true)]
-	public class NexoDateTime: NexoISODateTime, INexoISODateTime { public NexoDateTime() : base(TagsEnumeration.DateTime.ToString()) { } }
+	public class NexoDateTime : NexoISODateTime, INexoISODateTime { public NexoDateTime() : base(TagsEnumeration.DateTime.ToString()) { } }
 
 	[ComVisible(true)]
-	public class NexoInputCommand: NexoEnumeration, INexoEnumeration { public NexoInputCommand() : base(TagsEnumeration.InputCommand.ToString()) { } }
+	public class NexoInputCommand : NexoEnumeration, INexoEnumeration { public NexoInputCommand() : base(TagsEnumeration.InputCommand.ToString()) { } }
 
 	[ComVisible(true)]
-	public class NexoEventToNotify: NexoEnumeration, INexoEnumeration { public NexoEventToNotify() : base(TagsEnumeration.EventToNotify.ToString()) { } }
+	public class NexoEventToNotify : NexoEnumeration, INexoEnumeration { public NexoEventToNotify() : base(TagsEnumeration.EventToNotify.ToString()) { } }
 
 	[ComVisible(true)]
-	public class NexoPaymentIntrumentType: NexoEnumeration, INexoEnumeration { public NexoPaymentIntrumentType() : base(TagsEnumeration.PaymentInstrumentType.ToString()) { DefaultValue = PaymentInstrumentTypeEnumeration.Card.ToString(); } }
+	public class NexoPaymentIntrumentType : NexoEnumeration, INexoEnumeration { public NexoPaymentIntrumentType() : base(TagsEnumeration.PaymentInstrumentType.ToString()) { DefaultValue = PaymentInstrumentTypeEnumeration.Card.ToString(); } }
 
 }

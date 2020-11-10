@@ -27,7 +27,8 @@ Partial Class FActivity
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.rbConnected = New System.Windows.Forms.RadioButton()
 		Me.rbConnections = New System.Windows.Forms.RadioButton()
-		Me.rbCommands = New System.Windows.Forms.RadioButton()
+		Me.rbReceivedMessages = New System.Windows.Forms.RadioButton()
+		Me.rbSentMessages = New System.Windows.Forms.RadioButton()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.SuspendLayout()
@@ -70,14 +71,16 @@ Partial Class FActivity
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel2.AutoSize = True
 		Me.TableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel2.ColumnCount = 4
+		Me.TableLayoutPanel2.ColumnCount = 5
+		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel2.Controls.Add(Me.rbConnected, 2, 0)
-		Me.TableLayoutPanel2.Controls.Add(Me.rbConnections, 1, 0)
-		Me.TableLayoutPanel2.Controls.Add(Me.rbCommands, 0, 0)
+		Me.TableLayoutPanel2.Controls.Add(Me.rbSentMessages, 0, 0)
+		Me.TableLayoutPanel2.Controls.Add(Me.rbConnected, 3, 0)
+		Me.TableLayoutPanel2.Controls.Add(Me.rbConnections, 2, 0)
+		Me.TableLayoutPanel2.Controls.Add(Me.rbReceivedMessages, 0, 0)
 		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
 		Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
 		Me.TableLayoutPanel2.RowCount = 1
@@ -88,7 +91,7 @@ Partial Class FActivity
 		'rbConnected
 		'
 		Me.rbConnected.AutoSize = True
-		Me.rbConnected.Location = New System.Drawing.Point(176, 3)
+		Me.rbConnected.Location = New System.Drawing.Point(324, 3)
 		Me.rbConnected.Name = "rbConnected"
 		Me.rbConnected.Size = New System.Drawing.Size(77, 17)
 		Me.rbConnected.TabIndex = 2
@@ -99,7 +102,7 @@ Partial Class FActivity
 		'rbConnections
 		'
 		Me.rbConnections.AutoSize = True
-		Me.rbConnections.Location = New System.Drawing.Point(86, 3)
+		Me.rbConnections.Location = New System.Drawing.Point(234, 3)
 		Me.rbConnections.Name = "rbConnections"
 		Me.rbConnections.Size = New System.Drawing.Size(84, 17)
 		Me.rbConnections.TabIndex = 1
@@ -107,16 +110,27 @@ Partial Class FActivity
 		Me.rbConnections.Text = "Connections"
 		Me.rbConnections.UseVisualStyleBackColor = True
 		'
-		'rbCommands
+		'rbReceivedMessages
 		'
-		Me.rbCommands.AutoSize = True
-		Me.rbCommands.Location = New System.Drawing.Point(3, 3)
-		Me.rbCommands.Name = "rbCommands"
-		Me.rbCommands.Size = New System.Drawing.Size(77, 17)
-		Me.rbCommands.TabIndex = 0
-		Me.rbCommands.TabStop = True
-		Me.rbCommands.Text = "Commands"
-		Me.rbCommands.UseVisualStyleBackColor = True
+		Me.rbReceivedMessages.AutoSize = True
+		Me.rbReceivedMessages.Location = New System.Drawing.Point(3, 3)
+		Me.rbReceivedMessages.Name = "rbReceivedMessages"
+		Me.rbReceivedMessages.Size = New System.Drawing.Size(122, 17)
+		Me.rbReceivedMessages.TabIndex = 0
+		Me.rbReceivedMessages.TabStop = True
+		Me.rbReceivedMessages.Text = "Received Messages"
+		Me.rbReceivedMessages.UseVisualStyleBackColor = True
+		'
+		'rbSentMessages
+		'
+		Me.rbSentMessages.AutoSize = True
+		Me.rbSentMessages.Location = New System.Drawing.Point(131, 3)
+		Me.rbSentMessages.Name = "rbSentMessages"
+		Me.rbSentMessages.Size = New System.Drawing.Size(97, 17)
+		Me.rbSentMessages.TabIndex = 3
+		Me.rbSentMessages.TabStop = True
+		Me.rbSentMessages.Text = "Sent messages"
+		Me.rbSentMessages.UseVisualStyleBackColor = True
 		'
 		'FActivity
 		'
@@ -139,7 +153,8 @@ Partial Class FActivity
 	Friend WithEvents efActivity As TextBox
 	Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 	Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-	Friend WithEvents rbCommands As RadioButton
+	Friend WithEvents rbReceivedMessages As RadioButton
 	Friend WithEvents rbConnected As RadioButton
 	Friend WithEvents rbConnections As RadioButton
+	Friend WithEvents rbSentMessages As RadioButton
 End Class

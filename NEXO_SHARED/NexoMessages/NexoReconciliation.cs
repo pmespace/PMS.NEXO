@@ -153,9 +153,7 @@ namespace NEXO
 		#region constructor
 		public NexoReconciliation() : base(MessageCategoryEnumeration.Reconciliation)
 		{
-			RequestType = typeof(ReconciliationRequestType);
 			RequestItem = new ReconciliationRequestType();
-			ReplyType = typeof(ReconciliationResponseType);
 			ReplyItem = new ReconciliationResponseType();
 		}
 		#endregion

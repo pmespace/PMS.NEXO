@@ -22,27 +22,31 @@ namespace NEXO
 	[Guid("0010366D-C2CC-4685-A52A-9716D59740F3")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public abstract class NexoActivity: INexoActivity
+	public abstract class NexoActivity : INexoActivity
 	{
 		#region constructor
 		public NexoActivity()
 		{
+#if NEXO30
+			_sentmessages = new NexoListOfAnyMessages("SENT MESSAGES");
+			_receivedmessages = new NexoListOfAnyMessages("RECEIVED MESSAGES");
+#else
 			SentMessages = new ReadOnlyCollection<NexoAnyMessage>(_sentmessages);
 			ReceivedMessages = new ReadOnlyCollection<NexoAnyMessage>(_receivedmessages);
+#endif
 		}
 		#endregion
 
 		#region properties
-		/// <summary>
-		/// List of messages sent by the entity
-		/// </summary>
-		private NexoListOfAnyMessages _sentmessages = new NexoListOfAnyMessages("SENT MESSAGES");
+		private NexoListOfAnyMessages _sentmessages { get; set; }
+		private NexoListOfAnyMessages _receivedmessages { get; set; }
+#if NEXO30
+		public NexoListOfAnyMessages SentMessages { get => _sentmessages; private set => _sentmessages = value; }
+		public NexoListOfAnyMessages ReceivedMessages { get => _receivedmessages; private set => _receivedmessages = value; }
+#else
 		public ReadOnlyCollection<NexoAnyMessage> SentMessages { get; }
-		/// <summary>
-		/// List of messages received by the entity
-		/// </summary>
-		private NexoListOfAnyMessages _receivedmessages = new NexoListOfAnyMessages("RECEIVED MESSAGES");
 		public ReadOnlyCollection<NexoAnyMessage> ReceivedMessages { get; }
+#endif
 		#endregion
 
 		#region methods

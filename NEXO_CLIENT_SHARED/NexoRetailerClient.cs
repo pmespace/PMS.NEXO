@@ -23,7 +23,7 @@ namespace NEXO.Client
 	[Guid("1AD62E2A-7807-46E1-B3E5-69ED82788C7E")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoRetailerClientHandle: INexoRetailerClientHandle
+	public class NexoRetailerClientHandle : INexoRetailerClientHandle
 	{
 		public NexoRetailerClientHandle(string xml, object handle) { XML = xml; Handle = handle; }
 		public string XML { get; }
@@ -114,7 +114,7 @@ namespace NEXO.Client
 	[Guid("48D91DB7-8D55-4151-B04D-02985CFCF6DF")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public sealed class NexoRetailerClient: NexoRetailer, INexoRetailerClient
+	public sealed class NexoRetailerClient : NexoRetailer, INexoRetailerClient
 	{
 		#region constructor
 		public NexoRetailerClient() { SaleID = null; POIID = null; }
@@ -308,10 +308,10 @@ namespace NEXO.Client
 		private CStreamClientIO StreamIO = null;
 
 		private QueueOfNexoObjectToProcess receivedMessages = new QueueOfNexoObjectToProcess();
-		private ManualResetEvent evtStopDispatcher = new ManualResetEvent(false);
-		private ManualResetEvent evtCancelled = new ManualResetEvent(false);
-		private ManualResetEvent evtReceived = new ManualResetEvent(false);
-		private ManualResetEvent evtTimeout = new ManualResetEvent(false);
+		private AutoResetEvent evtStopDispatcher = new AutoResetEvent(false);
+		private AutoResetEvent evtCancelled = new AutoResetEvent(false);
+		private AutoResetEvent evtReceived = new AutoResetEvent(false);
+		private AutoResetEvent evtTimeout = new AutoResetEvent(false);
 		private Mutex isDisconnectingMutex = new Mutex(false);
 		private Exchange exchange
 		{
@@ -812,7 +812,6 @@ namespace NEXO.Client
 					res = (int)ThreadResult.Exception;
 				}
 			}
-			// indicate the thread is over
 			ReceiverEvents.SetStopped();
 			Disconnect();
 			return res;
@@ -848,8 +847,6 @@ namespace NEXO.Client
 						// a message is ready to process
 						// dequeue the older message
 						NexoObjectToProcess toprocess = null;
-						// reset the event for next time
-						((ManualResetEvent)handles[index]).Reset();
 						if (evtReceived == handles[index])
 						{
 							NexoDelegates.OnReceivedDelegate onReceived = null;
@@ -1037,5 +1034,5 @@ namespace NEXO.Client
 	}
 
 	[ComVisible(false)]
-	public class NexoRetailerClients: Dictionary<string, NexoRetailerClient> { }
+	public class NexoRetailerClients : Dictionary<string, NexoRetailerClient> { }
 }

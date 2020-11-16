@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\Release\PMS.NEXO.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
-    <RegisterForComInterop>false</RegisterForComInterop>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

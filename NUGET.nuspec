@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>2.0.4</version>
+    <version>2.0.6</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,6 +14,12 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      2.0.6
+      - [Failed] Missed updating COMMON minimum version to 2.0.4
+      
+      2.0.5
+      - Updated COMMON nuget package
+      
       2.0.4
       - Changes events type inside NexoRetailerClient and fixed a bug with ThreadDispatcher not well closed in certain conditions
       
@@ -62,11 +68,11 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="2.0.3" />
+        <dependency id="PMS.COMMON" version="2.0.4" />
         <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="2.0.3" />
+        <dependency id="PMS.COMMON" version="2.0.4" />
       </group>
     </dependencies>
   </metadata>

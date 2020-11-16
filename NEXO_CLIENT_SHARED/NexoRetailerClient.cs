@@ -1028,7 +1028,7 @@ namespace NEXO.Client
 		/// <param name="state"></param>
 		private static void TimerCallback(object state)
 		{
-			((ManualResetEvent)state).Set();
+			((AutoResetEvent)state).Set();
 		}
 		#endregion
 	}

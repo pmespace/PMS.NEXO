@@ -16,6 +16,22 @@ using COMMON;
 
 namespace NEXO
 {
+	//[ComVisible(false)]
+	//public static class MyExtensions
+	//{
+	//	/// <summary>
+	//	/// Extension making sure the decimal always contains at least one digit (eventually x.0)
+	//	/// </summary>
+	//	/// <param name="value">The decimal to process</param>
+	//	/// <param name="min">Indicates the minimum number of digits to use</param>
+	//	/// <returns></returns>
+	//	public static string ToSpecificFormat(this decimal value, uint min = 0)
+	//	{
+	//		var count = BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
+	//		return value.ToString(count <= min ? "N" + min : "N" + count, CultureInfo.InvariantCulture);
+	//	}
+	//}
+
 	[ComVisible(false)]
 	public static class NexoVersion
 	{
@@ -76,6 +92,8 @@ namespace NEXO
 		bool IsUnset { get; }
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 	}
 	[Guid("8F565B94-FC31-4938-BB9B-3628D74AA348")]
 	[ClassInterface(ClassInterfaceType.None)]
@@ -151,7 +169,7 @@ namespace NEXO
 		/// </summary>
 		/// <param name="value">The string to validate on entry, the validated string on exit (an empty string if the string on entry did not match the regular expression)</param>
 		/// <returns>True if the string is valid, false otherwise</returns>
-		private bool TestValue(ref string value)
+		public bool TestValue(ref string value)
 		{
 			if (null == value)
 				return false;
@@ -236,11 +254,14 @@ namespace NEXO
 		bool IsEmpty { get; }
 		[DispId(10)]
 		bool IsUnset { get; }
+
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 
 		[DispId(50)]
-		bool Boolean { get; set; }
+		bool AsBoolean { get; set; }
 	}
 	[Guid("C9E4530A-BCB7-437D-B814-D3BF11026D07")]
 	[ClassInterface(ClassInterfaceType.None)]
@@ -252,7 +273,7 @@ namespace NEXO
 		public override bool CaseInsensitive { get => true; }
 		public override bool PreserveCase { get => false; }
 		public override bool SetToUpperCase { get => false; }
-		public bool Boolean
+		public bool AsBoolean
 		{
 			get => ToBoolean();
 			set => FromBoolean(value);
@@ -284,8 +305,11 @@ namespace NEXO
 		bool IsEmpty { get; }
 		[DispId(10)]
 		bool IsUnset { get; }
+
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 
 		[DispId(50)]
 		int AsInteger { get; set; }
@@ -347,24 +371,25 @@ namespace NEXO
 		bool IsEmpty { get; }
 		[DispId(10)]
 		bool IsUnset { get; }
+
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 
 		[DispId(50)]
-		int AsInteger { get; set; }
-		[DispId(51)]
 		double AsDecimal { get; set; }
-		[DispId(52)]
+		[DispId(51)]
 		uint DecimalPlaces { get; set; }
-		[DispId(53)]
+		[DispId(52)]
 		uint Mantis { get; set; }
-		[DispId(54)]
+		[DispId(53)]
 		string DecimalSeparator { get; }
 	}
 	[Guid("6B3992EA-EA2A-40CE-8D32-759442C3733F")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDecimal : NexoInteger, INexoDecimal
+	public class NexoDecimal : NexoTextString, INexoDecimal
 	{
 		#region properties
 		public virtual uint DecimalPlaces
@@ -372,7 +397,7 @@ namespace NEXO
 			get => _decimal;
 			set
 			{
-				if (0 == MaxDecimalDigits || MaxDecimalDigits >= value)
+				if (0 == MaxDecimalPlaces || MaxDecimalPlaces >= value)
 				{
 					_decimal = value;
 					Value = SetValue(Value);
@@ -394,18 +419,45 @@ namespace NEXO
 		}
 		private uint _mantis = 0;
 		public string DecimalSeparator { get => @"."; }
-		public override int AsInteger
+		public virtual uint MaxDecimalPlaces
 		{
-			get => (int)AsDecimal;
-			set => AsDecimal = (double)value;
+			get => _maxdecimalplaces;
+			set
+			{
+				_maxdecimalplaces = value;
+				if (0 != MaxDecimalPlaces && MaxDecimalPlaces < _decimal) _decimal = _maxdecimalplaces;
+			}
 		}
+		private uint _maxdecimalplaces = 0;
+		public virtual uint MaxMantis
+		{
+			get => _maxmantis;
+			set
+			{
+				_maxmantis = value;
+				if (0 != MaxMantis && MaxMantis < Mantis) _mantis = _maxmantis;
+			}
+		}
+		private uint _maxmantis = 0;
+		/// <summary>
+		/// Allows setting and retrieving the decimal value
+		/// </summary>
 		public double AsDecimal
 		{
 			get => ToDecimal();
-			set => Value = value.ToString(CultureInfo.InvariantCulture);
+			set
+			{
+				try
+				{
+					//Value = value.ToSpecificFormat(DecimalPlaces);
+					Value = value.ToString("N", CultureInfo.InvariantCulture);
+				}
+				catch (Exception)
+				{
+					IsUnset = true;
+				}
+			}
 		}
-		protected uint MaxDecimalDigits = 0;
-		protected uint MaxMantis = 0;
 		#endregion
 
 		#region constructor
@@ -418,24 +470,28 @@ namespace NEXO
 		{
 			try
 			{
-				double d = double.Parse(value, CultureInfo.InvariantCulture);
-				return d.ToString("0.0", CultureInfo.InvariantCulture);
+				//return decimal.Parse(value, CultureInfo.InvariantCulture).ToSpecificFormat(DecimalPlaces);
+				return double.Parse(value, CultureInfo.InvariantCulture).ToString("N", CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return null; }
 		}
 		protected override string GetRegularExpression(string value)
 		{
-			string s = @"^" + @"[0-9]" + (0 < Mantis ? @"{1," + Mantis + @"}" : @"*") + DecimalSeparator + "?" + @"[0-9]" + (0 < DecimalPlaces ? @"{0," + DecimalPlaces + @"}" : @"*") + @"$";
+			string s = @"^" +
+				@"[0-9]" + (0 == MaxMantis && 0 == Mantis ? @"*" : 0 == MaxMantis ? @"{" + Mantis + @",}" : 0 == Mantis ? @"{0," + MaxMantis + @"}" : @"{" + Mantis + "," + MaxMantis + @"}") +
+				@"\" + DecimalSeparator + "?" +
+				@"[0-9]" + (0 == MaxDecimalPlaces && 0 == DecimalPlaces ? @"*" : 0 == MaxDecimalPlaces ? @"{" + DecimalPlaces + @",}" : 0 == DecimalPlaces ? @"{0," + MaxDecimalPlaces + @"}" : @"{" + DecimalPlaces + "," + MaxDecimalPlaces + @"}") +
+				@"$";
 			return s;
 		}
+		//private decimal ToDecimal()
 		private double ToDecimal()
 		{
 			try
 			{
-				double d = double.Parse(Value, CultureInfo.InvariantCulture);
-				string formattedString = d.ToString("0" + DecimalSeparator + new string('0', (int)DecimalPlaces), CultureInfo.InvariantCulture);
-				return double.Parse(formattedString, CultureInfo.InvariantCulture);
+				//return decimal.Parse(Value, CultureInfo.InvariantCulture);
+				return double.Parse(Value, CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return 0; }
@@ -448,9 +504,9 @@ namespace NEXO
 	public class NexoSimpleAmount : NexoDecimal, INexoDecimal
 	{
 		#region constructor
-		public NexoSimpleAmount() { }
-		public NexoSimpleAmount(string name) : base(name) { }
-		private void Initialize() { MaxDecimalDigits = 6; MaxMantis = 8; }
+		public NexoSimpleAmount() { Initialize(); }
+		public NexoSimpleAmount(string name) : base(name) { Initialize(); }
+		private void Initialize() { MaxDecimalPlaces = 6; MaxMantis = 8; }
 		#endregion
 	}
 
@@ -819,8 +875,11 @@ namespace NEXO
 		bool IsEmpty { get; }
 		[DispId(10)]
 		bool IsUnset { get; }
+
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 
 		[DispId(50)]
 		int Min { get; set; }
@@ -909,8 +968,11 @@ namespace NEXO
 		bool IsEmpty { get; }
 		[DispId(10)]
 		bool IsUnset { get; }
+
 		[DispId(100)]
 		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 
 		[DispId(50)]
 		int Min { get; set; }
@@ -950,6 +1012,11 @@ namespace NEXO
 		string Name { get; set; }
 		[DispId(2)]
 		string Value { get; set; }
+
+		[DispId(100)]
+		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 	}
 	[ComVisible(false)]
 	public abstract class NexoISOData : NexoLengthDrivenTextString
@@ -1083,11 +1150,17 @@ namespace NEXO
 		bool Utc { get; set; }
 		[DispId(4)]
 		bool Milliseconds { get; set; }
+
 		[DispId(100)]
+		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
+
+		[DispId(300)]
 		void Reset();
-		[DispId(101)]
+		[DispId(301)]
 		DateTime ToDateTime();
-		[DispId(102)]
+		[DispId(302)]
 		string FromDateTime(DateTime dt);
 	}
 	[Guid("91C85C90-6D2B-4762-88BE-B96A9C275DE9")]
@@ -1157,11 +1230,17 @@ namespace NEXO
 		string Name { get; set; }
 		[DispId(2)]
 		string Value { get; set; }
+
 		[DispId(100)]
+		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
+
+		[DispId(300)]
 		void Reset();
-		[DispId(101)]
+		[DispId(301)]
 		DateTime ToDateTime();
-		[DispId(102)]
+		[DispId(302)]
 		string FromDateTime(DateTime dt);
 	}
 	[Guid("29E0D16F-F912-4176-BAFB-41A5444F4B10")]
@@ -1236,6 +1315,9 @@ namespace NEXO
 		/// </summary>
 		[DispId(3)]
 		int Size { get; set; }
+
+		[DispId(100)]
+		string ToString();
 	}
 	[Guid("5E5B89AB-BC0A-405D-8DDC-F35C4E92D9A6")]
 	[ClassInterface(ClassInterfaceType.None)]
@@ -1290,6 +1372,11 @@ namespace NEXO
 		string Value { get; set; }
 		[DispId(3)]
 		uint DecimalPlaces { get; set; }
+
+		[DispId(100)]
+		string ToString();
+		[DispId(200)]
+		bool TestValue(ref string value);
 	}
 	[Guid("DE4FC2B3-900F-4128-8330-8881A0C36275")]
 	[ClassInterface(ClassInterfaceType.None)]
@@ -1304,10 +1391,46 @@ namespace NEXO
 		#endregion
 
 		#region constuctors
-		public NexoCurrency() { }
+		public NexoCurrency()
+		{
+			Value = DefaultCurrencySymbol();
+			DecimalPlaces = DefaultCurrencyDecimals();
+		}
 		#endregion
 
 		#region methods
+		protected override string GetDefaultValue(string value)
+		{
+			return DefaultCurrency().Value;
+		}
+		/// <summary>
+		/// Get the default currency as set on the system
+		/// </summary>
+		/// <returns></returns>
+		public static NexoCurrency DefaultCurrency()
+		{
+			return new NexoCurrency()
+			{
+				Value = DefaultCurrencySymbol(),
+				DecimalPlaces = DefaultCurrencyDecimals()
+			};
+		}
+		/// <summary>
+		/// Get the default currency symbol
+		/// </summary>
+		/// <returns></returns>
+		private static string DefaultCurrencySymbol()
+		{
+			return new RegionInfo(System.Globalization.CultureInfo.CurrentCulture.LCID).ISOCurrencySymbol;
+		}
+		/// <summary>
+		/// Get the default currency decimals
+		/// </summary>
+		/// <returns></returns>
+		private static uint DefaultCurrencyDecimals()
+		{
+			return (uint)CultureInfo.CurrentUICulture.NumberFormat.CurrencyDecimalDigits;
+		}
 		#endregion
 	}
 	[Guid("64799C07-C801-4276-BF3A-E6AB89A691B3")]
@@ -1326,67 +1449,6 @@ namespace NEXO
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
 	public class NexoCurrencyCHF : NexoCurrency, INexoCurrency { public NexoCurrencyCHF() { Value = "CHF"; DecimalPlaces = 2; } }
-	public class NexoDefaultCurrency : NexoCurrency, INexoCurrency
-	{
-		public NexoDefaultCurrency()
-		{
-			Value = new RegionInfo(System.Globalization.CultureInfo.CurrentCulture.LCID).ISOCurrencySymbol;
-			DecimalPlaces = (uint)CultureInfo.CurrentUICulture.NumberFormat.CurrencyDecimalDigits;
-		}
-	}
-
-	[Guid("5A214D20-F45B-4EB0-ACD4-1046EA315EF4")]
-	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-	[ComVisible(true)]
-	public interface INexoAmount
-	{
-		[DispId(1)]
-		string Name { get; set; }
-		[DispId(2)]
-		string Value { get; set; }
-		[DispId(3)]
-		uint DecimalPlaces { get; set; }
-		[DispId(4)]
-		long Amount { get; set; }
-		[DispId(5)]
-		double AmountDecimal { get; }
-		[DispId(6)]
-		bool DisplayCurrencyAfterAmount { get; set; }
-		[DispId(100)]
-		string ToString();
-	}
-	[Guid("D63D6791-C70C-4271-8348-774BC4FEA26D")]
-	[ClassInterface(ClassInterfaceType.None)]
-	[ComVisible(true)]
-	public class NexoCurrencyAmount : NexoCurrency, INexoAmount
-	{
-		#region properties
-		/// <summary>
-		/// Transaction amount in currency smallest unit (cents ?)
-		/// </summary>
-		public long Amount { get; set; } = 0;
-		/// <summary>
-		/// Transaction amount in decimal format
-		/// </summary>
-		public double AmountDecimal { get => (double)(Amount / Math.Pow(10, DecimalPlaces)); }
-		/// <summary>
-		/// Indicates how to display the amount, with currency after or before the amount
-		/// </summary>
-		public bool DisplayCurrencyAfterAmount { get; set; } = true;
-		#endregion
-
-		#region constuctors
-		public NexoCurrencyAmount() { }
-		#endregion
-
-		#region methods
-		/// <summary>
-		/// String representation of the data
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString() { return DisplayCurrencyAfterAmount ? AmountDecimal.ToString() + " " + Value : Value + " " + AmountDecimal.ToString(); }
-		#endregion
-	}
 
 	[ComVisible(true)]
 	public class NexoMessageType : NexoEnumeration, INexoEnumeration { public NexoMessageType() : base(TagsEnumeration.MessageType.ToString()) { Value = DefaultValue; } }

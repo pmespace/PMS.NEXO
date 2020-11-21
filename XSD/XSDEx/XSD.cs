@@ -308,12 +308,12 @@ namespace XSDEx
 								// verify if type needs to be converted
 								m.Type = ConvertType(settings, parameters, m.Type);
 
-								// attributes according to property type <<<>>>
-								if (0 == m.Type.ArrayRank && "System.Decimal" == m.Type.BaseType)
-								{
-									// add Decimal formatting attribute
-									AddDecimalFormatter(m.CustomAttributes, "0.00");
-								}
+								//// attributes according to property type <<<>>>
+								//if (0 == m.Type.ArrayRank && "System.Decimal" == m.Type.BaseType)
+								//{
+								//	// add Decimal formatting attribute
+								//	AddDecimalFormatter(m.CustomAttributes, "0.00");
+								//}
 
 								// search linked field
 								const string specified = "Field";

@@ -149,8 +149,6 @@ namespace NEXO
 			// prepare request and response objects
 			Request = new SaleToPOIRequest();
 			Reply = new SaleToPOIResponse();
-			Request.MessageHeader = new MessageHeaderType();
-			Reply.MessageHeader = new MessageHeaderType();
 			Request.SecurityTrailer = null;
 			Request.MessageHeader.MessageType = MessageTypeEnumeration.Request.ToString();
 			Reply.SecurityTrailer = null;

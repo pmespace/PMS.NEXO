@@ -25,6 +25,7 @@ namespace NEXO
 		string RequestOriginalPOITransactionTimestamp { get; set; }
 		[DispId(9)]
 		double RequestRequestedAmount { get; set; }
+		//double RequestRequestedAmount { get; set; }
 		[DispId(10)]
 		string RequestCurrency { get; set; }
 
@@ -34,6 +35,7 @@ namespace NEXO
 		string ReplyPOITransactionTimestamp { get; set; }
 		[DispId(52)]
 		double ReplyAuthorizedAmount { get; set; }
+		//double ReplyAuthorizedAmount { get; set; }
 		[DispId(53)]
 		PaymentInstrumentTypeEnumeration ReplyPaymentInstrumentType { get; set; }
 		[DispId(54)]
@@ -257,6 +259,7 @@ namespace NEXO
 			get => CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp);
 			set => RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
+		//public double RequestRequestedAmount
 		public double RequestRequestedAmount
 		{
 			get => RequestData.PaymentTransaction.AmountsReq.RequestedAmount;
@@ -280,6 +283,7 @@ namespace NEXO
 			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
 			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
+		//public double ReplyAuthorizedAmount
 		public double ReplyAuthorizedAmount
 		{
 			get => ReplyData.PaymentResult.AmountsResp.AuthorizedAmount;

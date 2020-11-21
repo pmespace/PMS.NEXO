@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FSimulator
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
-	<System.Diagnostics.DebuggerNonUserCode()> _
+	<System.Diagnostics.DebuggerNonUserCode()>
 	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
 		Try
 			If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FSimulator
 	'NOTE: The following procedure is required by the Windows Form Designer
 	'It can be modified using the Windows Form Designer.  
 	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
+	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.PanelMain = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelButtons = New System.Windows.Forms.TableLayoutPanel()
@@ -44,6 +44,7 @@ Partial Class FSimulator
 		Me.pbPayment = New System.Windows.Forms.Button()
 		Me.pbDeviceInput = New System.Windows.Forms.Button()
 		Me.pbDevicePrint = New System.Windows.Forms.Button()
+		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
 		Me.panelGateway = New System.Windows.Forms.TableLayoutPanel()
 		Me.serverToReachPanel14 = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelGatewayPort = New System.Windows.Forms.TableLayoutPanel()
@@ -118,7 +119,6 @@ Partial Class FSimulator
 		Me.lblFreeMessage = New System.Windows.Forms.Label()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -195,6 +195,8 @@ Partial Class FSimulator
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
 		Me.panelButtons.Controls.Add(Me.pbClose, 4, 0)
 		Me.panelButtons.Controls.Add(Me.pbClear, 2, 0)
 		Me.panelButtons.Controls.Add(Me.pbSaveContent, 3, 0)
@@ -503,6 +505,17 @@ Partial Class FSimulator
 		Me.pbDevicePrint.TabIndex = 3
 		Me.pbDevicePrint.Text = "Device Print"
 		Me.pbDevicePrint.UseVisualStyleBackColor = True
+		'
+		'cbSynchronous
+		'
+		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbSynchronous.AutoSize = True
+		Me.cbSynchronous.Location = New System.Drawing.Point(817, 6)
+		Me.cbSynchronous.Name = "cbSynchronous"
+		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
+		Me.cbSynchronous.TabIndex = 7
+		Me.cbSynchronous.Text = "Synchronous"
+		Me.cbSynchronous.UseVisualStyleBackColor = True
 		'
 		'panelGateway
 		'
@@ -1520,17 +1533,6 @@ Partial Class FSimulator
 		Me.lblFreeMessage.Size = New System.Drawing.Size(123, 20)
 		Me.lblFreeMessage.TabIndex = 13
 		Me.lblFreeMessage.Text = "Free message"
-		'
-		'cbSynchronous
-		'
-		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.cbSynchronous.AutoSize = True
-		Me.cbSynchronous.Location = New System.Drawing.Point(817, 6)
-		Me.cbSynchronous.Name = "cbSynchronous"
-		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
-		Me.cbSynchronous.TabIndex = 7
-		Me.cbSynchronous.Text = "Synchronous"
-		Me.cbSynchronous.UseVisualStyleBackColor = True
 		'
 		'FSimulator
 		'

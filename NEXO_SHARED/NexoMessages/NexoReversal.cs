@@ -23,6 +23,7 @@ namespace NEXO
 		string RequestSaleReferenceID { get; set; }
 		[DispId(6)]
 		double RequestReversedAmount { get; set; }
+		//double RequestReversedAmount { get; set; }
 		[DispId(7)]
 		string RequestReversalReason { get; set; }
 		[DispId(8)]
@@ -31,6 +32,7 @@ namespace NEXO
 		string ReplyPOITimestamp { get; set; }
 		[DispId(10)]
 		double ReplyReversedAmount { get; set; }
+		//double ReplyReversedAmount { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -208,6 +210,7 @@ namespace NEXO
 			set => RequestData.SaleData.SaleReferenceID = value;
 #endif
 		}
+		//public double RequestReversedAmount
 		public double RequestReversedAmount
 		{
 			get => RequestData.ReversedAmountSpecified ? RequestData.ReversedAmount : 0;
@@ -231,6 +234,7 @@ namespace NEXO
 			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
 			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
+		//public double ReplyReversedAmount
 		public double ReplyReversedAmount
 		{
 			get => ReplyData.ReversedAmountSpecified ? ReplyData.ReversedAmount : 0;

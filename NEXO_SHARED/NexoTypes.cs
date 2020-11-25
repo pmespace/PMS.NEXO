@@ -450,7 +450,7 @@ namespace NEXO
 				try
 				{
 					//Value = value.ToSpecificFormat(DecimalPlaces);
-					Value = value.ToString("N", CultureInfo.InvariantCulture);
+					Value = value.ToString(CultureInfo.InvariantCulture);
 				}
 				catch (Exception)
 				{
@@ -471,7 +471,7 @@ namespace NEXO
 			try
 			{
 				//return decimal.Parse(value, CultureInfo.InvariantCulture).ToSpecificFormat(DecimalPlaces);
-				return double.Parse(value, CultureInfo.InvariantCulture).ToString("N", CultureInfo.InvariantCulture);
+				return double.Parse(value, CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
 			}
 			catch (Exception)
 			{ return null; }

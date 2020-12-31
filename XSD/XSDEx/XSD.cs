@@ -110,9 +110,9 @@ namespace XSDEx
 		{
 			CodeTypeReference ntype = null;
 			// convert type if declared in the list of types to convert
-			if (null != parameters.Conversions && settings.ConvertTypes && parameters.Conversions.ContainsKey(type.BaseType))
+			if (null != parameters.TypeConversions && settings.ConvertTypes && parameters.TypeConversions.ContainsKey(type.BaseType))
 			{
-				ntype = new CodeTypeReference(parameters.Conversions[type.BaseType].TargetType);
+				ntype = new CodeTypeReference(parameters.TypeConversions[type.BaseType].TargetType);
 			}
 			// replace DateTime type by string if replacement requested
 			else if (settings.DateTimeToString && settings.ConvertTypes && type.BaseType == typeof(System.DateTime).ToString())
@@ -150,11 +150,15 @@ namespace XSDEx
 		private static bool CanConvertArray(XSDParams parameters, CodeTypeReference type, CodeTypeMember member)
 		{
 			return (0 != type.ArrayRank /* BEWARE multi dimensional arrays are not well managed */
-				&& (null == parameters.Arrays
-					|| (null != parameters.Arrays && !parameters.Arrays.Contains(type.BaseType)))
-				&& (null == parameters.Data
-					|| (null != parameters.Data && !parameters.Data.ContainsKey(member.Name))
-					|| (null != parameters.Data && parameters.Data.ContainsKey(member.Name) && type.BaseType != parameters.Data[member.Name].Type)));
+				&& (null == parameters.ArraysWithoutInitializer
+					|| (null != parameters.ArraysWithoutInitializer && !parameters.ArraysWithoutInitializer.Contains(type.BaseType)))
+				&& (null == parameters.FieldsWithoutInitializer
+					|| (null != parameters.FieldsWithoutInitializer && !parameters.FieldsWithoutInitializer.ContainsKey(member.Name))
+					|| (null != parameters.FieldsWithoutInitializer && parameters.FieldsWithoutInitializer.ContainsKey(member.Name) && type.BaseType != parameters.FieldsWithoutInitializer[member.Name].Type)));
+		}
+		private static bool IsSystemType(string value)
+		{
+			return value.Contains("System.");
 		}
 		/// <summary>
 		/// 
@@ -173,40 +177,40 @@ namespace XSDEx
 				json.WriteSettings(parameters);
 			}
 			bool fakeConversions = false, fakeArrays = false;
-			if (null == parameters.Conversions)
+			if (null == parameters.TypeConversions)
 			{
-				parameters.Conversions = new XSDTypeConversions();
-				parameters.Conversions.Add("myBaseType1", new XSDTargetType()
+				parameters.TypeConversions = new XSDTypeConversions();
+				parameters.TypeConversions.Add("myBaseType1", new XSDTargetType()
 				{
 					TargetType = "myTargetType",
 					TargetProperty = "myTargetProperty",
 				});
-				parameters.Conversions.Add("myBaseType2", new XSDTargetType()
+				parameters.TypeConversions.Add("myBaseType2", new XSDTargetType()
 				{
 					TargetType = "myTargetType",
 					TargetProperty = "myTargetProperty",
 				});
 				fakeConversions = true;
 			}
-			if (null == parameters.Arrays)
+			if (null == parameters.ArraysWithoutInitializer)
 			{
-				parameters.Arrays = new XSDArraysWithoutInitializer();
-				parameters.Arrays.Add("myArrayType1");
-				parameters.Arrays.Add("myArrayType2");
+				parameters.ArraysWithoutInitializer = new XSDArraysWithoutInitializer();
+				parameters.ArraysWithoutInitializer.Add("myArrayType1");
+				parameters.ArraysWithoutInitializer.Add("myArrayType2");
 				fakeArrays = true;
 			}
-			if (null == parameters.Data)
+			if (null == parameters.FieldsWithoutInitializer)
 			{
-				parameters.Data = new XSDFieldsWithoutInitializer();
-				parameters.Data.Add("myPropertyName1", new XSDField() { Type = "myPropertyType" });
-				parameters.Data.Add("myPropertyName2", new XSDField() { Type = "myPropertyType" });
+				parameters.FieldsWithoutInitializer = new XSDFieldsWithoutInitializer();
+				parameters.FieldsWithoutInitializer.Add("myPropertyName1", new XSDField() { Type = "myPropertyType" });
+				parameters.FieldsWithoutInitializer.Add("myPropertyName2", new XSDField() { Type = "myPropertyType" });
 				fakeArrays = true;
 			}
 			json.WriteSettings(parameters);
 			if (fakeConversions)
-				parameters.Conversions = null;
+				parameters.TypeConversions = null;
 			if (fakeArrays)
-				parameters.Arrays = null;
+				parameters.ArraysWithoutInitializer = null;
 			#endregion
 
 			try
@@ -283,7 +287,7 @@ namespace XSDEx
 								// set field initalizers
 								if (settings.CreateArrayInitializer)
 									// the field does not describe a System.<Type> and isn't an array, provide an initializer
-									if (!m.Type.BaseType.Contains("System.") && 0 == m.Type.ArrayRank)
+									if (!IsSystemType(m.Type.BaseType) && 0 == m.Type.ArrayRank)
 									{
 										// create "field = new Type();"
 										m.InitExpression = new CodeObjectCreateExpression(m.Type.BaseType, new CodeExpression[] { });
@@ -349,8 +353,94 @@ namespace XSDEx
 									if (manageInitFlag)//&& 0 == m.Type.ArrayRank)
 									{
 										// every property once set must set the type init flag
+
 										CodeAssignStatement cas = new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), cmf.Name), new CodePrimitiveExpression(true));
 										m.SetStatements.Insert(0, cas);
+
+										//CodeConditionStatement ccs = null;
+										//if (0 == m.Type.ArrayRank)
+										//{
+										//	if (IsSystemType(m.Type.BaseType))
+										//	{
+										//		ccs = new CodeConditionStatement(
+										//			new CodeBinaryOperatorExpression(
+										//				new CodePropertySetValueReferenceExpression(),
+										//				CodeBinaryOperatorType.ValueEquality,
+										//				new CodeDefaultValueExpression(m.Type)),
+										//			new CodeStatement[] {
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), cmf.Name),
+										//					new CodePrimitiveExpression(false)) },
+										//			new CodeStatement[] {
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), cmf.Name),
+										//					new CodePrimitiveExpression(true)) });
+										//	}
+										//	else
+										//	{
+										//		ccs = new CodeConditionStatement(
+										//			new CodeBinaryOperatorExpression(
+										//				new CodePropertySetValueReferenceExpression(),
+										//				CodeBinaryOperatorType.ValueEquality,
+										//				//new CodePrimitiveExpression(null)),
+										//				new CodeDefaultValueExpression(m.Type)),
+										//			new CodeStatement[] {
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), cmf.Name),
+										//					new CodePrimitiveExpression(false)),
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), mtbp.Name),
+										//					new CodeObjectCreateExpression(m.Type.BaseType, new CodeExpression[] { })) },
+										//			new CodeStatement[] {
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), cmf.Name),
+										//					new CodePrimitiveExpression(true)),
+										//				new CodeAssignStatement(
+										//					new CodeFieldReferenceExpression(
+										//						new CodeThisReferenceExpression(), mtbp.Name),
+										//						new CodePropertySetValueReferenceExpression()) });
+										//		m.SetStatements.Clear();
+										//	}
+										//	m.SetStatements.Insert(0, ccs);
+										//}
+										//else if (CanConvertArray(parameters, m.Type, m))
+										//{
+										//	ccs = new CodeConditionStatement(
+										//		new CodeBinaryOperatorExpression(
+										//			new CodePropertySetValueReferenceExpression(),
+										//			CodeBinaryOperatorType.ValueEquality,
+										//			new CodePrimitiveExpression(null)),
+										//		new CodeStatement[] {
+										//			new CodeAssignStatement(
+										//				new CodeFieldReferenceExpression(
+										//					new CodeThisReferenceExpression(), cmf.Name),
+										//				new CodePrimitiveExpression(false)),
+										//			new CodeAssignStatement(
+										//				new CodeFieldReferenceExpression(
+										//					new CodeThisReferenceExpression(), mtbp.Name),
+										//				new CodeArrayCreateExpression(m.Type.BaseType, 0)) },
+										//		new CodeStatement[] {
+										//			new CodeAssignStatement(
+										//				new CodeFieldReferenceExpression(
+										//					new CodeThisReferenceExpression(), cmf.Name),
+										//				new CodePrimitiveExpression(true)),
+										//				new CodeAssignStatement(
+										//			new CodeFieldReferenceExpression(
+										//				new CodeThisReferenceExpression(), mtbp.Name),
+										//				new CodePropertySetValueReferenceExpression()) });
+										//	m.SetStatements.Clear();
+										//	m.SetStatements.Insert(0, ccs);
+										//}
+										//else
+										//{
+										//	CodeAssignStatement cas = new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), cmf.Name), new CodePrimitiveExpression(true));
+										//	m.SetStatements.Insert(0, cas);
+										//}
 									}
 
 									// if array , set a "return null;" if size = 0
@@ -423,7 +513,7 @@ namespace XSDEx
 											m.GetStatements.Insert(0, ccs);
 										}
 									}
-									else if (manageInitFlag && 0 == m.Type.ArrayRank && !m.Type.BaseType.StartsWith("System") && !m.Type.BaseType.EndsWith("Enumeration") && settings.OptimizeStructs) //<<<>>>
+									else if (manageInitFlag && 0 == m.Type.ArrayRank && !IsSystemType(m.Type.BaseType) && !m.Type.BaseType.EndsWith("Enumeration") && settings.OptimizeStructs) //<<<>>>
 									{
 										//// create "if (type....InitFlag == false) return null;"
 										//CodeConditionStatement ccs = new CodeConditionStatement(

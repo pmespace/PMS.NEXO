@@ -39,12 +39,15 @@ Partial Class FSimulator
 		Me.panelCommands = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbLogin = New System.Windows.Forms.Button()
 		Me.pbLogout = New System.Windows.Forms.Button()
-		Me.pbRefund = New System.Windows.Forms.Button()
-		Me.pbReversal = New System.Windows.Forms.Button()
-		Me.pbPayment = New System.Windows.Forms.Button()
 		Me.pbDeviceInput = New System.Windows.Forms.Button()
 		Me.pbDevicePrint = New System.Windows.Forms.Button()
 		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
+		Me.cbOptimize = New System.Windows.Forms.CheckBox()
+		Me.pbPayment = New System.Windows.Forms.Button()
+		Me.cbAddReceipt = New System.Windows.Forms.CheckBox()
+		Me.pbReversal = New System.Windows.Forms.Button()
+		Me.pbRefund = New System.Windows.Forms.Button()
+		Me.cbOnelineReceipt = New System.Windows.Forms.CheckBox()
 		Me.panelGateway = New System.Windows.Forms.TableLayoutPanel()
 		Me.serverToReachPanel14 = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelGatewayPort = New System.Windows.Forms.TableLayoutPanel()
@@ -74,6 +77,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.udServerDelay = New System.Windows.Forms.NumericUpDown()
 		Me.Label10 = New System.Windows.Forms.Label()
+		Me.pbDatabaseSettings = New System.Windows.Forms.Button()
 		Me.panelServerPort = New System.Windows.Forms.TableLayoutPanel()
 		Me.localServerPort = New System.Windows.Forms.NumericUpDown()
 		Me.Label1 = New System.Windows.Forms.Label()
@@ -117,8 +121,10 @@ Partial Class FSimulator
 		Me.pbSendFreeMessage = New System.Windows.Forms.Button()
 		Me.command = New System.Windows.Forms.TextBox()
 		Me.lblFreeMessage = New System.Windows.Forms.Label()
+		Me.pbBuild = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+		Me.cbUseDatabase = New System.Windows.Forms.CheckBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -397,7 +403,7 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelCommands.AutoSize = True
 		Me.panelCommands.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelCommands.ColumnCount = 9
+		Me.panelCommands.ColumnCount = 12
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -407,14 +413,20 @@ Partial Class FSimulator
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.Controls.Add(Me.pbLogin, 0, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogout, 1, 0)
-		Me.panelCommands.Controls.Add(Me.pbRefund, 6, 0)
-		Me.panelCommands.Controls.Add(Me.pbReversal, 5, 0)
-		Me.panelCommands.Controls.Add(Me.pbPayment, 4, 0)
 		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 2, 0)
 		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 3, 0)
-		Me.panelCommands.Controls.Add(Me.cbSynchronous, 8, 0)
+		Me.panelCommands.Controls.Add(Me.cbSynchronous, 10, 0)
+		Me.panelCommands.Controls.Add(Me.cbOptimize, 11, 0)
+		Me.panelCommands.Controls.Add(Me.pbPayment, 4, 0)
+		Me.panelCommands.Controls.Add(Me.cbAddReceipt, 8, 0)
+		Me.panelCommands.Controls.Add(Me.pbReversal, 5, 0)
+		Me.panelCommands.Controls.Add(Me.pbRefund, 6, 0)
+		Me.panelCommands.Controls.Add(Me.cbOnelineReceipt, 9, 0)
 		Me.panelCommands.Location = New System.Drawing.Point(3, 226)
 		Me.panelCommands.Name = "panelCommands"
 		Me.panelCommands.RowCount = 1
@@ -446,42 +458,6 @@ Partial Class FSimulator
 		Me.pbLogout.Text = "Logout"
 		Me.pbLogout.UseVisualStyleBackColor = True
 		'
-		'pbRefund
-		'
-		Me.pbRefund.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbRefund.AutoSize = True
-		Me.pbRefund.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbRefund.Location = New System.Drawing.Point(402, 3)
-		Me.pbRefund.Name = "pbRefund"
-		Me.pbRefund.Size = New System.Drawing.Size(52, 23)
-		Me.pbRefund.TabIndex = 6
-		Me.pbRefund.Text = "Refund"
-		Me.pbRefund.UseVisualStyleBackColor = True
-		'
-		'pbReversal
-		'
-		Me.pbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbReversal.AutoSize = True
-		Me.pbReversal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbReversal.Location = New System.Drawing.Point(337, 3)
-		Me.pbReversal.Name = "pbReversal"
-		Me.pbReversal.Size = New System.Drawing.Size(59, 23)
-		Me.pbReversal.TabIndex = 5
-		Me.pbReversal.Text = "Reversal"
-		Me.pbReversal.UseVisualStyleBackColor = True
-		'
-		'pbPayment
-		'
-		Me.pbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbPayment.AutoSize = True
-		Me.pbPayment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbPayment.Location = New System.Drawing.Point(273, 3)
-		Me.pbPayment.Name = "pbPayment"
-		Me.pbPayment.Size = New System.Drawing.Size(58, 23)
-		Me.pbPayment.TabIndex = 4
-		Me.pbPayment.Text = "Payment"
-		Me.pbPayment.UseVisualStyleBackColor = True
-		'
 		'pbDeviceInput
 		'
 		Me.pbDeviceInput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -510,12 +486,87 @@ Partial Class FSimulator
 		'
 		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
 		Me.cbSynchronous.AutoSize = True
-		Me.cbSynchronous.Location = New System.Drawing.Point(817, 6)
+		Me.cbSynchronous.Location = New System.Drawing.Point(745, 6)
 		Me.cbSynchronous.Name = "cbSynchronous"
 		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
-		Me.cbSynchronous.TabIndex = 7
+		Me.cbSynchronous.TabIndex = 9
 		Me.cbSynchronous.Text = "Synchronous"
 		Me.cbSynchronous.UseVisualStyleBackColor = True
+		'
+		'cbOptimize
+		'
+		Me.cbOptimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbOptimize.AutoSize = True
+		Me.cbOptimize.Checked = True
+		Me.cbOptimize.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.cbOptimize.Location = New System.Drawing.Point(839, 6)
+		Me.cbOptimize.Name = "cbOptimize"
+		Me.cbOptimize.Size = New System.Drawing.Size(66, 17)
+		Me.cbOptimize.TabIndex = 10
+		Me.cbOptimize.Text = "Optimize"
+		Me.cbOptimize.UseVisualStyleBackColor = True
+		'
+		'pbPayment
+		'
+		Me.pbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbPayment.AutoSize = True
+		Me.pbPayment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbPayment.Location = New System.Drawing.Point(273, 3)
+		Me.pbPayment.Name = "pbPayment"
+		Me.pbPayment.Size = New System.Drawing.Size(58, 23)
+		Me.pbPayment.TabIndex = 4
+		Me.pbPayment.Text = "Payment"
+		Me.pbPayment.UseVisualStyleBackColor = True
+		'
+		'cbAddReceipt
+		'
+		Me.cbAddReceipt.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbAddReceipt.AutoSize = True
+		Me.cbAddReceipt.Checked = True
+		Me.cbAddReceipt.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.cbAddReceipt.Location = New System.Drawing.Point(553, 6)
+		Me.cbAddReceipt.Name = "cbAddReceipt"
+		Me.cbAddReceipt.Size = New System.Drawing.Size(80, 17)
+		Me.cbAddReceipt.TabIndex = 7
+		Me.cbAddReceipt.Text = "Add receipt"
+		Me.cbAddReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.cbAddReceipt.UseVisualStyleBackColor = True
+		'
+		'pbReversal
+		'
+		Me.pbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbReversal.AutoSize = True
+		Me.pbReversal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbReversal.Location = New System.Drawing.Point(337, 3)
+		Me.pbReversal.Name = "pbReversal"
+		Me.pbReversal.Size = New System.Drawing.Size(59, 23)
+		Me.pbReversal.TabIndex = 5
+		Me.pbReversal.Text = "Reversal"
+		Me.pbReversal.UseVisualStyleBackColor = True
+		'
+		'pbRefund
+		'
+		Me.pbRefund.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbRefund.AutoSize = True
+		Me.pbRefund.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbRefund.Location = New System.Drawing.Point(402, 3)
+		Me.pbRefund.Name = "pbRefund"
+		Me.pbRefund.Size = New System.Drawing.Size(52, 23)
+		Me.pbRefund.TabIndex = 6
+		Me.pbRefund.Text = "Refund"
+		Me.pbRefund.UseVisualStyleBackColor = True
+		'
+		'cbOnelineReceipt
+		'
+		Me.cbOnelineReceipt.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbOnelineReceipt.AutoSize = True
+		Me.cbOnelineReceipt.Location = New System.Drawing.Point(639, 6)
+		Me.cbOnelineReceipt.Name = "cbOnelineReceipt"
+		Me.cbOnelineReceipt.Size = New System.Drawing.Size(100, 17)
+		Me.cbOnelineReceipt.TabIndex = 8
+		Me.cbOnelineReceipt.Text = "One line receipt"
+		Me.cbOnelineReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.cbOnelineReceipt.UseVisualStyleBackColor = True
 		'
 		'panelGateway
 		'
@@ -835,7 +886,9 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelServerButtons.AutoSize = True
 		Me.panelServerButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelServerButtons.ColumnCount = 6
+		Me.panelServerButtons.ColumnCount = 8
+		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -847,6 +900,8 @@ Partial Class FSimulator
 		Me.panelServerButtons.Controls.Add(Me.pbStartServer, 0, 0)
 		Me.panelServerButtons.Controls.Add(Me.pbServerActivity, 2, 0)
 		Me.panelServerButtons.Controls.Add(Me.TableLayoutPanel2, 4, 0)
+		Me.panelServerButtons.Controls.Add(Me.pbDatabaseSettings, 6, 0)
+		Me.panelServerButtons.Controls.Add(Me.cbUseDatabase, 5, 0)
 		Me.panelServerButtons.Location = New System.Drawing.Point(371, 3)
 		Me.panelServerButtons.Name = "panelServerButtons"
 		Me.panelServerButtons.RowCount = 1
@@ -940,6 +995,18 @@ Partial Class FSimulator
 		Me.Label10.Size = New System.Drawing.Size(37, 13)
 		Me.Label10.TabIndex = 0
 		Me.Label10.Text = "Delay:"
+		'
+		'pbDatabaseSettings
+		'
+		Me.pbDatabaseSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbDatabaseSettings.AutoSize = True
+		Me.pbDatabaseSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbDatabaseSettings.Location = New System.Drawing.Point(445, 4)
+		Me.pbDatabaseSettings.Name = "pbDatabaseSettings"
+		Me.pbDatabaseSettings.Size = New System.Drawing.Size(55, 23)
+		Me.pbDatabaseSettings.TabIndex = 8
+		Me.pbDatabaseSettings.Text = "Settings"
+		Me.pbDatabaseSettings.UseVisualStyleBackColor = True
 		'
 		'panelServerPort
 		'
@@ -1489,13 +1556,15 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelRaw.AutoSize = True
 		Me.panelRaw.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelRaw.ColumnCount = 3
+		Me.panelRaw.ColumnCount = 4
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelRaw.Controls.Add(Me.pbSendFreeMessage, 2, 0)
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelRaw.Controls.Add(Me.pbSendFreeMessage, 3, 0)
 		Me.panelRaw.Controls.Add(Me.command, 1, 0)
 		Me.panelRaw.Controls.Add(Me.lblFreeMessage, 0, 0)
+		Me.panelRaw.Controls.Add(Me.pbBuild, 2, 0)
 		Me.panelRaw.Location = New System.Drawing.Point(3, 191)
 		Me.panelRaw.Name = "panelRaw"
 		Me.panelRaw.RowCount = 1
@@ -1511,7 +1580,7 @@ Partial Class FSimulator
 		Me.pbSendFreeMessage.Location = New System.Drawing.Point(818, 3)
 		Me.pbSendFreeMessage.Name = "pbSendFreeMessage"
 		Me.pbSendFreeMessage.Size = New System.Drawing.Size(87, 23)
-		Me.pbSendFreeMessage.TabIndex = 7
+		Me.pbSendFreeMessage.TabIndex = 2
 		Me.pbSendFreeMessage.Text = "Send message"
 		Me.pbSendFreeMessage.UseVisualStyleBackColor = True
 		'
@@ -1520,8 +1589,8 @@ Partial Class FSimulator
 		Me.command.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.command.Location = New System.Drawing.Point(132, 4)
 		Me.command.Name = "command"
-		Me.command.Size = New System.Drawing.Size(680, 20)
-		Me.command.TabIndex = 7
+		Me.command.Size = New System.Drawing.Size(634, 20)
+		Me.command.TabIndex = 0
 		'
 		'lblFreeMessage
 		'
@@ -1533,6 +1602,29 @@ Partial Class FSimulator
 		Me.lblFreeMessage.Size = New System.Drawing.Size(123, 20)
 		Me.lblFreeMessage.TabIndex = 13
 		Me.lblFreeMessage.Text = "Free message"
+		'
+		'pbBuild
+		'
+		Me.pbBuild.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbBuild.AutoSize = True
+		Me.pbBuild.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbBuild.Location = New System.Drawing.Point(772, 3)
+		Me.pbBuild.Name = "pbBuild"
+		Me.pbBuild.Size = New System.Drawing.Size(40, 23)
+		Me.pbBuild.TabIndex = 1
+		Me.pbBuild.Text = "Build"
+		Me.pbBuild.UseVisualStyleBackColor = True
+		'
+		'cbUseDatabase
+		'
+		Me.cbUseDatabase.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbUseDatabase.AutoSize = True
+		Me.cbUseDatabase.Location = New System.Drawing.Point(347, 7)
+		Me.cbUseDatabase.Name = "cbUseDatabase"
+		Me.cbUseDatabase.Size = New System.Drawing.Size(92, 17)
+		Me.cbUseDatabase.TabIndex = 7
+		Me.cbUseDatabase.Text = "Use database"
+		Me.cbUseDatabase.UseVisualStyleBackColor = True
 		'
 		'FSimulator
 		'
@@ -1713,4 +1805,10 @@ Partial Class FSimulator
 	Friend WithEvents udServerDelay As NumericUpDown
 	Friend WithEvents Label10 As Label
 	Friend WithEvents cbSynchronous As CheckBox
+	Friend WithEvents cbOptimize As CheckBox
+	Friend WithEvents cbAddReceipt As CheckBox
+	Friend WithEvents cbOnelineReceipt As CheckBox
+	Friend WithEvents pbDatabaseSettings As Button
+	Friend WithEvents pbBuild As Button
+	Friend WithEvents cbUseDatabase As CheckBox
 End Class

@@ -361,7 +361,7 @@ namespace NEXO
 		/// <param name="bom">true if BOM must be added, false otherwise</param>
 		/// <param name="ns">true if namespace must be added, false otherwise</param>
 		/// <returns>a serialized string or an empty string if an error occurred</returns>
-		static string XmlSerialize<NxT>(NxT data, bool bom = false, bool ns = false)
+		public static string XmlSerialize<NxT>(NxT data, bool bom = false, bool ns = false)
 		{
 			if (null == data)
 				return null;
@@ -392,7 +392,7 @@ namespace NEXO
 		/// <param name="data">the object to serialize</param>
 		/// <param name="bom">true if BOM must be used, false otherwise</param>
 		/// <returns>a serialized string or an empty string if an error occurred</returns>
-		static object XmlDeserialize<NxT>(string data, bool bom = false) //where NxT : class
+		public static object XmlDeserialize<NxT>(string data, bool bom = false) //where NxT : class
 		{
 			if (string.IsNullOrEmpty(data))
 				return null;
@@ -412,10 +412,10 @@ namespace NEXO
 		/// <summary>
 		/// This function will optimize the XML structure to avoid declaring types not initialised (avoiding default values) when serializing a type
 		/// </summary>
-		/// <param name="o">The initial object to serialize</param>
-		/// <param name="data">The structure of the object to optimize, or null. THIS MUST NEVER BE NULL WHEN CALLING THIS FUNCTION FROM OUTSIDE THE FUNCTION ITSELF FROM OUTSIDE, it will always be <see langword="null"/>when called recursively</param>
+		/// <param name="o">The initial object to serialize (usually a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/>)</param>
+		/// <param name="data">The structure of the specific nexo object to optimize (Login, Payment,...). THIS PARAMETER MUST NEVER BE NULL WHEN CALLING THIS FUNCTION, only recursive calls can set the parameter to null</param>
 		/// <returns></returns>
-		static bool Optimize(object o, object data)
+		public static bool Optimize(object o, object data)
 		{
 			// if no object it hasn't been modified
 			if (null == o)
@@ -430,11 +430,10 @@ namespace NEXO
 				string nmspace = typeof(SaleToPOIRequest).Namespace;
 				// look for other objects inside this object
 				object targetObject = data ?? o;
-				//List<PropertyInfo> properties = (null != data ? data.GetType().GetProperties().ToList() : o.GetType().GetProperties().ToList());
 				List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
 				foreach (PropertyInfo pinfo in properties)
 				{
-					//// verify only types defined inside the current namespace, others won't carry the init flaf property
+					// verify only types defined inside the current namespace, others won't carry the init flaf property
 					if (null != pinfo.GetValue(targetObject, null) &&
 						(nmspace == pinfo.PropertyType.Namespace ||
 						("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
@@ -460,12 +459,19 @@ namespace NEXO
 										object arrayObject = array.GetValue(i);
 										f = Optimize(arrayObject, null);
 										if (!f)
-											//pinfo.SetValue(arrayObject, null, null);
 											array.SetValue(null, i);
 										hasbeenset = hasbeenset || f;
 									}
 								}
-								else
+								//else
+								//{
+								//	// the object owns sub properties, we must recurse this processing
+								//	f = Optimize(pinfo.GetValue(targetObject, null), null);
+								//	if (!f)
+								//		pinfo.SetValue(targetObject, null, null);
+								//	hasbeenset = hasbeenset || f;
+								//}
+								else if (pinfo.PropertyType.IsClass)
 								{
 									// the object owns sub properties, we must recurse this processing
 									f = Optimize(pinfo.GetValue(targetObject, null), null);

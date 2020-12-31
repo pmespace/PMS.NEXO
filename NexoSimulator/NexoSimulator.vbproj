@@ -69,8 +69,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.3.0.0\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.3.0.2\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -102,6 +102,30 @@
       <DependentUpon>Connected.vb</DependentUpon>
     </Compile>
     <Compile Include="Connected.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FBuilder.Designer.vb">
+      <DependentUpon>FBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FBuilder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FChoser.Designer.vb">
+      <DependentUpon>FChoser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FChoser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FServerDatabase.Designer.vb">
+      <DependentUpon>FServerDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FServerDatabase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FServerSettings.Designer.vb">
+      <DependentUpon>FServerSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FServerSettings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Json\DeviceInput.vb" />
@@ -160,6 +184,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FAmount.resx">
       <DependentUpon>FAmount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FBuilder.resx">
+      <DependentUpon>FBuilder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FChoser.resx">
+      <DependentUpon>FChoser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FServerDatabase.resx">
+      <DependentUpon>FServerDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FServerSettings.resx">
+      <DependentUpon>FServerSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FTextToPrint.resx">
       <DependentUpon>FTextToPrint.vb</DependentUpon>

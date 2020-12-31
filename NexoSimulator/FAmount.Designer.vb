@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FAmount
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
-	<System.Diagnostics.DebuggerNonUserCode()> _
+	<System.Diagnostics.DebuggerNonUserCode()>
 	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
 		Try
 			If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FAmount
 	'NOTE: The following procedure is required by the Windows Form Designer
 	'It can be modified using the Windows Form Designer.  
 	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
+	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.panelMain = New System.Windows.Forms.TableLayoutPanel()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -51,7 +51,9 @@ Partial Class FAmount
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelMain.Size = New System.Drawing.Size(208, 78)
+		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelMain.Size = New System.Drawing.Size(208, 73)
 		Me.panelMain.TabIndex = 0
 		'
 		'TableLayoutPanel1
@@ -71,7 +73,7 @@ Partial Class FAmount
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(202, 26)
-		Me.TableLayoutPanel1.TabIndex = 2
+		Me.TableLayoutPanel1.TabIndex = 0
 		'
 		'amountincents
 		'
@@ -83,7 +85,7 @@ Partial Class FAmount
 		Me.amountincents.ResetOnPrompt = False
 		Me.amountincents.ResetOnSpace = False
 		Me.amountincents.Size = New System.Drawing.Size(85, 20)
-		Me.amountincents.TabIndex = 1
+		Me.amountincents.TabIndex = 0
 		'
 		'Label1
 		'
@@ -108,7 +110,7 @@ Partial Class FAmount
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.Controls.Add(Me.ok, 1, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.cancel, 2, 0)
-		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 46)
+		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 41)
 		Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
 		Me.TableLayoutPanel2.RowCount = 1
 		Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -146,7 +148,7 @@ Partial Class FAmount
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.cancel
-		Me.ClientSize = New System.Drawing.Size(232, 102)
+		Me.ClientSize = New System.Drawing.Size(232, 97)
 		Me.ControlBox = False
 		Me.Controls.Add(Me.panelMain)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

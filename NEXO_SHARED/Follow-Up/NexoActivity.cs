@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using COMMON;
+using NEXO.Server;
 
 namespace NEXO
 {
@@ -31,8 +32,8 @@ namespace NEXO
 			_sentmessages = new NexoListOfAnyMessages("SENT MESSAGES");
 			_receivedmessages = new NexoListOfAnyMessages("RECEIVED MESSAGES");
 #else
-			SentMessages = new ReadOnlyCollection<NexoAnyMessage>(_sentmessages);
-			ReceivedMessages = new ReadOnlyCollection<NexoAnyMessage>(_receivedmessages);
+						SentMessages = new ReadOnlyCollection<NexoAnyMessage>(_sentmessages);
+						ReceivedMessages = new ReadOnlyCollection<NexoAnyMessage>(_receivedmessages);
 #endif
 		}
 		#endregion
@@ -44,9 +45,23 @@ namespace NEXO
 		public NexoListOfAnyMessages SentMessages { get => _sentmessages; private set => _sentmessages = value; }
 		public NexoListOfAnyMessages ReceivedMessages { get => _receivedmessages; private set => _receivedmessages = value; }
 #else
-		public ReadOnlyCollection<NexoAnyMessage> SentMessages { get; }
-		public ReadOnlyCollection<NexoAnyMessage> ReceivedMessages { get; }
+				public ReadOnlyCollection<NexoAnyMessage> SentMessages { get; }
+				public ReadOnlyCollection<NexoAnyMessage> ReceivedMessages { get; }
 #endif
+
+		//internal CDatabase Database = new CDatabase();
+		//internal NexoRetailerServerDatabase DatabaseSettings
+		//{
+		//	get => _databasesettings;
+		//	set
+		//	{
+		//		if (null != value && value.IsValid)
+		//			Database.ConnectionString = value.ConnectionString;
+		//		if (Database.IsOpen)
+		//			_databasesettings = value;
+		//	}
+		//}
+		//private NexoRetailerServerDatabase _databasesettings = null;
 		#endregion
 
 		#region methods

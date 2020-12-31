@@ -454,34 +454,6 @@ namespace NEXO
 				return new NexoISOLanguage2A() { Value = defaultValue };
 			return language;
 		}
-		///// <summary>
-		///// Set the request from an externally received XML buffer
-		///// </summary>
-		///// <param name="xml">XML buffer to deserialize</param>
-		///// <returns>true if successful, false otherwise</returns>
-		//public bool RequestFromXml(string xml)
-		//{
-		//	SaleToPOIRequest o = Deserialize<SaleToPOIRequest>(xml);
-		//	if (null != o)
-		//	{
-		//		Request = o;
-		//	}
-		//	return false;
-		//}
-		///// <summary>
-		///// Set the reply from an externally received XML buffer
-		///// </summary>
-		///// <param name="xml">XML buffer to deserialize</param>
-		///// <returns>true if successful, false otherwise</returns>
-		//public bool ReplyFromXml(string xml)
-		//{
-		//	SaleToPOIResponse o = Deserialize<SaleToPOIResponse>(xml);
-		//	if (null != o)
-		//	{
-		//		Reply = o;
-		//	}
-		//	return false;
-		//}
 		/// <summary>
 		/// Allows initialising an object from an item
 		/// </summary>

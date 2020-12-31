@@ -1,23 +1,15 @@
 {
-  "Conversions": {
-    "myBaseType1": {
-      "TargetType": "myTargetType",
-      "TargetProperty": "myTargetProperty"
-    },
-    "myBaseType2": {
-      "TargetType": "myTargetType",
-      "TargetProperty": "myTargetProperty"
-    },
+  "TypeConversions": {
     "System.Decimal": {
       "TargetType": "System.Double",
       "TargetProperty": "myTargetProperty"
     }
   },
-  "Arrays": [
+  "ArraysWithoutInitializer": [
     "myArrayType1",
     "myArrayType2"
   ],
-  "Data": {
+  "FieldsWithoutInitializer": {
     "certificateField": {
       "Type": "System.Byte"
     },

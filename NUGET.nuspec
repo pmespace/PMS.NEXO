@@ -80,10 +80,10 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="3.0.0" />
+        <dependency id="PMS.COMMON" version="3.0.2" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="3.0.0" />
+        <dependency id="PMS.COMMON" version="3.0.2" />
       </group>
     </dependencies>
   </metadata>

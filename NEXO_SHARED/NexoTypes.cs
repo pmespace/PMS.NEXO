@@ -16,21 +16,33 @@ using COMMON;
 
 namespace NEXO
 {
-	//[ComVisible(false)]
-	//public static class MyExtensions
-	//{
-	//	/// <summary>
-	//	/// Extension making sure the decimal always contains at least one digit (eventually x.0)
-	//	/// </summary>
-	//	/// <param name="value">The decimal to process</param>
-	//	/// <param name="min">Indicates the minimum number of digits to use</param>
-	//	/// <returns></returns>
-	//	public static string ToSpecificFormat(this decimal value, uint min = 0)
-	//	{
-	//		var count = BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
-	//		return value.ToString(count <= min ? "N" + min : "N" + count, CultureInfo.InvariantCulture);
-	//	}
-	//}
+	[ComVisible(false)]
+	public static class MyExtensions
+	{
+		///// <summary>
+		///// Extension making sure the decimal always contains at least one digit (eventually x.0)
+		///// </summary>
+		///// <param name="value">The double to process</param>
+		///// <param name="min">Indicates the minimum number of digits to use</param>
+		///// <returns></returns>
+		//public static string ToSpecificFormat(this decimal value, uint min = 0)
+		//{
+		//	var count = BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
+		//	return value.ToString(count <= min ? "N" + min : "N" + count, CultureInfo.InvariantCulture);
+		//}
+
+		/// <summary>
+		/// Extension making sure the decimal always contains at least one digit (eventually x.0)
+		/// </summary>
+		/// <param name="value">The double to process</param>
+		/// <param name="min">Indicates the minimum number of digits to use</param>
+		/// <param name="decimalSeparator">Indicates the decimal separator to use</param>
+		/// <returns></returns>
+		public static string ToSpecificFormat(this double value, uint min = 0, string decimalSeparator = ".")
+		{
+			return value.ToString("0" + (0 != min ? decimalSeparator + new string('0', (int)min) : null), CultureInfo.InvariantCulture);
+		}
+	}
 
 	[ComVisible(false)]
 	public static class NexoVersion
@@ -449,8 +461,8 @@ namespace NEXO
 			{
 				try
 				{
-					//Value = value.ToSpecificFormat(DecimalPlaces);
-					Value = value.ToString(CultureInfo.InvariantCulture);
+					Value = value.ToSpecificFormat(DecimalPlaces);
+					//Value = value.ToString("0" + (0 != DecimalPlaces ? DecimalSeparator + new string('0', (int)DecimalPlaces) : null), CultureInfo.InvariantCulture);
 				}
 				catch (Exception)
 				{
@@ -471,7 +483,7 @@ namespace NEXO
 			try
 			{
 				//return decimal.Parse(value, CultureInfo.InvariantCulture).ToSpecificFormat(DecimalPlaces);
-				return double.Parse(value, CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+				return double.Parse(value, CultureInfo.InvariantCulture).ToSpecificFormat(DecimalPlaces);
 			}
 			catch (Exception)
 			{ return null; }

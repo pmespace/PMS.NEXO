@@ -32,8 +32,8 @@ namespace XSDEx
 	/// </summary>
 	class XSDParams
 		{
-		public XSDTypeConversions Conversions { get; set; }
-		public XSDArraysWithoutInitializer Arrays { get; set; }
-		public XSDFieldsWithoutInitializer Data { get; set; }
+		public XSDTypeConversions TypeConversions { get; set; }
+		public XSDArraysWithoutInitializer ArraysWithoutInitializer { get; set; }
+		public XSDFieldsWithoutInitializer FieldsWithoutInitializer { get; set; }
 		}
 	}

@@ -28,12 +28,21 @@ using NEXO;
 namespace NEXO.Server
 {
 	[ComVisible(false)]
-	public sealed class NexoRetailerServer: NexoRetailer
+	public sealed class NexoRetailerServer : NexoRetailer
 	{
 		#region constructor
 		public NexoRetailerServer()
 		{
-
+			UseDatabase = true;
+			Initialise();
+		}
+		public NexoRetailerServer(bool useDatabase)
+		{
+			UseDatabase = useDatabase;
+			Initialise();
+		}
+		private void Initialise()
+		{
 			SupportedProtocolVersions = new NexoSupportedProtocolVersions();
 			ServerProtocolVersion = new NexoProtocolVersion(NexoVersion.Short);
 			try
@@ -41,14 +50,14 @@ namespace NEXO.Server
 				SupportedProtocolVersions.Add(ServerProtocolVersion.Value, ServerProtocolVersion);
 			}
 			catch (Exception) { }
-			AcceptedEndPoints = new NexoDictionaryOfEndPoints("ACCEPTED ENDPOINTS");
-			DeclinedEndPoints = new NexoDictionaryOfEndPoints("DECLINED ENDPOINTS");
-			AcceptedSaleID = new NexoDictionaryOfPartners("ACCEPTED SALE");
-			DeclinedSaleID = new NexoDictionaryOfPartners("DECLINED SALE");
 		}
 		#endregion
 
 		#region public properties
+		/// <summary>
+		/// Indicator set 
+		/// </summary>
+		public bool UseDatabase { get; private set; }
 		/// <summary>
 		/// Indicates whether the serve ris actually running or not
 		/// </summary>
@@ -64,27 +73,11 @@ namespace NEXO.Server
 		/// <summary>
 		/// Version of Nexo Retailer specifications implemented by the server
 		/// </summary>
-		public NexoProtocolVersion ServerProtocolVersion { get; }
+		public NexoProtocolVersion ServerProtocolVersion { get; private set; }
 		/// <summary>
 		/// All supported protocol versions
 		/// </summary>
-		public NexoSupportedProtocolVersions SupportedProtocolVersions { get; }
-		/// <summary>
-		/// All end points allowed to connect
-		/// </summary>
-		public NexoDictionaryOfEndPoints AcceptedEndPoints { get; }
-		/// <summary>
-		/// All end points not allowed to connect
-		/// </summary>
-		public NexoDictionaryOfEndPoints DeclinedEndPoints { get; }
-		/// <summary>
-		/// All end points allowed to connect
-		/// </summary>
-		public NexoDictionaryOfPartners AcceptedSaleID { get; }
-		/// <summary>
-		/// All end points not allowed to connect
-		/// </summary>
-		public NexoDictionaryOfPartners DeclinedSaleID { get; }
+		public NexoSupportedProtocolVersions SupportedProtocolVersions { get; private set; }
 		/// <summary>
 		/// data used to initialise the calling environement of the server thread
 		/// </summary>
@@ -106,7 +99,14 @@ namespace NEXO.Server
 		/// Server activity while running
 		/// </summary>
 		public NexoRetailerServerActivity Activity = new NexoRetailerServerActivity();
+		/// <summary>
+		/// Timer to wait for before the server sends a reply back
+		/// </summary>
 		public int TimerBeforeReply { get; set; }
+		/// <summary>
+		/// Database to use for server settings
+		/// </summary>
+		private NexoRetailerServerDatabase Database = null;
 		#endregion
 
 		#region private properties
@@ -118,6 +118,18 @@ namespace NEXO.Server
 
 		#region public methods
 		/// <summary>
+		/// Load database settings from a json file
+		/// </summary>
+		/// <param name="databaseSettingsFileName">Json file to load</param>
+		/// <returns>a <see cref="NexoRetailerServerDatabaseSettings"/> if successfull, null otherwise</returns>
+		public static NexoRetailerServerDatabaseSettings LoadDatabaseSettings(string databaseSettingsFileName)
+		{
+			if (string.IsNullOrEmpty(databaseSettingsFileName))
+				return null;
+			CJson<NexoRetailerServerDatabaseSettings> json = new CJson<NexoRetailerServerDatabaseSettings>(databaseSettingsFileName);
+			return json.ReadSettings(true);
+		}
+		/// <summary>
 		/// Starts the Nexo server.
 		/// </summary>
 		/// <param name="settings">Parameters to use to run the server thread</param>
@@ -126,6 +138,37 @@ namespace NEXO.Server
 		{
 			if (IsRunning)
 				return true;
+			if (!settings.IsValid)
+			{
+				CLog.Add("Server settings are invalid, can't start server", TLog.ERROR);
+				return false;
+			}
+			else if (UseDatabase)
+			{
+				if (null != settings.DatabaseSettings && settings.DatabaseSettings.IsValid())
+				{
+					// verify database connection
+					Database = new NexoRetailerServerDatabase();
+					Database.Settings = settings.DatabaseSettings;
+					if (!Database.IsOpen)
+					{
+						// database is required but not available
+						CLog.Add("Unable to connect to the database, check settings", TLog.ERROR);
+						Database = null;
+						return false;
+					}
+				}
+				else
+				{
+					// database is required but no parameters are available
+					return false;
+				}
+			}
+			else
+			{
+				// no database to use
+				Database = null;
+			}
 			Settings = settings;
 			StreamServer = new CStreamServer();
 			StreamServer.StartServer(new CStreamServerStartSettings()
@@ -159,6 +202,7 @@ namespace NEXO.Server
 				StreamServer.StopServer();
 				StreamServer = null;
 			}
+			if (null != Database) Database = null;
 			return true;
 		}
 		#endregion
@@ -192,8 +236,7 @@ namespace NEXO.Server
 				NexoEndPoint ep = new NexoEndPoint(tcp);
 				Activity.AddEndPoint(ep);
 				// test list of accepted/refused end points
-				if (((0 == AcceptedEndPoints.Count ? true : AcceptedEndPoints.ContainsKey(ep.Key))
-					&& !DeclinedEndPoints.ContainsKey(ep.Key)))
+				if (null == Database || Database.IsEndPointAccepted(tcp))
 				{
 					bool fOK = true;
 					try
@@ -205,12 +248,14 @@ namespace NEXO.Server
 					if (fOK)
 					{
 						ep.AddConnection(true);
-						CLog.Add(StreamServer.Description + "EndPoint allowed to connect: " + ep.Key);
+						CLog.Add($"{StreamServer.Description} EndPoint allowed to connect: {ep.Key}");
 						return true;
 					}
 					ep.AddConnection(false);
-					CLog.Add(StreamServer.Description + "EndPoint not allowed to connect: " + ep.Key, TLog.ERROR);
+					CLog.Add($"{StreamServer.Description} EndPoint not allowed to connect: {ep.Key}", TLog.ERROR);
 				}
+				else
+					CLog.Add($"{StreamServer.Description} EndPoint not allowed to connect: {ep.Key}", TLog.ERROR);
 			}
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
 			return false;
@@ -223,17 +268,20 @@ namespace NEXO.Server
 		/// <param name="o"></param>
 		private void OnDisconnect(string tcp, CThreadData threadData = null, object o = null)
 		{
-			/* <<<>>> 
-			 * This needs to be reviewed to update activity
-			 */
 			try
 			{
-				if (null != Settings.OnDisconnect)
+				try
 				{
-					Settings.OnDisconnect(tcp, threadData, o);
+					if (null != Settings.OnDisconnect)
+					{
+						Settings.OnDisconnect(tcp, threadData, o);
+					}
 				}
+				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnDisconnect generated an exception"); }
+				NexoEndPoint ep = new NexoEndPoint(tcp);
+				Activity.RemoveEndPoint(ep);
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnDisconnect generated an exception"); }
+			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnMessage"/>
@@ -260,8 +308,11 @@ namespace NEXO.Server
 					NexoItem item = new NexoItem(xml);
 					if (item.IsValid)
 					{
-						string shortmessage = "Received " + item.Category.ToString().ToUpper() + " " + item.Type.ToString();
-						string fullmessage = shortmessage + " - Message [" + xml.Length + " bytes]: " + xml;
+						long msgid = 0;
+						string shortmessage = $"Received {item.Category.ToString().ToUpper()} {item.Type}";
+						string fullmessage = $"{shortmessage} - Message [{xml.Length} bytes]: {xml}";
+						if (null != Database)
+							Database.AddNewRequest(item, out msgid);
 
 						// create the Nexo object according to what is expected
 						NexoObjectToProcess toprocess = new NexoObjectToProcess(item);
@@ -359,6 +410,8 @@ namespace NEXO.Server
 										{
 											CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
 										}
+										if (null != Database)
+											Database.SetRequestReply(msgid, itemToSend);
 									}
 								}
 							}
@@ -436,9 +489,10 @@ namespace NEXO.Server
 					if (MessageCategoryEnumeration.Login == item.Category)
 					{
 						NexoSession session = client.AddSession(new NexoSession(client));
+						NexoLogin nxo = new NexoLogin();
+						nxo.Request = (SaleToPOIRequest)item.Item;
 						// test list of accepted/refused sale
-						if ((0 == AcceptedSaleID.Count || AcceptedSaleID.ContainsKey(mhex.SaleID.Value))
-								&& !DeclinedSaleID.ContainsKey(mhex.SaleID.Value))
+						if (null == Database || Database.IsSaleIDAccepted(tcp, nxo))
 						{
 							// verify protocol version
 							try
@@ -457,20 +511,35 @@ namespace NEXO.Server
 						}
 						else
 						{
-							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "SaleID : " + mhex.SaleID.Value + " not allowed to connect");
+							CLog.Add($"SaleID {nxo.SaleID} has not been authorised to connect to {nxo.POIID}", TLog.ERROR);
+							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, $"SaleID : {mhex.SaleID.Value} not allowed to connect");
 							response.Action = NexoNextAction.sendReplyWithError;
+						}
+						// log login result
+						if (null != Database)
+						{
+							DateTime logout = new DateTime();
+							Database.AddConnection(tcp, nxo, (response.Action == NexoNextAction.sendReply), new TimeSpan(0, (int)Database.Settings.DelayBeforeAutoLogout, 0), out logout);
 						}
 					}
 					// if LogoutRequest
 					else if (MessageCategoryEnumeration.Logout == item.Category)
 					{
 						NexoSession session = client.LastSession();
+						NexoLogout nxo = new NexoLogout();
+						nxo.Request = (SaleToPOIRequest)item.Item;
 						if (null != session)
 						{
 							// arrived here the logout message has been accepted, mark the SaleID as not connected
 							session.SetDisconnected();
 							Activity.RemoveCurrentClient(client);
 							response.Action = NexoNextAction.sendReply;
+							// log logout result
+							if (null != Database)
+							{
+								DateTime logout = new DateTime();
+								Database.SetDisconnected(tcp, nxo, out logout);
+							}
 						}
 						else
 						{
@@ -501,7 +570,6 @@ namespace NEXO.Server
 			catch (Exception ex)
 			{
 				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "PROCESSING ABORTED");
-				response = null;
 			}
 			return response;
 		}

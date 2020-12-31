@@ -100,6 +100,24 @@ namespace NEXO.Server
 			}
 		}
 		/// <summary>
+		///  Remove an Endpoint from the list of connected ones
+		/// </summary>
+		/// <param name="o"></param>
+		internal void RemoveEndPoint(NexoEndPoint o)
+		{
+			lock (mylock)
+			{
+				try
+				{
+					_endpoints.Remove(o.Key);
+				}
+				catch (Exception ex)
+				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				}
+			}
+		}
+		/// <summary>
 		/// Insert a new client as connected to the server if it is its first connection
 		/// Set the client as connected if not the first connection and disconnected
 		/// </summary>

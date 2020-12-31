@@ -46,4 +46,7 @@ Public Class Settings
 	Public Property Infinite As Boolean
 	Public Property ServerDelay As Integer
 	Public Property Synchronous As Boolean
+	Public Property AddReceipt As Boolean
+	Public Property OneLineReceipt As Boolean
+	Public Property UseDatabase As Boolean
 End Class

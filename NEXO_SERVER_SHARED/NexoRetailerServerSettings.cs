@@ -34,19 +34,27 @@ namespace NEXO.Server
 		NexoDelegates.OnSendDelegate OnSend { get; set; }
 		[DispId(15)]
 		NexoDelegates.OnStopDelegate OnStop { get; set; }
+		[DispId(16)]
+		NexoRetailerServerDatabaseSettings DatabaseSettings { get; set; }
 		#endregion
 	}
 	[Guid("D2737F59-F4EE-4935-9C89-C45667C4D506")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoRetailerServerSettings: INexoRetailerServerSettings
+	public class NexoRetailerServerSettings : INexoRetailerServerSettings
 	{
 		#region constructors
 		public NexoRetailerServerSettings() { }
 		#endregion
 
 		#region properties
-		public bool IsValid { get => null != Settings && Settings.IsValid && (null == ThreadData || ThreadData.IsValid) && null != OnReceivedRequest && null != OnReceivedReply && null != OnReceivedNotification; }
+		public bool IsValid
+		{
+			get => null != Settings && Settings.IsValid
+				&& (null == ThreadData || ThreadData.IsValid)
+				&& null != OnReceivedRequest && null != OnReceivedReply && null != OnReceivedNotification
+				&& null == DatabaseSettings || DatabaseSettings.IsValid();
+		}
 		public object Parameters { get; set; } = null;
 		public CThreadData ThreadData { get; set; } = null;
 		public CStreamServerSettings Settings { get; set; } = null;
@@ -80,6 +88,10 @@ namespace NEXO.Server
 		/// Name of the server
 		/// </summary>
 		public string Name { get; set; }
+		/// <summary>
+		/// Settings applicable to the database connection
+		/// </summary>
+		public NexoRetailerServerDatabaseSettings DatabaseSettings { get; set; } = null;
 		#endregion
 
 		#region methods
@@ -97,8 +109,9 @@ namespace NEXO.Server
 		/// <param name="onReceiveNotification">Function called to process any notification</param>
 		/// <param name="onSend">Function called to inform the application of the reply about to be sent</param>
 		/// <param name="onStop">Function called when stopping the thread to process requests</param>
+		/// <param name="databaseSettings">see <see cref="NexoRetailerServerDatabaseSettings"/></param>
 		/// <returns>A NexoRetailerServerSettings object</returns>
-		public static NexoRetailerServerSettings Prepare(CStreamServerSettings settings, CThreadData threadData, NexoDelegates.OnReceivedDelegate onReceiveRequest, NexoDelegates.OnReceivedDelegate onReceiveReply, NexoDelegates.OnReceivedDelegate onReceiveNotification, NexoDelegates.OnSendDelegate onSend, NexoDelegates.OnStartDelegate onStart, NexoDelegates.OnConnectDelegate onConnect, NexoDelegates.OnDisconnectDelegate onDisconnect, NexoDelegates.OnStopDelegate onStop)
+		public static NexoRetailerServerSettings Prepare(CStreamServerSettings settings, CThreadData threadData, NexoDelegates.OnReceivedDelegate onReceiveRequest, NexoDelegates.OnReceivedDelegate onReceiveReply, NexoDelegates.OnReceivedDelegate onReceiveNotification, NexoDelegates.OnSendDelegate onSend, NexoDelegates.OnStartDelegate onStart, NexoDelegates.OnConnectDelegate onConnect, NexoDelegates.OnDisconnectDelegate onDisconnect, NexoDelegates.OnStopDelegate onStop, NexoRetailerServerDatabaseSettings databaseSettings = null)
 		{
 			return new NexoRetailerServerSettings()
 			{
@@ -112,6 +125,7 @@ namespace NEXO.Server
 				OnReceivedNotification = onReceiveNotification,
 				OnSend = onSend,
 				OnStop = onStop,
+				DatabaseSettings = databaseSettings,
 			};
 		}
 		#endregion

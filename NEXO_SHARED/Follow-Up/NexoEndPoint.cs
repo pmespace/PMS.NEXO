@@ -9,7 +9,7 @@ namespace NEXO
 	/// <summary>
 	/// IP address of a client POS
 	/// </summary>
-	public class NexoEndPoint: NexoKey
+	public class NexoEndPoint : NexoKey
 	{
 		#region constructor
 		/// <summary>
@@ -19,6 +19,15 @@ namespace NEXO
 		public NexoEndPoint(TcpClient client)
 		{
 			IP = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+			Initialise();
+		}
+		public NexoEndPoint(string ip)
+		{
+			IP = ip;
+			Initialise();
+		}
+		private void Initialise()
+		{
 			Key = GetKey(this);
 			Description = GetDescription();
 		}
@@ -32,7 +41,7 @@ namespace NEXO
 		/// <summary>
 		/// All connections from this endpoint
 		/// </summary>
-		class Connection: NexoKey
+		class Connection : NexoKey
 		{
 			public Connection(bool accepted)
 			{
@@ -48,7 +57,7 @@ namespace NEXO
 				return ToString(addkey, (Accepted ? "Accepted" : "Denied") + (!addkey ? " at " + Key : null));
 			}
 		}
-		class ListOfConnections: NexoListOfObjects<Connection>
+		class ListOfConnections : NexoListOfObjects<Connection>
 		{
 			public ListOfConnections() : base("ENDPOINT CONNECTIONS") { }
 		}
@@ -92,7 +101,7 @@ namespace NEXO
 	/// <summary>
 	/// List of all endpoints for all POS
 	/// </summary>
-	public class NexoListOfEndPoints: NexoListOfObjects<NexoEndPoint>
+	public class NexoListOfEndPoints : NexoListOfObjects<NexoEndPoint>
 	{
 		public NexoListOfEndPoints(string text) : base(text) { }
 	}
@@ -100,7 +109,7 @@ namespace NEXO
 	/// <summary>
 	/// List of all endpoints for all POS
 	/// </summary>
-	public class NexoDictionaryOfEndPoints: NexoDictionaryOfObjects<NexoEndPoint>
+	public class NexoDictionaryOfEndPoints : NexoDictionaryOfObjects<NexoEndPoint>
 	{
 		public NexoDictionaryOfEndPoints(string text) : base(text) { }
 	}

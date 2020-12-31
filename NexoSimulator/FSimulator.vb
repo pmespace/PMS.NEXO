@@ -56,7 +56,7 @@ Public Class FSimulator
 #End Region
 
 	Private nexoClients As New NexoRetailerClients
-	Private nexoServer As New NexoRetailerServer
+	Private nexoServer As NexoRetailerServer = Nothing
 	Private gateway As CStreamServer
 	Private Const POIIDToUse As String = "090265130468"
 	Private connected As Connected
@@ -70,6 +70,7 @@ Public Class FSimulator
 		none
 		right
 	End Enum
+	Private Const SERVER_SETTINGS_FILE_NAME As String = "server.database.json"
 	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
 	Private Const SETTINGS_FILE_EXT As String = ".json"
 	Private Const LOG_FILE_EXT As String = ".log"
@@ -86,7 +87,11 @@ Public Class FSimulator
 
 	Private ReadOnly Property ServerIsRunning() As Boolean
 		Get
-			Return nexoServer.IsRunning
+			If Not IsNothing(nexoServer) Then
+				Return nexoServer.IsRunning
+			Else
+				Return False
+			End If
 		End Get
 	End Property
 
@@ -131,7 +136,11 @@ Public Class FSimulator
 		e.Cancel = e.Cancel Or ServerIsRunning Or GatewayIsRunning
 	End Sub
 
-	Private Function SettingsFileName() As String
+	Public Function ServerSettingsFileName() As String
+		Return SettingsFileName() & "." & SERVER_SETTINGS_FILE_NAME
+	End Function
+
+	Public Function SettingsFileName() As String
 		Dim path As String = Registry.GetValue("HKEY_CURRENT_USER\Software\CHECK\Simulator", "Settings", ".\")
 		If String.IsNullOrEmpty(path) Then
 			path = ".\"
@@ -191,6 +200,9 @@ Public Class FSimulator
 				udServerDelay.Value = 0
 			End Try
 			cbSynchronous.Checked = settings.Synchronous
+			cbAddReceipt.Checked = settings.AddReceipt
+			cbOnelineReceipt.Checked = settings.OneLineReceipt
+			cbUseDatabase.Checked = settings.UseDatabase
 		End If
 	End Sub
 
@@ -231,6 +243,9 @@ Public Class FSimulator
 		settings.Infinite = cbInfinite.Checked
 		settings.ServerDelay = udServerDelay.Value
 		settings.Synchronous = cbSynchronous.Checked
+		settings.AddReceipt = cbAddReceipt.Checked
+		settings.OneLineReceipt = cbOnelineReceipt.Checked
+		settings.UseDatabase = cbUseDatabase.Checked
 
 		json.WriteSettings(settings)
 	End Sub
@@ -442,22 +457,29 @@ Public Class FSimulator
 
 	Private Sub StartServer()
 		If Not ServerIsRunning Then
+			nexoServer = New NexoRetailerServer(cbUseDatabase.Checked)
 			Dim settings As CStreamServerSettings = CStreamServerSettings.Prepare(localServerPort.Value)
 			Dim threadData As CThreadData = CThreadData.Prepare(Me.Handle,
 																				 SERVER_STOPPED_MESSAGE,
 																				 SERVER_INFORMATION_MESSAGE)
+			Dim dbSettings As NexoRetailerServerDatabaseSettings = Nothing
+			If nexoServer.UseDatabase Then
+				dbSettings = NexoRetailerServer.LoadDatabaseSettings(ServerSettingsFileName)
+			End If
 			Dim startType As NexoRetailerServerSettings = NexoRetailerServerSettings.Prepare(settings,
-																											 threadData,
-																											 AddressOf ServerOnReceivedRequest,
-																											 AddressOf ServerOnReceivedReply,
-																											 AddressOf ServerOnReceivedNotification,
-																											 AddressOf ServerOnSend,
-																											 AddressOf ServerOnStart,
-																											 AddressOf ServerOnConnect,
-																											 AddressOf ServerOnDisconnect,
-																											 AddressOf ServerOnStop)
+																												 threadData,
+																												 AddressOf ServerOnReceivedRequest,
+																												 AddressOf ServerOnReceivedReply,
+																												 AddressOf ServerOnReceivedNotification,
+																												 AddressOf ServerOnSend,
+																												 AddressOf ServerOnStart,
+																												 AddressOf ServerOnConnect,
+																												 AddressOf ServerOnDisconnect,
+																												 AddressOf ServerOnStop,
+																												 dbSettings)
 			If CThread.NO_THREAD = nexoServer.Start(startType) Then
 				RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER FAILED TO START"})
+				nexoServer = Nothing
 			Else
 				RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.message, .Message = "SERVER STARTED"})
 			End If
@@ -466,8 +488,11 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub StopServer()
-		nexoServer.Stop()
-		SetButtons()
+		If Not IsNothing(nexoServer) Then
+			nexoServer.Stop()
+			nexoServer = Nothing
+			SetButtons()
+		End If
 	End Sub
 
 	Private Function ServerOnStart(threadData As CThreadData, o As Object) As Boolean
@@ -484,6 +509,13 @@ Public Class FSimulator
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
 	End Sub
 
+	Private Function IsRecognized(o As NexoObject, saleid As String, poiid As String)
+		Return (o.SaleID = saleid AndAlso o.POIID = poiid) OrElse
+							(o.SaleID = saleid AndAlso "*" = poiid) OrElse
+							("*" = saleid AndAlso o.POIID = poiid) OrElse
+							("*" = saleid AndAlso "*" = poiid)
+	End Function
+
 	Private Sub ServerOnReceivedRequest(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
 		Dim cat As String = toprocess.Category.ToString
 		If MessageCategoryEnumeration.Payment = toprocess.Category Then
@@ -494,6 +526,11 @@ Public Class FSimulator
 		End If
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "RECEIVED " & cat.ToUpper & " REQUEST" & " FROM " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xml) & vbCrLf & xml})
 
+		If Not toprocess.CurrentObject.Success Then
+			Return
+		End If
+
+		Dim processed As Boolean = False
 		Select Case (toprocess.Category)
 			Case MessageCategoryEnumeration.Login
 				Dim nxo As NexoLogin = toprocess.CurrentObject
@@ -501,12 +538,10 @@ Public Class FSimulator
 				Dim data As List(Of Login) = json.ReadSettings(True)
 				If Not IsNothing(data) Then
 					For Each entry As Login In data
-						If (nxo.SaleID = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							(nxo.SaleID = entry.SaleID AndAlso "*" = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso "*" = entry.POIID) Then
-							nxo.ReplyData.Response = entry.Response
+						If IsRecognized(nxo, entry.SaleID, entry.POIID) Then
+							nxo.Response = entry.Response
 							nxo.ReplyData.POISystemData.POISoftware = entry.POISoftware
+							processed = True
 							Exit For
 						End If
 					Next
@@ -527,6 +562,10 @@ Public Class FSimulator
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
+				If nxo.Unknown Then ' Not processed Then
+					nxo.Response.Result = ResultEnumeration.Failure.ToString
+					nxo.Response.ErrorCondition = ErrorConditionEnumeration.NotAllowed.ToString
+				End If
 
 			Case MessageCategoryEnumeration.Logout
 				Dim nxo As NexoLogout = toprocess.CurrentObject
@@ -534,11 +573,9 @@ Public Class FSimulator
 				Dim data As List(Of Logout) = json.ReadSettings(True)
 				If Not IsNothing(data) Then
 					For Each entry As Logout In data
-						If (nxo.SaleID = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							(nxo.SaleID = entry.SaleID AndAlso "*" = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso "*" = entry.POIID) Then
+						If IsRecognized(nxo, entry.SaleID, entry.POIID) Then
 							nxo.Response = entry.Response
+							processed = True
 							Exit For
 						End If
 					Next
@@ -554,6 +591,10 @@ Public Class FSimulator
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
+				If nxo.Unknown Then ' Not processed Then
+					nxo.Response.Result = ResultEnumeration.Failure.ToString
+					nxo.Response.ErrorCondition = ErrorConditionEnumeration.NotFound.ToString
+				End If
 
 			Case MessageCategoryEnumeration.Input
 				Dim nxo As NexoDeviceInput = toprocess.CurrentObject
@@ -561,15 +602,13 @@ Public Class FSimulator
 				Dim data As List(Of DeviceInput) = json.ReadSettings(True)
 				If Not IsNothing(data) Then
 					For Each entry As DeviceInput In data
-						If (nxo.SaleID = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							(nxo.SaleID = entry.SaleID AndAlso "*" = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso "*" = entry.POIID) Then
+						If IsRecognized(nxo, entry.SaleID, entry.POIID) Then
 							nxo.ReplyData.InputResult.Input.InputCommand = entry.InputResult.Input.InputCommand
 							nxo.ReplyData.InputResult.Input.TextInput = entry.InputResult.Input.TextInput
 							nxo.ReplyData.InputResult.Device = entry.InputResult.Device
 							nxo.ReplyData.InputResult.InfoQualify = entry.InputResult.InfoQualify
 							nxo.Response = entry.Response
+							processed = True
 							Exit For
 						End If
 					Next
@@ -626,18 +665,20 @@ Public Class FSimulator
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
+				If nxo.Unknown Then ' Not processed Then
+					nxo.Response.Result = ResultEnumeration.Failure.ToString
+					nxo.Response.ErrorCondition = ErrorConditionEnumeration.Aborted.ToString
+				End If
 
-			Case MessageCategoryEnumeration.Input
+			Case MessageCategoryEnumeration.Print
 				Dim nxo As NexoDevicePrint = toprocess.CurrentObject
 				Dim json As New CJson(Of List(Of DevicePrint))((SettingsFileName() & "." & nxo.MessageCategory.ToString() & ".json").ToLower())
 				Dim data As List(Of DevicePrint) = json.ReadSettings(True)
 				If Not IsNothing(data) Then
 					For Each entry As DevicePrint In data
-						If (nxo.SaleID = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso nxo.POIID = entry.POIID) OrElse
-							(nxo.SaleID = entry.SaleID AndAlso "*" = entry.POIID) OrElse
-							("*" = entry.SaleID AndAlso "*" = entry.POIID) Then
+						If IsRecognized(nxo, entry.SaleID, entry.POIID) Then
 							nxo.Response = entry.Response
+							processed = True
 							Exit For
 						End If
 					Next
@@ -672,6 +713,10 @@ Public Class FSimulator
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
+				If nxo.Unknown Then ' Not processed Then
+					nxo.Response.Result = ResultEnumeration.Failure.ToString
+					nxo.Response.ErrorCondition = ErrorConditionEnumeration.Aborted.ToString
+				End If
 
 			Case MessageCategoryEnumeration.Payment
 				Dim nxo As NexoFinancial = toprocess.CurrentObject
@@ -679,13 +724,11 @@ Public Class FSimulator
 				Dim data As List(Of Financial) = json.ReadSettings(True)
 				If Not IsNothing(data) Then
 					For Each entry As Financial In data
-						If (nxo.SaleID = entry.SaleID AndAlso nxo.POIID = entry.POIID AndAlso nxo.RequestRequestedAmount = entry.RequestedAmount) OrElse
-							("*" = entry.SaleID AndAlso nxo.POIID = entry.POIID AndAlso nxo.RequestRequestedAmount = entry.RequestedAmount) OrElse
-							(nxo.SaleID = entry.SaleID AndAlso "*" = entry.POIID AndAlso nxo.RequestRequestedAmount = entry.RequestedAmount) OrElse
-							("*" = entry.SaleID AndAlso "*" = entry.POIID AndAlso nxo.RequestRequestedAmount = entry.RequestedAmount) Then
+						If IsRecognized(nxo, entry.SaleID, entry.POIID) Then
 							nxo.ReplyAuthorizedAmount = nxo.RequestRequestedAmount
 							nxo.ReplyPaymentBrand = entry.PaymentBrand
 							nxo.Response = entry.Response
+							processed = True
 							Exit For
 						End If
 					Next
@@ -715,7 +758,90 @@ Public Class FSimulator
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
+				If nxo.Unknown Then ' Not processed Then
+					nxo.Response.Result = ResultEnumeration.Failure.ToString
+					nxo.Response.ErrorCondition = ErrorConditionEnumeration.Aborted.ToString
+				End If
+
+				'add receipt if required
+				If cbAddReceipt.Checked Then
+					Dim amountToUse As Double = nxo.RequestRequestedAmount
+					Dim resultString As String = "DECLINED TRANSACTION"
+					If nxo.Success Then
+						amountToUse = nxo.ReplyAuthorizedAmount
+						resultString = "ACCEPTED TRANSACTION"
+					End If
+					Dim clientReceipt As New PaymentReceiptType()
+					Dim merchantReceipt As New PaymentReceiptType()
+					clientReceipt.DocumentQualifier = DocumentQualifierEnumeration.CustomerReceipt.ToString
+					merchantReceipt.DocumentQualifier = DocumentQualifierEnumeration.CashierReceipt.ToString
+					clientReceipt.OutputContent.OutputFormat = OutputFormatEnumeration.Text.ToString
+					merchantReceipt.OutputContent.OutputFormat = OutputFormatEnumeration.Text.ToString
+
+					'client receipt
+					Dim clientText As New List(Of String)
+					If nxo.Success Then
+						clientText.Add("TRANSACTION ACCEPTED")
+					Else
+						clientText.Add("TRANSACTION DECLINED")
+					End If
+					clientText.Add("")
+					clientText.Add("CLIENT RECEIPT")
+					clientText.Add("AMOUNT: " & amountToUse & " " & nxo.RequestCurrency)
+					clientText.Add("")
+					If nxo.Success Then
+						clientText.Add("THANK YOU")
+					Else
+						clientText.Add("SORRY")
+					End If
+
+					'merchant receipt
+					Dim merchantText As New List(Of String)
+					If nxo.Success Then
+						merchantText.Add("TRANSACTION ACCEPTED")
+					Else
+						merchantText.Add("TRANSACTION DECLINED")
+					End If
+					merchantText.Add("")
+					merchantText.Add("MERCHANT RECEIPT")
+					merchantText.Add("AMOUNT: " & amountToUse & " " & nxo.RequestCurrency)
+					merchantText.Add("")
+					If nxo.Success Then
+						merchantText.Add("GOOD DEAL")
+					Else
+						merchantText.Add("TOO BAD")
+					End If
+
+					If cbOnelineReceipt.Checked Then
+						Dim t As String = String.Empty
+						For Each s As String In clientText
+							t = t & s & vbLf
+						Next
+						clientReceipt.OutputContent.OutputTextAddItem(New OutputTextType() With {.Value = t})
+						t = String.Empty
+						For Each s As String In merchantText
+							t = t & s & vbLf
+						Next
+						merchantReceipt.OutputContent.OutputTextAddItem(New OutputTextType() With {.Value = t})
+					Else
+						For Each s As String In clientText
+							clientReceipt.OutputContent.OutputTextAddItem(New OutputTextType() With {.Value = s, .EndOfLineFlag = False})
+						Next
+						For Each s As String In merchantText
+							merchantReceipt.OutputContent.OutputTextAddItem(New OutputTextType() With {.Value = s, .EndOfLineFlag = True})
+						Next
+					End If
+
+					'set receipts
+					nxo.ReplyData.PaymentReceiptAddItem(clientReceipt)
+					nxo.ReplyData.PaymentReceiptAddItem(merchantReceipt)
+				End If
 		End Select
+	End Sub
+
+	Private Sub PrepareReceipt(s As String, clientText As List(Of String), merchantText As List(Of String))
+
+
 	End Sub
 
 	Private Sub ServerOnReceivedReply(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, threadData As CThreadData, o As Object)
@@ -740,8 +866,10 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub pbActivity_Click(sender As Object, e As EventArgs) Handles pbServerActivity.Click
-		Dim f As New FActivity(nexoServer)
-		f.ShowDialog()
+		If Not IsNothing(nexoServer) Then
+			Dim f As New FActivity(nexoServer)
+			f.ShowDialog()
+		End If
 	End Sub
 
 	Private Sub saleID_TextChanged(sender As Object, e As EventArgs) Handles efSaleID.TextChanged
@@ -938,6 +1066,7 @@ Public Class FSimulator
 	Private Sub pbLogin_Click(sender As Object, e As EventArgs) Handles pbLogin.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogin()
+		o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -968,6 +1097,7 @@ Public Class FSimulator
 	Private Sub pbLogout_Click(sender As Object, e As EventArgs) Handles pbLogout.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogout()
+		o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -991,6 +1121,7 @@ Public Class FSimulator
 
 	Private Sub pbDeviceInput_Click(sender As Object, e As EventArgs) Handles pbDeviceInput.Click
 		Dim o As New NexoDeviceInput()
+		o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -1033,6 +1164,7 @@ Public Class FSimulator
 				TextToPrint = p.TextToPrint
 				'create the NexoLogin object
 				Dim o As New NexoDevicePrint()
+				o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -1070,6 +1202,7 @@ Public Class FSimulator
 			Case DialogResult.OK
 				'create the NexoLogin object
 				Dim o As New NexoPayment()
+				o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -1279,6 +1412,7 @@ Public Class FSimulator
 			Case DialogResult.OK
 				'create the NexoLogin object
 				Dim o As New NexoRefund()
+				o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(serviceid.Text)
@@ -1309,4 +1443,34 @@ Public Class FSimulator
 			nexoServer.TimerBeforeReply = udServerDelay.Value
 		End If
 	End Sub
+
+	Private Sub pbDatabaseSettings_Click(sender As Object, e As EventArgs) Handles pbDatabaseSettings.Click
+		Dim f As New FServerSettings
+		If nexoServer.IsRunning Then
+			f.Settings = nexoServer.Settings.DatabaseSettings
+		End If
+		f.ShowDialog()
+		If nexoServer.IsRunning Then
+			nexoServer.Settings.DatabaseSettings = f.Settings
+		End If
+		f.Dispose()
+	End Sub
+
+	Private Sub pbBuild_Click(sender As Object, e As EventArgs) Handles pbBuild.Click
+		Dim f As New FChoser
+		Dim T As Type = Nothing
+		If DialogResult.OK = f.ShowDialog() Then
+			T = f.nxo
+		End If
+		f.Dispose()
+
+		If Not IsNothing(T) Then
+			Dim g As New FBuilder
+			g.T = T
+			If DialogResult.OK = g.ShowDialog() Then
+			End If
+			g.Dispose()
+		End If
+	End Sub
+
 End Class

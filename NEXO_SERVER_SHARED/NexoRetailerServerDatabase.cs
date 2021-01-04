@@ -96,7 +96,7 @@ namespace NEXO.Server
 	public class NexoRetailerServerDatabaseMessage
 	{
 		#region properties
-		public long ID { get; set; }
+		public int ID { get; set; }
 		public string SaleID { get; set; }
 		public string POIID { get; set; }
 		public string Category { get; set; }
@@ -110,9 +110,9 @@ namespace NEXO.Server
 		public string Result { get; set; }
 		public string ErrorCondition { get; set; }
 		public string AdditionalResponse { get; set; }
-		public double RequestAmount { get; set; }
-		public double FinalAmount { get; set; }
-		public string Currency { get; set; }
+		public double RequestedAmount { get; set; }
+		public double AuthorizedAmount { get; set; }
+		public string TransactionCurrency { get; set; }
 		public string ReconciliationID { get; set; }
 		public string SaleTransactionID { get; set; }
 		public string SaleTransactionTimestamp { get; set; }
@@ -137,9 +137,9 @@ namespace NEXO.Server
 			Result,
 			ErrorCondition,
 			AdditionalResponse,
-			RequestAmount,
+			RequestedAmount,
 			AuthorizedAmount,
-			Currency,
+			TransactionCurrency,
 			ReconciliationID,
 			SaleTransactionID,
 			SaleTransactionTimestamp,
@@ -264,8 +264,6 @@ namespace NEXO.Server
 		#endregion
 
 		#region constants
-		public static string TRUE = "TRUE";
-		public static string FALSE = "FALSE";
 		public static string GENERIC = "'*'";
 		public static string REPLACEIT = "%1";
 		#endregion
@@ -280,10 +278,23 @@ namespace NEXO.Server
 				return "NULL";
 			return $"'{s}'";
 		}
-		private bool IsDeclined<TxN>(string sql)
+		private string TestStringOrNull(string s)
 		{
-			string sqlx = sql.Replace(REPLACEIT, FALSE);
-			List<TxN> list = SelectRequest<TxN>(sqlx, FeedEndPoint);
+			if (string.IsNullOrEmpty(s))
+				return " IS NULL";
+			return $"='{s}'";
+		}
+		private string SafeString(string s)
+		{
+			// makes every single quote a double quote
+			if (!string.IsNullOrEmpty(s))
+				return s.Replace(@"'", @"''");
+			return null;
+		}
+		private bool IsDeclined<TxN>(string sql, FeedRecordDelegate fnc)
+		{
+			string sqlx = sql.Replace(REPLACEIT, FALSE());
+			List<TxN> list = SelectRequest<TxN>(sqlx, fnc);
 			bool fOK = (null != list && 0 != list.Count);
 			string rules = null;
 			if (fOK)
@@ -292,10 +303,10 @@ namespace NEXO.Server
 			CLog.Add($"Secured: {Settings.Secured}; Default to decline: {Settings.DeclineByDefault} - " + (fOK ? $"Access declined [{sqlx}] by {list.Count} rules [{rules}]" : $"Access not declined [{sqlx}]"), fOK ? TLog.WARNG : TLog.INFOR);
 			return fOK;
 		}
-		private bool IsGranted<TxN>(string sql)
+		private bool IsGranted<TxN>(string sql, FeedRecordDelegate fnc)
 		{
-			string sqlx = sql.Replace(REPLACEIT, TRUE);
-			List<TxN> list = SelectRequest<TxN>(sqlx, FeedEndPoint);
+			string sqlx = sql.Replace(REPLACEIT, TRUE());
+			List<TxN> list = SelectRequest<TxN>(sqlx, fnc);
 			bool fOK = (null != list && 0 != list.Count);
 			string rules = null;
 			if (fOK)
@@ -303,6 +314,23 @@ namespace NEXO.Server
 					rules += txn.ToString() + "; ";
 			CLog.Add((fOK ? $"Access granted [{sqlx}] by {list.Count} rules [{rules}]" : $"Access not granted [{sqlx}]"), fOK ? TLog.INFOR : TLog.WARNG);
 			return fOK;
+		}
+		public bool CloseAllConnections()
+		{
+			if (!IsOpen) return false;
+
+			DateTime dt = DateTime.Now;
+			string s = dt.ToString(Chars.DATETIME);
+
+			// keep track of the unsuccessfull connection attempt
+			string sql = $"UPDATE {Settings.ConnectionsTableName} SET " +
+				$"{NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}='{s}'" +
+				"WHERE " +
+				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()}";
+			int nbRows = 0;
+			if (NonSelectRequest(sql, ref nbRows))
+				return true;
+			return false;
 		}
 		/// <summary>
 		/// Determine whether an IP is accepted to connect to the server
@@ -322,17 +350,18 @@ namespace NEXO.Server
 
 			if (Settings.Secured)
 			{
-				fOK = !IsDeclined<NexoRetailerServerDatabaseEndPoint>(sql) && IsGranted<NexoRetailerServerDatabaseEndPoint>(sql);
+				fOK = !IsDeclined<NexoRetailerServerDatabaseEndPoint>(sql, FeedEndPoint) && IsGranted<NexoRetailerServerDatabaseEndPoint>(sql, FeedEndPoint);
 			}
 			else if (Settings.DeclineByDefault)
 			{
-				fOK = IsGranted<NexoRetailerServerDatabaseEndPoint>(sql);
+				fOK = IsGranted<NexoRetailerServerDatabaseEndPoint>(sql, FeedEndPoint);
 			}
 			else
 			{
-				fOK = !IsDeclined<NexoRetailerServerDatabaseEndPoint>(sql);
+				fOK = !IsDeclined<NexoRetailerServerDatabaseEndPoint>(sql, FeedEndPoint);
 			}
 			if (fOK) return true;
+			// arrived here the EndPoint is not accepted, eventually log unsuccessfull connection attemps
 			if (logit)
 			{
 				DateTime dt = new DateTime();
@@ -378,17 +407,18 @@ namespace NEXO.Server
 
 			if (Settings.Secured)
 			{
-				fOK = !IsDeclined<NexoRetailerServerDatabaseSale>(sql) && IsGranted<NexoRetailerServerDatabaseSale>(sql);
+				fOK = !IsDeclined<NexoRetailerServerDatabaseSale>(sql, FeedSale) && IsGranted<NexoRetailerServerDatabaseSale>(sql, FeedSale);
 			}
 			else if (Settings.DeclineByDefault)
 			{
-				fOK = IsGranted<NexoRetailerServerDatabaseSale>(sql);
+				fOK = IsGranted<NexoRetailerServerDatabaseSale>(sql, FeedSale);
 			}
 			else
 			{
-				fOK = !IsDeclined<NexoRetailerServerDatabaseSale>(sql);
+				fOK = !IsDeclined<NexoRetailerServerDatabaseSale>(sql, FeedSale);
 			}
 			if (fOK) return true;
+			// arrived here the sale is not accepted, eventually log unsuccessfull connection attemps
 			if (logit)
 			{
 				DateTime dt = new DateTime();
@@ -444,13 +474,13 @@ namespace NEXO.Server
 			string sx = dtx.ToString(Chars.DATETIME);
 
 			string sql = $"INSERT INTO {Settings.ConnectionsTableName} (" +
-				$"{NexoRetailerServerDatabaseConnection.Labels.IP}, {NexoRetailerServerDatabaseConnection.Labels.SaleID}, " +
-				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}, " +
-				$"{NexoRetailerServerDatabaseConnection.Labels.LoginTimestamp}, {NexoRetailerServerDatabaseConnection.Labels.AutoLogoutTimestamp} " +
+				$"{NexoRetailerServerDatabaseConnection.Labels.IP}, {NexoRetailerServerDatabaseConnection.Labels.SaleID}" +
+				$", {NexoRetailerServerDatabaseConnection.Labels.Logged}" +
+				$", {NexoRetailerServerDatabaseConnection.Labels.LoginTimestamp}, {NexoRetailerServerDatabaseConnection.Labels.AutoLogoutTimestamp} " +
 				(null != nxo ? $", {NexoRetailerServerDatabaseConnection.Labels.POIID}, {NexoRetailerServerDatabaseConnection.Labels.SoftwareVersion}, {NexoRetailerServerDatabaseConnection.Labels.ApplicationName}, {NexoRetailerServerDatabaseConnection.Labels.CertificationCode}, {NexoRetailerServerDatabaseConnection.Labels.ManufacturerID} " : null) +
 				$") VALUES (" +
 				$"'{IPAddress(tcp)}', '{saleid}', " +
-				(accepted ? $"{TRUE}, " : $"{FALSE}, ") +
+				(accepted ? $"{TRUE()}, " : $"{FALSE()}, ") +
 				$"'{s}', '{sx}' " +
 				(null != nxo ? $", '{nxo.POIID}', {StringOrNull(nxo.RequestSoftwareVersion)}, {StringOrNull(nxo.RequestApplicationName)}, {StringOrNull(nxo.RequestCertificationCode)}, {StringOrNull(nxo.RequestManufacturerID)} " : null) +
 				$")";
@@ -486,7 +516,7 @@ namespace NEXO.Server
 				$"{NexoRetailerServerDatabaseConnection.Labels.IP}='{IPAddress(tcp)}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.SaleID}='{nxo.SaleID}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.POIID}='{nxo.POIID}' AND " +
-				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE})";
+				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()}";
 
 			int nbRows = 0;
 			if (NonSelectRequest(sql, ref nbRows))
@@ -518,7 +548,7 @@ namespace NEXO.Server
 				$"{NexoRetailerServerDatabaseConnection.Labels.IP}='{IPAddress(tcp)}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.SaleID}='{saleid}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.POIID}='{poiid}' AND " +
-				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE} AND " +
+				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()} AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}=NULL AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.AutoLogoutTimestamp}>='{s}')";
 
@@ -535,11 +565,17 @@ namespace NEXO.Server
 				sql = $"UPDATE {Settings.ConnectionsTableName} SET " +
 					$"{NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}='{NexoRetailerServerDatabaseConnection.Labels.AutoLogoutTimestamp}' " +
 					"WHERE " +
-					$"{NexoRetailerServerDatabaseConnection.Labels.IP}='{IPAddress(tcp)}' AND {NexoRetailerServerDatabaseConnection.Labels.SaleID}='{saleid}' AND {NexoRetailerServerDatabaseConnection.Labels.POIID}='{poiid}' AND {NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE} AND {NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}=NULL)";
+					$"{NexoRetailerServerDatabaseConnection.Labels.IP}='{IPAddress(tcp)}' AND {NexoRetailerServerDatabaseConnection.Labels.SaleID}='{saleid}' AND {NexoRetailerServerDatabaseConnection.Labels.POIID}='{poiid}' AND {NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()} AND {NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}=NULL)";
 				NonSelectRequest(sql, ref nbRows);
 			}
 			return false;
 		}
+		/// <summary>
+		/// Add a new request message
+		/// </summary>
+		/// <param name="item">The message to add to the database</param>
+		/// <param name="id">[out] the ID of the message to use for the update</param>
+		/// <returns>True if added successfully and the ID has been returned, false otherwise</returns>
 		public bool AddNewRequest(NexoItem item, out long id)
 		{
 			id = 0;
@@ -567,34 +603,34 @@ namespace NEXO.Server
 					reconciliation = (ReconciliationRequestType)saletopoi.Item;
 
 				string sql = $"INSERT INTO {Settings.MessagesTableName} (" +
-					$"{NexoRetailerServerDatabaseMessage.Labels.SaleID}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.POIID}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.Category}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.Received}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.ServiceID}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.DeviceID}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.Request}, " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.RequestTimestamp}" +
+					$"{NexoRetailerServerDatabaseMessage.Labels.SaleID}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.POIID}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.Category}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.Received}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.ServiceID}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.DeviceID}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.Request}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.RequestTimestamp}" +
 					(fPayment ?
-						$", {NexoRetailerServerDatabaseMessage.Labels.RequestAmount}, " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.Currency}, " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.SaleTransactionID}, " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.SaleTransactionTimestamp}"
+						$", {NexoRetailerServerDatabaseMessage.Labels.RequestedAmount}" +
+						$", {NexoRetailerServerDatabaseMessage.Labels.TransactionCurrency}" +
+						$", {NexoRetailerServerDatabaseMessage.Labels.SaleTransactionID}" +
+						$", {NexoRetailerServerDatabaseMessage.Labels.SaleTransactionTimestamp}"
 						: null) +
 					$") VALUES (" +
-					$"'{saletopoi.MessageHeader.SaleID}', " +
-					$"'{saletopoi.MessageHeader.POIID}', " +
-					$"'{saletopoi.MessageHeader.MessageCategory}', " +
-					$"{TRUE}, " +
-					$"{StringOrNull(saletopoi.MessageHeader.ServiceID)}, " +
-					$"{StringOrNull(saletopoi.MessageHeader.DeviceID)}, " +
-					$"'{item.XML}', " +
-					$"'{s}'" +
+					$"{StringOrNull(saletopoi.MessageHeader.SaleID)}" +
+					$", {StringOrNull(saletopoi.MessageHeader.POIID)}" +
+					$", {StringOrNull(saletopoi.MessageHeader.MessageCategory)}" +
+					$", {TRUE()}" +
+					$", {StringOrNull(saletopoi.MessageHeader.ServiceID)}" +
+					$", {StringOrNull(saletopoi.MessageHeader.DeviceID)}" +
+					$", {StringOrNull(SafeString(item.XML))}" +
+					$", {StringOrNull(s)}" +
 					(fPayment ?
-						$", {payment.PaymentTransaction.AmountsReq.RequestedAmount}, " +
-						$"{StringOrNull(payment.PaymentTransaction.AmountsReq.Currency)}, " +
-						$"{StringOrNull(payment.SaleData.SaleTransactionID.TransactionID)}, " +
-						$"{StringOrNull(payment.SaleData.SaleTransactionID.TimeStamp)}"
+						$", {StringOrNull(payment.PaymentTransaction.AmountsReq.RequestedAmount.ToString())}" +
+						$", {StringOrNull(payment.PaymentTransaction.AmountsReq.Currency)}" +
+						$", {StringOrNull(payment.SaleData.SaleTransactionID.TransactionID)}" +
+						$", {StringOrNull(payment.SaleData.SaleTransactionID.TimeStamp)}"
 						: null) +
 						")";
 
@@ -606,19 +642,21 @@ namespace NEXO.Server
 						$"{NexoRetailerServerDatabaseMessage.Labels.SaleID}='{saletopoi.MessageHeader.SaleID}' AND " +
 						$"{NexoRetailerServerDatabaseMessage.Labels.POIID}='{saletopoi.MessageHeader.POIID}' AND " +
 						$"{NexoRetailerServerDatabaseMessage.Labels.Category}='{saletopoi.MessageHeader.MessageCategory}' AND " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.Received}={TRUE} AND " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.ServiceID}={StringOrNull(saletopoi.MessageHeader.ServiceID)} AND " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.DeviceID}={StringOrNull(saletopoi.MessageHeader.DeviceID)} AND " +
+						$"{NexoRetailerServerDatabaseMessage.Labels.Received}={TRUE()} AND " +
+						$"{NexoRetailerServerDatabaseMessage.Labels.ServiceID}{TestStringOrNull(saletopoi.MessageHeader.ServiceID)} AND " +
+						$"{NexoRetailerServerDatabaseMessage.Labels.DeviceID}{TestStringOrNull(saletopoi.MessageHeader.DeviceID)} AND " +
 						$"{NexoRetailerServerDatabaseMessage.Labels.RequestTimestamp}='{s}'";
 					List<NexoRetailerServerDatabaseMessage> list = SelectRequest<NexoRetailerServerDatabaseMessage>(sql, FeedMessage);
 					if (null != list && 0 != list.Count)
+					{
 						id = list[0].ID;
+					}
 					return true;
 				}
 			}
 			return false;
 		}
-		public bool SetRequestReply(long id, NexoItem item)
+		public bool SetRequestReply(long id, NexoItem item, ResponseType response)
 		{
 			if (!IsOpen) return false;
 
@@ -640,17 +678,18 @@ namespace NEXO.Server
 					reconciliation = (ReconciliationResponseType)saletopoi.Item;
 
 				string sql = $"UPDATE {Settings.MessagesTableName} SET " +
-					$"{NexoRetailerServerDatabaseMessage.Labels.ID}={id}," +
-					$"{NexoRetailerServerDatabaseMessage.Labels.Reply}='{item.XML}'," +
-					$"{NexoRetailerServerDatabaseMessage.Labels.ReplyTimestamp}='{s}'," +
-					//$"{NexoRetailerServerDatabaseMessage.Labels.Result}='{saletopoi}'," +
-					//$"{NexoRetailerServerDatabaseMessage.Labels.ErrorCondition}='{saletopoi}'," +
-					//$"{NexoRetailerServerDatabaseMessage.Labels.AdditionalResponse}='{saletopoi}'," +
+					$"{NexoRetailerServerDatabaseMessage.Labels.ReplyTimestamp}='{s}'" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.Reply}={StringOrNull(SafeString(item.XML))}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.Result}={(null != response ? StringOrNull(response.Result) : null)}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.ErrorCondition}={(null != response ? StringOrNull(response.ErrorCondition) : null)}" +
+					$", {NexoRetailerServerDatabaseMessage.Labels.AdditionalResponse}={(null != response ? StringOrNull(SafeString(response.AdditionalResponse)) : null)}" +
 					(fPayment ?
-						$", {NexoRetailerServerDatabaseMessage.Labels.AuthorizedAmount}='{payment.PaymentResult.AmountsResp.AuthorizedAmount}', " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.POITransactionID}='{payment.POIData.POITransactionID.TransactionID}', " +
-						$"{NexoRetailerServerDatabaseMessage.Labels.POITransactionTimestamp}='{payment.POIData.POITransactionID.TimeStamp}'"
-						: null);
+						$", {NexoRetailerServerDatabaseMessage.Labels.AuthorizedAmount}='{payment.PaymentResult.AmountsResp.AuthorizedAmount}'" +
+						$", {NexoRetailerServerDatabaseMessage.Labels.POITransactionID}='{payment.POIData.POITransactionID.TransactionID}'" +
+						$", {NexoRetailerServerDatabaseMessage.Labels.POITransactionTimestamp}='{payment.POIData.POITransactionID.TimeStamp}'"
+						: null) +
+					" WHERE " +
+					$"{NexoRetailerServerDatabaseMessage.Labels.ID}={id}";
 
 				int nbRows = 0;
 				if (NonSelectRequest(sql, ref nbRows) && 0 != nbRows)
@@ -665,8 +704,8 @@ namespace NEXO.Server
 			NexoRetailerServerDatabaseMessage msg = new NexoRetailerServerDatabaseMessage();
 			try
 			{
-				long l = 0;
-				if (CDatabase.ItemValue<long>(reader, NexoRetailerServerDatabaseMessage.Labels.ID.ToString(), ref l))
+				int l = 0;
+				if (CDatabase.ItemValue<int>(reader, NexoRetailerServerDatabaseMessage.Labels.ID.ToString(), ref l))
 					msg.ID = l;
 				return msg;
 			}

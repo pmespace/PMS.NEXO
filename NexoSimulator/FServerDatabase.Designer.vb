@@ -61,6 +61,7 @@ Partial Class FServerDatabase
 			Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.DataGridView1.AutoGenerateColumns = False
+		Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
 		Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
 		Me.DataGridView1.DataSource = Me.BindingSource1
 		Me.DataGridView1.Location = New System.Drawing.Point(3, 3)

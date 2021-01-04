@@ -14,4 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailerServerSettings.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)dbo.Connections.sql" />
+    <None Include="$(MSBuildThisFileDirectory)dbo.EndPoints.sql" />
+    <None Include="$(MSBuildThisFileDirectory)dbo.Messages.sql" />
+    <None Include="$(MSBuildThisFileDirectory)dbo.Sales.sql" />
+  </ItemGroup>
 </Project>

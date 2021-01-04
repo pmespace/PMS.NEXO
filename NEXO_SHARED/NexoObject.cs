@@ -865,9 +865,9 @@ namespace NEXO
 		#endregion
 	}
 
-	[ComVisible(true)]
+	[ComVisible(false)]
 	public class QueueOfNexoObjectToProcess : Queue<NexoObjectToProcess> { }
 
-	[ComVisible(true)]
+	[ComVisible(false)]
 	public class StackOfNexoObjectToProcess : Stack<NexoObjectToProcess> { }
 }

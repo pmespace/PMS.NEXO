@@ -1,4 +1,5 @@
 ﻿Imports COMMON
+Imports NEXO.Server
 
 Public Enum TargetsEnum
 	_begin

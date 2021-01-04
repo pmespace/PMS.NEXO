@@ -9,6 +9,7 @@
 
 	Private Sub pbAccept_Click(sender As Object, e As EventArgs) Handles pbAccept.Click
 		TextToPrint = RichTextBox1.Text
+		DialogResult = DialogResult.Yes
 	End Sub
 
 	Private Sub FTextToPrint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -21,6 +22,10 @@
 
 	Private Sub RichTextBox1_SelectionChanged(sender As Object, e As EventArgs) Handles RichTextBox1.SelectionChanged
 		SetLabels()
+	End Sub
+
+	Private Sub pbCancel_Click(sender As Object, e As EventArgs) Handles pbCancel.Click
+		DialogResult = DialogResult.No
 	End Sub
 
 End Class

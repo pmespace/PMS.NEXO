@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[Messages] (
+    [ID]                       INT            IDENTITY (1, 1) NOT NULL,
+    [SaleID]                   NVARCHAR (255) NOT NULL,
+    [POIID]                    NVARCHAR (255) NOT NULL,
+    [Category]                 NVARCHAR (255) NOT NULL,
+    [Received]                 BIT            NOT NULL,
+    [ServiceID]                NVARCHAR (255) NULL,
+    [DeviceID]                 NVARCHAR (255) NULL,
+    [Request]                  NVARCHAR (MAX) NOT NULL,
+    [RequestTimestamp]         NVARCHAR (255) NOT NULL,
+    [Reply]                    NVARCHAR (MAX) NULL,
+    [ReplyTimestamp]           NVARCHAR (255) NULL,
+    [Result]                   NVARCHAR (255) NULL,
+    [ErrorCondition]           NVARCHAR (255) NULL,
+    [AdditionalResponse]       NVARCHAR (255) NULL,
+    [RequestedAmount]          MONEY          NULL,
+    [AuthorizedAmount]         MONEY          NULL,
+    [TransactionCurrency]      NVARCHAR (255) NULL,
+    [ReconciliationID]         NVARCHAR (255) NULL,
+    [SaleTransactionID]        NVARCHAR (255) NULL,
+    [SaleTransactionTimestamp] NVARCHAR (255) NULL,
+    [POITransactionID]         NVARCHAR (255) NULL,
+    [POITransactionTimestamp]  NVARCHAR (255) NULL,
+    CONSTRAINT [PK_Messages] PRIMARY KEY CLUSTERED ([ID] ASC, [SaleID] ASC, [POIID] ASC, [Category] ASC, [Received] ASC, [RequestTimestamp] ASC)
+);
+

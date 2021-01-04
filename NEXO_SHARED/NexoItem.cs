@@ -304,7 +304,6 @@ namespace NEXO
 					SupportsAbort = true;
 					break;
 				case MessageCategoryEnumeration.Print:
-					ReplyRequired = false;
 					break;
 				case MessageCategoryEnumeration.Reconciliation:
 					SupportsAbort = true;

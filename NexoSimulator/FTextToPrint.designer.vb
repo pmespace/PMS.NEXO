@@ -25,14 +25,14 @@ Partial Class FTextToPrint
 		Me.panelMain = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelnput = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelPositions = New System.Windows.Forms.TableLayoutPanel()
+		Me.Label2 = New System.Windows.Forms.Label()
 		Me.position = New System.Windows.Forms.Label()
 		Me.nbchars = New System.Windows.Forms.Label()
+		Me.Label1 = New System.Windows.Forms.Label()
+		Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
 		Me.panelButtons = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbAccept = New System.Windows.Forms.Button()
 		Me.pbCancel = New System.Windows.Forms.Button()
-		Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-		Me.Label1 = New System.Windows.Forms.Label()
-		Me.Label2 = New System.Windows.Forms.Label()
 		Me.panelMain.SuspendLayout()
 		Me.panelnput.SuspendLayout()
 		Me.panelPositions.SuspendLayout()
@@ -101,6 +101,19 @@ Partial Class FTextToPrint
 		Me.panelPositions.Size = New System.Drawing.Size(888, 68)
 		Me.panelPositions.TabIndex = 1
 		'
+		'Label2
+		'
+		Me.Label2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.Label2.AutoSize = True
+		Me.Label2.Location = New System.Drawing.Point(447, 0)
+		Me.Label2.Name = "Label2"
+		Me.Label2.Size = New System.Drawing.Size(438, 20)
+		Me.Label2.TabIndex = 3
+		Me.Label2.Text = "Position"
+		Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
 		'position
 		'
 		Me.position.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -130,6 +143,34 @@ Partial Class FTextToPrint
 		Me.nbchars.TabIndex = 0
 		Me.nbchars.Text = "Label1"
 		Me.nbchars.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label1
+		'
+		Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.Label1.AutoSize = True
+		Me.Label1.Location = New System.Drawing.Point(3, 0)
+		Me.Label1.Name = "Label1"
+		Me.Label1.Size = New System.Drawing.Size(438, 20)
+		Me.Label1.TabIndex = 2
+		Me.Label1.Text = "Characters"
+		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'RichTextBox1
+		'
+		Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.RichTextBox1.Font = New System.Drawing.Font("Courier New", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.RichTextBox1.Location = New System.Drawing.Point(3, 3)
+		Me.RichTextBox1.MaxLength = 80
+		Me.RichTextBox1.Multiline = False
+		Me.RichTextBox1.Name = "RichTextBox1"
+		Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+		Me.RichTextBox1.Size = New System.Drawing.Size(888, 28)
+		Me.RichTextBox1.TabIndex = 0
+		Me.RichTextBox1.Text = ""
 		'
 		'panelButtons
 		'
@@ -179,47 +220,6 @@ Partial Class FTextToPrint
 		Me.pbCancel.TabIndex = 1
 		Me.pbCancel.Text = "Cancel"
 		Me.pbCancel.UseVisualStyleBackColor = True
-		'
-		'RichTextBox1
-		'
-		Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.RichTextBox1.Font = New System.Drawing.Font("Courier New", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.RichTextBox1.Location = New System.Drawing.Point(3, 3)
-		Me.RichTextBox1.MaxLength = 80
-		Me.RichTextBox1.Multiline = False
-		Me.RichTextBox1.Name = "RichTextBox1"
-		Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-		Me.RichTextBox1.Size = New System.Drawing.Size(888, 28)
-		Me.RichTextBox1.TabIndex = 0
-		Me.RichTextBox1.Text = ""
-		'
-		'Label1
-		'
-		Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.Label1.AutoSize = True
-		Me.Label1.Location = New System.Drawing.Point(3, 0)
-		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(438, 20)
-		Me.Label1.TabIndex = 2
-		Me.Label1.Text = "Characters"
-		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'Label2
-		'
-		Me.Label2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.Label2.AutoSize = True
-		Me.Label2.Location = New System.Drawing.Point(447, 0)
-		Me.Label2.Name = "Label2"
-		Me.Label2.Size = New System.Drawing.Size(438, 20)
-		Me.Label2.TabIndex = 3
-		Me.Label2.Text = "Position"
-		Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'FTextToPrint
 		'

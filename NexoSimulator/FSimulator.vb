@@ -364,7 +364,8 @@ Public Class FSimulator
 
 		'client part
 		panelClientTarget.Enabled = rbServer.Checked
-		panelCommands.Enabled = panelRaw.Enabled = 0 <> nexoClients.Count
+		panelRaw.Enabled = 0 <> nexoClients.Count
+		panelCommands.Enabled = panelRaw.Enabled
 		CanDisconnect()
 
 		'gateway part
@@ -501,12 +502,12 @@ Public Class FSimulator
 	End Function
 
 	Private Function ServerOnConnect(tcp As TcpClient, threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT CONNECTED (" & tcp.Client.RemoteEndPoint.ToString & ")"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT CONNECTED (" & tcp.Client.RemoteEndPoint.ToString & ")"})
 		Return True
 	End Function
 
 	Private Sub ServerOnDisconnect(tcp As String, threadData As CThreadData, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
 	End Sub
 
 	Private Function IsRecognized(o As NexoObject, saleid As String, poiid As String)
@@ -1160,7 +1161,7 @@ Public Class FSimulator
 		Dim p As New FTextToPrint
 		p.TextToPrint = TextToPrint
 		Select Case p.ShowDialog
-			Case DialogResult.OK
+			Case DialogResult.Yes
 				TextToPrint = p.TextToPrint
 				'create the NexoLogin object
 				Dim o As New NexoDevicePrint()

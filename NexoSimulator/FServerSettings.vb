@@ -49,6 +49,7 @@ Public Class FServerSettings
 		Dim json As CJson(Of NexoRetailerServerDatabaseSettings) = New CJson(Of NexoRetailerServerDatabaseSettings)(FSimulator.ServerSettingsFileName)
 		json.WriteSettings(Settings, True)
 		modified = False
+		SetButtons()
 	End Sub
 
 	Private Sub SetButtons()

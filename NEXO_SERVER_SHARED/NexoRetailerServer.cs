@@ -88,7 +88,7 @@ namespace NEXO.Server
 		public bool DumpOnExit { get; set; } = false;
 		/// <summary>
 		/// This indicator set to true allows the application to change the result already decided by the server component (sent through OnRequest)
-		/// CHanging the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
+		/// Changing the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
 		/// </summary>
 		public bool AllowChangingResults { get; set; } = false;
 		/// <summary>
@@ -184,7 +184,11 @@ namespace NEXO.Server
 			});
 			if (null != StreamServer)
 			{
+				// save startup time
 				_startup = DateTime.Now;
+				// close all currently opened connections
+				if (null != Database)
+					Database.CloseAllConnections();
 				return true;
 			}
 			return false;
@@ -308,6 +312,7 @@ namespace NEXO.Server
 					NexoItem item = new NexoItem(xml);
 					if (item.IsValid)
 					{
+						RequestResponseType response;
 						long msgid = 0;
 						string shortmessage = $"Received {item.Category.ToString().ToUpper()} {item.Type}";
 						string fullmessage = $"{shortmessage} - Message [{xml.Length} bytes]: {xml}";
@@ -321,12 +326,12 @@ namespace NEXO.Server
 							toprocess.Action = NexoNextAction.noReply;
 							toprocess.CanModifyAction = false;
 						}
-
 						else if (item.IsRequest)
 						{
-							RequestResponseType response = ProcessRequest(tcp, item);
+							response = ProcessRequest(tcp, item);
 							toprocess.SuggestedAction = response.Action;
 							toprocess.CurrentObject.Response = response.Response;
+							toprocess.CanModifyAction = response.CanOverride;
 						}
 						else if (item.IsReply)
 						{
@@ -348,24 +353,33 @@ namespace NEXO.Server
 							try
 							{
 								bool f = true;
-								// request analysis by the application
-								try
+								// if declined do not pass the message to the application for processing, unless it has been explicitely set to
+								if (!toprocess.CurrentObject.Failure || AllowChangingResults)
 								{
-									if (item.IsNotification)
-										Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
-									else if (item.IsRequest)
-										Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
-									else if (item.IsReply)
-										Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
-								}
-								catch (Exception ex)
-								{
-									CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceived generated an exception");
-									f = false;
-								}
-								if (f && toprocess.Action != toprocess.SuggestedAction)
-								{
-									CLog.Add(StreamServer.Description + shortmessage + " - Action has been modified by the application: " + toprocess.Action.ToString());
+									if (toprocess.CurrentObject.Failure && AllowChangingResults)
+									{
+										// indicate we are in a special case explicitely authorised
+										CLog.Add("Pre-processing declined the request but server is set to allow application processing anyway", TLog.WARNG);
+									}
+									// request analysis by the application
+									try
+									{
+										if (item.IsNotification)
+											Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
+										else if (item.IsRequest)
+											Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
+										else if (item.IsReply)
+											Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
+									}
+									catch (Exception ex)
+									{
+										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceived generated an exception");
+										f = false;
+									}
+									if (f && toprocess.Action != toprocess.SuggestedAction)
+									{
+										CLog.Add(StreamServer.Description + shortmessage + " - Action has been modified by the application: " + toprocess.Action.ToString());
+									}
 								}
 								if (f)
 								{
@@ -411,7 +425,22 @@ namespace NEXO.Server
 											CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
 										}
 										if (null != Database)
-											Database.SetRequestReply(msgid, itemToSend);
+										{
+											switch (toprocess.Action)
+											{
+												case NexoNextAction.sendReply:
+												case NexoNextAction.sendReplyWithError:
+													Database.SetRequestReply(msgid, itemToSend, toprocess.CurrentObject.Response);
+													break;
+												case NexoNextAction.sendRequest:
+													break;
+												case NexoNextAction.sendNotification:
+													break;
+												default:
+													// nothing to do
+													break;
+											}
+										}
 									}
 								}
 							}
@@ -488,6 +517,8 @@ namespace NEXO.Server
 					// if LoginRequest
 					if (MessageCategoryEnumeration.Login == item.Category)
 					{
+						// login processing, response can't be modified
+						response.CanOverride = false;
 						NexoSession session = client.AddSession(new NexoSession(client));
 						NexoLogin nxo = new NexoLogin();
 						nxo.Request = (SaleToPOIRequest)item.Item;
@@ -525,6 +556,8 @@ namespace NEXO.Server
 					// if LogoutRequest
 					else if (MessageCategoryEnumeration.Logout == item.Category)
 					{
+						// logout processing, response can't be modified
+						response.CanOverride = false;
 						NexoSession session = client.LastSession();
 						NexoLogout nxo = new NexoLogout();
 						nxo.Request = (SaleToPOIRequest)item.Item;
@@ -577,6 +610,7 @@ namespace NEXO.Server
 		{
 			public ResponseType Response = new ResponseType() { Result = ResultEnumeration.Success.ToString() };
 			public NexoNextAction Action;
+			public bool CanOverride = true;
 		}
 		/// <summary>
 		/// Processing of a reply received by the server (should be a device action)

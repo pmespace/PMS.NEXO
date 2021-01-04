@@ -17,40 +17,41 @@
       2.0.11
       - Fixed bugs linked to Nexo server database access + added scripts to create the database
       - Moved to PMS.NEXO 3.0.4
-      
+      - Full database support for Nexo server
+
       2.0.10
       - Moved to PMS.COMMON 3.02
-      
+
       2.0.9
       - Fixed a bug inside NexoSimpleAmount type
       - Moved to PMS.COMMON 3.0.0
-      
+
       2.0.8
       - Fixed a bug of an event using the wrong type inside NexoRetailerCient
       - Updated Nuget packages dependencies
       - NexoSimulator is now installed with the DLLs
-      
+
       2.0.7
       - Updated DLL version to 2.0.7
-      
+
       2.0.6
       - [Failed] Missed updating COMMON minimum version to 2.0.4
-      
+
       2.0.5
       - Updated COMMON nuget package
-      
+
       2.0.4
       - Changes events type inside NexoRetailerClient and fixed a bug with ThreadDispatcher not well closed in certain conditions
-      
+
       2.0.3
       - Updated the interfaces + bug fixes (ProtocolVersion,...)
-      
+
       2.0.2
       - Modified decimal types to double for easier COM compatibility
-      
+
       2.0.1
       - Adjusted version number
-      
+
       2.0.0
       - Removed WMI dependency
 

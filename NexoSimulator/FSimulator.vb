@@ -8,6 +8,7 @@ Imports NEXO
 Imports NEXO.Client
 Imports NEXO.Server
 Imports System.IO
+Imports System.Xml.Serialization
 
 Public Class FSimulator
 
@@ -84,6 +85,7 @@ Public Class FSimulator
 	Private Const CLIENT_STOPPED_MESSAGE As Integer = Win32.WM_USER + 100
 	Private Const CLIENT_INFORMATION_MESSAGE As Integer = CLIENT_STOPPED_MESSAGE + 1
 	Private ClientCounter As Integer = 0
+	Private ConnectionSettings As SettingsConnectionSettings
 
 	Private ReadOnly Property ServerIsRunning() As Boolean
 		Get
@@ -141,7 +143,7 @@ Public Class FSimulator
 	End Function
 
 	Public Function SettingsFileName() As String
-		Dim path As String = Registry.GetValue("HKEY_CURRENT_USER\Software\CHECK\Simulator", "Settings", ".\")
+		Dim path As String = Registry.GetValue("HKEY_CURRENT_USER\Software\PMS\NEXO\Simulator", "Settings", ".\")
 		If String.IsNullOrEmpty(path) Then
 			path = ".\"
 		End If
@@ -203,6 +205,9 @@ Public Class FSimulator
 			cbAddReceipt.Checked = settings.AddReceipt
 			cbOnelineReceipt.Checked = settings.OneLineReceipt
 			cbUseDatabase.Checked = settings.UseDatabase
+
+			cbUseConnectionSettings.Checked = settings.UsePreConnection
+			ConnectionSettings = settings.ConnectionSettings
 		End If
 	End Sub
 
@@ -246,6 +251,9 @@ Public Class FSimulator
 		settings.AddReceipt = cbAddReceipt.Checked
 		settings.OneLineReceipt = cbOnelineReceipt.Checked
 		settings.UseDatabase = cbUseDatabase.Checked
+
+		settings.UsePreConnection = cbUseConnectionSettings.Checked
+		settings.ConnectionSettings = ConnectionSettings
 
 		json.WriteSettings(settings)
 	End Sub
@@ -398,6 +406,8 @@ Public Class FSimulator
 		If isClosing Then
 			Close()
 		End If
+
+		pbConnectionSettings.Enabled = cbUseConnectionSettings.Checked
 	End Sub
 
 	Private Sub SetProcessing()
@@ -559,7 +569,11 @@ Public Class FSimulator
 					entry.POISoftware.ApplicationName = "Nexo Simulator"
 					entry.POISoftware.SoftwareVersion = New NexoSoftwareVersion().DefaultValue
 					entry.POISoftware.CertificationCode = New NexoCertificationCode().DefaultValue
+#If NEXO30 Then
 					entry.POISoftware.ManufacturerID = New NexoManufacturerID().DefaultValue
+#Else
+					entry.POISoftware.ProviderIdentification = New NexoManufacturerID().DefaultValue
+#End If
 					entries.Add(entry)
 					json.WriteSettings(entries, True)
 				End If
@@ -878,6 +892,7 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub pbConnect_Click(sender As Object, e As EventArgs) Handles pbConnect.Click
+		ResetPreConnection()
 		Dim nexoClient As New NexoRetailerClient
 		Dim settings As New CStreamClientSettings
 		If rbLocalHost.Checked Then
@@ -889,6 +904,21 @@ Public Class FSimulator
 		Else
 			settings.IP = targetIP.Text
 			settings.Port = targetPort.Value
+		End If
+		'specific connection settings
+		Dim csettings As New NexoRetailerClientConnectionSettings() With
+			{
+			.OnConnectionRequest = AddressOf ClientOnConnectionRequest,
+			.OnConnectionReply = AddressOf ClientOnConnectionReply,
+			.ConnectionTimer = ConnectionSettings.ConnectionTimer
+			}
+		If cbUseConnectionSettings.Checked Then
+			If ConnectionSettings.UseCertificate Then
+				settings.CheckCertificate = ConnectionSettings.UseCertificate
+				settings.ServerName = ConnectionSettings.ServerName
+			End If
+		Else
+			csettings = Nothing
 		End If
 		Dim nexoRetailerClientSettings As New NexoRetailerClientSettings() With
 			{
@@ -902,6 +932,7 @@ Public Class FSimulator
 			.ThreadData = CThreadData.Prepare(Me.Handle,
 														 CLIENT_STOPPED_MESSAGE,
 														 CLIENT_INFORMATION_MESSAGE),
+			.ConnectionSettings = csettings,
 			.Parameters = Nothing
 			}
 		If nexoClient.Connect(nexoRetailerClientSettings) Then
@@ -913,6 +944,38 @@ Public Class FSimulator
 		End If
 		SetButtons()
 	End Sub
+
+	Public Function ClientOnConnectionRequest(settings As CStreamClientSettings) As Object
+		Return ConnectionSettings.RequestString
+	End Function
+
+	<Serializable, XmlRoot(ElementName:="connect")>
+	Class ConnectReply
+		Public Property status As Integer
+	End Class
+	Private Const CONNECT_STATUS_OK As Integer = 0
+	Private Const CONNECT_STATUS_KO As Integer = -1
+	Public Function ClientOnConnectionReply(o As Object) As Boolean
+		If Not IsNothing(o) Then
+			'deserialize the request
+			Dim xml As String = o.ToString()
+			efConnectionReply.Text = xml
+			Try
+				Dim reply As ConnectReply = NexoRetailer.XmlDeserialize(Of ConnectReply)(xml)
+				If 0 = reply.status Then
+					efConnectionReply.BackColor = Color.LightGreen
+					Return True
+				Else
+					efConnectionReply.BackColor = Color.Crimson
+				End If
+			Catch ex As Exception
+				efConnectionReply.BackColor = Color.Crimson
+			End Try
+		Else
+			efConnectionReply.BackColor = Color.Crimson
+		End If
+		Return False
+	End Function
 
 	Public Sub ClientOnSend(xml As String, obj As NexoItem, tcp As TcpClient, threadData As CThreadData, o As Object)
 		Dim s As String = obj.Category.ToString
@@ -963,7 +1026,11 @@ Public Class FSimulator
 					Select Case obj.CurrentObject.MessageCategory
 						Case MessageCategoryEnumeration.Login
 							Dim nxo As NexoLogin = obj.CurrentObject
-							RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS CONNECTED (" & nxo.SaleID & ")"})
+							If Not IsNothing(nxo.Response) AndAlso nxo.Success Then
+								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS CONNECTED (" & nxo.SaleID & ")"})
+							Else
+								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS NOT CONNECTED (" & nxo.SaleID & ")"})
+							End If
 						Case MessageCategoryEnumeration.Logout
 							Dim nxo As NexoLogout = obj.CurrentObject
 							RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID HAS BEEN DISCONNECTED (" & nxo.SaleID & ")"})
@@ -1458,20 +1525,31 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub pbBuild_Click(sender As Object, e As EventArgs) Handles pbBuild.Click
-		Dim f As New FChoser
-		Dim T As Type = Nothing
-		If DialogResult.OK = f.ShowDialog() Then
-			T = f.nxo
+		Dim f As New FChooser
+		f.XML = command.Text
+		f.ShowDialog()
+		If Clipboard.ContainsText() Then
+			command.Text = Clipboard.GetText
 		End If
 		f.Dispose()
-
-		If Not IsNothing(T) Then
-			Dim g As New FBuilder
-			g.T = T
-			If DialogResult.OK = g.ShowDialog() Then
-			End If
-			g.Dispose()
-		End If
 	End Sub
 
+	Private Sub ResetPreConnection()
+		efConnectionReply.BackColor = SystemColors.Window
+	End Sub
+
+	Private Sub cbPreConnect_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseConnectionSettings.CheckedChanged
+		ResetPreConnection()
+		SetButtons()
+	End Sub
+
+	Private Sub pbPreConnectionSettings_Click(sender As Object, e As EventArgs) Handles pbConnectionSettings.Click
+		Dim f As New FConnectionSettings
+		f.Settings = ConnectionSettings
+		Select Case f.ShowDialog()
+			Case DialogResult.OK
+				ConnectionSettings = f.Settings
+		End Select
+		f.Dispose()
+	End Sub
 End Class

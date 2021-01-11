@@ -10,7 +10,7 @@ namespace NEXO
 	/// This allows containing messages that can be received and will processed after an initial request has been sent
 	/// Once a request has been sent to a server replies (either responses or requests) not contained inside such object shall be ignored
 	/// </summary>
-	public class NexoAcceptedCommands: Dictionary<MessageCategoryEnumeration, MessageTypeEnumeration> { }
+	public class NexoAcceptedCommands : Dictionary<MessageCategoryEnumeration, MessageTypeEnumeration> { }
 
 	[Guid("B7773C1A-8091-4B2A-A54E-74E686E5F91E")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
@@ -60,7 +60,7 @@ namespace NEXO
 	[Guid("390237C2-5337-4EBE-8B1E-E395611FEC82")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoItem: NexoRetailer, INexoItem
+	public class NexoItem : NexoRetailer, INexoItem
 	{
 		#region constructor
 		/// <summary>
@@ -400,6 +400,25 @@ namespace NEXO
 					return new NexoTransactionStatus();
 				case MessageCategoryEnumeration.Transmit:
 					return new NexoTransmit();
+			}
+			return null;
+		}
+		/// <summary>
+		/// Create a <see cref="NexoObject"/> from an item
+		/// BEWARE not all fields are set as if using "new Nexo..."
+		/// </summary>
+		/// <param name="item">The <see cref="NexoItem"/> to use to create the <see cref="NexoObject"/></param>
+		/// <returns>A <see cref="NexoObject"/> if successfull, null otherwise</returns>
+		public static NexoObject ToNexoObject(NexoItem item)
+		{
+			if (null != item)
+			{
+				NexoObject o = AllocateObject(item.Category);
+				if (null != o)
+				{
+					o.FromItem(item);
+				}
+				return o;
 			}
 			return null;
 		}

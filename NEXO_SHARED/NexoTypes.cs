@@ -299,7 +299,7 @@ namespace NEXO
 
 		#region methods
 		protected override string GetRegularExpression(string value) { return @"^(true|false)$"; }
-		private bool ToBoolean() { return @"true" == Value.ToLower(); }
+		private bool ToBoolean() { return @"true" == (null != Value ? Value.ToLower() : default(bool).ToString()); }
 		private void FromBoolean(bool b) { Value = b.ToString().ToLower(); }
 		#endregion
 	}
@@ -1543,7 +1543,17 @@ namespace NEXO
 	public class NexoApplicationName : NexoTextString, INexoTextString { public NexoApplicationName() : base(TagsEnumeration.ApplicationName.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
 
 	[ComVisible(true)]
-	public class NexoManufacturerID : NexoTextString, INexoTextString { public NexoManufacturerID() : base(TagsEnumeration.ManufacturerID.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }
+	public class NexoManufacturerID : NexoTextString, INexoTextString
+	{
+		public NexoManufacturerID() : base(
+#if NEXO30
+			TagsEnumeration.ManufacturerID.ToString()
+#else
+			TagsEnumeration.ProviderIdentification.ToString()
+#endif
+			)
+		{ Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; }
+	}
 
 #if ANDROID
 	[ComVisible(true)]

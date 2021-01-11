@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>2.0.11</version>
+    <version>2.0.12</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,6 +14,10 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      2.0.12
+      - Added a new Retailer message builder application
+      - Added new features to simulator (create any Retailer message using the builder, pre-connection settings,...)
+
       2.0.11
       - Fixed bugs linked to Nexo server database access + added scripts to create the database
       - Moved to PMS.NEXO 3.0.4

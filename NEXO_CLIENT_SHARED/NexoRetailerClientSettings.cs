@@ -30,12 +30,14 @@ namespace NEXO.Client
 		uint WMNexoMessage { get; set; }
 		[DispId(10)]
 		object Parameters { get; set; }
+		[DispId(11)]
+		NexoRetailerClientConnectionSettings ConnectionSettings { get; set; }
 		#endregion
 	}
 	[Guid("863D37D5-09A2-4E2B-A2D2-9C5C41017472")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoRetailerClientSettings: INexoRetailerClientSettings
+	public class NexoRetailerClientSettings : INexoRetailerClientSettings
 	{
 		#region properties
 		public bool IsValid { get => null != StreamClientSettings && StreamClientSettings.IsValid && (null == ThreadData || ThreadData.IsValid); }// && null != OnReceivedRequest && null != OnReceivedReply && null != OnReceivedNotification; }
@@ -71,6 +73,10 @@ namespace NEXO.Client
 		/// Parameters passed to the thread that will be passed to the application through the function
 		/// </summary>
 		public object Parameters { get; set; }
+		/// <summary>
+		/// Functions that will be called for pre-connection functionnalities
+		/// </summary>
+		public NexoRetailerClientConnectionSettings ConnectionSettings { get; set; } = null;
 		#endregion
 
 		#region methods
@@ -108,6 +114,32 @@ namespace NEXO.Client
 				OnReceivedIgnoredMessage = onReceivedIgnoredMessage,
 			};
 		}
+		#endregion
+	}
+
+	[Guid("BFEFE83C-FA94-48DB-B7B9-9E1887CB6884")]
+	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
+	[ComVisible(true)]
+	public interface INexoRetailerClientConnectionSettings
+	{
+		#region INexoRetailerClientSettings
+		[DispId(1)]
+		NexoDelegates.OnConnectionRequestDelegate OnConnectionRequest { get; set; }
+		[DispId(2)]
+		NexoDelegates.OnConnectionReplyDelegate OnConnectionReply { get; set; }
+		[DispId(3)]
+		int ConnectionTimer { get; set; }
+		#endregion
+	}
+	[Guid("8005B572-3B32-429E-AE02-294C6522F5FE")]
+	[ClassInterface(ClassInterfaceType.None)]
+	[ComVisible(true)]
+	public class NexoRetailerClientConnectionSettings : INexoRetailerClientConnectionSettings
+	{
+		#region properties
+		public NexoDelegates.OnConnectionRequestDelegate OnConnectionRequest { get; set; } = null;
+		public NexoDelegates.OnConnectionReplyDelegate OnConnectionReply { get; set; } = null;
+		public int ConnectionTimer { get; set; } = 0;
 		#endregion
 	}
 }

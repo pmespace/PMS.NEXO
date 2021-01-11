@@ -7,28 +7,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace XSDEx
-	{
+{
 	/// <summary>
 	/// list of file names to use to create the XSD
 	/// </summary>
-	public class Files: List<string> { }
+	public class Files : List<string> { }
 
 	/// <summary>
 	/// Supported languages
 	/// </summary>
 	public enum enumLanguage
-		{
+	{
 		csharp,
 		vb,
-		}
+	}
 
 	/// <summary>
 	/// XSDEx working settings
 	/// </summary>
 	public class XSDSettings
-		{
+	{
 		public XSDSettings()
-			{
+		{
 			Language = enumLanguage.csharp;
 			Files = new Files();
 			Nmspace = null;
@@ -58,7 +58,7 @@ namespace XSDEx
 			OptimizeStructs = false;
 
 			DerivedClassName = "NexoSaleToPOIMessage";
-			}
+		}
 		public string Exception; // if an exception occurred it is reported here
 		public string ParametersFileName { get; set; }
 		public enumLanguage Language;
@@ -78,60 +78,61 @@ namespace XSDEx
 		public bool NumericToString { get; set; }
 		public bool BooleanToString { get; set; }
 		public bool CreateArrayInitializer
-			{
+		{
 			get => _providearraysinitializer;
 			set
-				{
+			{
 				_providearraysinitializer = value;
 				if (_providearraysinitializer)
 					AutomaticArrays = false;
-				}
 			}
+		}
 		private bool _providearraysinitializer = false;
 		public bool GetReturnsNullIfArrayIsEmpty
-			{
+		{
 			get => _sendnullifemptyarray;
 			set
-				{
+			{
 				_sendnullifemptyarray = value;
 				if (_sendnullifemptyarray)
 					AutomaticArrays = false;
-				}
 			}
+		}
 		private bool _sendnullifemptyarray = false;
 		public bool AutomaticArrays
-			{
+		{
 			get => _automaticallymanagearrays;
 			set
-				{
+			{
 				_automaticallymanagearrays = value;
 				if (AutomaticArrays)
-					{
+				{
 					CreateArrayInitializer = false;
 					GetReturnsNullIfArrayIsEmpty = false;
 					EmptyStringArrayToNull = false;
-					}
 				}
 			}
+		}
 		private bool _automaticallymanagearrays = true;
 		public bool PrivateByInternal { get; set; }
 		public MemberAttributes PrivateByInternalVisibility { get; set; }
 		public bool ManageInitFlag { get; set; }
 		public bool EmptyStringArrayToNull
-			{
+		{
 			get => _emptystringarraytonull;
 			set
-				{
+			{
 				_emptystringarraytonull = value;
 				if (EmptyStringArrayToNull)
-					{
+				{
 					AutomaticArrays = false;
-					}
 				}
 			}
+		}
 		private bool _emptystringarraytonull = true;
 		public bool CreateArrayAccessors { get; set; }
 		public bool OptimizeStructs { get; set; }
 		public string DerivedClassName { get; set; }
-		}
+		public string Preprocessor { get; set; }
 	}
+}

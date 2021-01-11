@@ -102,5 +102,19 @@ namespace NEXO
 		/// <param name="o">Private parameters passed by the caller</param>
 		[ComVisible(false)]
 		public delegate void OnSentRequestStatusChangedDelegate(string xml, NexoObjectToProcess msg, NexoMessageStatus status, TcpClient tcp, CThreadData threadData, object o);
+		/// <summary>
+		/// Called to set the pre-connection request string to send before sending any Nexo message
+		/// </summary>
+		/// <param name="settings">The <see cref="CStreamClientSettings"/> object used to connect</param>
+		/// <returns>An to send right after the connection and before receiving any message, null if no pre-connection object to use</returns>
+		[ComVisible(false)]
+		public delegate object OnConnectionRequestDelegate(CStreamClientSettings settings);
+		/// <summary>
+		/// Called to analyse the pre-connection reply string
+		/// </summary>
+		/// <param name="reply">The object received and to analyse to determine whether pre-connection is accepted or not</param>
+		/// <returns>True is pre-connection<see langword="abstract"/>,  then access, has been granted , false otherwise</returns>
+		[ComVisible(false)]
+		public delegate bool OnConnectionReplyDelegate(object reply);
 	}
 }

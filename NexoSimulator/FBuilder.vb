@@ -5,10 +5,12 @@ Imports COMMON
 Imports NEXO
 
 Public Class FBuilder
-	Public T As Type = Nothing
+	Public O As NexoObject = Nothing
+	Public MakeRequest As Boolean = True
 	Public XML As String = Nothing
-	Private nxo As Object = Nothing
-	Dim saletopoi As New SaleToPOIRequest()
+	Private nexoRequest As SaleToPOIRequest
+	Private nexoReply As SaleToPOIResponse
+	Private nexoItem As Object = Nothing
 	Private currentParentNode As TreeNode
 	Private currentNode As TreeNode
 	Private valueNode As TreeNode
@@ -40,6 +42,7 @@ Public Class FBuilder
 		Public PI As PropertyInfo = Nothing
 		Public MI As List(Of MethodInfo) = Nothing
 		Public ParentObject As Object
+		Public ParentNode As TreeNode
 	End Class
 
 	Private Const NODE_TYPE As String = "Type:"
@@ -49,73 +52,32 @@ Public Class FBuilder
 
 	Protected Overrides Sub WndProc(ByRef m As Message)
 		Select Case m.Msg
-			Case Win32.WM_USER
+			Case Win32.WMUser
 				Close()
 		End Select
 		MyBase.WndProc(m)
 	End Sub
 
 	Private Sub FBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		Dim s As String
 		DialogResult = DialogResult.None
-		If T = GetType(AbortRequestType) Then
-			nxo = New AbortRequestType()
-		ElseIf T = GetType(AdminRequestType) Then
-			nxo = New AdminRequestType()
-		ElseIf T = GetType(BalanceInquiryRequestType) Then
-			nxo = New BalanceInquiryRequestType()
-		ElseIf T = GetType(BatchRequestType) Then
-			nxo = New BatchRequestType()
-		ElseIf T = GetType(CardAcquisitionRequestType) Then
-			nxo = New CardAcquisitionRequestType()
-		ElseIf T = GetType(CardReaderAPDURequestType) Then
-			nxo = New CardReaderAPDURequestType()
-		ElseIf T = GetType(CardReaderInitRequestType) Then
-			nxo = New CardReaderInitRequestType()
-		ElseIf T = GetType(CardReaderPowerOffRequestType) Then
-			nxo = New CardReaderPowerOffRequestType()
-		ElseIf T = GetType(DiagnosisRequestType) Then
-			nxo = New DiagnosisRequestType()
-		ElseIf T = GetType(DisplayRequestType) Then
-			nxo = New DisplayRequestType()
-		ElseIf T = GetType(EnableServiceRequestType) Then
-			nxo = New EnableServiceRequestType()
-		ElseIf T = GetType(EventNotificationType) Then
-			nxo = New EventNotificationType()
-		ElseIf T = GetType(GetTotalsRequestType) Then
-			nxo = New GetTotalsRequestType()
-		ElseIf T = GetType(InputRequestType) Then
-			nxo = New InputRequestType()
-		ElseIf T = GetType(LoginRequestType) Then
-			nxo = New LoginRequestType()
-		ElseIf T = GetType(LogoutRequestType) Then
-			nxo = New LogoutRequestType()
-		ElseIf T = GetType(LoyaltyRequestType) Then
-			nxo = New LoyaltyRequestType()
-		ElseIf T = GetType(PaymentRequestType) Then
-			nxo = New PaymentRequestType()
-		ElseIf T = GetType(PINRequestType) Then
-			nxo = New PINRequestType()
-		ElseIf T = GetType(PrintRequestType) Then
-			nxo = New PrintRequestType()
-		ElseIf T = GetType(ReconciliationRequestType) Then
-			nxo = New ReconciliationRequestType()
-		ElseIf T = GetType(ReversalRequestType) Then
-			nxo = New ReversalRequestType()
-		ElseIf T = GetType(SoundRequestType) Then
-			nxo = New SoundRequestType()
-		ElseIf T = GetType(StoredValueRequestType) Then
-			nxo = New StoredValueRequestType()
-		ElseIf T = GetType(TransactionStatusRequestType) Then
-			nxo = New TransactionStatusRequestType()
-		ElseIf T = GetType(TransmitRequestType) Then
-			nxo = New TransmitRequestType()
+		nexoRequest = O.Request
+		nexoReply = O.Reply
+		Dim item As Object
+		If MakeRequest Then
+			nexoItem = nexoRequest
+			item = nexoRequest.Item
+			s = MessageTypeEnumeration.Request
+		Else
+			nexoItem = nexoReply
+			item = nexoRequest.Item
+			s = MessageTypeEnumeration.Response
 		End If
 
-		If Not IsNothing(nxo) Then
-			Text = $"Creating SaleToPOIRequest with {T} object"
-			saletopoi.Item = nxo
-			TreeView1.Nodes.Add(New TreeNode($"{saletopoi.GetType().Name} [{T}]"))
-			AddToTree(saletopoi, TreeView1.TopNode)
+		If Not IsNothing(nexoItem) Then
+			Text = $"Creating SaleToPOI{s} with {item.GetType}"
+			TreeView1.Nodes.Add(New TreeNode($"{nexoItem.GetType().Name}")) '[{T}]"))
+			AddToTree(nexoItem, TreeView1.TopNode)
 			TreeView1.TopNode.Expand()
 		Else
 			MsgBox("Invalid object requested")
@@ -159,6 +121,7 @@ Public Class FBuilder
 						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Value, .Value = value, .Type = myNode.Type, .PI = p, .ParentObject = o}}
 						node.Text = SetNodeText(node)
 						tn.Nodes(i).Nodes.Add(node)
+						SetNodeFont(node)
 					End If
 				Else
 					myNode.NodeType = MyNodeType.Tree
@@ -171,12 +134,35 @@ Public Class FBuilder
 		Next
 	End Sub
 
+	Private Sub SetNodeFont(node As TreeNode)
+		Dim myNode As MyNode = GetDetails(node)
+		If Not IsNothing(myNode) Then
+			Dim style As FontStyle = TreeView1.Font.Style
+			Select Case myNode.NodeType
+				Case MyNodeType.Value
+					If Not IsNothing(myNode.Value) Then
+						node.Parent.NodeFont = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+					Else
+						node.Parent.NodeFont = Nothing
+					End If
+				Case MyNodeType.Array
+					If 1 < node.Nodes.Count Then
+						node.NodeFont = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+					Else
+						node.NodeFont = Nothing
+					End If
+			End Select
+		End If
+	End Sub
+
 	Private Function SetNodeText(node As TreeNode) As String
 		If Not IsNothing(node.Tag) Then
 			Dim myNode As MyNode = node.Tag
 
 			If MyNodeType.Value = myNode.NodeType Then
-				myNode.PI.SetValue(myNode.ParentObject, myNode.Value)
+				If (myNode.Value <> myNode.PI.GetValue(myNode.ParentObject)) Then
+					myNode.PI.SetValue(myNode.ParentObject, myNode.Value)
+				End If
 				Return $"{NODE_VALUE} {myNode.Value}"
 
 			ElseIf MyNodeType.ArrayItem = myNode.NodeType Then
@@ -197,6 +183,7 @@ Public Class FBuilder
 			ElseIf MyNodeType.Leaf = myNode.NodeType Then
 				Return $"{myNode.Name} (Data)"
 			End If
+
 		End If
 		Return Nothing
 	End Function
@@ -212,23 +199,36 @@ Public Class FBuilder
 
 	Private Sub pbAccept_Click(sender As Object, e As EventArgs) Handles pbAccept.Click
 		Dim ok As Boolean = True
-		'serialize the object
-		If cbOptimize.Checked Then
-			ok = NexoRetailer.Optimize(saletopoi, saletopoi.Item)
-		End If
 		If ok Then
-			XML = NexoRetailer.XmlSerialize(Of SaleToPOIRequest)(saletopoi)
+			O.OptimizeXml = cbOptimize.Checked
+			If MakeRequest Then
+				'XML = NexoRetailer.XmlSerialize(Of SaleToPOIRequest)(nexoRequest)
+				XML = O.SerializedRequest
+			Else
+				'XML = NexoRetailer.XmlSerialize(Of SaleToPOIResponse)(nexoReply)
+				XML = O.SerializedReply
+			End If
 		End If
 		If Not IsNothing(XML) Then
-			MsgBox($"Serialized XML{vbCrLf}{vbCrLf}{XML}")
-			'copy xml to clipboard
-			Clipboard.SetText(XML)
-			DialogResult = DialogResult.Yes
+			Select Case MsgBox($"Serialized XML{vbCrLf}{vbCrLf}{XML}", MsgBoxStyle.YesNoCancel Or MsgBoxStyle.DefaultButton1)
+				Case MsgBoxResult.Yes
+					'copy xml to clipboard
+					Clipboard.SetText(XML)
+					Dim f As New FMessage() With {.Message = "The object has been saved to clipboard", .Duration = 1}
+					f.ShowDialog()
+					f.Dispose()
+					DialogResult = DialogResult.Yes
+					Close()
+				Case MsgBoxResult.No
+					DialogResult = DialogResult.No
+					Close()
+				Case MsgBoxResult.Cancel
+			End Select
 		Else
 			MsgBox($"Serializing object has failed")
 			DialogResult = DialogResult.No
+			Close()
 		End If
-		Close()
 	End Sub
 
 	Private Sub pbExpandAll_Click(sender As Object, e As EventArgs) Handles pbExpandAll.Click
@@ -378,6 +378,7 @@ Public Class FBuilder
 			End If
 			e.CancelEdit = True
 			e.Node.Text = SetNodeText(e.Node)
+			SetNodeFont(e.Node)
 		End If
 		e.Node.Text = SetNodeText(e.Node)
 	End Sub
@@ -450,6 +451,7 @@ Public Class FBuilder
 			If ok Then
 				'add the node and add the array item to the nexo object
 				parent.Nodes.Add(newNode)
+				SetNodeFont(parent)
 				If addIt Then
 					AddToTree(o, newNode)
 				End If
@@ -480,6 +482,7 @@ Public Class FBuilder
 		End If
 		If ok Then
 			parent.Nodes.Remove(node)
+			SetNodeFont(parent)
 		End If
 	End Sub
 

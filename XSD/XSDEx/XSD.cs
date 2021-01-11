@@ -56,6 +56,31 @@ namespace XSDEx
 					settings.Nmspace = "XSD";
 				XmlSchemaImporter schemaImporter = new XmlSchemaImporter(xsds);
 				CodeNamespace = new CodeNamespace(settings.Nmspace);
+
+				// if preprocessor variable to use, add it
+				string beginPreprocessor = null, endPreprocessor = null;
+				if (!string.IsNullOrEmpty(settings.Preprocessor))
+				{
+					if (enumLanguage.csharp == settings.Language)
+					{
+						beginPreprocessor = $"#if {settings.Preprocessor}";
+						endPreprocessor = $"#endif";
+					}
+					else if (enumLanguage.vb == settings.Language)
+					{
+						beginPreprocessor = $"#If {settings.Preprocessor} Then";
+						endPreprocessor = $"#End If";
+					}
+					if (!string.IsNullOrEmpty(beginPreprocessor))
+					{
+						//CodeNamespace. Comments Imports.Add(new CodeSnippetStatement(beginPreprocessor));
+						// <<<>>>
+						// still need to find out to add preprocessor directives
+					}
+
+				}
+
+				// add imports
 				CodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
 				CodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.InteropServices"));
 				XmlCodeExporter codeExporter = new XmlCodeExporter(CodeNamespace, null, CodeGenerationOptions.GenerateProperties);
@@ -85,6 +110,14 @@ namespace XSDEx
 
 				// process the files to generate a class
 				PostProcess(settings, CodeNamespace);
+
+				// if preprocessor variable to use, add it
+				if (!string.IsNullOrEmpty(beginPreprocessor))
+				{
+					//CodeNamespace. Comments Imports.Add(new CodeSnippetStatement(beginPreprocessor));
+					// <<<>>>
+					// still need to find out to add preprocessor directives
+				}
 
 				// create the code
 				Code = GenerateCode(settings);

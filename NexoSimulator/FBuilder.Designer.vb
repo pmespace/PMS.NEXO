@@ -149,30 +149,30 @@ Partial Class FBuilder
 		'
 		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetValueToolStripMenuItem, Me.ResetvalueToolStripMenuItem, Me.AddItemToolStripMenuItem, Me.RemoveItemToolStripMenuItem})
 		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-		Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 114)
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(145, 92)
 		'
 		'SetValueToolStripMenuItem
 		'
 		Me.SetValueToolStripMenuItem.Name = "SetValueToolStripMenuItem"
-		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.SetValueToolStripMenuItem.Text = "Set value"
 		'
 		'ResetvalueToolStripMenuItem
 		'
 		Me.ResetvalueToolStripMenuItem.Name = "ResetvalueToolStripMenuItem"
-		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.ResetvalueToolStripMenuItem.Text = "Reset value"
 		'
 		'AddItemToolStripMenuItem
 		'
 		Me.AddItemToolStripMenuItem.Name = "AddItemToolStripMenuItem"
-		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.AddItemToolStripMenuItem.Text = "Add item"
 		'
 		'RemoveItemToolStripMenuItem
 		'
 		Me.RemoveItemToolStripMenuItem.Name = "RemoveItemToolStripMenuItem"
-		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.RemoveItemToolStripMenuItem.Text = "Remove item"
 		'
 		'FBuilder
@@ -183,6 +183,7 @@ Partial Class FBuilder
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.MinimizeBox = False
 		Me.Name = "FBuilder"
+		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
 		Me.Text = "Saleto POI request builder"
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.TableLayoutPanel1.PerformLayout()

@@ -9,6 +9,6 @@
     <Import_RootNamespace>NEXO_31_SHARED</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages.xsd.31.cs" />
   </ItemGroup>
 </Project>

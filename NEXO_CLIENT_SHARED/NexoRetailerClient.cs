@@ -414,36 +414,86 @@ namespace NEXO.Client
 			finally { Monitor.Exit(myLock); }
 			if (f)
 			{
-				// save settings to use
-				Settings = settings;
-				// start threads
-				DispatchThread = new CThread();
-				DispatchThread.Name = "[" + StreamIO.Tcp.Client.LocalEndPoint.ToString() + "] CLIENT DISPATCHER";
-				DispatchEvents.Reset();
-				if (DispatchThread.Start(ThreadDispatch, Settings.ThreadData, Settings, DispatchEvents.Started))
+				// verify whether connection is requested or not
+				bool fPreConnection = true;
+				// is the re a connection requested
+				if (null != settings.ConnectionSettings && null != settings.ConnectionSettings.OnConnectionRequest && null != settings.ConnectionSettings.OnConnectionReply)
 				{
-					ReceiverThread = new CThread();
-					ReceiverThread.Name = "[" + StreamIO.Tcp.Client.LocalEndPoint.ToString() + "] CLIENT RECEIVER";
-					ReceiverEvents.Reset();
-					if (ReceiverThread.Start(ThreadReceive, Settings.ThreadData, Settings, ReceiverEvents.Started))
+					CLog.Add("Initiating connection process");
+					fPreConnection = false;
+					try
 					{
-						// everything went right
-						return Connected = true;
+						bool error = false;
+						// get the connection object
+						object o = settings.ConnectionSettings.OnConnectionRequest(settings.StreamClientSettings);
+						CLog.Add($"Connection request: {o}", null == o ? TLog.ERROR : TLog.INFOR);
+						if (null != o)
+						{
+							// use the specifc cxonnection timeout if using specific connection settings
+							StreamIO.Tcp.ReceiveTimeout = settings.ConnectionSettings.ConnectionTimer * CStreamClientSettings.ONESECOND;
+
+							//fPreConnection = CStream.SendLine(StreamIO, o.ToString());
+
+							// send and receive the connection settings
+							string reply = CStream.SendReceiveLine(StreamIO, o.ToString(), out error);
+							CLog.Add($"Connection reply: {reply}", string.IsNullOrEmpty(reply) ? TLog.ERROR : TLog.INFOR);
+							if (!string.IsNullOrEmpty(reply))
+							{
+								// validate the connection object
+								fPreConnection = settings.ConnectionSettings.OnConnectionReply(reply);
+								CLog.Add($"Connection result: {fPreConnection}", fPreConnection ? TLog.ERROR : TLog.INFOR);
+							}
+							else
+							{
+								CLog.Add("Connection process failed returning a null request", TLog.ERROR);
+							}
+
+							// restore standard receive timeout
+							StreamIO.Tcp.ReceiveTimeout = settings.StreamClientSettings.ReceiveTimeout * CStreamClientSettings.ONESECOND;
+						}
+						else
+						{
+							CLog.Add("Connection process failed returning a null request", TLog.ERROR);
+						}
+					}
+					catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnPreConnectionGetRequest generated an exception"); }
+				}
+
+				// arrived here if check connection status
+				if (fPreConnection)
+				{
+					// save settings to use
+					Settings = settings;
+					// start threads
+					DispatchThread = new CThread();
+					DispatchThread.Name = "[" + StreamIO.Tcp.Client.LocalEndPoint.ToString() + "] CLIENT DISPATCHER";
+					DispatchEvents.Reset();
+					if (DispatchThread.Start(ThreadDispatch, Settings.ThreadData, Settings, DispatchEvents.Started))
+					{
+						ReceiverThread = new CThread();
+						ReceiverThread.Name = "[" + StreamIO.Tcp.Client.LocalEndPoint.ToString() + "] CLIENT RECEIVER";
+						ReceiverEvents.Reset();
+						if (ReceiverThread.Start(ThreadReceive, Settings.ThreadData, Settings, ReceiverEvents.Started))
+						{
+							// everything went right
+							return Connected = true;
+						}
+						else
+						{
+							CLog.Add(Description + "Failed to start receiver thread", TLog.ERROR);
+							// stop the dispatcher
+							evtStopDispatcher.Set();
+							DispatchEvents.WaitStopped();
+							DispatchThread = null;
+						}
 					}
 					else
 					{
-						CLog.Add(Description + "Failed to start receiver thread", TLog.ERROR);
-						// stop the dispatcher
-						evtStopDispatcher.Set();
-						DispatchEvents.WaitStopped();
+						CLog.Add(Description + "Failed to start dispatcher thread", TLog.ERROR);
 						DispatchThread = null;
 					}
 				}
-				else
-				{
-					CLog.Add(Description + "Failed to start dispatcher thread", TLog.ERROR);
-					DispatchThread = null;
-				}
+				// arrived here it means we must close the connection
 				CStream.Disconnect(StreamIO);
 				StreamIO = null;
 			}

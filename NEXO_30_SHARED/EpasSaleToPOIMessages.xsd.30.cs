@@ -1,3 +1,4 @@
+#if NEXO30
 namespace NEXO
 {
    using System.Runtime.Serialization;
@@ -35606,3 +35607,4 @@ namespace NEXO
       Y,
    }
 }
+#endif

@@ -325,8 +325,9 @@ namespace NEXO.Server
 			// keep track of the unsuccessfull connection attempt
 			string sql = $"UPDATE {Settings.ConnectionsTableName} SET " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}='{s}'" +
-				"WHERE " +
-				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()}";
+				" WHERE " +
+				$"{NexoRetailerServerDatabaseConnection.Labels.Logged}={TRUE()}" +
+				$" AND {NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp} IS {null}";
 			int nbRows = 0;
 			if (NonSelectRequest(sql, ref nbRows))
 				return true;
@@ -512,7 +513,7 @@ namespace NEXO.Server
 			// keep track of the unsuccessfull connection attempt
 			string sql = $"UPDATE {Settings.ConnectionsTableName} SET " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.LogoutTimestamp}='{s}'" +
-				"WHERE " +
+				" WHERE " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.IP}='{IPAddress(tcp)}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.SaleID}='{nxo.SaleID}' AND " +
 				$"{NexoRetailerServerDatabaseConnection.Labels.POIID}='{nxo.POIID}' AND " +

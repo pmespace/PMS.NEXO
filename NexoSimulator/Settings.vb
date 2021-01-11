@@ -1,5 +1,5 @@
 ﻿Imports COMMON
-Imports NEXO.Server
+Imports NEXO.Client
 
 Public Enum TargetsEnum
 	_begin
@@ -50,4 +50,13 @@ Public Class Settings
 	Public Property AddReceipt As Boolean
 	Public Property OneLineReceipt As Boolean
 	Public Property UseDatabase As Boolean
+	Public Property UsePreConnection As Boolean
+	Public Property ConnectionSettings As New SettingsConnectionSettings
+End Class
+
+Public Class SettingsConnectionSettings
+	Public Property RequestString As String
+	Public Property ServerName As String
+	Public Property UseCertificate As Boolean = False
+	Public Property ConnectionTimer As Integer = 0
 End Class

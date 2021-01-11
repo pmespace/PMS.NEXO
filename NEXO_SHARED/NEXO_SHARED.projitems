@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoPIN.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReconciliation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoStoredValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoTransactionReport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoTransmit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoAbort.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDiagnosis.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReversal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessageHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoErrors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoTypes.cs" />
   </ItemGroup>
 </Project>

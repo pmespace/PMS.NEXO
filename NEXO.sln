@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{8B5DC89B-E6D8-429F-9FE5-1DDABB3B6BFF}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NexoBuilder", "Builder\NexoBuilder.vbproj", "{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NEXO_SHARED\NEXO_SHARED.projitems*{6897a747-bfbd-46be-a4d5-b4a8bcea0e2c}*SharedItemsImports = 13
@@ -40,6 +44,7 @@ Global
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{779a6456-1e80-4818-b67a-c8cef1b0b454}*SharedItemsImports = 13
 		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{78bcaa0c-e640-4dc4-9028-dfc7f30dc3a7}*SharedItemsImports = 13
 		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
+		NEXO_31_SHARED\NEXO_31_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SHARED\NEXO_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
@@ -78,6 +83,14 @@ Global
 		{40951913-02F5-47F3-9127-604D5B54C5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40951913-02F5-47F3-9127-604D5B54C5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40951913-02F5-47F3-9127-604D5B54C5EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B5DC89B-E6D8-429F-9FE5-1DDABB3B6BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5DC89B-E6D8-429F-9FE5-1DDABB3B6BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5DC89B-E6D8-429F-9FE5-1DDABB3B6BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5DC89B-E6D8-429F-9FE5-1DDABB3B6BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

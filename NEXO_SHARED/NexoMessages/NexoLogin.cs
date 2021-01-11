@@ -279,8 +279,8 @@ namespace NEXO
 			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ManufacturerID);
 			set => ReplyData.POISystemData.POISoftware.ManufacturerID = value;
 #else
-			get => CMisc.Trimmed(ReplyData.SaleSoftware.ProviderIdentification);
-			set => ReplyData.SaleSoftware.ProviderIdentification = value;
+			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification);
+			set => ReplyData.POISystemData.POISoftware.ProviderIdentification = value;
 #endif
 		}
 		public string ReplySoftwareVersion

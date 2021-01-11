@@ -15,6 +15,7 @@
     </description>
     <releaseNotes>
       2.0.12
+      - Moved to PMS.NEXO 3.0.8 minimum
       - Added a new Retailer message builder application
       - Added new features to simulator (create any Retailer message using the builder, pre-connection settings,...)
 
@@ -92,10 +93,10 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="3.0.4" />
+        <dependency id="PMS.COMMON" version="3.0.8" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="3.0.4" />
+        <dependency id="PMS.COMMON" version="3.0.8" />
       </group>
     </dependencies>
   </metadata>

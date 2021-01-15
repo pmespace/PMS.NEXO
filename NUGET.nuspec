@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>2.0.12</version>
+    <version>2.0.13</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,6 +14,10 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      2.0.13
+      - Nexo libraries are now divided in PMS.NEXO30 (Nexo 3.0), PMS.NEXO31 (Nexo 3.1) and PMS.NEXO35 (Nexo 3.0 running .NET 3.5)
+      - Simulator exists now in 2 applications, 1 for Nexo 3.0 and 1 for Nexo 3.1
+      
       2.0.12
       - Moved to PMS.NEXO 3.0.8 minimum
       - Added a new Retailer message builder application
@@ -101,10 +105,14 @@
     </dependencies>
   </metadata>
   <files>
-    <file src=".\Release\NexoSimulator.exe" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO.dll" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO.xml" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO.tlb" target="lib\net47"></file>
+    <file src=".\Release\NexoSimulator30.exe" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.tlb" target="lib\net47"></file>
+    <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO31.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
   </files>

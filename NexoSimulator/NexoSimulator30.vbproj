@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>NexoSimulator.My.MyApplication</StartupObject>
     <RootNamespace>NexoSimulator</RootNamespace>
-    <AssemblyName>NexoSimulator</AssemblyName>
+    <AssemblyName>NexoSimulator30</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>

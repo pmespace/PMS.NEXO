@@ -9,6 +9,7 @@ Imports System.IO
 Imports System.Xml.Serialization
 Imports NEXO.Server
 Imports NEXO.Client
+Imports NEXO.VersionMngt
 
 Public Class FSimulator
 
@@ -397,10 +398,11 @@ Public Class FSimulator
 			gatewayPort.BackColor = SystemColors.Window
 		End If
 
+		Text = $"Nexo Simulator v{NexoCurrentVersion.Current.Version} - CLIENT = SaleID: {FullSaleID()} / POIID: {FullPOIID()} - SERVER = "
 		If ServerIsRunning Then
-			Text = "Nexo Simulator - CLIENT = SaleID: " & FullSaleID() & " / POIID: " & FullPOIID() & " - SERVER = POIID: " & FullServerPOIID()
+			Text &= $"{FullServerPOIID()}"
 		Else
-			Text = "Nexo Simulator - CLIENT = SaleID: " & FullSaleID() & " / POIID: " & FullPOIID() & " - SERVER = Inactive"
+			Text = "Inactive"
 		End If
 
 		If isClosing Then

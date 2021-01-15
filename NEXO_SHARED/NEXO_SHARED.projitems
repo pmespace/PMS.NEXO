@@ -53,5 +53,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoErrors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoTypes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoVersionMngt.cs" />
   </ItemGroup>
 </Project>

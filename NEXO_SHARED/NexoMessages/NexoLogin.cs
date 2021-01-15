@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System;
 using COMMON;
+using NEXO.VersionMngt;
 
 namespace NEXO
 {
@@ -193,14 +194,14 @@ namespace NEXO
 	[Guid("FC9002AC-12F5-4611-8DBF-8ADAFFA39236")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoLogin: NexoService, INexoLogin
+	public class NexoLogin : NexoService, INexoLogin
 	{
 		#region constructor
 		public NexoLogin() : base(MessageCategoryEnumeration.Login)
 		{
 			RequestItem = new LoginRequestType();
 			ReplyItem = new LoginResponseType();
-			ProtocolVersion = (new NexoProtocolVersion(NexoVersion.Short)).Value;
+			ProtocolVersion = (new NexoProtocolVersion(NexoCurrentVersion.Current.Version)).Value;
 		}
 		#endregion
 
@@ -215,7 +216,7 @@ namespace NEXO
 #if NEXO30
 			get => CMisc.Trimmed(RequestData.SaleSoftware.ManufacturerID);
 			set => RequestData.SaleSoftware.ManufacturerID = value;
-#else
+#elif NEXO31
 			get => CMisc.Trimmed(RequestData.SaleSoftware.ProviderIdentification);
 			set => RequestData.SaleSoftware.ProviderIdentification = value;
 #endif
@@ -278,7 +279,7 @@ namespace NEXO
 #if NEXO30
 			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ManufacturerID);
 			set => ReplyData.POISystemData.POISoftware.ManufacturerID = value;
-#else
+#elif NEXO31
 			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification);
 			set => ReplyData.POISystemData.POISoftware.ProviderIdentification = value;
 #endif

@@ -1,6 +1,6 @@
 ﻿Imports COMMON
-Imports NEXO.Server
 Imports NEXO
+Imports NEXO.Server
 
 Public Class FActivity
 	Private server As NexoRetailerServer

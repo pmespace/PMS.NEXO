@@ -5,10 +5,10 @@ Imports System.Text
 Imports Microsoft.Win32
 Imports COMMON
 Imports NEXO
-Imports NEXO.Client
-Imports NEXO.Server
 Imports System.IO
 Imports System.Xml.Serialization
+Imports NEXO.Server
+Imports NEXO.Client
 
 Public Class FSimulator
 
@@ -571,7 +571,7 @@ Public Class FSimulator
 					entry.POISoftware.CertificationCode = New NexoCertificationCode().DefaultValue
 #If NEXO30 Then
 					entry.POISoftware.ManufacturerID = New NexoManufacturerID().DefaultValue
-#Else
+#ElseIf NEXO31 Then
 					entry.POISoftware.ProviderIdentification = New NexoManufacturerID().DefaultValue
 #End If
 					entries.Add(entry)

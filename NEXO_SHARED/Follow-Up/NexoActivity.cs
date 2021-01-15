@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using COMMON;
-using NEXO.Server;
 
 namespace NEXO
 {
@@ -28,7 +27,7 @@ namespace NEXO
 		#region constructor
 		public NexoActivity()
 		{
-#if NEXO30
+#if (NEXO30 || NEXO31)
 			_sentmessages = new NexoListOfAnyMessages("SENT MESSAGES");
 			_receivedmessages = new NexoListOfAnyMessages("RECEIVED MESSAGES");
 #else
@@ -41,7 +40,7 @@ namespace NEXO
 		#region properties
 		private NexoListOfAnyMessages _sentmessages { get; set; }
 		private NexoListOfAnyMessages _receivedmessages { get; set; }
-#if NEXO30
+#if (NEXO30 || NEXO31)
 		public NexoListOfAnyMessages SentMessages { get => _sentmessages; private set => _sentmessages = value; }
 		public NexoListOfAnyMessages ReceivedMessages { get => _receivedmessages; private set => _receivedmessages = value; }
 #else

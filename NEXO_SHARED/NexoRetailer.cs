@@ -22,8 +22,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #endif
 
-using NEXO.Properties;
 using COMMON;
+using NEXO.VersionMngt;
+using NEXO.Properties;
 
 namespace NEXO
 {
@@ -91,7 +92,7 @@ namespace NEXO
 			foreach (DictionaryEntry entry in resourceSet)
 			{
 				string resourceKey = entry.Key.ToString();
-				if (resourceKey.StartsWith("nexo30"))
+				if (resourceKey.StartsWith(NexoCurrentVersion.Current.ResourceName))
 					LoadAndSetXSD(resourceKey);
 			}
 			ResetSchemaValidationState();

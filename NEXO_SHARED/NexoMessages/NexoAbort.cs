@@ -164,7 +164,7 @@ namespace NEXO
 	[Guid("01101E72-06B5-47BA-B305-611BEEAF3AE4")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoAbort: NexoService, INexoAbort
+	public class NexoAbort : NexoService, INexoAbort
 	{
 		#region constructor
 		public NexoAbort() : base(MessageCategoryEnumeration.Abort)

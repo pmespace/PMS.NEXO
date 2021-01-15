@@ -13,6 +13,20 @@ namespace XSDEx
 	/// </summary>
 	public class Files : List<string> { }
 
+	public enum ActivityEvent
+	{
+		none,
+		message,
+		startingProcess,
+		endingProcess,
+	}
+
+	public class Activity
+	{
+		public string Message;
+		public ActivityEvent Evt;
+	}
+
 	/// <summary>
 	/// Supported languages
 	/// </summary>
@@ -55,7 +69,6 @@ namespace XSDEx
 			EmptyStringArrayToNull = true;
 
 			CreateArrayAccessors = true;
-			OptimizeStructs = false;
 
 			DerivedClassName = "NexoSaleToPOIMessage";
 		}
@@ -131,7 +144,6 @@ namespace XSDEx
 		}
 		private bool _emptystringarraytonull = true;
 		public bool CreateArrayAccessors { get; set; }
-		public bool OptimizeStructs { get; set; }
 		public string DerivedClassName { get; set; }
 		public string Preprocessor { get; set; }
 	}

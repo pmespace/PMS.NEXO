@@ -205,7 +205,7 @@ namespace NEXO
 #if NEXO30
 			get => CMisc.Trimmed(RequestData.SaleReferenceID);
 			set => RequestData.SaleReferenceID = value;
-#else
+#elif NEXO31
 			get => CMisc.Trimmed(RequestData.SaleData.SaleReferenceID);
 			set => RequestData.SaleData.SaleReferenceID = value;
 #endif

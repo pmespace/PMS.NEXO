@@ -20,9 +20,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #endif
 
-using NEXO.Properties;
+//using NEXO.Properties;
 using COMMON;
-using NEXO;
 
 namespace NEXO
 {

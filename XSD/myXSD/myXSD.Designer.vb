@@ -29,6 +29,7 @@ Partial Class myXSD
 		Me.pbGenerate = New System.Windows.Forms.Button()
 		Me.pbSave = New System.Windows.Forms.Button()
 		Me.status = New System.Windows.Forms.Label()
+		Me.pbGenerateNFiles = New System.Windows.Forms.Button()
 		Me.panelSettings = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelFiles = New System.Windows.Forms.TableLayoutPanel()
 		Me.files = New System.Windows.Forms.ListBox()
@@ -49,8 +50,12 @@ Partial Class myXSD
 		Me.panelLanguage = New System.Windows.Forms.TableLayoutPanel()
 		Me.vb = New System.Windows.Forms.RadioButton()
 		Me.csharp = New System.Windows.Forms.RadioButton()
+		Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.nmspace = New System.Windows.Forms.TextBox()
+		Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
+		Me.efPreprocessor = New System.Windows.Forms.TextBox()
+		Me.Label4 = New System.Windows.Forms.Label()
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.convertTypes = New System.Windows.Forms.CheckBox()
 		Me.panelTypes = New System.Windows.Forms.TableLayoutPanel()
@@ -73,10 +78,6 @@ Partial Class myXSD
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-		Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-		Me.Label4 = New System.Windows.Forms.Label()
-		Me.efPreprocessor = New System.Windows.Forms.TextBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelSettings.SuspendLayout()
@@ -86,14 +87,14 @@ Partial Class myXSD
 		Me.TableLayoutPanel6.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.panelLanguage.SuspendLayout()
+		Me.TableLayoutPanel8.SuspendLayout()
+		Me.TableLayoutPanel9.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.panelTypes.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.TableLayoutPanel4.SuspendLayout()
 		Me.TableLayoutPanel5.SuspendLayout()
 		Me.TableLayoutPanel7.SuspendLayout()
-		Me.TableLayoutPanel8.SuspendLayout()
-		Me.TableLayoutPanel9.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'panelMain
@@ -124,15 +125,17 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelButtons.AutoSize = True
 		Me.panelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelButtons.ColumnCount = 4
+		Me.panelButtons.ColumnCount = 5
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelButtons.Controls.Add(Me.pbClose, 3, 0)
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelButtons.Controls.Add(Me.pbClose, 4, 0)
 		Me.panelButtons.Controls.Add(Me.pbGenerate, 1, 0)
-		Me.panelButtons.Controls.Add(Me.pbSave, 2, 0)
+		Me.panelButtons.Controls.Add(Me.pbSave, 3, 0)
 		Me.panelButtons.Controls.Add(Me.status, 0, 0)
+		Me.panelButtons.Controls.Add(Me.pbGenerateNFiles, 2, 0)
 		Me.panelButtons.Location = New System.Drawing.Point(3, 344)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
@@ -149,7 +152,7 @@ Partial Class myXSD
 		Me.pbClose.Location = New System.Drawing.Point(790, 3)
 		Me.pbClose.Name = "pbClose"
 		Me.pbClose.Size = New System.Drawing.Size(43, 23)
-		Me.pbClose.TabIndex = 2
+		Me.pbClose.TabIndex = 3
 		Me.pbClose.Text = "Close"
 		Me.pbClose.UseVisualStyleBackColor = True
 		'
@@ -158,11 +161,11 @@ Partial Class myXSD
 		Me.pbGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbGenerate.AutoSize = True
 		Me.pbGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbGenerate.Location = New System.Drawing.Point(620, 3)
+		Me.pbGenerate.Location = New System.Drawing.Point(523, 3)
 		Me.pbGenerate.Name = "pbGenerate"
-		Me.pbGenerate.Size = New System.Drawing.Size(88, 23)
+		Me.pbGenerate.Size = New System.Drawing.Size(86, 23)
 		Me.pbGenerate.TabIndex = 0
-		Me.pbGenerate.Text = "Generate code"
+		Me.pbGenerate.Text = "Generate 1 file"
 		Me.pbGenerate.UseVisualStyleBackColor = True
 		'
 		'pbSave
@@ -173,7 +176,7 @@ Partial Class myXSD
 		Me.pbSave.Location = New System.Drawing.Point(714, 3)
 		Me.pbSave.Name = "pbSave"
 		Me.pbSave.Size = New System.Drawing.Size(70, 23)
-		Me.pbSave.TabIndex = 1
+		Me.pbSave.TabIndex = 2
 		Me.pbSave.Text = "Save to file"
 		Me.pbSave.UseVisualStyleBackColor = True
 		'
@@ -184,9 +187,21 @@ Partial Class myXSD
 		Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.status.Location = New System.Drawing.Point(3, 6)
 		Me.status.Name = "status"
-		Me.status.Size = New System.Drawing.Size(611, 16)
+		Me.status.Size = New System.Drawing.Size(514, 16)
 		Me.status.TabIndex = 3
 		Me.status.Text = "Label4"
+		'
+		'pbGenerateNFiles
+		'
+		Me.pbGenerateNFiles.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbGenerateNFiles.AutoSize = True
+		Me.pbGenerateNFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbGenerateNFiles.Location = New System.Drawing.Point(615, 3)
+		Me.pbGenerateNFiles.Name = "pbGenerateNFiles"
+		Me.pbGenerateNFiles.Size = New System.Drawing.Size(93, 23)
+		Me.pbGenerateNFiles.TabIndex = 1
+		Me.pbGenerateNFiles.Text = "Generate N files"
+		Me.pbGenerateNFiles.UseVisualStyleBackColor = True
 		'
 		'panelSettings
 		'
@@ -469,6 +484,25 @@ Partial Class myXSD
 		Me.csharp.Text = "C#"
 		Me.csharp.UseVisualStyleBackColor = True
 		'
+		'TableLayoutPanel8
+		'
+		Me.TableLayoutPanel8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.TableLayoutPanel8.AutoSize = True
+		Me.TableLayoutPanel8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.TableLayoutPanel8.ColumnCount = 2
+		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel8.Controls.Add(Me.Label1, 0, 0)
+		Me.TableLayoutPanel8.Controls.Add(Me.nmspace, 1, 0)
+		Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 3)
+		Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+		Me.TableLayoutPanel8.RowCount = 1
+		Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.TableLayoutPanel8.Size = New System.Drawing.Size(125, 26)
+		Me.TableLayoutPanel8.TabIndex = 0
+		'
 		'Label1
 		'
 		Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Right
@@ -488,6 +522,45 @@ Partial Class myXSD
 		Me.nmspace.Size = New System.Drawing.Size(46, 20)
 		Me.nmspace.TabIndex = 0
 		Me.nmspace.Text = "myXSD"
+		'
+		'TableLayoutPanel9
+		'
+		Me.TableLayoutPanel9.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.TableLayoutPanel9.AutoSize = True
+		Me.TableLayoutPanel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.TableLayoutPanel9.ColumnCount = 2
+		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel9.Controls.Add(Me.efPreprocessor, 0, 0)
+		Me.TableLayoutPanel9.Controls.Add(Me.Label4, 0, 0)
+		Me.TableLayoutPanel9.Location = New System.Drawing.Point(280, 3)
+		Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
+		Me.TableLayoutPanel9.RowCount = 1
+		Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.TableLayoutPanel9.Size = New System.Drawing.Size(126, 26)
+		Me.TableLayoutPanel9.TabIndex = 2
+		'
+		'efPreprocessor
+		'
+		Me.efPreprocessor.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efPreprocessor.Location = New System.Drawing.Point(81, 3)
+		Me.efPreprocessor.Name = "efPreprocessor"
+		Me.efPreprocessor.ReadOnly = True
+		Me.efPreprocessor.Size = New System.Drawing.Size(42, 20)
+		Me.efPreprocessor.TabIndex = 2
+		'
+		'Label4
+		'
+		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Right
+		Me.Label4.AutoSize = True
+		Me.Label4.Location = New System.Drawing.Point(3, 6)
+		Me.Label4.Name = "Label4"
+		Me.Label4.Size = New System.Drawing.Size(72, 13)
+		Me.Label4.TabIndex = 1
+		Me.Label4.Text = "Preprocessor:"
+		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
 		'
 		'TableLayoutPanel2
 		'
@@ -775,64 +848,6 @@ Partial Class myXSD
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
 		'
-		'TableLayoutPanel8
-		'
-		Me.TableLayoutPanel8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel8.AutoSize = True
-		Me.TableLayoutPanel8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel8.ColumnCount = 2
-		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel8.Controls.Add(Me.Label1, 0, 0)
-		Me.TableLayoutPanel8.Controls.Add(Me.nmspace, 1, 0)
-		Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 3)
-		Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-		Me.TableLayoutPanel8.RowCount = 1
-		Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel8.Size = New System.Drawing.Size(125, 26)
-		Me.TableLayoutPanel8.TabIndex = 0
-		'
-		'TableLayoutPanel9
-		'
-		Me.TableLayoutPanel9.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel9.AutoSize = True
-		Me.TableLayoutPanel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel9.ColumnCount = 2
-		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel9.Controls.Add(Me.efPreprocessor, 0, 0)
-		Me.TableLayoutPanel9.Controls.Add(Me.Label4, 0, 0)
-		Me.TableLayoutPanel9.Location = New System.Drawing.Point(280, 3)
-		Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-		Me.TableLayoutPanel9.RowCount = 1
-		Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel9.Size = New System.Drawing.Size(126, 26)
-		Me.TableLayoutPanel9.TabIndex = 2
-		'
-		'Label4
-		'
-		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Right
-		Me.Label4.AutoSize = True
-		Me.Label4.Location = New System.Drawing.Point(3, 6)
-		Me.Label4.Name = "Label4"
-		Me.Label4.Size = New System.Drawing.Size(72, 13)
-		Me.Label4.TabIndex = 1
-		Me.Label4.Text = "Preprocessor:"
-		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'efPreprocessor
-		'
-		Me.efPreprocessor.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.efPreprocessor.Location = New System.Drawing.Point(81, 3)
-		Me.efPreprocessor.Name = "efPreprocessor"
-		Me.efPreprocessor.ReadOnly = True
-		Me.efPreprocessor.Size = New System.Drawing.Size(42, 20)
-		Me.efPreprocessor.TabIndex = 2
-		'
 		'myXSD
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -859,6 +874,10 @@ Partial Class myXSD
 		Me.TableLayoutPanel1.PerformLayout()
 		Me.panelLanguage.ResumeLayout(False)
 		Me.panelLanguage.PerformLayout()
+		Me.TableLayoutPanel8.ResumeLayout(False)
+		Me.TableLayoutPanel8.PerformLayout()
+		Me.TableLayoutPanel9.ResumeLayout(False)
+		Me.TableLayoutPanel9.PerformLayout()
 		Me.TableLayoutPanel2.ResumeLayout(False)
 		Me.TableLayoutPanel2.PerformLayout()
 		Me.panelTypes.ResumeLayout(False)
@@ -871,10 +890,6 @@ Partial Class myXSD
 		Me.TableLayoutPanel5.PerformLayout()
 		Me.TableLayoutPanel7.ResumeLayout(False)
 		Me.TableLayoutPanel7.PerformLayout()
-		Me.TableLayoutPanel8.ResumeLayout(False)
-		Me.TableLayoutPanel8.PerformLayout()
-		Me.TableLayoutPanel9.ResumeLayout(False)
-		Me.TableLayoutPanel9.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -934,4 +949,5 @@ Partial Class myXSD
 	Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
 	Friend WithEvents efPreprocessor As TextBox
 	Friend WithEvents Label4 As Label
+	Friend WithEvents pbGenerateNFiles As Button
 End Class

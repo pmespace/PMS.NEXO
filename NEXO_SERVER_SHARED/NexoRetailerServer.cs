@@ -21,9 +21,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #endif
 
-using NEXO.Properties;
+//using NEXO.Properties;
 using COMMON;
 using NEXO;
+using NEXO.VersionMngt;
 
 namespace NEXO.Server
 {
@@ -44,7 +45,7 @@ namespace NEXO.Server
 		private void Initialise()
 		{
 			SupportedProtocolVersions = new NexoSupportedProtocolVersions();
-			ServerProtocolVersion = new NexoProtocolVersion(NexoVersion.Short);
+			ServerProtocolVersion = new NexoProtocolVersion(NexoCurrentVersion.Current.Version);
 			try
 			{
 				SupportedProtocolVersions.Add(ServerProtocolVersion.Value, ServerProtocolVersion);

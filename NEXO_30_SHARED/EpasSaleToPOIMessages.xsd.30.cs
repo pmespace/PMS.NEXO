@@ -4,11 +4,11 @@ namespace NEXO
    using System.Runtime.Serialization;
    using System.Runtime.InteropServices;
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("78ad4d03-1c0b-41c6-9ac1-7308d37bb552")]
+   [System.Runtime.InteropServices.GuidAttribute("29607120-6e22-418a-8d01-b093fff72f6c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AbortRequestType : IAbortRequestType
@@ -72,12 +72,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("bff04103-b453-42a9-b083-5d1533374090")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAbortRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      MessageReferenceType MessageReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string AbortReason
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdAbortRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("0f7b6499-65a3-4ce0-912f-3d0eb6c44c9b")]
+   [System.Runtime.InteropServices.GuidAttribute("02a45637-4648-4b26-93bf-4d9289a2e3b1")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class MessageReferenceType : IMessageReferenceType
@@ -171,12 +204,59 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("6f047ea9-47d4-46a5-938c-2f9af25656a9")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IMessageReferenceType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string MessageCategory
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ServiceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string DeviceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string SaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdMessageReferenceTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("976c1d87-289e-486f-8509-9b75c7268ca0")]
+   [System.Runtime.InteropServices.GuidAttribute("a846ad5f-562c-45ed-b458-5824f39df19f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DisplayResponseType : IDisplayResponseType
@@ -333,12 +413,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ca6363e0-78ab-4cc9-a025-248714a22bcc")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDisplayResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      OutputResultType[] OutputResult
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdDisplayResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(4)]
+      int OutputResultSize();
+      [DispId(5)]
+      OutputResultType OutputResultGetItem(int index);
+      [DispId(6)]
+      bool OutputResultSetItem(int index, OutputResultType value);
+      [DispId(7)]
+      bool OutputResultAddItem(OutputResultType value);
+      [DispId(8)]
+      bool OutputResultRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("f4837cca-197e-4dad-a919-f4a5c718bb75")]
+   [System.Runtime.InteropServices.GuidAttribute("a0cfd3e7-07bc-44eb-96f0-042b9bcc0cc1")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class OutputResultType : IOutputResultType
@@ -402,12 +511,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fffcea29-4971-4ae0-aa3a-931803598dc0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IOutputResultType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Device
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string InfoQualify
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdOutputResultTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("eb0ce153-4f49-4625-85c4-bb7a5b4e487f")]
+   [System.Runtime.InteropServices.GuidAttribute("fa88ede9-b6c8-4db6-93a5-937eb0f4c2e9")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ResponseType : IResponseType
@@ -471,12 +613,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("06792469-b013-4f35-8e57-3f1bc30fa775")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string AdditionalResponse
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Result
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ErrorCondition
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("fb9a1365-d7d4-4331-b852-d1f7031e5fd7")]
+   [System.Runtime.InteropServices.GuidAttribute("0a402e16-f278-46fa-9e2f-afc4d021638f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DisplayRequestType : IDisplayRequestType
@@ -633,12 +808,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("8e63ae3a-5362-4d5b-a961-7182c587aeb0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDisplayRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      DisplayOutputType[] DisplayOutput
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdDisplayRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(4)]
+      int DisplayOutputSize();
+      [DispId(5)]
+      DisplayOutputType DisplayOutputGetItem(int index);
+      [DispId(6)]
+      bool DisplayOutputSetItem(int index, DisplayOutputType value);
+      [DispId(7)]
+      bool DisplayOutputAddItem(DisplayOutputType value);
+      [DispId(8)]
+      bool DisplayOutputRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3a11e167-f099-44f3-aa75-2a1afa250bc9")]
+   [System.Runtime.InteropServices.GuidAttribute("3a2409e2-bf73-4d2b-bdd8-62eb165f718c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DisplayOutputType : IDisplayOutputType
@@ -1015,12 +1219,93 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("874119b2-3522-4331-9bf0-c384a1258258")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDisplayOutputType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      OutputContentType OutputContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      MenuEntryType[] MenuEntry
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      byte[] OutputSignature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      bool ResponseRequiredFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string MinimumDisplayTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string Device
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string InfoQualify
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      bool xsdDisplayOutputTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      int MenuEntrySize();
+      [DispId(18)]
+      MenuEntryType MenuEntryGetItem(int index);
+      [DispId(19)]
+      bool MenuEntrySetItem(int index, MenuEntryType value);
+      [DispId(20)]
+      bool MenuEntryAddItem(MenuEntryType value);
+      [DispId(21)]
+      bool MenuEntryRemoveItem(int index);
+      [DispId(22)]
+      int OutputSignatureSize();
+      [DispId(23)]
+      byte OutputSignatureGetItem(int index);
+      [DispId(24)]
+      bool OutputSignatureSetItem(int index, byte value);
+      [DispId(25)]
+      bool OutputSignatureAddItem(byte value);
+      [DispId(26)]
+      bool OutputSignatureRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c7fed555-0665-4736-8d5c-884fddef1a7b")]
+   [System.Runtime.InteropServices.GuidAttribute("e57e4449-a531-4b75-8913-91fcc3231657")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class OutputContentType : IOutputContentType
@@ -1360,12 +1645,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("20c13c69-305a-473a-a07c-c9a45f8f4d49")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IOutputContentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      PredefinedContentType PredefinedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      OutputTextType[] OutputText
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      byte[] OutputXHTML
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      OutputBarcodeType OutputBarcode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string OutputFormat
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdOutputContentTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      int OutputTextSize();
+      [DispId(13)]
+      OutputTextType OutputTextGetItem(int index);
+      [DispId(14)]
+      bool OutputTextSetItem(int index, OutputTextType value);
+      [DispId(15)]
+      bool OutputTextAddItem(OutputTextType value);
+      [DispId(16)]
+      bool OutputTextRemoveItem(int index);
+      [DispId(17)]
+      int OutputXHTMLSize();
+      [DispId(18)]
+      byte OutputXHTMLGetItem(int index);
+      [DispId(19)]
+      bool OutputXHTMLSetItem(int index, byte value);
+      [DispId(20)]
+      bool OutputXHTMLAddItem(byte value);
+      [DispId(21)]
+      bool OutputXHTMLRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2e101030-60e3-40ca-836e-72d8f232f79a")]
+   [System.Runtime.InteropServices.GuidAttribute("5279934b-29f7-4db6-9775-37335a596dd4")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PredefinedContentType : IPredefinedContentType
@@ -1414,12 +1766,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("6817c0c5-bd1a-4328-9ea1-90c697ec97c5")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPredefinedContentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ReferenceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Language
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdPredefinedContentTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("58dea23f-9e87-42d1-9d5e-fad3047e51ea")]
+   [System.Runtime.InteropServices.GuidAttribute("b779fcaa-1934-40cc-b363-6af61b943652")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class OutputTextType : IOutputTextType
@@ -1608,12 +1986,101 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("455fae22-08a2-4ce3-a493-78c7c938bcea")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IOutputTextType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string CharacterSet
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string Font
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string StartRow
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string StartColumn
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string Color
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string CharacterWidth
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string CharacterHeight
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      string CharacterStyle
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string Alignment
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      bool EndOfLineFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(22)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(24)]
+      bool xsdOutputTextTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("59f11944-8f11-4e20-895a-b9d772473c9c")]
+   [System.Runtime.InteropServices.GuidAttribute("68f73c2c-05ad-495f-9753-89c61de804c7")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class OutputBarcodeType : IOutputBarcodeType
@@ -1667,12 +2134,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("099f9f8e-a522-4c0b-84ce-6d0a0ac6622a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IOutputBarcodeType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string BarcodeType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      bool xsdOutputBarcodeTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("32fa84e1-9992-498c-b1fd-d6aea5631b60")]
+   [System.Runtime.InteropServices.GuidAttribute("a72b15e1-5229-49d6-a466-8d7b2b88f0b4")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class MenuEntryType : IMenuEntryType
@@ -2034,8 +2527,82 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("7846adf9-e744-4151-8829-871a398d2d22")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IMenuEntryType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      PredefinedContentType PredefinedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      OutputTextType[] OutputText
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      byte[] OutputXHTML
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string MenuEntryTag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string OutputFormat
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool DefaultSelectedFlag
+      {
+         get;
+         set;
+      }
+      [DispId(14)]
+      bool xsdMenuEntryTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      int OutputTextSize();
+      [DispId(16)]
+      OutputTextType OutputTextGetItem(int index);
+      [DispId(17)]
+      bool OutputTextSetItem(int index, OutputTextType value);
+      [DispId(18)]
+      bool OutputTextAddItem(OutputTextType value);
+      [DispId(19)]
+      bool OutputTextRemoveItem(int index);
+      [DispId(20)]
+      int OutputXHTMLSize();
+      [DispId(21)]
+      byte OutputXHTMLGetItem(int index);
+      [DispId(22)]
+      bool OutputXHTMLSetItem(int index, byte value);
+      [DispId(23)]
+      bool OutputXHTMLAddItem(byte value);
+      [DispId(24)]
+      bool OutputXHTMLRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -2059,11 +2626,11 @@ namespace NEXO
       EpurseCard,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("b80c4487-9590-4af9-b087-24aa1b28ac25")]
+   [System.Runtime.InteropServices.GuidAttribute("764fa931-6c9f-45d0-9d14-2940ed315737")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AdminRequestType : IAdminRequestType
@@ -2097,12 +2664,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("9c70ca94-b427-4554-aeb1-1cbde30035b0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAdminRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ServiceIdentification
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdAdminRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("149dc57e-f929-44ec-a2ee-7c4047b0c321")]
+   [System.Runtime.InteropServices.GuidAttribute("8e27d2c8-627d-4f4f-8a00-e2f861e0dea6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AdminResponseType : IAdminResponseType
@@ -2136,8 +2722,27 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("92bb50c5-4084-40cd-829d-19ed1f71e23a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAdminResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdAdminResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -2153,11 +2758,11 @@ namespace NEXO
       Justified,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("641833c0-b356-4759-8430-347f4f67a4cd")]
+   [System.Runtime.InteropServices.GuidAttribute("b946a354-43c4-4f65-8156-d6f3855cc53a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AllowedProductType : IAllowedProductType
@@ -2236,12 +2841,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("c8840318-4998-42b5-b94d-19738b8f4d4a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAllowedProductType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ProductLabel
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string AdditionalProductInfo
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string EanUpc
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdAllowedProductTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a392fcfd-ff9a-4a74-a999-a3fbed4c7d8b")]
+   [System.Runtime.InteropServices.GuidAttribute("e8ee9e6f-b2f1-4388-963b-8b0e0a238cc2")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AmountsReqType : IAmountsReqType
@@ -2492,12 +3137,129 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("e9282e39-0cc0-4ad0-b46f-988f7454cc15")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAmountsReqType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double RequestedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool RequestedAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      double CashBackAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      bool CashBackAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      double TipAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      bool TipAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      double PaidAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      bool PaidAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      double MinimumAmountToDeliver
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      bool MinimumAmountToDeliverSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(23)]
+      double MaximumCashBackAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(25)]
+      bool MaximumCashBackAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(27)]
+      double MinimumSplitAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(29)]
+      bool MinimumSplitAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(31)]
+      bool xsdAmountsReqTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("4c3b7498-711f-4335-b6b2-f77af4886062")]
+   [System.Runtime.InteropServices.GuidAttribute("82429246-d68e-4b98-8504-f59234f007a6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AmountsRespType : IAmountsRespType
@@ -2670,12 +3432,94 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5d295b9b-cdc2-451d-92bf-76f97074baaa")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAmountsRespType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double AuthorizedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      double TotalRebatesAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      bool TotalRebatesAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      double TotalFeesAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool TotalFeesAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      double CashBackAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      bool CashBackAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      double TipAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      bool TipAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(21)]
+      bool xsdAmountsRespTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2a289eb2-4c07-4b92-b135-28c9b3250bca")]
+   [System.Runtime.InteropServices.GuidAttribute("d3daf7e7-7424-410e-b3a1-88d6ab5ef9f8")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AreaSizeType : IAreaSizeType
@@ -2724,8 +3568,34 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("005edd05-dffa-4ee4-af5c-75676246b628")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAreaSizeType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string X
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Y
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdAreaSizeTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -2755,11 +3625,11 @@ namespace NEXO
       UnknownMethod,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c81a75ed-c1fb-4ff7-bdc3-19d708dd8495")]
+   [System.Runtime.InteropServices.GuidAttribute("95e0022b-2685-4768-bdd1-cdc2a6f68c32")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class BalanceInquiryRequestType : IBalanceInquiryRequestType
@@ -2808,12 +3678,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("51a21208-3dae-4658-a1f4-0b54ea406e34")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IBalanceInquiryRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      PaymentAccountReqType PaymentAccountReq
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      LoyaltyAccountReqType LoyaltyAccountReq
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdBalanceInquiryRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("4673638d-edcc-4da3-9c02-66a024302881")]
+   [System.Runtime.InteropServices.GuidAttribute("c73aa407-a2c7-4254-b872-829a65779f9a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentAccountReqType : IPaymentAccountReqType
@@ -2882,12 +3778,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("6d8927d6-d22d-4c16-8cb6-1fbf19ea3366")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentAccountReqType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      TransactionIdentificationType CardAcquisitionReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      PaymentInstrumentDataType PaymentInstrumentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string AccountType
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdPaymentAccountReqTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("fa3eb93b-4477-4ce5-ae59-1cdf2a0bd105")]
+   [System.Runtime.InteropServices.GuidAttribute("8227ba2a-d298-4310-8dbf-78168a5a7dbe")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionIdentificationType : ITransactionIdentificationType
@@ -2936,12 +3865,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("a996d207-6f46-48b9-800f-94a2f2a0b0fb")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionIdentificationType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string TransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string TimeStamp
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdTransactionIdentificationTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("39e71528-d6db-48b6-ba28-7a875d0cd7fa")]
+   [System.Runtime.InteropServices.GuidAttribute("2bdf5d6c-b929-4204-8b30-97de421e35be")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentInstrumentDataType : IPaymentInstrumentDataType
@@ -3020,12 +3975,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3953d50d-0e3e-4ce1-a882-22c81607810a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentInstrumentDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      CardDataType CardData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      CheckDataType CheckData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      MobileDataType MobileData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string PaymentInstrumentType
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPaymentInstrumentDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("b4607a9b-817e-460c-9971-732101cc2d68")]
+   [System.Runtime.InteropServices.GuidAttribute("c2832b22-6b3f-479e-9766-6802a5444f0b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardDataType : ICardDataType
@@ -3701,12 +4696,141 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f6ad1abf-fe2d-4677-a8df-2244e08637ca")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ContentInformationType ProtectedCardData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SensitiveCardDataType SensitiveCardData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string[] AllowedProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      AllowedProductType[] AllowedProduct
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      PaymentTokenType PaymentToken
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      CustomerOrderType[] CustomerOrder
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string PaymentBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string MaskedPAN
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      string PaymentAccountRef
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      string[] EntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      string CardCountryCode
+      {
+         get;
+         set;
+      }
+      [DispId(23)]
+      bool xsdCardDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(24)]
+      int AllowedProductCodeSize();
+      [DispId(25)]
+      string AllowedProductCodeGetItem(int index);
+      [DispId(26)]
+      bool AllowedProductCodeSetItem(int index, string value);
+      [DispId(27)]
+      bool AllowedProductCodeAddItem(string value);
+      [DispId(28)]
+      bool AllowedProductCodeRemoveItem(int index);
+      [DispId(29)]
+      int AllowedProductSize();
+      [DispId(30)]
+      AllowedProductType AllowedProductGetItem(int index);
+      [DispId(31)]
+      bool AllowedProductSetItem(int index, AllowedProductType value);
+      [DispId(32)]
+      bool AllowedProductAddItem(AllowedProductType value);
+      [DispId(33)]
+      bool AllowedProductRemoveItem(int index);
+      [DispId(34)]
+      int CustomerOrderSize();
+      [DispId(35)]
+      CustomerOrderType CustomerOrderGetItem(int index);
+      [DispId(36)]
+      bool CustomerOrderSetItem(int index, CustomerOrderType value);
+      [DispId(37)]
+      bool CustomerOrderAddItem(CustomerOrderType value);
+      [DispId(38)]
+      bool CustomerOrderRemoveItem(int index);
+      [DispId(39)]
+      int EntryModeSize();
+      [DispId(40)]
+      string EntryModeGetItem(int index);
+      [DispId(41)]
+      bool EntryModeSetItem(int index, string value);
+      [DispId(42)]
+      bool EntryModeAddItem(string value);
+      [DispId(43)]
+      bool EntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("17622319-a189-4899-bf00-564ad9b6cc06")]
+   [System.Runtime.InteropServices.GuidAttribute("605668be-82c2-4ada-9956-c0b19216702e")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ContentInformationType : IContentInformationType
@@ -3759,12 +4883,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("4b2d9ef0-5b32-4ef4-bdfe-155bbea25d38")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IContentInformationType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      object Item
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ContentType
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdContentInformationTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("27d6d820-6036-4973-98a7-96feb83ddc83")]
+   [System.Runtime.InteropServices.GuidAttribute("89d84344-3d9f-41ca-9a22-7513a5d9cec3")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AuthenticatedDataType : IAuthenticatedDataType
@@ -4110,12 +5260,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("7f21c4e3-d9f2-4cb9-ad72-719e5a2240e3")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAuthenticatedDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      object[] Items
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      AlgorithmIdentifier MACAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      EncapsulatedContentType EncapsulatedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string Version
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      byte[] MAC
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      bool xsdAuthenticatedDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      int ItemsSize();
+      [DispId(14)]
+      object ItemsGetItem(int index);
+      [DispId(15)]
+      bool ItemsSetItem(int index, object value);
+      [DispId(16)]
+      bool ItemsAddItem(object value);
+      [DispId(17)]
+      bool ItemsRemoveItem(int index);
+      [DispId(18)]
+      int MACSize();
+      [DispId(19)]
+      byte MACGetItem(int index);
+      [DispId(20)]
+      bool MACSetItem(int index, byte value);
+      [DispId(21)]
+      bool MACAddItem(byte value);
+      [DispId(22)]
+      bool MACRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d3682184-5a9a-4a5d-bbd7-bdfdee3b5919")]
+   [System.Runtime.InteropServices.GuidAttribute("b6a46e52-a35b-495e-aed7-23323bc1d429")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class KEKType : IKEKType
@@ -4322,12 +5539,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("88280480-9738-4b6a-851b-98afdbb64896")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IKEKType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      KEKIdentifierType KEKIdentifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      AlgorithmIdentifier KeyEncryptionAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Version
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      byte[] EncryptedKey
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      bool xsdKEKTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      int EncryptedKeySize();
+      [DispId(12)]
+      byte EncryptedKeyGetItem(int index);
+      [DispId(13)]
+      bool EncryptedKeySetItem(int index, byte value);
+      [DispId(14)]
+      bool EncryptedKeyAddItem(byte value);
+      [DispId(15)]
+      bool EncryptedKeyRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("54791a07-e9fa-4fd0-a6cd-bed3e01c1b3a")]
+   [System.Runtime.InteropServices.GuidAttribute("37408278-6245-4c01-8d7c-1b6f58effc4f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class KEKIdentifierType : IKEKIdentifierType
@@ -4514,12 +5781,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("24203c55-5906-484d-b1b4-1c1c27bfceb0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IKEKIdentifierType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string KeyIdentifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string KeyVersion
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      byte[] DerivationIdentifier
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdKEKIdentifierTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int DerivationIdentifierSize();
+      [DispId(9)]
+      byte DerivationIdentifierGetItem(int index);
+      [DispId(10)]
+      bool DerivationIdentifierSetItem(int index, byte value);
+      [DispId(11)]
+      bool DerivationIdentifierAddItem(byte value);
+      [DispId(12)]
+      bool DerivationIdentifierRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("f6ce6310-2fb9-4a9c-b869-9c80d81fba59")]
+   [System.Runtime.InteropServices.GuidAttribute("aabc8e04-8fee-48d5-906b-576d6e58802d")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AlgorithmIdentifier : IAlgorithmIdentifier
@@ -4568,12 +5878,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d93c995d-3b8f-4d49-afc0-f843ce88862f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAlgorithmIdentifier
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ParameterType Parameter
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Algorithm
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdAlgorithmIdentifierInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("9a89a6a9-ea65-443f-a636-efaeb7cf85e1")]
+   [System.Runtime.InteropServices.GuidAttribute("1be23843-7fea-45c7-bfb3-bfd7b7b515df")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ParameterType : IParameterType
@@ -4730,12 +6066,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3c74d329-dc58-48df-bd84-1e124f56113a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IParameterType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      byte[] InitialisationVector
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdParameterTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(4)]
+      int InitialisationVectorSize();
+      [DispId(5)]
+      byte InitialisationVectorGetItem(int index);
+      [DispId(6)]
+      bool InitialisationVectorSetItem(int index, byte value);
+      [DispId(7)]
+      bool InitialisationVectorAddItem(byte value);
+      [DispId(8)]
+      bool InitialisationVectorRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1a5a4c33-d592-42f9-afd1-8fe4602b60e9")]
+   [System.Runtime.InteropServices.GuidAttribute("2585d81f-c47f-4c57-b853-fb7d8acc7253")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class KeyTransportType : IKeyTransportType
@@ -4942,12 +6307,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("c76a7940-e39b-4210-914a-b0c10ea80c80")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IKeyTransportType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      RecipientIdentifierType RecipientIdentifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      AlgorithmIdentifier KeyEncryptionAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Version
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      byte[] EncryptedKey
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      bool xsdKeyTransportTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      int EncryptedKeySize();
+      [DispId(12)]
+      byte EncryptedKeyGetItem(int index);
+      [DispId(13)]
+      bool EncryptedKeySetItem(int index, byte value);
+      [DispId(14)]
+      bool EncryptedKeyAddItem(byte value);
+      [DispId(15)]
+      bool EncryptedKeyRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d66011c2-4a55-4db7-997c-011eb315409f")]
+   [System.Runtime.InteropServices.GuidAttribute("dae82ba5-8283-4803-9c2a-4419b4e07831")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class RecipientIdentifierType : IRecipientIdentifierType
@@ -4981,12 +6396,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3f158437-85d2-4bad-b032-1bbb080f1ec9")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IRecipientIdentifierType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      IssuerAndSerialNumberType IssuerAndSerialNumber
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdRecipientIdentifierTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("76914918-c345-4502-9470-541f3cd3bb27")]
+   [System.Runtime.InteropServices.GuidAttribute("ce799ca3-b1b9-40c8-a997-2625003ee8de")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class IssuerAndSerialNumberType : IIssuerAndSerialNumberType
@@ -5159,12 +6593,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b7b6f1a8-9c1a-4c80-b512-d3cc8238f767")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IIssuerAndSerialNumberType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      RelativeDistinguishedNameType[] Issuer
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string SerialNumber
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdIssuerAndSerialNumberTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int IssuerSize();
+      [DispId(7)]
+      RelativeDistinguishedNameType IssuerGetItem(int index);
+      [DispId(8)]
+      bool IssuerSetItem(int index, RelativeDistinguishedNameType value);
+      [DispId(9)]
+      bool IssuerAddItem(RelativeDistinguishedNameType value);
+      [DispId(10)]
+      bool IssuerRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1230b8a5-7876-40ed-9441-57336fcad691")]
+   [System.Runtime.InteropServices.GuidAttribute("12d53d88-13f2-4c56-8078-02ea034b14d2")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class RelativeDistinguishedNameType : IRelativeDistinguishedNameType
@@ -5213,12 +6683,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3ff2ceb3-61d7-42bd-8ccb-273a4e765fec")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IRelativeDistinguishedNameType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string AttributeType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string AttributeValue
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdRelativeDistinguishedNameTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c730b6be-0a1f-4736-818d-5747fe390a3b")]
+   [System.Runtime.InteropServices.GuidAttribute("32e673c6-1658-4b9c-8340-99b1b1986e24")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EncapsulatedContentType : IEncapsulatedContentType
@@ -5390,12 +6886,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("18f924f4-1361-4ad0-ac1c-b0b14cbc587a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEncapsulatedContentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      byte[] Content
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ContentType
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdEncapsulatedContentTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int ContentSize();
+      [DispId(7)]
+      byte ContentGetItem(int index);
+      [DispId(8)]
+      bool ContentSetItem(int index, byte value);
+      [DispId(9)]
+      bool ContentAddItem(byte value);
+      [DispId(10)]
+      bool ContentRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("e3902265-7662-4afe-8a13-d42150ff98ab")]
+   [System.Runtime.InteropServices.GuidAttribute("6698435e-e97e-43ba-871a-4bb0d776ae62")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DigestedDataType : IDigestedDataType
@@ -5597,12 +7129,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("6a809db9-24e1-4f20-ae7f-b8d20ef85c3c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDigestedDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      AlgorithmIdentifier DigestAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      EncapsulatedContentType EncapsulatedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      byte[] Digest
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string Version
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdDigestedDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int DigestSize();
+      [DispId(11)]
+      byte DigestGetItem(int index);
+      [DispId(12)]
+      bool DigestSetItem(int index, byte value);
+      [DispId(13)]
+      bool DigestAddItem(byte value);
+      [DispId(14)]
+      bool DigestRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("90aad1cf-5279-474a-b0e6-f5c21e4b865a")]
+   [System.Runtime.InteropServices.GuidAttribute("6e9300d1-bbbc-46c2-9832-428e699973c6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EnvelopedDataType : IEnvelopedDataType
@@ -5795,12 +7377,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("e81d1bb0-cc86-4dbe-945f-6023c6cf53ea")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEnvelopedDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      object[] Items
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      EncryptedContentType EncryptedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Version
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdEnvelopedDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      int ItemsSize();
+      [DispId(10)]
+      object ItemsGetItem(int index);
+      [DispId(11)]
+      bool ItemsSetItem(int index, object value);
+      [DispId(12)]
+      bool ItemsAddItem(object value);
+      [DispId(13)]
+      bool ItemsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("60ea7d9b-8d89-4c26-9b62-40db9111b51a")]
+   [System.Runtime.InteropServices.GuidAttribute("8fe0c497-0239-44c8-9712-ef3b868eca23")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EncryptedContentType : IEncryptedContentType
@@ -5987,12 +7612,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b9b715eb-2fd4-43a5-a960-d8cb2a7f3066")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEncryptedContentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      AlgorithmIdentifier ContentEncryptionAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      byte[] EncryptedData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ContentType
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdEncryptedContentTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int EncryptedDataSize();
+      [DispId(9)]
+      byte EncryptedDataGetItem(int index);
+      [DispId(10)]
+      bool EncryptedDataSetItem(int index, byte value);
+      [DispId(11)]
+      bool EncryptedDataAddItem(byte value);
+      [DispId(12)]
+      bool EncryptedDataRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("6060ab6c-ca3c-4473-ad00-21e822a7a648")]
+   [System.Runtime.InteropServices.GuidAttribute("95567e5b-7cd3-47b0-a592-a21f1c6ebf49")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class NamedKeyEncryptedDataType : INamedKeyEncryptedDataType
@@ -6061,12 +7729,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ece87f54-cb6c-40b0-89e1-261efbef841f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface INamedKeyEncryptedDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string KeyName
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      EncryptedContentType EncryptedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Version
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdNamedKeyEncryptedDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("6fb95be2-46b8-4249-b5c6-5d3ab3f9fb0a")]
+   [System.Runtime.InteropServices.GuidAttribute("620168e6-be9e-4749-9b47-be58a06cd8dd")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SignedDataType : ISignedDataType
@@ -6411,12 +8112,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("143585ee-c234-4696-a47c-00698d468eb4")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISignedDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      AlgorithmIdentifier[] DigestAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      EncapsulatedContentType EncapsulatedContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      byte[][] Certificate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      SignerType[] Signer
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string Version
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      bool xsdSignedDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      int DigestAlgorithmSize();
+      [DispId(14)]
+      AlgorithmIdentifier DigestAlgorithmGetItem(int index);
+      [DispId(15)]
+      bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value);
+      [DispId(16)]
+      bool DigestAlgorithmAddItem(AlgorithmIdentifier value);
+      [DispId(17)]
+      bool DigestAlgorithmRemoveItem(int index);
+      [DispId(18)]
+      int SignerSize();
+      [DispId(19)]
+      SignerType SignerGetItem(int index);
+      [DispId(20)]
+      bool SignerSetItem(int index, SignerType value);
+      [DispId(21)]
+      bool SignerAddItem(SignerType value);
+      [DispId(22)]
+      bool SignerRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("40bf00e3-f1c1-4215-a692-2dc21890a7d1")]
+   [System.Runtime.InteropServices.GuidAttribute("eede1d8b-9362-462e-bf80-ab5b76dc5066")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SignerType : ISignerType
@@ -6638,12 +8406,69 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ea11eca0-192a-4940-b6a3-baf1d0b3157a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISignerType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      SignerIdentifierType SignerIdentifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      AlgorithmIdentifier DigestAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      AlgorithmIdentifier SignatureAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      byte[] Signature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string Version
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      bool xsdSignerTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      int SignatureSize();
+      [DispId(14)]
+      byte SignatureGetItem(int index);
+      [DispId(15)]
+      bool SignatureSetItem(int index, byte value);
+      [DispId(16)]
+      bool SignatureAddItem(byte value);
+      [DispId(17)]
+      bool SignatureRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a34a35e2-0e4d-49c5-ac48-c1d4db4e2ac3")]
+   [System.Runtime.InteropServices.GuidAttribute("fc4d883a-3a44-4136-bc9b-14aade8e4776")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SignerIdentifierType : ISignerIdentifierType
@@ -6677,12 +8502,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b7fcb16a-dc4c-4999-9924-03ef06fcb2d3")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISignerIdentifierType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      IssuerAndSerialNumberType IssuerAndSerialNumber
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdSignerIdentifierTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ce55dfc3-0fbe-4130-9995-feddbb76de60")]
+   [System.Runtime.InteropServices.GuidAttribute("704c162d-a239-489c-b74a-5c14da241adb")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SensitiveCardDataType : ISensitiveCardDataType
@@ -6884,12 +8728,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("76f213db-ed97-47cb-8e9c-9c0708cd75de")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISensitiveCardDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TrackDataType[] TrackData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string PAN
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string CardSeqNumb
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string ExpiryDate
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdSensitiveCardDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int TrackDataSize();
+      [DispId(11)]
+      TrackDataType TrackDataGetItem(int index);
+      [DispId(12)]
+      bool TrackDataSetItem(int index, TrackDataType value);
+      [DispId(13)]
+      bool TrackDataAddItem(TrackDataType value);
+      [DispId(14)]
+      bool TrackDataRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ed963bb2-206a-4fa0-8f0b-e37f40e39482")]
+   [System.Runtime.InteropServices.GuidAttribute("41d3a56a-c65e-4446-92c7-48b4e4064295")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TrackDataType : ITrackDataType
@@ -6960,12 +8854,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("18fe6a1e-46ea-4bd8-b13f-7c86372f631e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITrackDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string TrackNumb
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string TrackFormat
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdTrackDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("0823bb06-f29f-4364-9b2d-7c615f9afff8")]
+   [System.Runtime.InteropServices.GuidAttribute("451d97f4-520e-47a2-beab-4fa0f7eb51f0")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentTokenType : IPaymentTokenType
@@ -7045,12 +8972,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("59944fde-7a77-43e2-801b-198bd99ec266")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentTokenType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string TokenRequestedType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string TokenValue
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ExpiryDateTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      bool ExpiryDateTimeSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPaymentTokenTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3b409036-d388-47ba-810d-2467318d8db7")]
+   [System.Runtime.InteropServices.GuidAttribute("bf2d29ec-e88d-484f-baac-e2d3610079b6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CustomerOrderType : ICustomerOrderType
@@ -7225,12 +9192,94 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("73c28fe6-d824-4ed8-bf0d-f2c3ae0e2aff")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICustomerOrderType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string AdditionalInformation
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string CustomerOrderID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool OpenOrderState
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string StartDate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string EndDate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool EndDateSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      double ForecastedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      double CurrentAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      string AccessedBy
+      {
+         get;
+         set;
+      }
+      [DispId(22)]
+      bool xsdCustomerOrderTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("5bc63f82-6c19-4fb3-8a20-a66cf7743458")]
+   [System.Runtime.InteropServices.GuidAttribute("76b900c5-a9ef-4b4b-a53e-9138182d9b04")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CheckDataType : ICheckDataType
@@ -7359,12 +9408,73 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("1cbbb607-0c02-46e3-ad10-915e8e3b8edf")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICheckDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string BankID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string AccountNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string CheckNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      TrackDataType TrackData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string CheckCardNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string TypeCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string Country
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      bool xsdCheckDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("64b45b98-6d19-485e-b601-15f92bbf819a")]
+   [System.Runtime.InteropServices.GuidAttribute("a9bc4d85-4dc3-43fa-a05e-25f190fd635e")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class MobileDataType : IMobileDataType
@@ -7473,12 +9583,66 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5400582c-ad2e-4790-9a1c-24b980c38d38")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IMobileDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string MobileCountryCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      GeolocationType Geolocation
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      ContentInformationType ProtectedMobileData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      SensitiveMobileDataType SensitiveMobileData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string MobileNetworkCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string MaskedMSISDN
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      bool xsdMobileDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("41cfe5b1-652f-4a2b-8d10-0118f96f966c")]
+   [System.Runtime.InteropServices.GuidAttribute("1f763634-9303-4326-8786-86cf488198b6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class GeolocationType : IGeolocationType
@@ -7527,12 +9691,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("8c3a17cc-059f-4f87-9143-e0ceae6eddbc")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IGeolocationType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      GeographicCoordinatesType GeographicCoordinates
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      UTMCoordinatesType UTMCoordinates
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdGeolocationTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d37e2cc6-2857-40ea-a49b-cd06f99cb764")]
+   [System.Runtime.InteropServices.GuidAttribute("c7aa78b4-bdf1-4152-baec-6eeb6068b243")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class GeographicCoordinatesType : IGeographicCoordinatesType
@@ -7581,12 +9771,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("93d679a2-6bca-4f4a-9281-da551f857e6f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IGeographicCoordinatesType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string Latitude
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Longitude
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdGeographicCoordinatesTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("b879a413-7f8e-4ada-a5dc-d2c04bf847da")]
+   [System.Runtime.InteropServices.GuidAttribute("7c65ba33-5d4f-4d6c-97c7-5033786ce26b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class UTMCoordinatesType : IUTMCoordinatesType
@@ -7650,12 +9866,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fb08324a-b4c3-456e-ae00-b18523c6831a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IUTMCoordinatesType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string UTMZone
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string UTMEastward
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string UTMNorthward
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdUTMCoordinatesTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("506ba80f-5250-40f0-9662-c1b2edd94b7f")]
+   [System.Runtime.InteropServices.GuidAttribute("50c72635-1c0c-496b-a77a-c54f3dd70677")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SensitiveMobileDataType : ISensitiveMobileDataType
@@ -7719,12 +9968,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f8931576-0dec-4a40-98e4-56f54475bd7c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISensitiveMobileDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string MSISDN
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string IMSI
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string IMEI
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdSensitiveMobileDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7a7dd31f-8907-4ba9-b722-9d21b8e052fe")]
+   [System.Runtime.InteropServices.GuidAttribute("193d4de8-8fbf-4354-bf06-647a1a702498")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAccountReqType : ILoyaltyAccountReqType
@@ -7773,12 +10055,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("82647262-e38c-4c4c-97a1-802afa2ce68c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAccountReqType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionIdentificationType CardAcquisitionReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      LoyaltyAccountIDType LoyaltyAccountID
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdLoyaltyAccountReqTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3b0c18f4-c60e-439d-bffb-f44a258f935c")]
+   [System.Runtime.InteropServices.GuidAttribute("c95970cb-fda7-41a8-8c56-22bf9154618b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAccountIDType : ILoyaltyAccountIDType
@@ -7980,12 +10288,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f5bd8044-d054-4839-b122-8045806a0b94")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAccountIDType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string[] EntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string IdentificationType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string IdentificationSupport
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdLoyaltyAccountIDTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int EntryModeSize();
+      [DispId(11)]
+      string EntryModeGetItem(int index);
+      [DispId(12)]
+      bool EntryModeSetItem(int index, string value);
+      [DispId(13)]
+      bool EntryModeAddItem(string value);
+      [DispId(14)]
+      bool EntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("92f309cb-9371-4961-b12b-0a43ca36b4d2")]
+   [System.Runtime.InteropServices.GuidAttribute("292840c2-9907-4c35-ac3b-f340415c2503")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class BalanceInquiryResponseType : IBalanceInquiryResponseType
@@ -8049,12 +10407,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("41161aee-71ec-4ab8-b5d5-f02a4c84d249")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IBalanceInquiryResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      PaymentAccountStatusType PaymentAccountStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      LoyaltyAccountStatusType LoyaltyAccountStatus
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdBalanceInquiryResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("5ddc3fc5-10f4-4d16-b5f3-7bf24e173ce5")]
+   [System.Runtime.InteropServices.GuidAttribute("7f732179-7e57-49ce-a66a-6f176f0fba98")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentAccountStatusType : IPaymentAccountStatusType
@@ -8164,12 +10555,66 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b9eb13f6-b3b2-40f5-9e45-267092724bbc")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentAccountStatusType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      PaymentInstrumentDataType PaymentInstrumentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      PaymentAcquirerDataType PaymentAcquirerData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      LoyaltyAccountStatusType LoyaltyAccountStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      double CurrentBalance
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool CurrentBalanceSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      bool xsdPaymentAccountStatusTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("299b656f-b949-49ff-9356-d11d073e55c2")]
+   [System.Runtime.InteropServices.GuidAttribute("bc7206d8-5100-4b01-923c-192c71bb2eab")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentAcquirerDataType : IPaymentAcquirerDataType
@@ -8263,12 +10708,59 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("27af93f1-7a89-4ee9-a9ba-99f4c1c3e563")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentAcquirerDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionIdentificationType AcquirerTransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ApprovalCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string MerchantID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string AcquirerPOIID
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdPaymentAcquirerDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d86dde5d-1c56-44de-bdd0-114b4de44a48")]
+   [System.Runtime.InteropServices.GuidAttribute("4bf442e5-40b9-48d1-b6df-ba44fbf25221")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAccountStatusType : ILoyaltyAccountStatusType
@@ -8368,12 +10860,59 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("e112be59-1d19-40f4-bca9-187932c4530f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAccountStatusType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      LoyaltyAccountType LoyaltyAccount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      double CurrentBalance
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool CurrentBalanceSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string LoyaltyUnit
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      bool xsdLoyaltyAccountStatusTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("bf045749-cdd9-446f-bfd6-2131472758dc")]
+   [System.Runtime.InteropServices.GuidAttribute("0a4a1020-d66a-46da-8aeb-c66d1ca761ed")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAccountType : ILoyaltyAccountType
@@ -8422,8 +10961,34 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5ddf8b99-1bfa-428a-a7af-34d016684a3c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAccountType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      LoyaltyAccountIDType LoyaltyAccountID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string LoyaltyBrand
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdLoyaltyAccountTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -8445,11 +11010,11 @@ namespace NEXO
       QRCODE,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("89b9c61b-c41e-40d3-9a45-2e87e1e1d33a")]
+   [System.Runtime.InteropServices.GuidAttribute("c9720c67-dc51-430f-931f-c2f194df880f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class BatchRequestType : IBatchRequestType
@@ -8637,12 +11202,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("84b743dd-7aa6-45c0-8fec-7a9f47f39159")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IBatchRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionToPerformType[] TransactionToPerform
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      bool RemoveAllFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool RemoveAllFlagSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdBatchRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int TransactionToPerformSize();
+      [DispId(9)]
+      TransactionToPerformType TransactionToPerformGetItem(int index);
+      [DispId(10)]
+      bool TransactionToPerformSetItem(int index, TransactionToPerformType value);
+      [DispId(11)]
+      bool TransactionToPerformAddItem(TransactionToPerformType value);
+      [DispId(12)]
+      bool TransactionToPerformRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("f103de27-7715-4514-bc39-aa9a66bb1f0b")]
+   [System.Runtime.InteropServices.GuidAttribute("ec8375fc-c072-455c-aaf0-d2f5ca4eb04f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionToPerformType : ITransactionToPerformType
@@ -8678,12 +11286,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b038ce3f-3c0d-4c77-94dc-a464c619453c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionToPerformType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      object Item
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdTransactionToPerformTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("af512f1a-eaac-4544-96fb-a51d8958cd0e")]
+   [System.Runtime.InteropServices.GuidAttribute("cda71315-e1e7-4d56-8ba5-bd48a87279ca")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyRequestType : ILoyaltyRequestType
@@ -8870,12 +11497,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fa667ba3-c102-493e-81ae-8e29786f45eb")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      LoyaltyTransactionType LoyaltyTransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      LoyaltyDataType[] LoyaltyData
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdLoyaltyRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int LoyaltyDataSize();
+      [DispId(9)]
+      LoyaltyDataType LoyaltyDataGetItem(int index);
+      [DispId(10)]
+      bool LoyaltyDataSetItem(int index, LoyaltyDataType value);
+      [DispId(11)]
+      bool LoyaltyDataAddItem(LoyaltyDataType value);
+      [DispId(12)]
+      bool LoyaltyDataRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c2443d38-f2b6-4ebd-b5a8-8fdd445606b5")]
+   [System.Runtime.InteropServices.GuidAttribute("2692c740-01cf-40a1-8be7-5beada2e9bf9")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleDataType : ISaleDataType
@@ -9335,12 +12005,135 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3d51c93a-34e9-4c9c-8c11-1577ad0e9b74")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionIdentificationType SaleTransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleTerminalDataType SaleTerminalData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      SponsoredMerchantType[] SponsoredMerchant
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string SaleToPOIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string SaleToAcquirerData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      SaleToIssuerDataType SaleToIssuerData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string OperatorID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string OperatorLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      string ShiftNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      string SaleReferenceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      string TokenRequestedType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(23)]
+      string CustomerOrderID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(25)]
+      string[] CustomerOrderReq
+      {
+         get;
+         set;
+      }
+      [DispId(27)]
+      bool xsdSaleDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(28)]
+      int SponsoredMerchantSize();
+      [DispId(29)]
+      SponsoredMerchantType SponsoredMerchantGetItem(int index);
+      [DispId(30)]
+      bool SponsoredMerchantSetItem(int index, SponsoredMerchantType value);
+      [DispId(31)]
+      bool SponsoredMerchantAddItem(SponsoredMerchantType value);
+      [DispId(32)]
+      bool SponsoredMerchantRemoveItem(int index);
+      [DispId(33)]
+      int CustomerOrderReqSize();
+      [DispId(34)]
+      string CustomerOrderReqGetItem(int index);
+      [DispId(35)]
+      bool CustomerOrderReqSetItem(int index, string value);
+      [DispId(36)]
+      bool CustomerOrderReqAddItem(string value);
+      [DispId(37)]
+      bool CustomerOrderReqRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("26bdbfbe-d3da-4b8f-96eb-762ec03919b3")]
+   [System.Runtime.InteropServices.GuidAttribute("630c2dbe-3280-4474-adaf-7b6755a092cf")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleTerminalDataType : ISaleTerminalDataType
@@ -9419,12 +12212,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fc965b42-e065-4537-aaeb-9ef953612cc8")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleTerminalDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string SaleCapabilities
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleProfileType SaleProfile
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string TerminalEnvironment
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string TotalsGroupID
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdSaleTerminalDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("f8cee5da-b122-4b35-b63a-4391b807a98f")]
+   [System.Runtime.InteropServices.GuidAttribute("bf81932b-396e-43b0-a9d8-13694d6960b6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleProfileType : ISaleProfileType
@@ -9478,12 +12311,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d0bd1de5-d633-4762-829d-841033fbf1a4")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleProfileType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string ServiceProfiles
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string GenericProfile
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      bool xsdSaleProfileTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("22af932a-13e8-4699-98a1-a12ad537effd")]
+   [System.Runtime.InteropServices.GuidAttribute("b63b1be8-2d6b-4b9b-9a53-eecd9e49089f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SponsoredMerchantType : ISponsoredMerchantType
@@ -9577,12 +12436,59 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("10a7b7c2-e6e3-47a4-838a-4e06ad116d25")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISponsoredMerchantType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string MerchantName
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string MerchantAddress
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string MerchantCountry
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string MerchantCategoryCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string RegistrationID
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdSponsoredMerchantTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2607e7a6-b9bb-4f25-a0ca-b91b5587eb8b")]
+   [System.Runtime.InteropServices.GuidAttribute("af821967-38c3-4d75-82cc-ad379b84a9f3")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleToIssuerDataType : ISaleToIssuerDataType
@@ -9616,12 +12522,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("232bf1dd-93f1-461a-9aa3-3d00be511b2e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleToIssuerDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string StatementReference
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdSaleToIssuerDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1ed5276f-71e7-4f82-93f9-7de22f63e677")]
+   [System.Runtime.InteropServices.GuidAttribute("e8e8efab-3d56-414e-9c73-4cf621d82cdc")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyTransactionType : ILoyaltyTransactionType
@@ -9869,12 +12794,83 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("950c88ca-72da-403a-8c12-fcb4c35e5c85")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyTransactionType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      OriginalPOITransactionType OriginalPOITransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TransactionConditionsType TransactionConditions
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      SaleItemType[] SaleItem
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string LoyaltyTransactionType1
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      double TotalAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      bool TotalAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdLoyaltyTransactionTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int SaleItemSize();
+      [DispId(17)]
+      SaleItemType SaleItemGetItem(int index);
+      [DispId(18)]
+      bool SaleItemSetItem(int index, SaleItemType value);
+      [DispId(19)]
+      bool SaleItemAddItem(SaleItemType value);
+      [DispId(20)]
+      bool SaleItemRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c9df2711-d847-4932-afca-5394a74184eb")]
+   [System.Runtime.InteropServices.GuidAttribute("b27af2f1-dcdf-44da-bb7a-ac076d8fbe7c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class OriginalPOITransactionType : IOriginalPOITransactionType
@@ -10018,12 +13014,80 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ac7edde9-da58-4ee3-8895-a4ca2a16b93f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IOriginalPOITransactionType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      TransactionIdentificationType POITransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string ApprovalCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      TransactionIdentificationType HostTransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string SaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool ReuseCardDataFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      string AcquirerID
+      {
+         get;
+         set;
+      }
+      [DispId(18)]
+      bool xsdOriginalPOITransactionTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2c946887-c159-4c36-bf18-b02b3f0969fa")]
+   [System.Runtime.InteropServices.GuidAttribute("acce39f9-92de-42af-80f8-754d78f7267c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionConditionsType : ITransactionConditionsType
@@ -10678,12 +13742,127 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("00137a41-6182-4d6f-a5cb-070be2f983a6")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionConditionsType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string[] AllowedPaymentBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string[] AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string[] AllowedLoyaltyBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string[] ForceEntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      bool DebitPreferredFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string LoyaltyHandling
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      bool ForceOnlineFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string MerchantCategoryCode
+      {
+         get;
+         set;
+      }
+      [DispId(20)]
+      bool xsdTransactionConditionsTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(21)]
+      int AllowedPaymentBrandSize();
+      [DispId(22)]
+      string AllowedPaymentBrandGetItem(int index);
+      [DispId(23)]
+      bool AllowedPaymentBrandSetItem(int index, string value);
+      [DispId(24)]
+      bool AllowedPaymentBrandAddItem(string value);
+      [DispId(25)]
+      bool AllowedPaymentBrandRemoveItem(int index);
+      [DispId(26)]
+      int AcquirerIDSize();
+      [DispId(27)]
+      string AcquirerIDGetItem(int index);
+      [DispId(28)]
+      bool AcquirerIDSetItem(int index, string value);
+      [DispId(29)]
+      bool AcquirerIDAddItem(string value);
+      [DispId(30)]
+      bool AcquirerIDRemoveItem(int index);
+      [DispId(31)]
+      int AllowedLoyaltyBrandSize();
+      [DispId(32)]
+      string AllowedLoyaltyBrandGetItem(int index);
+      [DispId(33)]
+      bool AllowedLoyaltyBrandSetItem(int index, string value);
+      [DispId(34)]
+      bool AllowedLoyaltyBrandAddItem(string value);
+      [DispId(35)]
+      bool AllowedLoyaltyBrandRemoveItem(int index);
+      [DispId(36)]
+      int ForceEntryModeSize();
+      [DispId(37)]
+      string ForceEntryModeGetItem(int index);
+      [DispId(38)]
+      bool ForceEntryModeSetItem(int index, string value);
+      [DispId(39)]
+      bool ForceEntryModeAddItem(string value);
+      [DispId(40)]
+      bool ForceEntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("f07a82de-9f44-41d8-b453-5d2e7ce2266b")]
+   [System.Runtime.InteropServices.GuidAttribute("70691a93-18dd-47af-b779-a907542b9909")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleItemType : ISaleItemType
@@ -10899,12 +14078,115 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("e102e24c-a598-4763-b958-fc4cf8350c76")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleItemType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string UnitOfMeasure
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double Quantity
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool QuantitySpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      double UnitPrice
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      bool UnitPriceSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string TaxCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string SaleChannel
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string ProductLabel
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      string AdditionalProductInfo
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      string ItemID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      string ProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(23)]
+      string EanUpc
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(25)]
+      double ItemAmount
+      {
+         get;
+         set;
+      }
+      [DispId(27)]
+      bool xsdSaleItemTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1c4466db-ae76-4d52-9e8d-909c86a9b04d")]
+   [System.Runtime.InteropServices.GuidAttribute("28128655-7818-43ee-a325-1f9e5f492c38")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyDataType : ILoyaltyDataType
@@ -10968,12 +14250,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("93577cf8-0dc7-43f7-bb50-35b936375a5b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionIdentificationType CardAcquisitionReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      LoyaltyAccountIDType LoyaltyAccountID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      LoyaltyAmountType LoyaltyAmount
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdLoyaltyDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("5993a2f6-84df-4428-a468-93301b248e1e")]
+   [System.Runtime.InteropServices.GuidAttribute("76e302eb-b4e7-4573-916c-5069b29cc241")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAmountType : ILoyaltyAmountType
@@ -11042,12 +14357,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("eaa085bb-3250-4eb7-b146-34dffa3a8741")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAmountType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string LoyaltyUnit
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      double Value
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdLoyaltyAmountTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("04a39f91-de31-4448-af7f-f49621b2e801")]
+   [System.Runtime.InteropServices.GuidAttribute("78ec23c3-ae04-4a2a-9fcb-e63b4015afbe")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentRequestType : IPaymentRequestType
@@ -11249,12 +14597,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("db5c0d7d-0ddf-4e6a-bcd8-1b7da7a0a483")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      PaymentTransactionType PaymentTransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      PaymentDataType PaymentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      LoyaltyDataType[] LoyaltyData
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPaymentRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int LoyaltyDataSize();
+      [DispId(11)]
+      LoyaltyDataType LoyaltyDataGetItem(int index);
+      [DispId(12)]
+      bool LoyaltyDataSetItem(int index, LoyaltyDataType value);
+      [DispId(13)]
+      bool LoyaltyDataAddItem(LoyaltyDataType value);
+      [DispId(14)]
+      bool LoyaltyDataRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("46fe45f4-cb75-40d5-b1ec-b9343fe6f257")]
+   [System.Runtime.InteropServices.GuidAttribute("8bab02d6-2983-499f-9d13-5d70b85379e8")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentTransactionType : IPaymentTransactionType
@@ -11456,12 +14854,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("df71c482-65ce-4d80-ad3e-4591859efcc1")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentTransactionType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      AmountsReqType AmountsReq
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      OriginalPOITransactionType OriginalPOITransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      TransactionConditionsType TransactionConditions
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      SaleItemType[] SaleItem
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPaymentTransactionTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int SaleItemSize();
+      [DispId(11)]
+      SaleItemType SaleItemGetItem(int index);
+      [DispId(12)]
+      bool SaleItemSetItem(int index, SaleItemType value);
+      [DispId(13)]
+      bool SaleItemAddItem(SaleItemType value);
+      [DispId(14)]
+      bool SaleItemRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3efedff5-7be8-4981-9b6a-ab6de8d8f6a0")]
+   [System.Runtime.InteropServices.GuidAttribute("387253da-4dbf-465d-abe0-3d317fe469d0")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentDataType : IPaymentDataType
@@ -11592,12 +15040,73 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f12744c4-c10d-42e8-95f4-0fe8804c9e1e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      TransactionIdentificationType CardAcquisitionReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string RequestedValidityDate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      InstalmentType Instalment
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      CustomerOrderType CustomerOrder
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      PaymentInstrumentDataType PaymentInstrumentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string PaymentType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      bool SplitPaymentFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      bool xsdPaymentDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("dbaf7de7-f1b7-44ab-8fbc-920662eb8429")]
+   [System.Runtime.InteropServices.GuidAttribute("d6450642-e56d-4205-b7f9-34eb27071702")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InstalmentType : IInstalmentType
@@ -11814,12 +15323,115 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fabf0bfd-c3fa-42db-8954-b75650c5146b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInstalmentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string InstalmentType1
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string SequenceNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string PlanID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string Period
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string PeriodUnit
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string FirstPaymentDate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string TotalNbOfPayments
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      double CumulativeAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      bool CumulativeAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      double FirstAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      bool FirstAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(23)]
+      double Charges
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(25)]
+      bool ChargesSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(27)]
+      bool xsdInstalmentTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7ef0964f-947b-485d-86a8-329c2a7ea609")]
+   [System.Runtime.InteropServices.GuidAttribute("5dc86028-65dd-4bc3-a6c6-32737331830f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ReversalRequestType : IReversalRequestType
@@ -11929,12 +15541,66 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fd67d8aa-6c21-4061-b913-fd1d51285932")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IReversalRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      OriginalPOITransactionType OriginalPOITransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      CustomerOrderType CustomerOrderID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string SaleReferenceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string ReversalReason
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      double ReversedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool ReversedAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      bool xsdReversalRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1b60f7d6-504e-4ced-8e7f-a746b55b8335")]
+   [System.Runtime.InteropServices.GuidAttribute("268fe900-9c20-4b50-bf1f-fec65fd5aee0")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class BatchResponseType : IBatchResponseType
@@ -12106,12 +15772,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d3f96f4a-60c9-4877-adc1-7d86b1cb5373")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IBatchResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      PerformedTransactionType[] PerformedTransaction
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdBatchResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int PerformedTransactionSize();
+      [DispId(7)]
+      PerformedTransactionType PerformedTransactionGetItem(int index);
+      [DispId(8)]
+      bool PerformedTransactionSetItem(int index, PerformedTransactionType value);
+      [DispId(9)]
+      bool PerformedTransactionAddItem(PerformedTransactionType value);
+      [DispId(10)]
+      bool PerformedTransactionRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7475963a-0272-4602-9b48-9b505fc6d3e7")]
+   [System.Runtime.InteropServices.GuidAttribute("405c4ff8-a016-4342-af25-7de4bbe07e8c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PerformedTransactionType : IPerformedTransactionType
@@ -12359,12 +16061,83 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("be3693ba-2b08-48dd-aec1-05f2a436a42a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPerformedTransactionType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      PaymentResultType PaymentResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      LoyaltyResultType[] LoyaltyResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      double ReversedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      bool ReversedAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdPerformedTransactionTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int LoyaltyResultSize();
+      [DispId(17)]
+      LoyaltyResultType LoyaltyResultGetItem(int index);
+      [DispId(18)]
+      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
+      [DispId(19)]
+      bool LoyaltyResultAddItem(LoyaltyResultType value);
+      [DispId(20)]
+      bool LoyaltyResultRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("469e16c3-fc57-44d7-bb8f-3666f312031c")]
+   [System.Runtime.InteropServices.GuidAttribute("167c37f9-2f23-41e9-ac1a-96fcf4686687")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POIDataType : IPOIDataType
@@ -12413,12 +16186,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("7dc38ec2-4152-4f9c-81bb-3bcca12a4b61")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOIDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      TransactionIdentificationType POITransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string POIReconciliationID
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdPOIDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3f314694-d11f-471d-a89f-c8b296981c4e")]
+   [System.Runtime.InteropServices.GuidAttribute("f214feda-8c3f-4f73-8833-614f619ce010")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentResultType : IPaymentResultType
@@ -12887,12 +16686,135 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5ca1b777-e8da-4a83-acef-1f6aa2cc940d")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentResultType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      PaymentInstrumentDataType PaymentInstrumentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      AmountsRespType AmountsResp
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      InstalmentType Instalment
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      CurrencyConversionType[] CurrencyConversion
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      CapturedSignatureType CapturedSignature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      ContentInformationType ProtectedSignature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      PaymentAcquirerDataType PaymentAcquirerData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      string PaymentType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      bool MerchantOverrideFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(22)]
+      bool OnlineFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(24)]
+      string[] AuthenticationMethod
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(26)]
+      string ValidityDate
+      {
+         get;
+         set;
+      }
+      [DispId(28)]
+      bool xsdPaymentResultTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(29)]
+      int CurrencyConversionSize();
+      [DispId(30)]
+      CurrencyConversionType CurrencyConversionGetItem(int index);
+      [DispId(31)]
+      bool CurrencyConversionSetItem(int index, CurrencyConversionType value);
+      [DispId(32)]
+      bool CurrencyConversionAddItem(CurrencyConversionType value);
+      [DispId(33)]
+      bool CurrencyConversionRemoveItem(int index);
+      [DispId(34)]
+      int AuthenticationMethodSize();
+      [DispId(35)]
+      string AuthenticationMethodGetItem(int index);
+      [DispId(36)]
+      bool AuthenticationMethodSetItem(int index, string value);
+      [DispId(37)]
+      bool AuthenticationMethodAddItem(string value);
+      [DispId(38)]
+      bool AuthenticationMethodRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("15ef1abf-a443-4863-82a0-248481240a4d")]
+   [System.Runtime.InteropServices.GuidAttribute("07d1a6c8-ceaf-43e5-a19e-b766718ac284")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CurrencyConversionType : ICurrencyConversionType
@@ -13054,12 +16976,87 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("584ab6ea-aa1a-4fcd-ad52-f332d7271a5e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICurrencyConversionType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      AmountType ConvertedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      double Commission
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool CommissionSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string Declaration
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      bool CustomerApprovedFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      double Rate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      bool RateSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      double Markup
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      bool MarkupSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(20)]
+      bool xsdCurrencyConversionTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("857acdbb-f9f9-46e9-a8dd-57b02a941011")]
+   [System.Runtime.InteropServices.GuidAttribute("5ac257ea-c705-465f-9e7d-4ad6d5e7fd59")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class AmountType : IAmountType
@@ -13108,12 +17105,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d8b68fa3-b0c6-4362-8dab-6410a310cdf1")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IAmountType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double Value
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdAmountTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("069a6e92-e416-49b3-a1dc-67b0f7c444b8")]
+   [System.Runtime.InteropServices.GuidAttribute("f1688d8c-7cde-4147-ac87-e5798869d201")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CapturedSignatureType : ICapturedSignatureType
@@ -13285,12 +17308,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f7f4b2e0-69db-4163-aa90-9203080d7802")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICapturedSignatureType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      AreaSizeType AreaSize
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SignaturePointType[] SignaturePoint
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdCapturedSignatureTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int SignaturePointSize();
+      [DispId(7)]
+      SignaturePointType SignaturePointGetItem(int index);
+      [DispId(8)]
+      bool SignaturePointSetItem(int index, SignaturePointType value);
+      [DispId(9)]
+      bool SignaturePointAddItem(SignaturePointType value);
+      [DispId(10)]
+      bool SignaturePointRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("228c8010-84e5-423b-99ce-ce7b6a3cb4a6")]
+   [System.Runtime.InteropServices.GuidAttribute("91f7dba6-f1e2-45a8-a296-07f397096e8a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SignaturePointType : ISignaturePointType
@@ -13339,12 +17398,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("9466d11b-42d8-4b28-a003-422a17a98060")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISignaturePointType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string X
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Y
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdSignaturePointTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3153f2cd-6206-4a99-8587-864d6d7e792f")]
+   [System.Runtime.InteropServices.GuidAttribute("197d3e62-2e24-461a-909e-5da35fded19f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyResultType : ILoyaltyResultType
@@ -13454,12 +17539,66 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("612fe266-6c6a-443f-beed-38aad0e44595")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyResultType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      LoyaltyAccountType LoyaltyAccount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      LoyaltyAmountType LoyaltyAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      LoyaltyAcquirerDataType LoyaltyAcquirerData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      RebatesType Rebates
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      double CurrentBalance
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool CurrentBalanceSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      bool xsdLoyaltyResultTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a63a2994-9341-4e8f-a754-1d898a51491f")]
+   [System.Runtime.InteropServices.GuidAttribute("d7570cf3-5870-40f4-baba-3703b7464e6a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyAcquirerDataType : ILoyaltyAcquirerDataType
@@ -13538,12 +17677,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("197e8e4d-37f3-4a25-b9bb-0382a223d2ce")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyAcquirerDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ApprovalCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TransactionIdentificationType LoyaltyTransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string LoyaltyAcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string HostReconciliationID
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdLoyaltyAcquirerDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("adbbde63-e8f8-4a78-8917-c79e17afc7db")]
+   [System.Runtime.InteropServices.GuidAttribute("af012a5e-2c7b-48af-8384-1b8527c954dd")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class RebatesType : IRebatesType
@@ -13746,12 +17925,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("bbdcd720-e476-4a72-a75b-72b81d88e6d2")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IRebatesType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      double TotalRebate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      bool TotalRebateSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string RebateLabel
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      SaleItemRebateType[] SaleItemRebate
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdRebatesTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int SaleItemRebateSize();
+      [DispId(11)]
+      SaleItemRebateType SaleItemRebateGetItem(int index);
+      [DispId(12)]
+      bool SaleItemRebateSetItem(int index, SaleItemRebateType value);
+      [DispId(13)]
+      bool SaleItemRebateAddItem(SaleItemRebateType value);
+      [DispId(14)]
+      bool SaleItemRebateRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("fc7c9f42-4a64-425f-96e0-75c0c99cdefa")]
+   [System.Runtime.InteropServices.GuidAttribute("6790a504-53a9-4402-81be-ca405c242373")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleItemRebateType : ISaleItemRebateType
@@ -13907,12 +18136,87 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("c6bad267-6d41-4a3a-8b48-08619ab8a767")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleItemRebateType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string UnitOfMeasure
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double Quantity
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool QuantitySpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string RebateLabel
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string ItemID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string ProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string EanUpc
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      double ItemAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      bool ItemAmountSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(19)]
+      bool xsdSaleItemRebateTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("822cbccf-5241-43ae-bd9b-824c4aa9b4c2")]
+   [System.Runtime.InteropServices.GuidAttribute("8d0426ae-d376-4dfb-9400-d860591d0d12")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardAcquisitionRequestType : ICardAcquisitionRequestType
@@ -13961,12 +18265,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("4f56ba5f-d58f-4a39-8612-eded36c790dd")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardAcquisitionRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      CardAcquisitionTransactionType CardAcquisitionTransaction
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdCardAcquisitionRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("dfb27d29-b2e5-44be-85c6-d7467f7f6dee")]
+   [System.Runtime.InteropServices.GuidAttribute("a9c4fac7-8aaf-4997-a73c-af5d5c678b0f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardAcquisitionTransactionType : ICardAcquisitionTransactionType
@@ -14528,12 +18858,131 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3a1032c6-9336-4457-878b-b955179516a7")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardAcquisitionTransactionType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string[] AllowedPaymentBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string[] AllowedLoyaltyBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string[] ForceEntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string LoyaltyHandling
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool ForceCustomerSelectionFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      double TotalAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      bool TotalAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string PaymentType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      bool CashBackFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(22)]
+      bool CashBackFlagSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(24)]
+      bool xsdCardAcquisitionTransactionTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(25)]
+      int AllowedPaymentBrandSize();
+      [DispId(26)]
+      string AllowedPaymentBrandGetItem(int index);
+      [DispId(27)]
+      bool AllowedPaymentBrandSetItem(int index, string value);
+      [DispId(28)]
+      bool AllowedPaymentBrandAddItem(string value);
+      [DispId(29)]
+      bool AllowedPaymentBrandRemoveItem(int index);
+      [DispId(30)]
+      int AllowedLoyaltyBrandSize();
+      [DispId(31)]
+      string AllowedLoyaltyBrandGetItem(int index);
+      [DispId(32)]
+      bool AllowedLoyaltyBrandSetItem(int index, string value);
+      [DispId(33)]
+      bool AllowedLoyaltyBrandAddItem(string value);
+      [DispId(34)]
+      bool AllowedLoyaltyBrandRemoveItem(int index);
+      [DispId(35)]
+      int ForceEntryModeSize();
+      [DispId(36)]
+      string ForceEntryModeGetItem(int index);
+      [DispId(37)]
+      bool ForceEntryModeSetItem(int index, string value);
+      [DispId(38)]
+      bool ForceEntryModeAddItem(string value);
+      [DispId(39)]
+      bool ForceEntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1e4a80b6-230b-46d1-8838-61a3b1d653e9")]
+   [System.Runtime.InteropServices.GuidAttribute("a8b03b72-786c-483c-8f80-540c9dcd720e")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardAcquisitionResponseType : ICardAcquisitionResponseType
@@ -15026,12 +19475,103 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("0cfaf4d6-026b-426b-bb4e-a484b94f2c24")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardAcquisitionResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string[] PaymentBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      PaymentInstrumentDataType PaymentInstrumentData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      LoyaltyAccountType[] LoyaltyAccount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      CustomerOrderType[] CustomerOrder
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdCardAcquisitionResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int PaymentBrandSize();
+      [DispId(17)]
+      string PaymentBrandGetItem(int index);
+      [DispId(18)]
+      bool PaymentBrandSetItem(int index, string value);
+      [DispId(19)]
+      bool PaymentBrandAddItem(string value);
+      [DispId(20)]
+      bool PaymentBrandRemoveItem(int index);
+      [DispId(21)]
+      int LoyaltyAccountSize();
+      [DispId(22)]
+      LoyaltyAccountType LoyaltyAccountGetItem(int index);
+      [DispId(23)]
+      bool LoyaltyAccountSetItem(int index, LoyaltyAccountType value);
+      [DispId(24)]
+      bool LoyaltyAccountAddItem(LoyaltyAccountType value);
+      [DispId(25)]
+      bool LoyaltyAccountRemoveItem(int index);
+      [DispId(26)]
+      int CustomerOrderSize();
+      [DispId(27)]
+      CustomerOrderType CustomerOrderGetItem(int index);
+      [DispId(28)]
+      bool CustomerOrderSetItem(int index, CustomerOrderType value);
+      [DispId(29)]
+      bool CustomerOrderAddItem(CustomerOrderType value);
+      [DispId(30)]
+      bool CustomerOrderRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("b3cacd01-2c68-469c-8ec7-4882a52a9061")]
+   [System.Runtime.InteropServices.GuidAttribute("18caed68-2408-4f35-91f1-94445128a035")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardholderPINType : ICardholderPINType
@@ -15095,12 +19635,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("1b399dbd-116a-4382-8dfe-482fff0e7e57")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardholderPINType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ContentInformationType EncrPINBlock
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string PINFormat
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string AdditionalInput
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdCardholderPINTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ef20d196-5eab-4ab1-bbfb-68aa2b05c0e4")]
+   [System.Runtime.InteropServices.GuidAttribute("b5968671-0272-4be2-b6db-ac3598b7e5ad")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderAPDURequestType : ICardReaderAPDURequestType
@@ -15947,12 +20520,126 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("626fba72-9f76-42e2-93d1-94abcbdb4c8b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderAPDURequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      byte[] APDUData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      byte[] APDUClass
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      byte[] APDUInstruction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      byte[] APDUPar1
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      byte[] APDUPar2
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      byte[] APDUExpectedLength
+      {
+         get;
+         set;
+      }
+      [DispId(13)]
+      bool xsdCardReaderAPDURequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(14)]
+      int APDUDataSize();
+      [DispId(15)]
+      byte APDUDataGetItem(int index);
+      [DispId(16)]
+      bool APDUDataSetItem(int index, byte value);
+      [DispId(17)]
+      bool APDUDataAddItem(byte value);
+      [DispId(18)]
+      bool APDUDataRemoveItem(int index);
+      [DispId(19)]
+      int APDUClassSize();
+      [DispId(20)]
+      byte APDUClassGetItem(int index);
+      [DispId(21)]
+      bool APDUClassSetItem(int index, byte value);
+      [DispId(22)]
+      bool APDUClassAddItem(byte value);
+      [DispId(23)]
+      bool APDUClassRemoveItem(int index);
+      [DispId(24)]
+      int APDUInstructionSize();
+      [DispId(25)]
+      byte APDUInstructionGetItem(int index);
+      [DispId(26)]
+      bool APDUInstructionSetItem(int index, byte value);
+      [DispId(27)]
+      bool APDUInstructionAddItem(byte value);
+      [DispId(28)]
+      bool APDUInstructionRemoveItem(int index);
+      [DispId(29)]
+      int APDUPar1Size();
+      [DispId(30)]
+      byte APDUPar1GetItem(int index);
+      [DispId(31)]
+      bool APDUPar1SetItem(int index, byte value);
+      [DispId(32)]
+      bool APDUPar1AddItem(byte value);
+      [DispId(33)]
+      bool APDUPar1RemoveItem(int index);
+      [DispId(34)]
+      int APDUPar2Size();
+      [DispId(35)]
+      byte APDUPar2GetItem(int index);
+      [DispId(36)]
+      bool APDUPar2SetItem(int index, byte value);
+      [DispId(37)]
+      bool APDUPar2AddItem(byte value);
+      [DispId(38)]
+      bool APDUPar2RemoveItem(int index);
+      [DispId(39)]
+      int APDUExpectedLengthSize();
+      [DispId(40)]
+      byte APDUExpectedLengthGetItem(int index);
+      [DispId(41)]
+      bool APDUExpectedLengthSetItem(int index, byte value);
+      [DispId(42)]
+      bool APDUExpectedLengthAddItem(byte value);
+      [DispId(43)]
+      bool APDUExpectedLengthRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ae482b79-f565-444f-ae43-c6516f1f8202")]
+   [System.Runtime.InteropServices.GuidAttribute("2675722d-2df4-4b97-a222-da0947d589ef")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderAPDUResponseType : ICardReaderAPDUResponseType
@@ -16262,12 +20949,65 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("73aef52f-a490-4b6f-856d-c399a8674f04")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderAPDUResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      byte[] APDUData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      byte[] CardStatusWords
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdCardReaderAPDUResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int APDUDataSize();
+      [DispId(9)]
+      byte APDUDataGetItem(int index);
+      [DispId(10)]
+      bool APDUDataSetItem(int index, byte value);
+      [DispId(11)]
+      bool APDUDataAddItem(byte value);
+      [DispId(12)]
+      bool APDUDataRemoveItem(int index);
+      [DispId(13)]
+      int CardStatusWordsSize();
+      [DispId(14)]
+      byte CardStatusWordsGetItem(int index);
+      [DispId(15)]
+      bool CardStatusWordsSetItem(int index, byte value);
+      [DispId(16)]
+      bool CardStatusWordsAddItem(byte value);
+      [DispId(17)]
+      bool CardStatusWordsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2123971e-bc85-4675-b5c0-204115f2e92a")]
+   [System.Runtime.InteropServices.GuidAttribute("a0cc53e0-93f4-4335-a7d3-8f52d3c24b0c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderInitRequestType : ICardReaderInitRequestType
@@ -16505,12 +21245,76 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("c292691e-8963-4306-aa8f-8f9ff0dc37da")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderInitRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string[] ForceEntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool WarmResetFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      bool WarmResetFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      bool LeaveCardFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string MaxWaitingTime
+      {
+         get;
+         set;
+      }
+      [DispId(14)]
+      bool xsdCardReaderInitRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      int ForceEntryModeSize();
+      [DispId(16)]
+      string ForceEntryModeGetItem(int index);
+      [DispId(17)]
+      bool ForceEntryModeSetItem(int index, string value);
+      [DispId(18)]
+      bool ForceEntryModeAddItem(string value);
+      [DispId(19)]
+      bool ForceEntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("bc6435c8-6806-4ba3-b600-99108f0e0f02")]
+   [System.Runtime.InteropServices.GuidAttribute("c633e626-93d2-4c38-a1ba-4489859d1f4a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderInitResponseType : ICardReaderInitResponseType
@@ -16835,12 +21639,72 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("1b03df4d-6f68-4034-93e9-4b2dce787cfc")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderInitResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TrackDataType[] TrackData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      ICCResetDataType ICCResetData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string[] EntryMode
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdCardReaderInitResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int TrackDataSize();
+      [DispId(11)]
+      TrackDataType TrackDataGetItem(int index);
+      [DispId(12)]
+      bool TrackDataSetItem(int index, TrackDataType value);
+      [DispId(13)]
+      bool TrackDataAddItem(TrackDataType value);
+      [DispId(14)]
+      bool TrackDataRemoveItem(int index);
+      [DispId(15)]
+      int EntryModeSize();
+      [DispId(16)]
+      string EntryModeGetItem(int index);
+      [DispId(17)]
+      bool EntryModeSetItem(int index, string value);
+      [DispId(18)]
+      bool EntryModeAddItem(string value);
+      [DispId(19)]
+      bool EntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d0a86485-7281-47c9-94c0-a41b5338b5e2")]
+   [System.Runtime.InteropServices.GuidAttribute("4c684b5a-15af-4d09-a000-1ea3bcc3cf5d")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ICCResetDataType : IICCResetDataType
@@ -17135,12 +21999,58 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("4e5e1175-c243-4a5e-ad98-2beca5d5aea4")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IICCResetDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      byte[] ATRValue
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      byte[] CardStatusWords
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdICCResetDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int ATRValueSize();
+      [DispId(7)]
+      byte ATRValueGetItem(int index);
+      [DispId(8)]
+      bool ATRValueSetItem(int index, byte value);
+      [DispId(9)]
+      bool ATRValueAddItem(byte value);
+      [DispId(10)]
+      bool ATRValueRemoveItem(int index);
+      [DispId(11)]
+      int CardStatusWordsSize();
+      [DispId(12)]
+      byte CardStatusWordsGetItem(int index);
+      [DispId(13)]
+      bool CardStatusWordsSetItem(int index, byte value);
+      [DispId(14)]
+      bool CardStatusWordsAddItem(byte value);
+      [DispId(15)]
+      bool CardStatusWordsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("0d3cbd35-823f-4540-9ff7-27ad18e543e2")]
+   [System.Runtime.InteropServices.GuidAttribute("f1489ab1-2a7f-4c9c-9b6e-98a0e6f4fb68")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderPowerOffRequestType : ICardReaderPowerOffRequestType
@@ -17189,12 +22099,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("e78b0b05-1e0a-4dc5-837a-43e145f14e1b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderPowerOffRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string MaxWaitingTime
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdCardReaderPowerOffRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("fb632755-e75e-431f-886b-4b88bb0e511a")]
+   [System.Runtime.InteropServices.GuidAttribute("b963dd75-acb2-42d8-8410-7ec02e535984")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CardReaderPowerOffResponseType : ICardReaderPowerOffResponseType
@@ -17228,12 +22164,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("db906b66-3eb9-4290-a31e-60c114b55593")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICardReaderPowerOffResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdCardReaderPowerOffResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1e729962-61e2-4666-96fa-ce678aa97c89")]
+   [System.Runtime.InteropServices.GuidAttribute("463881ac-fd66-48df-ad5c-63bb0ffd1e76")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CashHandlingDeviceType : ICashHandlingDeviceType
@@ -17420,12 +22375,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("107b91e1-225e-45b7-a902-4001a733d897")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICashHandlingDeviceType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      CoinsOrBillsType[] CoinsOrBills
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      bool CashHandlingOKFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdCashHandlingDeviceTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int CoinsOrBillsSize();
+      [DispId(9)]
+      CoinsOrBillsType CoinsOrBillsGetItem(int index);
+      [DispId(10)]
+      bool CoinsOrBillsSetItem(int index, CoinsOrBillsType value);
+      [DispId(11)]
+      bool CoinsOrBillsAddItem(CoinsOrBillsType value);
+      [DispId(12)]
+      bool CoinsOrBillsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("79760347-99c5-4f1d-a06f-572e5ddb8c81")]
+   [System.Runtime.InteropServices.GuidAttribute("70484ac5-c9bb-4ac6-b745-898dede0b770")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class CoinsOrBillsType : ICoinsOrBillsType
@@ -17474,8 +22472,34 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("72379210-8b3e-4c80-b255-0c0e2c6259c0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ICoinsOrBillsType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      double UnitValue
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Number
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdCoinsOrBillsTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17489,7 +22513,7 @@ namespace NEXO
       HalfHeight,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17505,7 +22529,7 @@ namespace NEXO
       Underlined,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17517,7 +22541,7 @@ namespace NEXO
       DoubleWidth,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17529,7 +22553,7 @@ namespace NEXO
       Company,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17553,7 +22577,7 @@ namespace NEXO
       Cyan,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17567,7 +22591,7 @@ namespace NEXO
       Both,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -17583,11 +22607,11 @@ namespace NEXO
       CustomerInput,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c2ad797b-8671-4974-b98f-1300a37a1a66")]
+   [System.Runtime.InteropServices.GuidAttribute("4d662f2f-b1ab-4b20-af22-343fa50b280c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DiagnosisRequestType : IDiagnosisRequestType
@@ -17779,12 +22803,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f201b61b-3e00-4328-b58a-e4143389d0c7")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDiagnosisRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string[] AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool HostDiagnosisFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdDiagnosisRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      int AcquirerIDSize();
+      [DispId(10)]
+      string AcquirerIDGetItem(int index);
+      [DispId(11)]
+      bool AcquirerIDSetItem(int index, string value);
+      [DispId(12)]
+      bool AcquirerIDAddItem(string value);
+      [DispId(13)]
+      bool AcquirerIDRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a88f47a6-5d42-43ac-85a9-09d03f5dcbe7")]
+   [System.Runtime.InteropServices.GuidAttribute("a03fe04a-83df-43b8-b6c4-338717334ee5")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class DiagnosisResponseType : IDiagnosisResponseType
@@ -18109,12 +23176,72 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("8c810819-89f7-47d8-abdd-37a0d61b042b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IDiagnosisResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string[] LoggedSaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIStatusType POIStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      HostStatusType[] HostStatus
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdDiagnosisResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int LoggedSaleIDSize();
+      [DispId(11)]
+      string LoggedSaleIDGetItem(int index);
+      [DispId(12)]
+      bool LoggedSaleIDSetItem(int index, string value);
+      [DispId(13)]
+      bool LoggedSaleIDAddItem(string value);
+      [DispId(14)]
+      bool LoggedSaleIDRemoveItem(int index);
+      [DispId(15)]
+      int HostStatusSize();
+      [DispId(16)]
+      HostStatusType HostStatusGetItem(int index);
+      [DispId(17)]
+      bool HostStatusSetItem(int index, HostStatusType value);
+      [DispId(18)]
+      bool HostStatusAddItem(HostStatusType value);
+      [DispId(19)]
+      bool HostStatusRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("529829e4-c1cf-4a1f-b460-250e2ed3d18a")]
+   [System.Runtime.InteropServices.GuidAttribute("3db0c603-6a28-4fb2-9276-475318708c08")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POIStatusType : IPOIStatusType
@@ -18456,12 +23583,125 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("23715819-bc81-4dd6-a138-ca3c666b72a4")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOIStatusType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      CashHandlingDeviceType[] CashHandlingDevice
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string GlobalStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool SecurityOKFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      bool SecurityOKFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      bool PEDOKFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool PEDOKFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      bool CardReaderOKFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      bool CardReaderOKFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(17)]
+      string PrinterStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(19)]
+      bool CommunicationOKFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(21)]
+      bool CommunicationOKFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(23)]
+      bool FraudPreventionFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(25)]
+      bool FraudPreventionFlagSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(27)]
+      bool xsdPOIStatusTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(28)]
+      int CashHandlingDeviceSize();
+      [DispId(29)]
+      CashHandlingDeviceType CashHandlingDeviceGetItem(int index);
+      [DispId(30)]
+      bool CashHandlingDeviceSetItem(int index, CashHandlingDeviceType value);
+      [DispId(31)]
+      bool CashHandlingDeviceAddItem(CashHandlingDeviceType value);
+      [DispId(32)]
+      bool CashHandlingDeviceRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ca71de09-ccac-499a-b95f-44f5e3af5425")]
+   [System.Runtime.InteropServices.GuidAttribute("7bf107dc-5050-4f90-ba1b-8f4e48eb32d1")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class HostStatusType : IHostStatusType
@@ -18515,8 +23755,34 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("0e58d551-41cd-4f9e-9350-7970cd834e62")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IHostStatusType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      bool IsReachableFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      bool xsdHostStatusTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -18536,11 +23802,11 @@ namespace NEXO
       Journal,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("e606301a-e9c5-4055-b24c-9a909c231e97")]
+   [System.Runtime.InteropServices.GuidAttribute("6fe5d13e-f747-4851-907c-c23bd7352728")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EnableServiceRequestType : IEnableServiceRequestType
@@ -18604,12 +23870,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("f9be7fea-a6d8-458b-bbb0-c32cff263b4a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEnableServiceRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ServicesEnabled
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string TransactionAction
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdEnableServiceRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2a8dd641-8d11-4b1b-9667-31d6b5187346")]
+   [System.Runtime.InteropServices.GuidAttribute("f7da4a50-bf65-4491-b4cd-8c1cee885b3e")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EnableServiceResponseType : IEnableServiceResponseType
@@ -18643,8 +23942,27 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("16da27e5-0a5b-4129-9e1c-c1d9f91a08fa")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEnableServiceResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdEnableServiceResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -18674,7 +23992,7 @@ namespace NEXO
       Mobile,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -18716,11 +24034,11 @@ namespace NEXO
       WrongPIN,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("502047df-5c0a-4760-9f73-aa0b583cd4f4")]
+   [System.Runtime.InteropServices.GuidAttribute("820ba772-c6b2-43f4-99f3-0c6c890eecff")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class EventNotificationType : IEventNotificationType
@@ -18972,8 +24290,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("a41d33a9-c040-424b-8fd0-5160592282d7")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IEventNotificationType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string EventDetails
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      byte[] RejectedMessage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string TimeStamp
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string EventToNotify
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool MaintenanceRequiredFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      bool xsdEventNotificationTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      int RejectedMessageSize();
+      [DispId(18)]
+      byte RejectedMessageGetItem(int index);
+      [DispId(19)]
+      bool RejectedMessageSetItem(int index, byte value);
+      [DispId(20)]
+      bool RejectedMessageAddItem(byte value);
+      [DispId(21)]
+      bool RejectedMessageRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -19013,7 +24402,7 @@ namespace NEXO
       Reject,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -19043,7 +24432,7 @@ namespace NEXO
       CheckReader,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -19057,11 +24446,11 @@ namespace NEXO
       Extended,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("408b9e3a-e6b6-4580-84e4-d6311e364bf2")]
+   [System.Runtime.InteropServices.GuidAttribute("6590318c-0aef-4a82-9e31-b341c62c8df5")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class GetTotalsRequestType : IGetTotalsRequestType
@@ -19110,12 +24499,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ee17612a-7fe4-43c3-a104-d2d077c1e319")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IGetTotalsRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string TotalDetails
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TotalFilterType TotalFilter
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdGetTotalsRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c120b888-1fb1-475a-9c3d-7fc37f952bf3")]
+   [System.Runtime.InteropServices.GuidAttribute("56f016df-b061-4b14-9cae-a94db5230cf9")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TotalFilterType : ITotalFilterType
@@ -19209,12 +24624,59 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("051b248b-2adc-4d7c-bbea-4f8b69882f57")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITotalFilterType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string SaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string OperatorID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string ShiftNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string TotalsGroupID
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdTotalFilterTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a11e2486-a6f2-4411-8b70-5b48d87d4b89")]
+   [System.Runtime.InteropServices.GuidAttribute("59a42f55-4143-4ad4-9074-42de4a84b384")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class GetTotalsResponseType : IGetTotalsResponseType
@@ -19401,12 +24863,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("bd569636-a116-433f-bb32-7fd9dadb73e8")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IGetTotalsResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TransactionTotalsType[] TransactionTotals
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string POIReconciliationID
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdGetTotalsResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int TransactionTotalsSize();
+      [DispId(9)]
+      TransactionTotalsType TransactionTotalsGetItem(int index);
+      [DispId(10)]
+      bool TransactionTotalsSetItem(int index, TransactionTotalsType value);
+      [DispId(11)]
+      bool TransactionTotalsAddItem(TransactionTotalsType value);
+      [DispId(12)]
+      bool TransactionTotalsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1e0fdc7a-9def-4147-8a27-a469c2a201a5")]
+   [System.Runtime.InteropServices.GuidAttribute("72b1c9cd-d9ad-4a88-8fd7-5919c1938d1a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionTotalsType : ITransactionTotalsType
@@ -19901,12 +25406,149 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ed0927ed-163b-4238-b657-57589bbdf721")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionTotalsType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      PaymentTotalsType[] PaymentTotals
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      LoyaltyTotalsType[] LoyaltyTotals
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string PaymentInstrumentType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string ErrorCondition
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string HostReconciliationID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string CardBrand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string SaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      string OperatorID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(22)]
+      string ShiftNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(24)]
+      string TotalsGroupID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(26)]
+      string PaymentCurrency
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(28)]
+      string LoyaltyUnit
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(30)]
+      string LoyaltyCurrency
+      {
+         get;
+         set;
+      }
+      [DispId(32)]
+      bool xsdTransactionTotalsTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(33)]
+      int PaymentTotalsSize();
+      [DispId(34)]
+      PaymentTotalsType PaymentTotalsGetItem(int index);
+      [DispId(35)]
+      bool PaymentTotalsSetItem(int index, PaymentTotalsType value);
+      [DispId(36)]
+      bool PaymentTotalsAddItem(PaymentTotalsType value);
+      [DispId(37)]
+      bool PaymentTotalsRemoveItem(int index);
+      [DispId(38)]
+      int LoyaltyTotalsSize();
+      [DispId(39)]
+      LoyaltyTotalsType LoyaltyTotalsGetItem(int index);
+      [DispId(40)]
+      bool LoyaltyTotalsSetItem(int index, LoyaltyTotalsType value);
+      [DispId(41)]
+      bool LoyaltyTotalsAddItem(LoyaltyTotalsType value);
+      [DispId(42)]
+      bool LoyaltyTotalsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("dfa62bd8-3fbf-46c9-8575-38d2cf65fe71")]
+   [System.Runtime.InteropServices.GuidAttribute("b3bc2997-6de8-4394-96c2-42a7539180b2")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentTotalsType : IPaymentTotalsType
@@ -19970,12 +25612,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("04a9dd3c-37b7-4034-b818-295529eb03df")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentTotalsType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string TransactionType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string TransactionCount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      double TransactionAmount
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdPaymentTotalsTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("5e9188f1-8b72-4b0a-a4a6-a6b44c246715")]
+   [System.Runtime.InteropServices.GuidAttribute("cccd6d84-841f-4abb-a1d9-62acbb559735")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyTotalsType : ILoyaltyTotalsType
@@ -20039,8 +25714,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("1a091426-ba9d-4ff5-82a5-b9944860a2ee")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyTotalsType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string TransactionType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string TransactionCount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      double TransactionAmount
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdLoyaltyTotalsTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -20056,7 +25764,7 @@ namespace NEXO
       Unreachable,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -20072,7 +25780,7 @@ namespace NEXO
       LinkedCard,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -20090,7 +25798,7 @@ namespace NEXO
       PhoneNumber,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -20118,11 +25826,11 @@ namespace NEXO
       Voucher,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d8dbabdd-31f6-43c6-a247-e8e80a512e96")]
+   [System.Runtime.InteropServices.GuidAttribute("740fe628-e000-41f8-a505-1c1dd1177292")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputType : IInputType
@@ -20262,8 +25970,76 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("bebd909e-dd25-4eb4-a9d0-9e3b91446a42")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      bool ConfirmedFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      bool ConfirmedFlagSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string FunctionKey
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string TextInput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string DigitInput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      ContentInformationType Password
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string MenuEntryNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string InputCommand
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      bool xsdInputTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -20289,11 +26065,11 @@ namespace NEXO
       Password,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7516bff7-c3f8-4a3f-a690-f024530d869c")]
+   [System.Runtime.InteropServices.GuidAttribute("88acce3b-d6fc-4b2c-8160-428bb2f70f51")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputDataType : IInputDataType
@@ -20637,12 +26413,164 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("178a7bf4-0da9-444b-87e0-dcf18e934bf8")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputDataType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string DefaultInputString
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string StringMask
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string Device
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string InfoQualify
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string InputCommand
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool NotifyCardInputFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string MaxInputTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      bool ImmediateResponseFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string MinLength
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      string MaxLength
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(22)]
+      string MaxDecimalLength
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(24)]
+      bool WaitUserValidationFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(26)]
+      bool FromRightToLeftFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(28)]
+      bool MaskCharactersFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(30)]
+      bool BeepKeyFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(32)]
+      bool GlobalCorrectionFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(34)]
+      bool DisableCancelFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(36)]
+      bool DisableCorrectFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(38)]
+      bool DisableValidFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(40)]
+      bool MenuBackFlag
+      {
+         get;
+         set;
+      }
+      [DispId(42)]
+      bool xsdInputDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("828fc892-3d14-4887-a367-a2a1227c7ad5")]
+   [System.Runtime.InteropServices.GuidAttribute("5ae52fa7-2f64-4483-928f-0d7da892f37b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputRequestType : IInputRequestType
@@ -20691,12 +26619,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d1ac694f-ace8-451f-a49e-bc9025f002dd")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      DisplayOutputType DisplayOutput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      InputDataType InputData
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdInputRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("c1592b0c-a76b-4371-b24d-de1a11fceba3")]
+   [System.Runtime.InteropServices.GuidAttribute("f7c0259a-51ff-4193-b910-837e524c108c")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputResponseType : IInputResponseType
@@ -20745,12 +26699,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("bd2376b6-9c98-4f71-bb21-2b805ef9fbc3")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      OutputResultType OutputResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      InputResultType InputResult
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdInputResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("299fdc8b-842f-4790-b327-01b16ce0cfa9")]
+   [System.Runtime.InteropServices.GuidAttribute("c6ad29c7-1ea9-41cb-bc4b-03a7a0874e1f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputResultType : IInputResultType
@@ -20829,12 +26809,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("245a5072-2688-4c33-8e73-d19828a5bac2")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputResultType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      InputType Input
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string Device
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string InfoQualify
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdInputResultTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("97b06674-cce7-4345-a453-f5964ad3b284")]
+   [System.Runtime.InteropServices.GuidAttribute("26acce83-d107-420c-9001-4db3e9b47553")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class InputUpdateType : IInputUpdateType
@@ -21204,8 +27224,89 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("569b67ec-feae-4788-8b6d-0f7384bad41b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IInputUpdateType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      MessageReferenceType MessageReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      OutputContentType OutputContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      MenuEntryType[] MenuEntry
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      byte[] OutputSignature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string MinLength
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string MaxLength
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string MaxDecimalLength
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdInputUpdateTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int MenuEntrySize();
+      [DispId(17)]
+      MenuEntryType MenuEntryGetItem(int index);
+      [DispId(18)]
+      bool MenuEntrySetItem(int index, MenuEntryType value);
+      [DispId(19)]
+      bool MenuEntryAddItem(MenuEntryType value);
+      [DispId(20)]
+      bool MenuEntryRemoveItem(int index);
+      [DispId(21)]
+      int OutputSignatureSize();
+      [DispId(22)]
+      byte OutputSignatureGetItem(int index);
+      [DispId(23)]
+      bool OutputSignatureSetItem(int index, byte value);
+      [DispId(24)]
+      bool OutputSignatureAddItem(byte value);
+      [DispId(25)]
+      bool OutputSignatureRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -21219,11 +27320,11 @@ namespace NEXO
       InequalInstalments,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("125bce7f-f59b-48cb-84e4-5f98d5b1cc02")]
+   [System.Runtime.InteropServices.GuidAttribute("7f9b373c-a86d-4e6a-8798-a0add1b08e41")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoginRequestType : ILoginRequestType
@@ -21520,12 +27621,104 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("00cfde42-d753-4ec6-9b6f-d34ce501f5f3")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoginRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string DateTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      SaleSoftwareType SaleSoftware
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      SaleTerminalDataType SaleTerminalData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      bool TrainingModeFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      string OperatorLanguage
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      string OperatorID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(14)]
+      string ShiftNumber
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(16)]
+      string TokenRequestedType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(18)]
+      string[] CustomerOrderReq
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(20)]
+      string POISerialNumber
+      {
+         get;
+         set;
+      }
+      [DispId(22)]
+      bool xsdLoginRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(23)]
+      int CustomerOrderReqSize();
+      [DispId(24)]
+      string CustomerOrderReqGetItem(int index);
+      [DispId(25)]
+      bool CustomerOrderReqSetItem(int index, string value);
+      [DispId(26)]
+      bool CustomerOrderReqAddItem(string value);
+      [DispId(27)]
+      bool CustomerOrderReqRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("1588ba29-e42f-40e2-b71d-a1863b7109e3")]
+   [System.Runtime.InteropServices.GuidAttribute("7331ebb7-bc2a-438e-bd1c-74270e978cdc")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleSoftwareType : ISaleSoftwareType
@@ -21604,12 +27797,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("cf6f74fe-b2de-4be4-89df-702114a5d22f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleSoftwareType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ManufacturerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ApplicationName
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string SoftwareVersion
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string CertificationCode
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdSaleSoftwareTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("beb45cf8-9373-4f89-ae3c-fc792fdb0457")]
+   [System.Runtime.InteropServices.GuidAttribute("a1381059-be51-49ab-95f5-2926e997fb8b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoginResponseType : ILoginResponseType
@@ -21658,12 +27891,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("17926b45-f290-4fda-ba31-d02b7333b20d")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoginResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      POISystemDataType POISystemData
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdLoginResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("756cff8b-3353-44ca-a7e9-6554cfaf40fc")]
+   [System.Runtime.InteropServices.GuidAttribute("c882d6b1-8714-412c-9127-18f98a3d8ec9")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POISystemDataType : IPOISystemDataType
@@ -21742,12 +28001,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("93dd4c56-35f1-4d34-923d-30abf962b61d")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOISystemDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string DateTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      POISoftwareType POISoftware
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POITerminalDataType POITerminalData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      POIStatusType POIStatus
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPOISystemDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("97fab600-c347-4ff6-a335-cfda5c8f036b")]
+   [System.Runtime.InteropServices.GuidAttribute("f542e763-7ad0-42fe-a597-114c7d285a43")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POISoftwareType : IPOISoftwareType
@@ -21826,12 +28125,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d5eff690-a631-435d-8cd4-f689911f6449")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOISoftwareType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ManufacturerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ApplicationName
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string SoftwareVersion
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string CertificationCode
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPOISoftwareTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("93d9f3c4-86d8-4555-951d-cd423b67c78e")]
+   [System.Runtime.InteropServices.GuidAttribute("3f36f019-3cbd-4926-baa9-4eaf21930487")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POITerminalDataType : IPOITerminalDataType
@@ -21910,12 +28249,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d5836e4f-6d05-4910-87a7-35c80d4ae6b0")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOITerminalDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string POICapabilities
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      POIProfileType POIProfile
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string TerminalEnvironment
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string POISerialNumber
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdPOITerminalDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2cc5dcbf-6f5a-4204-aab3-2bce454c8f3e")]
+   [System.Runtime.InteropServices.GuidAttribute("3041d43b-8273-4664-a31b-ec7fba1d2db6")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class POIProfileType : IPOIProfileType
@@ -21969,12 +28348,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("9c62ca95-3e2a-49a3-b238-103eee885d00")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPOIProfileType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      string ServiceProfiles
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string GenericProfile
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      bool xsdPOIProfileTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7f77de3c-f073-4740-b183-0c0b7775ed58")]
+   [System.Runtime.InteropServices.GuidAttribute("8c7a0722-30c4-4cf7-b012-8c19b6762f1b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LogoutRequestType : ILogoutRequestType
@@ -22013,12 +28418,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5cca4076-6472-436f-ba9d-aa423a524a30")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILogoutRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      bool MaintenanceAllowed
+      {
+         get;
+         set;
+      }
+      [DispId(4)]
+      bool xsdLogoutRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("a50a1e43-2ea6-4b5a-9c81-6bd66d60288a")]
+   [System.Runtime.InteropServices.GuidAttribute("6a0de105-02e5-4b8a-95e2-e4603ee4940f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LogoutResponseType : ILogoutResponseType
@@ -22052,8 +28476,27 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("5d382b15-c117-41f3-8e67-e58a0d3c3072")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILogoutResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdLogoutResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22071,11 +28514,11 @@ namespace NEXO
       Required,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("d97400d2-3a4b-4000-8214-02304bb4b6e0")]
+   [System.Runtime.InteropServices.GuidAttribute("54248cb0-ae68-40e9-8af0-8a9101780f17")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class LoyaltyResponseType : ILoyaltyResponseType
@@ -22415,12 +28858,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("44c77ce9-3feb-47ee-b7cb-37bed1c5f46a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ILoyaltyResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      LoyaltyResultType[] LoyaltyResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      PaymentReceiptType[] PaymentReceipt
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      bool xsdLoyaltyResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(12)]
+      int LoyaltyResultSize();
+      [DispId(13)]
+      LoyaltyResultType LoyaltyResultGetItem(int index);
+      [DispId(14)]
+      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
+      [DispId(15)]
+      bool LoyaltyResultAddItem(LoyaltyResultType value);
+      [DispId(16)]
+      bool LoyaltyResultRemoveItem(int index);
+      [DispId(17)]
+      int PaymentReceiptSize();
+      [DispId(18)]
+      PaymentReceiptType PaymentReceiptGetItem(int index);
+      [DispId(19)]
+      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
+      [DispId(20)]
+      bool PaymentReceiptAddItem(PaymentReceiptType value);
+      [DispId(21)]
+      bool PaymentReceiptRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3b88f66f-d2e7-4144-8b8a-d2fc64f18182")]
+   [System.Runtime.InteropServices.GuidAttribute("42766e81-5544-4f78-9d54-be6f77488b11")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentReceiptType : IPaymentReceiptType
@@ -22506,8 +29016,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("3972a904-21c3-4464-859f-e364cf298532")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentReceiptType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      OutputContentType OutputContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string DocumentQualifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool IntegratedPrintFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      bool RequiredSignatureFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      bool xsdPaymentReceiptTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22527,7 +29077,7 @@ namespace NEXO
       RedemptionRefund,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22539,7 +29089,7 @@ namespace NEXO
       Monetary,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22555,7 +29105,7 @@ namespace NEXO
       NonSelectableSubMenu,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22619,7 +29169,7 @@ namespace NEXO
       Transmit,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22633,11 +29183,11 @@ namespace NEXO
       Event,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("2a322df7-6932-40c7-b41f-8f9ba3af5868")]
+   [System.Runtime.InteropServices.GuidAttribute("a0f6a73d-a0ed-41df-88a4-f9fa0ee49b3f")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class MessageHeaderType : IMessageHeaderType
@@ -22776,8 +29326,76 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("ded77070-6afb-4035-9c1c-be9f9b66ad9c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IMessageHeaderType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string ProtocolVersion
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string MessageClass
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string MessageCategory
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string MessageType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string ServiceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string DeviceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string SaleID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string POIID
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      bool xsdMessageHeaderTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22791,7 +29409,7 @@ namespace NEXO
       Notification,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22807,7 +29425,7 @@ namespace NEXO
       BarCode,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -22825,11 +29443,11 @@ namespace NEXO
       Cash,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("934950d6-006b-4248-898b-d50fac04fa16")]
+   [System.Runtime.InteropServices.GuidAttribute("d4b4afa4-0b2a-42ab-bd0a-36e8f4945f19")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PaymentResponseType : IPaymentResponseType
@@ -23322,8 +29940,99 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("0b0b9c3a-d450-4f81-9251-837d72da3a92")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPaymentResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      PaymentResultType PaymentResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      LoyaltyResultType[] LoyaltyResult
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      PaymentReceiptType[] PaymentReceipt
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      CustomerOrderType[] CustomerOrder
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdPaymentResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int LoyaltyResultSize();
+      [DispId(17)]
+      LoyaltyResultType LoyaltyResultGetItem(int index);
+      [DispId(18)]
+      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
+      [DispId(19)]
+      bool LoyaltyResultAddItem(LoyaltyResultType value);
+      [DispId(20)]
+      bool LoyaltyResultRemoveItem(int index);
+      [DispId(21)]
+      int PaymentReceiptSize();
+      [DispId(22)]
+      PaymentReceiptType PaymentReceiptGetItem(int index);
+      [DispId(23)]
+      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
+      [DispId(24)]
+      bool PaymentReceiptAddItem(PaymentReceiptType value);
+      [DispId(25)]
+      bool PaymentReceiptRemoveItem(int index);
+      [DispId(26)]
+      int CustomerOrderSize();
+      [DispId(27)]
+      CustomerOrderType CustomerOrderGetItem(int index);
+      [DispId(28)]
+      bool CustomerOrderSetItem(int index, CustomerOrderType value);
+      [DispId(29)]
+      bool CustomerOrderAddItem(CustomerOrderType value);
+      [DispId(30)]
+      bool CustomerOrderRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23355,7 +30064,7 @@ namespace NEXO
       PaidOut,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23371,7 +30080,7 @@ namespace NEXO
       Annual,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23387,11 +30096,11 @@ namespace NEXO
       ISO3,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("95ee1565-9338-4028-9376-64a2696479b5")]
+   [System.Runtime.InteropServices.GuidAttribute("c3e17d40-e5aa-44d9-8962-710ae72a5730")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PINRequestType : IPINRequestType
@@ -23530,8 +30239,76 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("97e389d3-d9e5-4e62-a84b-7956a0641865")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPINRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      CardholderPINType CardholderPIN
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string PINRequestType1
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string PINVerifMethod
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string AdditionalInput
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string PINEncAlgorithm
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string PINFormat
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string KeyReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string MaxWaitingTime
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      bool xsdPINRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23545,11 +30322,11 @@ namespace NEXO
       PINEnter,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7736253e-9171-43a7-adbe-6127e4799e12")]
+   [System.Runtime.InteropServices.GuidAttribute("77ddfb37-a98f-4b60-a4a5-267fe4cb7229")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PINResponseType : IPINResponseType
@@ -23598,8 +30375,34 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("a29ba53d-7e71-4cba-8530-4da33e70b9f3")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPINResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      CardholderPINType CardholderPIN
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdPINResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23633,7 +30436,7 @@ namespace NEXO
       CashHandling,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -23651,11 +30454,11 @@ namespace NEXO
       OutOfOrder,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("bf088dd9-3eee-44a4-9040-7375531c4f8f")]
+   [System.Runtime.InteropServices.GuidAttribute("aac83300-faef-4b81-b05d-5d83ba5c0082")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PrintOutputType : IPrintOutputType
@@ -23894,12 +30697,76 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("88ae84b0-c08d-42df-a01c-f27268873c6e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPrintOutputType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      OutputContentType OutputContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      byte[] OutputSignature
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string DocumentQualifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string ResponseMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(10)]
+      bool IntegratedPrintFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(12)]
+      bool RequiredSignatureFlag
+      {
+         get;
+         set;
+      }
+      [DispId(14)]
+      bool xsdPrintOutputTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      int OutputSignatureSize();
+      [DispId(16)]
+      byte OutputSignatureGetItem(int index);
+      [DispId(17)]
+      bool OutputSignatureSetItem(int index, byte value);
+      [DispId(18)]
+      bool OutputSignatureAddItem(byte value);
+      [DispId(19)]
+      bool OutputSignatureRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("72ead72f-a9b0-4832-ab66-3d76cce099a5")]
+   [System.Runtime.InteropServices.GuidAttribute("d91a7873-2c77-410e-a181-d6d0e8f08c81")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PrintRequestType : IPrintRequestType
@@ -23933,12 +30800,31 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("8a3d16a1-0211-4fc8-8cbf-58324339b437")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPrintRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      PrintOutputType PrintOutput
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdPrintRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("22c780f5-674f-4427-9a8a-99f10afe5810")]
+   [System.Runtime.InteropServices.GuidAttribute("428417c5-bef7-4a67-9c00-466c7a2ab64d")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class PrintResponseType : IPrintResponseType
@@ -23987,12 +30873,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("a071124b-e1d3-4f25-bcb9-44abc723e706")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IPrintResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string DocumentQualifier
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdPrintResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("fad2ec23-fd31-4695-b23c-892351895a70")]
+   [System.Runtime.InteropServices.GuidAttribute("d7a181fa-8c93-4b20-861c-eec378f98ebb")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ReconciliationRequestType : IReconciliationRequestType
@@ -24179,12 +31091,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("26ccd7ad-e221-4d57-8e73-dd1e624d2583")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IReconciliationRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string[] AcquirerID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string ReconciliationType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string POIReconciliationID
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdReconciliationRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int AcquirerIDSize();
+      [DispId(9)]
+      string AcquirerIDGetItem(int index);
+      [DispId(10)]
+      bool AcquirerIDSetItem(int index, string value);
+      [DispId(11)]
+      bool AcquirerIDAddItem(string value);
+      [DispId(12)]
+      bool AcquirerIDRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("9424cb48-4d86-4474-907a-903d3f3ec084")]
+   [System.Runtime.InteropServices.GuidAttribute("f1a4b14a-bf14-4363-8221-43d8736d9cef")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ReconciliationResponseType : IReconciliationResponseType
@@ -24386,8 +31341,58 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("2aa0823e-558a-4967-9830-99729fe77845")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IReconciliationResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TransactionTotalsType[] TransactionTotals
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ReconciliationType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string POIReconciliationID
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdReconciliationResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int TransactionTotalsSize();
+      [DispId(11)]
+      TransactionTotalsType TransactionTotalsGetItem(int index);
+      [DispId(12)]
+      bool TransactionTotalsSetItem(int index, TransactionTotalsType value);
+      [DispId(13)]
+      bool TransactionTotalsAddItem(TransactionTotalsType value);
+      [DispId(14)]
+      bool TransactionTotalsRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -24403,11 +31408,11 @@ namespace NEXO
       PreviousReconciliation,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("e48cc0d9-4f0d-4dd2-9e5e-7561577d19c9")]
+   [System.Runtime.InteropServices.GuidAttribute("2bceca51-fb25-4ec1-9664-1f7fb69818b7")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class RepeatedMessageResponseType : IRepeatedMessageResponseType
@@ -24461,12 +31466,38 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("dfeca29b-3359-4d99-979f-69ca89ff2d7e")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IRepeatedMessageResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      MessageHeaderType MessageHeader
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      object Item
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdRepeatedMessageResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("0af739ae-63d2-4511-bc97-e0d9c0822420")]
+   [System.Runtime.InteropServices.GuidAttribute("c01f881b-c032-4144-b3d0-2b39e0d2f6b3")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class ReversalResponseType : IReversalResponseType
@@ -24714,12 +31745,83 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("7cc66fc1-bd3d-43bf-bf4d-a39e4f3a1081")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IReversalResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      OriginalPOITransactionType OriginalPOITransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      PaymentReceiptType[] PaymentReceipt
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      double ReversedAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      bool ReversedAmountSpecified
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string CustomerOrderID
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdReversalResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int PaymentReceiptSize();
+      [DispId(17)]
+      PaymentReceiptType PaymentReceiptGetItem(int index);
+      [DispId(18)]
+      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
+      [DispId(19)]
+      bool PaymentReceiptAddItem(PaymentReceiptType value);
+      [DispId(20)]
+      bool PaymentReceiptRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("ecb9a36e-d75f-424b-89dd-8190f4f16f9a")]
+   [System.Runtime.InteropServices.GuidAttribute("384b46e7-72f2-42d1-8d04-1dff9bc6e2e2")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueResponseType : IStoredValueResponseType
@@ -24921,12 +32023,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("df11bd97-c1d2-4b05-be29-0567d16c6bfd")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      POIDataType POIData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      StoredValueResultType[] StoredValueResult
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdStoredValueResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      int StoredValueResultSize();
+      [DispId(11)]
+      StoredValueResultType StoredValueResultGetItem(int index);
+      [DispId(12)]
+      bool StoredValueResultSetItem(int index, StoredValueResultType value);
+      [DispId(13)]
+      bool StoredValueResultAddItem(StoredValueResultType value);
+      [DispId(14)]
+      bool StoredValueResultRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("db28af2b-ad0f-40ec-8811-2a63371a576b")]
+   [System.Runtime.InteropServices.GuidAttribute("5abe9e63-a3fb-46c2-bdc1-f2dc74f5a50a")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueResultType : IStoredValueResultType
@@ -25050,12 +32202,73 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("05ccc937-7e72-4dea-8ea1-b1a65b7aba5f")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueResultType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      StoredValueAccountStatusType StoredValueAccountStatus
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      TransactionIdentificationType HostTransactionID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string StoredValueTransactionType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string ProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string EanUpc
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      double ItemAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdStoredValueResultTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("8681d5ba-f63c-465f-8d79-bdef2e797fa3")]
+   [System.Runtime.InteropServices.GuidAttribute("567ab123-c516-478f-b644-4fc50906e748")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueAccountStatusType : IStoredValueAccountStatusType
@@ -25120,12 +32333,45 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("edee4858-4763-467e-bb41-03048c64468d")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueAccountStatusType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      StoredValueAccountIDType StoredValueAccountID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      double CurrentBalance
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      bool CurrentBalanceSpecified
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdStoredValueAccountStatusTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3cb8073c-7475-4c41-bf38-1b49e603a653")]
+   [System.Runtime.InteropServices.GuidAttribute("51379030-8fab-4457-8a52-10d1696dad0b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueAccountIDType : IStoredValueAccountIDType
@@ -25372,8 +32618,79 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("c8cdaccd-f8c3-41ec-a571-eda1ff07295d")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueAccountIDType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string StoredValueAccountType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string StoredValueProvider
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string OwnerName
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string ExpiryDate
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string[] EntryMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string IdentificationType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(15)]
+      bool xsdStoredValueAccountIDTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(16)]
+      int EntryModeSize();
+      [DispId(17)]
+      string EntryModeGetItem(int index);
+      [DispId(18)]
+      bool EntryModeSetItem(int index, string value);
+      [DispId(19)]
+      bool EntryModeAddItem(string value);
+      [DispId(20)]
+      bool EntryModeRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25389,7 +32706,7 @@ namespace NEXO
       SoundEnd,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25403,7 +32720,7 @@ namespace NEXO
       Partial,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25419,7 +32736,7 @@ namespace NEXO
       Unable2Compl,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25457,7 +32774,7 @@ namespace NEXO
       EMVContactless,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25471,7 +32788,7 @@ namespace NEXO
       Loyalty,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25499,7 +32816,7 @@ namespace NEXO
       Communication,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25513,11 +32830,11 @@ namespace NEXO
       SetDefaultVolume,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("86eeb56b-799e-4f8c-8d9e-8050ea37e6a6")]
+   [System.Runtime.InteropServices.GuidAttribute("f940ab0f-14e2-45f7-a135-917ac9467c02")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SoundContentType : ISoundContentType
@@ -25596,12 +32913,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("fb9d937f-33a3-4582-9f97-3feb557dde02")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISoundContentType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      string SoundFormat
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      string Language
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string ReferenceID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string Value
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      bool xsdSoundContentTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7add1118-6024-4f8d-819b-ef497b107748")]
+   [System.Runtime.InteropServices.GuidAttribute("6cdb93e2-42dd-42f3-a9db-a10afb50a314")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SoundRequestType : ISoundRequestType
@@ -25685,12 +33042,52 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("dc522614-24d7-4978-8eb9-98623b86b3b2")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISoundRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      SoundContentType SoundContent
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string ResponseMode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string SoundAction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string SoundVolume
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      bool xsdSoundRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("7a3acf5e-ade8-4372-aaef-54c6dff1a635")]
+   [System.Runtime.InteropServices.GuidAttribute("e3b25369-0a8b-4913-aa3f-fc699b3c3706")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SoundResponseType : ISoundResponseType
@@ -25724,8 +33121,27 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("451b68ee-1f1b-4ed1-95d5-2877194088ea")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISoundResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      [DispId(3)]
+      bool xsdSoundResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25739,7 +33155,7 @@ namespace NEXO
       Text,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -25753,11 +33169,11 @@ namespace NEXO
       Other,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("3bce7dc2-6d33-474e-b2da-6b3e1a71837f")]
+   [System.Runtime.InteropServices.GuidAttribute("7cbc0253-485a-4f78-adca-1e63b4b09f9d")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueDataType : IStoredValueDataType
@@ -25896,12 +33312,80 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("2c3aa3a0-848e-45e9-91dc-4c2d020eb14b")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueDataType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      StoredValueAccountIDType StoredValueAccountID
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      OriginalPOITransactionType OriginalPOITransaction
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string StoredValueProvider
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(7)]
+      string StoredValueTransactionType
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(9)]
+      string ProductCode
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(11)]
+      string EanUpc
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(13)]
+      double ItemAmount
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(15)]
+      string Currency
+      {
+         get;
+         set;
+      }
+      [DispId(17)]
+      bool xsdStoredValueDataTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("dc9739ab-abf2-4c7b-bc16-c4a000d6a2fb")]
+   [System.Runtime.InteropServices.GuidAttribute("a53d1f00-0722-47c8-b6fc-81b06bc1075b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class StoredValueRequestType : IStoredValueRequestType
@@ -26088,8 +33572,51 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("8677776b-b18c-45e8-b83a-cb099be0e27a")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface IStoredValueRequestType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      SaleDataType SaleData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      StoredValueDataType[] StoredValueData
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      string CustomerLanguage
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdStoredValueRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      int StoredValueDataSize();
+      [DispId(9)]
+      StoredValueDataType StoredValueDataGetItem(int index);
+      [DispId(10)]
+      bool StoredValueDataSetItem(int index, StoredValueDataType value);
+      [DispId(11)]
+      bool StoredValueDataAddItem(StoredValueDataType value);
+      [DispId(12)]
+      bool StoredValueDataRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26109,7 +33636,7 @@ namespace NEXO
       Duplicate,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26123,7 +33650,7 @@ namespace NEXO
       Unattended,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26135,7 +33662,7 @@ namespace NEXO
       Customer,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26153,7 +33680,7 @@ namespace NEXO
       TotalsGroupID,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26177,11 +33704,11 @@ namespace NEXO
       E13B,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("04b4b00a-0592-4751-bda9-8bbdee188bc6")]
+   [System.Runtime.InteropServices.GuidAttribute("a0a7aafe-8125-4846-813b-4c18c05f72af")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransmitRequestType : ITransmitRequestType
@@ -26388,12 +33915,62 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("43db09cf-d943-4084-be59-28c2430ca357")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransmitRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      byte[] Message
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      bool WaitResponseFlag
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      string MaximumTransmitTime
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(8)]
+      string DestinationAddress
+      {
+         get;
+         set;
+      }
+      [DispId(10)]
+      bool xsdTransmitRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(11)]
+      int MessageSize();
+      [DispId(12)]
+      byte MessageGetItem(int index);
+      [DispId(13)]
+      bool MessageSetItem(int index, byte value);
+      [DispId(14)]
+      bool MessageAddItem(byte value);
+      [DispId(15)]
+      bool MessageRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("6012cc3d-741f-4c9f-a7e3-1f64cafef257")]
+   [System.Runtime.InteropServices.GuidAttribute("2d82e2a4-18c4-4dfa-9ac1-62300f26ea4b")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransmitResponseType : ITransmitResponseType
@@ -26565,12 +34142,48 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("cb6093c7-fac7-4359-b1a1-80153e9719ea")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransmitResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      byte[] Message
+      {
+         get;
+         set;
+      }
+      [DispId(5)]
+      bool xsdTransmitResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(6)]
+      int MessageSize();
+      [DispId(7)]
+      byte MessageGetItem(int index);
+      [DispId(8)]
+      bool MessageSetItem(int index, byte value);
+      [DispId(9)]
+      bool MessageAddItem(byte value);
+      [DispId(10)]
+      bool MessageRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("b5bb5b68-7041-4e8a-bf4b-9d4b2d5533b7")]
+   [System.Runtime.InteropServices.GuidAttribute("f52df689-7fb4-42f5-bb7a-2520a1c186fb")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionStatusRequestType : ITransactionStatusRequestType
@@ -26762,12 +34375,55 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("d56591e8-22f5-4a77-b983-341412c79a7c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionStatusRequestType
+   {
+      /// <remarks/>
+      [DispId(2)]
+      MessageReferenceType MessageReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(4)]
+      string[] DocumentQualifier
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(6)]
+      bool ReceiptReprintFlag
+      {
+         get;
+         set;
+      }
+      [DispId(8)]
+      bool xsdTransactionStatusRequestTypeInitFlag
+      {
+         get;
+         set;
+      }
+      [DispId(9)]
+      int DocumentQualifierSize();
+      [DispId(10)]
+      string DocumentQualifierGetItem(int index);
+      [DispId(11)]
+      bool DocumentQualifierSetItem(int index, string value);
+      [DispId(12)]
+      bool DocumentQualifierAddItem(string value);
+      [DispId(13)]
+      bool DocumentQualifierRemoveItem(int index);
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("54cc9a7a-1a4f-47d3-a545-7041d61bb0e3")]
+   [System.Runtime.InteropServices.GuidAttribute("92218f6b-2f61-4559-a1fa-937aa811fd0e")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class TransactionStatusResponseType : ITransactionStatusResponseType
@@ -26831,8 +34487,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("b079b222-6e32-40ed-beee-215ad5589c36")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ITransactionStatusResponseType
+   {
+      /// <remarks/>
+      [DispId(1)]
+      ResponseType Response
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      MessageReferenceType MessageReference
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      RepeatedMessageResponseType RepeatedMessageResponse
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdTransactionStatusResponseTypeInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26844,7 +34533,7 @@ namespace NEXO
       AbortTransaction,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26890,7 +34579,7 @@ namespace NEXO
       ReverseRebate,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -26936,12 +34625,12 @@ namespace NEXO
       Other,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-   [System.Runtime.InteropServices.GuidAttribute("0ca4e18a-d777-4cf2-b712-8e78fe4c41ad")]
+   [System.Runtime.InteropServices.GuidAttribute("f5aa35a8-9a5b-486f-bfd8-4609f6bfc0cb")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleToPOIRequest : ISaleToPOIRequest
@@ -27031,13 +34720,46 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("73c18c4c-a123-4cdf-ab90-891dc6bba681")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleToPOIRequest
+   {
+      /// <remarks/>
+      [DispId(1)]
+      MessageHeaderType MessageHeader
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      object Item
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      ContentInformationType SecurityTrailer
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdSaleToPOIRequestInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-   [System.Runtime.InteropServices.GuidAttribute("9f0778be-412e-4028-83b7-eaa2dc16fdaf")]
+   [System.Runtime.InteropServices.GuidAttribute("58fa7d83-83aa-4205-83b8-bfd25058ff18")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class SaleToPOIResponse : ISaleToPOIResponse
@@ -27124,8 +34846,41 @@ namespace NEXO
          }
       }
    }
+   [System.Runtime.InteropServices.GuidAttribute("26642482-06e0-45d8-a667-0cca1c078e8c")]
+   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public interface ISaleToPOIResponse
+   {
+      /// <remarks/>
+      [DispId(1)]
+      MessageHeaderType MessageHeader
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(3)]
+      object Item
+      {
+         get;
+         set;
+      }
+      /// <remarks/>
+      [DispId(5)]
+      ContentInformationType SecurityTrailer
+      {
+         get;
+         set;
+      }
+      [DispId(7)]
+      bool xsdSaleToPOIResponseInitFlag
+      {
+         get;
+         set;
+      }
+   }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -27158,7 +34913,7 @@ namespace NEXO
       rsaEncryption,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -27181,7 +34936,7 @@ namespace NEXO
       idatcountryName,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
@@ -27207,11 +34962,11 @@ namespace NEXO
       idctauthData,
    }
    /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
    [System.SerializableAttribute()]
    [System.ComponentModel.DesignerCategoryAttribute("code")]
    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = true)]
-   [System.Runtime.InteropServices.GuidAttribute("4cfea484-3c44-46db-88b6-cfc2e2fbc9e8")]
+   [System.Runtime.InteropServices.GuidAttribute("513b42da-8177-4bac-9395-a2f7df62a286")]
    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public partial class IssuerType : IIssuerType
@@ -27368,7782 +35123,7 @@ namespace NEXO
          }
       }
    }
-   /// <remarks/>
-   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.9.0")]
-   [System.SerializableAttribute()]
-   [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public enum VersionEnumeration
-   {
-      /// <remarks/>
-      v0,
-      /// <remarks/>
-      v1,
-      /// <remarks/>
-      v2,
-      /// <remarks/>
-      v3,
-      /// <remarks/>
-      v4,
-      /// <remarks/>
-      v5,
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4e4044f3-66ba-4fab-8bc7-c6317178b5a6")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAbortRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      MessageReferenceType MessageReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string AbortReason
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdAbortRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8c048db7-8dfc-47fb-8d52-eae32322f756")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IMessageReferenceType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string MessageCategory
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ServiceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string DeviceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string SaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdMessageReferenceTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("ccf582cb-c0d8-4c51-bd24-fdf069668fc7")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDisplayResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      OutputResultType[] OutputResult
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdDisplayResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(4)]
-      int OutputResultSize();
-      [DispId(5)]
-      OutputResultType OutputResultGetItem(int index);
-      [DispId(6)]
-      bool OutputResultSetItem(int index, OutputResultType value);
-      [DispId(7)]
-      bool OutputResultAddItem(OutputResultType value);
-      [DispId(8)]
-      bool OutputResultRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e290138d-7d50-4e18-a343-ad6dc3546ba5")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IOutputResultType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Device
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string InfoQualify
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdOutputResultTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8a8d7106-5d41-4439-8c4a-8d85f9f59410")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string AdditionalResponse
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Result
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ErrorCondition
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4c0f0b29-88fa-46cd-a2d6-45ffc6f5b728")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDisplayRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      DisplayOutputType[] DisplayOutput
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdDisplayRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(4)]
-      int DisplayOutputSize();
-      [DispId(5)]
-      DisplayOutputType DisplayOutputGetItem(int index);
-      [DispId(6)]
-      bool DisplayOutputSetItem(int index, DisplayOutputType value);
-      [DispId(7)]
-      bool DisplayOutputAddItem(DisplayOutputType value);
-      [DispId(8)]
-      bool DisplayOutputRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2ea0c17b-8ab0-4e73-9082-58e89dc810fb")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDisplayOutputType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      OutputContentType OutputContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      MenuEntryType[] MenuEntry
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      byte[] OutputSignature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      bool ResponseRequiredFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string MinimumDisplayTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string Device
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string InfoQualify
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      bool xsdDisplayOutputTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      int MenuEntrySize();
-      [DispId(18)]
-      MenuEntryType MenuEntryGetItem(int index);
-      [DispId(19)]
-      bool MenuEntrySetItem(int index, MenuEntryType value);
-      [DispId(20)]
-      bool MenuEntryAddItem(MenuEntryType value);
-      [DispId(21)]
-      bool MenuEntryRemoveItem(int index);
-      [DispId(22)]
-      int OutputSignatureSize();
-      [DispId(23)]
-      byte OutputSignatureGetItem(int index);
-      [DispId(24)]
-      bool OutputSignatureSetItem(int index, byte value);
-      [DispId(25)]
-      bool OutputSignatureAddItem(byte value);
-      [DispId(26)]
-      bool OutputSignatureRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("396027cf-2a58-44f8-a213-4e7ab08b658e")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IOutputContentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      PredefinedContentType PredefinedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      OutputTextType[] OutputText
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      byte[] OutputXHTML
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      OutputBarcodeType OutputBarcode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string OutputFormat
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdOutputContentTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      int OutputTextSize();
-      [DispId(13)]
-      OutputTextType OutputTextGetItem(int index);
-      [DispId(14)]
-      bool OutputTextSetItem(int index, OutputTextType value);
-      [DispId(15)]
-      bool OutputTextAddItem(OutputTextType value);
-      [DispId(16)]
-      bool OutputTextRemoveItem(int index);
-      [DispId(17)]
-      int OutputXHTMLSize();
-      [DispId(18)]
-      byte OutputXHTMLGetItem(int index);
-      [DispId(19)]
-      bool OutputXHTMLSetItem(int index, byte value);
-      [DispId(20)]
-      bool OutputXHTMLAddItem(byte value);
-      [DispId(21)]
-      bool OutputXHTMLRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("02bbcac3-6ed0-41f4-abee-262e56f68d58")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPredefinedContentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ReferenceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Language
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdPredefinedContentTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("9c2384b3-fdd8-4d9a-99fe-987d6161acd6")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IOutputTextType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string CharacterSet
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string Font
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string StartRow
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string StartColumn
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string Color
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string CharacterWidth
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string CharacterHeight
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      string CharacterStyle
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string Alignment
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      bool EndOfLineFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(22)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(24)]
-      bool xsdOutputTextTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("1f852385-6f93-4896-8254-840da0c81db8")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IOutputBarcodeType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string BarcodeType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      bool xsdOutputBarcodeTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f0ce670a-1c57-4499-b61c-453c636d1d55")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IMenuEntryType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      PredefinedContentType PredefinedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      OutputTextType[] OutputText
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      byte[] OutputXHTML
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string MenuEntryTag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string OutputFormat
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool DefaultSelectedFlag
-      {
-         get;
-         set;
-      }
-      [DispId(14)]
-      bool xsdMenuEntryTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      int OutputTextSize();
-      [DispId(16)]
-      OutputTextType OutputTextGetItem(int index);
-      [DispId(17)]
-      bool OutputTextSetItem(int index, OutputTextType value);
-      [DispId(18)]
-      bool OutputTextAddItem(OutputTextType value);
-      [DispId(19)]
-      bool OutputTextRemoveItem(int index);
-      [DispId(20)]
-      int OutputXHTMLSize();
-      [DispId(21)]
-      byte OutputXHTMLGetItem(int index);
-      [DispId(22)]
-      bool OutputXHTMLSetItem(int index, byte value);
-      [DispId(23)]
-      bool OutputXHTMLAddItem(byte value);
-      [DispId(24)]
-      bool OutputXHTMLRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("cd4ad275-82fb-4d5f-bc5c-acf718b8e045")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAdminRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ServiceIdentification
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdAdminRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("5fcf42f3-c8c1-4ba1-9a9a-1b739cdab5a2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAdminResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdAdminResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d218e8cf-097d-4be9-b0d4-db5374ac8859")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAllowedProductType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ProductLabel
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string AdditionalProductInfo
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string EanUpc
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdAllowedProductTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("5303d760-857f-42ce-9de9-00fb3f1da11b")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAmountsReqType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double RequestedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool RequestedAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      double CashBackAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      bool CashBackAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      double TipAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      bool TipAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      double PaidAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      bool PaidAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      double MinimumAmountToDeliver
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      bool MinimumAmountToDeliverSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(23)]
-      double MaximumCashBackAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(25)]
-      bool MaximumCashBackAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(27)]
-      double MinimumSplitAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(29)]
-      bool MinimumSplitAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(31)]
-      bool xsdAmountsReqTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("6defebe3-d5a2-4ede-8fd1-16fd54fe0210")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAmountsRespType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double AuthorizedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      double TotalRebatesAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      bool TotalRebatesAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      double TotalFeesAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool TotalFeesAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      double CashBackAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      bool CashBackAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      double TipAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      bool TipAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(21)]
-      bool xsdAmountsRespTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8cf97019-bb1b-4b99-8c1d-5448a61f7dff")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAreaSizeType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string X
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Y
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdAreaSizeTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("b493800c-541a-465b-a482-bb93ef731663")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IBalanceInquiryRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      PaymentAccountReqType PaymentAccountReq
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      LoyaltyAccountReqType LoyaltyAccountReq
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdBalanceInquiryRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a8d7becb-04e0-496e-85ae-2d6aa11d8e3c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentAccountReqType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      TransactionIdentificationType CardAcquisitionReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      PaymentInstrumentDataType PaymentInstrumentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string AccountType
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdPaymentAccountReqTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0d124d77-9e3c-4125-b50c-9e9b8f6d2a3c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionIdentificationType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string TransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string TimeStamp
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdTransactionIdentificationTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("b7fe3b3a-efb7-486a-93cb-68d54a76842f")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentInstrumentDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      CardDataType CardData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      CheckDataType CheckData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      MobileDataType MobileData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string PaymentInstrumentType
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPaymentInstrumentDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("201175b1-ed4a-4bf9-abfd-492ea1a71fd2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ContentInformationType ProtectedCardData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SensitiveCardDataType SensitiveCardData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string[] AllowedProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      AllowedProductType[] AllowedProduct
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      PaymentTokenType PaymentToken
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      CustomerOrderType[] CustomerOrder
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string PaymentBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string MaskedPAN
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      string PaymentAccountRef
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      string[] EntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      string CardCountryCode
-      {
-         get;
-         set;
-      }
-      [DispId(23)]
-      bool xsdCardDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(24)]
-      int AllowedProductCodeSize();
-      [DispId(25)]
-      string AllowedProductCodeGetItem(int index);
-      [DispId(26)]
-      bool AllowedProductCodeSetItem(int index, string value);
-      [DispId(27)]
-      bool AllowedProductCodeAddItem(string value);
-      [DispId(28)]
-      bool AllowedProductCodeRemoveItem(int index);
-      [DispId(29)]
-      int AllowedProductSize();
-      [DispId(30)]
-      AllowedProductType AllowedProductGetItem(int index);
-      [DispId(31)]
-      bool AllowedProductSetItem(int index, AllowedProductType value);
-      [DispId(32)]
-      bool AllowedProductAddItem(AllowedProductType value);
-      [DispId(33)]
-      bool AllowedProductRemoveItem(int index);
-      [DispId(34)]
-      int CustomerOrderSize();
-      [DispId(35)]
-      CustomerOrderType CustomerOrderGetItem(int index);
-      [DispId(36)]
-      bool CustomerOrderSetItem(int index, CustomerOrderType value);
-      [DispId(37)]
-      bool CustomerOrderAddItem(CustomerOrderType value);
-      [DispId(38)]
-      bool CustomerOrderRemoveItem(int index);
-      [DispId(39)]
-      int EntryModeSize();
-      [DispId(40)]
-      string EntryModeGetItem(int index);
-      [DispId(41)]
-      bool EntryModeSetItem(int index, string value);
-      [DispId(42)]
-      bool EntryModeAddItem(string value);
-      [DispId(43)]
-      bool EntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("67c3948d-e91f-43b5-82fc-1d5a87359477")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IContentInformationType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      object Item
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ContentType
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdContentInformationTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8ce1d7e2-76fc-4a4c-be61-cf9f9b8d6b44")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAuthenticatedDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      object[] Items
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      AlgorithmIdentifier MACAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      EncapsulatedContentType EncapsulatedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string Version
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      byte[] MAC
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      bool xsdAuthenticatedDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      int ItemsSize();
-      [DispId(14)]
-      object ItemsGetItem(int index);
-      [DispId(15)]
-      bool ItemsSetItem(int index, object value);
-      [DispId(16)]
-      bool ItemsAddItem(object value);
-      [DispId(17)]
-      bool ItemsRemoveItem(int index);
-      [DispId(18)]
-      int MACSize();
-      [DispId(19)]
-      byte MACGetItem(int index);
-      [DispId(20)]
-      bool MACSetItem(int index, byte value);
-      [DispId(21)]
-      bool MACAddItem(byte value);
-      [DispId(22)]
-      bool MACRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("bb46eac0-879d-4f25-8f80-1a97e10700d6")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IKEKType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      KEKIdentifierType KEKIdentifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      AlgorithmIdentifier KeyEncryptionAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Version
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      byte[] EncryptedKey
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      bool xsdKEKTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      int EncryptedKeySize();
-      [DispId(12)]
-      byte EncryptedKeyGetItem(int index);
-      [DispId(13)]
-      bool EncryptedKeySetItem(int index, byte value);
-      [DispId(14)]
-      bool EncryptedKeyAddItem(byte value);
-      [DispId(15)]
-      bool EncryptedKeyRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("fb05e69d-f196-4798-a024-b58cca7297cb")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IKEKIdentifierType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string KeyIdentifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string KeyVersion
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      byte[] DerivationIdentifier
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdKEKIdentifierTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int DerivationIdentifierSize();
-      [DispId(9)]
-      byte DerivationIdentifierGetItem(int index);
-      [DispId(10)]
-      bool DerivationIdentifierSetItem(int index, byte value);
-      [DispId(11)]
-      bool DerivationIdentifierAddItem(byte value);
-      [DispId(12)]
-      bool DerivationIdentifierRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8208418d-8a01-4980-9d0a-ce6efa40335d")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAlgorithmIdentifier
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ParameterType Parameter
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Algorithm
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdAlgorithmIdentifierInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("15360db9-259f-45c7-bebf-8ef4c57c5730")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IParameterType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      byte[] InitialisationVector
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdParameterTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(4)]
-      int InitialisationVectorSize();
-      [DispId(5)]
-      byte InitialisationVectorGetItem(int index);
-      [DispId(6)]
-      bool InitialisationVectorSetItem(int index, byte value);
-      [DispId(7)]
-      bool InitialisationVectorAddItem(byte value);
-      [DispId(8)]
-      bool InitialisationVectorRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("621d3902-a737-4942-8704-bdf11b9d2193")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IKeyTransportType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      RecipientIdentifierType RecipientIdentifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      AlgorithmIdentifier KeyEncryptionAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Version
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      byte[] EncryptedKey
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      bool xsdKeyTransportTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      int EncryptedKeySize();
-      [DispId(12)]
-      byte EncryptedKeyGetItem(int index);
-      [DispId(13)]
-      bool EncryptedKeySetItem(int index, byte value);
-      [DispId(14)]
-      bool EncryptedKeyAddItem(byte value);
-      [DispId(15)]
-      bool EncryptedKeyRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("550ec631-eb0a-435e-80a3-ca64d76ea4a4")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IRecipientIdentifierType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      IssuerAndSerialNumberType IssuerAndSerialNumber
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdRecipientIdentifierTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("24ceb416-9b72-4518-bdf3-408d0a12f741")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IIssuerAndSerialNumberType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      RelativeDistinguishedNameType[] Issuer
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string SerialNumber
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdIssuerAndSerialNumberTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int IssuerSize();
-      [DispId(7)]
-      RelativeDistinguishedNameType IssuerGetItem(int index);
-      [DispId(8)]
-      bool IssuerSetItem(int index, RelativeDistinguishedNameType value);
-      [DispId(9)]
-      bool IssuerAddItem(RelativeDistinguishedNameType value);
-      [DispId(10)]
-      bool IssuerRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7d43c995-8abf-4467-95bf-e1ce6efd90b5")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IRelativeDistinguishedNameType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string AttributeType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string AttributeValue
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdRelativeDistinguishedNameTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c415e766-bde0-4c05-a860-a25f6bb225db")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEncapsulatedContentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      byte[] Content
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ContentType
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdEncapsulatedContentTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int ContentSize();
-      [DispId(7)]
-      byte ContentGetItem(int index);
-      [DispId(8)]
-      bool ContentSetItem(int index, byte value);
-      [DispId(9)]
-      bool ContentAddItem(byte value);
-      [DispId(10)]
-      bool ContentRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("401289e0-a9c3-4673-951c-88f6ed0a2390")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDigestedDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      AlgorithmIdentifier DigestAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      EncapsulatedContentType EncapsulatedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      byte[] Digest
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string Version
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdDigestedDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int DigestSize();
-      [DispId(11)]
-      byte DigestGetItem(int index);
-      [DispId(12)]
-      bool DigestSetItem(int index, byte value);
-      [DispId(13)]
-      bool DigestAddItem(byte value);
-      [DispId(14)]
-      bool DigestRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("52ea40a3-1aa0-4b3b-8ba2-4cdc46a9bf1a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEnvelopedDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      object[] Items
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      EncryptedContentType EncryptedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Version
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdEnvelopedDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      int ItemsSize();
-      [DispId(10)]
-      object ItemsGetItem(int index);
-      [DispId(11)]
-      bool ItemsSetItem(int index, object value);
-      [DispId(12)]
-      bool ItemsAddItem(object value);
-      [DispId(13)]
-      bool ItemsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("80b0578e-388d-44be-97bf-4a093cca87f1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEncryptedContentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      AlgorithmIdentifier ContentEncryptionAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      byte[] EncryptedData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ContentType
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdEncryptedContentTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int EncryptedDataSize();
-      [DispId(9)]
-      byte EncryptedDataGetItem(int index);
-      [DispId(10)]
-      bool EncryptedDataSetItem(int index, byte value);
-      [DispId(11)]
-      bool EncryptedDataAddItem(byte value);
-      [DispId(12)]
-      bool EncryptedDataRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("85106820-0463-45db-b2c1-e978763c02ad")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface INamedKeyEncryptedDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string KeyName
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      EncryptedContentType EncryptedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Version
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdNamedKeyEncryptedDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("757a0ec9-df95-4e70-81d3-3870ada1605a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISignedDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      AlgorithmIdentifier[] DigestAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      EncapsulatedContentType EncapsulatedContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      byte[][] Certificate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      SignerType[] Signer
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string Version
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      bool xsdSignedDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      int DigestAlgorithmSize();
-      [DispId(14)]
-      AlgorithmIdentifier DigestAlgorithmGetItem(int index);
-      [DispId(15)]
-      bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value);
-      [DispId(16)]
-      bool DigestAlgorithmAddItem(AlgorithmIdentifier value);
-      [DispId(17)]
-      bool DigestAlgorithmRemoveItem(int index);
-      [DispId(18)]
-      int SignerSize();
-      [DispId(19)]
-      SignerType SignerGetItem(int index);
-      [DispId(20)]
-      bool SignerSetItem(int index, SignerType value);
-      [DispId(21)]
-      bool SignerAddItem(SignerType value);
-      [DispId(22)]
-      bool SignerRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("de05b3ef-fe78-4b27-a625-728e597e574d")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISignerType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      SignerIdentifierType SignerIdentifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      AlgorithmIdentifier DigestAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      AlgorithmIdentifier SignatureAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      byte[] Signature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string Version
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      bool xsdSignerTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      int SignatureSize();
-      [DispId(14)]
-      byte SignatureGetItem(int index);
-      [DispId(15)]
-      bool SignatureSetItem(int index, byte value);
-      [DispId(16)]
-      bool SignatureAddItem(byte value);
-      [DispId(17)]
-      bool SignatureRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a105c946-398c-4d2f-97bf-ae7bfd08f113")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISignerIdentifierType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      IssuerAndSerialNumberType IssuerAndSerialNumber
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdSignerIdentifierTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("ee8d6cb5-45eb-48c3-bad2-c0b8909403f3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISensitiveCardDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TrackDataType[] TrackData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string PAN
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string CardSeqNumb
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string ExpiryDate
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdSensitiveCardDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int TrackDataSize();
-      [DispId(11)]
-      TrackDataType TrackDataGetItem(int index);
-      [DispId(12)]
-      bool TrackDataSetItem(int index, TrackDataType value);
-      [DispId(13)]
-      bool TrackDataAddItem(TrackDataType value);
-      [DispId(14)]
-      bool TrackDataRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f8bd0837-03d6-4ca0-9b3b-658beb8802f4")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITrackDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string TrackNumb
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string TrackFormat
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdTrackDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("be17908b-8165-4d2d-afaf-ae22749372c2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentTokenType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string TokenRequestedType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string TokenValue
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ExpiryDateTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      bool ExpiryDateTimeSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPaymentTokenTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("eb9cb839-6a63-4019-9ec6-dba763f95e6a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICustomerOrderType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string AdditionalInformation
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string CustomerOrderID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool OpenOrderState
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string StartDate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string EndDate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool EndDateSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      double ForecastedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      double CurrentAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      string AccessedBy
-      {
-         get;
-         set;
-      }
-      [DispId(22)]
-      bool xsdCustomerOrderTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("3ad079c3-38bf-4c93-bdfe-6c148df2de6c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICheckDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string BankID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string AccountNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string CheckNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      TrackDataType TrackData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string CheckCardNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string TypeCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string Country
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      bool xsdCheckDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("68d1cf6a-5911-4565-bf40-8aecaf8e15ef")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IMobileDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string MobileCountryCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      GeolocationType Geolocation
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      ContentInformationType ProtectedMobileData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      SensitiveMobileDataType SensitiveMobileData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string MobileNetworkCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string MaskedMSISDN
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      bool xsdMobileDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0ad203f3-fcea-4cc0-8b9f-88a0e9bea7a2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IGeolocationType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      GeographicCoordinatesType GeographicCoordinates
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      UTMCoordinatesType UTMCoordinates
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdGeolocationTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("43c13386-23c0-4a94-ad55-538a9060bac5")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IGeographicCoordinatesType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string Latitude
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Longitude
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdGeographicCoordinatesTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("dd7adda7-cdba-4462-982c-79a66de8adb0")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IUTMCoordinatesType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string UTMZone
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string UTMEastward
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string UTMNorthward
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdUTMCoordinatesTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("efeedd9d-d1d5-4aab-9350-694bf08e3671")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISensitiveMobileDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string MSISDN
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string IMSI
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string IMEI
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdSensitiveMobileDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("9f4e5cf0-3fae-47f7-bd6b-71113162935a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAccountReqType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionIdentificationType CardAcquisitionReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      LoyaltyAccountIDType LoyaltyAccountID
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdLoyaltyAccountReqTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e7f915b3-01bb-4688-9aed-3d0ac8768c59")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAccountIDType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string[] EntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string IdentificationType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string IdentificationSupport
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdLoyaltyAccountIDTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int EntryModeSize();
-      [DispId(11)]
-      string EntryModeGetItem(int index);
-      [DispId(12)]
-      bool EntryModeSetItem(int index, string value);
-      [DispId(13)]
-      bool EntryModeAddItem(string value);
-      [DispId(14)]
-      bool EntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7a6c6b32-3bd2-4fa9-9225-d1e60cd880df")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IBalanceInquiryResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      PaymentAccountStatusType PaymentAccountStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      LoyaltyAccountStatusType LoyaltyAccountStatus
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdBalanceInquiryResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("720a1165-5b86-4970-8744-9d7538f1f443")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentAccountStatusType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      PaymentInstrumentDataType PaymentInstrumentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      PaymentAcquirerDataType PaymentAcquirerData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      LoyaltyAccountStatusType LoyaltyAccountStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      double CurrentBalance
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool CurrentBalanceSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      bool xsdPaymentAccountStatusTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("33216543-ee27-4cb7-bf1f-904d707313f1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentAcquirerDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionIdentificationType AcquirerTransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ApprovalCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string MerchantID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string AcquirerPOIID
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdPaymentAcquirerDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a0825c89-0b6f-4c83-bec2-1b0fbe61c448")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAccountStatusType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      LoyaltyAccountType LoyaltyAccount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      double CurrentBalance
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool CurrentBalanceSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string LoyaltyUnit
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      bool xsdLoyaltyAccountStatusTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("004a730b-73ee-4190-b6bc-97b9f4d883b7")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAccountType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      LoyaltyAccountIDType LoyaltyAccountID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string LoyaltyBrand
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdLoyaltyAccountTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2f7fcdb5-efe3-4fb6-9552-a2f0787e4565")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IBatchRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionToPerformType[] TransactionToPerform
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      bool RemoveAllFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool RemoveAllFlagSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdBatchRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int TransactionToPerformSize();
-      [DispId(9)]
-      TransactionToPerformType TransactionToPerformGetItem(int index);
-      [DispId(10)]
-      bool TransactionToPerformSetItem(int index, TransactionToPerformType value);
-      [DispId(11)]
-      bool TransactionToPerformAddItem(TransactionToPerformType value);
-      [DispId(12)]
-      bool TransactionToPerformRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e745a5d3-2085-432f-8e8a-cedb17934859")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionToPerformType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      object Item
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdTransactionToPerformTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8a7ca43f-1f03-48ad-ba86-c11a7a2430de")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      LoyaltyTransactionType LoyaltyTransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      LoyaltyDataType[] LoyaltyData
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdLoyaltyRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int LoyaltyDataSize();
-      [DispId(9)]
-      LoyaltyDataType LoyaltyDataGetItem(int index);
-      [DispId(10)]
-      bool LoyaltyDataSetItem(int index, LoyaltyDataType value);
-      [DispId(11)]
-      bool LoyaltyDataAddItem(LoyaltyDataType value);
-      [DispId(12)]
-      bool LoyaltyDataRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7fda82c2-5a6b-4c26-b6a9-f5d3363b6fbe")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionIdentificationType SaleTransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleTerminalDataType SaleTerminalData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      SponsoredMerchantType[] SponsoredMerchant
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string SaleToPOIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string SaleToAcquirerData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      SaleToIssuerDataType SaleToIssuerData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string OperatorID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string OperatorLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      string ShiftNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      string SaleReferenceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      string TokenRequestedType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(23)]
-      string CustomerOrderID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(25)]
-      string[] CustomerOrderReq
-      {
-         get;
-         set;
-      }
-      [DispId(27)]
-      bool xsdSaleDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(28)]
-      int SponsoredMerchantSize();
-      [DispId(29)]
-      SponsoredMerchantType SponsoredMerchantGetItem(int index);
-      [DispId(30)]
-      bool SponsoredMerchantSetItem(int index, SponsoredMerchantType value);
-      [DispId(31)]
-      bool SponsoredMerchantAddItem(SponsoredMerchantType value);
-      [DispId(32)]
-      bool SponsoredMerchantRemoveItem(int index);
-      [DispId(33)]
-      int CustomerOrderReqSize();
-      [DispId(34)]
-      string CustomerOrderReqGetItem(int index);
-      [DispId(35)]
-      bool CustomerOrderReqSetItem(int index, string value);
-      [DispId(36)]
-      bool CustomerOrderReqAddItem(string value);
-      [DispId(37)]
-      bool CustomerOrderReqRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f60b96fb-ee1a-45e4-9d57-fdb596bd6a8a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleTerminalDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string SaleCapabilities
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleProfileType SaleProfile
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string TerminalEnvironment
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string TotalsGroupID
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdSaleTerminalDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("9ee997d3-ace0-4396-addc-84f2ebe47999")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleProfileType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string ServiceProfiles
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string GenericProfile
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      bool xsdSaleProfileTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f71f031a-c821-429c-9ea8-b05109434cc1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISponsoredMerchantType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string MerchantName
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string MerchantAddress
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string MerchantCountry
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string MerchantCategoryCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string RegistrationID
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdSponsoredMerchantTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d8312d5a-14d0-40c6-944e-ac55619192d5")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleToIssuerDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string StatementReference
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdSaleToIssuerDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2a4e1430-e560-4e5a-9ceb-08125dcd1f24")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyTransactionType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      OriginalPOITransactionType OriginalPOITransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TransactionConditionsType TransactionConditions
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      SaleItemType[] SaleItem
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string LoyaltyTransactionType1
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      double TotalAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      bool TotalAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdLoyaltyTransactionTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int SaleItemSize();
-      [DispId(17)]
-      SaleItemType SaleItemGetItem(int index);
-      [DispId(18)]
-      bool SaleItemSetItem(int index, SaleItemType value);
-      [DispId(19)]
-      bool SaleItemAddItem(SaleItemType value);
-      [DispId(20)]
-      bool SaleItemRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("b20f9a8e-6fb3-41ca-ad4e-4c7835bde5f3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IOriginalPOITransactionType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      TransactionIdentificationType POITransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string ApprovalCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      TransactionIdentificationType HostTransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string SaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool ReuseCardDataFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      string AcquirerID
-      {
-         get;
-         set;
-      }
-      [DispId(18)]
-      bool xsdOriginalPOITransactionTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("3eb2e001-99d8-490a-ad88-985b3eeb744e")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionConditionsType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string[] AllowedPaymentBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string[] AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string[] AllowedLoyaltyBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string[] ForceEntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      bool DebitPreferredFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string LoyaltyHandling
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      bool ForceOnlineFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string MerchantCategoryCode
-      {
-         get;
-         set;
-      }
-      [DispId(20)]
-      bool xsdTransactionConditionsTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(21)]
-      int AllowedPaymentBrandSize();
-      [DispId(22)]
-      string AllowedPaymentBrandGetItem(int index);
-      [DispId(23)]
-      bool AllowedPaymentBrandSetItem(int index, string value);
-      [DispId(24)]
-      bool AllowedPaymentBrandAddItem(string value);
-      [DispId(25)]
-      bool AllowedPaymentBrandRemoveItem(int index);
-      [DispId(26)]
-      int AcquirerIDSize();
-      [DispId(27)]
-      string AcquirerIDGetItem(int index);
-      [DispId(28)]
-      bool AcquirerIDSetItem(int index, string value);
-      [DispId(29)]
-      bool AcquirerIDAddItem(string value);
-      [DispId(30)]
-      bool AcquirerIDRemoveItem(int index);
-      [DispId(31)]
-      int AllowedLoyaltyBrandSize();
-      [DispId(32)]
-      string AllowedLoyaltyBrandGetItem(int index);
-      [DispId(33)]
-      bool AllowedLoyaltyBrandSetItem(int index, string value);
-      [DispId(34)]
-      bool AllowedLoyaltyBrandAddItem(string value);
-      [DispId(35)]
-      bool AllowedLoyaltyBrandRemoveItem(int index);
-      [DispId(36)]
-      int ForceEntryModeSize();
-      [DispId(37)]
-      string ForceEntryModeGetItem(int index);
-      [DispId(38)]
-      bool ForceEntryModeSetItem(int index, string value);
-      [DispId(39)]
-      bool ForceEntryModeAddItem(string value);
-      [DispId(40)]
-      bool ForceEntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f479e481-faf4-4ba6-babf-5c32635e89d1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleItemType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string UnitOfMeasure
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double Quantity
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool QuantitySpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      double UnitPrice
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      bool UnitPriceSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string TaxCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string SaleChannel
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string ProductLabel
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      string AdditionalProductInfo
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      string ItemID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      string ProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(23)]
-      string EanUpc
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(25)]
-      double ItemAmount
-      {
-         get;
-         set;
-      }
-      [DispId(27)]
-      bool xsdSaleItemTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("93cd4885-5ffc-445c-9b3a-f3468f80a740")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionIdentificationType CardAcquisitionReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      LoyaltyAccountIDType LoyaltyAccountID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      LoyaltyAmountType LoyaltyAmount
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdLoyaltyDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c7953a08-ad54-477b-87d9-ce31df6ee07c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAmountType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string LoyaltyUnit
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      double Value
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdLoyaltyAmountTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("025379b1-49bc-41ee-8070-6c34c462c3cc")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      PaymentTransactionType PaymentTransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      PaymentDataType PaymentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      LoyaltyDataType[] LoyaltyData
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPaymentRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int LoyaltyDataSize();
-      [DispId(11)]
-      LoyaltyDataType LoyaltyDataGetItem(int index);
-      [DispId(12)]
-      bool LoyaltyDataSetItem(int index, LoyaltyDataType value);
-      [DispId(13)]
-      bool LoyaltyDataAddItem(LoyaltyDataType value);
-      [DispId(14)]
-      bool LoyaltyDataRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("40a968aa-1339-453d-8c8f-e7130768240e")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentTransactionType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      AmountsReqType AmountsReq
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      OriginalPOITransactionType OriginalPOITransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      TransactionConditionsType TransactionConditions
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      SaleItemType[] SaleItem
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPaymentTransactionTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int SaleItemSize();
-      [DispId(11)]
-      SaleItemType SaleItemGetItem(int index);
-      [DispId(12)]
-      bool SaleItemSetItem(int index, SaleItemType value);
-      [DispId(13)]
-      bool SaleItemAddItem(SaleItemType value);
-      [DispId(14)]
-      bool SaleItemRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c7db35e8-0350-468d-b6af-17a6e7e5f6d2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      TransactionIdentificationType CardAcquisitionReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string RequestedValidityDate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      InstalmentType Instalment
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      CustomerOrderType CustomerOrder
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      PaymentInstrumentDataType PaymentInstrumentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string PaymentType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      bool SplitPaymentFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      bool xsdPaymentDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("3a5a435f-6660-4e5a-a820-c9e0aa5f5231")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInstalmentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string InstalmentType1
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string SequenceNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string PlanID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string Period
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string PeriodUnit
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string FirstPaymentDate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string TotalNbOfPayments
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      double CumulativeAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      bool CumulativeAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      double FirstAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      bool FirstAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(23)]
-      double Charges
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(25)]
-      bool ChargesSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(27)]
-      bool xsdInstalmentTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("5cadbc4d-652e-4fe0-862d-5c60edc4c8bf")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IReversalRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      OriginalPOITransactionType OriginalPOITransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      CustomerOrderType CustomerOrderID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string SaleReferenceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string ReversalReason
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      double ReversedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool ReversedAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      bool xsdReversalRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7e02d378-8cb0-46af-b032-a09f4236ae78")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IBatchResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      PerformedTransactionType[] PerformedTransaction
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdBatchResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int PerformedTransactionSize();
-      [DispId(7)]
-      PerformedTransactionType PerformedTransactionGetItem(int index);
-      [DispId(8)]
-      bool PerformedTransactionSetItem(int index, PerformedTransactionType value);
-      [DispId(9)]
-      bool PerformedTransactionAddItem(PerformedTransactionType value);
-      [DispId(10)]
-      bool PerformedTransactionRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("16e47f4c-4128-4db7-b220-bd81bd0369bb")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPerformedTransactionType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      PaymentResultType PaymentResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      LoyaltyResultType[] LoyaltyResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      double ReversedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      bool ReversedAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdPerformedTransactionTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int LoyaltyResultSize();
-      [DispId(17)]
-      LoyaltyResultType LoyaltyResultGetItem(int index);
-      [DispId(18)]
-      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
-      [DispId(19)]
-      bool LoyaltyResultAddItem(LoyaltyResultType value);
-      [DispId(20)]
-      bool LoyaltyResultRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("cca4ed05-8319-4b01-8351-4e52c4249ee9")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOIDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      TransactionIdentificationType POITransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string POIReconciliationID
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdPOIDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("ed2b85cb-fa4e-4b5e-87f5-a39765deca4b")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentResultType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      PaymentInstrumentDataType PaymentInstrumentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      AmountsRespType AmountsResp
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      InstalmentType Instalment
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      CurrencyConversionType[] CurrencyConversion
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      CapturedSignatureType CapturedSignature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      ContentInformationType ProtectedSignature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      PaymentAcquirerDataType PaymentAcquirerData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      string PaymentType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      bool MerchantOverrideFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(22)]
-      bool OnlineFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(24)]
-      string[] AuthenticationMethod
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(26)]
-      string ValidityDate
-      {
-         get;
-         set;
-      }
-      [DispId(28)]
-      bool xsdPaymentResultTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(29)]
-      int CurrencyConversionSize();
-      [DispId(30)]
-      CurrencyConversionType CurrencyConversionGetItem(int index);
-      [DispId(31)]
-      bool CurrencyConversionSetItem(int index, CurrencyConversionType value);
-      [DispId(32)]
-      bool CurrencyConversionAddItem(CurrencyConversionType value);
-      [DispId(33)]
-      bool CurrencyConversionRemoveItem(int index);
-      [DispId(34)]
-      int AuthenticationMethodSize();
-      [DispId(35)]
-      string AuthenticationMethodGetItem(int index);
-      [DispId(36)]
-      bool AuthenticationMethodSetItem(int index, string value);
-      [DispId(37)]
-      bool AuthenticationMethodAddItem(string value);
-      [DispId(38)]
-      bool AuthenticationMethodRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("bb60d555-aeb2-4773-9300-a094787356a6")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICurrencyConversionType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      AmountType ConvertedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      double Commission
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool CommissionSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string Declaration
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      bool CustomerApprovedFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      double Rate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      bool RateSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      double Markup
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      bool MarkupSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(20)]
-      bool xsdCurrencyConversionTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("689bebab-ed13-45cd-8a0e-c0e73d7085b4")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IAmountType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double Value
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdAmountTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d7b399d0-0e85-4e89-8fc0-b7b135010c3e")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICapturedSignatureType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      AreaSizeType AreaSize
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SignaturePointType[] SignaturePoint
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdCapturedSignatureTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int SignaturePointSize();
-      [DispId(7)]
-      SignaturePointType SignaturePointGetItem(int index);
-      [DispId(8)]
-      bool SignaturePointSetItem(int index, SignaturePointType value);
-      [DispId(9)]
-      bool SignaturePointAddItem(SignaturePointType value);
-      [DispId(10)]
-      bool SignaturePointRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("373ce911-81f3-406d-8aac-1c78d1ad49d6")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISignaturePointType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string X
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Y
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdSignaturePointTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2e8ee3a6-d21c-4956-86bc-d03f7ed4a848")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyResultType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      LoyaltyAccountType LoyaltyAccount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      LoyaltyAmountType LoyaltyAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      LoyaltyAcquirerDataType LoyaltyAcquirerData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      RebatesType Rebates
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      double CurrentBalance
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool CurrentBalanceSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      bool xsdLoyaltyResultTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("cf85b58d-7eb2-43ac-9807-37bcafd76ece")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyAcquirerDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ApprovalCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TransactionIdentificationType LoyaltyTransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string LoyaltyAcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string HostReconciliationID
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdLoyaltyAcquirerDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("58d408b0-6c6e-4930-81ad-597a3f846c26")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IRebatesType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      double TotalRebate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      bool TotalRebateSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string RebateLabel
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      SaleItemRebateType[] SaleItemRebate
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdRebatesTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int SaleItemRebateSize();
-      [DispId(11)]
-      SaleItemRebateType SaleItemRebateGetItem(int index);
-      [DispId(12)]
-      bool SaleItemRebateSetItem(int index, SaleItemRebateType value);
-      [DispId(13)]
-      bool SaleItemRebateAddItem(SaleItemRebateType value);
-      [DispId(14)]
-      bool SaleItemRebateRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0cd67028-10b8-41fa-a8dc-eaa2a6605621")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleItemRebateType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string UnitOfMeasure
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double Quantity
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool QuantitySpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string RebateLabel
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string ItemID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string ProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string EanUpc
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      double ItemAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      bool ItemAmountSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(19)]
-      bool xsdSaleItemRebateTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7d6ea888-a519-49a0-8210-f7381f99ae0d")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardAcquisitionRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      CardAcquisitionTransactionType CardAcquisitionTransaction
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdCardAcquisitionRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2e1d92b4-ad63-46fa-a5e7-04f806bc8b29")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardAcquisitionTransactionType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string[] AllowedPaymentBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string[] AllowedLoyaltyBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string[] ForceEntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string LoyaltyHandling
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool ForceCustomerSelectionFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      double TotalAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      bool TotalAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string PaymentType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      bool CashBackFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(22)]
-      bool CashBackFlagSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(24)]
-      bool xsdCardAcquisitionTransactionTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(25)]
-      int AllowedPaymentBrandSize();
-      [DispId(26)]
-      string AllowedPaymentBrandGetItem(int index);
-      [DispId(27)]
-      bool AllowedPaymentBrandSetItem(int index, string value);
-      [DispId(28)]
-      bool AllowedPaymentBrandAddItem(string value);
-      [DispId(29)]
-      bool AllowedPaymentBrandRemoveItem(int index);
-      [DispId(30)]
-      int AllowedLoyaltyBrandSize();
-      [DispId(31)]
-      string AllowedLoyaltyBrandGetItem(int index);
-      [DispId(32)]
-      bool AllowedLoyaltyBrandSetItem(int index, string value);
-      [DispId(33)]
-      bool AllowedLoyaltyBrandAddItem(string value);
-      [DispId(34)]
-      bool AllowedLoyaltyBrandRemoveItem(int index);
-      [DispId(35)]
-      int ForceEntryModeSize();
-      [DispId(36)]
-      string ForceEntryModeGetItem(int index);
-      [DispId(37)]
-      bool ForceEntryModeSetItem(int index, string value);
-      [DispId(38)]
-      bool ForceEntryModeAddItem(string value);
-      [DispId(39)]
-      bool ForceEntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("22dfe59f-8e68-4fb1-853c-a0141ecb264a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardAcquisitionResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string[] PaymentBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      PaymentInstrumentDataType PaymentInstrumentData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      LoyaltyAccountType[] LoyaltyAccount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      CustomerOrderType[] CustomerOrder
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdCardAcquisitionResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int PaymentBrandSize();
-      [DispId(17)]
-      string PaymentBrandGetItem(int index);
-      [DispId(18)]
-      bool PaymentBrandSetItem(int index, string value);
-      [DispId(19)]
-      bool PaymentBrandAddItem(string value);
-      [DispId(20)]
-      bool PaymentBrandRemoveItem(int index);
-      [DispId(21)]
-      int LoyaltyAccountSize();
-      [DispId(22)]
-      LoyaltyAccountType LoyaltyAccountGetItem(int index);
-      [DispId(23)]
-      bool LoyaltyAccountSetItem(int index, LoyaltyAccountType value);
-      [DispId(24)]
-      bool LoyaltyAccountAddItem(LoyaltyAccountType value);
-      [DispId(25)]
-      bool LoyaltyAccountRemoveItem(int index);
-      [DispId(26)]
-      int CustomerOrderSize();
-      [DispId(27)]
-      CustomerOrderType CustomerOrderGetItem(int index);
-      [DispId(28)]
-      bool CustomerOrderSetItem(int index, CustomerOrderType value);
-      [DispId(29)]
-      bool CustomerOrderAddItem(CustomerOrderType value);
-      [DispId(30)]
-      bool CustomerOrderRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e7e74a3d-67ec-41a2-9388-79c0bbfbc18b")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardholderPINType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ContentInformationType EncrPINBlock
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string PINFormat
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string AdditionalInput
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdCardholderPINTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("33c07cb3-354a-4b8c-bec7-91106403da97")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderAPDURequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      byte[] APDUData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      byte[] APDUClass
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      byte[] APDUInstruction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      byte[] APDUPar1
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      byte[] APDUPar2
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      byte[] APDUExpectedLength
-      {
-         get;
-         set;
-      }
-      [DispId(13)]
-      bool xsdCardReaderAPDURequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(14)]
-      int APDUDataSize();
-      [DispId(15)]
-      byte APDUDataGetItem(int index);
-      [DispId(16)]
-      bool APDUDataSetItem(int index, byte value);
-      [DispId(17)]
-      bool APDUDataAddItem(byte value);
-      [DispId(18)]
-      bool APDUDataRemoveItem(int index);
-      [DispId(19)]
-      int APDUClassSize();
-      [DispId(20)]
-      byte APDUClassGetItem(int index);
-      [DispId(21)]
-      bool APDUClassSetItem(int index, byte value);
-      [DispId(22)]
-      bool APDUClassAddItem(byte value);
-      [DispId(23)]
-      bool APDUClassRemoveItem(int index);
-      [DispId(24)]
-      int APDUInstructionSize();
-      [DispId(25)]
-      byte APDUInstructionGetItem(int index);
-      [DispId(26)]
-      bool APDUInstructionSetItem(int index, byte value);
-      [DispId(27)]
-      bool APDUInstructionAddItem(byte value);
-      [DispId(28)]
-      bool APDUInstructionRemoveItem(int index);
-      [DispId(29)]
-      int APDUPar1Size();
-      [DispId(30)]
-      byte APDUPar1GetItem(int index);
-      [DispId(31)]
-      bool APDUPar1SetItem(int index, byte value);
-      [DispId(32)]
-      bool APDUPar1AddItem(byte value);
-      [DispId(33)]
-      bool APDUPar1RemoveItem(int index);
-      [DispId(34)]
-      int APDUPar2Size();
-      [DispId(35)]
-      byte APDUPar2GetItem(int index);
-      [DispId(36)]
-      bool APDUPar2SetItem(int index, byte value);
-      [DispId(37)]
-      bool APDUPar2AddItem(byte value);
-      [DispId(38)]
-      bool APDUPar2RemoveItem(int index);
-      [DispId(39)]
-      int APDUExpectedLengthSize();
-      [DispId(40)]
-      byte APDUExpectedLengthGetItem(int index);
-      [DispId(41)]
-      bool APDUExpectedLengthSetItem(int index, byte value);
-      [DispId(42)]
-      bool APDUExpectedLengthAddItem(byte value);
-      [DispId(43)]
-      bool APDUExpectedLengthRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f4d4be0b-463f-4f6b-b759-0d407d112533")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderAPDUResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      byte[] APDUData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      byte[] CardStatusWords
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdCardReaderAPDUResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int APDUDataSize();
-      [DispId(9)]
-      byte APDUDataGetItem(int index);
-      [DispId(10)]
-      bool APDUDataSetItem(int index, byte value);
-      [DispId(11)]
-      bool APDUDataAddItem(byte value);
-      [DispId(12)]
-      bool APDUDataRemoveItem(int index);
-      [DispId(13)]
-      int CardStatusWordsSize();
-      [DispId(14)]
-      byte CardStatusWordsGetItem(int index);
-      [DispId(15)]
-      bool CardStatusWordsSetItem(int index, byte value);
-      [DispId(16)]
-      bool CardStatusWordsAddItem(byte value);
-      [DispId(17)]
-      bool CardStatusWordsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("1a77d49a-fa90-4dc5-8a75-b7865c80dccc")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderInitRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string[] ForceEntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool WarmResetFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      bool WarmResetFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      bool LeaveCardFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string MaxWaitingTime
-      {
-         get;
-         set;
-      }
-      [DispId(14)]
-      bool xsdCardReaderInitRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      int ForceEntryModeSize();
-      [DispId(16)]
-      string ForceEntryModeGetItem(int index);
-      [DispId(17)]
-      bool ForceEntryModeSetItem(int index, string value);
-      [DispId(18)]
-      bool ForceEntryModeAddItem(string value);
-      [DispId(19)]
-      bool ForceEntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("9a3c1493-5585-428c-9ff9-f0e1bef00880")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderInitResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TrackDataType[] TrackData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      ICCResetDataType ICCResetData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string[] EntryMode
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdCardReaderInitResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int TrackDataSize();
-      [DispId(11)]
-      TrackDataType TrackDataGetItem(int index);
-      [DispId(12)]
-      bool TrackDataSetItem(int index, TrackDataType value);
-      [DispId(13)]
-      bool TrackDataAddItem(TrackDataType value);
-      [DispId(14)]
-      bool TrackDataRemoveItem(int index);
-      [DispId(15)]
-      int EntryModeSize();
-      [DispId(16)]
-      string EntryModeGetItem(int index);
-      [DispId(17)]
-      bool EntryModeSetItem(int index, string value);
-      [DispId(18)]
-      bool EntryModeAddItem(string value);
-      [DispId(19)]
-      bool EntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4d163dc6-aea2-4ed1-832f-4d551d155cdd")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IICCResetDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      byte[] ATRValue
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      byte[] CardStatusWords
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdICCResetDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int ATRValueSize();
-      [DispId(7)]
-      byte ATRValueGetItem(int index);
-      [DispId(8)]
-      bool ATRValueSetItem(int index, byte value);
-      [DispId(9)]
-      bool ATRValueAddItem(byte value);
-      [DispId(10)]
-      bool ATRValueRemoveItem(int index);
-      [DispId(11)]
-      int CardStatusWordsSize();
-      [DispId(12)]
-      byte CardStatusWordsGetItem(int index);
-      [DispId(13)]
-      bool CardStatusWordsSetItem(int index, byte value);
-      [DispId(14)]
-      bool CardStatusWordsAddItem(byte value);
-      [DispId(15)]
-      bool CardStatusWordsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4e9653ce-e6e9-45ed-85e7-a3c19bab4495")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderPowerOffRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string MaxWaitingTime
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdCardReaderPowerOffRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e9e91572-7863-48c3-8a37-0b32da8d6ac3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICardReaderPowerOffResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdCardReaderPowerOffResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("39b9d640-e0d0-44a1-a429-c512318d604d")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICashHandlingDeviceType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      CoinsOrBillsType[] CoinsOrBills
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      bool CashHandlingOKFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdCashHandlingDeviceTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int CoinsOrBillsSize();
-      [DispId(9)]
-      CoinsOrBillsType CoinsOrBillsGetItem(int index);
-      [DispId(10)]
-      bool CoinsOrBillsSetItem(int index, CoinsOrBillsType value);
-      [DispId(11)]
-      bool CoinsOrBillsAddItem(CoinsOrBillsType value);
-      [DispId(12)]
-      bool CoinsOrBillsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("311e189b-0d38-425f-add7-86ecc372023c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ICoinsOrBillsType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      double UnitValue
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Number
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdCoinsOrBillsTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a7b1f261-b01e-4f24-a777-d53df5927141")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDiagnosisRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string[] AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool HostDiagnosisFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdDiagnosisRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      int AcquirerIDSize();
-      [DispId(10)]
-      string AcquirerIDGetItem(int index);
-      [DispId(11)]
-      bool AcquirerIDSetItem(int index, string value);
-      [DispId(12)]
-      bool AcquirerIDAddItem(string value);
-      [DispId(13)]
-      bool AcquirerIDRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("839e8959-3981-4e3c-b216-bf6aeee4a700")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IDiagnosisResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string[] LoggedSaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIStatusType POIStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      HostStatusType[] HostStatus
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdDiagnosisResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int LoggedSaleIDSize();
-      [DispId(11)]
-      string LoggedSaleIDGetItem(int index);
-      [DispId(12)]
-      bool LoggedSaleIDSetItem(int index, string value);
-      [DispId(13)]
-      bool LoggedSaleIDAddItem(string value);
-      [DispId(14)]
-      bool LoggedSaleIDRemoveItem(int index);
-      [DispId(15)]
-      int HostStatusSize();
-      [DispId(16)]
-      HostStatusType HostStatusGetItem(int index);
-      [DispId(17)]
-      bool HostStatusSetItem(int index, HostStatusType value);
-      [DispId(18)]
-      bool HostStatusAddItem(HostStatusType value);
-      [DispId(19)]
-      bool HostStatusRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c34df397-7b5c-4e91-9a82-6611fc59ec31")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOIStatusType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      CashHandlingDeviceType[] CashHandlingDevice
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string GlobalStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool SecurityOKFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      bool SecurityOKFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      bool PEDOKFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool PEDOKFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      bool CardReaderOKFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      bool CardReaderOKFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(17)]
-      string PrinterStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(19)]
-      bool CommunicationOKFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(21)]
-      bool CommunicationOKFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(23)]
-      bool FraudPreventionFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(25)]
-      bool FraudPreventionFlagSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(27)]
-      bool xsdPOIStatusTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(28)]
-      int CashHandlingDeviceSize();
-      [DispId(29)]
-      CashHandlingDeviceType CashHandlingDeviceGetItem(int index);
-      [DispId(30)]
-      bool CashHandlingDeviceSetItem(int index, CashHandlingDeviceType value);
-      [DispId(31)]
-      bool CashHandlingDeviceAddItem(CashHandlingDeviceType value);
-      [DispId(32)]
-      bool CashHandlingDeviceRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("213377db-3086-4e43-bb65-2d0a487d0fd4")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IHostStatusType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      bool IsReachableFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      bool xsdHostStatusTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("6221a5bb-51d6-45c8-8e71-0d16ce4c079a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEnableServiceRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ServicesEnabled
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string TransactionAction
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdEnableServiceRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("5b394b0d-bbe8-47f5-918f-6246236584d3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEnableServiceResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdEnableServiceResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d399f3af-dcc2-4c49-b8ce-6b1324cb6973")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IEventNotificationType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string EventDetails
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      byte[] RejectedMessage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string TimeStamp
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string EventToNotify
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool MaintenanceRequiredFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      bool xsdEventNotificationTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      int RejectedMessageSize();
-      [DispId(18)]
-      byte RejectedMessageGetItem(int index);
-      [DispId(19)]
-      bool RejectedMessageSetItem(int index, byte value);
-      [DispId(20)]
-      bool RejectedMessageAddItem(byte value);
-      [DispId(21)]
-      bool RejectedMessageRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("74e9e875-b327-4d25-a642-2e990bc2d635")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IGetTotalsRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string TotalDetails
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TotalFilterType TotalFilter
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdGetTotalsRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c9fd59e1-3e03-4b00-8514-e8bc8de1f514")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITotalFilterType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string SaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string OperatorID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string ShiftNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string TotalsGroupID
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdTotalFilterTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f325dc76-b675-4190-8cae-d5c023c16ce4")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IGetTotalsResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TransactionTotalsType[] TransactionTotals
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string POIReconciliationID
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdGetTotalsResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int TransactionTotalsSize();
-      [DispId(9)]
-      TransactionTotalsType TransactionTotalsGetItem(int index);
-      [DispId(10)]
-      bool TransactionTotalsSetItem(int index, TransactionTotalsType value);
-      [DispId(11)]
-      bool TransactionTotalsAddItem(TransactionTotalsType value);
-      [DispId(12)]
-      bool TransactionTotalsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("71880ab3-b078-49ac-a3c8-089696726319")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionTotalsType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      PaymentTotalsType[] PaymentTotals
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      LoyaltyTotalsType[] LoyaltyTotals
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string PaymentInstrumentType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string ErrorCondition
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string HostReconciliationID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string CardBrand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string SaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      string OperatorID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(22)]
-      string ShiftNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(24)]
-      string TotalsGroupID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(26)]
-      string PaymentCurrency
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(28)]
-      string LoyaltyUnit
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(30)]
-      string LoyaltyCurrency
-      {
-         get;
-         set;
-      }
-      [DispId(32)]
-      bool xsdTransactionTotalsTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(33)]
-      int PaymentTotalsSize();
-      [DispId(34)]
-      PaymentTotalsType PaymentTotalsGetItem(int index);
-      [DispId(35)]
-      bool PaymentTotalsSetItem(int index, PaymentTotalsType value);
-      [DispId(36)]
-      bool PaymentTotalsAddItem(PaymentTotalsType value);
-      [DispId(37)]
-      bool PaymentTotalsRemoveItem(int index);
-      [DispId(38)]
-      int LoyaltyTotalsSize();
-      [DispId(39)]
-      LoyaltyTotalsType LoyaltyTotalsGetItem(int index);
-      [DispId(40)]
-      bool LoyaltyTotalsSetItem(int index, LoyaltyTotalsType value);
-      [DispId(41)]
-      bool LoyaltyTotalsAddItem(LoyaltyTotalsType value);
-      [DispId(42)]
-      bool LoyaltyTotalsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("40ccacce-d228-41b1-92b1-d83e5970cc8b")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentTotalsType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string TransactionType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string TransactionCount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      double TransactionAmount
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdPaymentTotalsTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("b6ddd4fd-6f55-42a7-91ee-a1ecc7afe60a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyTotalsType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string TransactionType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string TransactionCount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      double TransactionAmount
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdLoyaltyTotalsTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0feeb52d-7ec1-42bd-b714-92b1e448dd89")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      bool ConfirmedFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      bool ConfirmedFlagSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string FunctionKey
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string TextInput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string DigitInput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      ContentInformationType Password
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string MenuEntryNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string InputCommand
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      bool xsdInputTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a36f50fa-8280-4475-a1b8-bcfec8432f25")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputDataType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string DefaultInputString
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string StringMask
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string Device
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string InfoQualify
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string InputCommand
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool NotifyCardInputFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string MaxInputTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      bool ImmediateResponseFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string MinLength
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      string MaxLength
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(22)]
-      string MaxDecimalLength
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(24)]
-      bool WaitUserValidationFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(26)]
-      bool FromRightToLeftFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(28)]
-      bool MaskCharactersFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(30)]
-      bool BeepKeyFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(32)]
-      bool GlobalCorrectionFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(34)]
-      bool DisableCancelFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(36)]
-      bool DisableCorrectFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(38)]
-      bool DisableValidFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(40)]
-      bool MenuBackFlag
-      {
-         get;
-         set;
-      }
-      [DispId(42)]
-      bool xsdInputDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("73ad781b-591d-4af8-9e5b-f12b38f00054")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      DisplayOutputType DisplayOutput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      InputDataType InputData
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdInputRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e54d3120-1b2a-42c6-b2ad-4a9e332888d2")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      OutputResultType OutputResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      InputResultType InputResult
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdInputResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("337ca66a-1bb6-471b-8c18-449b57695868")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputResultType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      InputType Input
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string Device
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string InfoQualify
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdInputResultTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d764df56-2c50-4d48-a4c4-ba02985cc5d3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IInputUpdateType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      MessageReferenceType MessageReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      OutputContentType OutputContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      MenuEntryType[] MenuEntry
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      byte[] OutputSignature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string MinLength
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string MaxLength
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string MaxDecimalLength
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdInputUpdateTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int MenuEntrySize();
-      [DispId(17)]
-      MenuEntryType MenuEntryGetItem(int index);
-      [DispId(18)]
-      bool MenuEntrySetItem(int index, MenuEntryType value);
-      [DispId(19)]
-      bool MenuEntryAddItem(MenuEntryType value);
-      [DispId(20)]
-      bool MenuEntryRemoveItem(int index);
-      [DispId(21)]
-      int OutputSignatureSize();
-      [DispId(22)]
-      byte OutputSignatureGetItem(int index);
-      [DispId(23)]
-      bool OutputSignatureSetItem(int index, byte value);
-      [DispId(24)]
-      bool OutputSignatureAddItem(byte value);
-      [DispId(25)]
-      bool OutputSignatureRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("d7e834f7-eaaa-45e7-ba46-acf5bc96d731")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoginRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string DateTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      SaleSoftwareType SaleSoftware
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      SaleTerminalDataType SaleTerminalData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      bool TrainingModeFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      string OperatorLanguage
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      string OperatorID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(14)]
-      string ShiftNumber
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(16)]
-      string TokenRequestedType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(18)]
-      string[] CustomerOrderReq
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(20)]
-      string POISerialNumber
-      {
-         get;
-         set;
-      }
-      [DispId(22)]
-      bool xsdLoginRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(23)]
-      int CustomerOrderReqSize();
-      [DispId(24)]
-      string CustomerOrderReqGetItem(int index);
-      [DispId(25)]
-      bool CustomerOrderReqSetItem(int index, string value);
-      [DispId(26)]
-      bool CustomerOrderReqAddItem(string value);
-      [DispId(27)]
-      bool CustomerOrderReqRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("87a3cf1f-3193-468c-b1c4-9166946dc02a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleSoftwareType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ManufacturerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ApplicationName
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string SoftwareVersion
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string CertificationCode
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdSaleSoftwareTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("48f1c9bb-35a0-4469-9cb1-9462c8228436")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoginResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      POISystemDataType POISystemData
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdLoginResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0158c8b9-202e-44c8-8452-98d0a262b3b8")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOISystemDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string DateTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      POISoftwareType POISoftware
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POITerminalDataType POITerminalData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      POIStatusType POIStatus
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPOISystemDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("ab1e79d2-6fd9-4197-b4c6-df449b5ed01c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOISoftwareType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ManufacturerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ApplicationName
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string SoftwareVersion
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string CertificationCode
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPOISoftwareTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("803cbd57-33bc-494e-9c0e-6902d4ffb5e3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOITerminalDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string POICapabilities
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      POIProfileType POIProfile
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string TerminalEnvironment
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string POISerialNumber
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdPOITerminalDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("6ba0052f-8d8d-41b7-a484-b701f487b5c1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPOIProfileType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      string ServiceProfiles
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string GenericProfile
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      bool xsdPOIProfileTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("71ce8d2f-b21d-43c1-afcb-213403381e22")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILogoutRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      bool MaintenanceAllowed
-      {
-         get;
-         set;
-      }
-      [DispId(4)]
-      bool xsdLogoutRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("5405fcd9-ba53-41bc-8712-6d45c7ea073f")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILogoutResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdLogoutResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("83aebe11-9caa-4130-bacc-344d2aca1fc0")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ILoyaltyResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      LoyaltyResultType[] LoyaltyResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      PaymentReceiptType[] PaymentReceipt
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      bool xsdLoyaltyResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(12)]
-      int LoyaltyResultSize();
-      [DispId(13)]
-      LoyaltyResultType LoyaltyResultGetItem(int index);
-      [DispId(14)]
-      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
-      [DispId(15)]
-      bool LoyaltyResultAddItem(LoyaltyResultType value);
-      [DispId(16)]
-      bool LoyaltyResultRemoveItem(int index);
-      [DispId(17)]
-      int PaymentReceiptSize();
-      [DispId(18)]
-      PaymentReceiptType PaymentReceiptGetItem(int index);
-      [DispId(19)]
-      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
-      [DispId(20)]
-      bool PaymentReceiptAddItem(PaymentReceiptType value);
-      [DispId(21)]
-      bool PaymentReceiptRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("bcd4154e-7319-4d7a-b448-696590252395")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentReceiptType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      OutputContentType OutputContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string DocumentQualifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool IntegratedPrintFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      bool RequiredSignatureFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      bool xsdPaymentReceiptTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("c1c71383-8d9e-434d-b447-0c99a3facb20")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IMessageHeaderType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string ProtocolVersion
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string MessageClass
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string MessageCategory
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string MessageType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string ServiceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string DeviceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string SaleID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string POIID
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      bool xsdMessageHeaderTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("9b9d5169-3b53-414e-9574-54a74a1f366e")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPaymentResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      PaymentResultType PaymentResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      LoyaltyResultType[] LoyaltyResult
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      PaymentReceiptType[] PaymentReceipt
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      CustomerOrderType[] CustomerOrder
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdPaymentResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int LoyaltyResultSize();
-      [DispId(17)]
-      LoyaltyResultType LoyaltyResultGetItem(int index);
-      [DispId(18)]
-      bool LoyaltyResultSetItem(int index, LoyaltyResultType value);
-      [DispId(19)]
-      bool LoyaltyResultAddItem(LoyaltyResultType value);
-      [DispId(20)]
-      bool LoyaltyResultRemoveItem(int index);
-      [DispId(21)]
-      int PaymentReceiptSize();
-      [DispId(22)]
-      PaymentReceiptType PaymentReceiptGetItem(int index);
-      [DispId(23)]
-      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
-      [DispId(24)]
-      bool PaymentReceiptAddItem(PaymentReceiptType value);
-      [DispId(25)]
-      bool PaymentReceiptRemoveItem(int index);
-      [DispId(26)]
-      int CustomerOrderSize();
-      [DispId(27)]
-      CustomerOrderType CustomerOrderGetItem(int index);
-      [DispId(28)]
-      bool CustomerOrderSetItem(int index, CustomerOrderType value);
-      [DispId(29)]
-      bool CustomerOrderAddItem(CustomerOrderType value);
-      [DispId(30)]
-      bool CustomerOrderRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("466d8b07-200f-4fb5-a9f8-b18e74f63bca")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPINRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      CardholderPINType CardholderPIN
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string PINRequestType1
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string PINVerifMethod
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string AdditionalInput
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string PINEncAlgorithm
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string PINFormat
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string KeyReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string MaxWaitingTime
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      bool xsdPINRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("deebc4ec-b728-476b-a39a-0bcf5e457e6c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPINResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      CardholderPINType CardholderPIN
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdPINResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("592a9f5c-c185-4f0e-a326-43bd74ac2f5f")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPrintOutputType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      OutputContentType OutputContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      byte[] OutputSignature
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string DocumentQualifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string ResponseMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(10)]
-      bool IntegratedPrintFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(12)]
-      bool RequiredSignatureFlag
-      {
-         get;
-         set;
-      }
-      [DispId(14)]
-      bool xsdPrintOutputTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      int OutputSignatureSize();
-      [DispId(16)]
-      byte OutputSignatureGetItem(int index);
-      [DispId(17)]
-      bool OutputSignatureSetItem(int index, byte value);
-      [DispId(18)]
-      bool OutputSignatureAddItem(byte value);
-      [DispId(19)]
-      bool OutputSignatureRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2d835783-11e7-427c-a663-c6de6989f5be")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPrintRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      PrintOutputType PrintOutput
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdPrintRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("f60ac154-4ce0-4e99-87ea-d383b1bd947a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IPrintResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string DocumentQualifier
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdPrintResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("7b4dca02-ef2f-4f59-80ac-e0ac2ba5b854")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IReconciliationRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string[] AcquirerID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string ReconciliationType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string POIReconciliationID
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdReconciliationRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int AcquirerIDSize();
-      [DispId(9)]
-      string AcquirerIDGetItem(int index);
-      [DispId(10)]
-      bool AcquirerIDSetItem(int index, string value);
-      [DispId(11)]
-      bool AcquirerIDAddItem(string value);
-      [DispId(12)]
-      bool AcquirerIDRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("2ab8e2f0-d55a-4f05-8b9c-b2ad8474cbb9")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IReconciliationResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TransactionTotalsType[] TransactionTotals
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ReconciliationType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string POIReconciliationID
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdReconciliationResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int TransactionTotalsSize();
-      [DispId(11)]
-      TransactionTotalsType TransactionTotalsGetItem(int index);
-      [DispId(12)]
-      bool TransactionTotalsSetItem(int index, TransactionTotalsType value);
-      [DispId(13)]
-      bool TransactionTotalsAddItem(TransactionTotalsType value);
-      [DispId(14)]
-      bool TransactionTotalsRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("abe1c506-4d88-4513-92c6-62b5d038cc8c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IRepeatedMessageResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      MessageHeaderType MessageHeader
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      object Item
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdRepeatedMessageResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("ee838b17-2701-4830-a8ae-4bfb5905af0d")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IReversalResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      OriginalPOITransactionType OriginalPOITransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      PaymentReceiptType[] PaymentReceipt
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      double ReversedAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      bool ReversedAmountSpecified
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string CustomerOrderID
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdReversalResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int PaymentReceiptSize();
-      [DispId(17)]
-      PaymentReceiptType PaymentReceiptGetItem(int index);
-      [DispId(18)]
-      bool PaymentReceiptSetItem(int index, PaymentReceiptType value);
-      [DispId(19)]
-      bool PaymentReceiptAddItem(PaymentReceiptType value);
-      [DispId(20)]
-      bool PaymentReceiptRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e132a8a6-b803-41d2-9125-a082f42319b1")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      POIDataType POIData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      StoredValueResultType[] StoredValueResult
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdStoredValueResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      int StoredValueResultSize();
-      [DispId(11)]
-      StoredValueResultType StoredValueResultGetItem(int index);
-      [DispId(12)]
-      bool StoredValueResultSetItem(int index, StoredValueResultType value);
-      [DispId(13)]
-      bool StoredValueResultAddItem(StoredValueResultType value);
-      [DispId(14)]
-      bool StoredValueResultRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8c9859d5-fb03-4281-bb6f-61ead0460a7a")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueResultType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      StoredValueAccountStatusType StoredValueAccountStatus
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      TransactionIdentificationType HostTransactionID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string StoredValueTransactionType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string ProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string EanUpc
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      double ItemAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdStoredValueResultTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("8d192fbd-71f9-4224-b706-7b0ed829798c")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueAccountStatusType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      StoredValueAccountIDType StoredValueAccountID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      double CurrentBalance
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      bool CurrentBalanceSpecified
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdStoredValueAccountStatusTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4719b438-0da0-49ed-b42d-20cb433880d3")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueAccountIDType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string StoredValueAccountType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string StoredValueProvider
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string OwnerName
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string ExpiryDate
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string[] EntryMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string IdentificationType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(15)]
-      bool xsdStoredValueAccountIDTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(16)]
-      int EntryModeSize();
-      [DispId(17)]
-      string EntryModeGetItem(int index);
-      [DispId(18)]
-      bool EntryModeSetItem(int index, string value);
-      [DispId(19)]
-      bool EntryModeAddItem(string value);
-      [DispId(20)]
-      bool EntryModeRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("28ffb124-2eae-40ea-8dc6-223f7d315690")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISoundContentType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      string SoundFormat
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      string Language
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string ReferenceID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string Value
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      bool xsdSoundContentTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("96a92833-73d6-43ff-9cd3-fde32c1c1340")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISoundRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      SoundContentType SoundContent
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string ResponseMode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string SoundAction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string SoundVolume
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      bool xsdSoundRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("6b9d9ff6-4793-4e02-bd84-0fce5e92c906")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISoundResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      [DispId(3)]
-      bool xsdSoundResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("32d0fc5d-d9de-46fb-9f81-48ecbd54aabf")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueDataType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      StoredValueAccountIDType StoredValueAccountID
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      OriginalPOITransactionType OriginalPOITransaction
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string StoredValueProvider
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(7)]
-      string StoredValueTransactionType
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(9)]
-      string ProductCode
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(11)]
-      string EanUpc
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(13)]
-      double ItemAmount
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(15)]
-      string Currency
-      {
-         get;
-         set;
-      }
-      [DispId(17)]
-      bool xsdStoredValueDataTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("e7a7346e-09bf-4cd4-9f44-a1766b8a3198")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface IStoredValueRequestType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      SaleDataType SaleData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      StoredValueDataType[] StoredValueData
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      string CustomerLanguage
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdStoredValueRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      int StoredValueDataSize();
-      [DispId(9)]
-      StoredValueDataType StoredValueDataGetItem(int index);
-      [DispId(10)]
-      bool StoredValueDataSetItem(int index, StoredValueDataType value);
-      [DispId(11)]
-      bool StoredValueDataAddItem(StoredValueDataType value);
-      [DispId(12)]
-      bool StoredValueDataRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("3426de59-ee32-408e-b530-783f5ffdcb57")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransmitRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      byte[] Message
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      bool WaitResponseFlag
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      string MaximumTransmitTime
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(8)]
-      string DestinationAddress
-      {
-         get;
-         set;
-      }
-      [DispId(10)]
-      bool xsdTransmitRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(11)]
-      int MessageSize();
-      [DispId(12)]
-      byte MessageGetItem(int index);
-      [DispId(13)]
-      bool MessageSetItem(int index, byte value);
-      [DispId(14)]
-      bool MessageAddItem(byte value);
-      [DispId(15)]
-      bool MessageRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("4689f3f9-1729-4a99-bf7d-a9e51f5b4021")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransmitResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      byte[] Message
-      {
-         get;
-         set;
-      }
-      [DispId(5)]
-      bool xsdTransmitResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(6)]
-      int MessageSize();
-      [DispId(7)]
-      byte MessageGetItem(int index);
-      [DispId(8)]
-      bool MessageSetItem(int index, byte value);
-      [DispId(9)]
-      bool MessageAddItem(byte value);
-      [DispId(10)]
-      bool MessageRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("a2a8adf8-ffbc-4398-9c52-1de9e59c1a36")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionStatusRequestType
-   {
-      /// <remarks/>
-      [DispId(2)]
-      MessageReferenceType MessageReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(4)]
-      string[] DocumentQualifier
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(6)]
-      bool ReceiptReprintFlag
-      {
-         get;
-         set;
-      }
-      [DispId(8)]
-      bool xsdTransactionStatusRequestTypeInitFlag
-      {
-         get;
-         set;
-      }
-      [DispId(9)]
-      int DocumentQualifierSize();
-      [DispId(10)]
-      string DocumentQualifierGetItem(int index);
-      [DispId(11)]
-      bool DocumentQualifierSetItem(int index, string value);
-      [DispId(12)]
-      bool DocumentQualifierAddItem(string value);
-      [DispId(13)]
-      bool DocumentQualifierRemoveItem(int index);
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0e6ec726-3627-405a-aa9b-ef0e4a177ac0")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ITransactionStatusResponseType
-   {
-      /// <remarks/>
-      [DispId(1)]
-      ResponseType Response
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      MessageReferenceType MessageReference
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      RepeatedMessageResponseType RepeatedMessageResponse
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdTransactionStatusResponseTypeInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("757ffd50-1e5c-45ba-af6f-965d00ec4b92")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleToPOIRequest
-   {
-      /// <remarks/>
-      [DispId(1)]
-      MessageHeaderType MessageHeader
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      object Item
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      ContentInformationType SecurityTrailer
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdSaleToPOIRequestInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("0af5922a-ef28-4e1c-bae0-d6ca737a3758")]
-   [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-   public interface ISaleToPOIResponse
-   {
-      /// <remarks/>
-      [DispId(1)]
-      MessageHeaderType MessageHeader
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(3)]
-      object Item
-      {
-         get;
-         set;
-      }
-      /// <remarks/>
-      [DispId(5)]
-      ContentInformationType SecurityTrailer
-      {
-         get;
-         set;
-      }
-      [DispId(7)]
-      bool xsdSaleToPOIResponseInitFlag
-      {
-         get;
-         set;
-      }
-   }
-   [System.Runtime.InteropServices.GuidAttribute("43e19210-6f1e-4676-92f2-66c8fe47835c")]
+   [System.Runtime.InteropServices.GuidAttribute("c80cdb8c-47e4-4a6a-8b44-98cd6d226458")]
    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public interface IIssuerType
@@ -35171,6 +35151,26 @@ namespace NEXO
       bool RelativeDistinguishedNameAddItem(RelativeDistinguishedNameType value);
       [DispId(8)]
       bool RelativeDistinguishedNameRemoveItem(int index);
+   }
+   /// <remarks/>
+   [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+   [System.SerializableAttribute()]
+   [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+   public enum VersionEnumeration
+   {
+      /// <remarks/>
+      v0,
+      /// <remarks/>
+      v1,
+      /// <remarks/>
+      v2,
+      /// <remarks/>
+      v3,
+      /// <remarks/>
+      v4,
+      /// <remarks/>
+      v5,
    }
    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
    public enum TagsEnumeration

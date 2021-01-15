@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>21703d8d-b0f9-4080-b6f9-5ad74df57ae1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NEXO_40_SHARED</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.001.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.002.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.003.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.004.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.005.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.006.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.007.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.008.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.009.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.010.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.011.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.012.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.013.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.014.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.015.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.016.001.01.xsd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)nexo40.017.001.01.xsd.cs" />
+  </ItemGroup>
+</Project>

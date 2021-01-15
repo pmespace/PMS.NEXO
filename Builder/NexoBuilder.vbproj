@@ -34,6 +34,7 @@
     <OutputPath>..\Release\</OutputPath>
     <DocumentationFile>NexoBuilder.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DefineConstants>NEXO30</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -154,9 +155,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NEXO\NEXO.csproj">
+    <ProjectReference Include="..\NEXO\NEXO_30.csproj">
       <Project>{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}</Project>
-      <Name>NEXO</Name>
+      <Name>NEXO_30</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

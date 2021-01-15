@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 
 using NEXO.Properties;
 using COMMON;
+using NEXO.VersionMngt;
 
 namespace NEXO
 {
@@ -44,12 +45,67 @@ namespace NEXO
 		}
 	}
 
-	[ComVisible(false)]
-	public static class NexoVersion
-	{
-		public static readonly string Long = "Protocol Version 3.0 - Document Version 3.0 - 3 October 2016";
-		public static readonly string Short = "3.0";
-	}
+	//	[ComVisible(false)]
+	//	public static class NexoVersion
+	//	{
+	//#if NEXO30
+	//		public static readonly string Long = "Protocol Version 3.0 - Document Version 3.0 - 3 October 2016";
+	//		public static readonly string Short = "3.0";
+	//		public static readonly string StartName = "nexo30";
+	//#elif NEXO31
+	//		public static readonly string Long = "Protocol Version 3.1 - Document Version 3.1 - 31 July 2017";
+	//		public static readonly string Short = "3.1";
+	//		public static readonly string StartName = "nexo31";
+	//#endif
+	//	}
+
+//	[ComVisible(false)]
+//	public class NexoVersion
+//	{
+//		public string Version { get; set; }
+//		public string Description { get; set; }
+//		public string ResourceName { get; set; }
+//		public string AssemblyName { get; set; }
+//		public override string ToString()
+//		{
+//			return Version;
+//		}
+//	}
+
+//	[ComVisible(false)]
+//	public class NexoSupportedVersions : Dictionary<string, NexoVersion>
+//	{
+//		#region constructor
+//		public NexoSupportedVersions()
+//		{
+//			NexoVersion version = new NexoVersion()
+//			{
+//				Description = "Version 3.0 - 3 October 2016",
+//				ResourceName = "nexo30",
+//				AssemblyName = "PMS.NEXO30.dll",
+//				Version = "3.0",
+//			};
+//			Add(version.Version, version);
+
+//#if !NET35
+//			version = new NexoVersion()
+//			{
+//				Description = "Version 3.1 - 31 July 2017",
+//				ResourceName = "nexo31",
+//				AssemblyName = "PMS.NEXO31.dll",
+//				Version = "3.1",
+//			};
+//			Add(version.Version, version);
+//#endif
+//		}
+//		#endregion
+//	}
+
+//	[ComVisible(false)]
+//	public static class NexoCurrentVersion
+//	{
+//		public static NexoVersion Version = null;
+//	}
 
 	[ComVisible(false)]
 	public abstract class NexoType
@@ -1478,7 +1534,7 @@ namespace NEXO
 	public class NexoSaleCapabilities : NexoCluster, INexoCluster { public NexoSaleCapabilities() : base(TagsEnumeration.SaleCapabilities.ToString()) { Value = DefaultValue; } }
 
 	[ComVisible(true)]
-	public class NexoProtocolVersion : NexoDecimal, INexoDecimal { public NexoProtocolVersion(string v = null) : base(TagsEnumeration.ProtocolVersion.ToString()) { DefaultValue = NexoVersion.Short; Mantis = 1; DecimalPlaces = 1; Value = v ?? DefaultValue; } }
+	public class NexoProtocolVersion : NexoDecimal, INexoDecimal { public NexoProtocolVersion(string v = null) : base(TagsEnumeration.ProtocolVersion.ToString()) { DefaultValue = NexoCurrentVersion.Current.Version; Mantis = 1; DecimalPlaces = 1; Value = v ?? DefaultValue; } }
 
 	[ComVisible(true)]
 	public class NexoSupportedProtocolVersions : Dictionary<string, NexoProtocolVersion> { }
@@ -1548,7 +1604,7 @@ namespace NEXO
 		public NexoManufacturerID() : base(
 #if NEXO30
 			TagsEnumeration.ManufacturerID.ToString()
-#else
+#elif NEXO31
 			TagsEnumeration.ProviderIdentification.ToString()
 #endif
 			)

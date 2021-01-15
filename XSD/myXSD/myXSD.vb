@@ -18,9 +18,47 @@ Public Class myXSD
 	Private Const MYXSD_SETTINGS As String = "myxsd.json"
 	Private Const XSD_SETTINGS As String = "xsd.settings.json"
 	Private xsdex As New XSD
+	Private statusText As String, updateStatusText As String
+
+#Region "serverThread management"
+	'Private Enum ActivityEvent
+	'	none
+	'	message
+	'	startingProcess
+	'	endingProcess
+	'End Enum
+	'Private Class Activity
+	'	Public Property Message As String
+	'	Public Property Evt As ActivityEvent
+	'End Class
+	Private Delegate Sub AddActivity(Activity As Activity)
+	Private myDelegate As New AddActivity(AddressOf ProcessUI)
+
+	Private Sub ProcessUI(activity As Activity)
+		If ActivityEvent.none <> activity.Evt Then
+			UpdateStatus(activity.Message)
+		End If
+		SetButtons()
+	End Sub
+#End Region
+
+	Private Sub DisplayStatus()
+		status.Text = statusText
+		If Not String.IsNullOrEmpty(updateStatusText) Then
+			status.Text &= $" [{updateStatusText}]"
+		End If
+		status.Update()
+	End Sub
+
+	Private Sub UpdateStatus(s As String)
+		updateStatusText = s
+		status.Text = $"{statusText} [{updateStatusText}]"
+		status.Update()
+	End Sub
 
 	Private Sub SetStatus(s As String)
-		status.Text = s
+		statusText = s
+		status.Text = statusText
 		status.Update()
 	End Sub
 
@@ -141,13 +179,13 @@ Public Class myXSD
 		automaticArrays.Checked = settings.AutomaticArrays
 	End Sub
 
-	Private Sub pbGenerate_Click(sender As Object, e As EventArgs) Handles pbGenerate.Click
+	Private Sub GenerateFiles(mixFiles As Boolean)
 		panelSettings.Enabled = False
 		result.Clear()
 		ToSettings()
 		SetHourglass()
 		'FromSettings()
-		If xsdex.AnalyseXSD(ToSettings()) Then
+		If xsdex.AnalyseXSD(ToSettings(), mixFiles) Then
 			result.AppendText(xsdex.Code)
 			Try
 				Clipboard.SetText(xsdex.Code)
@@ -156,6 +194,14 @@ Public Class myXSD
 		End If
 		SetDefaultCursor()
 		panelSettings.Enabled = True
+	End Sub
+
+	Private Sub pbGenerate_Click(sender As Object, e As EventArgs) Handles pbGenerate.Click
+		GenerateFiles(True)
+	End Sub
+
+	Private Sub pbGenerateNFiles_Click(sender As Object, e As EventArgs) Handles pbGenerateNFiles.Click
+		GenerateFiles(False)
 	End Sub
 
 	Private Shared Function CloneMember(ByVal m As CodeTypeMember) As CodeTypeMember

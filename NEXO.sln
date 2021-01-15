@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexoResources", "NexoResour
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NexoSimulator", "NexoSimulator\NexoSimulator.vbproj", "{C639BA7F-272B-454E-8783-D95F1930358B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO", "NEXO\NEXO.csproj", "{BA4AE91F-C039-44CB-AB66-CE57ECA46EB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO_30", "NEXO\NEXO_30.csproj", "{BA4AE91F-C039-44CB-AB66-CE57ECA46EB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO35", "NEXO35\NEXO35.csproj", "{DBE66D0F-527D-44E8-8B8D-EA8DA6228F63}"
 EndProject
@@ -37,14 +37,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NexoBuilder", "Builder\NexoBuilder.vbproj", "{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NEXO_40_SHARED", "NEXO_40_SHARED\NEXO_40_SHARED.shproj", "{21703D8D-B0F9-4080-B6F9-5AD74DF57AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO_31", "NEXO31\NEXO_31.csproj", "{FA6F6FBC-9192-425B-808B-66624AD96D58}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NexoSimulator31", "NexoSimulator31\NexoSimulator31.vbproj", "{43829C4D-F366-4890-AF4B-A40F583A8265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEXO_40", "NEXO_40\NEXO_40.csproj", "{106FB3D1-63A0-404D-9529-F68048D69B70}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NEXO_40_SHARED\NEXO_40_SHARED.projitems*{106fb3d1-63a0-404d-9529-f68048d69b70}*SharedItemsImports = 4
+		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{106fb3d1-63a0-404d-9529-f68048d69b70}*SharedItemsImports = 4
+		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{106fb3d1-63a0-404d-9529-f68048d69b70}*SharedItemsImports = 4
+		NEXO_SHARED\NEXO_SHARED.projitems*{106fb3d1-63a0-404d-9529-f68048d69b70}*SharedItemsImports = 4
+		NEXO_40_SHARED\NEXO_40_SHARED.projitems*{21703d8d-b0f9-4080-b6f9-5ad74df57ae1}*SharedItemsImports = 13
 		NEXO_SHARED\NEXO_SHARED.projitems*{6897a747-bfbd-46be-a4d5-b4a8bcea0e2c}*SharedItemsImports = 13
 		NEXO_31_SHARED\NEXO_31_SHARED.projitems*{6f8db0ce-6132-47e2-8842-9ceab82eca1d}*SharedItemsImports = 13
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{779a6456-1e80-4818-b67a-c8cef1b0b454}*SharedItemsImports = 13
 		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{78bcaa0c-e640-4dc4-9028-dfc7f30dc3a7}*SharedItemsImports = 13
 		NEXO_30_SHARED\NEXO_30_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
-		NEXO_31_SHARED\NEXO_31_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
 		NEXO_SHARED\NEXO_SHARED.projitems*{ba4ae91f-c039-44cb-ab66-ce57eca46eb6}*SharedItemsImports = 4
@@ -53,6 +65,10 @@ Global
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
 		NEXO_SHARED\NEXO_SHARED.projitems*{dbe66d0f-527d-44e8-8b8d-ea8da6228f63}*SharedItemsImports = 4
+		NEXO_31_SHARED\NEXO_31_SHARED.projitems*{fa6f6fbc-9192-425b-808b-66624ad96d58}*SharedItemsImports = 4
+		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{fa6f6fbc-9192-425b-808b-66624ad96d58}*SharedItemsImports = 4
+		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{fa6f6fbc-9192-425b-808b-66624ad96d58}*SharedItemsImports = 4
+		NEXO_SHARED\NEXO_SHARED.projitems*{fa6f6fbc-9192-425b-808b-66624ad96d58}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +107,16 @@ Global
 		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6F6FBC-9192-425B-808B-66624AD96D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6F6FBC-9192-425B-808B-66624AD96D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6F6FBC-9192-425B-808B-66624AD96D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6F6FBC-9192-425B-808B-66624AD96D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43829C4D-F366-4890-AF4B-A40F583A8265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43829C4D-F366-4890-AF4B-A40F583A8265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43829C4D-F366-4890-AF4B-A40F583A8265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43829C4D-F366-4890-AF4B-A40F583A8265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{106FB3D1-63A0-404D-9529-F68048D69B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{106FB3D1-63A0-404D-9529-F68048D69B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

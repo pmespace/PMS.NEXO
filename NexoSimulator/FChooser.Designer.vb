@@ -56,6 +56,8 @@ Partial Class FChooser
 		Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
 		Me.efXML = New System.Windows.Forms.TextBox()
 		Me.pbAnalyse = New System.Windows.Forms.Button()
+		Me.efXMLJson = New System.Windows.Forms.TextBox()
+		Me.pbCopy = New System.Windows.Forms.Button()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
@@ -65,7 +67,7 @@ Partial Class FChooser
 		'
 		Me.rbLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbLogin.AutoSize = True
-		Me.rbLogin.Location = New System.Drawing.Point(3, 38)
+		Me.rbLogin.Location = New System.Drawing.Point(3, 67)
 		Me.rbLogin.Name = "rbLogin"
 		Me.rbLogin.Size = New System.Drawing.Size(106, 17)
 		Me.rbLogin.TabIndex = 1
@@ -77,7 +79,7 @@ Partial Class FChooser
 		'
 		Me.rbLogout.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbLogout.AutoSize = True
-		Me.rbLogout.Location = New System.Drawing.Point(115, 38)
+		Me.rbLogout.Location = New System.Drawing.Point(115, 67)
 		Me.rbLogout.Name = "rbLogout"
 		Me.rbLogout.Size = New System.Drawing.Size(100, 17)
 		Me.rbLogout.TabIndex = 2
@@ -90,7 +92,7 @@ Partial Class FChooser
 		Me.rbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbPayment.AutoSize = True
 		Me.rbPayment.Checked = True
-		Me.rbPayment.Location = New System.Drawing.Point(3, 61)
+		Me.rbPayment.Location = New System.Drawing.Point(3, 90)
 		Me.rbPayment.Name = "rbPayment"
 		Me.rbPayment.Size = New System.Drawing.Size(106, 17)
 		Me.rbPayment.TabIndex = 3
@@ -102,7 +104,7 @@ Partial Class FChooser
 		'
 		Me.rbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbReversal.AutoSize = True
-		Me.rbReversal.Location = New System.Drawing.Point(115, 61)
+		Me.rbReversal.Location = New System.Drawing.Point(115, 90)
 		Me.rbReversal.Name = "rbReversal"
 		Me.rbReversal.Size = New System.Drawing.Size(100, 17)
 		Me.rbReversal.TabIndex = 4
@@ -114,7 +116,7 @@ Partial Class FChooser
 		'
 		Me.rbAbort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbAbort.AutoSize = True
-		Me.rbAbort.Location = New System.Drawing.Point(3, 130)
+		Me.rbAbort.Location = New System.Drawing.Point(3, 159)
 		Me.rbAbort.Name = "rbAbort"
 		Me.rbAbort.Size = New System.Drawing.Size(106, 17)
 		Me.rbAbort.TabIndex = 13
@@ -126,7 +128,7 @@ Partial Class FChooser
 		'
 		Me.rbAdmin.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbAdmin.AutoSize = True
-		Me.rbAdmin.Location = New System.Drawing.Point(115, 130)
+		Me.rbAdmin.Location = New System.Drawing.Point(115, 159)
 		Me.rbAdmin.Name = "rbAdmin"
 		Me.rbAdmin.Size = New System.Drawing.Size(100, 17)
 		Me.rbAdmin.TabIndex = 14
@@ -138,7 +140,7 @@ Partial Class FChooser
 		'
 		Me.rbBalanceInquiry.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbBalanceInquiry.AutoSize = True
-		Me.rbBalanceInquiry.Location = New System.Drawing.Point(115, 153)
+		Me.rbBalanceInquiry.Location = New System.Drawing.Point(115, 182)
 		Me.rbBalanceInquiry.Name = "rbBalanceInquiry"
 		Me.rbBalanceInquiry.Size = New System.Drawing.Size(100, 17)
 		Me.rbBalanceInquiry.TabIndex = 17
@@ -150,7 +152,7 @@ Partial Class FChooser
 		'
 		Me.rbBatch.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbBatch.AutoSize = True
-		Me.rbBatch.Location = New System.Drawing.Point(3, 153)
+		Me.rbBatch.Location = New System.Drawing.Point(3, 182)
 		Me.rbBatch.Name = "rbBatch"
 		Me.rbBatch.Size = New System.Drawing.Size(106, 17)
 		Me.rbBatch.TabIndex = 16
@@ -162,7 +164,7 @@ Partial Class FChooser
 		'
 		Me.rbCardAcquisition.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbCardAcquisition.AutoSize = True
-		Me.rbCardAcquisition.Location = New System.Drawing.Point(115, 107)
+		Me.rbCardAcquisition.Location = New System.Drawing.Point(115, 136)
 		Me.rbCardAcquisition.Name = "rbCardAcquisition"
 		Me.rbCardAcquisition.Size = New System.Drawing.Size(100, 17)
 		Me.rbCardAcquisition.TabIndex = 9
@@ -174,7 +176,7 @@ Partial Class FChooser
 		'
 		Me.rbCardReaderAPDU.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbCardReaderAPDU.AutoSize = True
-		Me.rbCardReaderAPDU.Location = New System.Drawing.Point(221, 107)
+		Me.rbCardReaderAPDU.Location = New System.Drawing.Point(221, 136)
 		Me.rbCardReaderAPDU.Name = "rbCardReaderAPDU"
 		Me.rbCardReaderAPDU.Size = New System.Drawing.Size(113, 17)
 		Me.rbCardReaderAPDU.TabIndex = 10
@@ -186,7 +188,7 @@ Partial Class FChooser
 		'
 		Me.rbCardReaderInit.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbCardReaderInit.AutoSize = True
-		Me.rbCardReaderInit.Location = New System.Drawing.Point(3, 107)
+		Me.rbCardReaderInit.Location = New System.Drawing.Point(3, 136)
 		Me.rbCardReaderInit.Name = "rbCardReaderInit"
 		Me.rbCardReaderInit.Size = New System.Drawing.Size(106, 17)
 		Me.rbCardReaderInit.TabIndex = 8
@@ -198,7 +200,7 @@ Partial Class FChooser
 		'
 		Me.rbCardReaderPowerOff.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbCardReaderPowerOff.AutoSize = True
-		Me.rbCardReaderPowerOff.Location = New System.Drawing.Point(340, 107)
+		Me.rbCardReaderPowerOff.Location = New System.Drawing.Point(340, 136)
 		Me.rbCardReaderPowerOff.Name = "rbCardReaderPowerOff"
 		Me.rbCardReaderPowerOff.Size = New System.Drawing.Size(127, 17)
 		Me.rbCardReaderPowerOff.TabIndex = 11
@@ -210,7 +212,7 @@ Partial Class FChooser
 		'
 		Me.rbDisplay.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbDisplay.AutoSize = True
-		Me.rbDisplay.Location = New System.Drawing.Point(3, 176)
+		Me.rbDisplay.Location = New System.Drawing.Point(3, 205)
 		Me.rbDisplay.Name = "rbDisplay"
 		Me.rbDisplay.Size = New System.Drawing.Size(106, 17)
 		Me.rbDisplay.TabIndex = 21
@@ -222,7 +224,7 @@ Partial Class FChooser
 		'
 		Me.rbInput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbInput.AutoSize = True
-		Me.rbInput.Location = New System.Drawing.Point(115, 176)
+		Me.rbInput.Location = New System.Drawing.Point(115, 205)
 		Me.rbInput.Name = "rbInput"
 		Me.rbInput.Size = New System.Drawing.Size(100, 17)
 		Me.rbInput.TabIndex = 22
@@ -234,7 +236,7 @@ Partial Class FChooser
 		'
 		Me.rbPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbPrint.AutoSize = True
-		Me.rbPrint.Location = New System.Drawing.Point(221, 176)
+		Me.rbPrint.Location = New System.Drawing.Point(221, 205)
 		Me.rbPrint.Name = "rbPrint"
 		Me.rbPrint.Size = New System.Drawing.Size(113, 17)
 		Me.rbPrint.TabIndex = 23
@@ -246,7 +248,7 @@ Partial Class FChooser
 		'
 		Me.rbSound.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbSound.AutoSize = True
-		Me.rbSound.Location = New System.Drawing.Point(340, 176)
+		Me.rbSound.Location = New System.Drawing.Point(340, 205)
 		Me.rbSound.Name = "rbSound"
 		Me.rbSound.Size = New System.Drawing.Size(127, 17)
 		Me.rbSound.TabIndex = 24
@@ -258,7 +260,7 @@ Partial Class FChooser
 		'
 		Me.rbDiagnosis.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbDiagnosis.AutoSize = True
-		Me.rbDiagnosis.Location = New System.Drawing.Point(3, 199)
+		Me.rbDiagnosis.Location = New System.Drawing.Point(3, 228)
 		Me.rbDiagnosis.Name = "rbDiagnosis"
 		Me.rbDiagnosis.Size = New System.Drawing.Size(106, 17)
 		Me.rbDiagnosis.TabIndex = 25
@@ -270,7 +272,7 @@ Partial Class FChooser
 		'
 		Me.rbEnableService.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbEnableService.AutoSize = True
-		Me.rbEnableService.Location = New System.Drawing.Point(221, 130)
+		Me.rbEnableService.Location = New System.Drawing.Point(221, 159)
 		Me.rbEnableService.Name = "rbEnableService"
 		Me.rbEnableService.Size = New System.Drawing.Size(113, 17)
 		Me.rbEnableService.TabIndex = 15
@@ -282,7 +284,7 @@ Partial Class FChooser
 		'
 		Me.rbEvent.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbEvent.AutoSize = True
-		Me.rbEvent.Location = New System.Drawing.Point(115, 199)
+		Me.rbEvent.Location = New System.Drawing.Point(115, 228)
 		Me.rbEvent.Name = "rbEvent"
 		Me.rbEvent.Size = New System.Drawing.Size(100, 17)
 		Me.rbEvent.TabIndex = 26
@@ -294,7 +296,7 @@ Partial Class FChooser
 		'
 		Me.rbGetTotals.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbGetTotals.AutoSize = True
-		Me.rbGetTotals.Location = New System.Drawing.Point(221, 153)
+		Me.rbGetTotals.Location = New System.Drawing.Point(221, 182)
 		Me.rbGetTotals.Name = "rbGetTotals"
 		Me.rbGetTotals.Size = New System.Drawing.Size(113, 17)
 		Me.rbGetTotals.TabIndex = 18
@@ -306,7 +308,7 @@ Partial Class FChooser
 		'
 		Me.rbLoyalty.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbLoyalty.AutoSize = True
-		Me.rbLoyalty.Location = New System.Drawing.Point(3, 84)
+		Me.rbLoyalty.Location = New System.Drawing.Point(3, 113)
 		Me.rbLoyalty.Name = "rbLoyalty"
 		Me.rbLoyalty.Size = New System.Drawing.Size(106, 17)
 		Me.rbLoyalty.TabIndex = 6
@@ -318,7 +320,7 @@ Partial Class FChooser
 		'
 		Me.rbPIN.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbPIN.AutoSize = True
-		Me.rbPIN.Location = New System.Drawing.Point(473, 107)
+		Me.rbPIN.Location = New System.Drawing.Point(473, 136)
 		Me.rbPIN.Name = "rbPIN"
 		Me.rbPIN.Size = New System.Drawing.Size(65, 17)
 		Me.rbPIN.TabIndex = 12
@@ -330,7 +332,7 @@ Partial Class FChooser
 		'
 		Me.rbReconciliation.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbReconciliation.AutoSize = True
-		Me.rbReconciliation.Location = New System.Drawing.Point(221, 61)
+		Me.rbReconciliation.Location = New System.Drawing.Point(221, 90)
 		Me.rbReconciliation.Name = "rbReconciliation"
 		Me.rbReconciliation.Size = New System.Drawing.Size(113, 17)
 		Me.rbReconciliation.TabIndex = 5
@@ -342,7 +344,7 @@ Partial Class FChooser
 		'
 		Me.rbStoredValue.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbStoredValue.AutoSize = True
-		Me.rbStoredValue.Location = New System.Drawing.Point(115, 84)
+		Me.rbStoredValue.Location = New System.Drawing.Point(115, 113)
 		Me.rbStoredValue.Name = "rbStoredValue"
 		Me.rbStoredValue.Size = New System.Drawing.Size(100, 17)
 		Me.rbStoredValue.TabIndex = 7
@@ -354,7 +356,7 @@ Partial Class FChooser
 		'
 		Me.rbTransactionStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbTransactionStatus.AutoSize = True
-		Me.rbTransactionStatus.Location = New System.Drawing.Point(340, 153)
+		Me.rbTransactionStatus.Location = New System.Drawing.Point(340, 182)
 		Me.rbTransactionStatus.Name = "rbTransactionStatus"
 		Me.rbTransactionStatus.Size = New System.Drawing.Size(127, 17)
 		Me.rbTransactionStatus.TabIndex = 19
@@ -366,7 +368,7 @@ Partial Class FChooser
 		'
 		Me.rbTransmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.rbTransmit.AutoSize = True
-		Me.rbTransmit.Location = New System.Drawing.Point(473, 153)
+		Me.rbTransmit.Location = New System.Drawing.Point(473, 182)
 		Me.rbTransmit.Name = "rbTransmit"
 		Me.rbTransmit.Size = New System.Drawing.Size(65, 17)
 		Me.rbTransmit.TabIndex = 20
@@ -430,7 +432,8 @@ Partial Class FChooser
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(545, 260)
+		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(545, 290)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
 		'TableLayoutPanel2
@@ -449,7 +452,7 @@ Partial Class FChooser
 		Me.TableLayoutPanel2.Controls.Add(Me.pbCreate, 2, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.pbCancel, 3, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.cbRequest, 0, 0)
-		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 228)
+		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 258)
 		Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
 		Me.TableLayoutPanel2.RowCount = 1
 		Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -506,11 +509,14 @@ Partial Class FChooser
 		Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel3.Controls.Add(Me.efXML, 0, 0)
 		Me.TableLayoutPanel3.Controls.Add(Me.pbAnalyse, 1, 0)
+		Me.TableLayoutPanel3.Controls.Add(Me.efXMLJson, 0, 1)
+		Me.TableLayoutPanel3.Controls.Add(Me.pbCopy, 1, 1)
 		Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
 		Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-		Me.TableLayoutPanel3.RowCount = 1
+		Me.TableLayoutPanel3.RowCount = 2
 		Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel3.Size = New System.Drawing.Size(535, 29)
+		Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.TableLayoutPanel3.Size = New System.Drawing.Size(535, 58)
 		Me.TableLayoutPanel3.TabIndex = 0
 		'
 		'efXML
@@ -533,11 +539,32 @@ Partial Class FChooser
 		Me.pbAnalyse.Text = "Analyse"
 		Me.pbAnalyse.UseVisualStyleBackColor = True
 		'
+		'efXMLJson
+		'
+		Me.efXMLJson.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efXMLJson.Location = New System.Drawing.Point(3, 33)
+		Me.efXMLJson.Name = "efXMLJson"
+		Me.efXMLJson.ReadOnly = True
+		Me.efXMLJson.Size = New System.Drawing.Size(469, 20)
+		Me.efXMLJson.TabIndex = 2
+		'
+		'pbCopy
+		'
+		Me.pbCopy.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbCopy.AutoSize = True
+		Me.pbCopy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbCopy.Location = New System.Drawing.Point(478, 32)
+		Me.pbCopy.Name = "pbCopy"
+		Me.pbCopy.Size = New System.Drawing.Size(54, 23)
+		Me.pbCopy.TabIndex = 3
+		Me.pbCopy.Text = "Copy"
+		Me.pbCopy.UseVisualStyleBackColor = True
+		'
 		'FChooser
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(569, 284)
+		Me.ClientSize = New System.Drawing.Size(569, 314)
 		Me.ControlBox = False
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -590,4 +617,6 @@ Partial Class FChooser
 	Friend WithEvents efXML As TextBox
 	Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
 	Friend WithEvents pbAnalyse As Button
+	Friend WithEvents efXMLJson As TextBox
+	Friend WithEvents pbCopy As Button
 End Class

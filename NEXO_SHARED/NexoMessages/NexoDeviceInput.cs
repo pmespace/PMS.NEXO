@@ -22,7 +22,7 @@ namespace NEXO
 		[DispId(5)]
 		InputCommandEnumeration RequestInputCommand { get; set; }
 		[DispId(6)]
-		uint RequestMaxInput { get; set; }
+		uint RequestMaxInputTime { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -47,8 +47,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -103,7 +101,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -162,7 +164,7 @@ namespace NEXO
 	[Guid("AD272143-7CBD-4C8B-A766-EEF8B28197C8")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDeviceInput: NexoDevice, INexoDeviceInput
+	public class NexoDeviceInput : NexoDevice, INexoDeviceInput
 	{
 		#region constructor
 		public NexoDeviceInput() : base(MessageCategoryEnumeration.Input)
@@ -180,23 +182,23 @@ namespace NEXO
 		#region request inner properties
 		public DeviceEnumeration RequestDevice
 		{
-			get => (DeviceEnumeration)CMisc.GetEnumValue(typeof(DeviceEnumeration), CMisc.Trimmed(RequestData.InputData.Device));
-			set => RequestData.InputData.Device = CMisc.GetEnumName(typeof(DeviceEnumeration), value);
+			get => (null != RequestData && null != RequestData.InputData ? (DeviceEnumeration)CMisc.GetEnumValue(typeof(DeviceEnumeration), CMisc.Trimmed(RequestData.InputData.Device)) : (DeviceEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.InputData) RequestData.InputData.Device = CMisc.GetEnumName(typeof(DeviceEnumeration), value); }
 		}
 		public InfoQualifyEnumeration RequestInfoQualify
 		{
-			get => (InfoQualifyEnumeration)CMisc.GetEnumValue(typeof(InfoQualifyEnumeration), CMisc.Trimmed(RequestData.InputData.InfoQualify));
-			set => RequestData.InputData.InfoQualify = CMisc.GetEnumName(typeof(InfoQualifyEnumeration), value);
+			get => (null != RequestData && null != RequestData.InputData ? (InfoQualifyEnumeration)CMisc.GetEnumValue(typeof(InfoQualifyEnumeration), CMisc.Trimmed(RequestData.InputData.InfoQualify)) : (InfoQualifyEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.InputData) RequestData.InputData.InfoQualify = CMisc.GetEnumName(typeof(InfoQualifyEnumeration), value); }
 		}
 		public InputCommandEnumeration RequestInputCommand
 		{
-			get => (InputCommandEnumeration)CMisc.GetEnumValue(typeof(InputCommandEnumeration), CMisc.Trimmed(RequestData.InputData.InputCommand));
-			set => RequestData.InputData.InputCommand = CMisc.GetEnumName(typeof(InputCommandEnumeration), value);
+			get => (null != RequestData && null != RequestData.InputData ? (InputCommandEnumeration)CMisc.GetEnumValue(typeof(InputCommandEnumeration), CMisc.Trimmed(RequestData.InputData.InputCommand)) : (InputCommandEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.InputData) RequestData.InputData.InputCommand = CMisc.GetEnumName(typeof(InputCommandEnumeration), value); }
 		}
-		public uint RequestMaxInput
+		public uint RequestMaxInputTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), true);
-			set => RequestData.InputData.MaxInputTime = value.ToString();
+			get => (null != RequestData && null != RequestData.InputData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), true) : 0);
+			set { if (null != RequestData && null != RequestData.InputData) RequestData.InputData.MaxInputTime = value.ToString(); }
 		}
 		#endregion
 

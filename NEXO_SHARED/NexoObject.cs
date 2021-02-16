@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #endif
 
-//using NEXO.Properties;
 using COMMON;
 
 namespace NEXO
@@ -53,8 +52,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -109,7 +106,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -154,7 +155,6 @@ namespace NEXO
 			Reply.SecurityTrailer = null;
 			Reply.MessageHeader.MessageType = MessageTypeEnumeration.Response.ToString();
 			MessageCategory = category;
-			ProtocolVersion = null;
 			RequestItem = ReplyItem = null;
 		}
 		#endregion
@@ -169,7 +169,7 @@ namespace NEXO
 			internal set
 			{
 				_request = value;
-				if (null != Reply)
+				if (null != _reply)
 				{
 					NexoMessageHeader mh = new NexoMessageHeader(Request.MessageHeader, null);
 					Reply.MessageHeader = mh.MessageHeader;
@@ -244,14 +244,6 @@ namespace NEXO
 		public bool IsDevice { get => MessageClassEnumeration.Device == MessageClass; }
 		public bool IsEvent { get => MessageClassEnumeration.Event == MessageClass; }
 		/// <summary>
-		/// The protocol to use
-		/// </summary>
-		public string ProtocolVersion
-		{
-			get => MessageCategoryEnumeration.Login == MessageCategory ? CMisc.Trimmed(Request.MessageHeader.ProtocolVersion) : null;
-			set { Request.MessageHeader.ProtocolVersion = CMisc.Trimmed(value); Reply.MessageHeader.ProtocolVersion = null; }
-		}
-		/// <summary>
 		/// The sale ID. It can be set only once
 		/// </summary>
 		public string SaleID
@@ -275,6 +267,10 @@ namespace NEXO
 			get => CMisc.Trimmed(Request.MessageHeader.ServiceID);
 			set { Request.MessageHeader.ServiceID = CMisc.Trimmed(value); Reply.MessageHeader.ServiceID = ServiceID; }
 		}
+		public string OriginalServiceID
+		{
+			get => (null != Request && null != Request.MessageHeader ? Request.MessageHeader.ServiceID : null);
+		}
 		/// <summary>
 		/// The Service to use
 		/// </summary>
@@ -283,45 +279,86 @@ namespace NEXO
 			get => CMisc.Trimmed(Request.MessageHeader.DeviceID);
 			set { Request.MessageHeader.DeviceID = CMisc.Trimmed(value); Reply.MessageHeader.DeviceID = DeviceID; }
 		}
+		public string OriginalDeviceID
+		{
+			get => (null != Request && null != Request.MessageHeader ? Request.MessageHeader.DeviceID : null);
+		}
 		/// <summary>
 		/// Gives the final status of the operation
 		/// </summary>
-		public bool Success { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Success.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		public bool Failure { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Failure.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		public bool Partial { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Partial.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		//public bool Success { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Success.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		//public bool Failure { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Failure.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		//public bool Partial { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Partial.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
+		public bool Success { get => ResultEnumeration.Success == Result; }
+		public bool Failure { get => ResultEnumeration.Failure == Result; }
+		public bool Partial { get => ResultEnumeration.Partial == Result; }
 		public bool Unknown { get => !Success && !Failure && !Partial; }
 		/// <summary>
 		/// Indicates the error condition
 		/// </summary>
-		public bool Aborted { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Aborted.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Busy { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Busy.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Cancel { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Cancel.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool DeviceOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.DeviceOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InsertedCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InsertedCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InProgress { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InProgress.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool LoggedOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.LoggedOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool MessageFormat { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.MessageFormat.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool NotAllowed { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotAllowed.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool NotFound { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotFound.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool PaymentRestriction { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.PaymentRestriction.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool Refusal { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Refusal.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnavailableDevice { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableDevice.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnavailableService { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableService.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool InvalidCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InvalidCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool UnreachableHost { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnreachableHost.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		public bool WrongPIN { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.WrongPIN.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool Aborted { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Aborted.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool Busy { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Busy.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool Cancel { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Cancel.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool DeviceOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.DeviceOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool InsertedCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InsertedCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool InProgress { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InProgress.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool LoggedOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.LoggedOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool MessageFormat { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.MessageFormat.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool NotAllowed { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotAllowed.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool NotFound { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotFound.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool PaymentRestriction { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.PaymentRestriction.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool Refusal { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Refusal.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool UnavailableDevice { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableDevice.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool UnavailableService { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableService.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool InvalidCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InvalidCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool UnreachableHost { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnreachableHost.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool WrongPIN { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.WrongPIN.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
+		//public bool UnknownError { get => !Success ? !Aborted && !Busy && !Cancel && !DeviceOut && !InsertedCard && !InProgress && !LoggedOut && !MessageFormat && !NotAllowed && !NotFound && !PaymentRestriction && !Refusal && !UnavailableDevice && !UnavailableService && !InvalidCard && !UnreachableHost && !WrongPIN ? true : false : false; }
+		public bool Aborted { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Aborted == ErrorCondition : false; }
+		public bool Busy { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Busy == ErrorCondition : false; }
+		public bool Cancel { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Cancel == ErrorCondition : false; }
+		public bool DeviceOut { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.DeviceOut == ErrorCondition : false; }
+		public bool InsertedCard { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InsertedCard == ErrorCondition : false; }
+		public bool InProgress { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InProgress == ErrorCondition : false; }
+		public bool LoggedOut { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.LoggedOut == ErrorCondition : false; }
+		public bool MessageFormat { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.MessageFormat == ErrorCondition : false; }
+		public bool NotAllowed { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.NotAllowed == ErrorCondition : false; }
+		public bool NotFound { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.NotFound == ErrorCondition : false; }
+		public bool PaymentRestriction { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.PaymentRestriction == ErrorCondition : false; }
+		public bool Refusal { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Refusal == ErrorCondition : false; }
+		public bool UnavailableDevice { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnavailableDevice == ErrorCondition : false; }
+		public bool UnavailableService { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnavailableService == ErrorCondition : false; }
+		public bool InvalidCard { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.InvalidCard == ErrorCondition : false; }
+		public bool UnreachableHost { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.UnreachableHost == ErrorCondition : false; }
+		public bool WrongPIN { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.WrongPIN == ErrorCondition : false; }
 		public bool UnknownError { get => !Success ? !Aborted && !Busy && !Cancel && !DeviceOut && !InsertedCard && !InProgress && !LoggedOut && !MessageFormat && !NotAllowed && !NotFound && !PaymentRestriction && !Refusal && !UnavailableDevice && !UnavailableService && !InvalidCard && !UnreachableHost && !WrongPIN ? true : false : false; }
 		/// <summary>
-		/// Addition response data
+		/// Allows to easily manipulate the Result value inside the ResponseType
 		/// </summary>
-		public string AdditionalResponse { get => !Success && (Failure || Partial) ? GetResponse().AdditionalResponse : null; }
+		public ResultEnumeration Result
+		{
+			get => (null != GetResponse() ? (ResultEnumeration)GetResponseTag<ResultEnumeration>(GetResponse().Result) : (ResultEnumeration)NexoValues.None);
+			set { if (null != GetResponse()) GetResponse().Result = SetResponseTag<ResultEnumeration>(GetResponse().Result); }
+		}
+		/// <summary>
+		/// Allows to easily manipulate the ErrorCondition value inside the ResponseType
+		/// </summary>
+		public ErrorConditionEnumeration ErrorCondition
+		{
+			get => (null != GetResponse() ? (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(GetResponse().ErrorCondition) : (ErrorConditionEnumeration)NexoValues.None);
+			set { if (null != GetResponse()) GetResponse().ErrorCondition = SetResponseTag<ErrorConditionEnumeration>(GetResponse().ErrorCondition); }
+		}
+		/// <summary>
+		/// Allows to easily manipulate the AdditionalResponse value inside the ResponseType
+		/// </summary>
+		public string AdditionalResponse
+		{
+			get => (null != GetResponse() ? GetResponse().AdditionalResponse : null);
+			set { if (null != GetResponse()) GetResponse().AdditionalResponse = value; }
+		}
 		#endregion
 
 		#region processing public properties
-		///// <summary>
-		///// THIS IS A XSDEx GENERATED VARIABLE WHICH IS MEANT TO BE USED ONLY BY THIS CLASS
-		///// </summary>
-		//private myXSDClassType myXSDClass = new myXSDClassType();
 		/// <summary>
 		/// Indicates whether milliseconds must be added to any datetime value
 		/// </summary>
@@ -360,35 +397,63 @@ namespace NEXO
 		/// Set the default value of a cluster type
 		/// The dault value is ALL cluster entries packed together
 		/// </summary>
-		/// <param name="data">The current cluster data value</param>
+		/// <param name="value">The current cluster data value</param>
 		/// <param name="cluster">The cluster to look for entries</param>
 		/// <returns>The value to assign to the data</returns>
-		public string SetDefaultCluster(string data, NexoCluster cluster)
+		public string SetDefaultCluster(string value, NexoCluster cluster)
 		{
-			if (string.IsNullOrEmpty(data))
+			if (string.IsNullOrEmpty(value))
 			{
 				cluster.SetAllLabels().ToString();
 				return cluster.Value;
 			}
 			else
-				return data;
+				return value;
 		}
 		/// <summary>
 		/// Allows setting a default value to any unitialised data
 		/// </summary>
-		/// <param name="data">The data to test, eventually to set</param>
+		/// <param name="value">The data to test, eventually to set</param>
 		/// <param name="typeDefaultValue">The data type default value</param>
 		/// <param name="defaultValue">The default value if no other value is available</param>
 		/// <returns>The value to assign to the data</returns>
-		public string SetDefaultStringValue(string data, string defaultValue, string typeDefaultValue = "")
+		public string SetDefaultStringValue(string value, string defaultValue, string typeDefaultValue = "")
 		{
-			if (string.IsNullOrEmpty(data))
+			if (string.IsNullOrEmpty(value))
 				if (string.IsNullOrEmpty(typeDefaultValue))
 					return defaultValue;
 				else
 					return typeDefaultValue;
 			else
-				return data;
+				return value;
+		}
+		/// <summary>
+		/// Allows setting a default value to any unitialised data
+		/// </summary>
+		/// <param name="value">The data to test, eventually to set</param>
+		/// <param name="defaultValue">The default value if no other value is available</param>
+		/// <returns>The value to assign to the data</returns>
+		public double SetDefaultDoubleValue(double value, double defaultValue = 0)
+		{
+			if (0 == value)
+				return defaultValue;
+			else
+				return value;
+		}
+		/// <summary>
+		/// Allows setting a default value to any enumerated object
+		/// </summary>
+		/// <param name="typ">The enum type to consider</param>
+		/// <param name="value">The data to test, eventually to set</param>
+		/// <param name="defaultValue">The default value if no other value is available</param>
+		/// <returns>The value to assign to the data</returns>
+		public object SetDefaultEnumValue(Type typ, object value, object defaultValue)
+		{
+			if (null != value && CMisc.IsEnumValue(typ, value))
+				return value;
+			else if (null != defaultValue && CMisc.IsEnumValue(typ, defaultValue))
+				return value;
+			else return NexoValues.None;
 		}
 		/// <summary>
 		/// Allows setting a default value to a datetime
@@ -417,18 +482,18 @@ namespace NEXO
 		/// <summary>
 		/// Allows setting a default value to any uninitialised data
 		/// </summary>
-		/// <param name="data">The data to test, eventually to set</param>
+		/// <param name="value">The data to test, eventually to set</param>
 		/// <param name="requestValue">The value to use to set the data if necessary</param>
 		/// <returns>The value to assign to the data</returns>
-		public string CopyRequestStringValue(string data, string requestValue)
+		public string CopyRequestStringValue(string value, string requestValue)
 		{
-			if (string.IsNullOrEmpty(data))
+			if (string.IsNullOrEmpty(value))
 				if (string.IsNullOrEmpty(requestValue))
 					return null;
 				else
 					return requestValue;
 			else
-				return data;
+				return value;
 		}
 		/// <summary>
 		/// Allows setting a default value to a currency
@@ -469,7 +534,7 @@ namespace NEXO
 				}
 				else
 				{
-					ResetResponse((SaleToPOIResponse)item.Item);
+					ResetResponse(Request, (SaleToPOIResponse)item.Item);
 				}
 				return true;
 			}
@@ -495,6 +560,17 @@ namespace NEXO
 		/// </summary>
 		/// <param name="r">The Response object to use to set the Response object</param>
 		protected abstract void SetResponse(ResponseType r);
+		private object GetResponseTag<TxN>(string tag)
+		{
+			return CMisc.IsEnumValue(typeof(TxN), CMisc.GetEnumValue(typeof(TxN), tag)) ? CMisc.GetEnumValue(typeof(TxN), tag) : NexoValues.None;
+		}
+		private string SetResponseTag<TxN>(string tag)
+		{
+			Array array = Enum.GetValues(typeof(TxN));
+			if (CMisc.IsEnumValue(typeof(TxN), tag))
+				return CMisc.EnumValueToString(typeof(TxN), tag);
+			return null;
+		}
 		/// <summary>
 		/// Allows copying data from the request to the reply.
 		/// By default nothing is copied.
@@ -507,7 +583,14 @@ namespace NEXO
 		protected virtual InternalAction AutoCompleteRequest() { return InternalAction.noError; }
 		private InternalAction AutoCompleteRequestEx()
 		{
-			AutoComplete();
+			if (IsService || IsEvent)
+			{
+				ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
+			}
+			else if (IsDevice)
+			{
+				DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);
+			}
 			return AutoCompleteRequest();
 		}
 		/// <summary>
@@ -517,40 +600,34 @@ namespace NEXO
 		protected virtual InternalAction AutoCompleteReply() { return InternalAction.noError; }
 		private InternalAction AutoCompleteReplyEx()
 		{
-			AutoComplete();
+			ServiceID = OriginalServiceID;
+			DeviceID = OriginalDeviceID;
 			SetReplyFromRequest();
-			if (null != Response)
-			{
-				Response.Result = SetDefaultStringValue(Response.Result, ResultEnumeration.Success.ToString());
-				if (ResultEnumeration.Success.ToString().ToLower() == Response.Result.ToLower())
-				{
-					Response.ErrorCondition = null;
-					Response.AdditionalResponse = null;
-				}
-			}
 			return AutoCompleteReply();
 		}
-		/// <summary>
-		/// Perform standard, minimum autocomplete
-		/// </summary>
-		private void AutoComplete()
-		{
-			if (IsService || IsEvent)
-			{
-				ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
-			}
-			else if (IsDevice)
-			{
-				DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);
-			}
-		}
+		///// <summary>
+		///// Perform standard, minimum autocomplete
+		///// </summary>
+		//private void AutoComplete()
+		//{
+		//	if (IsService || IsEvent)
+		//	{
+		//		ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
+		//		OriginalServiceID = ServiceID;
+		//	}
+		//	else if (IsDevice)
+		//	{
+		//		DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);
+		//		OriginalDeviceID = DeviceID;
+		//	}
+		//}
 		/// <summary>
 		/// Prepare a request serializing it in XML.
 		/// </summary>
 		/// <returns>The request in XML, null if an error has occurred</returns>
 		private string SerializeRequest()
 		{
-			return Serialize(Request);
+			return Serialize(_request);
 		}
 		/// <summary>
 		/// Prepare a reply serializing it in XML.
@@ -564,14 +641,14 @@ namespace NEXO
 		/// Hidden function, only for internal use
 		/// Allows to set the request from outside the object
 		/// </summary>
-		/// <param name="req"></param>
+		/// <param name="request"></param>
 		/// <returns>True is reset, false otherwise</returns>
-		internal bool ResetRequest(SaleToPOIRequest req)
+		internal bool ResetRequest(SaleToPOIRequest request)
 		{
-			if (MessageCategory == (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), req.MessageHeader.MessageCategory))
+			if (MessageCategory == (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), request.MessageHeader.MessageCategory))
 			{
-				CopyMessageHeader(req.MessageHeader);
-				RequestItem = req.Item;
+				CopyMessageHeader(request.MessageHeader);
+				RequestItem = request.Item;
 				return true;
 			}
 			return false;
@@ -580,14 +657,15 @@ namespace NEXO
 		/// Hidden function, only for internal use
 		/// Allows to set the reply from outside the object
 		/// </summary>
-		/// <param name="req"></param>
+		/// <param name="request"></param>
+		/// <param name="response"></param>
 		/// <returns>True is reset, false otherwise</returns>
-		internal bool ResetResponse(SaleToPOIResponse req)
+		internal bool ResetResponse(SaleToPOIRequest request, SaleToPOIResponse response)
 		{
-			if (MessageCategory == (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), req.MessageHeader.MessageCategory))
+			if (MessageCategory == (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), request.MessageHeader.MessageCategory))
 			{
-				CopyMessageHeader(req.MessageHeader);
-				ReplyItem = req.Item;
+				CopyMessageHeader(request.MessageHeader);
+				ReplyItem = response.Item;
 				return true;
 			}
 			return false;
@@ -596,7 +674,6 @@ namespace NEXO
 		{
 			if (MessageCategory == (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory))
 			{
-				ProtocolVersion = mh.ProtocolVersion;
 				MessageClass = (MessageClassEnumeration)CMisc.GetEnumValue(typeof(MessageClassEnumeration), mh.MessageClass);
 				POIID = mh.POIID;
 				SaleID = mh.SaleID;
@@ -619,7 +696,7 @@ namespace NEXO
 				{
 					//if (!(RequestItem is LoginRequestType))
 					//	Request.MessageHeader.ProtocolVersion = null;
-					return Serialize(Request);
+					return Serialize(_request);
 				}
 				else
 					CLog.Add("Request serialization failed with error code: " + error.ToString(), TLog.ERROR);
@@ -669,205 +746,5 @@ namespace NEXO
 		protected NexoNotification() : base(MessageCategoryEnumeration.Event) { MessageClass = MessageClassEnumeration.Event; }
 	}
 
-	[ComVisible(true)]
-	public enum NexoNextAction
-	{
-		/// <summary>
-		/// abort the operation, the message is dismissed without further processing
-		/// </summary>
-		nothing,
-		/// <summary>
-		/// a REPLY has been received, the exchange is final and no more sent (automatically)
-		/// </summary>
-		final,
-		/// <summary>
-		/// a REQUEST has been received, no REPLY should be sent back
-		/// </summary>
-		noReply,
-		/// <summary>
-		/// a REQUEST has been received, a REPLY should be sent back
-		/// </summary>
-		sendReply,
-		/// <summary>
-		/// a REQUEST has been received, a REPLY with an error <see cref="ResponseType"/> should be sent back
-		/// </summary>
-		sendReplyWithError,
-		/// <summary>
-		/// a REQUEST or a REPLY has been received, a REQUEST should be sent back
-		/// </summary>
-		sendRequest,
-		/// <summary>
-		/// a REQUEST or a REPLY has been received, a NOIFICATION should be sent back
-		/// </summary>
-		sendNotification,
-	}
 
-	[Guid("4DA003CE-49BF-4831-83EB-3DAEA2072370")]
-	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
-	[ComVisible(true)]
-	public interface INexoObjectToProcess
-	{
-		#region INexoObjectToProcess
-		NexoObject CurrentObject { get; }
-		NexoObject NextObject { get; set; }
-		int NextTimer { get; set; }
-		NexoItem Item { get; }
-		MessageTypeEnumeration Type { get; }
-		MessageCategoryEnumeration Category { get; }
-		NexoNextAction SuggestedAction { get; }
-		bool CanModifyAction { get; }
-		NexoNextAction Action { get; set; }
-		#endregion
-	}
-	[Guid("195F55CA-64B2-4E61-A1DB-9964557DE450")]
-	[ClassInterface(ClassInterfaceType.None)]
-	[ComVisible(true)]
-	public class NexoObjectToProcess : INexoObjectToProcess
-	{
-		#region constructor
-		public NexoObjectToProcess(NexoItem item)
-		{
-			Item = item;
-			CanModifyAction = true;
-			Action = NexoNextAction.nothing;
-			CurrentObject = NexoItem.AllocateObject(item.Category);
-			if (item.IsRequest || item.IsNotification)
-			{
-				CurrentObject.Request = (SaleToPOIRequest)item.Item;
-			}
-			else if (item.IsReply)
-			{
-				CurrentObject.Reply = (SaleToPOIResponse)item.Item;
-			}
-		}
-		#endregion
-
-		#region properties
-		/// <summary>
-		/// The message to process
-		/// </summary>
-		public NexoObject CurrentObject
-		{
-			get => _currentobject;
-			protected set => _currentobject = value;
-		}
-		private NexoObject _currentobject;
-		/// <summary>
-		/// A potential message which will follow the processed one
-		/// </summary>
-		public NexoObject NextObject
-		{
-			get => nextmessage;
-			set => nextmessage = value;
-		}
-		private NexoObject nextmessage = null;
-		public int NextTimer { get; set; } = CStreamClientSettings.NO_TIMEOUT;
-		/// <summary>
-		/// The message to process
-		/// </summary>
-		public NexoItem Item
-		{
-			get => _item;
-			protected set => _item = value;
-		}
-		private NexoItem _item;
-		public MessageTypeEnumeration Type { get => Item.Type; }
-		public MessageCategoryEnumeration Category { get => Item.Category; }
-		/// <summary>
-		/// Indicates which action is expected next (suggested by the framework)
-		/// </summary>
-		public NexoNextAction SuggestedAction
-		{
-			get => _suggestedaction;
-			internal set
-			{
-				_suggestedaction = (NexoNextAction)CMisc.GetEnumValue(typeof(NexoNextAction), value, NexoNextAction.nothing);
-				Action = SuggestedAction;
-			}
-		}
-		private NexoNextAction _suggestedaction = NexoNextAction.nothing;
-		/// <summary>
-		/// Flag indicating whether the application can or or modify the <see cref="SuggestedAction"/> by the server
-		/// </summary>
-		public bool CanModifyAction { get; internal set; }
-		/// <summary>
-		/// Indicates which action is going to be made (decided by the application)
-		/// </summary>
-		public NexoNextAction Action
-		{
-			get => _action;
-			set
-			{
-				if (CanModifyAction)
-					switch (SuggestedAction)
-					{
-						case NexoNextAction.nothing:
-							switch (value)
-							{
-								case NexoNextAction.final:
-								case NexoNextAction.sendRequest:
-								case NexoNextAction.sendNotification:
-									_action = value;
-									break;
-							}
-							break;
-
-						case NexoNextAction.final:
-							switch (value)
-							{
-								case NexoNextAction.final:
-								case NexoNextAction.sendRequest:
-								case NexoNextAction.sendNotification:
-									_action = value;
-									break;
-							}
-							break;
-
-						case NexoNextAction.noReply:
-							switch (value)
-							{
-								case NexoNextAction.noReply:
-								case NexoNextAction.sendRequest:
-								case NexoNextAction.sendNotification:
-									_action = value;
-									break;
-							}
-							break;
-
-						case NexoNextAction.sendReply:
-						case NexoNextAction.sendReplyWithError:
-							switch (value)
-							{
-								case NexoNextAction.sendReply:
-								case NexoNextAction.sendReplyWithError:
-								case NexoNextAction.sendRequest:
-								case NexoNextAction.sendNotification:
-									_action = value;
-									break;
-							}
-							break;
-
-						case NexoNextAction.sendRequest:
-						case NexoNextAction.sendNotification:
-							switch (value)
-							{
-								case NexoNextAction.final:
-								case NexoNextAction.sendRequest:
-								case NexoNextAction.sendNotification:
-									_action = value;
-									break;
-							}
-							break;
-					}
-			}
-		}
-		private NexoNextAction _action = NexoNextAction.nothing;
-		#endregion
-	}
-
-	[ComVisible(false)]
-	public class QueueOfNexoObjectToProcess : Queue<NexoObjectToProcess> { }
-
-	[ComVisible(false)]
-	public class StackOfNexoObjectToProcess : Stack<NexoObjectToProcess> { }
 }

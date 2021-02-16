@@ -9,7 +9,14 @@ Public Class FAmount
 	End Sub
 
 	Private Sub ok_Click(sender As Object, e As EventArgs) Handles ok.Click
-		Amount = Long.Parse(amountincents.Text)
-		DialogResult = DialogResult.OK
+		Dim l As Long = 0
+		Try
+			l = Long.Parse(amountincents.Text)
+		Catch ex As Exception
+		End Try
+		If 0 <> l Then
+			Amount = Long.Parse(amountincents.Text)
+			DialogResult = DialogResult.OK
+		End If
 	End Sub
 End Class

@@ -1,4 +1,6 @@
-﻿Imports NEXO
+﻿Imports System.Text
+Imports NEXO
+Imports Newtonsoft.Json
 
 Public Class FChooser
 	Public XML As String = Nothing
@@ -22,7 +24,12 @@ Public Class FChooser
 		Dim item As NexoItem = Nothing
 		If Not String.IsNullOrEmpty(efXML.Text) Then
 			'deserialize the XML string
-			Dim o As Object = NexoRetailer.XmlDeserialize(Of SaleToPOIRequest)(efXML.Text)
+			Dim o As Object
+			If cbRequest.Checked Then
+				o = NexoRetailer.XmlDeserialize(Of SaleToPOIRequest)(efXML.Text)
+			Else
+				o = NexoRetailer.XmlDeserialize(Of SaleToPOIResponse)(efXML.Text)
+			End If
 			item = New NexoItem(efXML.Text)
 			If Not IsNothing(item) Then
 				nxo = NexoItem.ToNexoObject(item)
@@ -101,8 +108,8 @@ Public Class FChooser
 		Select Case f.ShowDialog()
 			Case DialogResult.Yes
 				dr = DialogResult.OK
-				Close()
-				Return dr
+				efXML.Text = Clipboard.GetText
+				efXMLJson.Text = JsonConvert.SerializeObject(Clipboard.GetText)
 		End Select
 		nxo = Nothing
 		Visible = True
@@ -117,4 +124,7 @@ Public Class FChooser
 		pbAnalyse.Enabled = Not String.IsNullOrEmpty(efXML.Text)
 	End Sub
 
+	Private Sub pbCopy_Click(sender As Object, e As EventArgs) Handles pbCopy.Click
+		Clipboard.SetText(efXMLJson.Text)
+	End Sub
 End Class

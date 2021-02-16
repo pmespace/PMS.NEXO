@@ -42,8 +42,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -98,7 +96,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -157,7 +159,7 @@ namespace NEXO
 	[Guid("6AC33EB7-F9DC-4BA9-968D-536CC95470AA")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoGetTotals: NexoService, INexoGetTotals
+	public class NexoGetTotals : NexoService, INexoGetTotals
 	{
 		#region constructor
 		public NexoGetTotals() : base(MessageCategoryEnumeration.GetTotals)
@@ -178,8 +180,8 @@ namespace NEXO
 		#region reply inner properties
 		public string ReplyPOIReconciliationID
 		{
-			get => CMisc.Trimmed(ReplyData.POIReconciliationID);
-			set => ReplyData.POIReconciliationID = value;
+			get => (null != ReplyData ? CMisc.Trimmed(ReplyData.POIReconciliationID) : null);
+			set { if (null != ReplyData) ReplyData.POIReconciliationID = value; }
 		}
 		#endregion
 

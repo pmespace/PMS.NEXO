@@ -39,7 +39,8 @@ Public Class Settings
 	Public Property WindowState As FormWindowState
 	Public Property Location As Point
 	Public Property Size As Size
-	Public Property Command As String
+	Public Property Commands As Commands = New Commands
+	Public Property CommandIndex As Integer
 	Public Property ClientColor As Color = SystemColors.ControlText
 	Public Property GatewayColor As Color = SystemColors.ControlText
 	Public Property ServerColor As Color = SystemColors.ControlText
@@ -52,6 +53,27 @@ Public Class Settings
 	Public Property UseDatabase As Boolean
 	Public Property UsePreConnection As Boolean
 	Public Property ConnectionSettings As New SettingsConnectionSettings
+End Class
+
+Public Class Commands
+	Inherits List(Of Command)
+End Class
+
+Public Class Command
+	Public Property Name As String
+		Get
+			Return _name
+		End Get
+		Set(value As String)
+			If String.IsNullOrEmpty(value) Then value = "<no name>"
+			_name = value
+		End Set
+	End Property
+	Private _name As String = Nothing
+	Public Property Command As String
+	Public Overrides Function ToString() As String
+		Return Name
+	End Function
 End Class
 
 Public Class SettingsConnectionSettings

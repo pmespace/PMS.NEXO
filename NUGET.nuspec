@@ -16,11 +16,11 @@
     <releaseNotes>
       2.0.14
       - Moved to PMS.COMMON 3.0.9
-      
+
       2.0.13
       - Nexo libraries are now divided in PMS.NEXO30 (Nexo 3.0), PMS.NEXO31 (Nexo 3.1) and PMS.NEXO35 (Nexo 3.0 running .NET 3.5)
       - Simulator exists now in 2 applications, 1 for Nexo 3.0 and 1 for Nexo 3.1
-      
+
       2.0.12
       - Moved to PMS.NEXO 3.0.8 minimum
       - Added a new Retailer message builder application
@@ -100,10 +100,10 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="3.0.9" />
+        <dependency id="PMS.COMMON" version="3.0.10" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="3.0.9" />
+        <dependency id="PMS.COMMON" version="3.0.10" />
       </group>
     </dependencies>
   </metadata>
@@ -112,11 +112,16 @@
     <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.tlb" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
+    
     <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.tlb" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO31.pdb" target="lib\net47"></file>
+    
     <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
+    <file src=".\Release\PMS.NEXO35.pdb" target="lib\net35"></file>
   </files>
 </package>

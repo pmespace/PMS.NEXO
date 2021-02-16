@@ -46,8 +46,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -102,7 +100,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -161,7 +163,7 @@ namespace NEXO
 	[Guid("5223C33A-11DD-4FE4-BA89-22A83A6390B7")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDiagnosis: NexoService, INexoDiagnosis
+	public class NexoDiagnosis : NexoService, INexoDiagnosis
 	{
 		#region constructor
 		public NexoDiagnosis() : base(MessageCategoryEnumeration.Diagnosis)
@@ -179,21 +181,21 @@ namespace NEXO
 		#region request inner properties
 		public string RequestPOIID
 		{
-			get => CMisc.Trimmed(RequestData.POIID);
-			set => RequestData.POIID = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.POIID) : null);
+			set { if (null != RequestData) RequestData.POIID = value; }
 		}
 		public bool RequestHostDiagnosisFlag
 		{
-			get => RequestData.HostDiagnosisFlag;
-			set => RequestData.HostDiagnosisFlag = value;
+			get => (null != RequestData ? RequestData.HostDiagnosisFlag : false);
+			set { if (null != RequestData) RequestData.HostDiagnosisFlag = value; }
 		}
 		#endregion
 
 		#region reply inner properties
 		public GlobalStatusEnumeration ReplyGlobalStatus
 		{
-			get => (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POIStatus.GlobalStatus));
-			set => ReplyData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value);
+			get => (null != ReplyData && null != ReplyData.POIStatus ? (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POIStatus.GlobalStatus)) : (GlobalStatusEnumeration)NexoValues.None);
+			set { if (null != ReplyData && null != ReplyData.POIStatus) ReplyData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value); }
 		}
 		#endregion
 

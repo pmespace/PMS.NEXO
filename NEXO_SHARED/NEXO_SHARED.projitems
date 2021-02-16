@@ -41,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDiagnosis.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoTransactionStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoResponseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoRetailer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDeviceInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDevicePrint.cs" />
@@ -51,7 +52,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReversal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessageHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoErrors.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NexoSaleToPOIMessages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoObjectToProcess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoXSD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoTypes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoVersionMngt.cs" />
   </ItemGroup>

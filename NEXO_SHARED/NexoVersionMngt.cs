@@ -3,7 +3,7 @@ using System.Reflection;
 using System;
 using COMMON;
 
-namespace NEXO.VersionMngt
+namespace NEXO
 {
 	public class NexoVersion
 	{

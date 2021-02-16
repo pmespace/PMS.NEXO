@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 using System.Xml;
 using System;
 using COMMON;
-using NEXO.VersionMngt;
 
 namespace NEXO
 {
@@ -38,6 +37,8 @@ namespace NEXO
 		string RequestOperatorLanguage { get; set; }
 		[DispId(12)]
 		string RequestDateTime { get; set; }
+		[DispId(13)]
+		string ProtocolVersion { get; }
 
 		[DispId(50)]
 		string ReplyDateTime { get; set; }
@@ -79,8 +80,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -135,7 +134,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -201,7 +204,6 @@ namespace NEXO
 		{
 			RequestItem = new LoginRequestType();
 			ReplyItem = new LoginResponseType();
-			ProtocolVersion = (new NexoProtocolVersion(NexoCurrentVersion.Current.Version)).Value;
 		}
 		#endregion
 
@@ -210,138 +212,162 @@ namespace NEXO
 		public LoginResponseType ReplyData { get => (LoginResponseType)ReplyItem; }
 		#endregion
 
+		#region specific properties
+		public string ProtocolVersion
+		{
+			get => (new NexoProtocolVersion(NexoCurrentVersion.Current.Version)).Value;
+		}
+		#endregion
+
 		#region request inner properties
 		public string RequestManufacturerID
 		{
 #if NEXO30
-			get => CMisc.Trimmed(RequestData.SaleSoftware.ManufacturerID);
-			set => RequestData.SaleSoftware.ManufacturerID = value;
+			get => (null != RequestData && null != RequestData.SaleSoftware ? CMisc.Trimmed(RequestData.SaleSoftware.ManufacturerID) : null);
+			set { if (null != RequestData && null != RequestData.SaleSoftware) RequestData.SaleSoftware.ManufacturerID = value; }
 #elif NEXO31
-			get => CMisc.Trimmed(RequestData.SaleSoftware.ProviderIdentification);
-			set => RequestData.SaleSoftware.ProviderIdentification = value;
+			get => (null != RequestData && null != RequestData.SaleSoftware ? CMisc.Trimmed(RequestData.SaleSoftware.ProviderIdentification) : null);
+			set { if (null != RequestData && null != RequestData.SaleSoftware) RequestData.SaleSoftware.ProviderIdentification = value; }
 #endif
 		}
 		public string RequestApplicationName
 		{
-			get => CMisc.Trimmed(RequestData.SaleSoftware.ApplicationName);
-			set => RequestData.SaleSoftware.ApplicationName = value;
+			get => (null != RequestData && null != RequestData.SaleSoftware ? CMisc.Trimmed(RequestData.SaleSoftware.ApplicationName) : null);
+			set { if (null != RequestData && null != RequestData.SaleSoftware) RequestData.SaleSoftware.ApplicationName = value; }
 		}
 		public string RequestSoftwareVersion
 		{
-			get => CMisc.Trimmed(RequestData.SaleSoftware.SoftwareVersion);
-			set => RequestData.SaleSoftware.SoftwareVersion = value;
+			get => (null != RequestData && null != RequestData.SaleSoftware ? CMisc.Trimmed(RequestData.SaleSoftware.SoftwareVersion) : null);
+			set { if (null != RequestData && null != RequestData.SaleSoftware) RequestData.SaleSoftware.SoftwareVersion = value; }
 		}
 		public string RequestCertificationCode
 		{
-			get => CMisc.Trimmed(RequestData.SaleSoftware.CertificationCode);
-			set => RequestData.SaleSoftware.CertificationCode = value;
+			get => (null != RequestData && null != RequestData.SaleSoftware ? CMisc.Trimmed(RequestData.SaleSoftware.CertificationCode) : null);
+			set { if (null != RequestData && null != RequestData.SaleSoftware) RequestData.SaleSoftware.CertificationCode = value; }
 		}
 		public string RequestTerminalEnvironment
 		{
+			//get => (null != RequestData && null != RequestData.SaleTerminalData ? CMisc.Trimmed(RequestData.SaleTerminalData.TerminalEnvironment) : null);
+			//set { if (null != RequestData && null != RequestData.SaleTerminalData) RequestData.SaleTerminalData.TerminalEnvironment = value; }
 			get => CMisc.Trimmed(RequestData.SaleTerminalData.TerminalEnvironment);
-			set => RequestData.SaleTerminalData.TerminalEnvironment = value;
+			set => RequestData.SaleTerminalData.TerminalEnvironment = new NexoTerminalEnvironment() { Value = value }.Value;
 		}
 		public string RequestSaleCapabilities
 		{
+			//get => (null != RequestData && null != RequestData.SaleTerminalData ? CMisc.Trimmed(RequestData.SaleTerminalData.SaleCapabilities) : null);
+			//set { if (null != RequestData && null != RequestData.SaleTerminalData) RequestData.SaleTerminalData.SaleCapabilities = value; }
 			get => CMisc.Trimmed(RequestData.SaleTerminalData.SaleCapabilities);
-			set => RequestData.SaleTerminalData.SaleCapabilities = value;
+			set => RequestData.SaleTerminalData.SaleCapabilities = new NexoSaleCapabilities() { Value = value }.Value;
 		}
 		public string RequestOperatorID
 		{
-			get => CMisc.Trimmed(RequestData.OperatorID);
-			set => RequestData.OperatorID = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.OperatorID) : null);
+			set { if (null != RequestData) RequestData.OperatorID = value; }
 		}
 		public string RequestOperatorLanguage
 		{
-			get => CMisc.Trimmed(RequestData.OperatorLanguage);
-			set => RequestData.OperatorLanguage = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.OperatorLanguage) : null);
+			set { if (null != RequestData) RequestData.OperatorLanguage = value; }
 		}
 		public string RequestDateTime
 		{
-			get => CMisc.Trimmed(RequestData.DateTime);
-			set => RequestData.DateTime = new NexoISODateTime() { Value = value }.Value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.DateTime) : null);
+			set { if (null != RequestData) RequestData.DateTime = new NexoISODateTime() { Value = value }.Value; }
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplyDateTime
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.DateTime);
-			set => ReplyData.POISystemData.DateTime = new NexoISODateTime() { Value = value }.Value;
+			get => (null != ReplyData && null != ReplyData.POISystemData ? CMisc.Trimmed(ReplyData.POISystemData.DateTime) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData) ReplyData.POISystemData.DateTime = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public string ReplyApplicationName
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ApplicationName);
-			set => ReplyData.POISystemData.POISoftware.ApplicationName = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware ? CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ApplicationName) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware) ReplyData.POISystemData.POISoftware.ApplicationName = value; }
 		}
 		public string ReplyManufacturerID
 		{
 #if NEXO30
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ManufacturerID);
-			set => ReplyData.POISystemData.POISoftware.ManufacturerID = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware ? CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ManufacturerID) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware) ReplyData.POISystemData.POISoftware.ManufacturerID = value; }
 #elif NEXO31
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification);
-			set => ReplyData.POISystemData.POISoftware.ProviderIdentification = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware ? CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware) ReplyData.POISystemData.POISoftware.ProviderIdentification = value; }
 #endif
 		}
 		public string ReplySoftwareVersion
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.SoftwareVersion);
-			set => ReplyData.POISystemData.POISoftware.SoftwareVersion = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware ? CMisc.Trimmed(ReplyData.POISystemData.POISoftware.SoftwareVersion) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware) ReplyData.POISystemData.POISoftware.SoftwareVersion = value; }
 		}
 		public string ReplyCertificationCode
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.CertificationCode);
-			set => ReplyData.POISystemData.POISoftware.CertificationCode = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware ? CMisc.Trimmed(ReplyData.POISystemData.POISoftware.CertificationCode) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POISoftware) ReplyData.POISystemData.POISoftware.CertificationCode = value; }
 		}
 		public string ReplyTerminalEnvironment
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.TerminalEnvironment);
-			set => ReplyData.POISystemData.POITerminalData.TerminalEnvironment = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData ? CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.TerminalEnvironment) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData) ReplyData.POISystemData.POITerminalData.TerminalEnvironment = value; }
 		}
 		public string ReplyPOICapabilities
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.POICapabilities);
-			set => ReplyData.POISystemData.POITerminalData.POICapabilities = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData ? CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.POICapabilities) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData) ReplyData.POISystemData.POITerminalData.POICapabilities = value; }
 		}
 		public string ReplyPOISerialNumber
 		{
-			get => CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.POISerialNumber);
-			set => ReplyData.POISystemData.POITerminalData.POISerialNumber = value;
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData ? CMisc.Trimmed(ReplyData.POISystemData.POITerminalData.POISerialNumber) : null);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData) ReplyData.POISystemData.POITerminalData.POISerialNumber = value; }
 		}
 		public GlobalStatusEnumeration ReplyGlobalStatus
 		{
-			get => (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POISystemData.POIStatus.GlobalStatus));
-			set => ReplyData.POISystemData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value);
+			get => (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POIStatus ? (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POISystemData.POIStatus.GlobalStatus)) : (GlobalStatusEnumeration)NexoValues.None);
+			set { if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POIStatus) ReplyData.POISystemData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value); }
 		}
 		#endregion
 
 		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.Response; }
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
+		protected override void SetReplyFromRequest()
+		{
+		}
 		protected override InternalAction AutoCompleteRequest()
 		{
+			Request.MessageHeader.ProtocolVersion = ProtocolVersion;
 			RequestApplicationName = SetDefaultStringValue(RequestApplicationName, new NexoApplicationName().DefaultValue);
 			RequestCertificationCode = SetDefaultStringValue(RequestCertificationCode, new NexoCertificationCode().DefaultValue);
 			RequestDateTime = SetDefaultStringValue(RequestDateTime, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
 			RequestManufacturerID = SetDefaultStringValue(RequestManufacturerID, new NexoManufacturerID().DefaultValue);
 			RequestOperatorID = SetDefaultStringValue(RequestOperatorID, new NexoOperatorID().DefaultValue);
 			RequestOperatorLanguage = SetDefaultStringValue(RequestOperatorLanguage, new NexoOperatorLanguage().DefaultValue);
-			//RequestSaleCapabilities = SetDefaultCluster(RequestSaleCapabilities, new NexoSaleCapabilities());
 			RequestSoftwareVersion = SetDefaultStringValue(RequestSoftwareVersion, new NexoSoftwareVersion().DefaultValue);
+			//RequestSaleCapabilities = SetDefaultCluster(RequestSaleCapabilities, new NexoSaleCapabilities());
 			//RequestTerminalEnvironment = SetDefaultStringValue(RequestTerminalEnvironment, new NexoTerminalEnvironment().DefaultValue);
 			return InternalAction.noError;
 		}
 		protected override InternalAction AutoCompleteReply()
 		{
-			ReplyManufacturerID = SetDefaultStringValue(ReplyManufacturerID, new NexoManufacturerID().DefaultValue);
-			ReplyApplicationName = SetDefaultStringValue(ReplyApplicationName, new NexoApplicationName().DefaultValue);
-			ReplyCertificationCode = SetDefaultStringValue(ReplyCertificationCode, new NexoCertificationCode().DefaultValue);
-			ReplyDateTime = SetDefaultStringValue(ReplyDateTime, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
-			//ReplyGlobalStatus = SetDefaultStringValue(ReplyGlobalStatus, new NexoGlobalStatus().DefaultValue);
-			ReplyPOICapabilities = null;
-			ReplyPOISerialNumber = SetDefaultStringValue(ReplyPOISerialNumber, new NexoPOISerialNumber().DefaultValue);
-			ReplySoftwareVersion = SetDefaultStringValue(ReplySoftwareVersion, new NexoSoftwareVersion().DefaultValue);
+			Reply.MessageHeader.ProtocolVersion = ProtocolVersion;
+			if (Success)
+			{
+				ReplyDateTime = SetDefaultStringValue(ReplyDateTime, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
+
+				ReplyManufacturerID = SetDefaultStringValue(ReplyManufacturerID, new NexoManufacturerID().DefaultValue);
+				ReplyApplicationName = SetDefaultStringValue(ReplyApplicationName, new NexoApplicationName().DefaultValue);
+				ReplySoftwareVersion = SetDefaultStringValue(ReplySoftwareVersion, new NexoSoftwareVersion().DefaultValue);
+				ReplyCertificationCode = SetDefaultStringValue(ReplyCertificationCode, new NexoCertificationCode().DefaultValue);
+
+				ReplyPOICapabilities = null;
+				ReplyPOISerialNumber = SetDefaultStringValue(ReplyPOISerialNumber, new NexoPOISerialNumber().DefaultValue);
+				ReplyGlobalStatus = (GlobalStatusEnumeration)SetDefaultEnumValue(typeof(GlobalStatusEnumeration), ReplyGlobalStatus, CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), new NexoGlobalStatus().DefaultValue));
+
+				if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData)
+					ReplyData.POISystemData.POITerminalData.TerminalEnvironment = RequestData.SaleTerminalData.TerminalEnvironment;
+			}
 			return InternalAction.noError;
 		}
 		#endregion

@@ -76,6 +76,7 @@ namespace NEXO
 			{
 				Request = msg;
 				XML = Serialize(Request);
+				SaleToPOI = AllocateObject(Category);
 			}
 		}
 		/// <summary>
@@ -91,6 +92,7 @@ namespace NEXO
 			{
 				Reply = msg;
 				XML = Serialize(Reply);
+				SaleToPOI = AllocateObject(Category);
 			}
 		}
 		/// <summary>
@@ -105,6 +107,7 @@ namespace NEXO
 			{
 				Request = request;
 				XML = xml;
+				SaleToPOI = AllocateObject(Category);
 			}
 			else
 			{
@@ -116,6 +119,7 @@ namespace NEXO
 				{
 					Reply = reply;
 					XML = xml;
+					SaleToPOI = AllocateObject(Category);
 				}
 			}
 		}
@@ -137,9 +141,11 @@ namespace NEXO
 		/// <summary>
 		/// Request and Response (Reply) to manipulate
 		/// </summary>
+		//public object Item { get => (IsRequest ? (object)SaleToPOI.Request : (IsReply ? (object)SaleToPOI.Reply : null)); }
+		private NexoObject SaleToPOI { get; set; } = null;
 		public object Item { get => (IsRequest ? (object)Request : (IsReply ? (object)Reply : null)); }
-		private SaleToPOIRequest Request { get; set; } = null;
-		private SaleToPOIResponse Reply { get; set; } = null;
+		private SaleToPOIRequest Request = null;
+		private SaleToPOIResponse Reply = null;
 		public string XML { get; } = null;
 		/// <summary>
 		/// Indicates the type of teh item

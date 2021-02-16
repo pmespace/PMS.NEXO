@@ -25,9 +25,10 @@ namespace NEXO
 		string RequestOriginalPOITransactionTimestamp { get; set; }
 		[DispId(9)]
 		double RequestRequestedAmount { get; set; }
-		//double RequestRequestedAmount { get; set; }
 		[DispId(10)]
 		string RequestCurrency { get; set; }
+		[DispId(11)]
+		string RequestSaleReferenceID { get; set; }
 
 		[DispId(50)]
 		string ReplyPOITransactionID { get; set; }
@@ -75,8 +76,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -131,7 +130,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -233,86 +236,89 @@ namespace NEXO
 		public bool Accepted { get => Success; }
 		public PaymentTypeEnumeration PaymentType
 		{
-			get => (PaymentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentTypeEnumeration), CMisc.Trimmed(RequestData.PaymentData.PaymentType));
-			set => RequestData.PaymentData.PaymentType = CMisc.GetEnumName(typeof(PaymentTypeEnumeration), value);
+			get => (null != RequestData && null != RequestData.PaymentData ? (PaymentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentTypeEnumeration), CMisc.Trimmed(RequestData.PaymentData.PaymentType)) : (PaymentTypeEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.PaymentData) RequestData.PaymentData.PaymentType = CMisc.GetEnumName(typeof(PaymentTypeEnumeration), value); }
 		}
 		#endregion
 
 		#region request inner properties
 		public string RequestSaleTransactionID
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID);
-			set { RequestData.SaleData.SaleTransactionID.TransactionID = value; }
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TransactionID = value; }
 		}
 		public string RequestSaleTransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp);
-			set { RequestData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public string RequestOriginalPOITransactionID
 		{
-			get => CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TransactionID);
-			set => RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TransactionID = value;
+			get => (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID) RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TransactionID = value; }
 		}
 		public string RequestOriginalPOITransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp);
-			set => RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction && null != RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID) RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
-		//public double RequestRequestedAmount
 		public double RequestRequestedAmount
 		{
-			get => RequestData.PaymentTransaction.AmountsReq.RequestedAmount;
-			set => RequestData.PaymentTransaction.AmountsReq.RequestedAmount = value;
+			get => (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.AmountsReq ? RequestData.PaymentTransaction.AmountsReq.RequestedAmount : 0);
+			set { if (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.AmountsReq) RequestData.PaymentTransaction.AmountsReq.RequestedAmount = value; }
 		}
 		public string RequestCurrency
 		{
-			get => CMisc.Trimmed(RequestData.PaymentTransaction.AmountsReq.Currency);
-			set => RequestData.PaymentTransaction.AmountsReq.Currency = new NexoCurrency() { Value = value }.Value;
+			get => (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.AmountsReq ? CMisc.Trimmed(RequestData.PaymentTransaction.AmountsReq.Currency) : null);
+			set { if (null != RequestData && null != RequestData.PaymentTransaction && null != RequestData.PaymentTransaction.AmountsReq) RequestData.PaymentTransaction.AmountsReq.Currency = new NexoCurrency() { Value = value }.Value; }
+		}
+		public string RequestSaleReferenceID
+		{
+			get => (null != RequestData && null != RequestData.SaleData ? CMisc.Trimmed(RequestData.SaleData.SaleReferenceID) : null);
+			set { if (null != RequestData && null != RequestData.SaleData) RequestData.SaleData.SaleReferenceID = value; }
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplyPOITransactionID
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID);
-			set => ReplyData.POIData.POITransactionID.TransactionID = value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TransactionID = value; }
 		}
 		public string ReplyPOITransactionTimestamp
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
-			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
-		//public double ReplyAuthorizedAmount
 		public double ReplyAuthorizedAmount
 		{
-			get => ReplyData.PaymentResult.AmountsResp.AuthorizedAmount;
-			set => ReplyData.PaymentResult.AmountsResp.AuthorizedAmount = value;
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.AmountsResp ? ReplyData.PaymentResult.AmountsResp.AuthorizedAmount : 0);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.AmountsResp) ReplyData.PaymentResult.AmountsResp.AuthorizedAmount = value; }
 		}
 		public PaymentInstrumentTypeEnumeration ReplyPaymentInstrumentType
 		{
-			get => (PaymentInstrumentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentInstrumentTypeEnumeration), CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.PaymentInstrumentType));
-			set => ReplyData.PaymentResult.PaymentInstrumentData.PaymentInstrumentType = CMisc.GetEnumName(typeof(PaymentInstrumentTypeEnumeration), value);
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData ? (PaymentInstrumentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentInstrumentTypeEnumeration), CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.PaymentInstrumentType)) : (PaymentInstrumentTypeEnumeration)NexoValues.None);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData) ReplyData.PaymentResult.PaymentInstrumentData.PaymentInstrumentType = CMisc.GetEnumName(typeof(PaymentInstrumentTypeEnumeration), value); }
 		}
 		public string ReplyPaymentBrand
 		{
-			get => CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.CardData.PaymentBrand);
-			set => ReplyData.PaymentResult.PaymentInstrumentData.CardData.PaymentBrand = value;
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData ? CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.CardData.PaymentBrand) : null);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData) ReplyData.PaymentResult.PaymentInstrumentData.CardData.PaymentBrand = value; }
 		}
 		public string ReplyCardCountryCode
 		{
-			get => CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.CardData.CardCountryCode);
-			set => ReplyData.PaymentResult.PaymentInstrumentData.CardData.CardCountryCode = value;
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData ? CMisc.Trimmed(ReplyData.PaymentResult.PaymentInstrumentData.CardData.CardCountryCode) : null);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData) ReplyData.PaymentResult.PaymentInstrumentData.CardData.CardCountryCode = value; }
 		}
 		public SensitiveCardDataType ReplySensitiveCardData
 		{
-			get => ReplyData.PaymentResult.PaymentInstrumentData.CardData.SensitiveCardData;
-			set => ReplyData.PaymentResult.PaymentInstrumentData.CardData.SensitiveCardData = value;
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData ? ReplyData.PaymentResult.PaymentInstrumentData.CardData.SensitiveCardData : null);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData) ReplyData.PaymentResult.PaymentInstrumentData.CardData.SensitiveCardData = value; }
 		}
 		public ContentInformationType ReplyProtectedCardData
 		{
-			get => ReplyData.PaymentResult.PaymentInstrumentData.CardData.ProtectedCardData;
-			set => ReplyData.PaymentResult.PaymentInstrumentData.CardData.ProtectedCardData = value;
+			get => (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData ? ReplyData.PaymentResult.PaymentInstrumentData.CardData.ProtectedCardData : null);
+			set { if (null != ReplyData && null != ReplyData.PaymentResult && null != ReplyData.PaymentResult.PaymentInstrumentData && null != ReplyData.PaymentResult.PaymentInstrumentData.CardData) ReplyData.PaymentResult.PaymentInstrumentData.CardData.ProtectedCardData = value; }
 		}
 		#endregion
 
@@ -321,11 +327,13 @@ namespace NEXO
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
 		protected override void SetReplyFromRequest()
 		{
-			RequestSaleTransactionID = RequestSaleTransactionID;
-			RequestSaleTransactionTimestamp = RequestSaleTransactionTimestamp;
+			ReplyData.SaleData.SaleReferenceID = SetDefaultStringValue(ReplyData.SaleData.SaleReferenceID, RequestSaleReferenceID);
+			ReplyData.SaleData.SaleTransactionID.TransactionID = SetDefaultStringValue(ReplyData.SaleData.SaleTransactionID.TransactionID, RequestSaleTransactionID);
+			ReplyData.SaleData.SaleTransactionID.TimeStamp = SetDefaultStringValue(ReplyData.SaleData.SaleTransactionID.TimeStamp, RequestSaleTransactionTimestamp);
 		}
 		protected override InternalAction AutoCompleteRequest()
 		{
+			PaymentType = (PaymentTypeEnumeration)SetDefaultEnumValue(typeof(PaymentTypeEnumeration), PaymentType, PaymentTypeEnumeration.Normal);
 			RequestCurrency = SetDefaultStringValue(RequestCurrency, new NexoCurrencyEUR().Value);
 			RequestSaleTransactionID = SetDefaultStringValue(RequestSaleTransactionTimestamp, NexoAutoID.ID());
 			RequestSaleTransactionTimestamp = SetDefaultStringValue(RequestSaleTransactionTimestamp, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
@@ -333,6 +341,41 @@ namespace NEXO
 		}
 		protected override InternalAction AutoCompleteReply()
 		{
+			//if (null != ReplyData)
+			//{
+			//	if (null != ReplyData.SaleData)
+			//	{
+			//		ReplyData.SaleData.SaleReferenceID = RequestSaleReferenceID;
+			//		if (null != ReplyData.SaleData.SaleTerminalData)
+			//		{
+			//			if (null != ReplyData.SaleData.SaleTransactionID)
+			//			{
+			//				ReplyData.SaleData.SaleTransactionID.TransactionID = RequestSaleTransactionID;
+			//				ReplyData.SaleData.SaleTransactionID.TimeStamp = RequestSaleTransactionTimestamp;
+			//			}
+
+			//		}
+			//	}
+			//	if (null != ReplyData.PaymentResult)
+			//	{
+			//		ReplyData.PaymentResult.PaymentType = CMisc.EnumValueToString(typeof(PaymentTypeEnumeration), PaymentType);
+			//	}
+			//}
+
+
+			ReplyData.PaymentResult.PaymentType = CMisc.EnumValueToString(typeof(PaymentTypeEnumeration), PaymentType);
+
+			if (Success)
+			{
+				ReplyAuthorizedAmount = SetDefaultDoubleValue(ReplyAuthorizedAmount, RequestRequestedAmount);
+			}
+			else if (Failure)
+			{ }
+			else if (Partial)
+			{
+				ReplyAuthorizedAmount = SetDefaultDoubleValue(ReplyAuthorizedAmount, RequestRequestedAmount);
+			}
+
 			ReplyPOITransactionID = SetDefaultStringValue(ReplyPOITransactionID, RequestSaleTransactionID, NexoAutoID.ID());
 			ReplyPOITransactionTimestamp = SetDefaultStringValue(ReplyPOITransactionTimestamp, RequestSaleTransactionTimestamp, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
 			return InternalAction.noError;

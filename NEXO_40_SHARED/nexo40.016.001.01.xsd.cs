@@ -1,51 +1,87 @@
+#if NEXO40
 namespace NEXO {
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ee12b027-4ffa-44d8-9325-ea24de91ad84")]
+    [System.Runtime.InteropServices.GuidAttribute("7fc4dd4e-5b09-4401-b9e5-6081ed3fd75f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceDisplayRequest1 : IDeviceDisplayRequest1 {
-        internal ActionMessage6[] dispOutptField = new ActionMessage6[0];
-        internal bool xsdDeviceDisplayRequest1InitFlagField = false;
+        private ActionMessage6[] dispOutptField = new ActionMessage6[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("DispOutpt")]
         public ActionMessage6[] DispOutpt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.dispOutptField == null)
                             || (this.dispOutptField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.dispOutptField;
             }
             set {
-                this.xsdDeviceDisplayRequest1InitFlagField = true;
-                this.dispOutptField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.dispOutptField = new ActionMessage6[0];
+                }
+                else {
+                    this.dispOutptField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceDisplayRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceDisplayRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceDisplayRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
             }
         }
         public int DispOutptSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.dispOutptField == null)) {
                 return 0;
             }
             else {
                 return this.dispOutptField.Length;
             }
+            // END ADDED BY XSD
         }
         public ActionMessage6 DispOutptGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.dispOutptField == default(ActionMessage6[]))) {
                     return default(ActionMessage6);
@@ -63,8 +99,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(ActionMessage6);
             }
+            // END ADDED BY XSD
         }
         public bool DispOutptSetItem(int index, ActionMessage6 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.dispOutptField == default(ActionMessage6[]))) {
                     return false;
@@ -77,8 +115,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DispOutptAddItem(ActionMessage6 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.dispOutptField == default(ActionMessage6[]))) {
                     return false;
@@ -97,8 +137,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DispOutptRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.dispOutptField == default(ActionMessage6[]))) {
                     return false;
@@ -124,62 +166,42 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("4c71fa0b-ea1b-4b03-92ae-e35aaaa8abba")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceDisplayRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        ActionMessage6[] DispOutpt {
-            get;
-            set;
-        }
-        [DispId(3)]
-        bool xsdDeviceDisplayRequest1InitFlag {
-            get;
-            set;
-        }
-        [DispId(4)]
-        int DispOutptSize();
-        [DispId(5)]
-        ActionMessage6 DispOutptGetItem(int index);
-        [DispId(6)]
-        bool DispOutptSetItem(int index, ActionMessage6 value);
-        [DispId(7)]
-        bool DispOutptAddItem(ActionMessage6 value);
-        [DispId(8)]
-        bool DispOutptRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("797cfa1b-302f-4466-a8dd-d7e5b95a4789")]
+    [System.Runtime.InteropServices.GuidAttribute("9f1b570b-d35e-4e33-8bfa-8059619a4f74")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceInitialisationCardReaderRequest1 : IDeviceInitialisationCardReaderRequest1 {
-        internal bool warmRstFlgField;
-        internal bool warmRstFlgFieldSpecified;
-        internal CardDataReading6Code[] forceNtryMdField = new CardDataReading6Code[0];
-        internal bool leavCardFlgField;
-        internal bool leavCardFlgFieldSpecified;
-        internal double maxWtgTmField;
-        internal bool maxWtgTmFieldSpecified;
-        internal ActionMessage6 dispOutptField = new ActionMessage6();
-        internal bool xsdDeviceInitialisationCardReaderRequest1InitFlagField = false;
+        private bool warmRstFlgField;
+        private bool warmRstFlgFieldSpecified;
+        private CardDataReading6Code[] forceNtryMdField = new CardDataReading6Code[0];
+        private bool leavCardFlgField;
+        private bool leavCardFlgFieldSpecified;
+        private double maxWtgTmField;
+        private bool maxWtgTmFieldSpecified;
+        private ActionMessage6 dispOutptField = new ActionMessage6();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public bool WarmRstFlg {
             get {
                 return this.warmRstFlgField;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.warmRstFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - WarmRstFlgSpecified = true
                 this.WarmRstFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -189,7 +211,6 @@ namespace NEXO {
                 return this.warmRstFlgFieldSpecified;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
                 this.warmRstFlgFieldSpecified = value;
             }
         }
@@ -197,14 +218,18 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute("ForceNtryMd")]
         public CardDataReading6Code[] ForceNtryMd {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.forceNtryMdField == null)
                             || (this.forceNtryMdField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.forceNtryMdField;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.forceNtryMdField = value;
             }
         }
@@ -214,9 +239,13 @@ namespace NEXO {
                 return this.leavCardFlgField;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.leavCardFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - LeavCardFlgSpecified = true
                 this.LeavCardFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -226,7 +255,6 @@ namespace NEXO {
                 return this.leavCardFlgFieldSpecified;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
                 this.leavCardFlgFieldSpecified = value;
             }
         }
@@ -236,9 +264,13 @@ namespace NEXO {
                 return this.maxWtgTmField;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.maxWtgTmField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - MaxWtgTmSpecified = true
                 this.MaxWtgTmSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -248,38 +280,85 @@ namespace NEXO {
                 return this.maxWtgTmFieldSpecified;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
                 this.maxWtgTmFieldSpecified = value;
             }
         }
         /// <remarks/>
         public ActionMessage6 DispOutpt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dispOutptField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dispOutptField;
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = true;
-                this.dispOutptField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dispOutptField = new ActionMessage6();
+                }
+                else {
+                    this.dispOutptField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceInitialisationCardReaderRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceInitialisationCardReaderRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((((this.XSD_HasBeenSetField || this.DispOutpt.XSD_HasBeenSetProperty)
+                            || this.WarmRstFlgSpecified)
+                            || this.LeavCardFlgSpecified)
+                            || this.MaxWtgTmSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceInitialisationCardReaderRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DispOutpt = null;
+                    this.WarmRstFlgSpecified = false;
+                    this.LeavCardFlgSpecified = false;
+                    this.MaxWtgTmSpecified = false;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DispOutpt != null)) {
+                    this.DispOutpt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int ForceNtryMdSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.forceNtryMdField == null)) {
                 return 0;
             }
             else {
                 return this.forceNtryMdField.Length;
             }
+            // END ADDED BY XSD
         }
         public CardDataReading6Code ForceNtryMdGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.forceNtryMdField == default(CardDataReading6Code[]))) {
                     return default(CardDataReading6Code);
@@ -297,8 +376,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(CardDataReading6Code);
             }
+            // END ADDED BY XSD
         }
         public bool ForceNtryMdSetItem(int index, CardDataReading6Code value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.forceNtryMdField == default(CardDataReading6Code[]))) {
                     return false;
@@ -311,8 +392,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool ForceNtryMdAddItem(CardDataReading6Code value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.forceNtryMdField == default(CardDataReading6Code[]))) {
                     return false;
@@ -331,8 +414,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool ForceNtryMdRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.forceNtryMdField == default(CardDataReading6Code[]))) {
                     return false;
@@ -358,247 +443,238 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("a864965d-8a3b-420b-8d2f-733c51fd7055")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceInitialisationCardReaderRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        bool WarmRstFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        bool WarmRstFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        CardDataReading6Code[] ForceNtryMd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        bool LeavCardFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        bool LeavCardFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        double MaxWtgTm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        bool MaxWtgTmSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(15)]
-        ActionMessage6 DispOutpt {
-            get;
-            set;
-        }
-        [DispId(17)]
-        bool xsdDeviceInitialisationCardReaderRequest1InitFlag {
-            get;
-            set;
-        }
-        [DispId(18)]
-        int ForceNtryMdSize();
-        [DispId(19)]
-        CardDataReading6Code ForceNtryMdGetItem(int index);
-        [DispId(20)]
-        bool ForceNtryMdSetItem(int index, CardDataReading6Code value);
-        [DispId(21)]
-        bool ForceNtryMdAddItem(CardDataReading6Code value);
-        [DispId(22)]
-        bool ForceNtryMdRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8e17fef5-46e8-40e8-8581-a70089f8e181")]
+    [System.Runtime.InteropServices.GuidAttribute("f0508cd7-c920-458d-9371-0ca7a27786bd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceInputNotification1 : IDeviceInputNotification1 {
-        internal string xchgIdField;
-        internal ActionMessage6 outptCnttField = new ActionMessage6();
-        internal bool xsdDeviceInputNotification1InitFlagField = false;
+        private string xchgIdField;
+        private ActionMessage6 outptCnttField = new ActionMessage6();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public string XchgId {
             get {
                 return this.xchgIdField;
             }
             set {
-                this.xsdDeviceInputNotification1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.xchgIdField = value;
             }
         }
         /// <remarks/>
         public ActionMessage6 OutptCntt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.outptCnttField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.outptCnttField;
             }
             set {
-                this.xsdDeviceInputNotification1InitFlagField = true;
-                this.outptCnttField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.outptCnttField = new ActionMessage6();
+                }
+                else {
+                    this.outptCnttField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceInputNotification1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceInputNotification1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (this.XSD_HasBeenSetField || this.OutptCntt.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceInputNotification1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.OutptCntt = null;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("e229de46-97bd-4a1e-a6aa-39cadbe9e98a")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceInputNotification1 {
-        /// <remarks/>
-        [DispId(1)]
-        string XchgId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        ActionMessage6 OutptCntt {
-            get;
-            set;
-        }
-        [DispId(5)]
-        bool xsdDeviceInputNotification1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.OutptCntt != null)) {
+                    this.OutptCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ec1b16b3-35bc-4333-a943-b8041fefdefb")]
+    [System.Runtime.InteropServices.GuidAttribute("45d36654-4071-4bbe-93a4-2c72c4fb4ffa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceInputRequest1 : IDeviceInputRequest1 {
-        internal ActionMessage6 dispOutptField = new ActionMessage6();
-        internal InputData1 inptDataField = new InputData1();
-        internal bool xsdDeviceInputRequest1InitFlagField = false;
+        private ActionMessage6 dispOutptField = new ActionMessage6();
+        private InputData1 inptDataField = new InputData1();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public ActionMessage6 DispOutpt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dispOutptField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dispOutptField;
             }
             set {
-                this.xsdDeviceInputRequest1InitFlagField = true;
-                this.dispOutptField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dispOutptField = new ActionMessage6();
+                }
+                else {
+                    this.dispOutptField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public InputData1 InptData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.inptDataField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.inptDataField;
             }
             set {
-                this.xsdDeviceInputRequest1InitFlagField = true;
-                this.inptDataField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.inptDataField = new InputData1();
+                }
+                else {
+                    this.inptDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceInputRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceInputRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((this.XSD_HasBeenSetField || this.DispOutpt.XSD_HasBeenSetProperty)
+                            || this.InptData.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceInputRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DispOutpt = null;
+                    this.InptData = null;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("42063481-cb40-43df-a6c1-e077f7417f8a")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceInputRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        ActionMessage6 DispOutpt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        InputData1 InptData {
-            get;
-            set;
-        }
-        [DispId(5)]
-        bool xsdDeviceInputRequest1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DispOutpt != null)) {
+                    this.DispOutpt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.InptData != null)) {
+                    this.InptData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("20a99d01-1af2-480b-9ea5-d9f111a7d0da")]
+    [System.Runtime.InteropServices.GuidAttribute("348a5e01-9d85-490d-acec-6c7637f8aa1e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputData1 : IInputData1 {
-        internal SaleCapabilities2Code dvcTpField = new SaleCapabilities2Code();
-        internal InformationQualify1Code infQlfrField = new InformationQualify1Code();
-        internal InputCommand1Code inptCmdField = new InputCommand1Code();
-        internal bool ntfyCardInptFlgField;
-        internal double maxInptTmField;
-        internal bool maxInptTmFieldSpecified;
-        internal ActionMessage6 inptTxtField = new ActionMessage6();
-        internal bool imdtRspnFlgField;
-        internal bool imdtRspnFlgFieldSpecified;
-        internal bool waitUsrVldtnFlgField;
-        internal bool waitUsrVldtnFlgFieldSpecified;
-        internal bool beepKeyFlgField;
-        internal bool beepKeyFlgFieldSpecified;
-        internal bool gblCrrctnFlgField;
-        internal bool gblCrrctnFlgFieldSpecified;
-        internal bool dsblCclFlgField;
-        internal bool dsblCclFlgFieldSpecified;
-        internal bool dsblCrrctFlgField;
-        internal bool dsblCrrctFlgFieldSpecified;
-        internal bool dsblVldFlgField;
-        internal bool dsblVldFlgFieldSpecified;
-        internal bool menuBckFlgField;
-        internal bool menuBckFlgFieldSpecified;
-        internal bool xsdInputData1InitFlagField = false;
+        private SaleCapabilities2Code dvcTpField;
+        private InformationQualify1Code infQlfrField;
+        private InputCommand1Code inptCmdField;
+        private bool ntfyCardInptFlgField;
+        private double maxInptTmField;
+        private bool maxInptTmFieldSpecified;
+        private ActionMessage6 inptTxtField = new ActionMessage6();
+        private bool imdtRspnFlgField;
+        private bool imdtRspnFlgFieldSpecified;
+        private bool waitUsrVldtnFlgField;
+        private bool waitUsrVldtnFlgFieldSpecified;
+        private bool beepKeyFlgField;
+        private bool beepKeyFlgFieldSpecified;
+        private bool gblCrrctnFlgField;
+        private bool gblCrrctnFlgFieldSpecified;
+        private bool dsblCclFlgField;
+        private bool dsblCclFlgFieldSpecified;
+        private bool dsblCrrctFlgField;
+        private bool dsblCrrctFlgFieldSpecified;
+        private bool dsblVldFlgField;
+        private bool dsblVldFlgFieldSpecified;
+        private bool menuBckFlgField;
+        private bool menuBckFlgFieldSpecified;
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public SaleCapabilities2Code DvcTp {
             get {
                 return this.dvcTpField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.dvcTpField = value;
             }
         }
@@ -608,7 +684,9 @@ namespace NEXO {
                 return this.infQlfrField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.infQlfrField = value;
             }
         }
@@ -618,7 +696,9 @@ namespace NEXO {
                 return this.inptCmdField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.inptCmdField = value;
             }
         }
@@ -628,7 +708,9 @@ namespace NEXO {
                 return this.ntfyCardInptFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.ntfyCardInptFlgField = value;
             }
         }
@@ -638,9 +720,13 @@ namespace NEXO {
                 return this.maxInptTmField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.maxInptTmField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - MaxInptTmSpecified = true
                 this.MaxInptTmSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -650,18 +736,29 @@ namespace NEXO {
                 return this.maxInptTmFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.maxInptTmFieldSpecified = value;
             }
         }
         /// <remarks/>
         public ActionMessage6 InptTxt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.inptTxtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.inptTxtField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
-                this.inptTxtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.inptTxtField = new ActionMessage6();
+                }
+                else {
+                    this.inptTxtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -670,9 +767,13 @@ namespace NEXO {
                 return this.imdtRspnFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.imdtRspnFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - ImdtRspnFlgSpecified = true
                 this.ImdtRspnFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -682,7 +783,6 @@ namespace NEXO {
                 return this.imdtRspnFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.imdtRspnFlgFieldSpecified = value;
             }
         }
@@ -692,9 +792,13 @@ namespace NEXO {
                 return this.waitUsrVldtnFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.waitUsrVldtnFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - WaitUsrVldtnFlgSpecified = true
                 this.WaitUsrVldtnFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -704,7 +808,6 @@ namespace NEXO {
                 return this.waitUsrVldtnFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.waitUsrVldtnFlgFieldSpecified = value;
             }
         }
@@ -714,9 +817,13 @@ namespace NEXO {
                 return this.beepKeyFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.beepKeyFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - BeepKeyFlgSpecified = true
                 this.BeepKeyFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -726,7 +833,6 @@ namespace NEXO {
                 return this.beepKeyFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.beepKeyFlgFieldSpecified = value;
             }
         }
@@ -736,9 +842,13 @@ namespace NEXO {
                 return this.gblCrrctnFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.gblCrrctnFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - GblCrrctnFlgSpecified = true
                 this.GblCrrctnFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -748,7 +858,6 @@ namespace NEXO {
                 return this.gblCrrctnFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.gblCrrctnFlgFieldSpecified = value;
             }
         }
@@ -758,9 +867,13 @@ namespace NEXO {
                 return this.dsblCclFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.dsblCclFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - DsblCclFlgSpecified = true
                 this.DsblCclFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -770,7 +883,6 @@ namespace NEXO {
                 return this.dsblCclFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.dsblCclFlgFieldSpecified = value;
             }
         }
@@ -780,9 +892,13 @@ namespace NEXO {
                 return this.dsblCrrctFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.dsblCrrctFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - DsblCrrctFlgSpecified = true
                 this.DsblCrrctFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -792,7 +908,6 @@ namespace NEXO {
                 return this.dsblCrrctFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.dsblCrrctFlgFieldSpecified = value;
             }
         }
@@ -802,9 +917,13 @@ namespace NEXO {
                 return this.dsblVldFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.dsblVldFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - DsblVldFlgSpecified = true
                 this.DsblVldFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -814,7 +933,6 @@ namespace NEXO {
                 return this.dsblVldFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.dsblVldFlgFieldSpecified = value;
             }
         }
@@ -824,9 +942,13 @@ namespace NEXO {
                 return this.menuBckFlgField;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.menuBckFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - MenuBckFlgSpecified = true
                 this.MenuBckFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -836,170 +958,66 @@ namespace NEXO {
                 return this.menuBckFlgFieldSpecified;
             }
             set {
-                this.xsdInputData1InitFlagField = true;
                 this.menuBckFlgFieldSpecified = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdInputData1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdInputData1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((((((((((this.XSD_HasBeenSetField || this.InptTxt.XSD_HasBeenSetProperty)
+                            || this.MaxInptTmSpecified)
+                            || this.ImdtRspnFlgSpecified)
+                            || this.WaitUsrVldtnFlgSpecified)
+                            || this.BeepKeyFlgSpecified)
+                            || this.GblCrrctnFlgSpecified)
+                            || this.DsblCclFlgSpecified)
+                            || this.DsblCrrctFlgSpecified)
+                            || this.DsblVldFlgSpecified)
+                            || this.MenuBckFlgSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdInputData1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.InptTxt = null;
+                    this.MaxInptTmSpecified = false;
+                    this.ImdtRspnFlgSpecified = false;
+                    this.WaitUsrVldtnFlgSpecified = false;
+                    this.BeepKeyFlgSpecified = false;
+                    this.GblCrrctnFlgSpecified = false;
+                    this.DsblCclFlgSpecified = false;
+                    this.DsblCrrctFlgSpecified = false;
+                    this.DsblVldFlgSpecified = false;
+                    this.MenuBckFlgSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("d53aed98-cccc-4859-924f-3c7a7eb71c4f")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IInputData1 {
-        /// <remarks/>
-        [DispId(1)]
-        SaleCapabilities2Code DvcTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        InformationQualify1Code InfQlfr {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        InputCommand1Code InptCmd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        bool NtfyCardInptFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        double MaxInptTm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        bool MaxInptTmSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        ActionMessage6 InptTxt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(15)]
-        bool ImdtRspnFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(17)]
-        bool ImdtRspnFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(19)]
-        bool WaitUsrVldtnFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(21)]
-        bool WaitUsrVldtnFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(23)]
-        bool BeepKeyFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(25)]
-        bool BeepKeyFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(27)]
-        bool GblCrrctnFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(29)]
-        bool GblCrrctnFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(31)]
-        bool DsblCclFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(33)]
-        bool DsblCclFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(35)]
-        bool DsblCrrctFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(37)]
-        bool DsblCrrctFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(39)]
-        bool DsblVldFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(41)]
-        bool DsblVldFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(43)]
-        bool MenuBckFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(45)]
-        bool MenuBckFlgSpecified {
-            get;
-            set;
-        }
-        [DispId(47)]
-        bool xsdInputData1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.InptTxt != null)) {
+                    this.InptTxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -1011,7 +1029,7 @@ namespace NEXO {
         CUIN,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -1041,31 +1059,36 @@ namespace NEXO {
         SIGN,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5bded494-701b-4ea6-86dd-6e645327503a")]
+    [System.Runtime.InteropServices.GuidAttribute("106312c2-3eff-4435-ba32-8efc1ab45686")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DevicePlaySoundRequest1 : IDevicePlaySoundRequest1 {
-        internal ResponseMode1Code rspnMdField = new ResponseMode1Code();
-        internal bool rspnMdFieldSpecified;
-        internal SoundAction1Code soundActnField = new SoundAction1Code();
-        internal double soundVolField;
-        internal bool soundVolFieldSpecified;
-        internal SoundContent1 soundCnttField = new SoundContent1();
-        internal bool xsdDevicePlaySoundRequest1InitFlagField = false;
+        private ResponseMode1Code rspnMdField;
+        private bool rspnMdFieldSpecified;
+        private SoundAction1Code soundActnField;
+        private double soundVolField;
+        private bool soundVolFieldSpecified;
+        private SoundContent1 soundCnttField = new SoundContent1();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public ResponseMode1Code RspnMd {
             get {
                 return this.rspnMdField;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rspnMdField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - RspnMdSpecified = true
                 this.RspnMdSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1075,7 +1098,6 @@ namespace NEXO {
                 return this.rspnMdFieldSpecified;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
                 this.rspnMdFieldSpecified = value;
             }
         }
@@ -1085,7 +1107,9 @@ namespace NEXO {
                 return this.soundActnField;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.soundActnField = value;
             }
         }
@@ -1095,9 +1119,13 @@ namespace NEXO {
                 return this.soundVolField;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.soundVolField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - SoundVolSpecified = true
                 this.SoundVolSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1107,78 +1135,74 @@ namespace NEXO {
                 return this.soundVolFieldSpecified;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
                 this.soundVolFieldSpecified = value;
             }
         }
         /// <remarks/>
         public SoundContent1 SoundCntt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.soundCnttField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.soundCnttField;
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = true;
-                this.soundCnttField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.soundCnttField = new SoundContent1();
+                }
+                else {
+                    this.soundCnttField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDevicePlaySoundRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDevicePlaySoundRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.SoundCntt.XSD_HasBeenSetProperty)
+                            || this.RspnMdSpecified)
+                            || this.SoundVolSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDevicePlaySoundRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.SoundCntt = null;
+                    this.RspnMdSpecified = false;
+                    this.SoundVolSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("aba459e6-9b0d-4d30-91c1-5ec1a2f494c7")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDevicePlaySoundRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        ResponseMode1Code RspnMd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        bool RspnMdSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        SoundAction1Code SoundActn {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        double SoundVol {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        bool SoundVolSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        SoundContent1 SoundCntt {
-            get;
-            set;
-        }
-        [DispId(13)]
-        bool xsdDevicePlaySoundRequest1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.SoundCntt != null)) {
+                    this.SoundCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -1194,7 +1218,7 @@ namespace NEXO {
         SEND,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -1208,27 +1232,30 @@ namespace NEXO {
         STOS,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1219d215-763c-40e4-b045-74c9136b8225")]
+    [System.Runtime.InteropServices.GuidAttribute("07085935-e2cd-4ade-b7d6-998b0f30b04e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundContent1 : ISoundContent1 {
-        internal SoundFormat1Code soundFrmtField = new SoundFormat1Code();
-        internal string langField;
-        internal string soundRefField;
-        internal string txtField;
-        internal bool xsdSoundContent1InitFlagField = false;
+        private SoundFormat1Code soundFrmtField;
+        private string langField;
+        private string soundRefField;
+        private string txtField;
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public SoundFormat1Code SoundFrmt {
             get {
                 return this.soundFrmtField;
             }
             set {
-                this.xsdSoundContent1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.soundFrmtField = value;
             }
         }
@@ -1238,7 +1265,9 @@ namespace NEXO {
                 return this.langField;
             }
             set {
-                this.xsdSoundContent1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.langField = value;
             }
         }
@@ -1248,7 +1277,9 @@ namespace NEXO {
                 return this.soundRefField;
             }
             set {
-                this.xsdSoundContent1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.soundRefField = value;
             }
         }
@@ -1258,56 +1289,47 @@ namespace NEXO {
                 return this.txtField;
             }
             set {
-                this.xsdSoundContent1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.txtField = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdSoundContent1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdSoundContent1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdSoundContent1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("61e9ed5a-c6b8-4d98-9b46-03adef11daa2")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISoundContent1 {
-        /// <remarks/>
-        [DispId(1)]
-        SoundFormat1Code SoundFrmt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string Lang {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        string SoundRef {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        string Txt {
-            get;
-            set;
-        }
-        [DispId(9)]
-        bool xsdSoundContent1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -1321,28 +1343,33 @@ namespace NEXO {
         TEXT,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b2d0cd97-401e-47f8-8fdb-68b5482a1d34")]
+    [System.Runtime.InteropServices.GuidAttribute("70bb4b1c-8bbe-4514-bca6-80b910f91840")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DevicePoweroffCardReaderRequest1 : IDevicePoweroffCardReaderRequest1 {
-        internal double pwrOffMaxWtgTmField;
-        internal bool pwrOffMaxWtgTmFieldSpecified;
-        internal ActionMessage6 dispOutptField = new ActionMessage6();
-        internal bool xsdDevicePoweroffCardReaderRequest1InitFlagField = false;
+        private double pwrOffMaxWtgTmField;
+        private bool pwrOffMaxWtgTmFieldSpecified;
+        private ActionMessage6 dispOutptField = new ActionMessage6();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public double PwrOffMaxWtgTm {
             get {
                 return this.pwrOffMaxWtgTmField;
             }
             set {
-                this.xsdDevicePoweroffCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pwrOffMaxWtgTmField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - PwrOffMaxWtgTmSpecified = true
                 this.PwrOffMaxWtgTmSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1352,83 +1379,98 @@ namespace NEXO {
                 return this.pwrOffMaxWtgTmFieldSpecified;
             }
             set {
-                this.xsdDevicePoweroffCardReaderRequest1InitFlagField = true;
                 this.pwrOffMaxWtgTmFieldSpecified = value;
             }
         }
         /// <remarks/>
         public ActionMessage6 DispOutpt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dispOutptField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dispOutptField;
             }
             set {
-                this.xsdDevicePoweroffCardReaderRequest1InitFlagField = true;
-                this.dispOutptField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dispOutptField = new ActionMessage6();
+                }
+                else {
+                    this.dispOutptField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDevicePoweroffCardReaderRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDevicePoweroffCardReaderRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((this.XSD_HasBeenSetField || this.DispOutpt.XSD_HasBeenSetProperty)
+                            || this.PwrOffMaxWtgTmSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDevicePoweroffCardReaderRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DispOutpt = null;
+                    this.PwrOffMaxWtgTmSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("c9b46939-d81d-4d15-8edb-65655577e8d0")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDevicePoweroffCardReaderRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        double PwrOffMaxWtgTm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        bool PwrOffMaxWtgTmSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        ActionMessage6 DispOutpt {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdDevicePoweroffCardReaderRequest1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DispOutpt != null)) {
+                    this.DispOutpt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("db402817-134b-44cd-a2d9-9f76fcd5f1b6")]
+    [System.Runtime.InteropServices.GuidAttribute("4c1b1345-e220-411c-85c5-67baec05ed9c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DevicePrintRequest1 : IDevicePrintRequest1 {
-        internal DocumentType7Code docQlfrField = new DocumentType7Code();
-        internal ResponseMode1Code rspnMdField = new ResponseMode1Code();
-        internal bool intgrtdPrtFlgField;
-        internal bool intgrtdPrtFlgFieldSpecified;
-        internal bool reqrdSgntrFlgField;
-        internal bool reqrdSgntrFlgFieldSpecified;
-        internal ActionMessage6 outptCnttField = new ActionMessage6();
-        internal bool xsdDevicePrintRequest1InitFlagField = false;
+        private DocumentType7Code docQlfrField;
+        private ResponseMode1Code rspnMdField;
+        private bool intgrtdPrtFlgField;
+        private bool intgrtdPrtFlgFieldSpecified;
+        private bool reqrdSgntrFlgField;
+        private bool reqrdSgntrFlgFieldSpecified;
+        private ActionMessage6 outptCnttField = new ActionMessage6();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public DocumentType7Code DocQlfr {
             get {
                 return this.docQlfrField;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.docQlfrField = value;
             }
         }
@@ -1438,7 +1480,9 @@ namespace NEXO {
                 return this.rspnMdField;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rspnMdField = value;
             }
         }
@@ -1448,9 +1492,13 @@ namespace NEXO {
                 return this.intgrtdPrtFlgField;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.intgrtdPrtFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - IntgrtdPrtFlgSpecified = true
                 this.IntgrtdPrtFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1460,7 +1508,6 @@ namespace NEXO {
                 return this.intgrtdPrtFlgFieldSpecified;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
                 this.intgrtdPrtFlgFieldSpecified = value;
             }
         }
@@ -1470,9 +1517,13 @@ namespace NEXO {
                 return this.reqrdSgntrFlgField;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.reqrdSgntrFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - ReqrdSgntrFlgSpecified = true
                 this.ReqrdSgntrFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1482,125 +1533,140 @@ namespace NEXO {
                 return this.reqrdSgntrFlgFieldSpecified;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
                 this.reqrdSgntrFlgFieldSpecified = value;
             }
         }
         /// <remarks/>
         public ActionMessage6 OutptCntt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.outptCnttField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.outptCnttField;
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = true;
-                this.outptCnttField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.outptCnttField = new ActionMessage6();
+                }
+                else {
+                    this.outptCnttField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDevicePrintRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDevicePrintRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.OutptCntt.XSD_HasBeenSetProperty)
+                            || this.IntgrtdPrtFlgSpecified)
+                            || this.ReqrdSgntrFlgSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDevicePrintRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.OutptCntt = null;
+                    this.IntgrtdPrtFlgSpecified = false;
+                    this.ReqrdSgntrFlgSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("8e67b757-d2f4-47ae-bbb1-6a0bc7d4c1c0")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDevicePrintRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        DocumentType7Code DocQlfr {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        ResponseMode1Code RspnMd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        bool IntgrtdPrtFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        bool IntgrtdPrtFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        bool ReqrdSgntrFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        bool ReqrdSgntrFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        ActionMessage6 OutptCntt {
-            get;
-            set;
-        }
-        [DispId(15)]
-        bool xsdDevicePrintRequest1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.OutptCntt != null)) {
+                    this.OutptCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ae4863f4-32eb-4a3b-92bd-78885e7c486e")]
+    [System.Runtime.InteropServices.GuidAttribute("5002fe40-ee6a-4fc7-b7f3-35016ef2b567")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceRequest2 : IDeviceRequest2 {
-        internal CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
-        internal CardPaymentContext27 cntxtField = new CardPaymentContext27();
-        internal RetailerService8Code svcCnttField = new RetailerService8Code();
-        internal ActionMessage6[] dispReqField = new ActionMessage6[0];
-        internal DeviceInputRequest1 inptReqField = new DeviceInputRequest1();
-        internal DevicePrintRequest1 prtReqField = new DevicePrintRequest1();
-        internal DevicePlaySoundRequest1 playSoundReqField = new DevicePlaySoundRequest1();
-        internal DeviceSecureInputRequest1 scrInptReqField = new DeviceSecureInputRequest1();
-        internal DeviceInitialisationCardReaderRequest1 initlstnCardRdrReqField = new DeviceInitialisationCardReaderRequest1();
-        internal DeviceSendApplicationProtocolDataUnitCardReaderRequest1 cardRdrAPDUReqField = new DeviceSendApplicationProtocolDataUnitCardReaderRequest1();
-        internal DevicePoweroffCardReaderRequest1 pwrOffCardRdrReqField = new DevicePoweroffCardReaderRequest1();
-        internal DeviceTransmitMessageRequest1 trnsmssnReqField = new DeviceTransmitMessageRequest1();
-        internal DeviceInputNotification1 inptNtfctnField = new DeviceInputNotification1();
-        internal SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
-        internal bool xsdDeviceRequest2InitFlagField = false;
+        private CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
+        private CardPaymentContext27 cntxtField = new CardPaymentContext27();
+        private RetailerService8Code svcCnttField;
+        private ActionMessage6[] dispReqField = new ActionMessage6[0];
+        private DeviceInputRequest1 inptReqField = new DeviceInputRequest1();
+        private DevicePrintRequest1 prtReqField = new DevicePrintRequest1();
+        private DevicePlaySoundRequest1 playSoundReqField = new DevicePlaySoundRequest1();
+        private DeviceSecureInputRequest1 scrInptReqField = new DeviceSecureInputRequest1();
+        private DeviceInitialisationCardReaderRequest1 initlstnCardRdrReqField = new DeviceInitialisationCardReaderRequest1();
+        private DeviceSendApplicationProtocolDataUnitCardReaderRequest1 cardRdrAPDUReqField = new DeviceSendApplicationProtocolDataUnitCardReaderRequest1();
+        private DevicePoweroffCardReaderRequest1 pwrOffCardRdrReqField = new DevicePoweroffCardReaderRequest1();
+        private DeviceTransmitMessageRequest1 trnsmssnReqField = new DeviceTransmitMessageRequest1();
+        private DeviceInputNotification1 inptNtfctnField = new DeviceInputNotification1();
+        private SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public CardPaymentEnvironment73 Envt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.envtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.envtField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.envtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.envtField = new CardPaymentEnvironment73();
+                }
+                else {
+                    this.envtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public CardPaymentContext27 Cntxt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.cntxtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.cntxtField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.cntxtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.cntxtField = new CardPaymentContext27();
+                }
+                else {
+                    this.cntxtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1609,7 +1675,9 @@ namespace NEXO {
                 return this.svcCnttField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.svcCnttField = value;
             }
         }
@@ -1617,140 +1685,344 @@ namespace NEXO {
         [System.Xml.Serialization.XmlArrayItemAttribute("DispOutpt", IsNullable=false)]
         public ActionMessage6[] DispReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.dispReqField == null)
                             || (this.dispReqField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.dispReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.dispReqField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.dispReqField = new ActionMessage6[0];
+                }
+                else {
+                    this.dispReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceInputRequest1 InptReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.inptReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.inptReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.inptReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.inptReqField = new DeviceInputRequest1();
+                }
+                else {
+                    this.inptReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DevicePrintRequest1 PrtReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.prtReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.prtReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.prtReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.prtReqField = new DevicePrintRequest1();
+                }
+                else {
+                    this.prtReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DevicePlaySoundRequest1 PlaySoundReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.playSoundReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.playSoundReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.playSoundReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.playSoundReqField = new DevicePlaySoundRequest1();
+                }
+                else {
+                    this.playSoundReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceSecureInputRequest1 ScrInptReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.scrInptReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.scrInptReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.scrInptReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.scrInptReqField = new DeviceSecureInputRequest1();
+                }
+                else {
+                    this.scrInptReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceInitialisationCardReaderRequest1 InitlstnCardRdrReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.initlstnCardRdrReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.initlstnCardRdrReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.initlstnCardRdrReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.initlstnCardRdrReqField = new DeviceInitialisationCardReaderRequest1();
+                }
+                else {
+                    this.initlstnCardRdrReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceSendApplicationProtocolDataUnitCardReaderRequest1 CardRdrAPDUReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.cardRdrAPDUReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.cardRdrAPDUReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.cardRdrAPDUReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.cardRdrAPDUReqField = new DeviceSendApplicationProtocolDataUnitCardReaderRequest1();
+                }
+                else {
+                    this.cardRdrAPDUReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DevicePoweroffCardReaderRequest1 PwrOffCardRdrReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.pwrOffCardRdrReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.pwrOffCardRdrReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.pwrOffCardRdrReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.pwrOffCardRdrReqField = new DevicePoweroffCardReaderRequest1();
+                }
+                else {
+                    this.pwrOffCardRdrReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceTransmitMessageRequest1 TrnsmssnReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.trnsmssnReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.trnsmssnReqField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.trnsmssnReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.trnsmssnReqField = new DeviceTransmitMessageRequest1();
+                }
+                else {
+                    this.trnsmssnReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public DeviceInputNotification1 InptNtfctn {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.inptNtfctnField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.inptNtfctnField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.inptNtfctnField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.inptNtfctnField = new DeviceInputNotification1();
+                }
+                else {
+                    this.inptNtfctnField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SplmtryData")]
         public SupplementaryData1[] SplmtryData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.splmtryDataField == null)
                             || (this.splmtryDataField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.splmtryDataField;
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = true;
-                this.splmtryDataField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.splmtryDataField = new SupplementaryData1[0];
+                }
+                else {
+                    this.splmtryDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceRequest2InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceRequest2InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((((((((((this.XSD_HasBeenSetField || this.Envt.XSD_HasBeenSetProperty)
+                            || this.Cntxt.XSD_HasBeenSetProperty)
+                            || this.InptReq.XSD_HasBeenSetProperty)
+                            || this.PrtReq.XSD_HasBeenSetProperty)
+                            || this.PlaySoundReq.XSD_HasBeenSetProperty)
+                            || this.ScrInptReq.XSD_HasBeenSetProperty)
+                            || this.InitlstnCardRdrReq.XSD_HasBeenSetProperty)
+                            || this.CardRdrAPDUReq.XSD_HasBeenSetProperty)
+                            || this.PwrOffCardRdrReq.XSD_HasBeenSetProperty)
+                            || this.TrnsmssnReq.XSD_HasBeenSetProperty)
+                            || this.InptNtfctn.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceRequest2InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Envt = null;
+                    this.Cntxt = null;
+                    this.InptReq = null;
+                    this.PrtReq = null;
+                    this.PlaySoundReq = null;
+                    this.ScrInptReq = null;
+                    this.InitlstnCardRdrReq = null;
+                    this.CardRdrAPDUReq = null;
+                    this.PwrOffCardRdrReq = null;
+                    this.TrnsmssnReq = null;
+                    this.InptNtfctn = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Envt != null)) {
+                    this.Envt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.Cntxt != null)) {
+                    this.Cntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.InptReq != null)) {
+                    this.InptReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.PrtReq != null)) {
+                    this.PrtReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.PlaySoundReq != null)) {
+                    this.PlaySoundReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.ScrInptReq != null)) {
+                    this.ScrInptReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.InitlstnCardRdrReq != null)) {
+                    this.InitlstnCardRdrReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.CardRdrAPDUReq != null)) {
+                    this.CardRdrAPDUReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.PwrOffCardRdrReq != null)) {
+                    this.PwrOffCardRdrReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.TrnsmssnReq != null)) {
+                    this.TrnsmssnReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.InptNtfctn != null)) {
+                    this.InptNtfctn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int DispReqSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.dispReqField == null)) {
                 return 0;
             }
             else {
                 return this.dispReqField.Length;
             }
+            // END ADDED BY XSD
         }
         public ActionMessage6 DispReqGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.dispReqField == default(ActionMessage6[]))) {
                     return default(ActionMessage6);
@@ -1768,8 +2040,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(ActionMessage6);
             }
+            // END ADDED BY XSD
         }
         public bool DispReqSetItem(int index, ActionMessage6 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.dispReqField == default(ActionMessage6[]))) {
                     return false;
@@ -1782,8 +2056,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DispReqAddItem(ActionMessage6 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.dispReqField == default(ActionMessage6[]))) {
                     return false;
@@ -1802,8 +2078,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DispReqRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.dispReqField == default(ActionMessage6[]))) {
                     return false;
@@ -1829,16 +2107,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int SplmtryDataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.splmtryDataField == null)) {
                 return 0;
             }
             else {
                 return this.splmtryDataField.Length;
             }
+            // END ADDED BY XSD
         }
         public SupplementaryData1 SplmtryDataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return default(SupplementaryData1);
@@ -1856,8 +2138,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(SupplementaryData1);
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataSetItem(int index, SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -1870,8 +2154,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataAddItem(SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -1890,8 +2176,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -1917,124 +2205,11 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("fda5decd-ddaa-4e17-b72c-1633342f9e68")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceRequest2 {
-        /// <remarks/>
-        [DispId(1)]
-        CardPaymentEnvironment73 Envt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        CardPaymentContext27 Cntxt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        RetailerService8Code SvcCntt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        ActionMessage6[] DispReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        DeviceInputRequest1 InptReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        DevicePrintRequest1 PrtReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        DevicePlaySoundRequest1 PlaySoundReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(15)]
-        DeviceSecureInputRequest1 ScrInptReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(17)]
-        DeviceInitialisationCardReaderRequest1 InitlstnCardRdrReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(19)]
-        DeviceSendApplicationProtocolDataUnitCardReaderRequest1 CardRdrAPDUReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(21)]
-        DevicePoweroffCardReaderRequest1 PwrOffCardRdrReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(23)]
-        DeviceTransmitMessageRequest1 TrnsmssnReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(25)]
-        DeviceInputNotification1 InptNtfctn {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(27)]
-        SupplementaryData1[] SplmtryData {
-            get;
-            set;
-        }
-        [DispId(29)]
-        bool xsdDeviceRequest2InitFlag {
-            get;
-            set;
-        }
-        [DispId(30)]
-        int DispReqSize();
-        [DispId(31)]
-        ActionMessage6 DispReqGetItem(int index);
-        [DispId(32)]
-        bool DispReqSetItem(int index, ActionMessage6 value);
-        [DispId(33)]
-        bool DispReqAddItem(ActionMessage6 value);
-        [DispId(34)]
-        bool DispReqRemoveItem(int index);
-        [DispId(35)]
-        int SplmtryDataSize();
-        [DispId(36)]
-        SupplementaryData1 SplmtryDataGetItem(int index);
-        [DispId(37)]
-        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
-        [DispId(38)]
-        bool SplmtryDataAddItem(SupplementaryData1 value);
-        [DispId(39)]
-        bool SplmtryDataRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -2062,30 +2237,33 @@ namespace NEXO {
         DINO,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8b182bf5-9d81-41e9-bcc5-98477a133b84")]
+    [System.Runtime.InteropServices.GuidAttribute("4c4d25bb-e0d1-4236-aa60-f78d29480a4e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceSecureInputRequest1 : IDeviceSecureInputRequest1 {
-        internal PINRequestType1Code pINReqTpField = new PINRequestType1Code();
-        internal string pINVrfctnMtdField;
-        internal double maxWtgTmField;
-        internal bool maxWtgTmFieldSpecified;
-        internal bool beepKeyFlgField;
-        internal bool beepKeyFlgFieldSpecified;
-        internal OnLinePIN6 crdhldrPINField = new OnLinePIN6();
-        internal bool xsdDeviceSecureInputRequest1InitFlagField = false;
+        private PINRequestType1Code pINReqTpField;
+        private string pINVrfctnMtdField;
+        private double maxWtgTmField;
+        private bool maxWtgTmFieldSpecified;
+        private bool beepKeyFlgField;
+        private bool beepKeyFlgFieldSpecified;
+        private OnLinePIN6 crdhldrPINField = new OnLinePIN6();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public PINRequestType1Code PINReqTp {
             get {
                 return this.pINReqTpField;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pINReqTpField = value;
             }
         }
@@ -2095,7 +2273,9 @@ namespace NEXO {
                 return this.pINVrfctnMtdField;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pINVrfctnMtdField = value;
             }
         }
@@ -2105,9 +2285,13 @@ namespace NEXO {
                 return this.maxWtgTmField;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.maxWtgTmField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - MaxWtgTmSpecified = true
                 this.MaxWtgTmSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -2117,7 +2301,6 @@ namespace NEXO {
                 return this.maxWtgTmFieldSpecified;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
                 this.maxWtgTmFieldSpecified = value;
             }
         }
@@ -2127,9 +2310,13 @@ namespace NEXO {
                 return this.beepKeyFlgField;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.beepKeyFlgField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - BeepKeyFlgSpecified = true
                 this.BeepKeyFlgSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -2139,84 +2326,74 @@ namespace NEXO {
                 return this.beepKeyFlgFieldSpecified;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
                 this.beepKeyFlgFieldSpecified = value;
             }
         }
         /// <remarks/>
         public OnLinePIN6 CrdhldrPIN {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.crdhldrPINField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.crdhldrPINField;
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = true;
-                this.crdhldrPINField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.crdhldrPINField = new OnLinePIN6();
+                }
+                else {
+                    this.crdhldrPINField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceSecureInputRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceSecureInputRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.CrdhldrPIN.XSD_HasBeenSetProperty)
+                            || this.MaxWtgTmSpecified)
+                            || this.BeepKeyFlgSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceSecureInputRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.CrdhldrPIN = null;
+                    this.MaxWtgTmSpecified = false;
+                    this.BeepKeyFlgSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("78f95199-c689-438d-9a41-a0d94a5ca31d")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceSecureInputRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        PINRequestType1Code PINReqTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string PINVrfctnMtd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        double MaxWtgTm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        bool MaxWtgTmSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        bool BeepKeyFlg {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        bool BeepKeyFlgSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        OnLinePIN6 CrdhldrPIN {
-            get;
-            set;
-        }
-        [DispId(15)]
-        bool xsdDeviceSecureInputRequest1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.CrdhldrPIN != null)) {
+                    this.CrdhldrPIN.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=false)]
@@ -2230,34 +2407,39 @@ namespace NEXO {
         PIVO,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("22607d28-dc14-4e04-93bf-44e67ff40940")]
+    [System.Runtime.InteropServices.GuidAttribute("9f7f3e64-b739-4533-be4e-3705b9262aec")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceSendApplicationProtocolDataUnitCardReaderRequest1 : IDeviceSendApplicationProtocolDataUnitCardReaderRequest1 {
-        internal byte[] clssField = new byte[0];
-        internal byte[] instrField = new byte[0];
-        internal byte[] param1Field = new byte[0];
-        internal byte[] param2Field = new byte[0];
-        internal byte[] dataField = new byte[0];
-        internal byte[] xpctdLngthField = new byte[0];
-        internal bool xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = false;
+        private byte[] clssField = new byte[0];
+        private byte[] instrField = new byte[0];
+        private byte[] param1Field = new byte[0];
+        private byte[] param2Field = new byte[0];
+        private byte[] dataField = new byte[0];
+        private byte[] xpctdLngthField = new byte[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] Clss {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.clssField == null)
                             || (this.clssField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.clssField;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.clssField = value;
             }
         }
@@ -2265,14 +2447,18 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] Instr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.instrField == null)
                             || (this.instrField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.instrField;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.instrField = value;
             }
         }
@@ -2280,14 +2466,18 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] Param1 {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.param1Field == null)
                             || (this.param1Field.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.param1Field;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.param1Field = value;
             }
         }
@@ -2295,14 +2485,18 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] Param2 {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.param2Field == null)
                             || (this.param2Field.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.param2Field;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.param2Field = value;
             }
         }
@@ -2310,14 +2504,18 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] Data {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.dataField == null)
                             || (this.dataField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.dataField;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.dataField = value;
             }
         }
@@ -2325,35 +2523,65 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] XpctdLngth {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.xpctdLngthField == null)
                             || (this.xpctdLngthField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.xpctdLngthField;
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.xpctdLngthField = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
             }
         }
         public int ClssSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.clssField == null)) {
                 return 0;
             }
             else {
                 return this.clssField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte ClssGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.clssField == default(byte[]))) {
                     return default(byte);
@@ -2371,8 +2599,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool ClssSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.clssField == default(byte[]))) {
                     return false;
@@ -2385,8 +2615,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool ClssAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.clssField == default(byte[]))) {
                     return false;
@@ -2405,8 +2637,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool ClssRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.clssField == default(byte[]))) {
                     return false;
@@ -2432,16 +2666,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int InstrSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.instrField == null)) {
                 return 0;
             }
             else {
                 return this.instrField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte InstrGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.instrField == default(byte[]))) {
                     return default(byte);
@@ -2459,8 +2697,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool InstrSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.instrField == default(byte[]))) {
                     return false;
@@ -2473,8 +2713,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool InstrAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.instrField == default(byte[]))) {
                     return false;
@@ -2493,8 +2735,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool InstrRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.instrField == default(byte[]))) {
                     return false;
@@ -2520,16 +2764,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int Param1Size() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.param1Field == null)) {
                 return 0;
             }
             else {
                 return this.param1Field.Length;
             }
+            // END ADDED BY XSD
         }
         public byte Param1GetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.param1Field == default(byte[]))) {
                     return default(byte);
@@ -2547,8 +2795,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool Param1SetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.param1Field == default(byte[]))) {
                     return false;
@@ -2561,8 +2811,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool Param1AddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.param1Field == default(byte[]))) {
                     return false;
@@ -2581,8 +2833,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool Param1RemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.param1Field == default(byte[]))) {
                     return false;
@@ -2608,16 +2862,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int Param2Size() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.param2Field == null)) {
                 return 0;
             }
             else {
                 return this.param2Field.Length;
             }
+            // END ADDED BY XSD
         }
         public byte Param2GetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.param2Field == default(byte[]))) {
                     return default(byte);
@@ -2635,8 +2893,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool Param2SetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.param2Field == default(byte[]))) {
                     return false;
@@ -2649,8 +2909,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool Param2AddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.param2Field == default(byte[]))) {
                     return false;
@@ -2669,8 +2931,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool Param2RemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.param2Field == default(byte[]))) {
                     return false;
@@ -2696,16 +2960,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int DataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.dataField == null)) {
                 return 0;
             }
             else {
                 return this.dataField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte DataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.dataField == default(byte[]))) {
                     return default(byte);
@@ -2723,8 +2991,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool DataSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.dataField == default(byte[]))) {
                     return false;
@@ -2737,8 +3007,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DataAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.dataField == default(byte[]))) {
                     return false;
@@ -2757,8 +3029,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool DataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.dataField == default(byte[]))) {
                     return false;
@@ -2784,16 +3058,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int XpctdLngthSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.xpctdLngthField == null)) {
                 return 0;
             }
             else {
                 return this.xpctdLngthField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte XpctdLngthGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.xpctdLngthField == default(byte[]))) {
                     return default(byte);
@@ -2811,8 +3089,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool XpctdLngthSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.xpctdLngthField == default(byte[]))) {
                     return false;
@@ -2825,8 +3105,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool XpctdLngthAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.xpctdLngthField == default(byte[]))) {
                     return false;
@@ -2845,8 +3127,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool XpctdLngthRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.xpctdLngthField == default(byte[]))) {
                     return false;
@@ -2872,138 +3156,46 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("9695da15-acbc-4f6b-835b-7f9414511a6d")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceSendApplicationProtocolDataUnitCardReaderRequest1 {
-        /// <remarks/>
-        [DispId(1)]
-        byte[] Clss {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        byte[] Instr {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        byte[] Param1 {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        byte[] Param2 {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        byte[] Data {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        byte[] XpctdLngth {
-            get;
-            set;
-        }
-        [DispId(13)]
-        bool xsdDeviceSendApplicationProtocolDataUnitCardReaderRequest1InitFlag {
-            get;
-            set;
-        }
-        [DispId(14)]
-        int ClssSize();
-        [DispId(15)]
-        byte ClssGetItem(int index);
-        [DispId(16)]
-        bool ClssSetItem(int index, byte value);
-        [DispId(17)]
-        bool ClssAddItem(byte value);
-        [DispId(18)]
-        bool ClssRemoveItem(int index);
-        [DispId(19)]
-        int InstrSize();
-        [DispId(20)]
-        byte InstrGetItem(int index);
-        [DispId(21)]
-        bool InstrSetItem(int index, byte value);
-        [DispId(22)]
-        bool InstrAddItem(byte value);
-        [DispId(23)]
-        bool InstrRemoveItem(int index);
-        [DispId(24)]
-        int Param1Size();
-        [DispId(25)]
-        byte Param1GetItem(int index);
-        [DispId(26)]
-        bool Param1SetItem(int index, byte value);
-        [DispId(27)]
-        bool Param1AddItem(byte value);
-        [DispId(28)]
-        bool Param1RemoveItem(int index);
-        [DispId(29)]
-        int Param2Size();
-        [DispId(30)]
-        byte Param2GetItem(int index);
-        [DispId(31)]
-        bool Param2SetItem(int index, byte value);
-        [DispId(32)]
-        bool Param2AddItem(byte value);
-        [DispId(33)]
-        bool Param2RemoveItem(int index);
-        [DispId(34)]
-        int DataSize();
-        [DispId(35)]
-        byte DataGetItem(int index);
-        [DispId(36)]
-        bool DataSetItem(int index, byte value);
-        [DispId(37)]
-        bool DataAddItem(byte value);
-        [DispId(38)]
-        bool DataRemoveItem(int index);
-        [DispId(39)]
-        int XpctdLngthSize();
-        [DispId(40)]
-        byte XpctdLngthGetItem(int index);
-        [DispId(41)]
-        bool XpctdLngthSetItem(int index, byte value);
-        [DispId(42)]
-        bool XpctdLngthAddItem(byte value);
-        [DispId(43)]
-        bool XpctdLngthRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("83bcc071-81a7-4450-8b50-79f9a83e1553")]
+    [System.Runtime.InteropServices.GuidAttribute("57c0f6d9-7a62-4dfa-831f-c75d76616c66")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DeviceTransmitMessageRequest1 : IDeviceTransmitMessageRequest1 {
-        internal NetworkParameters5 dstnAdrField = new NetworkParameters5();
-        internal double maxTrnsmssnTmField;
-        internal double maxWtgTmField;
-        internal bool maxWtgTmFieldSpecified;
-        internal byte[] msgToSndField = new byte[0];
-        internal bool xsdDeviceTransmitMessageRequest1InitFlagField = false;
+        private NetworkParameters5 dstnAdrField = new NetworkParameters5();
+        private double maxTrnsmssnTmField;
+        private double maxWtgTmField;
+        private bool maxWtgTmFieldSpecified;
+        private byte[] msgToSndField = new byte[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public NetworkParameters5 DstnAdr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dstnAdrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dstnAdrField;
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = true;
-                this.dstnAdrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dstnAdrField = new NetworkParameters5();
+                }
+                else {
+                    this.dstnAdrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -3012,7 +3204,9 @@ namespace NEXO {
                 return this.maxTrnsmssnTmField;
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.maxTrnsmssnTmField = value;
             }
         }
@@ -3022,9 +3216,13 @@ namespace NEXO {
                 return this.maxWtgTmField;
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.maxWtgTmField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - MaxWtgTmSpecified = true
                 this.MaxWtgTmSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -3034,7 +3232,6 @@ namespace NEXO {
                 return this.maxWtgTmFieldSpecified;
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = true;
                 this.maxWtgTmFieldSpecified = value;
             }
         }
@@ -3042,35 +3239,71 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] MsgToSnd {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.msgToSndField == null)
                             || (this.msgToSndField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.msgToSndField;
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.msgToSndField = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdDeviceTransmitMessageRequest1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdDeviceTransmitMessageRequest1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((this.XSD_HasBeenSetField || this.DstnAdr.XSD_HasBeenSetProperty)
+                            || this.MaxWtgTmSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdDeviceTransmitMessageRequest1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DstnAdr = null;
+                    this.MaxWtgTmSpecified = false;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DstnAdr != null)) {
+                    this.DstnAdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int MsgToSndSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.msgToSndField == null)) {
                 return 0;
             }
             else {
                 return this.msgToSndField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte MsgToSndGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.msgToSndField == default(byte[]))) {
                     return default(byte);
@@ -3088,8 +3321,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool MsgToSndSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.msgToSndField == default(byte[]))) {
                     return false;
@@ -3102,8 +3337,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool MsgToSndAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.msgToSndField == default(byte[]))) {
                     return false;
@@ -3122,8 +3359,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool MsgToSndRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.msgToSndField == default(byte[]))) {
                     return false;
@@ -3149,26 +3388,199 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("75317585-c4eb-465e-88ce-b89fa1657065")]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("82e39196-672c-4911-96ff-ea39a976f57e")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SaleToPOIDeviceRequestV01 : ISaleToPOIDeviceRequestV01 {
+        private Header37 hdrField = new Header37();
+        private DeviceRequest2 dvcReqField = new DeviceRequest2();
+        private ContentInformationType18 sctyTrlrField = new ContentInformationType18();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
+        /// <remarks/>
+        public Header37 Hdr {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.hdrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.hdrField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.hdrField = new Header37();
+                }
+                else {
+                    this.hdrField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        public DeviceRequest2 DvcReq {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dvcReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.dvcReqField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dvcReqField = new DeviceRequest2();
+                }
+                else {
+                    this.dvcReqField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        public ContentInformationType18 SctyTrlr {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.sctyTrlrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.sctyTrlrField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.sctyTrlrField = new ContentInformationType18();
+                }
+                else {
+                    this.sctyTrlrField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool XSD_HasBeenSetProperty {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.Hdr.XSD_HasBeenSetProperty)
+                            || this.DvcReq.XSD_HasBeenSetProperty)
+                            || this.SctyTrlr.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Hdr = null;
+                    this.DvcReq = null;
+                    this.SctyTrlr = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Hdr != null)) {
+                    this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.DvcReq != null)) {
+                    this.DvcReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.SctyTrlr != null)) {
+                    this.SctyTrlr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("0a2dd7a3-6ef8-420a-8f25-5a7867f2f238")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDeviceTransmitMessageRequest1 {
+    public interface IDeviceDisplayRequest1 {
         /// <remarks/>
         [DispId(1)]
-        NetworkParameters5 DstnAdr {
+        ActionMessage6[] DispOutpt {
+            get;
+            set;
+        }
+        [DispId(2)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(3)]
+        int DispOutptSize();
+        [DispId(4)]
+        ActionMessage6 DispOutptGetItem(int index);
+        [DispId(5)]
+        bool DispOutptSetItem(int index, ActionMessage6 value);
+        [DispId(6)]
+        bool DispOutptAddItem(ActionMessage6 value);
+        [DispId(7)]
+        bool DispOutptRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("04c875b5-0e4e-48c7-9a64-8d69831e38a2")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceInitialisationCardReaderRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        bool WarmRstFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        bool WarmRstFlgSpecified {
             get;
             set;
         }
         /// <remarks/>
         [DispId(3)]
-        double MaxTrnsmssnTm {
+        CardDataReading6Code[] ForceNtryMd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool LeavCardFlg {
             get;
             set;
         }
         /// <remarks/>
         [DispId(5)]
+        bool LeavCardFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
         double MaxWtgTm {
             get;
             set;
@@ -3180,82 +3592,702 @@ namespace NEXO {
             set;
         }
         /// <remarks/>
+        [DispId(8)]
+        ActionMessage6 DispOutpt {
+            get;
+            set;
+        }
         [DispId(9)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(10)]
+        int ForceNtryMdSize();
+        [DispId(11)]
+        CardDataReading6Code ForceNtryMdGetItem(int index);
+        [DispId(12)]
+        bool ForceNtryMdSetItem(int index, CardDataReading6Code value);
+        [DispId(13)]
+        bool ForceNtryMdAddItem(CardDataReading6Code value);
+        [DispId(14)]
+        bool ForceNtryMdRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("b9ca47ac-ed7a-4445-b4e1-90be9d6eb886")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceInputNotification1 {
+        /// <remarks/>
+        [DispId(1)]
+        string XchgId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        ActionMessage6 OutptCntt {
+            get;
+            set;
+        }
+        [DispId(3)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("b8f59d9d-de73-47fc-a4dc-3f76cd2d05ce")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceInputRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        ActionMessage6 DispOutpt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        InputData1 InptData {
+            get;
+            set;
+        }
+        [DispId(3)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("7cf9531d-9960-49d8-994c-8b0e1e620afe")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IInputData1 {
+        /// <remarks/>
+        [DispId(1)]
+        SaleCapabilities2Code DvcTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        InformationQualify1Code InfQlfr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        InputCommand1Code InptCmd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool NtfyCardInptFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        double MaxInptTm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        bool MaxInptTmSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        ActionMessage6 InptTxt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        bool ImdtRspnFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(9)]
+        bool ImdtRspnFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(10)]
+        bool WaitUsrVldtnFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(11)]
+        bool WaitUsrVldtnFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(12)]
+        bool BeepKeyFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(13)]
+        bool BeepKeyFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(14)]
+        bool GblCrrctnFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(15)]
+        bool GblCrrctnFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(16)]
+        bool DsblCclFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(17)]
+        bool DsblCclFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(18)]
+        bool DsblCrrctFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(19)]
+        bool DsblCrrctFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(20)]
+        bool DsblVldFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(21)]
+        bool DsblVldFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(22)]
+        bool MenuBckFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(23)]
+        bool MenuBckFlgSpecified {
+            get;
+            set;
+        }
+        [DispId(24)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("7f8cf231-5d82-47fd-9ba4-2c40e066b7c6")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDevicePlaySoundRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        ResponseMode1Code RspnMd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        bool RspnMdSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        SoundAction1Code SoundActn {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        double SoundVol {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        bool SoundVolSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        SoundContent1 SoundCntt {
+            get;
+            set;
+        }
+        [DispId(7)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("7dcfdf3c-1381-4115-94cc-63d8c2d4ac1b")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISoundContent1 {
+        /// <remarks/>
+        [DispId(1)]
+        SoundFormat1Code SoundFrmt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string Lang {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string SoundRef {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Txt {
+            get;
+            set;
+        }
+        [DispId(5)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("f0027c67-8fb6-4915-a7eb-df02b55be399")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDevicePoweroffCardReaderRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        double PwrOffMaxWtgTm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        bool PwrOffMaxWtgTmSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        ActionMessage6 DispOutpt {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("b1e32f68-8255-4ed4-aaf6-59a693c68429")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDevicePrintRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        DocumentType7Code DocQlfr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        ResponseMode1Code RspnMd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        bool IntgrtdPrtFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool IntgrtdPrtFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        bool ReqrdSgntrFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        bool ReqrdSgntrFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        ActionMessage6 OutptCntt {
+            get;
+            set;
+        }
+        [DispId(8)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("5dbe8e65-f4f8-4032-83fd-db292a5e81ba")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceRequest2 {
+        /// <remarks/>
+        [DispId(1)]
+        CardPaymentEnvironment73 Envt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        CardPaymentContext27 Cntxt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        RetailerService8Code SvcCntt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        ActionMessage6[] DispReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        DeviceInputRequest1 InptReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        DevicePrintRequest1 PrtReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        DevicePlaySoundRequest1 PlaySoundReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        DeviceSecureInputRequest1 ScrInptReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(9)]
+        DeviceInitialisationCardReaderRequest1 InitlstnCardRdrReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(10)]
+        DeviceSendApplicationProtocolDataUnitCardReaderRequest1 CardRdrAPDUReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(11)]
+        DevicePoweroffCardReaderRequest1 PwrOffCardRdrReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(12)]
+        DeviceTransmitMessageRequest1 TrnsmssnReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(13)]
+        DeviceInputNotification1 InptNtfctn {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(14)]
+        SupplementaryData1[] SplmtryData {
+            get;
+            set;
+        }
+        [DispId(15)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(16)]
+        int DispReqSize();
+        [DispId(17)]
+        ActionMessage6 DispReqGetItem(int index);
+        [DispId(18)]
+        bool DispReqSetItem(int index, ActionMessage6 value);
+        [DispId(19)]
+        bool DispReqAddItem(ActionMessage6 value);
+        [DispId(20)]
+        bool DispReqRemoveItem(int index);
+        [DispId(21)]
+        int SplmtryDataSize();
+        [DispId(22)]
+        SupplementaryData1 SplmtryDataGetItem(int index);
+        [DispId(23)]
+        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
+        [DispId(24)]
+        bool SplmtryDataAddItem(SupplementaryData1 value);
+        [DispId(25)]
+        bool SplmtryDataRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("0caba8f8-6ff5-431d-9e99-d54ecf48121b")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceSecureInputRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        PINRequestType1Code PINReqTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string PINVrfctnMtd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        double MaxWtgTm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool MaxWtgTmSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        bool BeepKeyFlg {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        bool BeepKeyFlgSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        OnLinePIN6 CrdhldrPIN {
+            get;
+            set;
+        }
+        [DispId(8)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("414a87cb-f344-4db9-afe3-f4420829f246")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceSendApplicationProtocolDataUnitCardReaderRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        byte[] Clss {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        byte[] Instr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        byte[] Param1 {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        byte[] Param2 {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        byte[] Data {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        byte[] XpctdLngth {
+            get;
+            set;
+        }
+        [DispId(7)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(8)]
+        int ClssSize();
+        [DispId(9)]
+        byte ClssGetItem(int index);
+        [DispId(10)]
+        bool ClssSetItem(int index, byte value);
+        [DispId(11)]
+        bool ClssAddItem(byte value);
+        [DispId(12)]
+        bool ClssRemoveItem(int index);
+        [DispId(13)]
+        int InstrSize();
+        [DispId(14)]
+        byte InstrGetItem(int index);
+        [DispId(15)]
+        bool InstrSetItem(int index, byte value);
+        [DispId(16)]
+        bool InstrAddItem(byte value);
+        [DispId(17)]
+        bool InstrRemoveItem(int index);
+        [DispId(18)]
+        int Param1Size();
+        [DispId(19)]
+        byte Param1GetItem(int index);
+        [DispId(20)]
+        bool Param1SetItem(int index, byte value);
+        [DispId(21)]
+        bool Param1AddItem(byte value);
+        [DispId(22)]
+        bool Param1RemoveItem(int index);
+        [DispId(23)]
+        int Param2Size();
+        [DispId(24)]
+        byte Param2GetItem(int index);
+        [DispId(25)]
+        bool Param2SetItem(int index, byte value);
+        [DispId(26)]
+        bool Param2AddItem(byte value);
+        [DispId(27)]
+        bool Param2RemoveItem(int index);
+        [DispId(28)]
+        int DataSize();
+        [DispId(29)]
+        byte DataGetItem(int index);
+        [DispId(30)]
+        bool DataSetItem(int index, byte value);
+        [DispId(31)]
+        bool DataAddItem(byte value);
+        [DispId(32)]
+        bool DataRemoveItem(int index);
+        [DispId(33)]
+        int XpctdLngthSize();
+        [DispId(34)]
+        byte XpctdLngthGetItem(int index);
+        [DispId(35)]
+        bool XpctdLngthSetItem(int index, byte value);
+        [DispId(36)]
+        bool XpctdLngthAddItem(byte value);
+        [DispId(37)]
+        bool XpctdLngthRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("aec57acd-476c-42d2-bb11-b96a4de7e228")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDeviceTransmitMessageRequest1 {
+        /// <remarks/>
+        [DispId(1)]
+        NetworkParameters5 DstnAdr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        double MaxTrnsmssnTm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        double MaxWtgTm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool MaxWtgTmSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
         byte[] MsgToSnd {
             get;
             set;
         }
-        [DispId(11)]
-        bool xsdDeviceTransmitMessageRequest1InitFlag {
+        [DispId(6)]
+        bool XSD_HasBeenSetProperty {
             get;
             set;
         }
-        [DispId(12)]
+        [DispId(7)]
         int MsgToSndSize();
-        [DispId(13)]
+        [DispId(8)]
         byte MsgToSndGetItem(int index);
-        [DispId(14)]
+        [DispId(9)]
         bool MsgToSndSetItem(int index, byte value);
-        [DispId(15)]
+        [DispId(10)]
         bool MsgToSndAddItem(byte value);
-        [DispId(16)]
+        [DispId(11)]
         bool MsgToSndRemoveItem(int index);
     }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.016.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("252d9d31-9b7f-4b98-a73f-82569598ea0a")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class SaleToPOIDeviceRequestV01 : ISaleToPOIDeviceRequestV01 {
-        internal Header37 hdrField = new Header37();
-        internal DeviceRequest2 dvcReqField = new DeviceRequest2();
-        internal ContentInformationType18 sctyTrlrField = new ContentInformationType18();
-        internal bool xsdSaleToPOIDeviceRequestV01InitFlagField = false;
-        /// <remarks/>
-        public Header37 Hdr {
-            get {
-                return this.hdrField;
-            }
-            set {
-                this.xsdSaleToPOIDeviceRequestV01InitFlagField = true;
-                this.hdrField = value;
-            }
-        }
-        /// <remarks/>
-        public DeviceRequest2 DvcReq {
-            get {
-                return this.dvcReqField;
-            }
-            set {
-                this.xsdSaleToPOIDeviceRequestV01InitFlagField = true;
-                this.dvcReqField = value;
-            }
-        }
-        /// <remarks/>
-        public ContentInformationType18 SctyTrlr {
-            get {
-                return this.sctyTrlrField;
-            }
-            set {
-                this.xsdSaleToPOIDeviceRequestV01InitFlagField = true;
-                this.sctyTrlrField = value;
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdSaleToPOIDeviceRequestV01InitFlag {
-            get {
-                return this.xsdSaleToPOIDeviceRequestV01InitFlagField;
-            }
-            set {
-                this.xsdSaleToPOIDeviceRequestV01InitFlagField = value;
-            }
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("f2235e79-308b-4cef-b29a-1946eaa3424d")]
+    [System.Runtime.InteropServices.GuidAttribute("83df4693-99b5-41ef-a226-3abeeaa7c60e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIDeviceRequestV01 {
@@ -3266,21 +4298,22 @@ namespace NEXO {
             set;
         }
         /// <remarks/>
-        [DispId(3)]
+        [DispId(2)]
         DeviceRequest2 DvcReq {
             get;
             set;
         }
         /// <remarks/>
-        [DispId(5)]
+        [DispId(3)]
         ContentInformationType18 SctyTrlr {
             get;
             set;
         }
-        [DispId(7)]
-        bool xsdSaleToPOIDeviceRequestV01InitFlag {
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
             get;
             set;
         }
     }
 }
+#endif

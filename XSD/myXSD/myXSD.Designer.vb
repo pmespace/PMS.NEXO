@@ -40,37 +40,36 @@ Partial Class myXSD
 		Me.panelOptions = New System.Windows.Forms.TableLayoutPanel()
 		Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
 		Me.enumVisible = New System.Windows.Forms.CheckBox()
-		Me.comInterface = New System.Windows.Forms.ComboBox()
 		Me.Label3 = New System.Windows.Forms.Label()
-		Me.addDispid = New System.Windows.Forms.CheckBox()
 		Me.createInterface = New System.Windows.Forms.CheckBox()
-		Me.classInterface = New System.Windows.Forms.ComboBox()
 		Me.classVisible = New System.Windows.Forms.CheckBox()
+		Me.panelInterface = New System.Windows.Forms.TableLayoutPanel()
+		Me.comInterface = New System.Windows.Forms.ComboBox()
+		Me.addDispid = New System.Windows.Forms.CheckBox()
+		Me.panelCOM = New System.Windows.Forms.TableLayoutPanel()
+		Me.classInterface = New System.Windows.Forms.ComboBox()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.Label5 = New System.Windows.Forms.Label()
+		Me.nmspace = New System.Windows.Forms.TextBox()
+		Me.Label1 = New System.Windows.Forms.Label()
 		Me.panelLanguage = New System.Windows.Forms.TableLayoutPanel()
 		Me.vb = New System.Windows.Forms.RadioButton()
 		Me.csharp = New System.Windows.Forms.RadioButton()
-		Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-		Me.Label1 = New System.Windows.Forms.Label()
-		Me.nmspace = New System.Windows.Forms.TextBox()
-		Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-		Me.efPreprocessor = New System.Windows.Forms.TextBox()
 		Me.Label4 = New System.Windows.Forms.Label()
+		Me.efPreprocessor = New System.Windows.Forms.TextBox()
+		Me.baseClass = New System.Windows.Forms.TextBox()
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.convertTypes = New System.Windows.Forms.CheckBox()
 		Me.panelTypes = New System.Windows.Forms.TableLayoutPanel()
-		Me.convertDateTime = New System.Windows.Forms.CheckBox()
 		Me.convertBoolean = New System.Windows.Forms.CheckBox()
 		Me.convertNumeric = New System.Windows.Forms.CheckBox()
+		Me.convertDateTime = New System.Windows.Forms.CheckBox()
 		Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Label2 = New System.Windows.Forms.Label()
 		Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
 		Me.cbNotations = New System.Windows.Forms.CheckBox()
 		Me.cbTypes = New System.Windows.Forms.CheckBox()
 		Me.cbElements = New System.Windows.Forms.CheckBox()
-		Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
-		Me.automaticArrays = New System.Windows.Forms.CheckBox()
-		Me.manageInit = New System.Windows.Forms.CheckBox()
 		Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
 		Me.arrayInitializer = New System.Windows.Forms.CheckBox()
 		Me.nullIfEmptyArray = New System.Windows.Forms.CheckBox()
@@ -85,15 +84,14 @@ Partial Class myXSD
 		Me.ContextMenuStrip1.SuspendLayout()
 		Me.panelOptions.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
+		Me.panelInterface.SuspendLayout()
+		Me.panelCOM.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.panelLanguage.SuspendLayout()
-		Me.TableLayoutPanel8.SuspendLayout()
-		Me.TableLayoutPanel9.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.panelTypes.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.TableLayoutPanel4.SuspendLayout()
-		Me.TableLayoutPanel5.SuspendLayout()
 		Me.TableLayoutPanel7.SuspendLayout()
 		Me.SuspendLayout()
 		'
@@ -115,7 +113,7 @@ Partial Class myXSD
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelMain.Size = New System.Drawing.Size(842, 376)
+		Me.panelMain.Size = New System.Drawing.Size(922, 417)
 		Me.panelMain.TabIndex = 0
 		'
 		'panelButtons
@@ -136,11 +134,11 @@ Partial Class myXSD
 		Me.panelButtons.Controls.Add(Me.pbSave, 3, 0)
 		Me.panelButtons.Controls.Add(Me.status, 0, 0)
 		Me.panelButtons.Controls.Add(Me.pbGenerateNFiles, 2, 0)
-		Me.panelButtons.Location = New System.Drawing.Point(3, 344)
+		Me.panelButtons.Location = New System.Drawing.Point(3, 385)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
 		Me.panelButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelButtons.Size = New System.Drawing.Size(836, 29)
+		Me.panelButtons.Size = New System.Drawing.Size(916, 29)
 		Me.panelButtons.TabIndex = 1
 		'
 		'pbClose
@@ -149,7 +147,7 @@ Partial Class myXSD
 		Me.pbClose.AutoSize = True
 		Me.pbClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 		Me.pbClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-		Me.pbClose.Location = New System.Drawing.Point(790, 3)
+		Me.pbClose.Location = New System.Drawing.Point(870, 3)
 		Me.pbClose.Name = "pbClose"
 		Me.pbClose.Size = New System.Drawing.Size(43, 23)
 		Me.pbClose.TabIndex = 3
@@ -161,7 +159,7 @@ Partial Class myXSD
 		Me.pbGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbGenerate.AutoSize = True
 		Me.pbGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbGenerate.Location = New System.Drawing.Point(523, 3)
+		Me.pbGenerate.Location = New System.Drawing.Point(603, 3)
 		Me.pbGenerate.Name = "pbGenerate"
 		Me.pbGenerate.Size = New System.Drawing.Size(86, 23)
 		Me.pbGenerate.TabIndex = 0
@@ -173,7 +171,7 @@ Partial Class myXSD
 		Me.pbSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSave.AutoSize = True
 		Me.pbSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSave.Location = New System.Drawing.Point(714, 3)
+		Me.pbSave.Location = New System.Drawing.Point(794, 3)
 		Me.pbSave.Name = "pbSave"
 		Me.pbSave.Size = New System.Drawing.Size(70, 23)
 		Me.pbSave.TabIndex = 2
@@ -187,7 +185,7 @@ Partial Class myXSD
 		Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.status.Location = New System.Drawing.Point(3, 6)
 		Me.status.Name = "status"
-		Me.status.Size = New System.Drawing.Size(514, 16)
+		Me.status.Size = New System.Drawing.Size(594, 16)
 		Me.status.TabIndex = 3
 		Me.status.Text = "Label4"
 		'
@@ -196,7 +194,7 @@ Partial Class myXSD
 		Me.pbGenerateNFiles.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbGenerateNFiles.AutoSize = True
 		Me.pbGenerateNFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbGenerateNFiles.Location = New System.Drawing.Point(615, 3)
+		Me.pbGenerateNFiles.Location = New System.Drawing.Point(695, 3)
 		Me.pbGenerateNFiles.Name = "pbGenerateNFiles"
 		Me.pbGenerateNFiles.Size = New System.Drawing.Size(93, 23)
 		Me.pbGenerateNFiles.TabIndex = 1
@@ -219,7 +217,7 @@ Partial Class myXSD
 		Me.panelSettings.RowCount = 2
 		Me.panelSettings.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelSettings.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelSettings.Size = New System.Drawing.Size(836, 214)
+		Me.panelSettings.Size = New System.Drawing.Size(916, 252)
 		Me.panelSettings.TabIndex = 0
 		'
 		'panelFiles
@@ -238,7 +236,7 @@ Partial Class myXSD
 		Me.panelFiles.Name = "panelFiles"
 		Me.panelFiles.RowCount = 1
 		Me.panelFiles.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelFiles.Size = New System.Drawing.Size(830, 67)
+		Me.panelFiles.Size = New System.Drawing.Size(910, 67)
 		Me.panelFiles.TabIndex = 0
 		'
 		'files
@@ -252,7 +250,7 @@ Partial Class myXSD
 		Me.files.Location = New System.Drawing.Point(84, 3)
 		Me.files.Name = "files"
 		Me.files.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-		Me.files.Size = New System.Drawing.Size(924, 61)
+		Me.files.Size = New System.Drawing.Size(938, 61)
 		Me.files.TabIndex = 1
 		'
 		'ContextMenuStrip1
@@ -290,22 +288,22 @@ Partial Class myXSD
 		Me.panelOptions.AutoSize = True
 		Me.panelOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 		Me.panelOptions.ColumnCount = 2
-		Me.panelOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.panelOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel6, 0, 1)
+		Me.panelOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.panelOptions.Controls.Add(Me.TableLayoutPanel6, 0, 2)
 		Me.panelOptions.Controls.Add(Me.TableLayoutPanel1, 0, 0)
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel2, 0, 2)
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel3, 1, 0)
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel5, 1, 3)
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel7, 0, 3)
+		Me.panelOptions.Controls.Add(Me.TableLayoutPanel2, 0, 3)
+		Me.panelOptions.Controls.Add(Me.TableLayoutPanel3, 0, 1)
+		Me.panelOptions.Controls.Add(Me.TableLayoutPanel7, 0, 4)
 		Me.panelOptions.Location = New System.Drawing.Point(3, 76)
 		Me.panelOptions.Name = "panelOptions"
-		Me.panelOptions.RowCount = 4
+		Me.panelOptions.RowCount = 5
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelOptions.Size = New System.Drawing.Size(830, 135)
+		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelOptions.Size = New System.Drawing.Size(910, 173)
 		Me.panelOptions.TabIndex = 1
 		'
 		'TableLayoutPanel6
@@ -316,38 +314,89 @@ Partial Class myXSD
 		Me.TableLayoutPanel6.AutoSize = True
 		Me.TableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 		Me.TableLayoutPanel6.ColumnCount = 7
-		Me.panelOptions.SetColumnSpan(Me.TableLayoutPanel6, 2)
 		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel6.Controls.Add(Me.enumVisible, 6, 0)
-		Me.TableLayoutPanel6.Controls.Add(Me.comInterface, 5, 0)
+		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel6.Controls.Add(Me.enumVisible, 5, 0)
 		Me.TableLayoutPanel6.Controls.Add(Me.Label3, 0, 0)
-		Me.TableLayoutPanel6.Controls.Add(Me.addDispid, 3, 0)
-		Me.TableLayoutPanel6.Controls.Add(Me.createInterface, 4, 0)
-		Me.TableLayoutPanel6.Controls.Add(Me.classInterface, 2, 0)
+		Me.TableLayoutPanel6.Controls.Add(Me.createInterface, 3, 0)
 		Me.TableLayoutPanel6.Controls.Add(Me.classVisible, 1, 0)
-		Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 41)
+		Me.TableLayoutPanel6.Controls.Add(Me.panelInterface, 4, 0)
+		Me.TableLayoutPanel6.Controls.Add(Me.panelCOM, 2, 0)
+		Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 73)
 		Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
 		Me.TableLayoutPanel6.RowCount = 1
 		Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel6.Size = New System.Drawing.Size(824, 27)
+		Me.TableLayoutPanel6.Size = New System.Drawing.Size(894, 33)
 		Me.TableLayoutPanel6.TabIndex = 2
 		'
 		'enumVisible
 		'
 		Me.enumVisible.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.enumVisible.AutoSize = True
-		Me.enumVisible.Location = New System.Drawing.Point(706, 5)
+		Me.enumVisible.Location = New System.Drawing.Point(776, 8)
 		Me.enumVisible.Name = "enumVisible"
 		Me.enumVisible.Size = New System.Drawing.Size(115, 17)
 		Me.enumVisible.TabIndex = 6
 		Me.enumVisible.Text = "Make enum Visible"
 		Me.enumVisible.UseVisualStyleBackColor = True
+		'
+		'Label3
+		'
+		Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Right
+		Me.Label3.AutoSize = True
+		Me.Label3.Location = New System.Drawing.Point(3, 10)
+		Me.Label3.Name = "Label3"
+		Me.Label3.Size = New System.Drawing.Size(69, 13)
+		Me.Label3.TabIndex = 0
+		Me.Label3.Text = "COM visibility"
+		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		'
+		'createInterface
+		'
+		Me.createInterface.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.createInterface.AutoSize = True
+		Me.createInterface.Location = New System.Drawing.Point(387, 8)
+		Me.createInterface.Name = "createInterface"
+		Me.createInterface.Size = New System.Drawing.Size(102, 17)
+		Me.createInterface.TabIndex = 4
+		Me.createInterface.Text = "Create Interface"
+		Me.createInterface.UseVisualStyleBackColor = True
+		'
+		'classVisible
+		'
+		Me.classVisible.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.classVisible.AutoSize = True
+		Me.classVisible.Location = New System.Drawing.Point(78, 8)
+		Me.classVisible.Name = "classVisible"
+		Me.classVisible.Size = New System.Drawing.Size(112, 17)
+		Me.classVisible.TabIndex = 1
+		Me.classVisible.Text = "Make class visible"
+		Me.classVisible.UseVisualStyleBackColor = True
+		'
+		'panelInterface
+		'
+		Me.panelInterface.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.panelInterface.AutoSize = True
+		Me.panelInterface.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.panelInterface.ColumnCount = 2
+		Me.panelInterface.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelInterface.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelInterface.Controls.Add(Me.comInterface, 0, 0)
+		Me.panelInterface.Controls.Add(Me.addDispid, 1, 0)
+		Me.panelInterface.Location = New System.Drawing.Point(495, 3)
+		Me.panelInterface.Name = "panelInterface"
+		Me.panelInterface.RowCount = 1
+		Me.panelInterface.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelInterface.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
+		Me.panelInterface.Size = New System.Drawing.Size(275, 27)
+		Me.panelInterface.TabIndex = 7
 		'
 		'comInterface
 		'
@@ -357,43 +406,38 @@ Partial Class myXSD
 		Me.comInterface.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.comInterface.FormattingEnabled = True
 		Me.comInterface.Items.AddRange(New Object() {"InterfaceIsDual", "InterfaceIsIUnknown", "InterfaceIsIDispatch"})
-		Me.comInterface.Location = New System.Drawing.Point(547, 3)
+		Me.comInterface.Location = New System.Drawing.Point(3, 3)
 		Me.comInterface.Name = "comInterface"
-		Me.comInterface.Size = New System.Drawing.Size(153, 21)
+		Me.comInterface.Size = New System.Drawing.Size(185, 21)
 		Me.comInterface.TabIndex = 5
-		'
-		'Label3
-		'
-		Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Right
-		Me.Label3.AutoSize = True
-		Me.Label3.Location = New System.Drawing.Point(3, 7)
-		Me.Label3.Name = "Label3"
-		Me.Label3.Size = New System.Drawing.Size(69, 13)
-		Me.Label3.TabIndex = 0
-		Me.Label3.Text = "COM visibility"
-		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
 		'
 		'addDispid
 		'
 		Me.addDispid.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.addDispid.AutoSize = True
-		Me.addDispid.Location = New System.Drawing.Point(355, 5)
+		Me.addDispid.Location = New System.Drawing.Point(194, 5)
 		Me.addDispid.Name = "addDispid"
 		Me.addDispid.Size = New System.Drawing.Size(78, 17)
 		Me.addDispid.TabIndex = 3
 		Me.addDispid.Text = "Add DispId"
 		Me.addDispid.UseVisualStyleBackColor = True
 		'
-		'createInterface
+		'panelCOM
 		'
-		Me.createInterface.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.createInterface.AutoSize = True
-		Me.createInterface.Location = New System.Drawing.Point(439, 5)
-		Me.createInterface.Name = "createInterface"
-		Me.createInterface.Size = New System.Drawing.Size(102, 17)
-		Me.createInterface.TabIndex = 4
-		Me.createInterface.Text = "Create Interface"
-		Me.createInterface.UseVisualStyleBackColor = True
+		Me.panelCOM.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.panelCOM.AutoSize = True
+		Me.panelCOM.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.panelCOM.ColumnCount = 1
+		Me.panelCOM.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCOM.Controls.Add(Me.classInterface, 0, 0)
+		Me.panelCOM.Location = New System.Drawing.Point(196, 3)
+		Me.panelCOM.Name = "panelCOM"
+		Me.panelCOM.RowCount = 1
+		Me.panelCOM.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelCOM.Size = New System.Drawing.Size(185, 27)
+		Me.panelCOM.TabIndex = 8
 		'
 		'classInterface
 		'
@@ -403,21 +447,10 @@ Partial Class myXSD
 		Me.classInterface.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.classInterface.FormattingEnabled = True
 		Me.classInterface.Items.AddRange(New Object() {"None", "AutoDispatch", "AutoDual"})
-		Me.classInterface.Location = New System.Drawing.Point(196, 3)
+		Me.classInterface.Location = New System.Drawing.Point(3, 3)
 		Me.classInterface.Name = "classInterface"
-		Me.classInterface.Size = New System.Drawing.Size(153, 21)
+		Me.classInterface.Size = New System.Drawing.Size(179, 21)
 		Me.classInterface.TabIndex = 2
-		'
-		'classVisible
-		'
-		Me.classVisible.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.classVisible.AutoSize = True
-		Me.classVisible.Location = New System.Drawing.Point(78, 5)
-		Me.classVisible.Name = "classVisible"
-		Me.classVisible.Size = New System.Drawing.Size(112, 17)
-		Me.classVisible.TabIndex = 1
-		Me.classVisible.Text = "Make class visible"
-		Me.classVisible.UseVisualStyleBackColor = True
 		'
 		'TableLayoutPanel1
 		'
@@ -426,20 +459,59 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel1.AutoSize = True
 		Me.TableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel1.ColumnCount = 3
-		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+		Me.TableLayoutPanel1.ColumnCount = 8
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.TableLayoutPanel1.Controls.Add(Me.panelLanguage, 1, 0)
-		Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel8, 0, 0)
-		Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel9, 2, 0)
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel1.Controls.Add(Me.Label5, 5, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.nmspace, 1, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.panelLanguage, 2, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.Label4, 3, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.efPreprocessor, 4, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.baseClass, 6, 0)
 		Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(409, 32)
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(894, 29)
 		Me.TableLayoutPanel1.TabIndex = 0
+		'
+		'Label5
+		'
+		Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Right
+		Me.Label5.AutoSize = True
+		Me.Label5.Location = New System.Drawing.Point(505, 8)
+		Me.Label5.Name = "Label5"
+		Me.Label5.Size = New System.Drawing.Size(61, 13)
+		Me.Label5.TabIndex = 3
+		Me.Label5.Text = "Base class:"
+		Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		'
+		'nmspace
+		'
+		Me.nmspace.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.nmspace.Location = New System.Drawing.Point(76, 4)
+		Me.nmspace.Name = "nmspace"
+		Me.nmspace.Size = New System.Drawing.Size(103, 20)
+		Me.nmspace.TabIndex = 0
+		Me.nmspace.Text = "myXSD"
+		'
+		'Label1
+		'
+		Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Right
+		Me.Label1.AutoSize = True
+		Me.Label1.Location = New System.Drawing.Point(3, 8)
+		Me.Label1.Name = "Label1"
+		Me.Label1.Size = New System.Drawing.Size(67, 13)
+		Me.Label1.TabIndex = 0
+		Me.Label1.Text = "Namespace:"
+		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
 		'
 		'panelLanguage
 		'
@@ -453,18 +525,18 @@ Partial Class myXSD
 		Me.panelLanguage.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 		Me.panelLanguage.Controls.Add(Me.vb, 1, 0)
 		Me.panelLanguage.Controls.Add(Me.csharp, 0, 0)
-		Me.panelLanguage.Location = New System.Drawing.Point(134, 3)
+		Me.panelLanguage.Location = New System.Drawing.Point(185, 3)
 		Me.panelLanguage.Name = "panelLanguage"
 		Me.panelLanguage.RowCount = 1
 		Me.panelLanguage.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelLanguage.Size = New System.Drawing.Size(140, 26)
+		Me.panelLanguage.Size = New System.Drawing.Size(140, 23)
 		Me.panelLanguage.TabIndex = 1
 		'
 		'vb
 		'
 		Me.vb.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.vb.AutoSize = True
-		Me.vb.Location = New System.Drawing.Point(73, 4)
+		Me.vb.Location = New System.Drawing.Point(73, 3)
 		Me.vb.Name = "vb"
 		Me.vb.Size = New System.Drawing.Size(64, 17)
 		Me.vb.TabIndex = 1
@@ -476,7 +548,7 @@ Partial Class myXSD
 		Me.csharp.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.csharp.AutoSize = True
 		Me.csharp.Checked = True
-		Me.csharp.Location = New System.Drawing.Point(3, 4)
+		Me.csharp.Location = New System.Drawing.Point(3, 3)
 		Me.csharp.Name = "csharp"
 		Me.csharp.Size = New System.Drawing.Size(64, 17)
 		Me.csharp.TabIndex = 0
@@ -484,83 +556,32 @@ Partial Class myXSD
 		Me.csharp.Text = "C#"
 		Me.csharp.UseVisualStyleBackColor = True
 		'
-		'TableLayoutPanel8
-		'
-		Me.TableLayoutPanel8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel8.AutoSize = True
-		Me.TableLayoutPanel8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel8.ColumnCount = 2
-		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel8.Controls.Add(Me.Label1, 0, 0)
-		Me.TableLayoutPanel8.Controls.Add(Me.nmspace, 1, 0)
-		Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 3)
-		Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-		Me.TableLayoutPanel8.RowCount = 1
-		Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel8.Size = New System.Drawing.Size(125, 26)
-		Me.TableLayoutPanel8.TabIndex = 0
-		'
-		'Label1
-		'
-		Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Right
-		Me.Label1.AutoSize = True
-		Me.Label1.Location = New System.Drawing.Point(3, 6)
-		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(67, 13)
-		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "Namespace:"
-		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		'
-		'nmspace
-		'
-		Me.nmspace.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.nmspace.Location = New System.Drawing.Point(76, 3)
-		Me.nmspace.Name = "nmspace"
-		Me.nmspace.Size = New System.Drawing.Size(46, 20)
-		Me.nmspace.TabIndex = 0
-		Me.nmspace.Text = "myXSD"
-		'
-		'TableLayoutPanel9
-		'
-		Me.TableLayoutPanel9.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel9.AutoSize = True
-		Me.TableLayoutPanel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel9.ColumnCount = 2
-		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel9.Controls.Add(Me.efPreprocessor, 0, 0)
-		Me.TableLayoutPanel9.Controls.Add(Me.Label4, 0, 0)
-		Me.TableLayoutPanel9.Location = New System.Drawing.Point(280, 3)
-		Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-		Me.TableLayoutPanel9.RowCount = 1
-		Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel9.Size = New System.Drawing.Size(126, 26)
-		Me.TableLayoutPanel9.TabIndex = 2
-		'
-		'efPreprocessor
-		'
-		Me.efPreprocessor.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.efPreprocessor.Location = New System.Drawing.Point(81, 3)
-		Me.efPreprocessor.Name = "efPreprocessor"
-		Me.efPreprocessor.ReadOnly = True
-		Me.efPreprocessor.Size = New System.Drawing.Size(42, 20)
-		Me.efPreprocessor.TabIndex = 2
-		'
 		'Label4
 		'
 		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Right
 		Me.Label4.AutoSize = True
-		Me.Label4.Location = New System.Drawing.Point(3, 6)
+		Me.Label4.Location = New System.Drawing.Point(331, 8)
 		Me.Label4.Name = "Label4"
 		Me.Label4.Size = New System.Drawing.Size(72, 13)
 		Me.Label4.TabIndex = 1
 		Me.Label4.Text = "Preprocessor:"
 		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		'
+		'efPreprocessor
+		'
+		Me.efPreprocessor.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efPreprocessor.Location = New System.Drawing.Point(409, 4)
+		Me.efPreprocessor.Name = "efPreprocessor"
+		Me.efPreprocessor.Size = New System.Drawing.Size(90, 20)
+		Me.efPreprocessor.TabIndex = 2
+		'
+		'baseClass
+		'
+		Me.baseClass.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.baseClass.Location = New System.Drawing.Point(572, 4)
+		Me.baseClass.Name = "baseClass"
+		Me.baseClass.Size = New System.Drawing.Size(185, 20)
+		Me.baseClass.TabIndex = 4
 		'
 		'TableLayoutPanel2
 		'
@@ -569,16 +590,17 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel2.AutoSize = True
 		Me.TableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel2.ColumnCount = 2
+		Me.TableLayoutPanel2.ColumnCount = 3
+		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel2.Controls.Add(Me.convertTypes, 0, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.panelTypes, 1, 0)
-		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 74)
+		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 112)
 		Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
 		Me.TableLayoutPanel2.RowCount = 1
 		Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel2.Size = New System.Drawing.Size(409, 29)
+		Me.TableLayoutPanel2.Size = New System.Drawing.Size(894, 29)
 		Me.TableLayoutPanel2.TabIndex = 3
 		'
 		'convertTypes
@@ -587,9 +609,9 @@ Partial Class myXSD
 		Me.convertTypes.AutoSize = True
 		Me.convertTypes.Location = New System.Drawing.Point(3, 6)
 		Me.convertTypes.Name = "convertTypes"
-		Me.convertTypes.Size = New System.Drawing.Size(91, 17)
+		Me.convertTypes.Size = New System.Drawing.Size(131, 17)
 		Me.convertTypes.TabIndex = 0
-		Me.convertTypes.Text = "Convert types"
+		Me.convertTypes.Text = "Convert types to string"
 		Me.convertTypes.UseVisualStyleBackColor = True
 		'
 		'panelTypes
@@ -600,37 +622,26 @@ Partial Class myXSD
 		Me.panelTypes.AutoSize = True
 		Me.panelTypes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 		Me.panelTypes.ColumnCount = 3
-		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-		Me.panelTypes.Controls.Add(Me.convertDateTime, 0, 0)
+		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelTypes.Controls.Add(Me.convertBoolean, 2, 0)
 		Me.panelTypes.Controls.Add(Me.convertNumeric, 1, 0)
-		Me.panelTypes.Location = New System.Drawing.Point(100, 3)
+		Me.panelTypes.Controls.Add(Me.convertDateTime, 0, 0)
+		Me.panelTypes.Location = New System.Drawing.Point(140, 3)
 		Me.panelTypes.Name = "panelTypes"
 		Me.panelTypes.RowCount = 1
 		Me.panelTypes.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelTypes.Size = New System.Drawing.Size(306, 23)
+		Me.panelTypes.Size = New System.Drawing.Size(220, 23)
 		Me.panelTypes.TabIndex = 9
-		'
-		'convertDateTime
-		'
-		Me.convertDateTime.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.convertDateTime.AutoSize = True
-		Me.convertDateTime.Location = New System.Drawing.Point(3, 3)
-		Me.convertDateTime.Name = "convertDateTime"
-		Me.convertDateTime.Size = New System.Drawing.Size(96, 17)
-		Me.convertDateTime.TabIndex = 0
-		Me.convertDateTime.Text = "DateTime"
-		Me.convertDateTime.UseVisualStyleBackColor = True
 		'
 		'convertBoolean
 		'
 		Me.convertBoolean.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.convertBoolean.AutoSize = True
-		Me.convertBoolean.Location = New System.Drawing.Point(207, 3)
+		Me.convertBoolean.Location = New System.Drawing.Point(152, 3)
 		Me.convertBoolean.Name = "convertBoolean"
-		Me.convertBoolean.Size = New System.Drawing.Size(96, 17)
+		Me.convertBoolean.Size = New System.Drawing.Size(65, 17)
 		Me.convertBoolean.TabIndex = 2
 		Me.convertBoolean.Text = "Boolean"
 		Me.convertBoolean.UseVisualStyleBackColor = True
@@ -639,12 +650,23 @@ Partial Class myXSD
 		'
 		Me.convertNumeric.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.convertNumeric.AutoSize = True
-		Me.convertNumeric.Location = New System.Drawing.Point(105, 3)
+		Me.convertNumeric.Location = New System.Drawing.Point(81, 3)
 		Me.convertNumeric.Name = "convertNumeric"
-		Me.convertNumeric.Size = New System.Drawing.Size(96, 17)
+		Me.convertNumeric.Size = New System.Drawing.Size(65, 17)
 		Me.convertNumeric.TabIndex = 1
 		Me.convertNumeric.Text = "Numeric"
 		Me.convertNumeric.UseVisualStyleBackColor = True
+		'
+		'convertDateTime
+		'
+		Me.convertDateTime.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.convertDateTime.AutoSize = True
+		Me.convertDateTime.Location = New System.Drawing.Point(3, 3)
+		Me.convertDateTime.Name = "convertDateTime"
+		Me.convertDateTime.Size = New System.Drawing.Size(72, 17)
+		Me.convertDateTime.TabIndex = 0
+		Me.convertDateTime.Text = "DateTime"
+		Me.convertDateTime.UseVisualStyleBackColor = True
 		'
 		'TableLayoutPanel3
 		'
@@ -658,18 +680,18 @@ Partial Class myXSD
 		Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel3.Controls.Add(Me.Label2, 0, 0)
 		Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 1, 0)
-		Me.TableLayoutPanel3.Location = New System.Drawing.Point(418, 3)
+		Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 38)
 		Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
 		Me.TableLayoutPanel3.RowCount = 1
 		Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel3.Size = New System.Drawing.Size(409, 32)
+		Me.TableLayoutPanel3.Size = New System.Drawing.Size(894, 29)
 		Me.TableLayoutPanel3.TabIndex = 1
 		'
 		'Label2
 		'
 		Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Right
 		Me.Label2.AutoSize = True
-		Me.Label2.Location = New System.Drawing.Point(3, 9)
+		Me.Label2.Location = New System.Drawing.Point(3, 8)
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(76, 13)
 		Me.Label2.TabIndex = 0
@@ -683,10 +705,11 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel4.AutoSize = True
 		Me.TableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel4.ColumnCount = 3
-		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+		Me.TableLayoutPanel4.ColumnCount = 4
+		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel4.Controls.Add(Me.cbNotations, 2, 0)
 		Me.TableLayoutPanel4.Controls.Add(Me.cbTypes, 0, 0)
 		Me.TableLayoutPanel4.Controls.Add(Me.cbElements, 1, 0)
@@ -694,16 +717,16 @@ Partial Class myXSD
 		Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
 		Me.TableLayoutPanel4.RowCount = 1
 		Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel4.Size = New System.Drawing.Size(321, 26)
+		Me.TableLayoutPanel4.Size = New System.Drawing.Size(806, 23)
 		Me.TableLayoutPanel4.TabIndex = 9
 		'
 		'cbNotations
 		'
 		Me.cbNotations.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.cbNotations.AutoSize = True
-		Me.cbNotations.Location = New System.Drawing.Point(216, 4)
+		Me.cbNotations.Location = New System.Drawing.Point(178, 3)
 		Me.cbNotations.Name = "cbNotations"
-		Me.cbNotations.Size = New System.Drawing.Size(102, 17)
+		Me.cbNotations.Size = New System.Drawing.Size(91, 17)
 		Me.cbNotations.TabIndex = 2
 		Me.cbNotations.Text = "Use notations"
 		Me.cbNotations.UseVisualStyleBackColor = True
@@ -712,9 +735,9 @@ Partial Class myXSD
 		'
 		Me.cbTypes.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.cbTypes.AutoSize = True
-		Me.cbTypes.Location = New System.Drawing.Point(3, 4)
+		Me.cbTypes.Location = New System.Drawing.Point(3, 3)
 		Me.cbTypes.Name = "cbTypes"
-		Me.cbTypes.Size = New System.Drawing.Size(100, 17)
+		Me.cbTypes.Size = New System.Drawing.Size(73, 17)
 		Me.cbTypes.TabIndex = 0
 		Me.cbTypes.Text = "Use types"
 		Me.cbTypes.UseVisualStyleBackColor = True
@@ -723,54 +746,12 @@ Partial Class myXSD
 		'
 		Me.cbElements.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.cbElements.AutoSize = True
-		Me.cbElements.Location = New System.Drawing.Point(109, 4)
+		Me.cbElements.Location = New System.Drawing.Point(82, 3)
 		Me.cbElements.Name = "cbElements"
-		Me.cbElements.Size = New System.Drawing.Size(101, 17)
+		Me.cbElements.Size = New System.Drawing.Size(90, 17)
 		Me.cbElements.TabIndex = 1
 		Me.cbElements.Text = "Use elements"
 		Me.cbElements.UseVisualStyleBackColor = True
-		'
-		'TableLayoutPanel5
-		'
-		Me.TableLayoutPanel5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel5.AutoSize = True
-		Me.TableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel5.ColumnCount = 3
-		Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel5.Controls.Add(Me.automaticArrays, 0, 0)
-		Me.TableLayoutPanel5.Controls.Add(Me.manageInit, 0, 0)
-		Me.TableLayoutPanel5.Location = New System.Drawing.Point(418, 109)
-		Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
-		Me.TableLayoutPanel5.RowCount = 1
-		Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel5.Size = New System.Drawing.Size(409, 23)
-		Me.TableLayoutPanel5.TabIndex = 5
-		'
-		'automaticArrays
-		'
-		Me.automaticArrays.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.automaticArrays.AutoSize = True
-		Me.automaticArrays.Location = New System.Drawing.Point(110, 3)
-		Me.automaticArrays.Name = "automaticArrays"
-		Me.automaticArrays.Size = New System.Drawing.Size(160, 17)
-		Me.automaticArrays.TabIndex = 2
-		Me.automaticArrays.Text = "Automatically manage arrays"
-		Me.automaticArrays.UseVisualStyleBackColor = True
-		'
-		'manageInit
-		'
-		Me.manageInit.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.manageInit.AutoSize = True
-		Me.manageInit.Location = New System.Drawing.Point(3, 3)
-		Me.manageInit.Name = "manageInit"
-		Me.manageInit.Size = New System.Drawing.Size(101, 17)
-		Me.manageInit.TabIndex = 1
-		Me.manageInit.Text = "Manage init flag"
-		Me.manageInit.UseVisualStyleBackColor = True
 		'
 		'TableLayoutPanel7
 		'
@@ -779,18 +760,19 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel7.AutoSize = True
 		Me.TableLayoutPanel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel7.ColumnCount = 3
+		Me.TableLayoutPanel7.ColumnCount = 4
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel7.Controls.Add(Me.arrayInitializer, 0, 0)
 		Me.TableLayoutPanel7.Controls.Add(Me.nullIfEmptyArray, 1, 0)
 		Me.TableLayoutPanel7.Controls.Add(Me.privateByInternal, 2, 0)
-		Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 109)
+		Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 147)
 		Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
 		Me.TableLayoutPanel7.RowCount = 1
 		Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel7.Size = New System.Drawing.Size(409, 23)
+		Me.TableLayoutPanel7.Size = New System.Drawing.Size(894, 23)
 		Me.TableLayoutPanel7.TabIndex = 4
 		'
 		'arrayInitializer
@@ -799,31 +781,31 @@ Partial Class myXSD
 		Me.arrayInitializer.AutoSize = True
 		Me.arrayInitializer.Location = New System.Drawing.Point(3, 3)
 		Me.arrayInitializer.Name = "arrayInitializer"
-		Me.arrayInitializer.Size = New System.Drawing.Size(92, 17)
+		Me.arrayInitializer.Size = New System.Drawing.Size(140, 17)
 		Me.arrayInitializer.TabIndex = 0
-		Me.arrayInitializer.Text = "Array initializer"
+		Me.arrayInitializer.Text = "Create an array initializer"
 		Me.arrayInitializer.UseVisualStyleBackColor = True
 		'
 		'nullIfEmptyArray
 		'
 		Me.nullIfEmptyArray.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.nullIfEmptyArray.AutoSize = True
-		Me.nullIfEmptyArray.Location = New System.Drawing.Point(101, 3)
+		Me.nullIfEmptyArray.Location = New System.Drawing.Point(149, 3)
 		Me.nullIfEmptyArray.Name = "nullIfEmptyArray"
-		Me.nullIfEmptyArray.Size = New System.Drawing.Size(142, 17)
+		Me.nullIfEmptyArray.Size = New System.Drawing.Size(184, 17)
 		Me.nullIfEmptyArray.TabIndex = 1
-		Me.nullIfEmptyArray.Text = "Return null if empty array"
+		Me.nullIfEmptyArray.Text = "Get will return null if array is empty"
 		Me.nullIfEmptyArray.UseVisualStyleBackColor = True
 		'
 		'privateByInternal
 		'
 		Me.privateByInternal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.privateByInternal.AutoSize = True
-		Me.privateByInternal.Location = New System.Drawing.Point(249, 3)
+		Me.privateByInternal.Location = New System.Drawing.Point(339, 3)
 		Me.privateByInternal.Name = "privateByInternal"
-		Me.privateByInternal.Size = New System.Drawing.Size(157, 17)
+		Me.privateByInternal.Size = New System.Drawing.Size(152, 17)
 		Me.privateByInternal.TabIndex = 2
-		Me.privateByInternal.Text = "Private by Internal"
+		Me.privateByInternal.Text = "Replace private by internal"
 		Me.privateByInternal.UseVisualStyleBackColor = True
 		'
 		'result
@@ -831,11 +813,11 @@ Partial Class myXSD
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
 			Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.result.Location = New System.Drawing.Point(3, 223)
+		Me.result.Location = New System.Drawing.Point(3, 261)
 		Me.result.Multiline = True
 		Me.result.Name = "result"
 		Me.result.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.result.Size = New System.Drawing.Size(836, 115)
+		Me.result.Size = New System.Drawing.Size(916, 118)
 		Me.result.TabIndex = 0
 		'
 		'OpenFileDialog1
@@ -853,7 +835,7 @@ Partial Class myXSD
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.pbClose
-		Me.ClientSize = New System.Drawing.Size(866, 402)
+		Me.ClientSize = New System.Drawing.Size(946, 443)
 		Me.Controls.Add(Me.panelMain)
 		Me.Name = "myXSD"
 		Me.Text = "myXSD generator"
@@ -870,14 +852,13 @@ Partial Class myXSD
 		Me.panelOptions.PerformLayout()
 		Me.TableLayoutPanel6.ResumeLayout(False)
 		Me.TableLayoutPanel6.PerformLayout()
+		Me.panelInterface.ResumeLayout(False)
+		Me.panelInterface.PerformLayout()
+		Me.panelCOM.ResumeLayout(False)
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.TableLayoutPanel1.PerformLayout()
 		Me.panelLanguage.ResumeLayout(False)
 		Me.panelLanguage.PerformLayout()
-		Me.TableLayoutPanel8.ResumeLayout(False)
-		Me.TableLayoutPanel8.PerformLayout()
-		Me.TableLayoutPanel9.ResumeLayout(False)
-		Me.TableLayoutPanel9.PerformLayout()
 		Me.TableLayoutPanel2.ResumeLayout(False)
 		Me.TableLayoutPanel2.PerformLayout()
 		Me.panelTypes.ResumeLayout(False)
@@ -886,8 +867,6 @@ Partial Class myXSD
 		Me.TableLayoutPanel3.PerformLayout()
 		Me.TableLayoutPanel4.ResumeLayout(False)
 		Me.TableLayoutPanel4.PerformLayout()
-		Me.TableLayoutPanel5.ResumeLayout(False)
-		Me.TableLayoutPanel5.PerformLayout()
 		Me.TableLayoutPanel7.ResumeLayout(False)
 		Me.TableLayoutPanel7.PerformLayout()
 		Me.ResumeLayout(False)
@@ -941,13 +920,12 @@ Partial Class myXSD
 	Friend WithEvents enumVisible As CheckBox
 	Friend WithEvents comInterface As ComboBox
 	Friend WithEvents privateByInternal As CheckBox
-	Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
-	Friend WithEvents manageInit As CheckBox
-	Friend WithEvents automaticArrays As CheckBox
 	Friend WithEvents status As Label
-	Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
-	Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
 	Friend WithEvents efPreprocessor As TextBox
 	Friend WithEvents Label4 As Label
 	Friend WithEvents pbGenerateNFiles As Button
+	Friend WithEvents panelInterface As TableLayoutPanel
+	Friend WithEvents panelCOM As TableLayoutPanel
+	Friend WithEvents Label5 As Label
+	Friend WithEvents baseClass As TextBox
 End Class

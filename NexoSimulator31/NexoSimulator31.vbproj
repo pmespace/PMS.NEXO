@@ -53,8 +53,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=3.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.3.0.9\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=3.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.3.0.10\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -84,78 +84,97 @@
     <Compile Include="..\NexoSimulator\ApplicationEvents.vb">
       <Link>ApplicationEvents.vb</Link>
     </Compile>
-    <Compile Include="..\NexoSimulator\Connected.Designer.vb">
-      <Link>Connected.Designer.vb</Link>
-    </Compile>
-    <Compile Include="..\NexoSimulator\Connected.vb">
-      <Link>Connected.vb</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\NexoSimulator\FActivity.Designer.vb">
-      <Link>FActivity.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FActivity.designer.vb">
+      <Link>FActivity.designer.vb</Link>
+      <DependentUpon>FActivity.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FActivity.vb">
       <Link>FActivity.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FAmount.Designer.vb">
-      <Link>FAmount.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FAmount.designer.vb">
+      <Link>FAmount.designer.vb</Link>
+      <DependentUpon>FAmount.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FAmount.vb">
       <Link>FAmount.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FBuilder.Designer.vb">
-      <Link>FBuilder.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FBuilder.designer.vb">
+      <Link>FBuilder.designer.vb</Link>
+      <DependentUpon>FBuilder.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FBuilder.vb">
       <Link>FBuilder.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FChooser.Designer.vb">
-      <Link>FChooser.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FChooser.designer.vb">
+      <Link>FChooser.designer.vb</Link>
+      <DependentUpon>FChooser.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FChooser.vb">
       <Link>FChooser.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FConnectionSettings.Designer.vb">
-      <Link>FConnectionSettings.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FConnected.designer.vb">
+      <Link>FConnected.designer.vb</Link>
+      <DependentUpon>FConnected.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\NexoSimulator\FConnected.vb">
+      <Link>FConnected.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NexoSimulator\FConnectionSettings.designer.vb">
+      <Link>FConnectionSettings.designer.vb</Link>
+      <DependentUpon>FConnectionSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FConnectionSettings.vb">
       <Link>FConnectionSettings.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FMessage.Designer.vb">
-      <Link>FMessage.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FInput.designer.vb">
+      <Link>FInput.designer.vb</Link>
+      <DependentUpon>FInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\NexoSimulator\FInput.vb">
+      <Link>FInput.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NexoSimulator\FMessage.designer.vb">
+      <Link>FMessage.designer.vb</Link>
+      <DependentUpon>FMessage.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FMessage.vb">
       <Link>FMessage.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FServerDatabase.Designer.vb">
-      <Link>FServerDatabase.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FServerDatabase.designer.vb">
+      <Link>FServerDatabase.designer.vb</Link>
+      <DependentUpon>FServerDatabase.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FServerDatabase.vb">
       <Link>FServerDatabase.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FServerSettings.Designer.vb">
-      <Link>FServerSettings.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FServerSettings.designer.vb">
+      <Link>FServerSettings.designer.vb</Link>
+      <DependentUpon>FServerSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FServerSettings.vb">
       <Link>FServerSettings.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FSimulator.Designer.vb">
-      <Link>FSimulator.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FSimulator.designer.vb">
+      <Link>FSimulator.designer.vb</Link>
+      <DependentUpon>FSimulator.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FSimulator.vb">
       <Link>FSimulator.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\NexoSimulator\FStarting.Designer.vb">
-      <Link>FStarting.Designer.vb</Link>
+    <Compile Include="..\NexoSimulator\FStarting.designer.vb">
+      <Link>FStarting.designer.vb</Link>
+      <DependentUpon>FStarting.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FStarting.vb">
       <Link>FStarting.vb</Link>
@@ -163,6 +182,7 @@
     </Compile>
     <Compile Include="..\NexoSimulator\FTextToPrint.designer.vb">
       <Link>FTextToPrint.designer.vb</Link>
+      <DependentUpon>FTextToPrint.vb</DependentUpon>
     </Compile>
     <Compile Include="..\NexoSimulator\FTextToPrint.vb">
       <Link>FTextToPrint.vb</Link>
@@ -204,6 +224,58 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\NexoSimulator\FActivity.resx">
+      <Link>FActivity.resx</Link>
+      <DependentUpon>FActivity.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FAmount.resx">
+      <Link>FAmount.resx</Link>
+      <DependentUpon>FAmount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FBuilder.resx">
+      <Link>FBuilder.resx</Link>
+      <DependentUpon>FBuilder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FChooser.resx">
+      <Link>FChooser.resx</Link>
+      <DependentUpon>FChooser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FConnected.resx">
+      <Link>FConnected.resx</Link>
+      <DependentUpon>FConnected.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FConnectionSettings.resx">
+      <Link>FConnectionSettings.resx</Link>
+      <DependentUpon>FConnectionSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FInput.resx">
+      <Link>FInput.resx</Link>
+      <DependentUpon>FInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FMessage.resx">
+      <Link>FMessage.resx</Link>
+      <DependentUpon>FMessage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FServerDatabase.resx">
+      <Link>FServerDatabase.resx</Link>
+      <DependentUpon>FServerDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FServerSettings.resx">
+      <Link>FServerSettings.resx</Link>
+      <DependentUpon>FServerSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FSimulator.resx">
+      <Link>FSimulator.resx</Link>
+      <DependentUpon>FSimulator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FStarting.resx">
+      <Link>FStarting.resx</Link>
+      <DependentUpon>FStarting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator\FTextToPrint.resx">
+      <Link>FTextToPrint.resx</Link>
+      <DependentUpon>FTextToPrint.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

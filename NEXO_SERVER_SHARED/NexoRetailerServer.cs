@@ -24,7 +24,6 @@ using Newtonsoft.Json.Linq;
 //using NEXO.Properties;
 using COMMON;
 using NEXO;
-using NEXO.VersionMngt;
 
 namespace NEXO.Server
 {
@@ -87,11 +86,11 @@ namespace NEXO.Server
 		/// Indicates whether a dump of all commands processed by the server must be produced when the server stops
 		/// </summary>
 		public bool DumpOnExit { get; set; } = false;
-		/// <summary>
-		/// This indicator set to true allows the application to change the result already decided by the server component (sent through OnRequest)
-		/// Changing the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
-		/// </summary>
-		public bool AllowChangingResults { get; set; } = false;
+		///// <summary>
+		///// This indicator set to true allows the application to change the result already decided by the server component (sent through OnRequest)
+		///// Changing the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
+		///// </summary>
+		//public bool AllowChangingResults { get; set; } = false;
 		/// <summary>
 		/// server startup datetime
 		/// </summary>
@@ -174,7 +173,7 @@ namespace NEXO.Server
 			StreamServer = new CStreamServer();
 			StreamServer.StartServer(new CStreamServerStartSettings()
 			{
-				StreamServerSettings = settings.Settings,
+				StreamServerSettings = settings.StreamServerSettings,
 				ThreadData = settings.ThreadData,
 				OnConnect = OnConnect,
 				OnDisconnect = OnDisconnect,
@@ -307,21 +306,26 @@ namespace NEXO.Server
 				string xml = Encoding.UTF8.GetString(request);
 				if (!string.IsNullOrEmpty(xml))
 				{
+					string shortmessage = null;
+					string fullmessage = null;
+					long msgid = 0;
+
+					/********************/
+					/* message processing */
+
 					// save the mesage
 					Activity.AddReceivedMessage(new NexoAnyMessage(xml));
 					// try to identify the received message
 					NexoItem item = new NexoItem(xml);
-					if (item.IsValid)
+					NexoObjectToProcess toprocess = new NexoObjectToProcess(item); ;
+					if (item.IsValid && (item.IsNotification || item.IsRequest || item.IsReply))
 					{
 						RequestResponseType response;
-						long msgid = 0;
-						string shortmessage = $"Received {item.Category.ToString().ToUpper()} {item.Type}";
-						string fullmessage = $"{shortmessage} - Message [{xml.Length} bytes]: {xml}";
+
 						if (null != Database)
 							Database.AddNewRequest(item, out msgid);
 
 						// create the Nexo object according to what is expected
-						NexoObjectToProcess toprocess = new NexoObjectToProcess(item);
 						if (item.IsNotification)
 						{
 							toprocess.Action = NexoNextAction.noReply;
@@ -331,144 +335,168 @@ namespace NEXO.Server
 						{
 							response = ProcessRequest(tcp, item);
 							toprocess.SuggestedAction = response.Action;
-							toprocess.CurrentObject.Response = response.Response;
 							toprocess.CanModifyAction = response.CanOverride;
+							toprocess.CurrentObject.Response = response.Response.Response();
+							toprocess.PassToApp = ResultEnumeration.Success == response.Response.Result;
 						}
 						else if (item.IsReply)
 						{
 							// fetch original request
 							toprocess.SuggestedAction = NexoNextAction.final;
 						}
-						else
-						{
-							toprocess.SuggestedAction = NexoNextAction.nothing;
-						}
-
-						/********************/
-
-						CLog.Add(StreamServer.Description + fullmessage + " - Action: " + toprocess.SuggestedAction.ToString());
-
-						// arrived here, let's see what to do next
-						if (null != toprocess && NexoNextAction.nothing != toprocess.SuggestedAction)
-						{
-							try
-							{
-								bool f = true;
-								// if declined do not pass the message to the application for processing, unless it has been explicitely set to
-								if (!toprocess.CurrentObject.Failure || AllowChangingResults)
-								{
-									if (toprocess.CurrentObject.Failure && AllowChangingResults)
-									{
-										// indicate we are in a special case explicitely authorised
-										CLog.Add("Pre-processing declined the request but server is set to allow application processing anyway", TLog.WARNG);
-									}
-									// request analysis by the application
-									try
-									{
-										if (item.IsNotification)
-											Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
-										else if (item.IsRequest)
-											Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
-										else if (item.IsReply)
-											Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
-									}
-									catch (Exception ex)
-									{
-										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceived generated an exception");
-										f = false;
-									}
-									if (f && toprocess.Action != toprocess.SuggestedAction)
-									{
-										CLog.Add(StreamServer.Description + shortmessage + " - Action has been modified by the application: " + toprocess.Action.ToString());
-									}
-								}
-								if (f)
-								{
-									// analyse decision
-									string s = null, t = null, c = null;
-									switch (toprocess.Action)
-									{
-										case NexoNextAction.sendReply:
-										case NexoNextAction.sendReplyWithError:
-											s = toprocess.CurrentObject.SerializeAndCompleteReply();
-											c = toprocess.CurrentObject.Reply.MessageHeader.MessageCategory.ToUpper();
-											t = MessageTypeEnumeration.Response.ToString().ToUpper();
-											break;
-										case NexoNextAction.sendRequest:
-											s = toprocess.NextObject.SerializeAndCompleteRequest();
-											c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
-											t = MessageTypeEnumeration.Request.ToString().ToUpper();
-											break;
-										case NexoNextAction.sendNotification:
-											s = toprocess.NextObject.SerializeAndCompleteRequest();
-											c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
-											t = MessageTypeEnumeration.Notification.ToString().ToUpper();
-											break;
-										default:
-											// nothing to do
-											break;
-									}
-									if (!string.IsNullOrEmpty(s))
-									{
-										// before sending the message fill it with missing data
-
-										CLog.Add(StreamServer.Description + "Sending " + c + " " + t + " - Message[" + s.Length + " bytes]: " + s);
-										// set message to send (or not)
-										reply = Encoding.UTF8.GetBytes(s);
-										NexoItem itemToSend = new NexoItem(s);
-										try
-										{
-											Thread.Sleep(TimerBeforeReply * CStreamClientSettings.ONESECOND);
-											Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, o);
-										}
-										catch (Exception ex)
-										{
-											CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
-										}
-										if (null != Database)
-										{
-											switch (toprocess.Action)
-											{
-												case NexoNextAction.sendReply:
-												case NexoNextAction.sendReplyWithError:
-													Database.SetRequestReply(msgid, itemToSend, toprocess.CurrentObject.Response);
-													break;
-												case NexoNextAction.sendRequest:
-													break;
-												case NexoNextAction.sendNotification:
-													break;
-												default:
-													// nothing to do
-													break;
-											}
-										}
-									}
-								}
-							}
-							catch (Exception ex)
-							{
-								CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
-							}
-						}
-						// store the replied message if any
-						if (null != reply)
-							Activity.AddSentMessage(new NexoAnyMessage(Encoding.UTF8.GetString(reply)));
 					}
 					else
 					{
-						CLog.Add(StreamServer.Description + "Invalid message received", TLog.WARNG);
-						// nothing to do
+						CLog.Add("Unable to proces the received message, a notification is being sent", TLog.WARNG);
+						// invalid message
+						toprocess.SuggestedAction = NexoNextAction.sendNotification;
+						toprocess.CanModifyAction = false;
+						toprocess.PassToApp = false;
+						// cerate the notification to send containing the rejected message
+						NexoEvent evt = new NexoEvent();
+						evt.EventToNotify = EventToNotifyEnumeration.Reject;
+						evt.EventRejectedMessage = new NexoByteSequence() { Value = request };
+						evt.EventDetails = "Unrecognized message";
+						toprocess.NextObject = evt;
+					}
+
+					/********************/
+					/* next action processing */
+
+					shortmessage = $"Received {item.Category.ToString().ToUpper()} {item.Type}";
+					fullmessage = $"{shortmessage} - Message [{xml.Length} bytes]: {xml}";
+					CLog.Add(StreamServer.Description + $"{fullmessage} - Suggested action: {toprocess.SuggestedAction} - Action: {toprocess.Action}");
+
+					/* arrived here, let's see what to do next
+					 * if no suggested action has been set or we must not pass the message to the app for further processing, we don't go through this */
+					if (null != toprocess && NexoNextAction.nothing != toprocess.SuggestedAction && toprocess.PassToApp)
+					{
+						//// if declined do not pass the message to the application for processing, unless it has been explicitely set to
+						//if (!toprocess.CurrentObject.Failure || AllowChangingResults)
+						//{
+						//	if (toprocess.CurrentObject.Failure && AllowChangingResults)
+						//	{
+						//		// indicate we are in a special case explicitely authorised
+						//		CLog.Add("Pre-processing declined the request but server is set to allow application processing anyway", TLog.WARNG);
+						//	}
+						// request analysis by the application
+						try
+						{
+							if (item.IsNotification)
+								Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
+							else if (item.IsRequest)
+								Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
+							else if (item.IsReply)
+								Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
+						}
+						catch (Exception ex)
+						{
+							CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Message analysis generated an exception");
+							// unstable situation, we stop processing the message and send a notification instead
+							toprocess.Action = NexoNextAction.sendNotification;
+							toprocess.CanModifyAction = false;
+							toprocess.PassToApp = false;
+							// send a notification with the rejected message
+							NexoEvent evt = new NexoEvent();
+							evt.EventToNotify = EventToNotifyEnumeration.OutOfOrder;
+							evt.EventDetails = "Message analysis generated an exception inside the server";
+							toprocess.NextObject = evt;
+						}
+						if (toprocess.Action != toprocess.SuggestedAction)
+						{
+							CLog.Add(StreamServer.Description + shortmessage + " - Action has been modified by the application: " + toprocess.Action.ToString(), TLog.WARNG);
+						}
+						//}
+					}
+
+					/********************/
+					/* reply processing */
+
+					CLog.Add(StreamServer.Description + $"Decided action: {toprocess.Action}");
+
+					try
+					{
+						// analyse decision
+						string s = null, t = null, c = null;
+						switch (toprocess.Action)
+						{
+							case NexoNextAction.sendReply:
+								//case NexoNextAction.sendReplyWithError:
+								s = toprocess.CurrentObject.SerializeAndCompleteReply();
+								c = toprocess.CurrentObject.Reply.MessageHeader.MessageCategory.ToUpper();
+								t = MessageTypeEnumeration.Response.ToString().ToUpper();
+								break;
+							case NexoNextAction.sendRequest:
+								s = toprocess.NextObject.SerializeAndCompleteRequest();
+								c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
+								t = MessageTypeEnumeration.Request.ToString().ToUpper();
+								break;
+							case NexoNextAction.sendNotification:
+								s = toprocess.NextObject.SerializeAndCompleteRequest();
+								c = toprocess.NextObject.Reply.MessageHeader.MessageCategory.ToUpper();
+								t = MessageTypeEnumeration.Notification.ToString().ToUpper();
+								break;
+							default:
+								// nothing to do
+								break;
+						}
+						if (!string.IsNullOrEmpty(s))
+						{
+							CLog.Add(StreamServer.Description + $"Sending {c} {t} - Message[{s.Length} bytes]: {s}");
+							// set message to send (or not)
+							reply = Encoding.UTF8.GetBytes(s);
+							NexoItem itemToSend = new NexoItem(s);
+							try
+							{
+								Thread.Sleep(TimerBeforeReply * CStreamClientSettings.ONESECOND);
+								Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, o);
+							}
+							catch (Exception ex)
+							{
+								CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
+							}
+							if (null != Database)
+							{
+								switch (toprocess.Action)
+								{
+									case NexoNextAction.sendReply:
+										//case NexoNextAction.sendReplyWithError:
+										Database.SetRequestReply(msgid, itemToSend, toprocess.CurrentObject.Response);
+										break;
+									case NexoNextAction.sendRequest:
+										// <<<>>> REVISIT AS id should be used when the reply arrives
+										Database.AddNewRequest(itemToSend, out msgid);
+										break;
+									case NexoNextAction.sendNotification:
+										Database.AddNewRequest(itemToSend, out long id);
+										break;
+									default:
+										// nothing to do
+										break;
+								}
+							}
+							// store the replied message if any
+							if (null != reply)
+								Activity.AddSentMessage(new NexoAnyMessage(Encoding.UTF8.GetString(reply)));
+						}
+						else
+						{
+							CLog.Add(StreamServer.Description + "No message could be generated to send to the client", TLog.ERROR);
+						}
+					}
+					catch (Exception ex)
+					{
+						CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
 					}
 				}
 				else
 				{
-					CLog.Add(StreamServer.Description + " - NO ACTION - Unrecognized command: " + xml, TLog.ERROR);
+					CLog.Add(StreamServer.Description + "Invalid message received", TLog.WARNG);
 				}
 			}
 			catch (Exception ex)
 			{
 				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
-				reply = null;
 			}
 			return reply;
 		}
@@ -509,7 +537,6 @@ namespace NEXO.Server
 			{
 				// save the message
 				// determine whether the request is valid or not
-				//NexoRetailerServerMessageHeaderValidator mhex = new NexoRetailerServerMessageHeaderValidator(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
 				NexoMessageHeader mhex = new NexoMessageHeader(((SaleToPOIRequest)item.Item).MessageHeader, ServerProtocolVersion);
 				if (fOK = mhex.IsValid)
 				{
@@ -538,14 +565,14 @@ namespace NEXO.Server
 							catch (Exception)
 							{
 								NexoErrors.UnavailableServiceTooOldProtocolVersion(response.Response, mhex.ProtocolVersion.Value, ServerProtocolVersion.Value);
-								response.Action = NexoNextAction.sendReplyWithError;
+								response.Action = NexoNextAction.sendReply;// sendReplyWithError;
 							}
 						}
 						else
 						{
 							CLog.Add($"SaleID {nxo.SaleID} has not been authorised to connect to {nxo.POIID}", TLog.ERROR);
 							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, $"SaleID : {mhex.SaleID.Value} not allowed to connect");
-							response.Action = NexoNextAction.sendReplyWithError;
+							response.Action = NexoNextAction.sendReply;// sendReplyWithError;
 						}
 						// log login result
 						if (null != Database)
@@ -579,7 +606,7 @@ namespace NEXO.Server
 						{
 							// not already connected
 							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, "Logout request was declined");
-							response.Action = NexoNextAction.sendReplyWithError;
+							response.Action = NexoNextAction.sendReply;// sendReplyWithError;
 						}
 					}
 					else
@@ -589,7 +616,7 @@ namespace NEXO.Server
 						if (!fConnected)
 						{
 							NexoErrors.NotAllowedForbiddenMessage(response.Response, "Not connected, the message " + msg.Key + " hasn't been processed");
-							response.Action = item.ReplyRequired ? NexoNextAction.sendReplyWithError : NexoNextAction.noReply;
+							response.Action = item.ReplyRequired ? NexoNextAction.sendReply /* sendReplyWithError */: NexoNextAction.noReply;
 						}
 					}
 				}
@@ -597,7 +624,7 @@ namespace NEXO.Server
 				{
 					// the request generated an error
 					response.Response = mhex.Response;
-					response.Action = item.ReplyRequired ? NexoNextAction.sendReplyWithError : NexoNextAction.noReply;
+					response.Action = item.ReplyRequired ? NexoNextAction.sendReply /* sendReplyWithError */ : NexoNextAction.noReply;
 				}
 				CLog.Add("Request is " + (fOK ? "VALID" : "INVALID") + " - Analysed next action: " + response.Action.ToString());
 			}
@@ -609,9 +636,9 @@ namespace NEXO.Server
 		}
 		class RequestResponseType
 		{
-			public ResponseType Response = new ResponseType() { Result = ResultEnumeration.Success.ToString() };
-			public NexoNextAction Action;
+			public NexoResponseType Response = new NexoResponseType();
 			public bool CanOverride = true;
+			public NexoNextAction Action;
 		}
 		/// <summary>
 		/// Processing of a reply received by the server (should be a device action)

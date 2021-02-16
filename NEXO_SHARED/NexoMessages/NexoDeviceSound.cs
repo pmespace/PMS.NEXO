@@ -43,8 +43,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -99,7 +97,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -158,7 +160,7 @@ namespace NEXO
 	[Guid("8A01F960-7FC2-49C6-B512-37C246A4512C")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDeviceSound: NexoDevice, INexoDeviceSound
+	public class NexoDeviceSound : NexoDevice, INexoDeviceSound
 	{
 		#region constructor
 		public NexoDeviceSound() : base(MessageCategoryEnumeration.Sound)
@@ -176,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public SoundActionEnumeration RequestSoundAction
 		{
-			get => (SoundActionEnumeration)CMisc.GetEnumValue(typeof(SoundActionEnumeration), CMisc.Trimmed(RequestData.SoundAction));
-			set => RequestData.SoundAction = CMisc.GetEnumName(typeof(SoundActionEnumeration), value);
+			get => (null != RequestData ? (SoundActionEnumeration)CMisc.GetEnumValue(typeof(SoundActionEnumeration), CMisc.Trimmed(RequestData.SoundAction)) : (SoundActionEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.SoundAction = CMisc.GetEnumName(typeof(SoundActionEnumeration), value); }
 		}
 		public uint RequestSoundVolume
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true);
-			set => RequestData.SoundVolume = value.ToString();
+			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true) : (uint)0);
+			set { if (null != RequestData) RequestData.SoundVolume = value.ToString(); }
 		}
 		#endregion
 

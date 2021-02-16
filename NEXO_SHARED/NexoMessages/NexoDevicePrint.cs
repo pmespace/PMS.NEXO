@@ -48,8 +48,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -104,7 +102,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -163,7 +165,7 @@ namespace NEXO
 	[Guid("C07B9790-C8C5-47C2-813C-C218F5545EF0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoDevicePrint: NexoDevice, INexoDevicePrint
+	public class NexoDevicePrint : NexoDevice, INexoDevicePrint
 	{
 		#region constructor
 		public NexoDevicePrint() : base(MessageCategoryEnumeration.Print)
@@ -181,26 +183,26 @@ namespace NEXO
 		#region request inner properties
 		public DocumentQualifierEnumeration RequestDocumentQualifier
 		{
-			get => (DocumentQualifierEnumeration)CMisc.GetEnumValue(typeof(DocumentQualifierEnumeration), CMisc.Trimmed(RequestData.PrintOutput.DocumentQualifier));
-			set => RequestData.PrintOutput.DocumentQualifier = CMisc.GetEnumName(typeof(DocumentQualifierEnumeration), value);
+			get => (null != RequestData && null != RequestData.PrintOutput ? (DocumentQualifierEnumeration)CMisc.GetEnumValue(typeof(DocumentQualifierEnumeration), CMisc.Trimmed(RequestData.PrintOutput.DocumentQualifier)) : (DocumentQualifierEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.PrintOutput) RequestData.PrintOutput.DocumentQualifier = CMisc.GetEnumName(typeof(DocumentQualifierEnumeration), value); }
 		}
 		public ResponseModeEnumeration RequestResponseMode
 		{
-			get => (ResponseModeEnumeration)CMisc.GetEnumValue(typeof(ResponseModeEnumeration), CMisc.Trimmed(RequestData.PrintOutput.ResponseMode));
-			set => RequestData.PrintOutput.ResponseMode = CMisc.GetEnumName(typeof(ResponseModeEnumeration), value);
+			get => (null != RequestData && null != RequestData.PrintOutput ? (ResponseModeEnumeration)CMisc.GetEnumValue(typeof(ResponseModeEnumeration), CMisc.Trimmed(RequestData.PrintOutput.ResponseMode)) : (ResponseModeEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.PrintOutput) RequestData.PrintOutput.ResponseMode = CMisc.GetEnumName(typeof(ResponseModeEnumeration), value); }
 		}
 		public OutputFormatEnumeration RequestOutputFormat
 		{
-			get => (OutputFormatEnumeration)CMisc.GetEnumValue(typeof(OutputFormatEnumeration), CMisc.Trimmed(RequestData.PrintOutput.OutputContent.OutputFormat));
-			set => RequestData.PrintOutput.OutputContent.OutputFormat = CMisc.GetEnumName(typeof(OutputFormatEnumeration), value);
+			get => (null != RequestData && null != RequestData.PrintOutput ? (OutputFormatEnumeration)CMisc.GetEnumValue(typeof(OutputFormatEnumeration), CMisc.Trimmed(RequestData.PrintOutput.OutputContent.OutputFormat)) : (OutputFormatEnumeration)NexoValues.None);
+			set { if (null != RequestData && null != RequestData.PrintOutput) RequestData.PrintOutput.OutputContent.OutputFormat = CMisc.GetEnumName(typeof(OutputFormatEnumeration), value); }
 		}
 		#endregion
 
 		#region reply inner properties
 		public DocumentQualifierEnumeration ReplyDocumentQualifier
 		{
-			get => (DocumentQualifierEnumeration)CMisc.GetEnumValue(typeof(DocumentQualifierEnumeration), CMisc.Trimmed(ReplyData.DocumentQualifier));
-			set => ReplyData.DocumentQualifier = CMisc.GetEnumName(typeof(DocumentQualifierEnumeration), value);
+			get => (null != ReplyData ? (DocumentQualifierEnumeration)CMisc.GetEnumValue(typeof(DocumentQualifierEnumeration), CMisc.Trimmed(ReplyData.DocumentQualifier)) : (DocumentQualifierEnumeration)NexoValues.None);
+			set { if (null != ReplyData) ReplyData.DocumentQualifier = CMisc.GetEnumName(typeof(DocumentQualifierEnumeration), value); }
 		}
 		#endregion
 

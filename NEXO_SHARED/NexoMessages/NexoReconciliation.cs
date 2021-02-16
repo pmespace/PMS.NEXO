@@ -19,35 +19,36 @@ namespace NEXO
 		ReconciliationTypeEnumeration RequestReconciliationType { get; set; }
 		#endregion
 
-		#region inherited properties & methods
-		/// <summary>
-		/// <see cref="NexoObject"/>
-		/// </summary>
+		#region inherited from NexoObject
 		[DispId(10000)]
 		SaleToPOIRequest Request { get; }
 		[DispId(10001)]
 		SaleToPOIResponse Reply { get; }
-		[DispId(10002)]
-		ResponseType Response { get; }
 
-		[DispId(10101)]
+		[DispId(10010)]
+		string SerializedRequest { get; }
+		[DispId(10011)]
+		string SerializedReply { get; }
+		[DispId(10020)]
+		ResponseType Response { get; set; }
+		[DispId(10030)]
 		MessageCategoryEnumeration MessageCategory { get; }
-		[DispId(10103)]
+		[DispId(10031)]
 		MessageClassEnumeration MessageClass { get; }
-		[DispId(10104)]
-		string ProtocolVersion { get; set; }
-		[DispId(10005)]
-		string ServiceID { get; set; }
-		[DispId(10006)]
-		string DeviceID { get; set; }
-		[DispId(10007)]
+		[DispId(10032)]
+		bool IsService { get; }
+		[DispId(10033)]
+		bool IsDevice { get; }
+		[DispId(10034)]
+		bool IsEvent { get; }
+		[DispId(10036)]
 		string SaleID { get; set; }
-		[DispId(10008)]
+		[DispId(10037)]
 		string POIID { get; set; }
-		[DispId(15009)]
-		bool AddMilliseconds { get; set; }
-		[DispId(15010)]
-		bool Utc { get; set; }
+		[DispId(10038)]
+		string ServiceID { get; set; }
+		[DispId(10039)]
+		string DeviceID { get; set; }
 
 		[DispId(10050)]
 		bool Success { get; }
@@ -57,48 +58,54 @@ namespace NEXO
 		bool Partial { get; }
 		[DispId(10053)]
 		bool Unknown { get; }
-
-		[DispId(10060)]
+		[DispId(10054)]
 		bool Aborted { get; }
-		[DispId(10061)]
+		[DispId(10055)]
 		bool Busy { get; }
-		[DispId(10062)]
+		[DispId(10056)]
 		bool Cancel { get; }
-		[DispId(10063)]
+		[DispId(10057)]
 		bool DeviceOut { get; }
-		[DispId(10064)]
+		[DispId(10058)]
 		bool InsertedCard { get; }
-		[DispId(10065)]
+		[DispId(10059)]
 		bool InProgress { get; }
-		[DispId(10066)]
+		[DispId(10060)]
 		bool LoggedOut { get; }
-		[DispId(10067)]
+		[DispId(10061)]
 		bool MessageFormat { get; }
-		[DispId(10068)]
+		[DispId(10062)]
 		bool NotAllowed { get; }
-		[DispId(10069)]
+		[DispId(10063)]
 		bool NotFound { get; }
-		[DispId(10070)]
+		[DispId(10064)]
 		bool PaymentRestriction { get; }
-		[DispId(10071)]
+		[DispId(10065)]
 		bool Refusal { get; }
-		[DispId(10072)]
+		[DispId(10066)]
 		bool UnavailableDevice { get; }
-		[DispId(10073)]
+		[DispId(10067)]
 		bool UnavailableService { get; }
-		[DispId(10074)]
+		[DispId(10068)]
 		bool InvalidCard { get; }
-		[DispId(10075)]
+		[DispId(10069)]
 		bool UnreachableHost { get; }
-		[DispId(10076)]
+		[DispId(10070)]
 		bool WrongPIN { get; }
-		[DispId(10077)]
+		[DispId(10071)]
 		bool UnknownError { get; }
+		[DispId(10072)]
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
-		[DispId(10100)]
-		string AdditionalResponse { get; }
+		[DispId(10090)]
+		bool AddMilliseconds { get; set; }
+		[DispId(10091)]
+		bool Utc { get; set; }
 
-		/* inherited methods */
 		[DispId(11000)]
 		string ToString();
 		[DispId(11001)]
@@ -108,17 +115,20 @@ namespace NEXO
 		[DispId(11003)]
 		string SetDefaultStringValue(string data, string defaultValue, string typeDefaultValue = "");
 		[DispId(11004)]
-		string CopyRequestStringValue(string data, string requestValue);
-		[DispId(11005)]
 		DateTime SetDefaultDateTime(DateTime dt, bool utc = false);
-		[DispId(11006)]
+		[DispId(11005)]
 		NexoISODateTime SetDefaultDateTime(NexoISODateTime dt, string defaultValue);
+		[DispId(11006)]
+		string CopyRequestStringValue(string data, string requestValue);
 		[DispId(11007)]
 		NexoCurrency SetDefaultCurrency(NexoCurrency currency, string defaultValue);
+		[DispId(11008)]
+		NexoISOLanguage2A SetDefaultLanguage(NexoISOLanguage2A language, string defaultValue);
+		[DispId(11009)]
+		bool FromItem(NexoItem item);
+		#endregion
 
-		/// <summary>
-		/// <see cref="NexoRetailer"/>
-		/// </summary>
+		#region inherited from NexoRetailer
 		[DispId(15000)]
 		bool SendWithErrors { get; set; }
 		[DispId(15001)]
@@ -148,7 +158,7 @@ namespace NEXO
 	[Guid("C09916A4-9B04-4331-BB35-C845E17E6FD0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoReconciliation: NexoService, INexoReconciliation
+	public class NexoReconciliation : NexoService, INexoReconciliation
 	{
 		#region constructor
 		public NexoReconciliation() : base(MessageCategoryEnumeration.Reconciliation)
@@ -166,8 +176,8 @@ namespace NEXO
 		#region request inner properties
 		public ReconciliationTypeEnumeration RequestReconciliationType
 		{
-			get => (ReconciliationTypeEnumeration)CMisc.GetEnumValue(typeof(ReconciliationTypeEnumeration), CMisc.Trimmed(RequestData.ReconciliationType));
-			set => RequestData.ReconciliationType = CMisc.GetEnumName(typeof(ReconciliationTypeEnumeration), value);
+			get => (null != RequestData ? (ReconciliationTypeEnumeration)CMisc.GetEnumValue(typeof(ReconciliationTypeEnumeration), CMisc.Trimmed(RequestData.ReconciliationType)) : (ReconciliationTypeEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.ReconciliationType = CMisc.GetEnumName(typeof(ReconciliationTypeEnumeration), value); }
 		}
 		#endregion
 

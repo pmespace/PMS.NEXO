@@ -944,7 +944,7 @@ namespace NEXO.Client
 								switch (toprocess.Action)
 								{
 									case NexoNextAction.sendReply:
-									case NexoNextAction.sendReplyWithError:
+										//case NexoNextAction.sendReplyWithError:
 										SendReply(toprocess.CurrentObject.Reply);
 										break;
 									case NexoNextAction.final:

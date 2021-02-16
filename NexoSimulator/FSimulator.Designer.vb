@@ -22,6 +22,7 @@ Partial Class FSimulator
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
+		Me.components = New System.ComponentModel.Container()
 		Me.PanelMain = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelButtons = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbClose = New System.Windows.Forms.Button()
@@ -51,15 +52,15 @@ Partial Class FSimulator
 		Me.panelGateway = New System.Windows.Forms.TableLayoutPanel()
 		Me.serverToReachPanel14 = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelGatewayPort = New System.Windows.Forms.TableLayoutPanel()
-		Me.gatewayPort = New System.Windows.Forms.NumericUpDown()
+		Me.udGatewayPort = New System.Windows.Forms.NumericUpDown()
 		Me.Label12 = New System.Windows.Forms.Label()
 		Me.cbGatewayUseLocalHost = New System.Windows.Forms.CheckBox()
 		Me.panelGatewayServer = New System.Windows.Forms.TableLayoutPanel()
 		Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Label6 = New System.Windows.Forms.Label()
-		Me.gatewayServerIP = New System.Windows.Forms.TextBox()
+		Me.efGatewayServerIP = New System.Windows.Forms.TextBox()
 		Me.panelGatewayDistantPort = New System.Windows.Forms.TableLayoutPanel()
-		Me.gatewayServerPort = New System.Windows.Forms.NumericUpDown()
+		Me.udGatewayServerPort = New System.Windows.Forms.NumericUpDown()
 		Me.Label11 = New System.Windows.Forms.Label()
 		Me.lblGateway = New System.Windows.Forms.Label()
 		Me.panelGatewayButtons = New System.Windows.Forms.TableLayoutPanel()
@@ -80,16 +81,16 @@ Partial Class FSimulator
 		Me.pbDatabaseSettings = New System.Windows.Forms.Button()
 		Me.cbUseDatabase = New System.Windows.Forms.CheckBox()
 		Me.panelServerPort = New System.Windows.Forms.TableLayoutPanel()
-		Me.localServerPort = New System.Windows.Forms.NumericUpDown()
+		Me.udLocalServerPort = New System.Windows.Forms.NumericUpDown()
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.panelClient = New System.Windows.Forms.TableLayoutPanel()
 		Me.lblClient = New System.Windows.Forms.Label()
 		Me.panelClientNexo = New System.Windows.Forms.TableLayoutPanel()
 		Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
-		Me.deviceid = New System.Windows.Forms.TextBox()
+		Me.efDeviceID = New System.Windows.Forms.TextBox()
 		Me.Label4 = New System.Windows.Forms.Label()
 		Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-		Me.serviceid = New System.Windows.Forms.TextBox()
+		Me.efServiceID = New System.Windows.Forms.TextBox()
 		Me.device = New System.Windows.Forms.Label()
 		Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
 		Me.efPOIID = New System.Windows.Forms.TextBox()
@@ -103,16 +104,16 @@ Partial Class FSimulator
 		Me.pbConnectionSettings = New System.Windows.Forms.Button()
 		Me.panelClientServer = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelClientTimeout = New System.Windows.Forms.TableLayoutPanel()
-		Me.timeout = New System.Windows.Forms.NumericUpDown()
+		Me.udTimeout = New System.Windows.Forms.NumericUpDown()
 		Me.Label8 = New System.Windows.Forms.Label()
 		Me.cbInfinite = New System.Windows.Forms.CheckBox()
 		Me.Label7 = New System.Windows.Forms.Label()
 		Me.panelClientTarget = New System.Windows.Forms.TableLayoutPanel()
 		Me.PanelIPPort = New System.Windows.Forms.TableLayoutPanel()
 		Me.Label5 = New System.Windows.Forms.Label()
-		Me.targetIP = New System.Windows.Forms.TextBox()
+		Me.efTargetIP = New System.Windows.Forms.TextBox()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-		Me.targetPort = New System.Windows.Forms.NumericUpDown()
+		Me.udTargetPort = New System.Windows.Forms.NumericUpDown()
 		Me.Label9 = New System.Windows.Forms.Label()
 		Me.panelClientButtons1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbConnect = New System.Windows.Forms.Button()
@@ -124,9 +125,14 @@ Partial Class FSimulator
 		Me.rbLocalHost = New System.Windows.Forms.RadioButton()
 		Me.panelRaw = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbSendFreeMessage = New System.Windows.Forms.Button()
-		Me.command = New System.Windows.Forms.TextBox()
 		Me.lblFreeMessage = New System.Windows.Forms.Label()
 		Me.pbBuild = New System.Windows.Forms.Button()
+		Me.cbxCommands = New System.Windows.Forms.ComboBox()
+		Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.RenameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.pbAdd = New System.Windows.Forms.Button()
+		Me.pbRemove = New System.Windows.Forms.Button()
+		Me.efCommand = New System.Windows.Forms.TextBox()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
 		Me.PanelMain.SuspendLayout()
@@ -138,18 +144,18 @@ Partial Class FSimulator
 		Me.panelGateway.SuspendLayout()
 		Me.serverToReachPanel14.SuspendLayout()
 		Me.panelGatewayPort.SuspendLayout()
-		CType(Me.gatewayPort, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.udGatewayPort, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelGatewayServer.SuspendLayout()
 		Me.TableLayoutPanel12.SuspendLayout()
 		Me.panelGatewayDistantPort.SuspendLayout()
-		CType(Me.gatewayServerPort, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.udGatewayServerPort, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelGatewayButtons.SuspendLayout()
 		Me.panelServer.SuspendLayout()
 		Me.panelServerButtons.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		CType(Me.udServerDelay, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelServerPort.SuspendLayout()
-		CType(Me.localServerPort, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.udLocalServerPort, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelClient.SuspendLayout()
 		Me.panelClientNexo.SuspendLayout()
 		Me.TableLayoutPanel10.SuspendLayout()
@@ -159,14 +165,15 @@ Partial Class FSimulator
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.panelClientServer.SuspendLayout()
 		Me.panelClientTimeout.SuspendLayout()
-		CType(Me.timeout, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.udTimeout, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelClientTarget.SuspendLayout()
 		Me.PanelIPPort.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
-		CType(Me.targetPort, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.udTargetPort, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.panelClientButtons1.SuspendLayout()
 		Me.panelClientTargets.SuspendLayout()
 		Me.panelRaw.SuspendLayout()
+		Me.ContextMenuStrip1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'PanelMain
@@ -628,7 +635,7 @@ Partial Class FSimulator
 		Me.panelGatewayPort.ColumnCount = 2
 		Me.panelGatewayPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelGatewayPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelGatewayPort.Controls.Add(Me.gatewayPort, 1, 0)
+		Me.panelGatewayPort.Controls.Add(Me.udGatewayPort, 1, 0)
 		Me.panelGatewayPort.Controls.Add(Me.Label12, 0, 0)
 		Me.panelGatewayPort.Location = New System.Drawing.Point(3, 3)
 		Me.panelGatewayPort.Name = "panelGatewayPort"
@@ -637,16 +644,16 @@ Partial Class FSimulator
 		Me.panelGatewayPort.Size = New System.Drawing.Size(138, 32)
 		Me.panelGatewayPort.TabIndex = 9
 		'
-		'gatewayPort
+		'udGatewayPort
 		'
-		Me.gatewayPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gatewayPort.AutoSize = True
-		Me.gatewayPort.Location = New System.Drawing.Point(82, 6)
-		Me.gatewayPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-		Me.gatewayPort.Name = "gatewayPort"
-		Me.gatewayPort.Size = New System.Drawing.Size(53, 20)
-		Me.gatewayPort.TabIndex = 0
-		Me.gatewayPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.udGatewayPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.udGatewayPort.AutoSize = True
+		Me.udGatewayPort.Location = New System.Drawing.Point(82, 6)
+		Me.udGatewayPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+		Me.udGatewayPort.Name = "udGatewayPort"
+		Me.udGatewayPort.Size = New System.Drawing.Size(53, 20)
+		Me.udGatewayPort.TabIndex = 0
+		Me.udGatewayPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
 		'
 		'Label12
 		'
@@ -699,7 +706,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel12.Controls.Add(Me.Label6, 0, 0)
-		Me.TableLayoutPanel12.Controls.Add(Me.gatewayServerIP, 1, 0)
+		Me.TableLayoutPanel12.Controls.Add(Me.efGatewayServerIP, 1, 0)
 		Me.TableLayoutPanel12.Location = New System.Drawing.Point(3, 3)
 		Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
 		Me.TableLayoutPanel12.RowCount = 1
@@ -717,13 +724,13 @@ Partial Class FSimulator
 		Me.Label6.TabIndex = 1
 		Me.Label6.Text = "IP"
 		'
-		'gatewayServerIP
+		'efGatewayServerIP
 		'
-		Me.gatewayServerIP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gatewayServerIP.Location = New System.Drawing.Point(26, 3)
-		Me.gatewayServerIP.Name = "gatewayServerIP"
-		Me.gatewayServerIP.Size = New System.Drawing.Size(85, 20)
-		Me.gatewayServerIP.TabIndex = 0
+		Me.efGatewayServerIP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efGatewayServerIP.Location = New System.Drawing.Point(26, 3)
+		Me.efGatewayServerIP.Name = "efGatewayServerIP"
+		Me.efGatewayServerIP.Size = New System.Drawing.Size(85, 20)
+		Me.efGatewayServerIP.TabIndex = 0
 		'
 		'panelGatewayDistantPort
 		'
@@ -735,7 +742,7 @@ Partial Class FSimulator
 		Me.panelGatewayDistantPort.ColumnCount = 2
 		Me.panelGatewayDistantPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelGatewayDistantPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelGatewayDistantPort.Controls.Add(Me.gatewayServerPort, 1, 0)
+		Me.panelGatewayDistantPort.Controls.Add(Me.udGatewayServerPort, 1, 0)
 		Me.panelGatewayDistantPort.Controls.Add(Me.Label11, 0, 0)
 		Me.panelGatewayDistantPort.Location = New System.Drawing.Point(123, 3)
 		Me.panelGatewayDistantPort.Name = "panelGatewayDistantPort"
@@ -744,16 +751,16 @@ Partial Class FSimulator
 		Me.panelGatewayDistantPort.Size = New System.Drawing.Size(127, 26)
 		Me.panelGatewayDistantPort.TabIndex = 1
 		'
-		'gatewayServerPort
+		'udGatewayServerPort
 		'
-		Me.gatewayServerPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.gatewayServerPort.AutoSize = True
-		Me.gatewayServerPort.Location = New System.Drawing.Point(71, 3)
-		Me.gatewayServerPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-		Me.gatewayServerPort.Name = "gatewayServerPort"
-		Me.gatewayServerPort.Size = New System.Drawing.Size(53, 20)
-		Me.gatewayServerPort.TabIndex = 1
-		Me.gatewayServerPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.udGatewayServerPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.udGatewayServerPort.AutoSize = True
+		Me.udGatewayServerPort.Location = New System.Drawing.Point(71, 3)
+		Me.udGatewayServerPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+		Me.udGatewayServerPort.Name = "udGatewayServerPort"
+		Me.udGatewayServerPort.Size = New System.Drawing.Size(53, 20)
+		Me.udGatewayServerPort.TabIndex = 1
+		Me.udGatewayServerPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
 		'
 		'Label11
 		'
@@ -1034,7 +1041,7 @@ Partial Class FSimulator
 		Me.panelServerPort.ColumnCount = 2
 		Me.panelServerPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelServerPort.Controls.Add(Me.localServerPort, 1, 0)
+		Me.panelServerPort.Controls.Add(Me.udLocalServerPort, 1, 0)
 		Me.panelServerPort.Controls.Add(Me.Label1, 0, 0)
 		Me.panelServerPort.Location = New System.Drawing.Point(187, 3)
 		Me.panelServerPort.Name = "panelServerPort"
@@ -1043,16 +1050,16 @@ Partial Class FSimulator
 		Me.panelServerPort.Size = New System.Drawing.Size(94, 32)
 		Me.panelServerPort.TabIndex = 1
 		'
-		'localServerPort
+		'udLocalServerPort
 		'
-		Me.localServerPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.localServerPort.AutoSize = True
-		Me.localServerPort.Location = New System.Drawing.Point(38, 6)
-		Me.localServerPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-		Me.localServerPort.Name = "localServerPort"
-		Me.localServerPort.Size = New System.Drawing.Size(53, 20)
-		Me.localServerPort.TabIndex = 0
-		Me.localServerPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.udLocalServerPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.udLocalServerPort.AutoSize = True
+		Me.udLocalServerPort.Location = New System.Drawing.Point(38, 6)
+		Me.udLocalServerPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+		Me.udLocalServerPort.Name = "udLocalServerPort"
+		Me.udLocalServerPort.Size = New System.Drawing.Size(53, 20)
+		Me.udLocalServerPort.TabIndex = 0
+		Me.udLocalServerPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
 		'
 		'Label1
 		'
@@ -1130,7 +1137,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel10.ColumnCount = 2
 		Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel10.Controls.Add(Me.deviceid, 1, 0)
+		Me.TableLayoutPanel10.Controls.Add(Me.efDeviceID, 1, 0)
 		Me.TableLayoutPanel10.Controls.Add(Me.Label4, 0, 0)
 		Me.TableLayoutPanel10.Location = New System.Drawing.Point(405, 6)
 		Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
@@ -1139,13 +1146,13 @@ Partial Class FSimulator
 		Me.TableLayoutPanel10.Size = New System.Drawing.Size(137, 26)
 		Me.TableLayoutPanel10.TabIndex = 3
 		'
-		'deviceid
+		'efDeviceID
 		'
-		Me.deviceid.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.deviceid.Location = New System.Drawing.Point(64, 3)
-		Me.deviceid.Name = "deviceid"
-		Me.deviceid.Size = New System.Drawing.Size(70, 20)
-		Me.deviceid.TabIndex = 0
+		Me.efDeviceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efDeviceID.Location = New System.Drawing.Point(64, 3)
+		Me.efDeviceID.Name = "efDeviceID"
+		Me.efDeviceID.Size = New System.Drawing.Size(70, 20)
+		Me.efDeviceID.TabIndex = 0
 		'
 		'Label4
 		'
@@ -1166,7 +1173,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel4.ColumnCount = 2
 		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel4.Controls.Add(Me.serviceid, 1, 0)
+		Me.TableLayoutPanel4.Controls.Add(Me.efServiceID, 1, 0)
 		Me.TableLayoutPanel4.Controls.Add(Me.device, 0, 0)
 		Me.TableLayoutPanel4.Location = New System.Drawing.Point(260, 6)
 		Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -1175,13 +1182,13 @@ Partial Class FSimulator
 		Me.TableLayoutPanel4.Size = New System.Drawing.Size(139, 26)
 		Me.TableLayoutPanel4.TabIndex = 2
 		'
-		'serviceid
+		'efServiceID
 		'
-		Me.serviceid.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.serviceid.Location = New System.Drawing.Point(66, 3)
-		Me.serviceid.Name = "serviceid"
-		Me.serviceid.Size = New System.Drawing.Size(70, 20)
-		Me.serviceid.TabIndex = 0
+		Me.efServiceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efServiceID.Location = New System.Drawing.Point(66, 3)
+		Me.efServiceID.Name = "efServiceID"
+		Me.efServiceID.Size = New System.Drawing.Size(70, 20)
+		Me.efServiceID.TabIndex = 0
 		'
 		'device
 		'
@@ -1358,7 +1365,7 @@ Partial Class FSimulator
 		Me.panelClientTimeout.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelClientTimeout.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelClientTimeout.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelClientTimeout.Controls.Add(Me.timeout, 1, 0)
+		Me.panelClientTimeout.Controls.Add(Me.udTimeout, 1, 0)
 		Me.panelClientTimeout.Controls.Add(Me.Label8, 0, 0)
 		Me.panelClientTimeout.Controls.Add(Me.cbInfinite, 2, 0)
 		Me.panelClientTimeout.Location = New System.Drawing.Point(567, 3)
@@ -1368,15 +1375,15 @@ Partial Class FSimulator
 		Me.panelClientTimeout.Size = New System.Drawing.Size(176, 32)
 		Me.panelClientTimeout.TabIndex = 2
 		'
-		'timeout
+		'udTimeout
 		'
-		Me.timeout.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.timeout.AutoSize = True
-		Me.timeout.Location = New System.Drawing.Point(57, 6)
-		Me.timeout.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-		Me.timeout.Name = "timeout"
-		Me.timeout.Size = New System.Drawing.Size(53, 20)
-		Me.timeout.TabIndex = 0
+		Me.udTimeout.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.udTimeout.AutoSize = True
+		Me.udTimeout.Location = New System.Drawing.Point(57, 6)
+		Me.udTimeout.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+		Me.udTimeout.Name = "udTimeout"
+		Me.udTimeout.Size = New System.Drawing.Size(53, 20)
+		Me.udTimeout.TabIndex = 0
 		'
 		'Label8
 		'
@@ -1440,7 +1447,7 @@ Partial Class FSimulator
 		Me.PanelIPPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.PanelIPPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.PanelIPPort.Controls.Add(Me.Label5, 0, 0)
-		Me.PanelIPPort.Controls.Add(Me.targetIP, 1, 0)
+		Me.PanelIPPort.Controls.Add(Me.efTargetIP, 1, 0)
 		Me.PanelIPPort.Location = New System.Drawing.Point(3, 3)
 		Me.PanelIPPort.Name = "PanelIPPort"
 		Me.PanelIPPort.RowCount = 1
@@ -1458,13 +1465,13 @@ Partial Class FSimulator
 		Me.Label5.TabIndex = 1
 		Me.Label5.Text = "IP"
 		'
-		'targetIP
+		'efTargetIP
 		'
-		Me.targetIP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.targetIP.Location = New System.Drawing.Point(26, 3)
-		Me.targetIP.Name = "targetIP"
-		Me.targetIP.Size = New System.Drawing.Size(92, 20)
-		Me.targetIP.TabIndex = 0
+		Me.efTargetIP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efTargetIP.Location = New System.Drawing.Point(26, 3)
+		Me.efTargetIP.Name = "efTargetIP"
+		Me.efTargetIP.Size = New System.Drawing.Size(92, 20)
+		Me.efTargetIP.TabIndex = 0
 		'
 		'TableLayoutPanel1
 		'
@@ -1476,7 +1483,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel1.ColumnCount = 2
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel1.Controls.Add(Me.targetPort, 1, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.udTargetPort, 1, 0)
 		Me.TableLayoutPanel1.Controls.Add(Me.Label9, 0, 0)
 		Me.TableLayoutPanel1.Location = New System.Drawing.Point(130, 3)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -1485,16 +1492,16 @@ Partial Class FSimulator
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(94, 26)
 		Me.TableLayoutPanel1.TabIndex = 6
 		'
-		'targetPort
+		'udTargetPort
 		'
-		Me.targetPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.targetPort.AutoSize = True
-		Me.targetPort.Location = New System.Drawing.Point(38, 3)
-		Me.targetPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-		Me.targetPort.Name = "targetPort"
-		Me.targetPort.Size = New System.Drawing.Size(53, 20)
-		Me.targetPort.TabIndex = 0
-		Me.targetPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.udTargetPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.udTargetPort.AutoSize = True
+		Me.udTargetPort.Location = New System.Drawing.Point(38, 3)
+		Me.udTargetPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+		Me.udTargetPort.Name = "udTargetPort"
+		Me.udTargetPort.Size = New System.Drawing.Size(53, 20)
+		Me.udTargetPort.TabIndex = 0
+		Me.udTargetPort.Value = New Decimal(New Integer() {1, 0, 0, 0})
 		'
 		'Label9
 		'
@@ -1625,15 +1632,21 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelRaw.AutoSize = True
 		Me.panelRaw.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelRaw.ColumnCount = 4
-		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.panelRaw.ColumnCount = 7
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelRaw.Controls.Add(Me.pbSendFreeMessage, 3, 0)
-		Me.panelRaw.Controls.Add(Me.command, 1, 0)
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.0!))
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelRaw.Controls.Add(Me.pbSendFreeMessage, 6, 0)
 		Me.panelRaw.Controls.Add(Me.lblFreeMessage, 0, 0)
-		Me.panelRaw.Controls.Add(Me.pbBuild, 2, 0)
+		Me.panelRaw.Controls.Add(Me.pbBuild, 5, 0)
+		Me.panelRaw.Controls.Add(Me.cbxCommands, 2, 0)
+		Me.panelRaw.Controls.Add(Me.pbAdd, 1, 0)
+		Me.panelRaw.Controls.Add(Me.pbRemove, 4, 0)
+		Me.panelRaw.Controls.Add(Me.efCommand, 3, 0)
 		Me.panelRaw.Location = New System.Drawing.Point(3, 191)
 		Me.panelRaw.Name = "panelRaw"
 		Me.panelRaw.RowCount = 1
@@ -1646,20 +1659,12 @@ Partial Class FSimulator
 		Me.pbSendFreeMessage.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSendFreeMessage.AutoSize = True
 		Me.pbSendFreeMessage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSendFreeMessage.Location = New System.Drawing.Point(917, 3)
+		Me.pbSendFreeMessage.Location = New System.Drawing.Point(916, 3)
 		Me.pbSendFreeMessage.Name = "pbSendFreeMessage"
-		Me.pbSendFreeMessage.Size = New System.Drawing.Size(87, 23)
-		Me.pbSendFreeMessage.TabIndex = 2
+		Me.pbSendFreeMessage.Size = New System.Drawing.Size(88, 23)
+		Me.pbSendFreeMessage.TabIndex = 3
 		Me.pbSendFreeMessage.Text = "Send message"
 		Me.pbSendFreeMessage.UseVisualStyleBackColor = True
-		'
-		'command
-		'
-		Me.command.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.command.Location = New System.Drawing.Point(132, 4)
-		Me.command.Name = "command"
-		Me.command.Size = New System.Drawing.Size(733, 20)
-		Me.command.TabIndex = 0
 		'
 		'lblFreeMessage
 		'
@@ -1677,12 +1682,67 @@ Partial Class FSimulator
 		Me.pbBuild.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbBuild.AutoSize = True
 		Me.pbBuild.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbBuild.Location = New System.Drawing.Point(871, 3)
+		Me.pbBuild.Location = New System.Drawing.Point(870, 3)
 		Me.pbBuild.Name = "pbBuild"
 		Me.pbBuild.Size = New System.Drawing.Size(40, 23)
-		Me.pbBuild.TabIndex = 1
+		Me.pbBuild.TabIndex = 2
 		Me.pbBuild.Text = "Build"
 		Me.pbBuild.UseVisualStyleBackColor = True
+		'
+		'cbxCommands
+		'
+		Me.cbxCommands.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbxCommands.ContextMenuStrip = Me.ContextMenuStrip1
+		Me.cbxCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		Me.cbxCommands.FormattingEnabled = True
+		Me.cbxCommands.Location = New System.Drawing.Point(174, 4)
+		Me.cbxCommands.Name = "cbxCommands"
+		Me.cbxCommands.Size = New System.Drawing.Size(154, 21)
+		Me.cbxCommands.TabIndex = 0
+		'
+		'ContextMenuStrip1
+		'
+		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RenameToolStripMenuItem})
+		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+		'
+		'RenameToolStripMenuItem
+		'
+		Me.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem"
+		Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.RenameToolStripMenuItem.Text = "Rename..."
+		'
+		'pbAdd
+		'
+		Me.pbAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbAdd.AutoSize = True
+		Me.pbAdd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbAdd.Location = New System.Drawing.Point(132, 3)
+		Me.pbAdd.Name = "pbAdd"
+		Me.pbAdd.Size = New System.Drawing.Size(36, 23)
+		Me.pbAdd.TabIndex = 14
+		Me.pbAdd.Text = "Add"
+		Me.pbAdd.UseVisualStyleBackColor = True
+		'
+		'pbRemove
+		'
+		Me.pbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbRemove.AutoSize = True
+		Me.pbRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbRemove.Location = New System.Drawing.Point(816, 3)
+		Me.pbRemove.Name = "pbRemove"
+		Me.pbRemove.Size = New System.Drawing.Size(48, 23)
+		Me.pbRemove.TabIndex = 15
+		Me.pbRemove.Text = "Delete"
+		Me.pbRemove.UseVisualStyleBackColor = True
+		'
+		'efCommand
+		'
+		Me.efCommand.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efCommand.Location = New System.Drawing.Point(334, 4)
+		Me.efCommand.Name = "efCommand"
+		Me.efCommand.Size = New System.Drawing.Size(476, 20)
+		Me.efCommand.TabIndex = 16
 		'
 		'FSimulator
 		'
@@ -1711,14 +1771,14 @@ Partial Class FSimulator
 		Me.serverToReachPanel14.PerformLayout()
 		Me.panelGatewayPort.ResumeLayout(False)
 		Me.panelGatewayPort.PerformLayout()
-		CType(Me.gatewayPort, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.udGatewayPort, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelGatewayServer.ResumeLayout(False)
 		Me.panelGatewayServer.PerformLayout()
 		Me.TableLayoutPanel12.ResumeLayout(False)
 		Me.TableLayoutPanel12.PerformLayout()
 		Me.panelGatewayDistantPort.ResumeLayout(False)
 		Me.panelGatewayDistantPort.PerformLayout()
-		CType(Me.gatewayServerPort, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.udGatewayServerPort, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelGatewayButtons.ResumeLayout(False)
 		Me.panelGatewayButtons.PerformLayout()
 		Me.panelServer.ResumeLayout(False)
@@ -1730,7 +1790,7 @@ Partial Class FSimulator
 		CType(Me.udServerDelay, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelServerPort.ResumeLayout(False)
 		Me.panelServerPort.PerformLayout()
-		CType(Me.localServerPort, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.udLocalServerPort, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelClient.ResumeLayout(False)
 		Me.panelClient.PerformLayout()
 		Me.panelClientNexo.ResumeLayout(False)
@@ -1749,20 +1809,21 @@ Partial Class FSimulator
 		Me.panelClientServer.PerformLayout()
 		Me.panelClientTimeout.ResumeLayout(False)
 		Me.panelClientTimeout.PerformLayout()
-		CType(Me.timeout, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.udTimeout, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelClientTarget.ResumeLayout(False)
 		Me.panelClientTarget.PerformLayout()
 		Me.PanelIPPort.ResumeLayout(False)
 		Me.PanelIPPort.PerformLayout()
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.TableLayoutPanel1.PerformLayout()
-		CType(Me.targetPort, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.udTargetPort, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.panelClientButtons1.ResumeLayout(False)
 		Me.panelClientButtons1.PerformLayout()
 		Me.panelClientTargets.ResumeLayout(False)
 		Me.panelClientTargets.PerformLayout()
 		Me.panelRaw.ResumeLayout(False)
 		Me.panelRaw.PerformLayout()
+		Me.ContextMenuStrip1.ResumeLayout(False)
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -1785,47 +1846,46 @@ Partial Class FSimulator
 	Friend WithEvents pbDevicePrint As Button
 	Friend WithEvents pbDeviceInput As Button
 	Friend WithEvents pbRefund As Button
-	Friend WithEvents command As TextBox
 	Friend WithEvents panelCommands As TableLayoutPanel
 	Friend WithEvents pbSendFreeMessage As Button
 	Friend WithEvents panelOptions As TableLayoutPanel
 	Friend WithEvents panelServer As TableLayoutPanel
 	Friend WithEvents pbStartServer As Button
 	Friend WithEvents panelServerPort As TableLayoutPanel
-	Friend WithEvents localServerPort As NumericUpDown
+	Friend WithEvents udLocalServerPort As NumericUpDown
 	Friend WithEvents Label1 As Label
 	Friend WithEvents cbConnected As CheckBox
 	Friend WithEvents pbServerActivity As Button
 	Friend WithEvents pbStopServer As Button
 	Friend WithEvents serverToReachPanel14 As TableLayoutPanel
 	Friend WithEvents panelClientTimeout As TableLayoutPanel
-	Friend WithEvents timeout As NumericUpDown
+	Friend WithEvents udTimeout As NumericUpDown
 	Friend WithEvents Label8 As Label
 	Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-	Friend WithEvents targetPort As NumericUpDown
+	Friend WithEvents udTargetPort As NumericUpDown
 	Friend WithEvents Label9 As Label
 	Friend WithEvents Label7 As Label
 	Friend WithEvents PanelIPPort As TableLayoutPanel
 	Friend WithEvents Label5 As Label
-	Friend WithEvents targetIP As TextBox
+	Friend WithEvents efTargetIP As TextBox
 	Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
 	Friend WithEvents efPOIID As TextBox
 	Friend WithEvents Label2 As Label
 	Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
-	Friend WithEvents deviceid As TextBox
+	Friend WithEvents efDeviceID As TextBox
 	Friend WithEvents Label4 As Label
 	Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-	Friend WithEvents serviceid As TextBox
+	Friend WithEvents efServiceID As TextBox
 	Friend WithEvents device As Label
 	Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
 	Friend WithEvents efSaleID As TextBox
 	Friend WithEvents Label3 As Label
 	Friend WithEvents panelGatewayDistantPort As TableLayoutPanel
-	Friend WithEvents gatewayServerPort As NumericUpDown
+	Friend WithEvents udGatewayServerPort As NumericUpDown
 	Friend WithEvents Label11 As Label
 	Friend WithEvents panelGateway As TableLayoutPanel
 	Friend WithEvents panelGatewayPort As TableLayoutPanel
-	Friend WithEvents gatewayPort As NumericUpDown
+	Friend WithEvents udGatewayPort As NumericUpDown
 	Friend WithEvents Label12 As Label
 	Friend WithEvents panelGatewayButtons As TableLayoutPanel
 	Friend WithEvents pbStopGateway As Button
@@ -1851,7 +1911,7 @@ Partial Class FSimulator
 	Friend WithEvents pbConnect As Button
 	Friend WithEvents TableLayoutPanel12 As TableLayoutPanel
 	Friend WithEvents Label6 As Label
-	Friend WithEvents gatewayServerIP As TextBox
+	Friend WithEvents efGatewayServerIP As TextBox
 	Friend WithEvents panelGatewayServer As TableLayoutPanel
 	Friend WithEvents panelClientTarget As TableLayoutPanel
 	Friend WithEvents panelClientTargets As TableLayoutPanel
@@ -1875,4 +1935,10 @@ Partial Class FSimulator
 	Friend WithEvents cbUseConnectionSettings As CheckBox
 	Friend WithEvents efConnectionReply As TextBox
 	Friend WithEvents pbConnectionSettings As Button
+	Friend WithEvents pbAdd As Button
+	Friend WithEvents pbRemove As Button
+	Friend WithEvents cbxCommands As ComboBox
+	Friend WithEvents efCommand As TextBox
+	Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+	Friend WithEvents RenameToolStripMenuItem As ToolStripMenuItem
 End Class

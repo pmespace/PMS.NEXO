@@ -58,8 +58,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -114,7 +112,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -173,7 +175,7 @@ namespace NEXO
 	[Guid("B1DB0498-3008-4E26-B04D-1833C36147A4")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoLoyalty: NexoService, INexoLoyalty
+	public class NexoLoyalty : NexoService, INexoLoyalty
 	{
 		#region constructor
 		public NexoLoyalty() : base(MessageCategoryEnumeration.Loyalty)
@@ -191,51 +193,51 @@ namespace NEXO
 		#region request inner properties
 		public string RequestSaleTransactionID
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID);
-			set { RequestData.SaleData.SaleTransactionID.TransactionID = value; ReplySaleTransactionID = RequestSaleTransactionID; }
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) { RequestData.SaleData.SaleTransactionID.TransactionID = value; ReplySaleTransactionID = RequestSaleTransactionID; } }
 		}
 		public string RequestSaleTransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp);
-			set { RequestData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; ReplySaleTransactionTimestamp = RequestSaleTransactionTimestamp; }
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) { RequestData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; ReplySaleTransactionTimestamp = RequestSaleTransactionTimestamp; } }
 		}
 		public string RequestOriginalPOITransactionID
 		{
-			get => CMisc.Trimmed(RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TransactionID);
-			set => RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TransactionID = value;
+			get => (null != RequestData && null != RequestData.LoyaltyTransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.LoyaltyTransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID) RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TransactionID = value; }
 		}
 		public string RequestOriginalPOITransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp);
-			set => RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != RequestData && null != RequestData.LoyaltyTransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.LoyaltyTransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction && null != RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID) RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public string RequestLoyaltyTransactionType
 		{
-			get => CMisc.Trimmed(RequestData.LoyaltyTransaction.LoyaltyTransactionType1);
-			set => RequestData.LoyaltyTransaction.LoyaltyTransactionType1 = value;
+			get => (null != RequestData && null != RequestData.LoyaltyTransaction ? CMisc.Trimmed(RequestData.LoyaltyTransaction.LoyaltyTransactionType1) : null);
+			set { if (null != RequestData && null != RequestData.LoyaltyTransaction) RequestData.LoyaltyTransaction.LoyaltyTransactionType1 = value; }
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplySaleTransactionID
 		{
-			get => CMisc.Trimmed(ReplyData.SaleData.SaleTransactionID.TransactionID);
-			set => ReplyData.SaleData.SaleTransactionID.TransactionID = value;
+			get => (null != ReplyData && null != ReplyData.SaleData && null != ReplyData.SaleData.SaleTransactionID ? CMisc.Trimmed(ReplyData.SaleData.SaleTransactionID.TransactionID) : null);
+			set { if (null != ReplyData && null != ReplyData.SaleData && null != ReplyData.SaleData.SaleTransactionID) ReplyData.SaleData.SaleTransactionID.TransactionID = value; }
 		}
 		public string ReplySaleTransactionTimestamp
 		{
-			get => CMisc.Trimmed(ReplyData.SaleData.SaleTransactionID.TimeStamp);
-			set => ReplyData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != ReplyData && null != ReplyData.SaleData && null != ReplyData.SaleData.SaleTransactionID ? CMisc.Trimmed(ReplyData.SaleData.SaleTransactionID.TimeStamp) : null);
+			set { if (null != ReplyData && null != ReplyData.SaleData && null != ReplyData.SaleData.SaleTransactionID) ReplyData.SaleData.SaleTransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public string ReplyPOITransactionID
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID);
-			set => ReplyData.POIData.POITransactionID.TransactionID = value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TransactionID = value; }
 		}
 		public string ReplyPOITransactionTimestamp
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
-			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		#endregion
 

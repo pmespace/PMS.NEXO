@@ -23,16 +23,14 @@ namespace NEXO
 		string RequestSaleReferenceID { get; set; }
 		[DispId(6)]
 		double RequestReversedAmount { get; set; }
-		//double RequestReversedAmount { get; set; }
 		[DispId(7)]
-		string RequestReversalReason { get; set; }
+		ReversalReasonEnumeration RequestReversalReason { get; set; }
 		[DispId(8)]
 		string ReplyPOITransactionID { get; set; }
 		[DispId(9)]
 		string ReplyPOITimestamp { get; set; }
 		[DispId(10)]
 		double ReplyReversedAmount { get; set; }
-		//double ReplyReversedAmount { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -57,8 +55,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -113,7 +109,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -173,7 +173,7 @@ namespace NEXO
 	[Guid("9DF21BBA-CF43-497C-B0AD-54647E3D8918")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoReversal: NexoService, INexoReversal
+	public class NexoReversal : NexoService, INexoReversal
 	{
 		#region constructor
 		public NexoReversal() : base(MessageCategoryEnumeration.Reversal)
@@ -192,53 +192,51 @@ namespace NEXO
 		#region request inner properties
 		public string RequestOriginalPOITransactionID
 		{
-			get => CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TransactionID);
-			set { RequestData.OriginalPOITransaction.POITransactionID.TransactionID = value; ReplyData.OriginalPOITransaction.POITransactionID.TransactionID = RequestOriginalPOITransactionID; }
+			get => (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID) RequestData.OriginalPOITransaction.POITransactionID.TransactionID = value; }
 		}
 		public string RequestOriginalPOITransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TimeStamp);
-			set { RequestData.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; ReplyData.OriginalPOITransaction.POITransactionID.TimeStamp = RequestOriginalPOITransactionTimestamp; }
+			get => (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID) RequestData.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public string RequestSaleReferenceID
 		{
 #if NEXO30
-			get => CMisc.Trimmed(RequestData.SaleReferenceID);
-			set => RequestData.SaleReferenceID = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.SaleReferenceID) : null);
+			set { if (null != RequestData) RequestData.SaleReferenceID = value; }
 #elif NEXO31
-			get => CMisc.Trimmed(RequestData.SaleData.SaleReferenceID);
-			set => RequestData.SaleData.SaleReferenceID = value;
+			get => (null != RequestData && null != RequestData.SaleData ? CMisc.Trimmed(RequestData.SaleData.SaleReferenceID) : null);
+			set { if (null != RequestData && null != RequestData.SaleData) RequestData.SaleData.SaleReferenceID = value; }
 #endif
 		}
-		//public double RequestReversedAmount
 		public double RequestReversedAmount
 		{
-			get => RequestData.ReversedAmountSpecified ? RequestData.ReversedAmount : 0;
-			set => RequestData.ReversedAmount = value;
+			get => (null != RequestData ? RequestData.ReversedAmountSpecified ? RequestData.ReversedAmount : 0 : 0);
+			set { if (null != RequestData) RequestData.ReversedAmount = value; }
 		}
-		public string RequestReversalReason
+		public ReversalReasonEnumeration RequestReversalReason
 		{
-			get => CMisc.Trimmed(RequestData.ReversalReason);
-			set => RequestData.ReversalReason = value;
+			get => (null != RequestData ? (ReversalReasonEnumeration)CMisc.GetEnumValue(typeof(ReversalReasonEnumeration), CMisc.Trimmed(RequestData.ReversalReason)) : (ReversalReasonEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.ReversalReason = CMisc.GetEnumName(typeof(SoundActionEnumeration), value); }
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplyPOITransactionID
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID);
-			set => ReplyData.POIData.POITransactionID.TransactionID = value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TransactionID = value; }
 		}
 		public string ReplyPOITimestamp
 		{
-			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
-			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp) : null);
+			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
-		//public double ReplyReversedAmount
 		public double ReplyReversedAmount
 		{
-			get => ReplyData.ReversedAmountSpecified ? ReplyData.ReversedAmount : 0;
-			set => ReplyData.ReversedAmount = value;
+			get => (null != ReplyData ? ReplyData.ReversedAmountSpecified ? ReplyData.ReversedAmount : 0 : 0);
+			set { if (null != ReplyData) ReplyData.ReversedAmount = value; }
 		}
 		#endregion
 

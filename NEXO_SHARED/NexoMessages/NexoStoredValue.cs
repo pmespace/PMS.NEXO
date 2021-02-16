@@ -43,8 +43,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -99,7 +97,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -158,7 +160,7 @@ namespace NEXO
 	[Guid("44CCE01A-FB6C-4C1F-912B-D46DED85B1BE")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoStoredValue: NexoService, INexoStoredValue
+	public class NexoStoredValue : NexoService, INexoStoredValue
 	{
 		#region constructor
 		public NexoStoredValue() : base(MessageCategoryEnumeration.StoredValue)
@@ -176,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public string RequestSaleTransactionID
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID);
-			set => RequestData.SaleData.SaleTransactionID.TransactionID = value;
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TransactionID = value; }
 		}
 		public string RequestSaleTransactionTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp);
-			set => RequestData.SaleData.SaleTransactionID.TimeStamp = value;
+			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp) : null);
+			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TimeStamp = value; }
 		}
 		#endregion
 

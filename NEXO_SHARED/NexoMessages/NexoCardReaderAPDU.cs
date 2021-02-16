@@ -39,8 +39,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -95,7 +93,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -154,7 +156,7 @@ namespace NEXO
 	[Guid("18285838-CA0F-41E9-A69A-CF217A99A3E3")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoCardReaderAPDU: NexoService, INexoCardReaderAPDU
+	public class NexoCardReaderAPDU : NexoService, INexoCardReaderAPDU
 	{
 		#region constructor
 		public NexoCardReaderAPDU() : base(MessageCategoryEnumeration.CardReaderAPDU)

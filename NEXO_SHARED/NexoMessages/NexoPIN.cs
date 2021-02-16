@@ -43,8 +43,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -99,7 +97,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -158,7 +160,7 @@ namespace NEXO
 	[Guid("E86AFFEC-3811-41BD-87D5-EBF9B85A4FD0")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoPIN: NexoService, INexoPIN
+	public class NexoPIN : NexoService, INexoPIN
 	{
 		#region constructor
 		public NexoPIN() : base(MessageCategoryEnumeration.PIN)
@@ -176,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public PINRequestTypeEnumeration RequestPINRequestType
 		{
-			get => (PINRequestTypeEnumeration)CMisc.GetEnumValue(typeof(PINRequestTypeEnumeration), CMisc.Trimmed(RequestData.PINRequestType1));
-			set => RequestData.PINRequestType1 = CMisc.GetEnumName(typeof(PINRequestTypeEnumeration), value);
+			get => (null != RequestData ? (PINRequestTypeEnumeration)CMisc.GetEnumValue(typeof(PINRequestTypeEnumeration), CMisc.Trimmed(RequestData.PINRequestType1)) : (PINRequestTypeEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.PINRequestType1 = CMisc.GetEnumName(typeof(PINRequestTypeEnumeration), value); }
 		}
 		public uint RequestMaxWaitingTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true);
-			set => RequestData.MaxWaitingTime = value.ToString();
+			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true) : 0);
+			set { if (null != RequestData) RequestData.MaxWaitingTime = value.ToString(); }
 		}
 		#endregion
 

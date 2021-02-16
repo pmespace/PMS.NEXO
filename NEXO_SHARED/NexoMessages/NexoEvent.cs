@@ -49,8 +49,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -105,7 +103,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -164,7 +166,7 @@ namespace NEXO
 	[Guid("C30F6D21-9370-494D-B7D8-8BE6A945AA07")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoEvent: NexoNotification, INexoEvent
+	public class NexoEvent : NexoNotification, INexoEvent
 	{
 		#region constructor
 		public NexoEvent()
@@ -187,28 +189,28 @@ namespace NEXO
 		private ResponseType fakeResponse = new ResponseType();
 		public string EventTimestamp
 		{
-			get => CMisc.Trimmed(RequestData.TimeStamp);
-			set => RequestData.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.TimeStamp) : null);
+			set { if (null != RequestData) RequestData.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
 		}
 		public EventToNotifyEnumeration EventToNotify
 		{
-			get => (EventToNotifyEnumeration)CMisc.GetEnumValue(typeof(EventToNotifyEnumeration), CMisc.Trimmed(RequestData.EventToNotify));
-			set => RequestData.EventToNotify = CMisc.GetEnumName(typeof(EventToNotifyEnumeration), value);
+			get => (null != RequestData ? (EventToNotifyEnumeration)CMisc.GetEnumValue(typeof(EventToNotifyEnumeration), CMisc.Trimmed(RequestData.EventToNotify)) : (EventToNotifyEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.EventToNotify = CMisc.GetEnumName(typeof(EventToNotifyEnumeration), value); }
 		}
 		public string EventDetails
 		{
-			get => CMisc.Trimmed(RequestData.EventDetails);
-			set => RequestData.EventDetails = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.EventDetails) : null);
+			set { if (null != RequestData) RequestData.EventDetails = value; }
 		}
 		public NexoByteSequence EventRejectedMessage
 		{
-			get => new NexoByteSequence() { Value = RequestData.RejectedMessage };
-			set => RequestData.RejectedMessage = value.Value;
+			get => (null != RequestData ? new NexoByteSequence() { Value = RequestData.RejectedMessage } : null);
+			set { if (null != RequestData) RequestData.RejectedMessage = value.Value; }
 		}
 		public bool EventMaintenanceRequiredFlag
 		{
-			get => RequestData.MaintenanceRequiredFlag;
-			set => RequestData.MaintenanceRequiredFlag = value;
+			get => (null != RequestData ? RequestData.MaintenanceRequiredFlag : false);
+			set { if (null != RequestData) RequestData.MaintenanceRequiredFlag = value; }
 		}
 		public string EventCustomerLanguage
 		{

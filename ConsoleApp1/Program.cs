@@ -34,7 +34,11 @@ namespace ConsoleApp1
 				NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings()
 				{
 					ConnectionSettings = null,
-					StreamClientSettings = CStreamClientSettings.Prepare(settings.IP, settings.Port),
+					StreamClientSettings = new CStreamClientSettings()
+					{
+						IP = settings.IP,
+						Port = settings.Port,
+					},
 				};
 				Console.WriteLine($"IP: {settings.IP}");
 				Console.WriteLine($"Port: {settings.Port}");

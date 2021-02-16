@@ -60,13 +60,9 @@ namespace XSDEx
 			AddDispID = true;
 			DeclareClassInterface = true;
 			PrivateByInternal = true;
-			PrivateByInternalVisibility = MemberAttributes.Assembly;
 
-			ManageInitFlag = false;
-			CreateArrayInitializer = false;
-			GetReturnsNullIfArrayIsEmpty = false;
-			AutomaticArrays = true;
-			EmptyStringArrayToNull = true;
+			ArrayCreateInitializer = false;
+			ArrayGetReturnsNullEmpty = false;
 
 			CreateArrayAccessors = true;
 
@@ -77,72 +73,74 @@ namespace XSDEx
 		public enumLanguage Language;
 		public Files Files { get; set; }
 		public string Nmspace { get; set; }
+		/// <summary>
+		/// Indicate use Types from inside the XSD
+		/// </summary>
 		public bool UseTypes { get; set; }
+		/// <summary>
+		/// Indicate use Elements from inside the XSD
+		/// </summary>
 		public bool UseElements { get; set; }
+		/// <summary>
+		/// Indicate use Notations inside the XSD
+		/// </summary>
 		public bool UseNotations { get; set; }
+		/// <summary>
+		/// Interface type to use when generating the interface
+		/// </summary>
 		public ClassInterfaceType ClassInterface { get; set; }
+		/// <summary>
+		/// Com interface to use when generating the classes
+		/// </summary>
 		public ComInterfaceType ComInterface { get; set; }
 		public bool AddDispID { get; set; }
 		public bool MakeEnumComVisible { get; set; }
+		/// <summary>
+		/// Make the class visible and inherit its interface to be visible on COM
+		/// </summary>
 		public bool MakeClassComVisible { get; set; }
+		/// <summary>
+		/// Indicates an interface must be created for a class
+		/// </summary>
 		public bool DeclareClassInterface { get; set; }
+		/// <summary>
+		/// Indicate class type conversion must be analysed or not (impacts XSDParams)
+		/// </summary>
 		public bool ConvertTypes { get; set; }
 		public bool DateTimeToString { get; set; }
 		public bool NumericToString { get; set; }
 		public bool BooleanToString { get; set; }
-		public bool CreateArrayInitializer
+		/// <summary>
+		/// Create an array initializer at the field level or not
+		/// </summary>
+		public bool ArrayCreateInitializer
 		{
 			get => _providearraysinitializer;
 			set
 			{
 				_providearraysinitializer = value;
-				if (_providearraysinitializer)
-					AutomaticArrays = false;
 			}
 		}
 		private bool _providearraysinitializer = false;
-		public bool GetReturnsNullIfArrayIsEmpty
+		/// <summary>
+		/// Get returns null if an array is empty
+		/// </summary>
+		public bool ArrayGetReturnsNullEmpty
 		{
 			get => _sendnullifemptyarray;
 			set
 			{
 				_sendnullifemptyarray = value;
-				if (_sendnullifemptyarray)
-					AutomaticArrays = false;
 			}
 		}
 		private bool _sendnullifemptyarray = false;
-		public bool AutomaticArrays
-		{
-			get => _automaticallymanagearrays;
-			set
-			{
-				_automaticallymanagearrays = value;
-				if (AutomaticArrays)
-				{
-					CreateArrayInitializer = false;
-					GetReturnsNullIfArrayIsEmpty = false;
-					EmptyStringArrayToNull = false;
-				}
-			}
-		}
-		private bool _automaticallymanagearrays = true;
+		/// <summary>
+		/// Replace private by internal
+		/// </summary>
 		public bool PrivateByInternal { get; set; }
-		public MemberAttributes PrivateByInternalVisibility { get; set; }
-		public bool ManageInitFlag { get; set; }
-		public bool EmptyStringArrayToNull
-		{
-			get => _emptystringarraytonull;
-			set
-			{
-				_emptystringarraytonull = value;
-				if (EmptyStringArrayToNull)
-				{
-					AutomaticArrays = false;
-				}
-			}
-		}
-		private bool _emptystringarraytonull = true;
+		/// <summary>
+		/// Indicate whether array accessors must be created or not
+		/// </summary>
 		public bool CreateArrayAccessors { get; set; }
 		public string DerivedClassName { get; set; }
 		public string Preprocessor { get; set; }

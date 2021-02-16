@@ -1,177 +1,326 @@
+#if NEXO40
 namespace NEXO {
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8c0991fd-9116-4bf2-938e-d5a8a13c9f33")]
+    [System.Runtime.InteropServices.GuidAttribute("aa6c1a15-d1ab-454b-aad0-f1cb8c61874e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIReconciliationResponseV01 : ISaleToPOIReconciliationResponseV01 {
-        internal Header37 hdrField = new Header37();
-        internal ReconciliationResponse3 rcncltnRspnField = new ReconciliationResponse3();
-        internal ContentInformationType18 sctyTrlrField = new ContentInformationType18();
-        internal bool xsdSaleToPOIReconciliationResponseV01InitFlagField = false;
+        private Header37 hdrField = new Header37();
+        private ReconciliationResponse3 rcncltnRspnField = new ReconciliationResponse3();
+        private ContentInformationType18 sctyTrlrField = new ContentInformationType18();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public Header37 Hdr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.hdrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.hdrField;
             }
             set {
-                this.xsdSaleToPOIReconciliationResponseV01InitFlagField = true;
-                this.hdrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.hdrField = new Header37();
+                }
+                else {
+                    this.hdrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ReconciliationResponse3 RcncltnRspn {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rcncltnRspnField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rcncltnRspnField;
             }
             set {
-                this.xsdSaleToPOIReconciliationResponseV01InitFlagField = true;
-                this.rcncltnRspnField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rcncltnRspnField = new ReconciliationResponse3();
+                }
+                else {
+                    this.rcncltnRspnField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ContentInformationType18 SctyTrlr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.sctyTrlrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.sctyTrlrField;
             }
             set {
-                this.xsdSaleToPOIReconciliationResponseV01InitFlagField = true;
-                this.sctyTrlrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.sctyTrlrField = new ContentInformationType18();
+                }
+                else {
+                    this.sctyTrlrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdSaleToPOIReconciliationResponseV01InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdSaleToPOIReconciliationResponseV01InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.Hdr.XSD_HasBeenSetProperty)
+                            || this.RcncltnRspn.XSD_HasBeenSetProperty)
+                            || this.SctyTrlr.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdSaleToPOIReconciliationResponseV01InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Hdr = null;
+                    this.RcncltnRspn = null;
+                    this.SctyTrlr = null;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("55ee58ab-1617-44e3-aa3d-246e13333b6c")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISaleToPOIReconciliationResponseV01 {
-        /// <remarks/>
-        [DispId(1)]
-        Header37 Hdr {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        ReconciliationResponse3 RcncltnRspn {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        ContentInformationType18 SctyTrlr {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdSaleToPOIReconciliationResponseV01InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Hdr != null)) {
+                    this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.RcncltnRspn != null)) {
+                    this.RcncltnRspn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.SctyTrlr != null)) {
+                    this.SctyTrlr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b232e757-5bb4-4826-adeb-0e678dec96fc")]
+    [System.Runtime.InteropServices.GuidAttribute("1255b451-9acd-45fb-93dc-6ae5f115a652")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationResponse3 : IReconciliationResponse3 {
-        internal CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
-        internal CardPaymentContext27 cntxtField = new CardPaymentContext27();
-        internal ReconciliationResponseData1 rcncltnRspnDataField = new ReconciliationResponseData1();
-        internal ResponseType9 rspnField = new ResponseType9();
-        internal SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
-        internal bool xsdReconciliationResponse3InitFlagField = false;
+        private CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
+        private CardPaymentContext27 cntxtField = new CardPaymentContext27();
+        private ReconciliationResponseData1 rcncltnRspnDataField = new ReconciliationResponseData1();
+        private ResponseType9 rspnField = new ResponseType9();
+        private SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public CardPaymentEnvironment73 Envt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.envtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.envtField;
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = true;
-                this.envtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.envtField = new CardPaymentEnvironment73();
+                }
+                else {
+                    this.envtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public CardPaymentContext27 Cntxt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.cntxtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.cntxtField;
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = true;
-                this.cntxtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.cntxtField = new CardPaymentContext27();
+                }
+                else {
+                    this.cntxtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ReconciliationResponseData1 RcncltnRspnData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rcncltnRspnDataField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rcncltnRspnDataField;
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = true;
-                this.rcncltnRspnDataField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rcncltnRspnDataField = new ReconciliationResponseData1();
+                }
+                else {
+                    this.rcncltnRspnDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ResponseType9 Rspn {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rspnField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rspnField;
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = true;
-                this.rspnField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rspnField = new ResponseType9();
+                }
+                else {
+                    this.rspnField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SplmtryData")]
         public SupplementaryData1[] SplmtryData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.splmtryDataField == null)
                             || (this.splmtryDataField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.splmtryDataField;
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = true;
-                this.splmtryDataField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.splmtryDataField = new SupplementaryData1[0];
+                }
+                else {
+                    this.splmtryDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdReconciliationResponse3InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdReconciliationResponse3InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((((this.XSD_HasBeenSetField || this.Envt.XSD_HasBeenSetProperty)
+                            || this.Cntxt.XSD_HasBeenSetProperty)
+                            || this.RcncltnRspnData.XSD_HasBeenSetProperty)
+                            || this.Rspn.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdReconciliationResponse3InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Envt = null;
+                    this.Cntxt = null;
+                    this.RcncltnRspnData = null;
+                    this.Rspn = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Envt != null)) {
+                    this.Envt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.Cntxt != null)) {
+                    this.Cntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.RcncltnRspnData != null)) {
+                    this.RcncltnRspnData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.Rspn != null)) {
+                    this.Rspn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int SplmtryDataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.splmtryDataField == null)) {
                 return 0;
             }
             else {
                 return this.splmtryDataField.Length;
             }
+            // END ADDED BY XSD
         }
         public SupplementaryData1 SplmtryDataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return default(SupplementaryData1);
@@ -189,8 +338,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(SupplementaryData1);
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataSetItem(int index, SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -203,8 +354,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataAddItem(SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -223,8 +376,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -250,79 +405,33 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("7f6987d0-6aab-4e29-b6aa-aa7cbcb7b41f")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IReconciliationResponse3 {
-        /// <remarks/>
-        [DispId(1)]
-        CardPaymentEnvironment73 Envt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        CardPaymentContext27 Cntxt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        ReconciliationResponseData1 RcncltnRspnData {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        ResponseType9 Rspn {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        SupplementaryData1[] SplmtryData {
-            get;
-            set;
-        }
-        [DispId(11)]
-        bool xsdReconciliationResponse3InitFlag {
-            get;
-            set;
-        }
-        [DispId(12)]
-        int SplmtryDataSize();
-        [DispId(13)]
-        SupplementaryData1 SplmtryDataGetItem(int index);
-        [DispId(14)]
-        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
-        [DispId(15)]
-        bool SplmtryDataAddItem(SupplementaryData1 value);
-        [DispId(16)]
-        bool SplmtryDataRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d7140f26-3f27-40b9-8499-07c62078a153")]
+    [System.Runtime.InteropServices.GuidAttribute("c1b3d3c8-8fb2-42eb-9a64-2afd9f48079e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationResponseData1 : IReconciliationResponseData1 {
-        internal ReconciliationType1Code rcncltnTpField = new ReconciliationType1Code();
-        internal string pOIRcncltnIdField;
-        internal TransactionTotalsSet1[] txTtlsField = new TransactionTotalsSet1[0];
-        internal bool xsdReconciliationResponseData1InitFlagField = false;
+        private ReconciliationType1Code rcncltnTpField;
+        private string pOIRcncltnIdField;
+        private TransactionTotalsSet1[] txTtlsField = new TransactionTotalsSet1[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public ReconciliationType1Code RcncltnTp {
             get {
                 return this.rcncltnTpField;
             }
             set {
-                this.xsdReconciliationResponseData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rcncltnTpField = value;
             }
         }
@@ -332,7 +441,9 @@ namespace NEXO {
                 return this.pOIRcncltnIdField;
             }
             set {
-                this.xsdReconciliationResponseData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pOIRcncltnIdField = value;
             }
         }
@@ -340,35 +451,69 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute("TxTtls")]
         public TransactionTotalsSet1[] TxTtls {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.txTtlsField == null)
                             || (this.txTtlsField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.txTtlsField;
             }
             set {
-                this.xsdReconciliationResponseData1InitFlagField = true;
-                this.txTtlsField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.txTtlsField = new TransactionTotalsSet1[0];
+                }
+                else {
+                    this.txTtlsField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdReconciliationResponseData1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdReconciliationResponseData1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdReconciliationResponseData1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
             }
         }
         public int TxTtlsSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.txTtlsField == null)) {
                 return 0;
             }
             else {
                 return this.txTtlsField.Length;
             }
+            // END ADDED BY XSD
         }
         public TransactionTotalsSet1 TxTtlsGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.txTtlsField == default(TransactionTotalsSet1[]))) {
                     return default(TransactionTotalsSet1);
@@ -386,8 +531,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(TransactionTotalsSet1);
             }
+            // END ADDED BY XSD
         }
         public bool TxTtlsSetItem(int index, TransactionTotalsSet1 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.txTtlsField == default(TransactionTotalsSet1[]))) {
                     return false;
@@ -400,8 +547,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool TxTtlsAddItem(TransactionTotalsSet1 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.txTtlsField == default(TransactionTotalsSet1[]))) {
                     return false;
@@ -420,8 +569,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool TxTtlsRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.txTtlsField == default(TransactionTotalsSet1[]))) {
                     return false;
@@ -447,76 +598,42 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("ed242a8e-9791-45b3-8e36-6e622686adb3")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IReconciliationResponseData1 {
-        /// <remarks/>
-        [DispId(1)]
-        ReconciliationType1Code RcncltnTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string POIRcncltnId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        TransactionTotalsSet1[] TxTtls {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdReconciliationResponseData1InitFlag {
-            get;
-            set;
-        }
-        [DispId(8)]
-        int TxTtlsSize();
-        [DispId(9)]
-        TransactionTotalsSet1 TxTtlsGetItem(int index);
-        [DispId(10)]
-        bool TxTtlsSetItem(int index, TransactionTotalsSet1 value);
-        [DispId(11)]
-        bool TxTtlsAddItem(TransactionTotalsSet1 value);
-        [DispId(12)]
-        bool TxTtlsRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d35ecf4b-35d6-45b6-a38e-ce493e6f41e0")]
+    [System.Runtime.InteropServices.GuidAttribute("43d9e950-748d-4e03-99e9-ad007bce3ebf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionTotalsSet1 : ITransactionTotalsSet1 {
-        internal PaymentInstrumentType1Code pmtInstrmTpField = new PaymentInstrumentType1Code();
-        internal string acqrrIdField;
-        internal string rcncltnIdField;
-        internal string saleRcncltnIdField;
-        internal string brndField;
-        internal string pOIIdField;
-        internal string saleIdField;
-        internal string cshrIdField;
-        internal string shftNbField;
-        internal Organisation26[] spnsrdMrchntField = new Organisation26[0];
-        internal TransactionTotals8 txTtlField = new TransactionTotals8();
-        internal LoyaltyTransactionTotals1[] lltyTxTtlField = new LoyaltyTransactionTotals1[0];
-        internal bool xsdTransactionTotalsSet1InitFlagField = false;
+        private PaymentInstrumentType1Code pmtInstrmTpField;
+        private string acqrrIdField;
+        private string rcncltnIdField;
+        private string saleRcncltnIdField;
+        private string brndField;
+        private string pOIIdField;
+        private string saleIdField;
+        private string cshrIdField;
+        private string shftNbField;
+        private Organisation26[] spnsrdMrchntField = new Organisation26[0];
+        private TransactionTotals8 txTtlField = new TransactionTotals8();
+        private LoyaltyTransactionTotals1[] lltyTxTtlField = new LoyaltyTransactionTotals1[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public PaymentInstrumentType1Code PmtInstrmTp {
             get {
                 return this.pmtInstrmTpField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pmtInstrmTpField = value;
             }
         }
@@ -526,7 +643,9 @@ namespace NEXO {
                 return this.acqrrIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.acqrrIdField = value;
             }
         }
@@ -536,7 +655,9 @@ namespace NEXO {
                 return this.rcncltnIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rcncltnIdField = value;
             }
         }
@@ -546,7 +667,9 @@ namespace NEXO {
                 return this.saleRcncltnIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.saleRcncltnIdField = value;
             }
         }
@@ -556,7 +679,9 @@ namespace NEXO {
                 return this.brndField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.brndField = value;
             }
         }
@@ -566,7 +691,9 @@ namespace NEXO {
                 return this.pOIIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pOIIdField = value;
             }
         }
@@ -576,7 +703,9 @@ namespace NEXO {
                 return this.saleIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.saleIdField = value;
             }
         }
@@ -586,7 +715,9 @@ namespace NEXO {
                 return this.cshrIdField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.cshrIdField = value;
             }
         }
@@ -596,7 +727,9 @@ namespace NEXO {
                 return this.shftNbField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.shftNbField = value;
             }
         }
@@ -604,60 +737,118 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute("SpnsrdMrchnt")]
         public Organisation26[] SpnsrdMrchnt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.spnsrdMrchntField == null)
                             || (this.spnsrdMrchntField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.spnsrdMrchntField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
-                this.spnsrdMrchntField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.spnsrdMrchntField = new Organisation26[0];
+                }
+                else {
+                    this.spnsrdMrchntField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public TransactionTotals8 TxTtl {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.txTtlField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.txTtlField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
-                this.txTtlField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.txTtlField = new TransactionTotals8();
+                }
+                else {
+                    this.txTtlField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("LltyTxTtl")]
         public LoyaltyTransactionTotals1[] LltyTxTtl {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.lltyTxTtlField == null)
                             || (this.lltyTxTtlField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.lltyTxTtlField;
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = true;
-                this.lltyTxTtlField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.lltyTxTtlField = new LoyaltyTransactionTotals1[0];
+                }
+                else {
+                    this.lltyTxTtlField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdTransactionTotalsSet1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdTransactionTotalsSet1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (this.XSD_HasBeenSetField || this.TxTtl.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdTransactionTotalsSet1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.TxTtl = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.TxTtl != null)) {
+                    this.TxTtl.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int SpnsrdMrchntSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.spnsrdMrchntField == null)) {
                 return 0;
             }
             else {
                 return this.spnsrdMrchntField.Length;
             }
+            // END ADDED BY XSD
         }
         public Organisation26 SpnsrdMrchntGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.spnsrdMrchntField == default(Organisation26[]))) {
                     return default(Organisation26);
@@ -675,8 +866,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(Organisation26);
             }
+            // END ADDED BY XSD
         }
         public bool SpnsrdMrchntSetItem(int index, Organisation26 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.spnsrdMrchntField == default(Organisation26[]))) {
                     return false;
@@ -689,8 +882,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SpnsrdMrchntAddItem(Organisation26 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.spnsrdMrchntField == default(Organisation26[]))) {
                     return false;
@@ -709,8 +904,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SpnsrdMrchntRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.spnsrdMrchntField == default(Organisation26[]))) {
                     return false;
@@ -736,16 +933,20 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public int LltyTxTtlSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.lltyTxTtlField == null)) {
                 return 0;
             }
             else {
                 return this.lltyTxTtlField.Length;
             }
+            // END ADDED BY XSD
         }
         public LoyaltyTransactionTotals1 LltyTxTtlGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.lltyTxTtlField == default(LoyaltyTransactionTotals1[]))) {
                     return default(LoyaltyTransactionTotals1);
@@ -763,8 +964,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(LoyaltyTransactionTotals1);
             }
+            // END ADDED BY XSD
         }
         public bool LltyTxTtlSetItem(int index, LoyaltyTransactionTotals1 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.lltyTxTtlField == default(LoyaltyTransactionTotals1[]))) {
                     return false;
@@ -777,8 +980,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool LltyTxTtlAddItem(LoyaltyTransactionTotals1 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.lltyTxTtlField == default(LoyaltyTransactionTotals1[]))) {
                     return false;
@@ -797,8 +1002,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool LltyTxTtlRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.lltyTxTtlField == default(LoyaltyTransactionTotals1[]))) {
                     return false;
@@ -824,112 +1031,11 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("3be92d36-e177-4c41-8f39-083c8e603333")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ITransactionTotalsSet1 {
-        /// <remarks/>
-        [DispId(1)]
-        PaymentInstrumentType1Code PmtInstrmTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string AcqrrId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        string RcncltnId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        string SaleRcncltnId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        string Brnd {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        string POIId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        string SaleId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(15)]
-        string CshrId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(17)]
-        string ShftNb {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(19)]
-        Organisation26[] SpnsrdMrchnt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(21)]
-        TransactionTotals8 TxTtl {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(23)]
-        LoyaltyTransactionTotals1[] LltyTxTtl {
-            get;
-            set;
-        }
-        [DispId(25)]
-        bool xsdTransactionTotalsSet1InitFlag {
-            get;
-            set;
-        }
-        [DispId(26)]
-        int SpnsrdMrchntSize();
-        [DispId(27)]
-        Organisation26 SpnsrdMrchntGetItem(int index);
-        [DispId(28)]
-        bool SpnsrdMrchntSetItem(int index, Organisation26 value);
-        [DispId(29)]
-        bool SpnsrdMrchntAddItem(Organisation26 value);
-        [DispId(30)]
-        bool SpnsrdMrchntRemoveItem(int index);
-        [DispId(31)]
-        int LltyTxTtlSize();
-        [DispId(32)]
-        LoyaltyTransactionTotals1 LltyTxTtlGetItem(int index);
-        [DispId(33)]
-        bool LltyTxTtlSetItem(int index, LoyaltyTransactionTotals1 value);
-        [DispId(34)]
-        bool LltyTxTtlAddItem(LoyaltyTransactionTotals1 value);
-        [DispId(35)]
-        bool LltyTxTtlRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=false)]
@@ -947,30 +1053,33 @@ namespace NEXO {
         SVAC,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("296d177b-7c4f-4380-a1b7-6fccf74c7e6e")]
+    [System.Runtime.InteropServices.GuidAttribute("e18a2708-f71b-404b-9ba9-df4256bcd21c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionTotals8 : ITransactionTotals8 {
-        internal string pOIGrpIdField;
-        internal string cardPdctPrflField;
-        internal string ccyField;
-        internal TypeTransactionTotals3Code tpField = new TypeTransactionTotals3Code();
-        internal double ttlNbField;
-        internal double cmltvAmtField;
-        internal DetailedAmount15 dtldAmtField = new DetailedAmount15();
-        internal bool xsdTransactionTotals8InitFlagField = false;
+        private string pOIGrpIdField;
+        private string cardPdctPrflField;
+        private string ccyField;
+        private TypeTransactionTotals3Code tpField;
+        private double ttlNbField;
+        private double cmltvAmtField;
+        private DetailedAmount15 dtldAmtField = new DetailedAmount15();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public string POIGrpId {
             get {
                 return this.pOIGrpIdField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pOIGrpIdField = value;
             }
         }
@@ -980,7 +1089,9 @@ namespace NEXO {
                 return this.cardPdctPrflField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.cardPdctPrflField = value;
             }
         }
@@ -990,7 +1101,9 @@ namespace NEXO {
                 return this.ccyField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.ccyField = value;
             }
         }
@@ -1000,7 +1113,9 @@ namespace NEXO {
                 return this.tpField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.tpField = value;
             }
         }
@@ -1010,7 +1125,9 @@ namespace NEXO {
                 return this.ttlNbField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.ttlNbField = value;
             }
         }
@@ -1020,84 +1137,73 @@ namespace NEXO {
                 return this.cmltvAmtField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.cmltvAmtField = value;
             }
         }
         /// <remarks/>
         public DetailedAmount15 DtldAmt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dtldAmtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dtldAmtField;
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = true;
-                this.dtldAmtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dtldAmtField = new DetailedAmount15();
+                }
+                else {
+                    this.dtldAmtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdTransactionTotals8InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdTransactionTotals8InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (this.XSD_HasBeenSetField || this.DtldAmt.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdTransactionTotals8InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DtldAmt = null;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("a7e6160d-78d1-4ea1-b489-e1b133c0a265")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ITransactionTotals8 {
-        /// <remarks/>
-        [DispId(1)]
-        string POIGrpId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string CardPdctPrfl {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        string Ccy {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        TypeTransactionTotals3Code Tp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        double TtlNb {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        double CmltvAmt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        DetailedAmount15 DtldAmt {
-            get;
-            set;
-        }
-        [DispId(15)]
-        bool xsdTransactionTotals8InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DtldAmt != null)) {
+                    this.DtldAmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=false)]
@@ -1119,32 +1225,35 @@ namespace NEXO {
         RESV,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("db60e543-2b2f-4065-b9fe-6e767880314b")]
+    [System.Runtime.InteropServices.GuidAttribute("e775a22e-d62b-48ee-a385-ac020185ff45")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyTransactionTotals1 : ILoyaltyTransactionTotals1 {
-        internal string pOIGrpIdField;
-        internal AmountUnit1Code lltyUnitField = new AmountUnit1Code();
-        internal bool lltyUnitFieldSpecified;
-        internal string cardPdctPrflField;
-        internal string ccyField;
-        internal LoyaltyTypeTransactionTotals1Code txTpField = new LoyaltyTypeTransactionTotals1Code();
-        internal double ttlNbField;
-        internal double cmltvAmtField;
-        internal DetailedAmount15 dtldAmtField = new DetailedAmount15();
-        internal bool xsdLoyaltyTransactionTotals1InitFlagField = false;
+        private string pOIGrpIdField;
+        private AmountUnit1Code lltyUnitField;
+        private bool lltyUnitFieldSpecified;
+        private string cardPdctPrflField;
+        private string ccyField;
+        private LoyaltyTypeTransactionTotals1Code txTpField;
+        private double ttlNbField;
+        private double cmltvAmtField;
+        private DetailedAmount15 dtldAmtField = new DetailedAmount15();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public string POIGrpId {
             get {
                 return this.pOIGrpIdField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pOIGrpIdField = value;
             }
         }
@@ -1154,9 +1263,13 @@ namespace NEXO {
                 return this.lltyUnitField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.lltyUnitField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value may have been changed - LltyUnitSpecified = true
                 this.LltyUnitSpecified = true;
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
@@ -1166,7 +1279,6 @@ namespace NEXO {
                 return this.lltyUnitFieldSpecified;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
                 this.lltyUnitFieldSpecified = value;
             }
         }
@@ -1176,7 +1288,9 @@ namespace NEXO {
                 return this.cardPdctPrflField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.cardPdctPrflField = value;
             }
         }
@@ -1186,7 +1300,9 @@ namespace NEXO {
                 return this.ccyField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.ccyField = value;
             }
         }
@@ -1196,7 +1312,9 @@ namespace NEXO {
                 return this.txTpField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.txTpField = value;
             }
         }
@@ -1206,7 +1324,9 @@ namespace NEXO {
                 return this.ttlNbField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.ttlNbField = value;
             }
         }
@@ -1216,96 +1336,75 @@ namespace NEXO {
                 return this.cmltvAmtField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.cmltvAmtField = value;
             }
         }
         /// <remarks/>
         public DetailedAmount15 DtldAmt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.dtldAmtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.dtldAmtField;
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = true;
-                this.dtldAmtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.dtldAmtField = new DetailedAmount15();
+                }
+                else {
+                    this.dtldAmtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdLoyaltyTransactionTotals1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdLoyaltyTransactionTotals1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((this.XSD_HasBeenSetField || this.DtldAmt.XSD_HasBeenSetProperty)
+                            || this.LltyUnitSpecified);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdLoyaltyTransactionTotals1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.DtldAmt = null;
+                    this.LltyUnitSpecified = false;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("0c7f1508-5c5f-4fda-959b-2dc9d3eae730")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ILoyaltyTransactionTotals1 {
-        /// <remarks/>
-        [DispId(1)]
-        string POIGrpId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        AmountUnit1Code LltyUnit {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        bool LltyUnitSpecified {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        string CardPdctPrfl {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(9)]
-        string Ccy {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(11)]
-        LoyaltyTypeTransactionTotals1Code TxTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(13)]
-        double TtlNb {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(15)]
-        double CmltvAmt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(17)]
-        DetailedAmount15 DtldAmt {
-            get;
-            set;
-        }
-        [DispId(19)]
-        bool xsdLoyaltyTransactionTotals1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DtldAmt != null)) {
+                    this.DtldAmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.004.001.01", IsNullable=false)]
@@ -1324,4 +1423,339 @@ namespace NEXO {
         /// <remarks/>
         REDR,
     }
+    [System.Runtime.InteropServices.GuidAttribute("856bf612-428e-4377-8be8-67784f741f78")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISaleToPOIReconciliationResponseV01 {
+        /// <remarks/>
+        [DispId(1)]
+        Header37 Hdr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        ReconciliationResponse3 RcncltnRspn {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        ContentInformationType18 SctyTrlr {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("135a972f-be8e-42b4-b3f0-f9a5fd62b70e")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IReconciliationResponse3 {
+        /// <remarks/>
+        [DispId(1)]
+        CardPaymentEnvironment73 Envt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        CardPaymentContext27 Cntxt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        ReconciliationResponseData1 RcncltnRspnData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        ResponseType9 Rspn {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        SupplementaryData1[] SplmtryData {
+            get;
+            set;
+        }
+        [DispId(6)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(7)]
+        int SplmtryDataSize();
+        [DispId(8)]
+        SupplementaryData1 SplmtryDataGetItem(int index);
+        [DispId(9)]
+        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
+        [DispId(10)]
+        bool SplmtryDataAddItem(SupplementaryData1 value);
+        [DispId(11)]
+        bool SplmtryDataRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("72f779c6-f9b0-4df2-b2c3-c12cd8889d6b")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IReconciliationResponseData1 {
+        /// <remarks/>
+        [DispId(1)]
+        ReconciliationType1Code RcncltnTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string POIRcncltnId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        TransactionTotalsSet1[] TxTtls {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(5)]
+        int TxTtlsSize();
+        [DispId(6)]
+        TransactionTotalsSet1 TxTtlsGetItem(int index);
+        [DispId(7)]
+        bool TxTtlsSetItem(int index, TransactionTotalsSet1 value);
+        [DispId(8)]
+        bool TxTtlsAddItem(TransactionTotalsSet1 value);
+        [DispId(9)]
+        bool TxTtlsRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("f488a4fd-241d-457f-a2fe-3838003ed64a")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ITransactionTotalsSet1 {
+        /// <remarks/>
+        [DispId(1)]
+        PaymentInstrumentType1Code PmtInstrmTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string AcqrrId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string RcncltnId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string SaleRcncltnId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string Brnd {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string POIId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        string SaleId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        string CshrId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(9)]
+        string ShftNb {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(10)]
+        Organisation26[] SpnsrdMrchnt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(11)]
+        TransactionTotals8 TxTtl {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(12)]
+        LoyaltyTransactionTotals1[] LltyTxTtl {
+            get;
+            set;
+        }
+        [DispId(13)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(14)]
+        int SpnsrdMrchntSize();
+        [DispId(15)]
+        Organisation26 SpnsrdMrchntGetItem(int index);
+        [DispId(16)]
+        bool SpnsrdMrchntSetItem(int index, Organisation26 value);
+        [DispId(17)]
+        bool SpnsrdMrchntAddItem(Organisation26 value);
+        [DispId(18)]
+        bool SpnsrdMrchntRemoveItem(int index);
+        [DispId(19)]
+        int LltyTxTtlSize();
+        [DispId(20)]
+        LoyaltyTransactionTotals1 LltyTxTtlGetItem(int index);
+        [DispId(21)]
+        bool LltyTxTtlSetItem(int index, LoyaltyTransactionTotals1 value);
+        [DispId(22)]
+        bool LltyTxTtlAddItem(LoyaltyTransactionTotals1 value);
+        [DispId(23)]
+        bool LltyTxTtlRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("1769b98d-7fbc-4d8a-b124-25826e3da3bb")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ITransactionTotals8 {
+        /// <remarks/>
+        [DispId(1)]
+        string POIGrpId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string CardPdctPrfl {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string Ccy {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        TypeTransactionTotals3Code Tp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        double TtlNb {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        double CmltvAmt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        DetailedAmount15 DtldAmt {
+            get;
+            set;
+        }
+        [DispId(8)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("cafea261-9509-47f0-bfae-8bacefacf813")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ILoyaltyTransactionTotals1 {
+        /// <remarks/>
+        [DispId(1)]
+        string POIGrpId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        AmountUnit1Code LltyUnit {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        bool LltyUnitSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string CardPdctPrfl {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string Ccy {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        LoyaltyTypeTransactionTotals1Code TxTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        double TtlNb {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        double CmltvAmt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(9)]
+        DetailedAmount15 DtldAmt {
+            get;
+            set;
+        }
+        [DispId(10)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
 }
+#endif

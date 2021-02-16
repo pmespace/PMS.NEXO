@@ -70,7 +70,7 @@ Public Class FBuilder
 			s = MessageTypeEnumeration.Request
 		Else
 			nexoItem = nexoReply
-			item = nexoRequest.Item
+			item = nexoReply.Item
 			s = MessageTypeEnumeration.Response
 		End If
 
@@ -92,7 +92,7 @@ Public Class FBuilder
 		Dim properties As List(Of PropertyInfo) = o.GetType().GetProperties().ToList()
 		Dim methods As List(Of MethodInfo) = o.GetType().GetMethods().ToList()
 		For Each p As PropertyInfo In properties
-			If MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith("xsd") Then
+			If MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith(NexoXSDStrings.XSD) Then
 				Dim value As Object = p.GetValue(o, Nothing)
 				Dim valuetype As Type = p.PropertyType
 				Dim target As Object = value

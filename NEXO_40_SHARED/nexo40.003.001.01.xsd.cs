@@ -1,166 +1,298 @@
+#if NEXO40
 namespace NEXO {
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("376ddafe-8b53-4f98-84ce-800c299f5b44")]
+    [System.Runtime.InteropServices.GuidAttribute("7ade0e20-bd4c-4b50-87f9-f6e535fecb6c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIReconciliationRequestV01 : ISaleToPOIReconciliationRequestV01 {
-        internal Header37 hdrField = new Header37();
-        internal ReconciliationRequest2 rcncltnReqField = new ReconciliationRequest2();
-        internal ContentInformationType18 sctyTrlrField = new ContentInformationType18();
-        internal bool xsdSaleToPOIReconciliationRequestV01InitFlagField = false;
+        private Header37 hdrField = new Header37();
+        private ReconciliationRequest2 rcncltnReqField = new ReconciliationRequest2();
+        private ContentInformationType18 sctyTrlrField = new ContentInformationType18();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public Header37 Hdr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.hdrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.hdrField;
             }
             set {
-                this.xsdSaleToPOIReconciliationRequestV01InitFlagField = true;
-                this.hdrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.hdrField = new Header37();
+                }
+                else {
+                    this.hdrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ReconciliationRequest2 RcncltnReq {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rcncltnReqField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rcncltnReqField;
             }
             set {
-                this.xsdSaleToPOIReconciliationRequestV01InitFlagField = true;
-                this.rcncltnReqField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rcncltnReqField = new ReconciliationRequest2();
+                }
+                else {
+                    this.rcncltnReqField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ContentInformationType18 SctyTrlr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.sctyTrlrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.sctyTrlrField;
             }
             set {
-                this.xsdSaleToPOIReconciliationRequestV01InitFlagField = true;
-                this.sctyTrlrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.sctyTrlrField = new ContentInformationType18();
+                }
+                else {
+                    this.sctyTrlrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdSaleToPOIReconciliationRequestV01InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdSaleToPOIReconciliationRequestV01InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.Hdr.XSD_HasBeenSetProperty)
+                            || this.RcncltnReq.XSD_HasBeenSetProperty)
+                            || this.SctyTrlr.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdSaleToPOIReconciliationRequestV01InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Hdr = null;
+                    this.RcncltnReq = null;
+                    this.SctyTrlr = null;
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("50f3ba73-f64d-448e-8c49-2b392ff2d9fe")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISaleToPOIReconciliationRequestV01 {
-        /// <remarks/>
-        [DispId(1)]
-        Header37 Hdr {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        ReconciliationRequest2 RcncltnReq {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        ContentInformationType18 SctyTrlr {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdSaleToPOIReconciliationRequestV01InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Hdr != null)) {
+                    this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.RcncltnReq != null)) {
+                    this.RcncltnReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.SctyTrlr != null)) {
+                    this.SctyTrlr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ac48c282-be40-47b0-92e2-03e3afc2d21f")]
+    [System.Runtime.InteropServices.GuidAttribute("b96d5d64-4e58-454c-b3e0-79cbbe76ec90")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationRequest2 : IReconciliationRequest2 {
-        internal CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
-        internal CardPaymentContext27 cntxtField = new CardPaymentContext27();
-        internal ReconciliationRequestData1 rcncltnReqDataField = new ReconciliationRequestData1();
-        internal SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
-        internal bool xsdReconciliationRequest2InitFlagField = false;
+        private CardPaymentEnvironment73 envtField = new CardPaymentEnvironment73();
+        private CardPaymentContext27 cntxtField = new CardPaymentContext27();
+        private ReconciliationRequestData1 rcncltnReqDataField = new ReconciliationRequestData1();
+        private SupplementaryData1[] splmtryDataField = new SupplementaryData1[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public CardPaymentEnvironment73 Envt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.envtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.envtField;
             }
             set {
-                this.xsdReconciliationRequest2InitFlagField = true;
-                this.envtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.envtField = new CardPaymentEnvironment73();
+                }
+                else {
+                    this.envtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public CardPaymentContext27 Cntxt {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.cntxtField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.cntxtField;
             }
             set {
-                this.xsdReconciliationRequest2InitFlagField = true;
-                this.cntxtField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.cntxtField = new CardPaymentContext27();
+                }
+                else {
+                    this.cntxtField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public ReconciliationRequestData1 RcncltnReqData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rcncltnReqDataField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rcncltnReqDataField;
             }
             set {
-                this.xsdReconciliationRequest2InitFlagField = true;
-                this.rcncltnReqDataField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rcncltnReqDataField = new ReconciliationRequestData1();
+                }
+                else {
+                    this.rcncltnReqDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SplmtryData")]
         public SupplementaryData1[] SplmtryData {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.splmtryDataField == null)
                             || (this.splmtryDataField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.splmtryDataField;
             }
             set {
-                this.xsdReconciliationRequest2InitFlagField = true;
-                this.splmtryDataField = value;
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.splmtryDataField = new SupplementaryData1[0];
+                }
+                else {
+                    this.splmtryDataField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdReconciliationRequest2InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdReconciliationRequest2InitFlagField;
+                // BEGIN ADDED BY XSD
+                return (((this.XSD_HasBeenSetField || this.Envt.XSD_HasBeenSetProperty)
+                            || this.Cntxt.XSD_HasBeenSetProperty)
+                            || this.RcncltnReqData.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdReconciliationRequest2InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Envt = null;
+                    this.Cntxt = null;
+                    this.RcncltnReqData = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Envt != null)) {
+                    this.Envt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.Cntxt != null)) {
+                    this.Cntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.RcncltnReqData != null)) {
+                    this.RcncltnReqData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
         public int SplmtryDataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.splmtryDataField == null)) {
                 return 0;
             }
             else {
                 return this.splmtryDataField.Length;
             }
+            // END ADDED BY XSD
         }
         public SupplementaryData1 SplmtryDataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return default(SupplementaryData1);
@@ -178,8 +310,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(SupplementaryData1);
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataSetItem(int index, SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -192,8 +326,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataAddItem(SupplementaryData1 value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -212,8 +348,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool SplmtryDataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.splmtryDataField == default(SupplementaryData1[]))) {
                     return false;
@@ -239,73 +377,33 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("d36ee7cf-854e-4651-b358-6df7440e90b6")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IReconciliationRequest2 {
-        /// <remarks/>
-        [DispId(1)]
-        CardPaymentEnvironment73 Envt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        CardPaymentContext27 Cntxt {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        ReconciliationRequestData1 RcncltnReqData {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(7)]
-        SupplementaryData1[] SplmtryData {
-            get;
-            set;
-        }
-        [DispId(9)]
-        bool xsdReconciliationRequest2InitFlag {
-            get;
-            set;
-        }
-        [DispId(10)]
-        int SplmtryDataSize();
-        [DispId(11)]
-        SupplementaryData1 SplmtryDataGetItem(int index);
-        [DispId(12)]
-        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
-        [DispId(13)]
-        bool SplmtryDataAddItem(SupplementaryData1 value);
-        [DispId(14)]
-        bool SplmtryDataRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9c5dc471-5fd4-439c-ba80-240d07611942")]
+    [System.Runtime.InteropServices.GuidAttribute("6d754569-860d-4ee8-8d05-0a325317d042")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationRequestData1 : IReconciliationRequestData1 {
-        internal ReconciliationType1Code rcncltnTpField = new ReconciliationType1Code();
-        internal string acqrrIdField;
-        internal string pOIRcncltnIdField;
-        internal bool xsdReconciliationRequestData1InitFlagField = false;
+        private ReconciliationType1Code rcncltnTpField;
+        private string acqrrIdField;
+        private string pOIRcncltnIdField;
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public ReconciliationType1Code RcncltnTp {
             get {
                 return this.rcncltnTpField;
             }
             set {
-                this.xsdReconciliationRequestData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rcncltnTpField = value;
             }
         }
@@ -315,7 +413,9 @@ namespace NEXO {
                 return this.acqrrIdField;
             }
             set {
-                this.xsdReconciliationRequestData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.acqrrIdField = value;
             }
         }
@@ -325,50 +425,47 @@ namespace NEXO {
                 return this.pOIRcncltnIdField;
             }
             set {
-                this.xsdReconciliationRequestData1InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.pOIRcncltnIdField = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdReconciliationRequestData1InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdReconciliationRequestData1InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdReconciliationRequestData1InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
             }
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("2002c433-685b-4cb7-8465-437e326e21a6")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IReconciliationRequestData1 {
-        /// <remarks/>
-        [DispId(1)]
-        ReconciliationType1Code RcncltnTp {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string AcqrrId {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        string POIRcncltnId {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdReconciliationRequestData1InitFlag {
-            get;
-            set;
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
         }
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.003.001.01", IsNullable=false)]
@@ -383,4 +480,105 @@ namespace NEXO {
         /// <remarks/>
         SREC,
     }
+    [System.Runtime.InteropServices.GuidAttribute("403253a8-cc6a-4a08-9c22-bafe8fc8b068")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISaleToPOIReconciliationRequestV01 {
+        /// <remarks/>
+        [DispId(1)]
+        Header37 Hdr {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        ReconciliationRequest2 RcncltnReq {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        ContentInformationType18 SctyTrlr {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("57a031f8-7fe7-4f82-90b7-04a2709e1eff")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IReconciliationRequest2 {
+        /// <remarks/>
+        [DispId(1)]
+        CardPaymentEnvironment73 Envt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        CardPaymentContext27 Cntxt {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        ReconciliationRequestData1 RcncltnReqData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        SupplementaryData1[] SplmtryData {
+            get;
+            set;
+        }
+        [DispId(5)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(6)]
+        int SplmtryDataSize();
+        [DispId(7)]
+        SupplementaryData1 SplmtryDataGetItem(int index);
+        [DispId(8)]
+        bool SplmtryDataSetItem(int index, SupplementaryData1 value);
+        [DispId(9)]
+        bool SplmtryDataAddItem(SupplementaryData1 value);
+        [DispId(10)]
+        bool SplmtryDataRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("2b5f9e8e-7c69-4221-9fe8-c486e12e9c2f")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IReconciliationRequestData1 {
+        /// <remarks/>
+        [DispId(1)]
+        ReconciliationType1Code RcncltnTp {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string AcqrrId {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string POIRcncltnId {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+    }
 }
+#endif

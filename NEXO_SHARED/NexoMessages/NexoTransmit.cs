@@ -46,8 +46,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -102,7 +100,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -161,7 +163,7 @@ namespace NEXO
 	[Guid("EF2554E1-71FD-45F0-9B44-40FBD13BA213")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoTransmit: NexoService, INexoTransmit
+	public class NexoTransmit : NexoService, INexoTransmit
 	{
 		#region constructor
 		public NexoTransmit() : base(MessageCategoryEnumeration.Transmit)
@@ -179,18 +181,18 @@ namespace NEXO
 		#region request inner properties
 		public uint RequestMaximumTransmitTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true);
-			set => RequestData.MaximumTransmitTime = value.ToString();
+			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true) : (uint)0);
+			set { if (null != RequestData) RequestData.MaximumTransmitTime = value.ToString(); }
 		}
 		public string RequestDestinationAddress
 		{
-			get => CMisc.Trimmed(RequestData.DestinationAddress);
-			set => RequestData.DestinationAddress = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.DestinationAddress) : null);
+			set { if (null != RequestData) RequestData.DestinationAddress = value; }
 		}
 		public string RequestMessage
 		{
-			get => CMisc.Trimmed(Encoding.UTF8.GetString(RequestData.Message));
-			set => RequestData.Message = Encoding.UTF8.GetBytes(value);
+			get => (null != RequestData ? CMisc.Trimmed(Encoding.UTF8.GetString(RequestData.Message)) : null);
+			set { if (null != RequestData) RequestData.Message = Encoding.UTF8.GetBytes(value); }
 		}
 		#endregion
 

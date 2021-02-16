@@ -21,7 +21,7 @@ namespace NEXO.Server
 		[DispId(3)]
 		CThreadData ThreadData { get; set; }
 		[DispId(4)]
-		CStreamServerSettings Settings { get; set; }
+		CStreamServerSettings StreamServerSettings { get; set; }
 		[DispId(10)]
 		NexoDelegates.OnStartDelegate OnStart { get; set; }
 		[DispId(11)]
@@ -50,14 +50,14 @@ namespace NEXO.Server
 		#region properties
 		public bool IsValid
 		{
-			get => null != Settings && Settings.IsValid
+			get => null != StreamServerSettings && StreamServerSettings.IsValid
 				&& (null == ThreadData || ThreadData.IsValid)
 				&& null != OnReceivedRequest && null != OnReceivedReply && null != OnReceivedNotification
 				&& null == DatabaseSettings || DatabaseSettings.IsValid();
 		}
 		public object Parameters { get; set; } = null;
 		public CThreadData ThreadData { get; set; } = null;
-		public CStreamServerSettings Settings { get; set; } = null;
+		public CStreamServerSettings StreamServerSettings { get; set; } = null;
 		/// <summary>
 		/// Called before starting processing requests from a client.
 		/// This function allows to initialise the server context.
@@ -92,42 +92,6 @@ namespace NEXO.Server
 		/// Settings applicable to the database connection
 		/// </summary>
 		public NexoRetailerServerDatabaseSettings DatabaseSettings { get; set; } = null;
-		#endregion
-
-		#region methods
-		/// <summary>
-		/// Create a NexoRetailerServerSettings.
-		/// Among the processing methods, 1 must be NULL, 1 must be set
-		/// </summary>
-		/// <param name="settings">Stream settings to use</param>
-		/// <param name="threadData">Thread tools to communicate and identify</param>
-		/// <param name="onStart">Function called when starting the thread to process requests</param>
-		/// <param name="onConnect">Function called when a client connects to the server</param>
-		/// <param name="onDisconnect">Function called when a client disconnects from the server</param>
-		/// <param name="onReceiveRequest">Function called to process any received request</param>
-		/// <param name="onReceiveReply">Function called to process any received reply</param>
-		/// <param name="onReceiveNotification">Function called to process any notification</param>
-		/// <param name="onSend">Function called to inform the application of the reply about to be sent</param>
-		/// <param name="onStop">Function called when stopping the thread to process requests</param>
-		/// <param name="databaseSettings">see <see cref="NexoRetailerServerDatabaseSettings"/></param>
-		/// <returns>A NexoRetailerServerSettings object</returns>
-		public static NexoRetailerServerSettings Prepare(CStreamServerSettings settings, CThreadData threadData, NexoDelegates.OnReceivedDelegate onReceiveRequest, NexoDelegates.OnReceivedDelegate onReceiveReply, NexoDelegates.OnReceivedDelegate onReceiveNotification, NexoDelegates.OnSendDelegate onSend, NexoDelegates.OnStartDelegate onStart, NexoDelegates.OnConnectDelegate onConnect, NexoDelegates.OnDisconnectDelegate onDisconnect, NexoDelegates.OnStopDelegate onStop, NexoRetailerServerDatabaseSettings databaseSettings = null)
-		{
-			return new NexoRetailerServerSettings()
-			{
-				Settings = settings,
-				ThreadData = threadData,
-				OnStart = onStart,
-				OnConnect = onConnect,
-				OnDisconnect = onDisconnect,
-				OnReceivedRequest = onReceiveRequest,
-				OnReceivedReply = onReceiveReply,
-				OnReceivedNotification = onReceiveNotification,
-				OnSend = onSend,
-				OnStop = onStop,
-				DatabaseSettings = databaseSettings,
-			};
-		}
 		#endregion
 	}
 }

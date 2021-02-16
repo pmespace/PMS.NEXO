@@ -1,0 +1,32 @@
+{
+  "TypeConversions": {
+    "System.Decimal": {
+      "TargetType": "System.Double",
+      "TargetProperty": "myTargetProperty"
+    }
+  },
+  "ArraysWithoutInitializer": [
+    "myArrayType1",
+    "myArrayType2"
+  ],
+  "FieldsWithoutInitializer": {
+    "certificateField": {
+      "Type": "System.Byte"
+    },
+    "Certificate": {
+      "Type": "System.Byte"
+    },
+    "searchORField": {
+      "Type": "SearchANDType"
+    },
+    "SearchOR": {
+      "Type": "SearchANDType"
+    },
+    "searchCriteriasField": {
+      "Type": "SearchANDType"
+    },
+    "SearchCriterias": {
+      "Type": "SearchANDType"
+    }
+  }
+}

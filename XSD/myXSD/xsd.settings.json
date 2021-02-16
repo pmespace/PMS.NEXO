@@ -1,5 +1,6 @@
 {
-  "ParametersFileName": "xsd.parameters.json",
+  "Language": 0,
+  "ParametersFileName": "xsd.params.json",
   "Files": [
     "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasSaleToPOIMessages.xsd",
     "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasCMS.xsd",
@@ -8,6 +9,8 @@
   "Nmspace": "NEXO",
   "UseTypes": true,
   "UseElements": true,
+  "UseNotations": true,
+  "ClassInterface": 0,
   "ComInterface": 1,
   "AddDispID": true,
   "MakeEnumComVisible": true,
@@ -15,12 +18,12 @@
   "DeclareClassInterface": true,
   "ConvertTypes": true,
   "DateTimeToString": true,
-  "CreateArrayInitializer": true,
-  "GetReturnsNullIfArrayIsEmpty": true,
-  "PrivateByInternal": true,
-  "PrivateByInternalVisibility": 4096,
-  "ManageInitFlag": true,
-  "EmptyStringArrayToNull": true,
+  "NumericToString": false,
+  "BooleanToString": false,
+  "ArrayCreateInitializer": true,
+  "ArrayGetReturnsNullEmpty": true,
+  "PrivateByInternal": false,
   "CreateArrayAccessors": true,
-  "DerivedClassName": "NexoSaleToPOIMessage"
+  "DerivedClassName": "",
+  "Preprocessor": "NEXO30"
 }

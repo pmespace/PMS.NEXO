@@ -43,8 +43,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -99,7 +97,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -158,7 +160,7 @@ namespace NEXO
 	[Guid("BD5687D5-EF40-47B1-B599-EEFB31BBF532")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoEnableService: NexoService, INexoEnableService
+	public class NexoEnableService : NexoService, INexoEnableService
 	{
 		#region constructor
 		public NexoEnableService() : base(MessageCategoryEnumeration.EnableService)
@@ -176,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public TransactionActionEnumeration RequestTransactionAction
 		{
-			get => (TransactionActionEnumeration)CMisc.GetEnumValue(typeof(TransactionActionEnumeration), CMisc.Trimmed(RequestData.TransactionAction));
-			set => RequestData.TransactionAction = CMisc.GetEnumName(typeof(TransactionActionEnumeration), value);
+			get => (null != RequestData ? (TransactionActionEnumeration)CMisc.GetEnumValue(typeof(TransactionActionEnumeration), CMisc.Trimmed(RequestData.TransactionAction)) : (TransactionActionEnumeration)NexoValues.None);
+			set { if (null != RequestData) RequestData.TransactionAction = CMisc.GetEnumName(typeof(TransactionActionEnumeration), value); }
 		}
 		public string RequestServicesEnabled
 		{
-			get => CMisc.Trimmed(RequestData.ServicesEnabled);
-			set => RequestData.ServicesEnabled = value;
+			get => (null != RequestData ? CMisc.Trimmed(RequestData.ServicesEnabled) : null);
+			set { if (null != RequestData) RequestData.ServicesEnabled = value; }
 		}
 		#endregion
 

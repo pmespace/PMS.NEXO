@@ -71,8 +71,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=3.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.3.0.9\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=3.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.3.0.10\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -100,10 +100,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Connected.Designer.vb">
-      <DependentUpon>Connected.vb</DependentUpon>
+    <Compile Include="FConnected.Designer.vb">
+      <DependentUpon>FConnected.vb</DependentUpon>
     </Compile>
-    <Compile Include="Connected.vb">
+    <Compile Include="FConnected.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FBuilder.Designer.vb">
@@ -122,6 +122,12 @@
       <DependentUpon>FConnectionSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="FConnectionSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FInput.Designer.vb">
+      <DependentUpon>FInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FInput.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FMessage.Designer.vb">
@@ -196,8 +202,8 @@
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Connected.resx">
-      <DependentUpon>Connected.vb</DependentUpon>
+    <EmbeddedResource Include="FConnected.resx">
+      <DependentUpon>FConnected.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FActivity.resx">
       <DependentUpon>FActivity.vb</DependentUpon>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FConnectionSettings.resx">
       <DependentUpon>FConnectionSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FInput.resx">
+      <DependentUpon>FInput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FMessage.resx">
       <DependentUpon>FMessage.vb</DependentUpon>

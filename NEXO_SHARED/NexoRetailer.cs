@@ -23,7 +23,6 @@ using Newtonsoft.Json.Linq;
 #endif
 
 using COMMON;
-using NEXO.VersionMngt;
 using NEXO.Properties;
 
 namespace NEXO
@@ -287,26 +286,38 @@ namespace NEXO
 		/// <returns>The XML string representing the object</returns>
 		protected string Serialize(SaleToPOIRequest request)
 		{
+			string serialized = null;
 			try
 			{
-				string serialized = null;
+				request.XSD_OptimizingProperty = OptimizeXml;
 				try
 				{
-					if (OptimizeXml)
-						Optimize(request, request.Item);
+					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_OptimizingProperty);
+					//if (OptimizeXml)
+					//	Optimize(request, request.Item, true);
 				}
-				catch (Exception ex)
+				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request optimisation"); }
+				finally
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request optimisation");
+					serialized = Serialize<SaleToPOIRequest>(request);
+					//try
+					//{
+					//	if (OptimizeXml)
+					//		Optimize(request, request.Item, false);
+					//}
+					//catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request de-optimisation"); }
 				}
-				serialized = Serialize<SaleToPOIRequest>(request);
-				return serialized;
 			}
 			catch (Exception ex)
 			{
 				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request processing");
 			}
-			return null;
+			finally
+			{
+				request.XSD_OptimizingProperty = false;
+				SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_OptimizingProperty);
+			}
+			return serialized;
 		}
 		/// <summary>
 		/// Optimize and serialize response
@@ -314,26 +325,38 @@ namespace NEXO
 		/// <returns>The XML string representing the object</returns>
 		protected string Serialize(SaleToPOIResponse reply)
 		{
+			string serialized = null;
 			try
 			{
-				string serialized = null;
+				reply.XSD_OptimizingProperty = OptimizeXml;
 				try
 				{
-					if (OptimizeXml)
-						Optimize(reply, reply.Item);
+					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_OptimizingProperty);
+					//if (OptimizeXml)
+					//	Optimize(reply, reply.Item, true);
 				}
-				catch (Exception ex)
+				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply optimisation"); }
+				finally
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply optimisation");
+					serialized = Serialize<SaleToPOIResponse>(reply);
+					//try
+					//{
+					//	if (OptimizeXml)
+					//		Optimize(reply, reply.Item, false);
+					//}
+					//catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply de-optimisation"); }
 				}
-				serialized = Serialize<SaleToPOIResponse>(reply);
-				return serialized;
 			}
 			catch (Exception ex)
 			{
 				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply processing");
 			}
-			return null;
+			finally
+			{
+				reply.XSD_OptimizingProperty = false;
+				SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_OptimizingProperty);
+			}
+			return serialized;
 		}
 		/// <summary>
 		/// Serialize a SaleToPOIXXX
@@ -415,78 +438,340 @@ namespace NEXO
 		/// </summary>
 		/// <param name="o">The initial object to serialize (usually a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/>)</param>
 		/// <param name="data">The structure of the specific nexo object to optimize (Login, Payment,...). THIS PARAMETER MUST NEVER BE NULL WHEN CALLING THIS FUNCTION, only recursive calls can set the parameter to null</param>
+		/// <param name="optimize">Indicates whether optimisation must be turned on or off</param>
 		/// <returns></returns>
-		public static bool Optimize(object o, object data)
+		public static bool Optimize(object o, object data, bool optimize)
 		{
-			// if no object it hasn't been modified
-			if (null == o)
-				return false;
-			bool hasbeenset = false;
-			// get the modified flag of the current object
-			PropertyInfo pi = o.GetType().GetProperty("xsd" + o.GetType().Name + "InitFlag");
+			//// if no object it hasn't been modified
+			//if (null == o)
+			//	return false;
+			//bool hasbeenset = false;
+			//// get the modified flag of the current object
+			//PropertyInfo pi = o.GetType().GetProperty(Strings.NexoHasBeenSetProperty);
+			//if (null != pi)
+			//{
+			//	// get init flag
+			//	hasbeenset = (bool)pi.GetValue(o, null);
+			//	string nmspace = typeof(SaleToPOIRequest).Namespace;
+			//	// look for other objects inside this object
+			//	object targetObject = data ?? o;
+			//	List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
+			//	foreach (PropertyInfo pinfo in properties)
+			//	{
+			//		// verify only types defined inside the current namespace, others won't carry the set flag property
+			//		if (null != pinfo.GetValue(targetObject, null) &&
+			//			(nmspace == pinfo.PropertyType.Namespace ||
+			//			("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
+			//		{
+			//			int maxindex = 0;
+			//			bool mustOptimize = true;
+			//			// if array, an empty array indicates not set
+			//			if (pinfo.PropertyType.IsArray)
+			//				mustOptimize = 0 != (maxindex = ((Array)pinfo.GetValue(targetObject, null)).Length) && 1 == pinfo.PropertyType.GetArrayRank();
+			//			// we go inside the property only if optimization is necessary
+			//			if (mustOptimize)
+			//			{
+			//				// we do it only if the property owns other properties (useless otherwise)
+			//				List<PropertyInfo> subproperties = pinfo.GetType().GetProperties().ToList();
+			//				if (null != subproperties && 0 != subproperties.Count)
+			//				{
+			//					bool f = false;
+			//					if (pinfo.PropertyType.IsArray)
+			//					{
+			//						Array array = (Array)pinfo.GetValue(targetObject, null);
+			//						for (int i = 0; i < array.Length; i++)
+			//						{
+			//							object arrayObject = array.GetValue(i);
+			//							f = Optimize(arrayObject, null);
+			//							if (!f)
+			//								array.SetValue(null, i);
+			//							hasbeenset = hasbeenset || f;
+			//						}
+			//					}
+			//					//else
+			//					//{
+			//					//	// the object owns sub properties, we must recurse this processing
+			//					//	f = Optimize(pinfo.GetValue(targetObject, null), null);
+			//					//	if (!f)
+			//					//		pinfo.SetValue(targetObject, null, null);
+			//					//	hasbeenset = hasbeenset || f;
+			//					//}
+			//					else if (pinfo.PropertyType.IsClass)
+			//					{
+			//						// the object owns sub properties, we must recurse this processing
+			//						f = Optimize(pinfo.GetValue(targetObject, null), null);
+			//						if (!f)
+			//							pinfo.SetValue(targetObject, null, null);
+			//						hasbeenset = hasbeenset || f;
+			//					}
+			//				}
+			//			}
+			//		}
+			//	}
+			//}
+			//return hasbeenset;
+
+			//// if no object it hasn't been modified
+			//if (null == o) return false;
+
+			//// get the modified flag of the current object
+			//bool hasbeenset = false;
+			//PropertyInfo pi = o.GetType().GetProperty(NexoXSDStrings.NexoHasBeenSetProperty);
+			//if (null != pi)
+			//{
+			//	// get init flag
+			//	hasbeenset = (bool)pi.GetValue(o, null);
+			//	string nmspace = typeof(SaleToPOIRequest).Namespace;
+			//	// look for other objects inside this object
+			//	object targetObject = o;// data ?? o;
+			//	List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
+			//	foreach (PropertyInfo pinfo in properties)
+			//	{
+			//		object obj = o;
+			//		Type type = pinfo.PropertyType;
+			//		if (IsSystemObject(pinfo))
+			//		{
+			//			obj = pinfo.GetValue(o, null);
+			//			if (null != obj)
+			//				type = obj.GetType();
+			//		}
+			//		// verify only types defined inside the current namespace, others won't carry the set flag property
+			//		if (null != obj &&
+			//			  //(nmspace == pinfo.PropertyType.Namespace ||
+			//			  //("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
+			//			  (nmspace == type.Namespace ||
+			//			  ("System" == type.Namespace && type.IsArray)))
+			//		{
+			//			int maxindex = 0;
+			//			bool mustOptimize = true;
+			//			// if array, an empty array indicates not set
+			//			if (pinfo.PropertyType.IsArray)
+			//			{
+			//				if (null != pinfo.GetValue(targetObject, null))
+			//					mustOptimize = 0 != (maxindex = ((Array)pinfo.GetValue(targetObject, null)).Length) && 1 == pinfo.PropertyType.GetArrayRank();
+			//				else
+			//					mustOptimize = false;
+			//			}
+			//			// we go inside the property only if optimization is necessary
+			//			if (mustOptimize)
+			//			{
+			//				// we do it only if the property owns other properties (useless otherwise)
+			//				List<PropertyInfo> subproperties = pinfo.GetType().GetProperties().ToList();
+			//				if (null != subproperties && 0 != subproperties.Count)
+			//				{
+			//					bool f = false;
+			//					if (pinfo.PropertyType.IsArray)
+			//					{
+			//						Array array = (Array)pinfo.GetValue(targetObject, null);
+			//						for (int i = 0; i < array.Length; i++)
+			//						{
+			//							object arrayObject = array.GetValue(i);
+			//							f = Optimize(arrayObject, null, optimize);
+			//							//if (!f)
+			//							//	array.SetValue(null, i);
+			//							hasbeenset = hasbeenset || f;
+			//						}
+			//					}
+			//					//else
+			//					//{
+			//					//	// the object owns sub properties, we must recurse this processing
+			//					//	f = Optimize(pinfo.GetValue(targetObject, null), null);
+			//					//	if (!f)
+			//					//		pinfo.SetValue(targetObject, null, null);
+			//					//	hasbeenset = hasbeenset || f;
+			//					//}
+			//					else if (pinfo.PropertyType.IsClass)
+			//					{
+			//						// the object owns sub properties, we must recurse this processing
+			//						f = Optimize(pinfo.GetValue(targetObject, null), null, optimize);
+			//						//if (!f)
+			//						//	pinfo.SetValue(targetObject, null, null);
+			//						hasbeenset = hasbeenset || f;
+			//					}
+			//				}
+			//			}
+			//		}
+			//	}
+
+			//	//if (null != optimizing)
+			//	//	optimizing.SetValue(targetObject, false, null);
+			//	pi.SetValue(o, hasbeenset, null);
+
+
+
+			//	//List<PropertyInfo> internalproperties = targetObject.GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic).ToList();
+
+			//	//PropertyInfo optimizing = null;
+			//	//try
+			//	//{
+			//	//	// indicate we're optimizing
+			//	//	foreach (PropertyInfo prop in internalproperties)
+			//	//		if (0 == string.Compare(prop.Name, Strings.OptimizingClassProperty, true))
+			//	//		{
+			//	//			optimizing = prop;
+			//	//			optimizing.SetValue(targetObject, optimize, null);
+			//	//			break;
+			//	//		}
+			//	//	if (null == optimizing)
+			//	//	{
+			//	//		// strange
+			//	//	}
+			//}
+			//return hasbeenset;
+
+			return true;
+		}
+		///// <summary>
+		///// Allows propagating the value of a bool property from a starting object to its leaves objects
+		///// That function DOES NOT SET the requested property inside the starting object
+		///// </summary>
+		///// <param name="initial">Starting object</param>
+		///// <param name="property">Property name to look for and to update</param>
+		///// <param name="value">Value to set</param>
+		///// <returns>True if the property was found inside the starting object, false otherwise</returns>
+		//public static bool SetBoolPropertyValue(object initial, string property, bool value)
+		//{
+		//	try
+		//	{
+		//		PropertyInfo pi = initial.GetType().GetProperty(property, typeof(bool));
+		//		if (null != pi)
+		//		{
+		//			// parse all properties inside this class searching for this same property
+		//			List<PropertyInfo> properties = initial.GetType().GetProperties().ToList();
+		//			foreach (PropertyInfo pinfo in properties)
+		//			{
+		//				// get the object holding the property we're looking for
+		//				object target = FindRealPropertyObject(initial, pinfo, out Type type);
+		//				if (null != target)
+		//				{
+		//					pi = type.GetProperty(property, typeof(bool));
+		//					if (null != pi)
+		//					{
+		//						pi.SetValue(target, value, null);
+		//					}
+		//				}
+		//			}
+		//			return true;
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, $"Object: {initial.GetType()} - Property name: {property}");
+		//	}
+		//	return false;
+		//}
+		/// <summary>
+		/// Set a property value (not an array one) by name inside an object
+		/// </summary>
+		/// <param name="o">The object to look inside</param>
+		/// <param name="property">The property to look for</param>
+		/// <param name="value">The value to set</param>
+		/// <returns>true if the property value has been set, false otherwise (property not found or property doesn't support the value)</returns>
+		private static bool SetObjectProperty(object o, string property, object value)
+		{
+			// get the type of the object
+			Type type = GetRealObjectType(o);
+			// search for the requested property inside that object
+			PropertyInfo pi = type.GetProperty(property, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Public);
 			if (null != pi)
 			{
-				// get init flag
-				hasbeenset = (bool)pi.GetValue(o, null);
-				string nmspace = typeof(SaleToPOIRequest).Namespace;
-				// look for other objects inside this object
-				object targetObject = data ?? o;
-				List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
-				foreach (PropertyInfo pinfo in properties)
+				try
 				{
-					// verify only types defined inside the current namespace, others won't carry the init flaf property
-					if (null != pinfo.GetValue(targetObject, null) &&
-						(nmspace == pinfo.PropertyType.Namespace ||
-						("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
-					{
-						int maxindex = 0;
-						bool mustOptimize = true;
-						// if array, an empty array indicates not set
-						if (pinfo.PropertyType.IsArray)
-							mustOptimize = 0 != (maxindex = ((Array)pinfo.GetValue(targetObject, null)).Length) && 1 == pinfo.PropertyType.GetArrayRank();
-						// we go inside the property only if optimization is necessary
-						if (mustOptimize)
-						{
-							// we do it only if the property owns other properties (useless otherwise)
-							List<PropertyInfo> subproperties = pinfo.GetType().GetProperties().ToList();
-							if (null != subproperties && 0 != subproperties.Count)
-							{
-								bool f = false;
-								if (pinfo.PropertyType.IsArray)
-								{
-									Array array = (Array)pinfo.GetValue(targetObject, null);
-									for (int i = 0; i < array.Length; i++)
-									{
-										object arrayObject = array.GetValue(i);
-										f = Optimize(arrayObject, null);
-										if (!f)
-											array.SetValue(null, i);
-										hasbeenset = hasbeenset || f;
-									}
-								}
-								//else
-								//{
-								//	// the object owns sub properties, we must recurse this processing
-								//	f = Optimize(pinfo.GetValue(targetObject, null), null);
-								//	if (!f)
-								//		pinfo.SetValue(targetObject, null, null);
-								//	hasbeenset = hasbeenset || f;
-								//}
-								else if (pinfo.PropertyType.IsClass)
-								{
-									// the object owns sub properties, we must recurse this processing
-									f = Optimize(pinfo.GetValue(targetObject, null), null);
-									if (!f)
-										pinfo.SetValue(targetObject, null, null);
-									hasbeenset = hasbeenset || f;
-								}
-							}
-						}
-					}
+					// the property has been found, let's setit to the desired value
+					pi.SetValue(o, value, null);
+					return true;
+				}
+				catch (Exception ex)
+				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, $"Object: {type} - Property name: {property} - Value to set: {value}");
 				}
 			}
-			return hasbeenset;
+			return false;
 		}
+		///// <summary>
+		///// Return the real object (if any) stored inside a System.Object property
+		///// </summary>
+		///// <param name="o">current object containg that property</param>
+		///// <param name="pinfo">property to look for</param>
+		///// <param name="type">[OUT] the type of the object stored inside the System.Object (if any, as it may be null)</param>
+		///// <returns>The real object stored inside a System.Object (if any), the current object if one is stored inside a System.Object, null otherwise</returns>
+		//private static void SetPropertyFromObject(object initial, string property, out Type type)
+		//{
+		//	Func<Type, bool> IsArray = (Type xtype) => { return xtype.IsArray; };
+		//	Func<Type, bool> IsSystemType = (Type xtype) => { return (0 == string.Compare("system", xtype.Namespace, true)); };
+		//	Func<Type, bool> IsSystemObject = (Type xtype) => { return IsSystemType(xtype) && (0 == string.Compare("object", xtype.Name, true)); };
+
+		//	object target = null;
+		//	// get the type of the property to check
+		//	type = pinfo.PropertyType;
+		//	if (IsSystemObject(type) || !IsSystemType(type))
+		//	{
+		//		// the property is either a System.Object or a non System obejct, get its value to try to find its real type
+		//		target = pinfo.GetValue(initial, null);
+		//		if (null != target)
+		//			// we found the real type of the object stored inside the System.Object property
+		//			type = target.GetType();
+		//	}
+		//	return target;
+		//}
+		///// <summary>
+		///// Return the real object (if any) stored inside a System.Object property
+		///// </summary>
+		///// <param name="o">current object containg that property</param>
+		///// <param name="pinfo">property to look for</param>
+		///// <param name="type">[OUT] the type of the object stored inside the System.Object (if any, as it may be null)</param>
+		///// <returns>The real object stored inside a System.Object (if any), the current object if one is stored inside a System.Object, null otherwise</returns>
+		//private static object GetPropertyFromObject(object initial, PropertyInfo pinfo, out Type type)
+		//{
+		//	Func<Type, bool> IsArray = (Type xtype) => { return xtype.IsArray; };
+		//	Func<Type, bool> IsSystemType = (Type xtype) => { return (0 == string.Compare("system", xtype.Namespace, true)); };
+		//	Func<Type, bool> IsSystemObject = (Type xtype) => { return IsSystemType(xtype) && (0 == string.Compare("object", xtype.Name, true)); };
+
+		//	object target = null;
+		//	// get the type of the property to check
+		//	type = pinfo.PropertyType;
+		//	if (IsSystemObject(type) || !IsSystemType(type))
+		//	{
+		//		// the property is either a System.Object or a non System obejct, get its value to try to find its real type
+		//		target = pinfo.GetValue(initial, null);
+		//		if (null != target)
+		//			// we found the real type of the object stored inside the System.Object property
+		//			type = target.GetType();
+		//	}
+		//	return target;
+		//}
+		/// <summary>
+		/// Return the real object (if any) stored inside a System.Object property
+		/// </summary>
+		/// <param name="o">current object containg that property</param>
+		/// <returns>The real object stored inside a System.Object (if any), the current object if one is stored inside a System.Object, null otherwise</returns>
+		public static Type GetRealObjectType(object o)
+		{
+			Func<Type, bool> IsArray = (Type xtype) => { return xtype.IsArray; };
+			Func<Type, bool> IsSystemType = (Type xtype) => { return (0 == string.Compare("system", xtype.Namespace, true)); };
+			Func<Type, bool> IsSystemObject = (Type xtype) => { return IsSystemType(xtype) && (0 == string.Compare("object", xtype.Name, true)); };
+
+			// get the type of the property to check
+			Type type = o.GetType();
+			if (IsSystemObject(type))
+			{
+				object obj = o;
+				type = obj.GetType();
+			}
+			return type;
+		}
+		//private static bool IsSystemType(Type type)
+		//{
+		//	return (0 == string.Compare("system", type.Namespace, true));
+		//}
+		//private static bool IsSystemObject(Type type)
+		//{
+		//	return IsSystemType(type) && (0 == string.Compare("object", type.Name, true));
+		//}
+		//private static bool IsArray(Type type)
+		//{
+		//	return type.IsArray;
+		//}
 		#endregion
 	}
 }

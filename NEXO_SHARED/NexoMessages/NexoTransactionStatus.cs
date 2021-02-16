@@ -44,8 +44,6 @@ namespace NEXO
 		bool IsDevice { get; }
 		[DispId(10034)]
 		bool IsEvent { get; }
-		[DispId(10035)]
-		string ProtocolVersion { get; set; }
 		[DispId(10036)]
 		string SaleID { get; set; }
 		[DispId(10037)]
@@ -100,7 +98,11 @@ namespace NEXO
 		[DispId(10071)]
 		bool UnknownError { get; }
 		[DispId(10072)]
-		string AdditionalResponse { get; }
+		ResultEnumeration Result { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -159,7 +161,7 @@ namespace NEXO
 	[Guid("A788EBE5-CF20-48BB-9E1E-2D9FF23BCE8A")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoTransactionStatus: NexoService, INexoTransactionStatus
+	public class NexoTransactionStatus : NexoService, INexoTransactionStatus
 	{
 		#region constructor
 		public NexoTransactionStatus() : base(MessageCategoryEnumeration.TransactionStatus)
@@ -178,21 +180,21 @@ namespace NEXO
 		#region request inner properties
 		public MessageReferenceType RequestMessageReference
 		{
-			get => RequestData.MessageReference;
-			set => RequestData.MessageReference = value;
+			get => (null != RequestData ? RequestData.MessageReference : null);
+			set { if (null != RequestData) RequestData.MessageReference = value; }
 		}
 		public bool RequestReceiptReprintFlag
 		{
-			get => RequestData.ReceiptReprintFlag;
-			set => RequestData.ReceiptReprintFlag = value;
+			get => (null != RequestData ? RequestData.ReceiptReprintFlag : false);
+			set { if (null != RequestData) RequestData.ReceiptReprintFlag = value; }
 		}
 		#endregion
 
 		#region reply inner properties
 		public MessageReferenceType ReplyMessageReference
 		{
-			get => ReplyData.MessageReference;
-			set => ReplyData.MessageReference = value;
+			get => (null != ReplyData ? ReplyData.MessageReference : null);
+			set { if (null != ReplyData) ReplyData.MessageReference = value; }
 		}
 		#endregion
 

@@ -1,27 +1,31 @@
+#if NEXO40
 namespace NEXO {
     using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4eaabcf5-9ee9-4eff-a004-85bd801089e6")]
+    [System.Runtime.InteropServices.GuidAttribute("d3e8e32f-5405-4139-bc08-b96feec16faa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AcceptorRejection2 : IAcceptorRejection2 {
-        internal RejectReason1Code rjctRsnField = new RejectReason1Code();
-        internal string addtlInfField;
-        internal byte[] msgInErrField = new byte[0];
-        internal bool xsdAcceptorRejection2InitFlagField = false;
+        private RejectReason1Code rjctRsnField;
+        private string addtlInfField;
+        private byte[] msgInErrField = new byte[0];
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public RejectReason1Code RjctRsn {
             get {
                 return this.rjctRsnField;
             }
             set {
-                this.xsdAcceptorRejection2InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.rjctRsnField = value;
             }
         }
@@ -31,7 +35,9 @@ namespace NEXO {
                 return this.addtlInfField;
             }
             set {
-                this.xsdAcceptorRejection2InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.addtlInfField = value;
             }
         }
@@ -39,35 +45,65 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
         public byte[] MsgInErr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
                 if (((this.msgInErrField == null)
                             || (this.msgInErrField.Length == 0))) {
                     return null;
                 }
+                // END ADDED BY XSD
                 return this.msgInErrField;
             }
             set {
-                this.xsdAcceptorRejection2InitFlagField = true;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.XSD_HasBeenSetField = true;
+                // END ADDED BY XSD
                 this.msgInErrField = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdAcceptorRejection2InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdAcceptorRejection2InitFlagField;
+                // BEGIN ADDED BY XSD
+                return this.XSD_HasBeenSetField;
+                // END ADDED BY XSD
             }
             set {
-                this.xsdAcceptorRejection2InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
             }
         }
         public int MsgInErrSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
             if ((this.msgInErrField == null)) {
                 return 0;
             }
             else {
                 return this.msgInErrField.Length;
             }
+            // END ADDED BY XSD
         }
         public byte MsgInErrGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
             try {
                 if ((this.msgInErrField == default(byte[]))) {
                     return default(byte);
@@ -85,8 +121,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return default(byte);
             }
+            // END ADDED BY XSD
         }
         public bool MsgInErrSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
             try {
                 if ((this.msgInErrField == default(byte[]))) {
                     return false;
@@ -99,8 +137,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool MsgInErrAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
             try {
                 if ((this.msgInErrField == default(byte[]))) {
                     return false;
@@ -119,8 +159,10 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
         public bool MsgInErrRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
             try {
                 if ((this.msgInErrField == default(byte[]))) {
                     return false;
@@ -146,48 +188,11 @@ namespace NEXO {
             catch (System.Exception ex) {
                 return false;
             }
+            // END ADDED BY XSD
         }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("e9fe530a-db16-4a24-800d-fa6d40209d06")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IAcceptorRejection2 {
-        /// <remarks/>
-        [DispId(1)]
-        RejectReason1Code RjctRsn {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string AddtlInf {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        byte[] MsgInErr {
-            get;
-            set;
-        }
-        [DispId(7)]
-        bool xsdAcceptorRejection2InitFlag {
-            get;
-            set;
-        }
-        [DispId(8)]
-        int MsgInErrSize();
-        [DispId(9)]
-        byte MsgInErrGetItem(int index);
-        [DispId(10)]
-        bool MsgInErrSetItem(int index, byte value);
-        [DispId(11)]
-        bool MsgInErrAddItem(byte value);
-        [DispId(12)]
-        bool MsgInErrRemoveItem(int index);
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01", IsNullable=false)]
@@ -213,49 +218,144 @@ namespace NEXO {
         MSGT,
     }
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.12.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "2.0.14.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="urn:iso:std:iso:20022:tech:xsd:casp.013.001.01", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("38a35dd5-09d6-48ea-a210-3d4a46bfc242")]
+    [System.Runtime.InteropServices.GuidAttribute("7dc7ffd1-0039-4342-86e0-04738d7655b2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIMessageRejectionV01 : ISaleToPOIMessageRejectionV01 {
-        internal Header37 hdrField = new Header37();
-        internal AcceptorRejection2 rjctField = new AcceptorRejection2();
-        internal bool xsdSaleToPOIMessageRejectionV01InitFlagField = false;
+        private Header37 hdrField = new Header37();
+        private AcceptorRejection2 rjctField = new AcceptorRejection2();
+        private bool XSD_HasBeenSetField = false;
+        private bool XSD_OptimizingField = false;
         /// <remarks/>
         public Header37 Hdr {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.hdrField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.hdrField;
             }
             set {
-                this.xsdSaleToPOIMessageRejectionV01InitFlagField = true;
-                this.hdrField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.hdrField = new Header37();
+                }
+                else {
+                    this.hdrField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         /// <remarks/>
         public AcceptorRejection2 Rjct {
             get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.XSD_OptimizingField == true)
+                            && (this.rjctField.XSD_HasBeenSetProperty == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
                 return this.rjctField;
             }
             set {
-                this.xsdSaleToPOIMessageRejectionV01InitFlagField = true;
-                this.rjctField = value;
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rjctField = new AcceptorRejection2();
+                }
+                else {
+                    this.rjctField = value;
+                }
+                // END ADDED BY XSD
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool xsdSaleToPOIMessageRejectionV01InitFlag {
+        public bool XSD_HasBeenSetProperty {
             get {
-                return this.xsdSaleToPOIMessageRejectionV01InitFlagField;
+                // BEGIN ADDED BY XSD
+                return ((this.XSD_HasBeenSetField || this.Hdr.XSD_HasBeenSetProperty)
+                            || this.Rjct.XSD_HasBeenSetProperty);
+                // END ADDED BY XSD
             }
             set {
-                this.xsdSaleToPOIMessageRejectionV01InitFlagField = value;
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_HasBeenSetField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.XSD_HasBeenSetField == false)) {
+                    this.Hdr = null;
+                    this.Rjct = null;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        internal bool XSD_OptimizingProperty {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this.XSD_OptimizingField;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this.XSD_OptimizingField = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Hdr != null)) {
+                    this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                if ((this.Rjct != null)) {
+                    this.Rjct.XSD_OptimizingProperty = this.XSD_OptimizingField;
+                }
+                // END ADDED BY XSD
             }
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("cb813c27-c617-4152-abe6-5eb26536ce47")]
+    [System.Runtime.InteropServices.GuidAttribute("76a73698-c58d-4f51-8881-2ee9fe246ff1")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IAcceptorRejection2 {
+        /// <remarks/>
+        [DispId(1)]
+        RejectReason1Code RjctRsn {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string AddtlInf {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        byte[] MsgInErr {
+            get;
+            set;
+        }
+        [DispId(4)]
+        bool XSD_HasBeenSetProperty {
+            get;
+            set;
+        }
+        [DispId(5)]
+        int MsgInErrSize();
+        [DispId(6)]
+        byte MsgInErrGetItem(int index);
+        [DispId(7)]
+        bool MsgInErrSetItem(int index, byte value);
+        [DispId(8)]
+        bool MsgInErrAddItem(byte value);
+        [DispId(9)]
+        bool MsgInErrRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("6efd2c5c-96fe-4ec4-bb82-d0dfa19e77f6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIMessageRejectionV01 {
@@ -266,15 +366,16 @@ namespace NEXO {
             set;
         }
         /// <remarks/>
-        [DispId(3)]
+        [DispId(2)]
         AcceptorRejection2 Rjct {
             get;
             set;
         }
-        [DispId(5)]
-        bool xsdSaleToPOIMessageRejectionV01InitFlag {
+        [DispId(3)]
+        bool XSD_HasBeenSetProperty {
             get;
             set;
         }
     }
 }
+#endif

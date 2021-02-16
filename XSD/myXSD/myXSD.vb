@@ -92,7 +92,7 @@ Public Class myXSD
 		For Each f As String In files.Items
 			settings.Files.Add(f)
 		Next
-		settings.ParametersFileName = "xsd.parameters.json"
+		settings.ParametersFileName = "xsd.params.json"
 		settings.AddDispID = addDispid.Checked
 		settings.BooleanToString = convertBoolean.Checked
 
@@ -126,14 +126,14 @@ Public Class myXSD
 		settings.MakeEnumComVisible = enumVisible.Checked
 		settings.Nmspace = nmspace.Text
 		settings.NumericToString = convertNumeric.Checked
-		settings.CreateArrayInitializer = arrayInitializer.Checked
-		settings.GetReturnsNullIfArrayIsEmpty = nullIfEmptyArray.Checked
+		settings.ArrayCreateInitializer = arrayInitializer.Checked
+		settings.ArrayGetReturnsNullEmpty = nullIfEmptyArray.Checked
 		settings.UseElements = cbElements.Checked
 		settings.UseNotations = cbNotations.Checked
 		settings.UseTypes = cbTypes.Checked
 		settings.PrivateByInternal = privateByInternal.Checked
-		settings.ManageInitFlag = manageInit.Checked
-		settings.AutomaticArrays = automaticArrays.Checked
+		settings.Preprocessor = efPreprocessor.Text
+		settings.DerivedClassName = baseClass.Text
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -169,14 +169,14 @@ Public Class myXSD
 		enumVisible.Checked = settings.MakeEnumComVisible
 		nmspace.Text = settings.Nmspace
 		convertNumeric.Checked = settings.NumericToString
-		arrayInitializer.Checked = settings.CreateArrayInitializer
-		nullIfEmptyArray.Checked = settings.GetReturnsNullIfArrayIsEmpty
+		arrayInitializer.Checked = settings.ArrayCreateInitializer
+		nullIfEmptyArray.Checked = settings.ArrayGetReturnsNullEmpty
 		cbElements.Checked = settings.UseElements
 		cbNotations.Checked = settings.UseNotations
 		cbTypes.Checked = settings.UseTypes
 		privateByInternal.Checked = settings.PrivateByInternal
-		manageInit.Checked = settings.ManageInitFlag
-		automaticArrays.Checked = settings.AutomaticArrays
+		efPreprocessor.Text = settings.Preprocessor
+		baseClass.Text = settings.DerivedClassName
 	End Sub
 
 	Private Sub GenerateFiles(mixFiles As Boolean)
@@ -296,6 +296,14 @@ Public Class myXSD
 
 	Private Sub result_TextChanged(sender As Object, e As EventArgs) Handles result.TextChanged
 		SetButtons()
+	End Sub
+
+	Private Sub classVisible_CheckedChanged(sender As Object, e As EventArgs) Handles classVisible.CheckedChanged
+		panelCOM.Enabled = classVisible.Checked
+	End Sub
+
+	Private Sub createInterface_CheckedChanged(sender As Object, e As EventArgs) Handles createInterface.CheckedChanged
+		panelInterface.Enabled = createInterface.Checked
 	End Sub
 
 	Private Sub convertTypes_CheckedChanged(sender As Object, e As EventArgs) Handles convertTypes.CheckedChanged

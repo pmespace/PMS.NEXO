@@ -51,16 +51,16 @@ namespace NEXO
 	//}
 	//[Guid("E9BA4737-C3FA-4898-80FA-29641E7D5A24")]
 	//[ClassInterface(ClassInterfaceType.None)]
-	//[ComVisible(true)]
 	/// <summary>
 	/// This class allows verifying whether a message header is valid or not
 	/// </summary>
+	[ComVisible(false)]
 	public class NexoMessageHeader//: INexoRetailerServerMessageHeaderValidator
 	{
 		#region constructors
 		public NexoMessageHeader(MessageHeaderType mh, NexoProtocolVersion server = null)
 		{
-			Response = new ResponseType();
+			Response = new NexoResponseType();
 			Type = MessageHeaderToType(mh);
 			Class = MessageHeaderToClass(mh);
 			Category = MessageHeaderToCategory(mh);
@@ -70,7 +70,7 @@ namespace NEXO
 			ServiceID = new NexoServiceID(mh.ServiceID);
 			ProtocolVersion = new NexoProtocolVersion() { Value = (MessageCategoryEnumeration.Login == Category ? mh.ProtocolVersion : null) };
 			ServerVersion = server;
-			Response.Result = ResultEnumeration.Success.ToString();
+			Response.Result = ResultEnumeration.Success;
 		}
 		#endregion
 
@@ -122,7 +122,7 @@ namespace NEXO
 		/// <summary>
 		/// Response to send if an error has occurred 
 		/// </summary>
-		public ResponseType Response { get; private set; }
+		public NexoResponseType Response { get; private set; }
 		/// <summary>
 		/// Indicates if the request can be processed based on MessageHeader
 		/// </summary>
@@ -231,9 +231,9 @@ namespace NEXO
 				}
 				// test values
 				if (!(fOK = fOK && !SaleID.IsEmpty))
-					NexoErrors.MessageFormatMandatoryDataAbsent(Response, ServiceID.Name);
+					NexoErrors.MessageFormatMandatoryDataAbsent(Response, SaleID.Name);
 				if (!(fOK = fOK && !POIID.IsEmpty))
-					NexoErrors.MessageFormatMandatoryDataAbsent(Response, ServiceID.Name);
+					NexoErrors.MessageFormatMandatoryDataAbsent(Response, POIID.Name);
 				// test final result
 				return fOK;
 			}

@@ -176,8 +176,8 @@ namespace NEXO
 		#region request inner properties
 		public ReconciliationTypeEnumeration RequestReconciliationType
 		{
-			get => (null != RequestData ? (ReconciliationTypeEnumeration)CMisc.GetEnumValue(typeof(ReconciliationTypeEnumeration), CMisc.Trimmed(RequestData.ReconciliationType)) : (ReconciliationTypeEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.ReconciliationType = CMisc.GetEnumName(typeof(ReconciliationTypeEnumeration), value); }
+			get => (ReconciliationTypeEnumeration)CMisc.GetEnumValue(typeof(ReconciliationTypeEnumeration), CMisc.Trimmed(RequestData.ReconciliationType), NexoValues.None);
+			set => RequestData.ReconciliationType = CMisc.GetEnumName(typeof(ReconciliationTypeEnumeration), value);
 		}
 		#endregion
 

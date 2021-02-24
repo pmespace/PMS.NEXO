@@ -96,10 +96,10 @@ namespace NEXO
 		bool UnknownError { get; }
 		[DispId(10072)]
 		ResultEnumeration Result { get; set; }
-  [DispId(10073)]
-  ErrorConditionEnumeration ErrorCondition { get; set; }
-  [DispId(10074)]
-  string AdditionalResponse { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -176,8 +176,8 @@ namespace NEXO
 		#region request inner properties
 		public string RequestServiceIdentification
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.ServiceIdentification) : null);
-			set { if (null != RequestData) RequestData.ServiceIdentification = value; }
+			get => CMisc.Trimmed(RequestData.ServiceIdentification);
+			set => RequestData.ServiceIdentification = value;
 		}
 		#endregion
 

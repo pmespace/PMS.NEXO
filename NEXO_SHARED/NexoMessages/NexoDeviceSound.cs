@@ -178,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public SoundActionEnumeration RequestSoundAction
 		{
-			get => (null != RequestData ? (SoundActionEnumeration)CMisc.GetEnumValue(typeof(SoundActionEnumeration), CMisc.Trimmed(RequestData.SoundAction)) : (SoundActionEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.SoundAction = CMisc.GetEnumName(typeof(SoundActionEnumeration), value); }
+			get => (SoundActionEnumeration)CMisc.GetEnumValue(typeof(SoundActionEnumeration), CMisc.Trimmed(RequestData.SoundAction), NexoValues.None);
+			set => RequestData.SoundAction = CMisc.GetEnumName(typeof(SoundActionEnumeration), value);
 		}
 		public uint RequestSoundVolume
 		{
-			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true) : (uint)0);
-			set { if (null != RequestData) RequestData.SoundVolume = value.ToString(); }
+			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true);
+			set => RequestData.SoundVolume = value.ToString();
 		}
 		#endregion
 

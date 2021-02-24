@@ -176,13 +176,13 @@ namespace NEXO
 		#region request inner properties
 		public string RequestMessageReferenceServiceID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.ServiceID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.ServiceID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.ServiceID);
+			set => RequestData.MessageReference.ServiceID = value;
 		}
 		public string RequestMessageReferenceDeviceID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.DeviceID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.DeviceID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.DeviceID);
+			set => RequestData.MessageReference.DeviceID = value;
 		}
 		#endregion
 
@@ -192,6 +192,7 @@ namespace NEXO
 		#region methods
 		protected override ResponseType GetResponse() { return null; }
 		protected override void SetResponse(ResponseType r) { }
+		protected override void SetReplyFromRequest() { }
 		protected override InternalAction AutoCompleteRequest()
 		{
 			DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);

@@ -181,18 +181,18 @@ namespace NEXO
 		#region request inner properties
 		public uint RequestMaximumTransmitTime
 		{
-			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true) : (uint)0);
-			set { if (null != RequestData) RequestData.MaximumTransmitTime = value.ToString(); }
+			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true);
+			set => RequestData.MaximumTransmitTime = value.ToString();
 		}
 		public string RequestDestinationAddress
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.DestinationAddress) : null);
-			set { if (null != RequestData) RequestData.DestinationAddress = value; }
+			get => CMisc.Trimmed(RequestData.DestinationAddress);
+			set => RequestData.DestinationAddress = value;
 		}
 		public string RequestMessage
 		{
-			get => (null != RequestData ? CMisc.Trimmed(Encoding.UTF8.GetString(RequestData.Message)) : null);
-			set { if (null != RequestData) RequestData.Message = Encoding.UTF8.GetBytes(value); }
+			get => CMisc.Trimmed(Encoding.UTF8.GetString(RequestData.Message));
+			set => RequestData.Message = Encoding.UTF8.GetBytes(value);
 		}
 		#endregion
 

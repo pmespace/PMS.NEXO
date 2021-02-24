@@ -104,10 +104,10 @@ namespace NEXO
 		bool UnknownError { get; }
 		[DispId(10072)]
 		ResultEnumeration Result { get; set; }
-  [DispId(10073)]
-  ErrorConditionEnumeration ErrorCondition { get; set; }
-  [DispId(10074)]
-  string AdditionalResponse { get; set; }
+		[DispId(10073)]
+		ErrorConditionEnumeration ErrorCondition { get; set; }
+		[DispId(10074)]
+		string AdditionalResponse { get; set; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -184,33 +184,33 @@ namespace NEXO
 		#region request inner properties
 		public string AbortPOIID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.POIID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.POIID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.POIID);
+			set => RequestData.MessageReference.POIID = value;
 		}
 		public string AbortSaleID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.SaleID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.SaleID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.SaleID);
+			set => RequestData.MessageReference.SaleID = value;
 		}
 		public string AbortServiceID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.ServiceID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.ServiceID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.ServiceID);
+			set => RequestData.MessageReference.ServiceID = value;
 		}
 		public string AbortDeviceID
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? CMisc.Trimmed(RequestData.MessageReference.DeviceID) : null);
-			set { if (null != RequestData && null != RequestData.MessageReference) RequestData.MessageReference.DeviceID = value; }
+			get => CMisc.Trimmed(RequestData.MessageReference.DeviceID);
+			set => RequestData.MessageReference.DeviceID = value;
 		}
 		public MessageCategoryEnumeration AbortMessageCategory
 		{
-			get => (null != RequestData && null != RequestData.MessageReference ? (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), CMisc.Trimmed(RequestData.MessageReference.MessageCategory)) : (MessageCategoryEnumeration)NexoValues.None);
+			get => (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), CMisc.Trimmed(RequestData.MessageReference.MessageCategory), NexoValues.None);
 			set => RequestData.MessageReference.MessageCategory = CMisc.GetEnumName(typeof(MessageCategoryEnumeration), value);
 		}
 		public string AbortReason
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.AbortReason) : null);
-			set { if (null != RequestData) RequestData.AbortReason = value; }
+			get => CMisc.Trimmed(RequestData.AbortReason);
+			set => RequestData.AbortReason = value;
 		}
 		#endregion
 

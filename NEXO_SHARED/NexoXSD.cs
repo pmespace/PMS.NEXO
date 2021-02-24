@@ -19,6 +19,11 @@ namespace NEXO
 		public static string NexoHasBeenSetField = $"{XSD}HasBeenSetField";
 	}
 
+	public abstract class NexoDummy
+	{
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public string MyString { get; set; }
+	}
 	//public static class NexoTools
 	//{
 	//	#region methods
@@ -133,7 +138,6 @@ namespace NEXO
 	//	}
 	//	#endregion
 
-	//}
 	//[ComVisible(false)]
 	//public abstract class NexoXSD
 	//{

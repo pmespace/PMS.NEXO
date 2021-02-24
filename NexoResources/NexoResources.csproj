@@ -56,57 +56,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\casp.001.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.002.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.003.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.004.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.005.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.006.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.007.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.008.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.009.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.010.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.011.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.012.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.013.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.014.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.015.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.016.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\casp.017.001.01.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Resources\nexo30CMS.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -39,11 +39,30 @@ namespace XSDEx
 		class MyTags : SortedDictionary<string, string> { }
 		private MyTags tags = new MyTags();
 
+		class Message
+		{
+			public Message() { }
+			public Label Lbl = null;
+			public string Header
+			{
+				get => _header;
+				set { _text = null; _header = value; Set(); }
+			}
+			private string _header = null;
+			public string Text
+			{
+				get => _text;
+				set { _text = value; Set(); }
+			}
+			private string _text = null;
+			private void Set() { if (null != Lbl) Lbl.Text = ((null != Header ? $"{Header}: " : null) + Text); Lbl.Refresh(); }
+		}
+
 		/// <summary>
 		/// dictionary of all objects contained inside all the XSD files
 		/// </summary>
 		class MyCodeTypeDeclarations : SortedDictionary<string, CodeTypeDeclaration> { }
-		private MyCodeTypeDeclarations codeTypeDeclarations;
+		private MyCodeTypeDeclarations typesDeclaredInsideNamespace;
 
 		/// <summary>
 		///  Dictionary of all tags inside all XSD files
@@ -67,13 +86,73 @@ namespace XSDEx
 		/// </summary>
 		/// <param name="settings"></param>
 		/// <param name="mixFiles"></param>
+		/// <param name="lbl"></param>
 		/// <returns></returns>
-		public bool AnalyseXSD(XSDSettings settings, bool mixFiles)
+		public bool AnalyseXSD(XSDSettings settings, bool mixFiles, Label lbl)
 		{
+			Message msg = new Message() { Lbl = lbl };
 			XmlSchema xsd;
 			try
 			{
-				codeTypeDeclarations = new MyCodeTypeDeclarations();
+				#region init parameters
+				// try to open the type conversino file
+				CJson<XSDParams> json = new CJson<XSDParams>(settings.ParametersFileName);
+				XSDParams parameters = json.ReadSettings();
+				if (null == parameters)
+				{
+					parameters = new XSDParams();
+					json.WriteSettings(parameters);
+				}
+				if (null == parameters.TypeConversions)
+				{
+					parameters.TypeConversions = new XSDTypeConversions();
+					parameters.TypeConversions.Add("myDummyBaseType1", new XSDTypeConversion()
+					{
+						TargetType = "myDummyTargetType",
+						Rank = 0,
+					});
+					parameters.TypeConversions.Add("myDummyBaseType2", new XSDTypeConversion()
+					{
+						TargetType = "myDummyTargetType",
+						Rank = 0,
+					});
+				}
+				if (null == parameters.ArrayConversions)
+				{
+					parameters.TypeConversions = new XSDTypeConversions();
+					parameters.TypeConversions.Add("myDummyArrayType1", new XSDTypeConversion()
+					{
+						TargetType = "myDummyTargetType",
+						Rank = 1,
+					});
+					parameters.TypeConversions.Add("myDummyArrayType2", new XSDTypeConversion()
+					{
+						TargetType = "myDummyTargetType",
+						Rank = 1,
+					});
+				}
+				if (null == parameters.TypesWithoutInitializer)
+				{
+					parameters.TypesWithoutInitializer = new XSDTypesWithSpecialProcessing();
+					parameters.TypesWithoutInitializer.Add("myDummyType1");
+					parameters.TypesWithoutInitializer.Add("myDummyType2");
+				}
+				if (null == parameters.ArrayTypesWithoutInitializer)
+				{
+					parameters.ArrayTypesWithoutInitializer = new XSDTypesWithSpecialProcessing();
+					parameters.ArrayTypesWithoutInitializer.Add("myDummyArrayType1");
+					parameters.ArrayTypesWithoutInitializer.Add("myDummyArrayType2");
+				}
+				if (null == parameters.ArrayTypesWithoutAccessors)
+				{
+					parameters.ArrayTypesWithoutAccessors = new XSDTypesWithSpecialProcessing();
+					parameters.ArrayTypesWithoutAccessors.Add("myDummyArrayType1");
+					parameters.ArrayTypesWithoutAccessors.Add("myDummyArrayType2");
+				}
+				json.WriteSettings(parameters);
+				#endregion
+
+				typesDeclaredInsideNamespace = new MyCodeTypeDeclarations();
 				if (mixFiles)
 				{
 					// all XSD will generate 1 file
@@ -92,7 +171,7 @@ namespace XSDEx
 						xsds.Add(xsd);
 					}
 					xsds.Compile(null, true);
-					return ProcessFile(settings, xsds, fileName, true);
+					return ProcessFile(settings, parameters, xsds, fileName, true, msg, false);
 				}
 				else
 				{
@@ -110,7 +189,7 @@ namespace XSDEx
 						xsds.Add(xsd);
 						xsds.Compile(null, true);
 						// allow special processing for the last file
-						fOK = fOK && ProcessFile(settings, xsds, fileName, i == settings.Files.Count - 1);
+						fOK = fOK && ProcessFile(settings, parameters, xsds, fileName, i == settings.Files.Count - 1, msg, true);
 					}
 					return fOK;
 				}
@@ -126,14 +205,19 @@ namespace XSDEx
 		/// Prepare a file to be created by the processing adding all necessary attributes and processing the types it contains
 		/// </summary>
 		/// <param name="settings"></param>
+		/// <param name="parameters"></param>
 		/// <param name="xsds"></param>
 		/// <param name="fileName"></param>
 		/// <param name="lastFile"></param>
+		/// <param name="msg"></param>
+		/// <param name="useNamespace"></param>
 		/// <returns></returns>
-		private bool ProcessFile(XSDSettings settings, XmlSchemas xsds, string fileName, bool lastFile)
+		private bool ProcessFile(XSDSettings settings, XSDParams parameters, XmlSchemas xsds, string fileName, bool lastFile, Message msg, bool useNamespace)
 		{
 			try
 			{
+				msg.Header = fileName;
+
 				// create the context
 				if (string.IsNullOrEmpty(settings.Nmspace))
 					settings.Nmspace = "XSD";
@@ -155,7 +239,9 @@ namespace XSDEx
 						endPreprocessor = $"#End If";
 					}
 				}
+
 				// export the code inside the namespace
+				msg.Text = "Exporting XSD";
 				XmlCodeExporter codeExporter = new XmlCodeExporter(codeNamespace, null, CodeGenerationOptions.GenerateProperties);
 
 				// load objects fromm the XSD
@@ -183,7 +269,9 @@ namespace XSDEx
 					codeExporter.ExportTypeMapping(map);
 
 				// process the files to update classes and other objects
-				CodeNamespace newCodeNamespace = PostProcess(settings, codeNamespace, lastFile);
+				CodeNamespace newCodeNamespace = PostProcess(settings, parameters, codeNamespace, lastFile, msg);
+
+				msg.Text = "Finalising";
 
 				// add the required imports 
 				newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
@@ -196,12 +284,16 @@ namespace XSDEx
 				CodeGenerator.ValidateIdentifiers(newCodeNamespace);
 
 				// create the code
+				msg.Text = "Generating code";
+
 				//Code = GenerateCode(settings, codeNamespace);
 				Code = GenerateCode(settings, newCodeNamespace);
 				if (!string.IsNullOrEmpty(beginPreprocessor))
 				{
 					Code = $"{beginPreprocessor}\r\n{Code}{endPreprocessor}";
 				}
+
+				msg.Text = "Writing file";
 
 				// create the file
 				using (StreamWriter sw = new StreamWriter(fileName))
@@ -221,62 +313,19 @@ namespace XSDEx
 		/// 
 		/// </summary>
 		/// <param name="settings"></param>
+		/// <param name="parameters"></param>
 		/// <param name="codeNamespace"></param>
 		/// <param name="lastFile"></param>
+		/// <param name="msg"></param>
 		/// <returns></returns>
-		private CodeNamespace PostProcess(XSDSettings settings, CodeNamespace codeNamespace, bool lastFile)
+		private CodeNamespace PostProcess(XSDSettings settings, XSDParams parameters, CodeNamespace codeNamespace, bool lastFile, Message msg)
 		{
-			#region init parameters
-			// try to open the type conversino file
-			CJson<XSDParams> json = new CJson<XSDParams>(settings.ParametersFileName);
-			XSDParams parameters = json.ReadSettings();
-			if (null == parameters)
-			{
-				parameters = new XSDParams();
-				json.WriteSettings(parameters);
-			}
-			bool fakeConversions = false, fakeArrays = false;
-			if (null == parameters.TypeConversions)
-			{
-				parameters.TypeConversions = new XSDTypeConversions();
-				parameters.TypeConversions.Add("myBaseType1", new XSDTargetType()
-				{
-					TargetType = "myTargetType",
-					TargetProperty = "myTargetProperty",
-				});
-				parameters.TypeConversions.Add("myBaseType2", new XSDTargetType()
-				{
-					TargetType = "myTargetType",
-					TargetProperty = "myTargetProperty",
-				});
-				fakeConversions = true;
-			}
-			if (null == parameters.ArraysWithoutInitializer)
-			{
-				parameters.ArraysWithoutInitializer = new XSDArraysWithoutInitializer();
-				parameters.ArraysWithoutInitializer.Add("myArrayType1");
-				parameters.ArraysWithoutInitializer.Add("myArrayType2");
-				fakeArrays = true;
-			}
-			if (null == parameters.FieldsWithoutInitializer)
-			{
-				parameters.FieldsWithoutInitializer = new XSDFieldsWithoutInitializer();
-				parameters.FieldsWithoutInitializer.Add("myPropertyName1", new XSDField() { Type = "myPropertyType" });
-				parameters.FieldsWithoutInitializer.Add("myPropertyName2", new XSDField() { Type = "myPropertyType" });
-				fakeArrays = true;
-			}
-			json.WriteSettings(parameters);
-			if (fakeConversions)
-				parameters.TypeConversions = null;
-			if (fakeArrays)
-				parameters.ArraysWithoutInitializer = null;
-			#endregion
-
 			CodeNamespace newCodeNamespace = null;
 
 			string bXSD = "BEGIN ADDED BY XSD";
 			string eXSD = "END ADDED BY XSD";
 
+			msg.Text = "Post process";
 			try
 			{
 				// file specific objects to add
@@ -292,7 +341,7 @@ namespace XSDEx
 					try
 					{
 						// add this type to the list of types to generate
-						codeTypeDeclarations.Add(codeType.Name /*+ "myXSDClassOrStruct"*/, codeType);
+						typesDeclaredInsideNamespace.Add(codeType.Name /*+ "myXSDClassOrStruct"*/, codeType);
 						// arrived here the type can be added 
 						thisFileTypes.Add(codeType);
 						//if (codeType.IsEnum)
@@ -301,10 +350,12 @@ namespace XSDEx
 					catch (Exception) { }
 				}
 
+				string header = msg.Header;
 				int internalcounter = 0;
 				foreach (CodeTypeDeclaration codeType in codeNamespace.Types)
 				{
 					internalcounter++;
+					msg.Header = $"{header} - Object #{internalcounter}";
 
 #if DECLAREHASBEENSET
 					// prepare init flag statements (create an additional bool value set to true if the data has been set, false otherwise)
@@ -324,7 +375,7 @@ namespace XSDEx
 
 					// create a list of properties that will receive special processing from XSDEx
 					List<CodeMemberProperty> propertiesToProcess = new List<CodeMemberProperty>();
-					List<CodeMemberProperty> optionalToProcess = new List<CodeMemberProperty>();
+					List<CodeMemberProperty> optionalsToProcess = new List<CodeMemberProperty>();
 
 					try
 					{
@@ -337,6 +388,8 @@ namespace XSDEx
 						if (visible && (codeType.IsClass || codeType.IsStruct))
 						{
 							int i;
+
+							msg.Header = $"{msg.Header} - Class {codeType.Name}";
 
 							// remove debugger settings
 							CodeAttributeDeclaration cad = new CodeAttributeDeclaration("System.Diagnostics.DebuggerStepThroughAttribute");
@@ -364,17 +417,12 @@ namespace XSDEx
 							// parse all members
 							foreach (CodeTypeMember member in codeType.Members)
 							{
+								//msg.Text = member.Name;
+
 								// process fields...
 								if (member is CodeMemberField)
 								{
 									CodeMemberField field = (CodeMemberField)member;
-
-									//if (0<>field.Type.Nested)
-									//if (0<>field.Type.ArrayRank)
-									//{
-									//	Array array = (Array)field.GetValue();
-									//}
-									string aaa = field.Type.ToString();
 
 									// verify if type needs to be converted (decimal to double,...)
 									field.Type = ConvertType(settings, parameters, field.Type);
@@ -383,7 +431,7 @@ namespace XSDEx
 									CodeTypeDeclaration ctd = null;
 									try
 									{
-										ctd = codeTypeDeclarations[field.Type.BaseType];
+										ctd = typesDeclaredInsideNamespace[field.Type.BaseType];
 									}
 									catch (Exception) { }
 
@@ -393,20 +441,33 @@ namespace XSDEx
 										field.Attributes = MemberAttributes.Assembly;
 									}
 
-									// set field initalizers
-									if (settings.ArrayCreateInitializer)
-										// the field does not describe a System.<Type> and isn't an array, provide an initializer
-										if (!IsSystemType(field.Type.BaseType) && 0 == field.Type.ArrayRank && !ctd.IsEnum)
-										{
-											// create "field = new Type();"
-											field.InitExpression = new CodeObjectCreateExpression(field.Type.BaseType, new CodeExpression[] { });
-										}
-										// the field is an array, provide an initializer if no exception to it is set
-										else if (CanConvertArray(parameters, field.Type, field))
-										{
-											// create "field = new Type[0];"
-											field.InitExpression = new CodeArrayCreateExpression(field.Type.BaseType, 0);
-										}
+									// the field does not describe a System.<Type>, isn't an array or an enum, we provide an initializer
+									if (!IsPrimitiveType(field.Type) && !IsArray(field.Type) && (null == ctd || !ctd.IsEnum)
+										&& (null == parameters.TypesWithoutInitializer ||
+											(null != parameters.TypesWithoutInitializer && !parameters.TypesWithoutInitializer.Contains(field.Type.BaseType))))
+									{
+										// create "field = new Type();"
+										field.InitExpression = new CodeObjectCreateExpression(field.Type.BaseType, new CodeExpression[] { });
+									}
+									// the field is an array, provide an initializer if no exception to it is set
+									//else if (CanConvertArray(parameters, field.Type, field))
+									else if (IsArray(field.Type)
+										&& settings.ArrayCreateInitializer
+										&& (null == parameters.ArrayTypesWithoutInitializer ||
+											(null != parameters.ArrayTypesWithoutInitializer && !parameters.ArrayTypesWithoutInitializer.Contains(field.Type.BaseType))))
+									{
+										// create "field = new Type[0];"
+										field.InitExpression = new CodeArrayCreateExpression(field.Type.BaseType, 0);
+									}
+									else if (null == parameters.TypesWithoutInitializer ||
+										(null != parameters.TypesWithoutInitializer && !parameters.TypesWithoutInitializer.Contains(field.Type.BaseType)))
+									{
+										field.InitExpression = new CodeDefaultValueExpression(field.Type);
+									}
+									else
+									{
+										// nothing special
+									}
 								}
 
 								// process properties...
@@ -423,12 +484,15 @@ namespace XSDEx
 									CodeTypeDeclaration ctd = null;
 									try
 									{
-										ctd = codeTypeDeclarations[property.Type.BaseType];
+										ctd = typesDeclaredInsideNamespace[property.Type.BaseType];
 									}
 									catch (Exception) { }
 
 									// verify if type needs to be converted
-									property.Type = ConvertType(settings, parameters, property.Type);
+									CodeTypeReference t = ConvertType(settings, parameters, property.Type);
+									//if (property.Type != t)
+									//	AddElementAttribute(property.CustomAttributes, property.Name, Type.GetType(property.Type.BaseType));
+									property.Type = t;
 
 									// search linked field
 									const string specified = "Field";
@@ -444,43 +508,54 @@ namespace XSDEx
 									// search whether this property is optional (there's a <name>Specified property, generated by the framework)
 									bool optional = false;
 									const string optionalSpecified = "Specified";
+									CodeMemberProperty propertySpecified = null;
 									foreach (CodeTypeMember mtb in codeType.Members)
 										if (mtb is CodeMemberProperty)
 											if (optional = (0 == string.Compare(property.Name + optionalSpecified, mtb.Name, true)))
+											{
+												propertySpecified = (CodeMemberProperty)mtb;
 												break;
+											}
 
 									// search whether this is a "Specified" flag keeping track of the optional member
-									bool optionalFlag = property.Name.EndsWith(optionalSpecified);
-									optionalFlag = optionalFlag && IsSystemType(property.Type.BaseType);
+									bool optionalAndPrimitive = property.Name.EndsWith(optionalSpecified) && IsPrimitiveType(property.Type);
 
 									// if not a system object or an array we add the object to the list of properties that will be treated by XSDEx
-									if (!IsSystemType(property.Type.BaseType) && !IsArray(property.Type) && !ctd.IsEnum && !optionalFlag)
+									if (!IsPrimitiveType(property.Type) && null != ctd && !ctd.IsEnum && !optional)
 									{
 										propertiesToProcess.Add(property);
 									}
 									// if it is an optional flag save it for later use
-									if (optionalFlag)
+									if (optional)
 									{
-										optionalToProcess.Add(property);
+										optionalsToProcess.Add(propertySpecified);
 									}
 
 									// "set" property part
 									if (property.HasSet)
 									{
+										CodeAssignStatement cas;
+
 										// not a system type
-										if (!IsSystemType(property.Type.BaseType) && !ctd.IsEnum)
+										if (!IsPrimitiveType(property.Type) || IsArray(property.Type))
 										{
 											// remove all set statements to add ours
 											property.SetStatements.Clear();
 
 											// if not an enum...
-											if (null != ctd && !ctd.IsEnum)
+											if (null == ctd || !ctd.IsEnum)
 											{
 												CodeExpression ce;
+
+												// determine the type of initialiser depending if array or not
 												if (IsArray(property.Type))
+												{
 													ce = new CodeArrayCreateExpression(property.Type, 0);
+												}
 												else
+												{
 													ce = new CodeObjectCreateExpression(property.Type, new CodeExpression[] { });
+												}
 
 												// create "if (null==value) { object=new} else { object=value;}"
 												CodeConditionStatement ccs = new CodeConditionStatement(
@@ -491,13 +566,13 @@ namespace XSDEx
 													// if true
 													new CodeStatement[]
 														{
-															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetFieldStr), new CodeBinaryOperatorExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetFieldStr), CodeBinaryOperatorType.BitwiseOr, new CodePropertyReferenceExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), hasBeenSetFieldStr))),
+															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), NexoXSDStrings.NexoHasBeenSetField), new CodeBinaryOperatorExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetFieldStr), CodeBinaryOperatorType.BitwiseOr, new CodePropertyReferenceExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), hasBeenSetFieldStr))),
 															new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), ce)
 														},
 													// if false
 													new CodeStatement[]
 														{
-															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetFieldStr), new CodePrimitiveExpression(true)),
+															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), NexoXSDStrings.NexoHasBeenSetField), new CodePrimitiveExpression(true)),
 															new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(),propertyField.Name), new CodePropertySetValueReferenceExpression())
 														}
 													);
@@ -505,50 +580,42 @@ namespace XSDEx
 												property.SetStatements.Insert(1, ccs);
 												property.SetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
 											}
-											// this is an enum, let's do nothing
+											// if an enum
 											else
 											{
+												// let's do nothing
 											}
 										}
 
-										// system type
+										// system type, not an array
 										else
 										{
-											CodeAssignStatement cas;
-
 											// if optional property update FieldSpecified flag when the property is set
 											if (optional)
 											{
-												// set ...fieldSpecified when setting the property
+												// set "...fieldSpecified=true" when setting the property
 												string st = property.Name + optionalSpecified;
 												cas = new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), st), new CodePrimitiveExpression(true));
 												property.SetStatements.Add(new CodeCommentStatement($"{bXSD} - indicate optional system property value may have been changed - {st} = true"));
 												property.SetStatements.Add(cas);
 												property.SetStatements.Add(new CodeCommentStatement($"{eXSD}"));
 											}
-
-											// specified flag, managed by the framework
-											if (optionalFlag)
-											{
-												// do nothing
-											}
-											else
-											{
-												// add set the init flag once the property is set
-												// every property once set must set the type init flag
-												cas = new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name), new CodePrimitiveExpression(true));
-												property.SetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - indicate system value has been changed"));
-												property.SetStatements.Insert(1, cas);
-												property.SetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
-											}
 										}
+
+										// add set the "has been set" flag once the property is set
+										cas = new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name), new CodePrimitiveExpression(true));
+										property.SetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - indicate system value has been changed"));
+										property.SetStatements.Insert(1, cas);
+										property.SetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
 									}
 
 									// "get" property part
 									if (property.HasGet)
 									{
 										// Set a "return null;" if array is of size 0
-										if (CanConvertArray(parameters, property.Type, property) && settings.ArrayGetReturnsNullEmpty)
+										//if (CanConvertArray(parameters, property.Type, property) && settings.ArrayGetReturnsNullEmpty)
+										if (IsArray(property.Type) &&
+											settings.ArrayGetReturnsNullEmpty)
 										{
 											CodeConditionStatement ccs = new CodeConditionStatement(
 												new CodeBinaryOperatorExpression(
@@ -573,10 +640,10 @@ namespace XSDEx
 
 #if USEOPTIMIZER
 										// if it is not a System type, if optimizing is on and the class hasn't been updated return what's appropriate
-										if (!IsArray(property.Type) && !IsSystemType(property.Type.BaseType))
+										else if (!IsPrimitiveType(property.Type))
 										{
-											// check the kind of type for this property
-											if (null != ctd && !ctd.IsEnum)
+											// if not an enum
+											if (null == ctd || !ctd.IsEnum)
 											{
 												// in this case return null
 												CodeConditionStatement ccs = new CodeConditionStatement(
@@ -599,9 +666,10 @@ namespace XSDEx
 												property.GetStatements.Insert(1, ccs);
 												property.GetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
 											}
+											// if enum
 											else
 											{
-												// it is an enum, do nothing special
+												// do nothing
 											}
 										}
 #endif
@@ -610,7 +678,11 @@ namespace XSDEx
 
 									#region declare accessors
 									// if array then create accessors if requested
-									if (CanConvertArray(parameters, property.Type, property) && settings.CreateArrayAccessors)
+									//if (CanConvertArray(parameters, property.Type, property) && settings.CreateArrayAccessors)
+									if (IsArray(property.Type) &&
+										settings.CreateArrayAccessors &&
+										(null == parameters.ArrayTypesWithoutAccessors ||
+											(null != parameters.ArrayTypesWithoutAccessors && !parameters.ArrayTypesWithoutAccessors.Contains(property.Type.BaseType))))
 									{
 										string isEx = "ex";
 										string isLength = "Length";
@@ -918,6 +990,8 @@ namespace XSDEx
 								}
 							}
 
+							//msg.Text = $"Finalising";
+
 							List<CodeStatement> statements = new List<CodeStatement>();
 
 #if DECLAREHASBEENSET
@@ -926,27 +1000,32 @@ namespace XSDEx
 							CodeExpression expression = new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name);
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
 							{
-								expression = new CodeBinaryOperatorExpression(
-									expression,
-									CodeBinaryOperatorType.BooleanOr,
-									new CodePropertyReferenceExpression(
+								if (!IsArray(cmp.Type) && !IsPrimitiveType(cmp.Type))
+								{
+									expression = new CodeBinaryOperatorExpression(
+										expression,
+										CodeBinaryOperatorType.BooleanOr,
 										new CodePropertyReferenceExpression(
-											new CodeThisReferenceExpression(),
-											cmp.Name),
-										hasBeenSetProperty.Name));
+											new CodePropertyReferenceExpression(
+												new CodeThisReferenceExpression(),
+												cmp.Name),
+											hasBeenSetProperty.Name));
+								}
 							}
-							foreach (CodeMemberProperty cmp in optionalToProcess)
+							foreach (CodeMemberProperty cmp in optionalsToProcess)
 							{
-								expression = new CodeBinaryOperatorExpression(
+								if (!IsArray(cmp.Type) && !IsPrimitiveType(cmp.Type))
+								{
+									expression = new CodeBinaryOperatorExpression(
 									expression,
 									CodeBinaryOperatorType.BooleanOr,
 									new CodePropertyReferenceExpression(
 										new CodeThisReferenceExpression(),
 										cmp.Name));
+								}
 							}
 							hasBeenSetProperty.GetStatements.Add(new CodeMethodReturnStatement(expression));
 							AddComment(hasBeenSetProperty, e, true);
-
 
 							AddSetStatementFromValue(hasBeenSetProperty, hasBeenSetField, b, e);
 							AddComment(hasBeenSetProperty, b, false);
@@ -958,7 +1037,7 @@ namespace XSDEx
 										cmp.Name),
 									new CodePrimitiveExpression(null)));
 							}
-							foreach (CodeMemberProperty cmp in optionalToProcess)
+							foreach (CodeMemberProperty cmp in optionalsToProcess)
 							{
 								statements.Add(new CodeAssignStatement(
 									new CodePropertyReferenceExpression(
@@ -986,7 +1065,9 @@ namespace XSDEx
 							statements.Clear();
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
 							{
-								statements.Add(new CodeConditionStatement(
+								if (!IsArray(cmp.Type))
+								{
+									statements.Add(new CodeConditionStatement(
 									new CodeBinaryOperatorExpression(
 										 new CodePropertyReferenceExpression(
 											 new CodeThisReferenceExpression(),
@@ -1005,6 +1086,7 @@ namespace XSDEx
 												new CodeThisReferenceExpression(),
 												optimizingField.Name))
 									}));
+								}
 							}
 							optimizingProperty.SetStatements.AddRange(statements.ToArray());
 							AddComment(optimizingProperty, e, false);
@@ -1060,7 +1142,7 @@ namespace XSDEx
 								try
 								{
 									string key = itf.Name + "myXSDInterface";
-									codeTypeDeclarations.Add(key, itf);
+									typesDeclaredInsideNamespace.Add(key, itf);
 									// arrived the interface doesn 't exist yet and can be added to the list of types/interaces inside this file
 									thisFileTypes.Add(itf);
 								}
@@ -1087,7 +1169,7 @@ namespace XSDEx
 
 				//// create a Decimal formatting attribute
 				//CodeAttributeDeclaration decimalFormat = new CodeAttributeDeclaration("DecimalFormatterAttribute");
-				//codeTypeDeclarations.Add(decimalFormat);
+				//typesDeclaredInsideNamespace.Add(decimalFormat);
 
 				// if it is time to add the tags let's do it
 				if (lastFile)
@@ -1106,7 +1188,7 @@ namespace XSDEx
 					// add tags
 					try
 					{
-						codeTypeDeclarations.Add(tagsType.Name, tagsType);
+						typesDeclaredInsideNamespace.Add(tagsType.Name, tagsType);
 						newCodeTypeDeclarations.Add(tagsType);
 					}
 					catch (Exception ex) { }
@@ -1159,13 +1241,15 @@ namespace XSDEx
 		/// <param name="settings"></param>
 		/// <param name="parameters"></param>
 		/// <param name="type"></param>
+		/// <returns></returns>
 		private static CodeTypeReference ConvertType(XSDSettings settings, XSDParams parameters, CodeTypeReference type)
 		{
+			XSDTypeConversions conversions = (IsArray(type) ? parameters.ArrayConversions : parameters.TypeConversions);
 			CodeTypeReference ntype = null;
 			// convert type if declared in the list of types to convert
-			if (null != parameters.TypeConversions && settings.ConvertTypes && parameters.TypeConversions.ContainsKey(type.BaseType))
+			if (null != conversions && settings.ConvertTypes && conversions.ContainsKey(type.BaseType))
 			{
-				ntype = new CodeTypeReference(parameters.TypeConversions[type.BaseType].TargetType);
+				ntype = new CodeTypeReference(conversions[type.BaseType].TargetType);
 			}
 			// replace DateTime type by string if replacement requested
 			else if (settings.DateTimeToString && settings.ConvertTypes && type.BaseType == typeof(System.DateTime).ToString())
@@ -1191,32 +1275,55 @@ namespace XSDEx
 			{
 				ntype = new CodeTypeReference(typeof(string));
 			}
+			if (IsArray(type) && null != ntype)
+				ntype.ArrayRank = conversions[type.BaseType].Rank;
 			return ntype ?? type;
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="parameters"></param>
-		/// <param name="type"></param>
-		/// <param name="member"></param>
-		/// <returns></returns>
-		private static bool CanConvertArray(XSDParams parameters, CodeTypeReference type, CodeTypeMember member)
-		{
-			return (IsArray(type) /* BEWARE multi dimensional arrays are not well managed */
-				&& (null == parameters.ArraysWithoutInitializer
-					|| (null != parameters.ArraysWithoutInitializer && !parameters.ArraysWithoutInitializer.Contains(type.BaseType)))
-				&& (null == parameters.FieldsWithoutInitializer
-					|| (null != parameters.FieldsWithoutInitializer && !parameters.FieldsWithoutInitializer.ContainsKey(member.Name))
-					|| (null != parameters.FieldsWithoutInitializer && parameters.FieldsWithoutInitializer.ContainsKey(member.Name) && type.BaseType != parameters.FieldsWithoutInitializer[member.Name].Type)));
-		}
+		///// <summary>
+		///// 
+		///// </summary>
+		///// <param name="parameters"></param>
+		///// <param name="type"></param>
+		///// <param name="member"></param>
+		///// <returns></returns>
+		//private static bool CanConvertArray(XSDParams parameters, CodeTypeReference type, CodeTypeMember member)
+		//{
+		//	//return (IsArray(type) /* BEWARE multi dimensional arrays are not well managed */
+		//	//	&& (null == parameters.ArrayTypesWithoutInitializer
+		//	//		|| (null != parameters.ArrayTypesWithoutInitializer && !parameters.ArrayTypesWithoutInitializer.Contains(type.BaseType)))
+		//	//	&& (null == parameters.FieldsWithoutInitializer
+		//	//		|| (null != parameters.FieldsWithoutInitializer && !parameters.FieldsWithoutInitializer.Contains(member.Name))
+		//	//		|| (null != parameters.FieldsWithoutInitializer && parameters.FieldsWithoutInitializer.Contains(member.Name))));
+
+		//	return (IsArray(type)
+		//		&& (null == parameters.ArrayTypesWithoutInitializer
+		//			|| (null != parameters.ArrayTypesWithoutInitializer && !parameters.ArrayTypesWithoutInitializer.Contains(type.BaseType))));
+		//}
 		private static bool IsArray(CodeTypeReference type)
 		{
 			int rank = type.ArrayRank;
 			return 0 != type.ArrayRank;
 		}
-		private static bool IsSystemType(string value)
+		private static bool IsObjectType(CodeTypeReference type)
 		{
-			return value.Contains("System.");
+			Type t = Type.GetType(type.BaseType);
+			if (null != t)
+				return 0 == string.Compare(t.FullName, "system.object", true);
+			return false;
+		}
+		private static bool IsStringType(CodeTypeReference type)
+		{
+			Type t = Type.GetType(type.BaseType);
+			if (null != t)
+				return 0 == string.Compare(t.FullName, "system.string", true);
+			return false;
+		}
+		private static bool IsPrimitiveType(CodeTypeReference type)
+		{
+			Type t = Type.GetType(type.BaseType);
+			if (null != t)
+				return t.IsPrimitive || IsStringType(type) || IsObjectType(type);
+			return false;
 		}
 		/// <summary>
 		/// 
@@ -1236,11 +1343,20 @@ namespace XSDEx
 		private static void AddComVisible(CodeAttributeDeclarationCollection attrs, bool visible = true)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.ComVisibleAttribute"), new CodeAttributeArgument(new CodePrimitiveExpression(visible)))); }
 		private static void AddClassInterface(CodeAttributeDeclarationCollection attrs, ClassInterfaceType clsif = ClassInterfaceType.None)
-		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.ClassInterface"), new CodeAttributeArgument(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("System.Runtime.InteropServices.ClassInterfaceType"), clsif.ToString())))); }
+		{
+			attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.ClassInterface"),
+			 new CodeAttributeArgument(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("System.Runtime.InteropServices.ClassInterfaceType"), clsif.ToString()))));
+		}
 		private static void AddInterfaceType(CodeAttributeDeclarationCollection attrs, ComInterfaceType cit = ComInterfaceType.InterfaceIsDual)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.InterfaceTypeAttribute"), new CodeAttributeArgument(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("System.Runtime.InteropServices.ComInterfaceType"), cit.ToString())))); }
 		private static void AddDispID(CodeAttributeDeclarationCollection attrs, int dispid)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("DispId"), new CodeAttributeArgument(new CodePrimitiveExpression(dispid)))); }
+		private static void AddElementAttribute(CodeAttributeDeclarationCollection attrs, string name, Type type)
+		{
+			attrs.Add(new CodeAttributeDeclaration(
+				new CodeTypeReference("System.Xml.Serialization.XmlElementAttribute"),
+				new CodeAttributeArgument(new CodeTypeOfExpression(type))));
+		}
 		/// <summary>
 		/// 
 		/// </summary>

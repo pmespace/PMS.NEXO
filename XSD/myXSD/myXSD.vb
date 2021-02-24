@@ -133,7 +133,6 @@ Public Class myXSD
 		settings.UseTypes = cbTypes.Checked
 		settings.PrivateByInternal = privateByInternal.Checked
 		settings.Preprocessor = efPreprocessor.Text
-		settings.DerivedClassName = baseClass.Text
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -176,7 +175,6 @@ Public Class myXSD
 		cbTypes.Checked = settings.UseTypes
 		privateByInternal.Checked = settings.PrivateByInternal
 		efPreprocessor.Text = settings.Preprocessor
-		baseClass.Text = settings.DerivedClassName
 	End Sub
 
 	Private Sub GenerateFiles(mixFiles As Boolean)
@@ -185,7 +183,7 @@ Public Class myXSD
 		ToSettings()
 		SetHourglass()
 		'FromSettings()
-		If xsdex.AnalyseXSD(ToSettings(), mixFiles) Then
+		If xsdex.AnalyseXSD(ToSettings(), mixFiles, Label5) Then
 			result.AppendText(xsdex.Code)
 			Try
 				Clipboard.SetText(xsdex.Code)
@@ -304,6 +302,10 @@ Public Class myXSD
 
 	Private Sub createInterface_CheckedChanged(sender As Object, e As EventArgs) Handles createInterface.CheckedChanged
 		panelInterface.Enabled = createInterface.Checked
+	End Sub
+
+	Private Sub status_TextChanged(sender As Object, e As EventArgs) Handles status.TextChanged
+		Label5.Text = String.Empty
 	End Sub
 
 	Private Sub convertTypes_CheckedChanged(sender As Object, e As EventArgs) Handles convertTypes.CheckedChanged

@@ -5,35 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace XSDEx
-	{
+{
 	/// <summary>
 	/// Type conversions
 	/// </summary>
-	class XSDTargetType
-		{
+	class XSDTypeConversion
+	{
 		public string TargetType { get; set; }
-		public string TargetProperty { get; set; }
-		}
-	class XSDTypeConversions: Dictionary<string, XSDTargetType> { }
+		public int Rank { get; set; }
+	}
+	class XSDTypeConversions : Dictionary<string, XSDTypeConversion> { }
 	/// <summary>
 	/// Arrays with no initializers
 	/// </summary>
-	class XSDArraysWithoutInitializer: List<string> { }
-	class XSDField
-		{
-		public string Type { get; set; }
-		}
-	/// <summary>
-	/// Properties array whose fields must not have any initializer
-	/// </summary>
-	class XSDFieldsWithoutInitializer: Dictionary<string, XSDField> { }
+	class XSDTypesWithSpecialProcessing : List<string> { }
 	/// <summary>
 	/// Json parameters file
 	/// </summary>
 	class XSDParams
-		{
+	{
 		public XSDTypeConversions TypeConversions { get; set; }
-		public XSDArraysWithoutInitializer ArraysWithoutInitializer { get; set; }
-		public XSDFieldsWithoutInitializer FieldsWithoutInitializer { get; set; }
-		}
+		public XSDTypeConversions ArrayConversions { get; set; }
+		public XSDTypesWithSpecialProcessing TypesWithoutInitializer { get; set; }
+		public XSDTypesWithSpecialProcessing ArrayTypesWithoutInitializer { get; set; }
+		public XSDTypesWithSpecialProcessing ArrayTypesWithoutAccessors { get; set; }
 	}
+}

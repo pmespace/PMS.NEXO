@@ -192,51 +192,51 @@ namespace NEXO
 		#region request inner properties
 		public string RequestOriginalPOITransactionID
 		{
-			get => (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TransactionID) : null);
-			set { if (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID) RequestData.OriginalPOITransaction.POITransactionID.TransactionID = value; }
+			get => CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TransactionID);
+			set => RequestData.OriginalPOITransaction.POITransactionID.TransactionID = value;
 		}
 		public string RequestOriginalPOITransactionTimestamp
 		{
-			get => (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID ? CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TimeStamp) : null);
-			set { if (null != RequestData && null != RequestData.OriginalPOITransaction && null != RequestData.OriginalPOITransaction.POITransactionID) RequestData.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
+			get => CMisc.Trimmed(RequestData.OriginalPOITransaction.POITransactionID.TimeStamp);
+			set => RequestData.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
 		public string RequestSaleReferenceID
 		{
 #if NEXO30
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.SaleReferenceID) : null);
-			set { if (null != RequestData) RequestData.SaleReferenceID = value; }
+			get => CMisc.Trimmed(RequestData.SaleReferenceID);
+			set => RequestData.SaleReferenceID = value;
 #elif NEXO31
-			get => (null != RequestData && null != RequestData.SaleData ? CMisc.Trimmed(RequestData.SaleData.SaleReferenceID) : null);
-			set { if (null != RequestData && null != RequestData.SaleData) RequestData.SaleData.SaleReferenceID = value; }
+		get => CMisc.Trimmed(RequestData.SaleData.SaleReferenceID);
+		set => RequestData.SaleData.SaleReferenceID = value;
 #endif
 		}
 		public double RequestReversedAmount
 		{
-			get => (null != RequestData ? RequestData.ReversedAmountSpecified ? RequestData.ReversedAmount : 0 : 0);
-			set { if (null != RequestData) RequestData.ReversedAmount = value; }
+			get => RequestData.ReversedAmount;
+			set => RequestData.ReversedAmount = value;
 		}
 		public ReversalReasonEnumeration RequestReversalReason
 		{
-			get => (null != RequestData ? (ReversalReasonEnumeration)CMisc.GetEnumValue(typeof(ReversalReasonEnumeration), CMisc.Trimmed(RequestData.ReversalReason)) : (ReversalReasonEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.ReversalReason = CMisc.GetEnumName(typeof(SoundActionEnumeration), value); }
+			get => (ReversalReasonEnumeration)CMisc.GetEnumValue(typeof(ReversalReasonEnumeration), CMisc.Trimmed(RequestData.ReversalReason), NexoValues.None);
+			set => RequestData.ReversalReason = CMisc.GetEnumName(typeof(SoundActionEnumeration), value);
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplyPOITransactionID
 		{
-			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID) : null);
-			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TransactionID = value; }
+			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID);
+			set => ReplyData.POIData.POITransactionID.TransactionID = value;
 		}
 		public string ReplyPOITimestamp
 		{
-			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp) : null);
-			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
+			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
+			set => ReplyData.POIData.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
 		public double ReplyReversedAmount
 		{
-			get => (null != ReplyData ? ReplyData.ReversedAmountSpecified ? ReplyData.ReversedAmount : 0 : 0);
-			set { if (null != ReplyData) ReplyData.ReversedAmount = value; }
+			get => ReplyData.ReversedAmount;
+			set => ReplyData.ReversedAmount = value;
 		}
 		#endregion
 
@@ -246,6 +246,12 @@ namespace NEXO
 		protected override InternalAction AutoCompleteRequest()
 		{
 			ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
+
+#if NEXO30
+#elif NEXO31
+			RequestData.SaleData.SaleTransactionID.TimeStamp = SetDefaultStringValue(RequestData.SaleData.SaleTransactionID.TimeStamp, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
+#endif
+
 			return InternalAction.noError;
 		}
 		protected override InternalAction AutoCompleteReply()

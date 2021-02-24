@@ -178,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public PINRequestTypeEnumeration RequestPINRequestType
 		{
-			get => (null != RequestData ? (PINRequestTypeEnumeration)CMisc.GetEnumValue(typeof(PINRequestTypeEnumeration), CMisc.Trimmed(RequestData.PINRequestType1)) : (PINRequestTypeEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.PINRequestType1 = CMisc.GetEnumName(typeof(PINRequestTypeEnumeration), value); }
+			get => (PINRequestTypeEnumeration)CMisc.GetEnumValue(typeof(PINRequestTypeEnumeration), CMisc.Trimmed(RequestData.PINRequestType1), NexoValues.None);
+			set => RequestData.PINRequestType1 = CMisc.GetEnumName(typeof(PINRequestTypeEnumeration), value);
 		}
 		public uint RequestMaxWaitingTime
 		{
-			get => (null != RequestData ? (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true) : 0);
-			set { if (null != RequestData) RequestData.MaxWaitingTime = value.ToString(); }
+			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true);
+			set => RequestData.MaxWaitingTime = value.ToString();
 		}
 		#endregion
 

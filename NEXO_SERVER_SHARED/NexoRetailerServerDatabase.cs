@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using COMMON;
 using System.Net.Sockets;
 using System.Net;
+using System.Data.Odbc;
 
 namespace NEXO.Server
 {
@@ -343,7 +344,6 @@ namespace NEXO.Server
 		{
 			bool fOK = false;
 			if (!IsOpen) return false;
-			List<NexoRetailerServerDatabaseEndPoint> list;
 
 			string sql = $"SELECT * FROM {Settings.EndPointsTableName} WHERE " +
 				$"({NexoRetailerServerDatabaseEndPoint.Labels.IP}='{IPAddress(tcp)}' OR {NexoRetailerServerDatabaseEndPoint.Labels.IP}={GENERIC}) AND " +
@@ -370,7 +370,7 @@ namespace NEXO.Server
 			}
 			return fOK;
 		}
-		private NexoRetailerServerDatabaseEndPoint FeedEndPoint(OleDbDataReader reader)
+		private NexoRetailerServerDatabaseEndPoint FeedEndPoint(OdbcDataReader reader)
 		{
 			NexoRetailerServerDatabaseEndPoint endPoint = new NexoRetailerServerDatabaseEndPoint();
 			try
@@ -397,7 +397,6 @@ namespace NEXO.Server
 		{
 			bool fOK;
 			if (!IsOpen) return false;
-			List<NexoRetailerServerDatabaseSale> list;
 
 			string sql = $"SELECT * FROM {Settings.SalesTableName}" +
 				" WHERE " +
@@ -427,7 +426,7 @@ namespace NEXO.Server
 			}
 			return fOK;
 		}
-		private NexoRetailerServerDatabaseSale FeedSale(OleDbDataReader reader)
+		private NexoRetailerServerDatabaseSale FeedSale(OdbcDataReader reader)
 		{
 			NexoRetailerServerDatabaseSale sale = new NexoRetailerServerDatabaseSale();
 			try
@@ -700,7 +699,7 @@ namespace NEXO.Server
 			}
 			return false;
 		}
-		private NexoRetailerServerDatabaseMessage FeedMessage(OleDbDataReader reader)
+		private NexoRetailerServerDatabaseMessage FeedMessage(OdbcDataReader reader)
 		{
 			NexoRetailerServerDatabaseMessage msg = new NexoRetailerServerDatabaseMessage();
 			try

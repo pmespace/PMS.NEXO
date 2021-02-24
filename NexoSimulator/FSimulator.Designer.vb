@@ -430,15 +430,15 @@ Partial Class FSimulator
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.Controls.Add(Me.pbLogin, 0, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogout, 1, 0)
-		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 2, 0)
-		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 3, 0)
 		Me.panelCommands.Controls.Add(Me.cbSynchronous, 10, 0)
 		Me.panelCommands.Controls.Add(Me.cbOptimize, 11, 0)
-		Me.panelCommands.Controls.Add(Me.pbPayment, 4, 0)
 		Me.panelCommands.Controls.Add(Me.cbAddReceipt, 8, 0)
-		Me.panelCommands.Controls.Add(Me.pbReversal, 5, 0)
-		Me.panelCommands.Controls.Add(Me.pbRefund, 6, 0)
 		Me.panelCommands.Controls.Add(Me.cbOnelineReceipt, 9, 0)
+		Me.panelCommands.Controls.Add(Me.pbPayment, 2, 0)
+		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 5, 0)
+		Me.panelCommands.Controls.Add(Me.pbReversal, 3, 0)
+		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 6, 0)
+		Me.panelCommands.Controls.Add(Me.pbRefund, 4, 0)
 		Me.panelCommands.Location = New System.Drawing.Point(3, 226)
 		Me.panelCommands.Name = "panelCommands"
 		Me.panelCommands.RowCount = 1
@@ -475,10 +475,10 @@ Partial Class FSimulator
 		Me.pbDeviceInput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbDeviceInput.AutoSize = True
 		Me.pbDeviceInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbDeviceInput.Location = New System.Drawing.Point(108, 3)
+		Me.pbDeviceInput.Location = New System.Drawing.Point(376, 3)
 		Me.pbDeviceInput.Name = "pbDeviceInput"
 		Me.pbDeviceInput.Size = New System.Drawing.Size(78, 23)
-		Me.pbDeviceInput.TabIndex = 2
+		Me.pbDeviceInput.TabIndex = 6
 		Me.pbDeviceInput.Text = "Device Input"
 		Me.pbDeviceInput.UseVisualStyleBackColor = True
 		'
@@ -487,10 +487,10 @@ Partial Class FSimulator
 		Me.pbDevicePrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbDevicePrint.AutoSize = True
 		Me.pbDevicePrint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbDevicePrint.Location = New System.Drawing.Point(192, 3)
+		Me.pbDevicePrint.Location = New System.Drawing.Point(295, 3)
 		Me.pbDevicePrint.Name = "pbDevicePrint"
 		Me.pbDevicePrint.Size = New System.Drawing.Size(75, 23)
-		Me.pbDevicePrint.TabIndex = 3
+		Me.pbDevicePrint.TabIndex = 5
 		Me.pbDevicePrint.Text = "Device Print"
 		Me.pbDevicePrint.UseVisualStyleBackColor = True
 		'
@@ -523,10 +523,10 @@ Partial Class FSimulator
 		Me.pbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbPayment.AutoSize = True
 		Me.pbPayment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbPayment.Location = New System.Drawing.Point(273, 3)
+		Me.pbPayment.Location = New System.Drawing.Point(108, 3)
 		Me.pbPayment.Name = "pbPayment"
 		Me.pbPayment.Size = New System.Drawing.Size(58, 23)
-		Me.pbPayment.TabIndex = 4
+		Me.pbPayment.TabIndex = 2
 		Me.pbPayment.Text = "Payment"
 		Me.pbPayment.UseVisualStyleBackColor = True
 		'
@@ -549,10 +549,11 @@ Partial Class FSimulator
 		Me.pbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbReversal.AutoSize = True
 		Me.pbReversal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbReversal.Location = New System.Drawing.Point(337, 3)
+		Me.pbReversal.Enabled = False
+		Me.pbReversal.Location = New System.Drawing.Point(172, 3)
 		Me.pbReversal.Name = "pbReversal"
 		Me.pbReversal.Size = New System.Drawing.Size(59, 23)
-		Me.pbReversal.TabIndex = 5
+		Me.pbReversal.TabIndex = 3
 		Me.pbReversal.Text = "Reversal"
 		Me.pbReversal.UseVisualStyleBackColor = True
 		'
@@ -561,10 +562,10 @@ Partial Class FSimulator
 		Me.pbRefund.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbRefund.AutoSize = True
 		Me.pbRefund.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbRefund.Location = New System.Drawing.Point(402, 3)
+		Me.pbRefund.Location = New System.Drawing.Point(237, 3)
 		Me.pbRefund.Name = "pbRefund"
 		Me.pbRefund.Size = New System.Drawing.Size(52, 23)
-		Me.pbRefund.TabIndex = 6
+		Me.pbRefund.TabIndex = 4
 		Me.pbRefund.Text = "Refund"
 		Me.pbRefund.UseVisualStyleBackColor = True
 		'
@@ -1636,8 +1637,8 @@ Partial Class FSimulator
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.0!))
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.0!))
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelRaw.Controls.Add(Me.pbSendFreeMessage, 6, 0)
@@ -1645,8 +1646,8 @@ Partial Class FSimulator
 		Me.panelRaw.Controls.Add(Me.pbBuild, 5, 0)
 		Me.panelRaw.Controls.Add(Me.cbxCommands, 2, 0)
 		Me.panelRaw.Controls.Add(Me.pbAdd, 1, 0)
-		Me.panelRaw.Controls.Add(Me.pbRemove, 4, 0)
-		Me.panelRaw.Controls.Add(Me.efCommand, 3, 0)
+		Me.panelRaw.Controls.Add(Me.efCommand, 4, 0)
+		Me.panelRaw.Controls.Add(Me.pbRemove, 3, 0)
 		Me.panelRaw.Location = New System.Drawing.Point(3, 191)
 		Me.panelRaw.Name = "panelRaw"
 		Me.panelRaw.RowCount = 1
@@ -1662,7 +1663,7 @@ Partial Class FSimulator
 		Me.pbSendFreeMessage.Location = New System.Drawing.Point(916, 3)
 		Me.pbSendFreeMessage.Name = "pbSendFreeMessage"
 		Me.pbSendFreeMessage.Size = New System.Drawing.Size(88, 23)
-		Me.pbSendFreeMessage.TabIndex = 3
+		Me.pbSendFreeMessage.TabIndex = 5
 		Me.pbSendFreeMessage.Text = "Send message"
 		Me.pbSendFreeMessage.UseVisualStyleBackColor = True
 		'
@@ -1685,7 +1686,7 @@ Partial Class FSimulator
 		Me.pbBuild.Location = New System.Drawing.Point(870, 3)
 		Me.pbBuild.Name = "pbBuild"
 		Me.pbBuild.Size = New System.Drawing.Size(40, 23)
-		Me.pbBuild.TabIndex = 2
+		Me.pbBuild.TabIndex = 4
 		Me.pbBuild.Text = "Build"
 		Me.pbBuild.UseVisualStyleBackColor = True
 		'
@@ -1698,18 +1699,18 @@ Partial Class FSimulator
 		Me.cbxCommands.Location = New System.Drawing.Point(174, 4)
 		Me.cbxCommands.Name = "cbxCommands"
 		Me.cbxCommands.Size = New System.Drawing.Size(154, 21)
-		Me.cbxCommands.TabIndex = 0
+		Me.cbxCommands.TabIndex = 1
 		'
 		'ContextMenuStrip1
 		'
 		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RenameToolStripMenuItem})
 		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-		Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(127, 26)
 		'
 		'RenameToolStripMenuItem
 		'
 		Me.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem"
-		Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
 		Me.RenameToolStripMenuItem.Text = "Rename..."
 		'
 		'pbAdd
@@ -1720,7 +1721,7 @@ Partial Class FSimulator
 		Me.pbAdd.Location = New System.Drawing.Point(132, 3)
 		Me.pbAdd.Name = "pbAdd"
 		Me.pbAdd.Size = New System.Drawing.Size(36, 23)
-		Me.pbAdd.TabIndex = 14
+		Me.pbAdd.TabIndex = 0
 		Me.pbAdd.Text = "Add"
 		Me.pbAdd.UseVisualStyleBackColor = True
 		'
@@ -1729,20 +1730,20 @@ Partial Class FSimulator
 		Me.pbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbRemove.AutoSize = True
 		Me.pbRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbRemove.Location = New System.Drawing.Point(816, 3)
+		Me.pbRemove.Location = New System.Drawing.Point(334, 3)
 		Me.pbRemove.Name = "pbRemove"
 		Me.pbRemove.Size = New System.Drawing.Size(48, 23)
-		Me.pbRemove.TabIndex = 15
+		Me.pbRemove.TabIndex = 2
 		Me.pbRemove.Text = "Delete"
 		Me.pbRemove.UseVisualStyleBackColor = True
 		'
 		'efCommand
 		'
 		Me.efCommand.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.efCommand.Location = New System.Drawing.Point(334, 4)
+		Me.efCommand.Location = New System.Drawing.Point(388, 4)
 		Me.efCommand.Name = "efCommand"
 		Me.efCommand.Size = New System.Drawing.Size(476, 20)
-		Me.efCommand.TabIndex = 16
+		Me.efCommand.TabIndex = 3
 		'
 		'FSimulator
 		'

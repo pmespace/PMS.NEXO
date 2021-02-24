@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>2.0.14</version>
+    <version>3.0.0</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,6 +14,13 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      3.0.0
+      - All Nexo classes are now safe, no way to have a null reference if using the classes
+      - Nexo simulator now is fully operational to build any message
+      - Nexo simulator POI simulation can be set nexo service by nexo service to reply with a pre-defined message stored in a json file
+      - Nexo Retailer 4.0 is still NOT SUPPORTED though and will be in version 4.x
+      - Nexo simumulator now can use a database to store its activity
+      
       2.0.14
       - Moved to PMS.COMMON 3.0.9
 
@@ -100,10 +107,10 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="3.0.10" />
+        <dependency id="PMS.COMMON" version="4.0.0" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="3.0.10" />
+        <dependency id="PMS.COMMON" version="4.0.0" />
       </group>
     </dependencies>
   </metadata>

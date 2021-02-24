@@ -178,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public string RequestSaleTransactionID
 		{
-			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID) : null);
-			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TransactionID = value; }
+			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID);
+			set => RequestData.SaleData.SaleTransactionID.TransactionID = value;
 		}
 		public string RequestSaleTransactionTimestamp
 		{
-			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp) : null);
-			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) RequestData.SaleData.SaleTransactionID.TimeStamp = value; }
+			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp);
+			set => RequestData.SaleData.SaleTransactionID.TimeStamp = value;
 		}
 		#endregion
 

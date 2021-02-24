@@ -189,28 +189,28 @@ namespace NEXO
 		private ResponseType fakeResponse = new ResponseType();
 		public string EventTimestamp
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.TimeStamp) : null);
-			set { if (null != RequestData) RequestData.TimeStamp = new NexoISODateTime() { Value = value }.Value; }
+			get => CMisc.Trimmed(RequestData.TimeStamp);
+			set => RequestData.TimeStamp = new NexoISODateTime() { Value = value }.Value;
 		}
 		public EventToNotifyEnumeration EventToNotify
 		{
-			get => (null != RequestData ? (EventToNotifyEnumeration)CMisc.GetEnumValue(typeof(EventToNotifyEnumeration), CMisc.Trimmed(RequestData.EventToNotify)) : (EventToNotifyEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.EventToNotify = CMisc.GetEnumName(typeof(EventToNotifyEnumeration), value); }
+			get => (EventToNotifyEnumeration)CMisc.GetEnumValue(typeof(EventToNotifyEnumeration), CMisc.Trimmed(RequestData.EventToNotify), NexoValues.None);
+			set => RequestData.EventToNotify = CMisc.GetEnumName(typeof(EventToNotifyEnumeration), value);
 		}
 		public string EventDetails
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.EventDetails) : null);
-			set { if (null != RequestData) RequestData.EventDetails = value; }
+			get => CMisc.Trimmed(RequestData.EventDetails);
+			set => RequestData.EventDetails = value;
 		}
 		public NexoByteSequence EventRejectedMessage
 		{
-			get => (null != RequestData ? new NexoByteSequence() { Value = RequestData.RejectedMessage } : null);
-			set { if (null != RequestData) RequestData.RejectedMessage = value.Value; }
+			get => new NexoByteSequence() { Value = RequestData.RejectedMessage };
+			set => RequestData.RejectedMessage = value.Value;
 		}
 		public bool EventMaintenanceRequiredFlag
 		{
-			get => (null != RequestData ? RequestData.MaintenanceRequiredFlag : false);
-			set { if (null != RequestData) RequestData.MaintenanceRequiredFlag = value; }
+			get => RequestData.MaintenanceRequiredFlag;
+			set => RequestData.MaintenanceRequiredFlag = value;
 		}
 		public string EventCustomerLanguage
 		{

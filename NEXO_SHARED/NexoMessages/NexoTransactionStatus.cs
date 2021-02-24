@@ -180,21 +180,21 @@ namespace NEXO
 		#region request inner properties
 		public MessageReferenceType RequestMessageReference
 		{
-			get => (null != RequestData ? RequestData.MessageReference : null);
-			set { if (null != RequestData) RequestData.MessageReference = value; }
+			get => RequestData.MessageReference;
+			set => RequestData.MessageReference = value;
 		}
 		public bool RequestReceiptReprintFlag
 		{
-			get => (null != RequestData ? RequestData.ReceiptReprintFlag : false);
-			set { if (null != RequestData) RequestData.ReceiptReprintFlag = value; }
+			get => RequestData.ReceiptReprintFlag;
+			set => RequestData.ReceiptReprintFlag = value;
 		}
 		#endregion
 
 		#region reply inner properties
 		public MessageReferenceType ReplyMessageReference
 		{
-			get => (null != ReplyData ? ReplyData.MessageReference : null);
-			set { if (null != ReplyData) ReplyData.MessageReference = value; }
+			get => ReplyData.MessageReference;
+			set => ReplyData.MessageReference = value;
 		}
 		#endregion
 

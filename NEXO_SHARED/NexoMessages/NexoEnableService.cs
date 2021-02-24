@@ -178,13 +178,13 @@ namespace NEXO
 		#region request inner properties
 		public TransactionActionEnumeration RequestTransactionAction
 		{
-			get => (null != RequestData ? (TransactionActionEnumeration)CMisc.GetEnumValue(typeof(TransactionActionEnumeration), CMisc.Trimmed(RequestData.TransactionAction)) : (TransactionActionEnumeration)NexoValues.None);
-			set { if (null != RequestData) RequestData.TransactionAction = CMisc.GetEnumName(typeof(TransactionActionEnumeration), value); }
+			get => (TransactionActionEnumeration)CMisc.GetEnumValue(typeof(TransactionActionEnumeration), CMisc.Trimmed(RequestData.TransactionAction), NexoValues.None);
+			set => RequestData.TransactionAction = CMisc.GetEnumName(typeof(TransactionActionEnumeration), value);
 		}
 		public string RequestServicesEnabled
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.ServicesEnabled) : null);
-			set { if (null != RequestData) RequestData.ServicesEnabled = value; }
+			get => CMisc.Trimmed(RequestData.ServicesEnabled);
+			set => RequestData.ServicesEnabled = value;
 		}
 		#endregion
 

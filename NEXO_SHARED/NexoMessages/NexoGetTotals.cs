@@ -180,8 +180,8 @@ namespace NEXO
 		#region reply inner properties
 		public string ReplyPOIReconciliationID
 		{
-			get => (null != ReplyData ? CMisc.Trimmed(ReplyData.POIReconciliationID) : null);
-			set { if (null != ReplyData) ReplyData.POIReconciliationID = value; }
+			get => CMisc.Trimmed(ReplyData.POIReconciliationID);
+			set => ReplyData.POIReconciliationID = value;
 		}
 		#endregion
 

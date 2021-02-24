@@ -181,27 +181,28 @@ namespace NEXO
 		#region request inner properties
 		public string RequestPOIID
 		{
-			get => (null != RequestData ? CMisc.Trimmed(RequestData.POIID) : null);
-			set { if (null != RequestData) RequestData.POIID = value; }
+			get => CMisc.Trimmed(RequestData.POIID);
+			set => RequestData.POIID = value;
 		}
 		public bool RequestHostDiagnosisFlag
 		{
-			get => (null != RequestData ? RequestData.HostDiagnosisFlag : false);
-			set { if (null != RequestData) RequestData.HostDiagnosisFlag = value; }
+			get => RequestData.HostDiagnosisFlag;
+			set => RequestData.HostDiagnosisFlag = value;
 		}
 		#endregion
 
 		#region reply inner properties
 		public GlobalStatusEnumeration ReplyGlobalStatus
 		{
-			get => (null != ReplyData && null != ReplyData.POIStatus ? (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POIStatus.GlobalStatus)) : (GlobalStatusEnumeration)NexoValues.None);
-			set { if (null != ReplyData && null != ReplyData.POIStatus) ReplyData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value); }
+			get => (GlobalStatusEnumeration)CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), CMisc.Trimmed(ReplyData.POIStatus.GlobalStatus), NexoValues.None);
+			set => ReplyData.POIStatus.GlobalStatus = CMisc.GetEnumName(typeof(GlobalStatusEnumeration), value);
 		}
 		#endregion
 
 		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.Response; }
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
+		protected override void SetReplyFromRequest() { }
 		protected override InternalAction AutoCompleteRequest()
 		{
 			return InternalAction.noError;

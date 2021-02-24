@@ -13,6 +13,62 @@ Imports System.Reflection
 
 Public Class FSimulator
 
+#Region "data"
+	Private nexoClients As New NexoRetailerClients
+	Private nexoServer As NexoRetailerServer = Nothing
+	Private gateway As CStreamServer
+	Private Const POIIDToUse As String = "090265130468"
+	Private connected As FConnected
+	Private Enum Position
+		client
+		gateway
+		server
+	End Enum
+	Private Enum Direction
+		left
+		none
+		right
+	End Enum
+	Private Const SERVER_SETTINGS_FILE_NAME As String = "server.database.json"
+	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
+	Private Const SETTINGS_FILE_EXT As String = ".json"
+	Private Const LOG_FILE_EXT As String = ".log"
+	Private json As CJson(Of Settings)
+	Private isClosing As Boolean = False
+	Private nexoServerID As Integer
+	Private Const SERVER_STOPPED_MESSAGE As Integer = Win32.WM_USER + 1
+	Private Const SERVER_INFORMATION_MESSAGE As Integer = SERVER_STOPPED_MESSAGE + 1
+	Private Const GATEWAY_STOPPED_MESSAGE As Integer = Win32.WM_USER + 50
+	Private Const GATEWAY_INFORMATION_MESSAGE As Integer = GATEWAY_STOPPED_MESSAGE + 1
+	Private Const CLIENT_STOPPED_MESSAGE As Integer = Win32.WM_USER + 100
+	Private Const CLIENT_INFORMATION_MESSAGE As Integer = CLIENT_STOPPED_MESSAGE + 1
+	Private ClientCounter As Integer = 0
+	Private ConnectionSettings As SettingsConnectionSettings
+	Private Class ContextType
+		Public Property SaleReferenceID As String
+	End Class
+	Private context As New ContextType
+
+	Private ReadOnly Property ServerIsRunning() As Boolean
+		Get
+			If Not IsNothing(nexoServer) Then
+				Return nexoServer.IsRunning
+			Else
+				Return False
+			End If
+		End Get
+	End Property
+
+	Private ReadOnly Property GatewayIsRunning As Boolean
+		Get
+			Return Not IsNothing(gateway) AndAlso gateway.IsRunning
+		End Get
+	End Property
+
+	Private Property TextToPrint As String
+	Private Property IsProcessing As Boolean = False
+#End Region
+
 #Region "serverThread management"
 	Private Enum ActivityEvent
 		none
@@ -55,58 +111,54 @@ Public Class FSimulator
 		End If
 		SetButtons()
 	End Sub
+
+	Private Sub AddLine(position As Position, r As Direction, s As String, Optional reset As Boolean = False)
+		Dim dt As DateTime = Now
+		Dim start As Integer = RichTextBox1.TextLength
+		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
+		Select Case r
+			Case Direction.left
+				txt = "<<< " & txt & " <<<"
+			Case Direction.right
+				txt = ">>> " & txt & " >>>"
+		End Select
+		RichTextBox1.SelectionStart = start
+		If position = Position.server Then
+			RichTextBox1.SelectionColor = lblServerHeader.ForeColor
+			RichTextBox1.SelectionAlignment = HorizontalAlignment.Right
+		ElseIf position = Position.client Then
+			RichTextBox1.SelectionColor = lblClientHeader.ForeColor
+			RichTextBox1.SelectionAlignment = HorizontalAlignment.Left
+		ElseIf position = Position.gateway Then
+			RichTextBox1.SelectionColor = lblGatewayHeader.ForeColor
+			RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
+		Else
+			RichTextBox1.SelectionColor = Color.Black
+			RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
+		End If
+		RichTextBox1.AppendText(txt & vbCrLf)
+		RichTextBox1.SelectionLength = RichTextBox1.TextLength - start
+		RichTextBox1.ScrollToCaret()
+	End Sub
+
+	Private Function MessageLength(s As String) As String
+		Return " [" & s.Length & " bytes]"
+	End Function
+
+	Private Sub DisplaySynchronousExchange(client As NexoRetailerClient, o As NexoObject, s As String)
+		Dim q As String = o.SerializedRequest, y As String = o.SerializedReply
+		AddLine(Position.client, Direction.right, "SYNCHRONOUSLY SENT " & o.MessageCategory.ToString.ToUpper & " " & " REQUEST TO " & s & MessageLength(q) & vbCrLf & q)
+		If client.Received Then
+			AddLine(Position.client, Direction.left, "SYNCHRONOUSLY RECEIVED " & o.MessageCategory.ToString.ToUpper & " " & " RESPONSE FROM " & s & MessageLength(y) & vbCrLf & y)
+		Else
+			Dim sts As String = "TIMEOUT"
+			If client.Cancelled Then sts = "CANCELLED"
+			AddLine(Position.client, Direction.none, "SYNCHRONOUS  EXCHANGE FAILED WITH STATUS: " & sts)
+		End If
+	End Sub
 #End Region
 
-	Private nexoClients As New NexoRetailerClients
-	Private nexoServer As NexoRetailerServer = Nothing
-	Private gateway As CStreamServer
-	Private Const POIIDToUse As String = "090265130468"
-	Private connected As FConnected
-	Private Enum Position
-		client
-		gateway
-		server
-	End Enum
-	Private Enum Direction
-		left
-		none
-		right
-	End Enum
-	Private Const SERVER_SETTINGS_FILE_NAME As String = "server.database.json"
-	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
-	Private Const SETTINGS_FILE_EXT As String = ".json"
-	Private Const LOG_FILE_EXT As String = ".log"
-	Private json As CJson(Of Settings)
-	Private isClosing As Boolean = False
-	Private nexoServerID As Integer
-	Private Const SERVER_STOPPED_MESSAGE As Integer = Win32.WM_USER + 1
-	Private Const SERVER_INFORMATION_MESSAGE As Integer = SERVER_STOPPED_MESSAGE + 1
-	Private Const GATEWAY_STOPPED_MESSAGE As Integer = Win32.WM_USER + 50
-	Private Const GATEWAY_INFORMATION_MESSAGE As Integer = GATEWAY_STOPPED_MESSAGE + 1
-	Private Const CLIENT_STOPPED_MESSAGE As Integer = Win32.WM_USER + 100
-	Private Const CLIENT_INFORMATION_MESSAGE As Integer = CLIENT_STOPPED_MESSAGE + 1
-	Private ClientCounter As Integer = 0
-	Private ConnectionSettings As SettingsConnectionSettings
-
-	Private ReadOnly Property ServerIsRunning() As Boolean
-		Get
-			If Not IsNothing(nexoServer) Then
-				Return nexoServer.IsRunning
-			Else
-				Return False
-			End If
-		End Get
-	End Property
-
-	Private ReadOnly Property GatewayIsRunning As Boolean
-		Get
-			Return Not IsNothing(gateway) AndAlso gateway.IsRunning
-		End Get
-	End Property
-
-	Private Property TextToPrint As String
-	Private Property IsProcessing As Boolean = False
-
+#Region "window management"
 	Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		Dim sfn As String = SettingsFileName()
 		json = New CJson(Of Settings)(sfn & SETTINGS_FILE_EXT)
@@ -139,6 +191,29 @@ Public Class FSimulator
 		e.Cancel = e.Cancel Or ServerIsRunning Or GatewayIsRunning
 	End Sub
 
+	Protected Overrides Sub WndProc(ByRef m As Message)
+		Select Case (m.Msg)
+			Case GATEWAY_STOPPED_MESSAGE
+				AddLine(Position.gateway, Direction.none, "GATEWAY STOPPED")
+				gateway = Nothing
+				SetButtons()
+			Case SERVER_STOPPED_MESSAGE
+				AddLine(Position.server, Direction.none, "SERVER STOPPED")
+				SetButtons()
+			Case CLIENT_STOPPED_MESSAGE
+				Dim c As NexoRetailerClient = GetClientFromID(m.WParam)
+				If Not IsNothing(c) Then
+					AddLine(Position.client, Direction.none, "CLIENT " & c.ToString & " STOPPED")
+					RemoveClient(c)
+				End If
+				ResetProcessing()
+				SetButtons()
+		End Select
+		MyBase.WndProc(m)
+	End Sub
+#End Region
+
+#Region "settings"
 	Public Function ServerSettingsFileName() As String
 		Return SettingsFileName() & "." & SERVER_SETTINGS_FILE_NAME
 	End Function
@@ -278,28 +353,9 @@ Public Class FSimulator
 
 		json.WriteSettings(settings)
 	End Sub
+#End Region
 
-	Protected Overrides Sub WndProc(ByRef m As Message)
-		Select Case (m.Msg)
-			Case GATEWAY_STOPPED_MESSAGE
-				AddLine(Position.gateway, Direction.none, "GATEWAY STOPPED")
-				gateway = Nothing
-				SetButtons()
-			Case SERVER_STOPPED_MESSAGE
-				AddLine(Position.server, Direction.none, "SERVER STOPPED")
-				SetButtons()
-			Case CLIENT_STOPPED_MESSAGE
-				Dim c As NexoRetailerClient = GetClientFromID(m.WParam)
-				If Not IsNothing(c) Then
-					AddLine(Position.client, Direction.none, "CLIENT " & c.ToString & " STOPPED")
-					RemoveClient(c)
-				End If
-				ResetProcessing()
-				SetButtons()
-		End Select
-		MyBase.WndProc(m)
-	End Sub
-
+#Region "client management"
 	Private Function AddClient(client As NexoRetailerClient) As Boolean
 		Try
 			nexoClients.Add(client.Key, client)
@@ -382,7 +438,9 @@ Public Class FSimulator
 			ctl.BackColor = container.BackColor
 		End If
 	End Sub
+#End Region
 
+#Region "interface management"
 	Private Sub SetButtons()
 		'server part
 		pbStartServer.Enabled = Not ServerIsRunning
@@ -448,43 +506,25 @@ Public Class FSimulator
 		SetButtons()
 	End Sub
 
-	Private Sub AddLine(position As Position, r As Direction, s As String, Optional reset As Boolean = False)
-		Dim dt As DateTime = Now
-		Dim start As Integer = RichTextBox1.TextLength
-		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
-		Select Case r
-			Case Direction.left
-				txt = "<<< " & txt & " <<<"
-			Case Direction.right
-				txt = ">>> " & txt & " >>>"
-		End Select
-		RichTextBox1.SelectionStart = start
-		If position = Position.server Then
-			RichTextBox1.SelectionColor = lblServerHeader.ForeColor
-			RichTextBox1.SelectionAlignment = HorizontalAlignment.Right
-		ElseIf position = Position.client Then
-			RichTextBox1.SelectionColor = lblClientHeader.ForeColor
-			RichTextBox1.SelectionAlignment = HorizontalAlignment.Left
-		ElseIf position = Position.gateway Then
-			RichTextBox1.SelectionColor = lblGatewayHeader.ForeColor
-			RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
-		Else
-			RichTextBox1.SelectionColor = Color.Black
-			RichTextBox1.SelectionAlignment = HorizontalAlignment.Center
+	Private Function SaveContent() As Boolean
+		SaveFileDialog1.Filter = "RTF files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*"
+		SaveFileDialog1.DefaultExt = "rtf"
+		SaveFileDialog1.AddExtension = True
+		Dim f As Boolean = MsgBoxResult.Ok = SaveFileDialog1.ShowDialog()
+		If f Then
+			Dim ext As String = Path.GetExtension(SaveFileDialog1.FileName)
+			If ext.ToLower = ".rtf" Then
+				RichTextBox1.SaveFile(SaveFileDialog1.FileName)
+			Else
+				RichTextBox1.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.PlainText)
+			End If
+			Return True
 		End If
-		RichTextBox1.AppendText(txt & vbCrLf)
-		RichTextBox1.SelectionLength = RichTextBox1.TextLength - start
-		RichTextBox1.ScrollToCaret()
-	End Sub
-
-	Private Function MessageLength(s As String) As String
-		Return " [" & s.Length & " bytes]"
+		Return False
 	End Function
+#End Region
 
-	Private Sub pbClose_Click(sender As Object, e As EventArgs) Handles pbClose.Click
-		Close()
-	End Sub
-
+#Region "server management"
 	Private Sub pbStartServer_Click(sender As Object, e As EventArgs) Handles pbStartServer.Click
 		StartServer()
 	End Sub
@@ -715,10 +755,20 @@ Public Class FSimulator
 		End If
 	End Sub
 
-	Private Sub saleID_TextChanged(sender As Object, e As EventArgs) Handles efSaleID.TextChanged
-		SetButtons()
+	Private Sub pbDatabaseSettings_Click(sender As Object, e As EventArgs) Handles pbDatabaseSettings.Click
+		Dim f As New FServerSettings
+		If nexoServer.IsRunning Then
+			f.Settings = nexoServer.Settings.DatabaseSettings
+		End If
+		f.ShowDialog()
+		If nexoServer.IsRunning Then
+			nexoServer.Settings.DatabaseSettings = f.Settings
+		End If
+		f.Dispose()
 	End Sub
+#End Region
 
+#Region "client management"
 	Private Sub pbConnect_Click(sender As Object, e As EventArgs) Handles pbConnect.Click
 		If cbUseConnectionSettings.Checked Then
 			If MsgBoxResult.No = MsgBox($"Beware you're trying to connect using pre-connexion settings.{vbCrLf}Do you wish to continue ?", MsgBoxStyle.YesNo) Then
@@ -889,7 +939,6 @@ Public Class FSimulator
 								  .Message = "??? SENT MESSAGE " & obj.Category.ToString.ToUpper & " " & obj.Type.ToString.ToUpper & " TO " & tcp.Client.RemoteEndPoint.ToString & " " & s & " AND HAS BEEN DISMISSED" & MessageLength(xml) & " ???" & vbCrLf & xml
 								  })
 
-		''prepare new message (abort ?)
 		'Dim abort As New NexoAbort()
 		'abort.AbortRequest(obj.CurrentObject)
 		'abort.AbortReason = "Timeout"
@@ -914,14 +963,6 @@ Public Class FSimulator
 	End Function
 
 	Private Function FullPOIID() As String
-		'Return CMisc.Trimmed(poiid.Text) ' & "@" & targetip.Text & ":" & targetport.Value.ToString
-		'If rbLocalHost.Checked Then
-		'	Return CMisc.Trimmed(poiid.Text) & "@" & CStream.Localhost & ":" & localServerPort.Value.ToString
-		'ElseIf rbGateway.Checked Then
-		'	Return CMisc.Trimmed(poiid.Text) & "@" & CStream.Localhost & ":" & gatewayPort.Value.ToString
-		'Else
-		'	Return CMisc.Trimmed(poiid.Text) & "@" & targetIP.Text & ":" & targetPort.Value.ToString
-		'End If
 		If String.IsNullOrEmpty(efPOIID.Text) Then
 			Dim c As NexoRetailerClient = CurrentClient()
 			If Not IsNothing(c) Then
@@ -953,19 +994,206 @@ Public Class FSimulator
 			Return udTimeout.Value
 		End If
 	End Function
+#End Region
 
-	Private Sub DisplaySynchronousExchange(client As NexoRetailerClient, o As NexoObject, s As String)
-		Dim q As String = o.SerializedRequest, y As String = o.SerializedReply
-		AddLine(Position.client, Direction.right, "SYNCHRONOUSLY SENT " & o.MessageCategory.ToString.ToUpper & " " & " REQUEST TO " & s & MessageLength(q) & vbCrLf & q)
-		If client.Received Then
-			AddLine(Position.client, Direction.left, "SYNCHRONOUSLY RECEIVED " & o.MessageCategory.ToString.ToUpper & " " & " RESPONSE FROM " & s & MessageLength(y) & vbCrLf & y)
-		Else
-			Dim sts As String = "TIMEOUT"
-			If client.Cancelled Then sts = "CANCELLED"
-			AddLine(Position.client, Direction.none, "SYNCHRONOUS  EXCHANGE FAILED WITH STATUS: " & sts)
+#Region "gateway management"
+	Private Sub pbStartGateway_Click(sender As Object, e As EventArgs) Handles pbStartGateway.Click
+		StartGateway()
+	End Sub
+
+	Private Sub pbStopGateway_Click(sender As Object, e As EventArgs) Handles pbStopGateway.Click
+		StopGateway()
+	End Sub
+
+	Private Sub StopGateway()
+		gateway.StopServer()
+		SetButtons()
+	End Sub
+
+	Private Sub StartGateway()
+		If IsNothing(gateway) Then
+			gateway = New CStreamServer() With {.Name = "Gateway"}
+		End If
+		If Not GatewayIsRunning Then
+			gateway.ID = 1
+			Dim settings As New CStreamServerSettings With {.Port = udGatewayPort.Value}
+			Dim threadData As New CThreadData With {.WindowToWarn = Me.Handle, .StoppedMessage = GATEWAY_STOPPED_MESSAGE, .InformationMessage = GATEWAY_INFORMATION_MESSAGE}
+			Dim startServerType As New CStreamServerStartSettings With
+				{
+				.StreamServerSettings = settings,
+				.ThreadData = threadData,
+				.OnMessage = AddressOf GatewayOnMessage,
+				.OnStart = AddressOf GatewayOnStart,
+				.OnConnect = AddressOf GatewayOnConnect,
+				.OnDisconnect = AddressOf GatewayOnDisconnect,
+				.OnStop = AddressOf GatewayOnStop
+				}
+			'AddressOf GatewayOnStop)
+			If gateway.StartServer(startServerType) Then
+				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY STARTED"})
+			Else
+				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY FAILED TO START"})
+			End If
+			SetButtons()
 		End If
 	End Sub
 
+	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, threadData As CThreadData, o As Object) As Byte()
+		'the gateway received a request that must be forwarded to the distant server
+		Dim settings As New CStreamClientSettings
+		If cbGatewayUseLocalHost.Checked Then
+			settings.IP = CStream.Localhost
+			settings.Port = udLocalServerPort.Value
+		Else
+			settings.IP = efGatewayServerIP.Text
+			settings.Port = udGatewayServerPort.Value
+		End If
+		'get the message as a string
+		Dim timeout As Boolean
+		Dim replySize As Integer
+		Dim xmlrequest As String = Encoding.UTF8.GetString(request)
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.forwardingRequest, .Message = "FORWARDING REQUEST FROM " & tcp.Client.RemoteEndPoint.ToString & " TO " & settings.FullIP & MessageLength(xmlrequest) & vbCrLf & xmlrequest})
+		Dim xmlreply As String = NexoRetailerClient.SendRawRequest(settings, xmlrequest, replySize, timeout)
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.receivingForwardedReply, .Message = "FORWARDING REPLY FROM " & settings.FullIP & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xmlrequest) & vbCrLf & xmlreply})
+		'do not forget, we're using nexo hence string messages, the system must add the buffer size when returning the reply
+		addBufferSize = True
+		Return Encoding.UTF8.GetBytes(xmlreply)
+	End Function
+
+	Private Function GatewayOnStart(threadData As CThreadData, o As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY IS STARTING"})
+		Return True
+	End Function
+
+	Private Function GatewayOnConnect(tcp As TcpClient, threadData As CThreadData, o As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
+		Return True
+	End Function
+
+	Private Function GatewayOnDisconnect(tcp As String, threadData As CThreadData, o As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
+		Return True
+	End Function
+
+	Private Function GatewayOnStop(threadData As CThreadData, o As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY IS STOPPING"})
+		Return True
+	End Function
+#End Region
+
+#Region "free commands management"
+	Private Sub pbFree_Click(sender As Object, e As EventArgs) Handles pbSendFreeMessage.Click
+		If Not String.IsNullOrEmpty(efCommand.Text) Then
+			Dim client As NexoRetailerClient = CurrentClient()
+			If Not IsNothing(client) Then
+				Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout())
+				If Not IsNothing(o) Then
+					'AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
+				End If
+			End If
+		End If
+		SetButtons()
+	End Sub
+
+	Private Sub pbAdd_Click(sender As Object, e As EventArgs) Handles pbAdd.Click
+		AddCommand()
+	End Sub
+
+	Private Sub cbxCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxCommands.SelectedIndexChanged
+		If -1 <> cbxCommands.SelectedIndex Then
+			efCommand.Text = DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Command
+		Else
+			EraseCommand()
+		End If
+		SetButtons()
+	End Sub
+
+	Private Sub pbRemove_Click(sender As Object, e As EventArgs) Handles pbRemove.Click
+		If 0 < cbxCommands.Items.Count Then
+			RemoveCommand()
+		End If
+	End Sub
+
+	Private Sub SaveCommand(index As Integer)
+		If -1 <> index Then
+			DirectCast(cbxCommands.Items(index), Command).Name = cbxCommands.Text
+			DirectCast(cbxCommands.Items(index), Command).Command = efCommand.Text
+		End If
+	End Sub
+
+	Private Sub EraseCommand()
+		cbxCommands.Text = Nothing
+		efCommand.Text = Nothing
+	End Sub
+
+	Private Sub AddCommand()
+		cbxCommands.SelectedIndex = cbxCommands.Items.Add(New Command With {.Name = $"item {cbxCommands.Items.Count + 1}", .Command = Nothing})
+		SetButtons()
+	End Sub
+
+	Private Sub RemoveCommand()
+		Dim index As Integer = cbxCommands.SelectedIndex
+		If -1 <> index Then
+			cbxCommands.Items.RemoveAt(index)
+			If 0 < cbxCommands.Items.Count Then
+				If cbxCommands.Items.Count >= index + 1 Then
+					cbxCommands.SelectedIndex = index
+				Else
+					cbxCommands.SelectedIndex = cbxCommands.Items.Count - 1
+				End If
+			Else
+				cbxCommands.SelectedIndex = -1
+				EraseCommand()
+			End If
+		End If
+		SetButtons()
+	End Sub
+
+	Private Sub cbxCommands_EnabledChanged(sender As Object, e As EventArgs) Handles cbxCommands.EnabledChanged
+		efCommand.Enabled = cbxCommands.Enabled
+		pbRemove.Enabled = cbxCommands.Enabled
+	End Sub
+
+	Private Sub NameCommand()
+		If -1 <> cbxCommands.SelectedIndex Then
+			Dim f As New FInput
+			f.Caption = "Please name your command"
+			f.Invite = $"{f.Caption}:"
+			f.Input = DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Name
+			Select Case f.ShowDialog
+				Case DialogResult.OK
+					DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Name = f.Input
+					DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), ComboBox).Refresh()
+			End Select
+		End If
+	End Sub
+
+	Private Sub efCommand_TextChanged(sender As Object, e As EventArgs) Handles efCommand.TextChanged
+		If -1 <> cbxCommands.SelectedIndex Then
+			DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Command = efCommand.Text
+		End If
+	End Sub
+
+	Private Sub RenameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem.Click
+		NameCommand()
+	End Sub
+
+	Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
+		e.Cancel = -1 = cbxCommands.SelectedIndex
+	End Sub
+
+	Private Sub pbBuild_Click(sender As Object, e As EventArgs) Handles pbBuild.Click
+		Dim f As New FChooser
+		f.XML = efCommand.Text
+		f.ShowDialog()
+		If Clipboard.ContainsText() Then
+			efCommand.Text = Clipboard.GetText
+		End If
+		f.Dispose()
+	End Sub
+#End Region
+
+#Region "nexo pre-defined messages"
 	Private Sub pbLogin_Click(sender As Object, e As EventArgs) Handles pbLogin.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogin()
@@ -1131,107 +1359,98 @@ Public Class FSimulator
 		End Select
 	End Sub
 
+	Private Sub pbRefund_Click(sender As Object, e As EventArgs) Handles pbRefund.Click
+		Dim payment As New FAmount
+		Select Case payment.ShowDialog
+			Case DialogResult.OK
+				'create the NexoLogin object
+				Dim o As New NexoRefund()
+				o.OptimizeXml = cbOptimize.Checked
+				o.SaleID = FullSaleID()
+				o.POIID = FullPOIID()
+				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
+				o.RequestSaleTransactionID = NexoAutoID.ID
+				Dim eur As New NexoCurrencyEUR()
+				o.RequestCurrency = eur.Value
+				o.RequestRequestedAmount = New NexoSimpleAmount() With {.DecimalPlaces = eur.DecimalPlaces, .AsDecimal = payment.Amount / 100}.AsDecimal
+				Dim s As String = o.SerializedRequest
+				Dim client As NexoRetailerClient = CurrentClient()
+				Dim f As Boolean = True
+				If f = Not IsNothing(client) Then
+					Dim t As Object = client.SendRequest(o, GetTimeout())
+					If f = Not IsNothing(t) Then
+					End If
+				End If
+				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING REFUND REQUEST" & MessageLength(s) & vbCrLf & s)
+				SetButtons()
+		End Select
+		payment = Nothing
+	End Sub
+
+	Private Sub pbReversal_Click(sender As Object, e As EventArgs) Handles pbReversal.Click
+		'Dim payment As New FAmount
+		'Select Case payment.ShowDialog
+		'	Case DialogResult.OK
+		'		'create the NexoLogin object
+		'		Dim o As New NexoReversal()
+		'		o.OptimizeXml = cbOptimize.Checked
+		'		o.SaleID = FullSaleID()
+		'		o.POIID = FullPOIID()
+		'		o.ServiceID = CMisc.Trimmed(efServiceID.Text)
+		'		o.RequestSaleTransactionID = NexoAutoID.ID
+		'		Dim eur As New NexoCurrencyEUR()
+		'		o.RequestCurrency = eur.Value
+		'		o.RequestRequestedAmount = New NexoSimpleAmount() With {.DecimalPlaces = eur.DecimalPlaces, .AsDecimal = payment.Amount / 100}.AsDecimal
+		'		Dim s As String = o.SerializedRequest
+		'		Dim client As NexoRetailerClient = CurrentClient()
+		'		Dim f As Boolean = True
+		'		If f = Not IsNothing(client) Then
+		'			Dim t As Object = client.SendRequest(o, GetTimeout())
+		'			If f = Not IsNothing(t) Then
+		'			End If
+		'		End If
+		'		If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING REFUND REQUEST" & MessageLength(s) & vbCrLf & s)
+		'		SetButtons()
+		'End Select
+		'payment = Nothing
+	End Sub
+#End Region
+
+#Region "pre-connection management"
+	Private Sub ResetPreConnection()
+		efConnectionReply.BackColor = SystemColors.Window
+	End Sub
+
+	Private Sub cbPreConnect_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseConnectionSettings.CheckedChanged
+		ResetPreConnection()
+		SetButtons()
+	End Sub
+
+	Private Sub pbPreConnectionSettings_Click(sender As Object, e As EventArgs) Handles pbConnectionSettings.Click
+		Dim f As New FConnectionSettings
+		f.Settings = ConnectionSettings
+		Select Case f.ShowDialog()
+			Case DialogResult.OK
+				ConnectionSettings = f.Settings
+		End Select
+		f.Dispose()
+	End Sub
+#End Region
+
+#Region "miscellaneous"
+	Private Sub pbClose_Click(sender As Object, e As EventArgs) Handles pbClose.Click
+		Close()
+	End Sub
+
+	Private Sub saleID_TextChanged(sender As Object, e As EventArgs) Handles efSaleID.TextChanged
+		SetButtons()
+	End Sub
+
 	Private Sub cbConnected_CheckedChanged(sender As Object, e As EventArgs) Handles cbConnected.CheckedChanged
 		connected.Visible = cbConnected.Checked
 	End Sub
 
 	Private Sub localIP_CheckedChanged(sender As Object, e As EventArgs)
-		SetButtons()
-	End Sub
-
-	Private Sub pbFree_Click(sender As Object, e As EventArgs) Handles pbSendFreeMessage.Click
-		If Not String.IsNullOrEmpty(efCommand.Text) Then
-			Dim client As NexoRetailerClient = CurrentClient()
-			If Not IsNothing(client) Then
-				Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout())
-				If Not IsNothing(o) Then
-					'AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
-				End If
-			End If
-		End If
-		SetButtons()
-	End Sub
-
-	Private Sub pbStartGateway_Click(sender As Object, e As EventArgs) Handles pbStartGateway.Click
-		StartGateway()
-	End Sub
-
-	Private Sub StartGateway()
-		If IsNothing(gateway) Then
-			gateway = New CStreamServer() With {.Name = "Gateway"}
-		End If
-		If Not GatewayIsRunning Then
-			gateway.ID = 1
-			Dim settings As New CStreamServerSettings With {.Port = udGatewayPort.Value}
-			Dim threadData As New CThreadData With {.WindowToWarn = Me.Handle, .StoppedMessage = GATEWAY_STOPPED_MESSAGE, .InformationMessage = GATEWAY_INFORMATION_MESSAGE}
-			Dim startServerType As New CStreamServerStartSettings With
-				{
-				.StreamServerSettings = settings,
-				.ThreadData = threadData,
-				.OnMessage = AddressOf GatewayOnMessage,
-				.OnStart = AddressOf GatewayOnStart,
-				.OnConnect = AddressOf GatewayOnConnect,
-				.OnDisconnect = AddressOf GatewayOnDisconnect,
-				.OnStop = AddressOf GatewayOnStop
-				}
-			'AddressOf GatewayOnStop)
-			If gateway.StartServer(startServerType) Then
-				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY STARTED"})
-			Else
-				RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY FAILED TO START"})
-			End If
-			SetButtons()
-		End If
-	End Sub
-
-	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, threadData As CThreadData, o As Object) As Byte()
-		'the gateway received a request that must be forwarded to the distant server
-		Dim settings As New CStreamClientSettings
-		If cbGatewayUseLocalHost.Checked Then
-			settings.IP = CStream.Localhost
-			settings.Port = udLocalServerPort.Value
-		Else
-			settings.IP = efGatewayServerIP.Text
-			settings.Port = udGatewayServerPort.Value
-		End If
-		'get the message as a string
-		Dim timeout As Boolean
-		Dim replySize As Integer
-		Dim xmlrequest As String = Encoding.UTF8.GetString(request)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.forwardingRequest, .Message = "FORWARDING REQUEST FROM " & tcp.Client.RemoteEndPoint.ToString & " TO " & settings.FullIP & MessageLength(xmlrequest) & vbCrLf & xmlrequest})
-		Dim xmlreply As String = NexoRetailerClient.SendRawRequest(settings, xmlrequest, replySize, timeout)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.receivingForwardedReply, .Message = "FORWARDING REPLY FROM " & settings.FullIP & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xmlrequest) & vbCrLf & xmlreply})
-		'do not forget, we're using nexo hence string messages, the system must add the buffer size when returning the reply
-		addBufferSize = True
-		Return Encoding.UTF8.GetBytes(xmlreply)
-	End Function
-
-	Private Function GatewayOnStart(threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY IS STARTING"})
-		Return True
-	End Function
-
-	Private Function GatewayOnConnect(tcp As TcpClient, threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
-		Return True
-	End Function
-
-	Private Function GatewayOnDisconnect(tcp As String, threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
-		Return True
-	End Function
-
-	Private Function GatewayOnStop(threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY IS STOPPING"})
-		Return True
-	End Function
-
-	Private Sub pbStopGateway_Click(sender As Object, e As EventArgs) Handles pbStopGateway.Click
-		StopGateway()
-	End Sub
-
-	Private Sub StopGateway()
-		gateway.StopServer()
 		SetButtons()
 	End Sub
 
@@ -1246,23 +1465,6 @@ Public Class FSimulator
 	Private Sub pbSaveContent_Click(sender As Object, e As EventArgs) Handles pbSaveContent.Click
 		SaveContent()
 	End Sub
-
-	Private Function SaveContent() As Boolean
-		SaveFileDialog1.Filter = "RTF files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*"
-		SaveFileDialog1.DefaultExt = "rtf"
-		SaveFileDialog1.AddExtension = True
-		Dim f As Boolean = MsgBoxResult.Ok = SaveFileDialog1.ShowDialog()
-		If f Then
-			Dim ext As String = Path.GetExtension(SaveFileDialog1.FileName)
-			If ext.ToLower = ".rtf" Then
-				RichTextBox1.SaveFile(SaveFileDialog1.FileName)
-			Else
-				RichTextBox1.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.PlainText)
-			End If
-			Return True
-		End If
-		Return False
-	End Function
 
 	Private Sub pbSaveSettings_Click(sender As Object, e As EventArgs) Handles pbSaveSettings.Click
 		SaveSettings()
@@ -1309,34 +1511,6 @@ Public Class FSimulator
 		SetButtons()
 	End Sub
 
-	Private Sub pbRefund_Click(sender As Object, e As EventArgs) Handles pbRefund.Click
-		Dim payment As New FAmount
-		Select Case payment.ShowDialog
-			Case DialogResult.OK
-				'create the NexoLogin object
-				Dim o As New NexoRefund()
-				o.OptimizeXml = cbOptimize.Checked
-				o.SaleID = FullSaleID()
-				o.POIID = FullPOIID()
-				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
-				o.RequestSaleTransactionID = NexoAutoID.ID
-				Dim eur As New NexoCurrencyEUR()
-				o.RequestCurrency = eur.Value
-				o.RequestRequestedAmount = New NexoSimpleAmount() With {.DecimalPlaces = eur.DecimalPlaces, .AsDecimal = payment.Amount / 100}.AsDecimal
-				Dim s As String = o.SerializedRequest
-				Dim client As NexoRetailerClient = CurrentClient()
-				Dim f As Boolean = True
-				If f = Not IsNothing(client) Then
-					Dim t As Object = client.SendRequest(o, GetTimeout())
-					If f = Not IsNothing(t) Then
-					End If
-				End If
-				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING REFUND REQUEST" & MessageLength(s) & vbCrLf & s)
-				SetButtons()
-		End Select
-		payment = Nothing
-	End Sub
-
 	Private Sub cbInfinite_CheckedChanged(sender As Object, e As EventArgs) Handles cbInfinite.CheckedChanged
 		SetButtons()
 	End Sub
@@ -1346,132 +1520,6 @@ Public Class FSimulator
 			nexoServer.TimerBeforeReply = udServerDelay.Value
 		End If
 	End Sub
+#End Region
 
-	Private Sub pbDatabaseSettings_Click(sender As Object, e As EventArgs) Handles pbDatabaseSettings.Click
-		Dim f As New FServerSettings
-		If nexoServer.IsRunning Then
-			f.Settings = nexoServer.Settings.DatabaseSettings
-		End If
-		f.ShowDialog()
-		If nexoServer.IsRunning Then
-			nexoServer.Settings.DatabaseSettings = f.Settings
-		End If
-		f.Dispose()
-	End Sub
-
-	Private Sub pbBuild_Click(sender As Object, e As EventArgs) Handles pbBuild.Click
-		Dim f As New FChooser
-		f.XML = efCommand.Text
-		f.ShowDialog()
-		If Clipboard.ContainsText() Then
-			efCommand.Text = Clipboard.GetText
-		End If
-		f.Dispose()
-	End Sub
-
-	Private Sub ResetPreConnection()
-		efConnectionReply.BackColor = SystemColors.Window
-	End Sub
-
-	Private Sub cbPreConnect_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseConnectionSettings.CheckedChanged
-		ResetPreConnection()
-		SetButtons()
-	End Sub
-
-	Private Sub pbPreConnectionSettings_Click(sender As Object, e As EventArgs) Handles pbConnectionSettings.Click
-		Dim f As New FConnectionSettings
-		f.Settings = ConnectionSettings
-		Select Case f.ShowDialog()
-			Case DialogResult.OK
-				ConnectionSettings = f.Settings
-		End Select
-		f.Dispose()
-	End Sub
-
-	Private Sub pbAdd_Click(sender As Object, e As EventArgs) Handles pbAdd.Click
-		AddCommand()
-	End Sub
-
-	Private Sub cbxCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxCommands.SelectedIndexChanged
-		If -1 <> cbxCommands.SelectedIndex Then
-			efCommand.Text = DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Command
-		Else
-			EraseCommand()
-		End If
-		SetButtons()
-	End Sub
-
-	Private Sub pbRemove_Click(sender As Object, e As EventArgs) Handles pbRemove.Click
-		If 0 < cbxCommands.Items.Count Then
-			RemoveCommand()
-		End If
-	End Sub
-
-	Private Sub SaveCommand(index As Integer)
-		If -1 <> index Then
-			DirectCast(cbxCommands.Items(index), Command).Name = cbxCommands.Text
-			DirectCast(cbxCommands.Items(index), Command).Command = efCommand.Text
-		End If
-	End Sub
-
-	Private Sub EraseCommand()
-		cbxCommands.Text = Nothing
-		efCommand.Text = Nothing
-	End Sub
-
-	Private Sub AddCommand()
-		cbxCommands.SelectedIndex = cbxCommands.Items.Add(New Command With {.Name = $"item {cbxCommands.Items.Count + 1}", .Command = Nothing})
-		SetButtons()
-	End Sub
-
-	Private Sub RemoveCommand()
-		Dim index As Integer = cbxCommands.SelectedIndex
-		If -1 <> index Then
-			cbxCommands.Items.RemoveAt(index)
-			If 0 < cbxCommands.Items.Count Then
-				If cbxCommands.Items.Count >= index + 1 Then
-					cbxCommands.SelectedIndex = index
-				Else
-					cbxCommands.SelectedIndex = cbxCommands.Items.Count - 1
-				End If
-			Else
-				cbxCommands.SelectedIndex = -1
-				EraseCommand()
-			End If
-		End If
-		SetButtons()
-	End Sub
-
-	Private Sub cbxCommands_EnabledChanged(sender As Object, e As EventArgs) Handles cbxCommands.EnabledChanged
-		efCommand.Enabled = cbxCommands.Enabled
-		pbRemove.Enabled = cbxCommands.Enabled
-	End Sub
-
-	Private Sub NameCommand()
-		If -1 <> cbxCommands.SelectedIndex Then
-			Dim f As New FInput
-			f.Caption = "Please name your command"
-			f.Invite = $"{f.Caption}:"
-			f.Input = DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Name
-			Select Case f.ShowDialog
-				Case DialogResult.OK
-					DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Name = f.Input
-					DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), ComboBox).Refresh()
-			End Select
-		End If
-	End Sub
-
-	Private Sub efCommand_TextChanged(sender As Object, e As EventArgs) Handles efCommand.TextChanged
-		If -1 <> cbxCommands.SelectedIndex Then
-			DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Command = efCommand.Text
-		End If
-	End Sub
-
-	Private Sub RenameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem.Click
-		NameCommand()
-	End Sub
-
-	Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
-		e.Cancel = -1 = cbxCommands.SelectedIndex
-	End Sub
 End Class

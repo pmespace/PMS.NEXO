@@ -2,31 +2,31 @@
   "TypeConversions": {
     "System.Decimal": {
       "TargetType": "System.Double",
-      "TargetProperty": "myTargetProperty"
+      "Rank": 0
     }
   },
-  "ArraysWithoutInitializer": [
-    "myArrayType1",
-    "myArrayType2"
-  ],
-  "FieldsWithoutInitializer": {
-    "certificateField": {
-      "Type": "System.Byte"
+  "ArrayConversions": {
+    "System.Byte": {
+      "TargetType": "System.Byte",
+      "Rank": 1
     },
-    "Certificate": {
-      "Type": "System.Byte"
-    },
-    "searchORField": {
-      "Type": "SearchANDType"
-    },
-    "SearchOR": {
-      "Type": "SearchANDType"
-    },
-    "searchCriteriasField": {
-      "Type": "SearchANDType"
-    },
-    "SearchCriterias": {
-      "Type": "SearchANDType"
+    "SearchANDType": {
+      "TargetType": "SearchANDType",
+      "Rank": 1
     }
-  }
+  },
+  "TypesWithoutInitializer": [
+    "System.Object",
+    "myDummyFieldName1",
+    "myDummyFieldName2"
+  ],
+  "ArrayTypesWithoutInitializer": [
+    "System.Object",
+    "myDummyArrayType1",
+    "myDummyArrayType2"
+  ],
+  "ArrayTypesWithoutAccessors": [
+    "System.Byte",
+    "myDummyArrayType2"
+  ]
 }

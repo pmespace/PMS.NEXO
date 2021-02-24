@@ -65,8 +65,6 @@ namespace XSDEx
 			ArrayGetReturnsNullEmpty = false;
 
 			CreateArrayAccessors = true;
-
-			DerivedClassName = "NexoSaleToPOIMessage";
 		}
 		public string Exception; // if an exception occurred it is reported here
 		public string ParametersFileName { get; set; }
@@ -142,7 +140,6 @@ namespace XSDEx
 		/// Indicate whether array accessors must be created or not
 		/// </summary>
 		public bool CreateArrayAccessors { get; set; }
-		public string DerivedClassName { get; set; }
 		public string Preprocessor { get; set; }
 	}
 }

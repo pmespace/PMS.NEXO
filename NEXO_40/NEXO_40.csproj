@@ -28,7 +28,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NEXO40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -38,8 +38,8 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=3.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.3.0.10\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.4.0.0\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +54,23 @@
     <Compile Include="..\NexoResources\Properties\NexoResources.Designer.cs">
       <Link>Properties\NexoResources.Designer.cs</Link>
     </Compile>
+    <Compile Include="nexo40.001.001.01.xsd.cs" />
+    <Compile Include="nexo40.002.001.01.xsd.cs" />
+    <Compile Include="nexo40.003.001.01.xsd.cs" />
+    <Compile Include="nexo40.004.001.01.xsd.cs" />
+    <Compile Include="nexo40.005.001.01.xsd.cs" />
+    <Compile Include="nexo40.006.001.01.xsd.cs" />
+    <Compile Include="nexo40.007.001.01.xsd.cs" />
+    <Compile Include="nexo40.008.001.01.xsd.cs" />
+    <Compile Include="nexo40.009.001.01.xsd.cs" />
+    <Compile Include="nexo40.010.001.01.xsd.cs" />
+    <Compile Include="nexo40.011.001.01.xsd.cs" />
+    <Compile Include="nexo40.012.001.01.xsd.cs" />
+    <Compile Include="nexo40.013.001.01.xsd.cs" />
+    <Compile Include="nexo40.014.001.01.xsd.cs" />
+    <Compile Include="nexo40.015.001.01.xsd.cs" />
+    <Compile Include="nexo40.016.001.01.xsd.cs" />
+    <Compile Include="nexo40.017.001.01.xsd.cs" />
     <Compile Include="NexoTypes40.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +85,5 @@
   <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
   <Import Project="..\NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems" Label="Shared" />
   <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />
-  <Import Project="..\NEXO_40_SHARED\NEXO_40_SHARED.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -562,10 +562,13 @@ namespace NEXO
 		protected abstract void SetResponse(ResponseType r);
 		private object GetResponseTag<TxN>(string tag)
 		{
+			if (string.IsNullOrEmpty(tag)) return NexoValues.None;
 			return CMisc.IsEnumValue(typeof(TxN), CMisc.GetEnumValue(typeof(TxN), tag)) ? CMisc.GetEnumValue(typeof(TxN), tag) : NexoValues.None;
 		}
 		private string SetResponseTag<TxN>(string tag)
 		{
+			if (string.IsNullOrEmpty(tag))
+				return null;
 			Array array = Enum.GetValues(typeof(TxN));
 			if (CMisc.IsEnumValue(typeof(TxN), tag))
 				return CMisc.EnumValueToString(typeof(TxN), tag);

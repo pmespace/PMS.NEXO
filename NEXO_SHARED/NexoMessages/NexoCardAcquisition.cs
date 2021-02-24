@@ -183,32 +183,37 @@ namespace NEXO
 		#region request inner properties
 		public string RequestSaleTransactionID
 		{
-			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID) : null);
-			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) { RequestData.SaleData.SaleTransactionID.TransactionID = value; ReplyData.SaleData.SaleTransactionID.TransactionID = RequestSaleTransactionID; } }
+			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TransactionID);
+			set => RequestData.SaleData.SaleTransactionID.TransactionID = value;
 		}
 		public string RequestSaleTransactionTimestamp
 		{
-			get => (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID ? CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp) : null);
-			set { if (null != RequestData && null != RequestData.SaleData && null != RequestData.SaleData.SaleTransactionID) { RequestData.SaleData.SaleTransactionID.TimeStamp = value; ReplyData.SaleData.SaleTransactionID.TransactionID = RequestSaleTransactionTimestamp; } }
+			get => CMisc.Trimmed(RequestData.SaleData.SaleTransactionID.TimeStamp);
+			set => RequestData.SaleData.SaleTransactionID.TimeStamp = value;
 		}
 		#endregion
 
 		#region reply inner properties
 		public string ReplyPOITransactionID
 		{
-			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID) : null);
-			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TransactionID = value; }
+			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TransactionID);
+			set => ReplyData.POIData.POITransactionID.TransactionID = value;
 		}
 		public string ReplyPOITransactionTimestamp
 		{
-			get => (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID ? CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp) : null);
-			set { if (null != ReplyData && null != ReplyData.POIData && null != ReplyData.POIData.POITransactionID) ReplyData.POIData.POITransactionID.TimeStamp = value; }
+			get => CMisc.Trimmed(ReplyData.POIData.POITransactionID.TimeStamp);
+			set => ReplyData.POIData.POITransactionID.TimeStamp = value;
 		}
 		#endregion
 
 		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.Response; }
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
+		protected override void SetReplyFromRequest()
+		{
+			ReplyData.SaleData.SaleTransactionID.TransactionID = SetDefaultStringValue(ReplyData.SaleData.SaleTransactionID.TransactionID, RequestSaleTransactionID);
+			ReplyData.SaleData.SaleTransactionID.TimeStamp = SetDefaultStringValue(ReplyData.SaleData.SaleTransactionID.TimeStamp, RequestSaleTransactionTimestamp);
+		}
 		protected override InternalAction AutoCompleteRequest()
 		{
 			ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);

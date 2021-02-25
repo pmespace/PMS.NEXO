@@ -109,7 +109,7 @@ namespace NEXO
 	[ComVisible(true)]
 	public enum NexoValues
 	{
-		None = 0xFFFF,
+		None = int.MaxValue,
 	}
 
 	[ComVisible(false)]

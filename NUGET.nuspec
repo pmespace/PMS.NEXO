@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,13 +14,16 @@
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      3.0.1
+      - Fixed a bug which prevented the ReponseType to be set appropriately
+
       3.0.0
       - All Nexo classes are now safe, no way to have a null reference if using the classes
       - Nexo simulator now is fully operational to build any message
       - Nexo simulator POI simulation can be set nexo service by nexo service to reply with a pre-defined message stored in a json file
       - Nexo Retailer 4.0 is still NOT SUPPORTED though and will be in version 4.x
       - Nexo simumulator now can use a database to store its activity
-      
+
       2.0.14
       - Moved to PMS.COMMON 3.0.9
 
@@ -107,10 +110,10 @@
     <tags>NEXO</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="4.0.0" />
+        <dependency id="PMS.COMMON" version="4.0.1" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="4.0.0" />
+        <dependency id="PMS.COMMON" version="4.0.1" />
       </group>
     </dependencies>
   </metadata>
@@ -120,13 +123,13 @@
     <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
-    
+
     <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.pdb" target="lib\net47"></file>
-    
+
     <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.pdb" target="lib\net35"></file>

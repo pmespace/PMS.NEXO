@@ -51,7 +51,7 @@ namespace NEXO
 				if (CMisc.IsEnumValue(typeof(ResultEnumeration), value))
 					response.Result = CMisc.GetEnumName(typeof(ResultEnumeration), value);
 				else
-					response.Result = ResultEnumeration.Success.ToString();
+					response.Result = ResultEnumeration.Failure.ToString();
 			}
 		}
 		public ErrorConditionEnumeration ErrorCondition

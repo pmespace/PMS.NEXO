@@ -694,7 +694,7 @@ Public Class FSimulator
 				'no answer is available, return an error
 				toprocess.CurrentObject.Result = ResultEnumeration.Failure
 				toprocess.CurrentObject.ErrorCondition = ErrorConditionEnumeration.NotFound
-				toprocess.CurrentObject.AdditionalResponse = "No message To send back for this request"
+				toprocess.CurrentObject.AdditionalResponse = "[SIMULATOR] No message found to send back for this request"
 			End If
 		End If
 	End Sub

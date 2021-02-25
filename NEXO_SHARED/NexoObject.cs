@@ -286,9 +286,6 @@ namespace NEXO
 		/// <summary>
 		/// Gives the final status of the operation
 		/// </summary>
-		//public bool Success { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Success.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		//public bool Failure { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Failure.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
-		//public bool Partial { get => null != GetResponse() && null != GetResponse().Result ? ResultEnumeration.Partial.ToString().ToLower() == GetResponse().Result.ToLower() : false; }
 		public bool Success { get => ResultEnumeration.Success == Result; }
 		public bool Failure { get => ResultEnumeration.Failure == Result; }
 		public bool Partial { get => ResultEnumeration.Partial == Result; }
@@ -296,24 +293,6 @@ namespace NEXO
 		/// <summary>
 		/// Indicates the error condition
 		/// </summary>
-		//public bool Aborted { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Aborted.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool Busy { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Busy.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool Cancel { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Cancel.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool DeviceOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.DeviceOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool InsertedCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InsertedCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool InProgress { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InProgress.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool LoggedOut { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.LoggedOut.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool MessageFormat { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.MessageFormat.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool NotAllowed { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotAllowed.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool NotFound { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.NotFound.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool PaymentRestriction { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.PaymentRestriction.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool Refusal { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.Refusal.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool UnavailableDevice { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableDevice.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool UnavailableService { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnavailableService.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool InvalidCard { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.InvalidCard.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool UnreachableHost { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.UnreachableHost.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool WrongPIN { get => !Success && (Failure || Partial) && null != GetResponse().ErrorCondition ? ErrorConditionEnumeration.WrongPIN.ToString().ToLower() == GetResponse().ErrorCondition.ToLower() : false; }
-		//public bool UnknownError { get => !Success ? !Aborted && !Busy && !Cancel && !DeviceOut && !InsertedCard && !InProgress && !LoggedOut && !MessageFormat && !NotAllowed && !NotFound && !PaymentRestriction && !Refusal && !UnavailableDevice && !UnavailableService && !InvalidCard && !UnreachableHost && !WrongPIN ? true : false : false; }
 		public bool Aborted { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Aborted == ErrorCondition : false; }
 		public bool Busy { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Busy == ErrorCondition : false; }
 		public bool Cancel { get => !Success && (Failure || Partial) ? ErrorConditionEnumeration.Cancel == ErrorCondition : false; }
@@ -337,24 +316,59 @@ namespace NEXO
 		/// </summary>
 		public ResultEnumeration Result
 		{
-			get => (null != GetResponse() ? (ResultEnumeration)GetResponseTag<ResultEnumeration>(GetResponse().Result) : (ResultEnumeration)NexoValues.None);
-			set { if (null != GetResponse()) GetResponse().Result = SetResponseTag<ResultEnumeration>(GetResponse().Result); }
+			get
+			{
+				ResponseType response = GetResponse();
+				if (null != response)
+					return (ResultEnumeration)GetResponseTag<ResultEnumeration>(response.Result);
+				else
+					return (ResultEnumeration)NexoValues.None;
+			}
+			set
+			{
+				ResponseType response = GetResponse();
+				if (null != response)
+					response.Result = SetResponseTag<ResultEnumeration>(value);
+			}
 		}
 		/// <summary>
 		/// Allows to easily manipulate the ErrorCondition value inside the ResponseType
 		/// </summary>
 		public ErrorConditionEnumeration ErrorCondition
 		{
-			get => (null != GetResponse() ? (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(GetResponse().ErrorCondition) : (ErrorConditionEnumeration)NexoValues.None);
-			set { if (null != GetResponse()) GetResponse().ErrorCondition = SetResponseTag<ErrorConditionEnumeration>(GetResponse().ErrorCondition); }
+			get
+			{
+				ResponseType response = GetResponse();
+				if (null != response)
+					return (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(response.ErrorCondition);
+				else
+					return (ErrorConditionEnumeration)NexoValues.None;
+			}
+			set
+			{
+				ResponseType response = GetResponse();
+				if (null != response)
+					response.ErrorCondition = SetResponseTag<ErrorConditionEnumeration>(value);
+			}
 		}
 		/// <summary>
 		/// Allows to easily manipulate the AdditionalResponse value inside the ResponseType
 		/// </summary>
 		public string AdditionalResponse
 		{
-			get => (null != GetResponse() ? GetResponse().AdditionalResponse : null);
-			set { if (null != GetResponse()) GetResponse().AdditionalResponse = value; }
+			get
+			{
+				ResponseType response = GetResponse();
+				if (null != response)
+					return response.AdditionalResponse;
+				else
+					return null;
+			}
+			set
+			{
+				ResponseType response = GetResponse();
+				if (null != response) response.AdditionalResponse = value;
+			}
 		}
 		#endregion
 
@@ -563,12 +577,12 @@ namespace NEXO
 		private object GetResponseTag<TxN>(string tag)
 		{
 			if (string.IsNullOrEmpty(tag)) return NexoValues.None;
-			return CMisc.IsEnumValue(typeof(TxN), CMisc.GetEnumValue(typeof(TxN), tag)) ? CMisc.GetEnumValue(typeof(TxN), tag) : NexoValues.None;
+			object value = CMisc.GetEnumValue(typeof(TxN), tag);
+			return CMisc.IsEnumValue(typeof(TxN), value) ? value : NexoValues.None;
 		}
-		private string SetResponseTag<TxN>(string tag)
+		private string SetResponseTag<TxN>(object tag)
 		{
-			if (string.IsNullOrEmpty(tag))
-				return null;
+			if (null == tag) return null;
 			Array array = Enum.GetValues(typeof(TxN));
 			if (CMisc.IsEnumValue(typeof(TxN), tag))
 				return CMisc.EnumValueToString(typeof(TxN), tag);

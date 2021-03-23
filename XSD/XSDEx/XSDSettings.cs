@@ -13,18 +13,20 @@ namespace XSDEx
 	/// </summary>
 	public class Files : List<string> { }
 
-	public enum ActivityEvent
+	public enum XSDActivityEvent
 	{
 		none,
+		status,
 		message,
 		startingProcess,
 		endingProcess,
 	}
 
-	public class Activity
+	public delegate void XSDAddActivity(XSDActivity activity);
+	public class XSDActivity
 	{
 		public string Message;
-		public ActivityEvent Evt;
+		public XSDActivityEvent Evt;
 	}
 
 	/// <summary>

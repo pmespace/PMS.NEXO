@@ -25,6 +25,15 @@ PMS.NEXOSALE (like PMS.COMMON and all PMS.NEXOxx components) is available on Git
 
 
 Releasenotes:
+3.0.2
+-----
+- Fixed a bug inside NEXO 3.0 and 3.1
+- Update NexoBuilder and NexoSimulator to avoid crashing when editing a response
+- Updated NexoSimulator to allow sending RAW request and managed requests from the XML entry field
+
+3.0.1
+-----
+- Fixed a bug which prevented the ReponseType to be set appropriately
 
 2.0.14
 ------

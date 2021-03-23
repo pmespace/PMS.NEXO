@@ -58,6 +58,7 @@ Partial Class FChooser
 		Me.pbAnalyse = New System.Windows.Forms.Button()
 		Me.efXMLJson = New System.Windows.Forms.TextBox()
 		Me.pbCopy = New System.Windows.Forms.Button()
+		Me.rbTransactionReport = New System.Windows.Forms.RadioButton()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
@@ -418,6 +419,7 @@ Partial Class FChooser
 		Me.TableLayoutPanel1.Controls.Add(Me.rbReversal, 1, 2)
 		Me.TableLayoutPanel1.Controls.Add(Me.rbReconciliation, 2, 2)
 		Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 0, 0)
+		Me.TableLayoutPanel1.Controls.Add(Me.rbTransactionReport, 3, 8)
 		Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 11
@@ -560,6 +562,17 @@ Partial Class FChooser
 		Me.pbCopy.Text = "Copy"
 		Me.pbCopy.UseVisualStyleBackColor = True
 		'
+		'rbTransactionReport
+		'
+		Me.rbTransactionReport.AutoSize = True
+		Me.rbTransactionReport.Location = New System.Drawing.Point(340, 228)
+		Me.rbTransactionReport.Name = "rbTransactionReport"
+		Me.rbTransactionReport.Size = New System.Drawing.Size(111, 17)
+		Me.rbTransactionReport.TabIndex = 28
+		Me.rbTransactionReport.TabStop = True
+		Me.rbTransactionReport.Text = "Transaction report"
+		Me.rbTransactionReport.UseVisualStyleBackColor = True
+		'
 		'FChooser
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -619,4 +632,5 @@ Partial Class FChooser
 	Friend WithEvents pbAnalyse As Button
 	Friend WithEvents efXMLJson As TextBox
 	Friend WithEvents pbCopy As Button
+	Friend WithEvents rbTransactionReport As RadioButton
 End Class

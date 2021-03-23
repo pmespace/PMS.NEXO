@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PMS.NEXO</id>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <title>PMS.NEXO</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,10 +10,16 @@
     <repository type="git" url="https://github.com/pmespace/PMS.NEXO.git" branch="master" />
     <projectUrl>https://github.com/pmespace/PMS.NEXO/</projectUrl>
     <description>
-      Nexo Retailer v3.0 library supporting all messages defined inside the specifications.
+      Nexo Retailer v3.0 and 3.1 libraries supporting all messages defined inside the specifications.
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
     <releaseNotes>
+      3.0.2
+      - Fixed a bug inside nexo 3.0 and 3.1
+      - Update NexoBuilder and NexoSimulator to avoid crashing when editing a response
+      - Updated NexoSimulator to allow sending RAW request and managed requests from the XML entry field
+      - Added a NexoBuilder31 (for nexo 3.1)
+
       3.0.1
       - Fixed a bug which prevented the ReponseType to be set appropriately
 
@@ -118,12 +124,14 @@
     </dependencies>
   </metadata>
   <files>
+    <file src=".\Release\NexoBuilder30.exe" target="lib\net47"></file>
     <file src=".\Release\NexoSimulator30.exe" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
 
+    <file src=".\Release\NexoBuilder31.exe" target="lib\net47"></file>
     <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>

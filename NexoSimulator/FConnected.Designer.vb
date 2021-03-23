@@ -37,7 +37,7 @@ Partial Class FConnected
 		Me.ListBox1.Size = New System.Drawing.Size(320, 84)
 		Me.ListBox1.TabIndex = 0
 		'
-		'Connected
+		'FConnected
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -46,7 +46,7 @@ Partial Class FConnected
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
 		Me.MaximizeBox = False
 		Me.MinimizeBox = False
-		Me.Name = "Connected"
+		Me.Name = "FConnected"
 		Me.Text = "Connected"
 		Me.TopMost = True
 		Me.ResumeLayout(False)

@@ -454,6 +454,7 @@ Public Class FSimulator
 
 		'free commands
 		pbSendFreeMessage.Enabled = 0 <> nexoClients.Count
+		pbSendRequest.Enabled = pbSendFreeMessage.Enabled
 		cbxCommands.Enabled = 0 <> cbxCommands.Items.Count
 
 		'existing buttons
@@ -1082,13 +1083,31 @@ Public Class FSimulator
 #End Region
 
 #Region "free commands management"
-	Private Sub pbFree_Click(sender As Object, e As EventArgs) Handles pbSendFreeMessage.Click
+	Private Sub pbFree_Click(sender As Object, e As EventArgs) Handles pbSendFreeMessage.Click, pbSendRequest.Click
 		If Not String.IsNullOrEmpty(efCommand.Text) Then
 			Dim client As NexoRetailerClient = CurrentClient()
 			If Not IsNothing(client) Then
-				Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout())
-				If Not IsNothing(o) Then
-					'AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
+				If DirectCast(sender, Button).Equals(pbSendFreeMessage) Then
+					Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout())
+					If Not IsNothing(o) Then
+						'AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
+					End If
+				Else
+					Dim item As New NexoItem(efCommand.Text)
+					If item.IsValid AndAlso item.IsRequest Then
+						Dim o As NexoObject = NexoItem.AllocateObject(item.Category)
+						o.FromItem(item)
+						o.SaleID = FullSaleID()
+						o.POIID = FullPOIID()
+						o.ServiceID = CMisc.Trimmed(efServiceID.Text)
+						If (item.IsDevice) Then
+							o.DeviceID = CMisc.Trimmed(efDeviceID.Text)
+						End If
+						Dim t = client.SendRequest(o.Request)
+						If IsNothing(t) Then
+							AddLine(Position.client, Direction.none, $"ERROR SENDING {item.Category} REQUEST" & MessageLength(item.XML) & vbCrLf & item.XML)
+						End If
+					End If
 				End If
 			End If
 		End If

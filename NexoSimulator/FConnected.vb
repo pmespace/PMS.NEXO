@@ -7,5 +7,4 @@
 		Me.Visible = False
 		Warn.Checked = False
 	End Sub
-
 End Class

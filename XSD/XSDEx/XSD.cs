@@ -43,6 +43,19 @@ namespace XSDEx
 		{
 			public Message() { }
 			public Label Lbl = null;
+			public CThreadData threadData = null;
+			public XSDAddActivity WndDelegate
+			{
+				get => _processui;
+				set
+				{
+					if (null != value)
+						_processui = new XSDAddActivity(value);
+					else
+						_processui = null;
+				}
+			}
+			private XSDAddActivity _processui = null;
 			public string Header
 			{
 				get => _header;
@@ -55,7 +68,22 @@ namespace XSDEx
 				set { _text = value; Set(); }
 			}
 			private string _text = null;
-			private void Set() { if (null != Lbl) Lbl.Text = ((null != Header ? $"{Header}: " : null) + Text); Lbl.Refresh(); }
+			private void Set()
+			{
+				if (null != Lbl)
+				{
+					string s = ((null != Header ? $"{Header}: " : null) + Text);
+					if (null == threadData || IntPtr.Zero == threadData.WindowToWarn)
+					{
+						Lbl.Text = ((null != Header ? $"{Header}: " : null) + Text);
+						Lbl.Refresh();
+					}
+					else
+					{
+						Lbl.Invoke(WndDelegate, new XSDActivity() { Evt = XSDActivityEvent.message, Message = s });
+					}
+				}
+			}
 		}
 
 		/// <summary>
@@ -85,18 +113,16 @@ namespace XSDEx
 		/// Result can be all XSD help generate 1 file or each XSD help generates 1 file
 		/// </summary>
 		/// <param name="settings"></param>
-		/// <param name="mixFiles"></param>
-		/// <param name="lbl"></param>
 		/// <returns></returns>
-		public bool AnalyseXSD(XSDSettings settings, bool mixFiles, Label lbl)
+		public bool AnalyseXSD(AnalyseSettings settings)
 		{
-			Message msg = new Message() { Lbl = lbl };
+			Message msg = new Message() { Lbl = settings.lbl, WndDelegate = settings.processUI, threadData = settings.threadData };
 			XmlSchema xsd;
 			try
 			{
 				#region init parameters
 				// try to open the type conversino file
-				CJson<XSDParams> json = new CJson<XSDParams>(settings.ParametersFileName);
+				CJson<XSDParams> json = new CJson<XSDParams>(settings.xsdSettings.ParametersFileName);
 				XSDParams parameters = json.ReadSettings();
 				if (null == parameters)
 				{
@@ -153,17 +179,17 @@ namespace XSDEx
 				#endregion
 
 				typesDeclaredInsideNamespace = new MyCodeTypeDeclarations();
-				if (mixFiles)
+				if (settings.mixFiles)
 				{
 					// all XSD will generate 1 file
 					MyTags tags = new MyTags();
 					XmlSchemas xsds = new XmlSchemas();
 					string fileName = null;
 					// load all selected files into a schema and compile
-					foreach (string file in settings.Files)
+					foreach (string file in settings.xsdSettings.Files)
 					{
 						if (string.IsNullOrEmpty(fileName))
-							fileName = settings.Files[0] + GetExtension(settings);
+							fileName = settings.xsdSettings.Files[0] + GetExtension(settings.xsdSettings);
 						using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read))
 						{
 							xsd = XmlSchema.Read(stream, null);
@@ -171,35 +197,43 @@ namespace XSDEx
 						xsds.Add(xsd);
 					}
 					xsds.Compile(null, true);
-					return ProcessFile(settings, parameters, xsds, fileName, true, msg, false);
+					return ProcessFile(settings.xsdSettings, parameters, xsds, fileName, true, msg, false);
 				}
 				else
 				{
 					// each XSD generates 1 file
 					bool fOK = true;
 					// load all selected files into a schema and compile
-					for (int i = 0; i < settings.Files.Count; i++)
+					for (int i = 0; i < settings.xsdSettings.Files.Count; i++)
 					{
-						string fileName = settings.Files[i] + GetExtension(settings);
+						string fileName = settings.xsdSettings.Files[i] + GetExtension(settings.xsdSettings);
 						XmlSchemas xsds = new XmlSchemas();
-						using (var stream = new FileStream(settings.Files[i], FileMode.Open, FileAccess.Read))
+						using (var stream = new FileStream(settings.xsdSettings.Files[i], FileMode.Open, FileAccess.Read))
 						{
 							xsd = XmlSchema.Read(stream, null);
 						}
 						xsds.Add(xsd);
 						xsds.Compile(null, true);
 						// allow special processing for the last file
-						fOK = fOK && ProcessFile(settings, parameters, xsds, fileName, i == settings.Files.Count - 1, msg, true);
+						fOK = fOK && ProcessFile(settings.xsdSettings, parameters, xsds, fileName, i == settings.xsdSettings.Files.Count - 1, msg, true);
 					}
 					return fOK;
 				}
 			}
 			catch (Exception ex)
 			{
-				settings.Exception = ex.Message;
+				settings.xsdSettings.Exception = ex.Message;
 				//CodeNamespace = default;
 				return false;
 			}
+		}
+		public class AnalyseSettings
+		{
+			public XSDSettings xsdSettings { get; set; }
+			public CThreadData threadData { get; set; }
+			public bool mixFiles { get; set; }
+			public Label lbl { get; set; }
+			public XSDAddActivity processUI { get; set; }
 		}
 		/// <summary>
 		/// Prepare a file to be created by the processing adding all necessary attributes and processing the types it contains
@@ -1002,14 +1036,31 @@ namespace XSDEx
 							{
 								if (!IsArray(cmp.Type) && !IsPrimitiveType(cmp.Type))
 								{
+									//expression = new CodeBinaryOperatorExpression(
+									//	expression,
+									//	CodeBinaryOperatorType.BooleanOr,
+									//	new CodePropertyReferenceExpression(
+									//		new CodePropertyReferenceExpression(
+									//			new CodeThisReferenceExpression(),
+									//			cmp.Name),
+									//		hasBeenSetProperty.Name));
+
 									expression = new CodeBinaryOperatorExpression(
 										expression,
 										CodeBinaryOperatorType.BooleanOr,
-										new CodePropertyReferenceExpression(
+										new CodeBinaryOperatorExpression(
+											new CodeBinaryOperatorExpression(
+												new CodePropertyReferenceExpression(
+													new CodeThisReferenceExpression(),
+													cmp.Name),
+												CodeBinaryOperatorType.IdentityInequality,
+												new CodePrimitiveExpression(null)),
+											CodeBinaryOperatorType.BooleanAnd,
 											new CodePropertyReferenceExpression(
-												new CodeThisReferenceExpression(),
-												cmp.Name),
-											hasBeenSetProperty.Name));
+												new CodePropertyReferenceExpression(
+													new CodeThisReferenceExpression(),
+													cmp.Name),
+												hasBeenSetProperty.Name)));
 								}
 							}
 							foreach (CodeMemberProperty cmp in optionalsToProcess)

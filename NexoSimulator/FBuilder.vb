@@ -349,7 +349,9 @@ Public Class FBuilder
 			Else
 				myNode.Value = Nothing
 			End If
-			valueNode.Text = SetNodeText(valueNode)
+			'valueNode.Text = SetNodeText(valueNode)
+			'SetNodeFont(valueNode)
+			UpdateLabelAppearance(valueNode)
 		End If
 	End Sub
 
@@ -358,6 +360,30 @@ Public Class FBuilder
 	End Sub
 
 	Private Sub TreeView1_AfterLabelEdit(sender As Object, e As NodeLabelEditEventArgs) Handles TreeView1.AfterLabelEdit
+		'If Not IsNothing(e.Label) Then
+		'	Dim ok As Boolean = False
+		'	SetNodeContext(e.Node)
+		'	Dim myNode As MyNode = valueNode.Tag
+		'	'editing a node has ended, test the value
+		'	If GetType(String) = myNode.Type Then
+		'		Dim x As New NexoTextString() With {.Value = e.Label}
+		'		If e.Label = x.Value Then myNode.Value = x.Value
+		'	ElseIf GetType(Integer) = myNode.Type Then
+		'		Dim x As New NexoInteger() With {.Value = e.Label}
+		'		If e.Label = x.Value Then myNode.Value = x.AsInteger
+		'	ElseIf GetType(Double) = myNode.Type Then
+		'		Dim x As New NexoDecimal() With {.Value = e.Label}
+		'		If e.Label = x.Value Then myNode.Value = x.AsDecimal
+		'	ElseIf GetType(Boolean) = myNode.Type Then
+		'		Dim x As New NexoBoolean() With {.Value = e.Label}
+		'		If e.Label = x.Value Then myNode.Value = x.AsBoolean
+		'	End If
+		'	e.CancelEdit = True
+		'	e.Node.Text = SetNodeText(e.Node)
+		'	SetNodeFont(e.Node)
+		'End If
+		'e.Node.Text = SetNodeText(e.Node)
+
 		If Not IsNothing(e.Label) Then
 			Dim ok As Boolean = False
 			SetNodeContext(e.Node)
@@ -377,10 +403,14 @@ Public Class FBuilder
 				If e.Label = x.Value Then myNode.Value = x.AsBoolean
 			End If
 			e.CancelEdit = True
-			e.Node.Text = SetNodeText(e.Node)
-			SetNodeFont(e.Node)
+			UpdateLabelAppearance(e.Node)
 		End If
 		e.Node.Text = SetNodeText(e.Node)
+	End Sub
+
+	Private Sub UpdateLabelAppearance(node As TreeNode)
+		node.Text = SetNodeText(node)
+		SetNodeFont(node)
 	End Sub
 
 	Private Sub AddItem(parent As TreeNode)

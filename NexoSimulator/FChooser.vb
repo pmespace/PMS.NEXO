@@ -6,6 +6,9 @@ Public Class FChooser
 	Public XML As String = Nothing
 
 	Private Sub FChoser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+#If NEXO30 Then
+		rbTransactionReport.Visible = False
+#End If
 		efXML.Text = XML
 		rbPayment.Checked = True
 		SetButtons()
@@ -23,15 +26,8 @@ Public Class FChooser
 		Dim nxo As NexoObject = Nothing
 		Dim item As NexoItem = Nothing
 		If Not String.IsNullOrEmpty(efXML.Text) Then
-			'deserialize the XML string
-			Dim o As Object
-			If cbRequest.Checked Then
-				o = NexoRetailer.XmlDeserialize(Of SaleToPOIRequest)(efXML.Text)
-			Else
-				o = NexoRetailer.XmlDeserialize(Of SaleToPOIResponse)(efXML.Text)
-			End If
 			item = New NexoItem(efXML.Text)
-			If Not IsNothing(item) Then
+			If item.IsValid Then
 				nxo = NexoItem.ToNexoObject(item)
 				If Not IsNothing(nxo) Then
 					cbRequest.Checked = item.IsRequest
@@ -97,6 +93,10 @@ Public Class FChooser
 				nxo = New NexoTransactionStatus
 			ElseIf rbTransmit.Checked Then
 				nxo = New NexoTransmit
+#If NEXO31 Then
+			ElseIf rbTransactionReport.Checked Then
+				nxo = New NexoTransactionReport
+#End If
 			End If
 		End If
 

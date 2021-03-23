@@ -76,6 +76,7 @@ Partial Class myXSD
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+		Me.panelGenerateButtons = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelSettings.SuspendLayout()
@@ -92,6 +93,7 @@ Partial Class myXSD
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.TableLayoutPanel4.SuspendLayout()
 		Me.TableLayoutPanel7.SuspendLayout()
+		Me.panelGenerateButtons.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'panelMain
@@ -122,25 +124,24 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelButtons.AutoSize = True
 		Me.panelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelButtons.ColumnCount = 7
+		Me.panelButtons.ColumnCount = 8
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.panelButtons.Controls.Add(Me.pbClose, 6, 0)
-		Me.panelButtons.Controls.Add(Me.pbGenerate, 3, 0)
-		Me.panelButtons.Controls.Add(Me.pbSave, 5, 0)
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelButtons.Controls.Add(Me.pbClose, 7, 0)
 		Me.panelButtons.Controls.Add(Me.status, 0, 0)
-		Me.panelButtons.Controls.Add(Me.pbGenerateNFiles, 4, 0)
 		Me.panelButtons.Controls.Add(Me.Label5, 1, 0)
-		Me.panelButtons.Location = New System.Drawing.Point(3, 385)
+		Me.panelButtons.Controls.Add(Me.panelGenerateButtons, 3, 0)
+		Me.panelButtons.Location = New System.Drawing.Point(3, 379)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
 		Me.panelButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelButtons.Size = New System.Drawing.Size(916, 29)
+		Me.panelButtons.Size = New System.Drawing.Size(916, 35)
 		Me.panelButtons.TabIndex = 1
 		'
 		'pbClose
@@ -149,9 +150,9 @@ Partial Class myXSD
 		Me.pbClose.AutoSize = True
 		Me.pbClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 		Me.pbClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-		Me.pbClose.Location = New System.Drawing.Point(899, 3)
+		Me.pbClose.Location = New System.Drawing.Point(870, 6)
 		Me.pbClose.Name = "pbClose"
-		Me.pbClose.Size = New System.Drawing.Size(14, 23)
+		Me.pbClose.Size = New System.Drawing.Size(43, 23)
 		Me.pbClose.TabIndex = 3
 		Me.pbClose.Text = "Close"
 		Me.pbClose.UseVisualStyleBackColor = True
@@ -161,7 +162,7 @@ Partial Class myXSD
 		Me.pbGenerate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbGenerate.AutoSize = True
 		Me.pbGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbGenerate.Location = New System.Drawing.Point(632, 3)
+		Me.pbGenerate.Location = New System.Drawing.Point(3, 3)
 		Me.pbGenerate.Name = "pbGenerate"
 		Me.pbGenerate.Size = New System.Drawing.Size(86, 23)
 		Me.pbGenerate.TabIndex = 0
@@ -173,7 +174,7 @@ Partial Class myXSD
 		Me.pbSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSave.AutoSize = True
 		Me.pbSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSave.Location = New System.Drawing.Point(823, 3)
+		Me.pbSave.Location = New System.Drawing.Point(194, 3)
 		Me.pbSave.Name = "pbSave"
 		Me.pbSave.Size = New System.Drawing.Size(70, 23)
 		Me.pbSave.TabIndex = 2
@@ -185,10 +186,10 @@ Partial Class myXSD
 		Me.status.Anchor = System.Windows.Forms.AnchorStyles.Left
 		Me.status.AutoSize = True
 		Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.status.Location = New System.Drawing.Point(3, 6)
+		Me.status.Location = New System.Drawing.Point(3, 9)
 		Me.status.Name = "status"
 		Me.status.Size = New System.Drawing.Size(55, 16)
-		Me.status.TabIndex = 3
+		Me.status.TabIndex = 0
 		Me.status.Text = "Label4"
 		'
 		'pbGenerateNFiles
@@ -196,7 +197,7 @@ Partial Class myXSD
 		Me.pbGenerateNFiles.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbGenerateNFiles.AutoSize = True
 		Me.pbGenerateNFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbGenerateNFiles.Location = New System.Drawing.Point(724, 3)
+		Me.pbGenerateNFiles.Location = New System.Drawing.Point(95, 3)
 		Me.pbGenerateNFiles.Name = "pbGenerateNFiles"
 		Me.pbGenerateNFiles.Size = New System.Drawing.Size(93, 23)
 		Me.pbGenerateNFiles.TabIndex = 1
@@ -207,10 +208,10 @@ Partial Class myXSD
 		'
 		Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.Label5.AutoSize = True
-		Me.Label5.Location = New System.Drawing.Point(64, 8)
+		Me.Label5.Location = New System.Drawing.Point(64, 11)
 		Me.Label5.Name = "Label5"
-		Me.Label5.Size = New System.Drawing.Size(562, 13)
-		Me.Label5.TabIndex = 4
+		Me.Label5.Size = New System.Drawing.Size(527, 13)
+		Me.Label5.TabIndex = 1
 		Me.Label5.Text = "Label5"
 		'
 		'panelSettings
@@ -808,7 +809,7 @@ Partial Class myXSD
 		Me.result.Multiline = True
 		Me.result.Name = "result"
 		Me.result.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.result.Size = New System.Drawing.Size(916, 118)
+		Me.result.Size = New System.Drawing.Size(916, 112)
 		Me.result.TabIndex = 0
 		'
 		'OpenFileDialog1
@@ -820,6 +821,27 @@ Partial Class myXSD
 		'SaveFileDialog1
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
+		'
+		'panelGenerateButtons
+		'
+		Me.panelGenerateButtons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.panelGenerateButtons.AutoSize = True
+		Me.panelGenerateButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.panelGenerateButtons.ColumnCount = 3
+		Me.panelGenerateButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelGenerateButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelGenerateButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelGenerateButtons.Controls.Add(Me.pbGenerate, 0, 0)
+		Me.panelGenerateButtons.Controls.Add(Me.pbSave, 2, 0)
+		Me.panelGenerateButtons.Controls.Add(Me.pbGenerateNFiles, 1, 0)
+		Me.panelGenerateButtons.Location = New System.Drawing.Point(597, 3)
+		Me.panelGenerateButtons.Name = "panelGenerateButtons"
+		Me.panelGenerateButtons.RowCount = 1
+		Me.panelGenerateButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.panelGenerateButtons.Size = New System.Drawing.Size(267, 29)
+		Me.panelGenerateButtons.TabIndex = 2
 		'
 		'myXSD
 		'
@@ -860,6 +882,8 @@ Partial Class myXSD
 		Me.TableLayoutPanel4.PerformLayout()
 		Me.TableLayoutPanel7.ResumeLayout(False)
 		Me.TableLayoutPanel7.PerformLayout()
+		Me.panelGenerateButtons.ResumeLayout(False)
+		Me.panelGenerateButtons.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -918,4 +942,5 @@ Partial Class myXSD
 	Friend WithEvents panelInterface As TableLayoutPanel
 	Friend WithEvents panelCOM As TableLayoutPanel
 	Friend WithEvents Label5 As Label
+	Friend WithEvents panelGenerateButtons As TableLayoutPanel
 End Class

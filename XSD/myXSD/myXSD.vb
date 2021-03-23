@@ -19,28 +19,46 @@ Public Class myXSD
 	Private Const XSD_SETTINGS As String = "xsd.settings.json"
 	Private xsdex As New XSD
 	Private statusText As String, updateStatusText As String
+	Private thread As CThread
+	Private Const WM_EVENT As Integer = Win32.WM_USER + 1
 
 #Region "serverThread management"
-	'Private Enum ActivityEvent
-	'	none
-	'	message
-	'	startingProcess
-	'	endingProcess
-	'End Enum
-	'Private Class Activity
-	'	Public Property Message As String
-	'	Public Property Evt As ActivityEvent
-	'End Class
-	Private Delegate Sub AddActivity(Activity As Activity)
-	Private myDelegate As New AddActivity(AddressOf ProcessUI)
-
-	Private Sub ProcessUI(activity As Activity)
-		If ActivityEvent.none <> activity.Evt Then
-			UpdateStatus(activity.Message)
-		End If
-		SetButtons()
+	Private myDelegate As New XSDAddActivity(AddressOf ProcessUI)
+	Private Sub ProcessUI(activity As XSDActivity)
+		Select Case activity.Evt
+			Case XSDActivityEvent.startingProcess
+				panelSettings.Enabled = False
+				panelGenerateButtons.Enabled = False
+				result.Clear()
+				ToSettings()
+				SetHourglass()
+			Case XSDActivityEvent.status
+				UpdateStatus(activity.Message)
+			Case XSDActivityEvent.message
+				Label5.Text = activity.Message
+			Case XSDActivityEvent.endingProcess
+				If Not String.IsNullOrEmpty(xsdex.Code) Then
+					result.AppendText(xsdex.Code)
+					Try
+						Clipboard.SetText(xsdex.Code)
+					Catch ex As Exception
+					End Try
+				End If
+				SetDefaultCursor()
+				panelSettings.Enabled = True
+				panelGenerateButtons.Enabled = True
+		End Select
+		'SetButtons()
 	End Sub
 #End Region
+
+	Protected Overrides Sub WndProc(ByRef m As Message)
+		Select Case m.Msg
+			Case WM_EVENT
+				Label5.Invoke(myDelegate, New XSDActivity With {.Evt = XSDActivityEvent.endingProcess})
+		End Select
+		MyBase.WndProc(m)
+	End Sub
 
 	Private Sub DisplayStatus()
 		status.Text = statusText
@@ -177,29 +195,40 @@ Public Class myXSD
 		efPreprocessor.Text = settings.Preprocessor
 	End Sub
 
-	Private Sub GenerateFiles(mixFiles As Boolean)
-		panelSettings.Enabled = False
-		result.Clear()
-		ToSettings()
-		SetHourglass()
-		'FromSettings()
-		If xsdex.AnalyseXSD(ToSettings(), mixFiles, Label5) Then
-			result.AppendText(xsdex.Code)
-			Try
-				Clipboard.SetText(xsdex.Code)
-			Catch ex As Exception
-			End Try
+	Private Function GenerateFilesAsyncThread(threadData As CThreadData, o As Object) As Integer
+		Dim myParams As myParams = o
+		Dim mySettings As New XSD.AnalyseSettings With {.threadData = threadData, .mixFiles = myParams.mixfiles, .lbl = Label5, .processUI = AddressOf ProcessUI, .xsdSettings = myParams.xsdSettings}
+		If xsdex.AnalyseXSD(mySettings) Then
 		End If
-		SetDefaultCursor()
-		panelSettings.Enabled = True
+		Return ThreadResult.OK
+	End Function
+
+	Private Class myParams
+		Public mixfiles As Boolean
+		Public xsdSettings As XSDSettings
+	End Class
+
+	Private Sub GenerateFilesAsync(mixFiles As Boolean)
+		Label5.Invoke(myDelegate, New XSDActivity With {.Evt = XSDActivityEvent.startingProcess})
+		thread = New CThread
+		Dim myParams As New myParams With {.mixfiles = mixFiles, .xsdSettings = ToSettings()}
+		thread.Start(AddressOf GenerateFilesAsyncThread,
+						 New CThreadData() With
+							{
+							.StoppedMessage = WM_EVENT,
+							.WindowToWarn = Me.Handle
+							},
+						 myParams,
+						 Nothing,
+						 True)
 	End Sub
 
 	Private Sub pbGenerate_Click(sender As Object, e As EventArgs) Handles pbGenerate.Click
-		GenerateFiles(True)
+		GenerateFilesAsync(True)
 	End Sub
 
 	Private Sub pbGenerateNFiles_Click(sender As Object, e As EventArgs) Handles pbGenerateNFiles.Click
-		GenerateFiles(False)
+		GenerateFilesAsync(True)
 	End Sub
 
 	Private Shared Function CloneMember(ByVal m As CodeTypeMember) As CodeTypeMember

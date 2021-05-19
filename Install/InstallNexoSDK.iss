@@ -3,14 +3,14 @@
 
 #define MyInstallation "01"
 
-#define MyExeDir "..\Release\"
-#define MyFilesDir "..\Debug\"
+#define MyReleaseFolder "..\Release\"
+#define MyDebugFolder "..\Debug\"
 #define MyAppName "NEXO SDK"
-#define MyRegistryCheck "CHECK"
-#define MyRegistrySimulator "PMS\NEXO\Simulator"
-#define MySoftwareVersion GetFileVersion(MyExeDir+"pms.nexo.dll")
+#define MyRegistry "PMS\NEXO\Simulator"
+#define MySoftwareVersion GetFileVersion(MyReleaseFolder+"pms.nexo30.dll")
 #define MyInstallDir "..\Install\"
-#define MySourceDir ""
+#define MySourceDir "..\NexoSimulator"
+#define MyTargetSourceDir "NexoSimulator"
 #define MyAppPublisher "PMS"
 #define MySQLFilesDir "..\NEXO_SERVER_SHARED\"
 
@@ -39,21 +39,22 @@ Name: "{userdocs}\{#MyAppName}"
 
 [Files]
 ; program folder
-Source: "{#MyExeDir}PMS.NEXO*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}PMS.NEXO*.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}PMS.COMMON*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}PMS.COMMON*.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}Newtonsoft.Json.*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}NexoSimulator.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MyExeDir}NexoBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}PMS.NEXO*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}PMS.NEXO*.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}PMS.COMMON*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}PMS.COMMON*.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}Newtonsoft.Json.*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}NexoSimulator*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyReleaseFolder}NexoBuilder*.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; programdata folder
 Source: "{#MySQLFilesDir}*.sql"; DestDir: "{userdocs}\{#MyAppName}"; Flags: ignoreversion
-Source: "{#MyFilesDir}*.accdb"; DestDir: "{userdocs}\{#MyAppName}"; Flags: ignoreversion
-Source: "{#MyFilesDir}nexo.simulator*.json"; DestDir: "{userdocs}\{#MyAppName}"; Flags: ignoreversion
+Source: "{#MyDebugFolder}*.accdb"; DestDir: "{userdocs}\{#MyAppName}"; Flags: ignoreversion
+Source: "{#MyDebugFolder}nexo.simulator*.json"; DestDir: "{userdocs}\{#MyAppName}"; Flags: ignoreversion
+Source: "{#MySourceDir}\*.*"; DestDir: "{userdocs}\{#MyAppName}\{#MyTargetSourceDir}"; Flags: recursesubdirs ignoreversion
 
 [Run]
 
 [UninstallRun]
 
 [Registry]
-Root: HKCU; Subkey: "Software\{#MyRegistryCheck}"; ValueName: "Settings"; ValueType: string; ValueData: "{userdocs}\{#MyAppName}\"; Flags: createvalueifdoesntexist uninsdeletekey
+Root: HKCU; Subkey: "Software\{#MyRegistry}"; ValueName: "Settings"; ValueType: string; ValueData: "{userdocs}\{#MyAppName}\"; Flags: createvalueifdoesntexist uninsdeletekey

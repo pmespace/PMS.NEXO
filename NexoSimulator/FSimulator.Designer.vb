@@ -133,9 +133,9 @@ Partial Class FSimulator
 		Me.pbAdd = New System.Windows.Forms.Button()
 		Me.efCommand = New System.Windows.Forms.TextBox()
 		Me.pbRemove = New System.Windows.Forms.Button()
+		Me.pbSendRequest = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-		Me.pbSendRequest = New System.Windows.Forms.Button()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -1732,9 +1732,11 @@ Partial Class FSimulator
 		'
 		Me.efCommand.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efCommand.Location = New System.Drawing.Point(373, 4)
+		Me.efCommand.Multiline = True
 		Me.efCommand.Name = "efCommand"
 		Me.efCommand.Size = New System.Drawing.Size(430, 20)
 		Me.efCommand.TabIndex = 3
+		Me.efCommand.WordWrap = False
 		'
 		'pbRemove
 		'

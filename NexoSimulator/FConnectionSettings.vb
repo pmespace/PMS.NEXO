@@ -1,4 +1,5 @@
 ﻿Imports NEXO.Client
+Imports System.Net.Security
 Public Class FConnectionSettings
 	Public Settings As SettingsConnectionSettings
 	Private modified As Boolean = False
@@ -12,11 +13,14 @@ Public Class FConnectionSettings
 		Catch ex As Exception
 			udTimer.Value = 0
 		End Try
+		cbRemoteCertificateNotAvailable.Checked = Settings.AllowedSslErrors And SslPolicyErrors.RemoteCertificateNotAvailable
+		cbRemoteCertificateNameMismatch.Checked = Settings.AllowedSslErrors And SslPolicyErrors.RemoteCertificateNameMismatch
+		cbRemoteCertificateChainErrors.Checked = Settings.AllowedSslErrors And SslPolicyErrors.RemoteCertificateChainErrors
 		modified = False
 		SetButtons()
 	End Sub
 
-	Private Sub HasBeenModified(sender As Object, e As EventArgs) Handles efServerName.TextChanged, efRequest.TextChanged, cbUseCertificate.CheckedChanged, udTimer.ValueChanged
+	Private Sub HasBeenModified(sender As Object, e As EventArgs) Handles efServerName.TextChanged, efRequest.TextChanged, cbUseCertificate.CheckedChanged, udTimer.ValueChanged, cbRemoteCertificateNotAvailable.CheckedChanged, cbRemoteCertificateNameMismatch.CheckedChanged, cbRemoteCertificateChainErrors.CheckedChanged
 		modified = True
 		SetButtons()
 	End Sub
@@ -42,6 +46,9 @@ Public Class FConnectionSettings
 		Settings.ServerName = efServerName.Text
 		Settings.UseCertificate = cbUseCertificate.Checked
 		Settings.ConnectionTimer = udTimer.Value
+		Settings.AllowedSslErrors = SslPolicyErrors.None
+		Settings.AllowedSslErrors = SslPolicyErrors.None Or (cbRemoteCertificateNotAvailable.Checked And SslPolicyErrors.RemoteCertificateNotAvailable) Or
+			(cbRemoteCertificateNameMismatch.Checked And SslPolicyErrors.RemoteCertificateNameMismatch) Or (cbRemoteCertificateChainErrors.Checked And SslPolicyErrors.RemoteCertificateChainErrors)
 		Close()
 	End Sub
 End Class

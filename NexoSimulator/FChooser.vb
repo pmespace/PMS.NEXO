@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports NEXO
+Imports COMMON
 Imports Newtonsoft.Json
 
 Public Class FChooser
@@ -116,7 +117,36 @@ Public Class FChooser
 		Return dr
 	End Function
 
+	Private Function ReplaceChars(orig As String, toreplace As String, replacedby As String)
+		If orig.Contains(toreplace) Then
+			orig = orig.Replace(toreplace, replacedby)
+		End If
+		Return orig
+	End Function
+
 	Private Sub efXML_TextChanged(sender As Object, e As EventArgs) Handles efXML.TextChanged
+		'Dim s = efXML.Text
+		'If s.Contains("\""") Then
+		'	Dim pos As Integer = efXML.SelectionStart
+		'	s = s.Replace("\""", """")
+		'	efXML.Text = s
+		'	Try
+		'		efXML.SelectionStart = pos - 1
+		'	Catch ex As Exception
+		'		efXML.SelectionStart = 0
+		'	End Try
+		Dim s As String = efXML.Text
+		Dim pos As Integer = efXML.SelectionStart
+		s = ReplaceChars(s, "\""", """")
+		s = ReplaceChars(s, Chars.CR, "")
+		s = ReplaceChars(s, Chars.LF, "")
+		s = ReplaceChars(s, Chars.TAB, "")
+		efXML.Text = s
+		Try
+			efXML.SelectionStart = pos - 1
+		Catch ex As Exception
+			efXML.SelectionStart = 0
+		End Try
 		SetButtons()
 	End Sub
 

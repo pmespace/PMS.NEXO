@@ -525,9 +525,11 @@ Partial Class FChooser
 		'
 		Me.efXML.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efXML.Location = New System.Drawing.Point(3, 4)
+		Me.efXML.Multiline = True
 		Me.efXML.Name = "efXML"
 		Me.efXML.Size = New System.Drawing.Size(469, 20)
 		Me.efXML.TabIndex = 0
+		Me.efXML.WordWrap = False
 		'
 		'pbAnalyse
 		'

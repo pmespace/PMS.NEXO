@@ -66,21 +66,21 @@ namespace NEXO.Client
 		[DispId(102)]
 		void Disconnect();
 		[DispId(110)]
-		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null);
+		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true);
 		[DispId(111)]
-		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null);
+		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true);
 		[DispId(120)]
-		bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT);
+		bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(121)]
-		bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT);
+		bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(200)]
-		bool SendReply(NexoObject msg);
+		bool SendReply(NexoObject msg, bool autoComplete = true);
 		[DispId(201)]
-		bool SendReply(SaleToPOIResponse msg);
+		bool SendReply(SaleToPOIResponse msg, bool autoComplete = true);
 		[DispId(300)]
-		NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT);
+		NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(301)]
-		bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT);
+		bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true);
 		#endregion
 
 		#region INexoRetailer
@@ -424,6 +424,10 @@ namespace NEXO.Client
 					try
 					{
 						bool error = false;
+
+						// that error must be accepted in order to proceed
+						settings.StreamClientSettings.AllowedSslErrors = System.Net.Security.SslPolicyErrors.RemoteCertificateNameMismatch;
+
 						// get the connection object
 						object o = settings.ConnectionSettings.OnConnectionRequest(settings.StreamClientSettings);
 						CLog.Add($"Connection request: {o}", null == o ? TLog.ERROR : TLog.INFOR);
@@ -523,8 +527,9 @@ namespace NEXO.Client
 		/// <param name="msg">request to send</param>
 		/// <param name="timer">timer to wait for a response (in seconds)</param>
 		/// <param name="settings">a <see cref="NexoRetailerClientSettings"/> object to use to process this peculiar message overriding settings declared when connecting to the server</param>
+		/// <param name="autoComplete">true if the message must be auto completed before being sent, false to send it as it is</param>
 		/// <returns>An object if the message has been sent, null otherwise</returns>
-		public NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null)
+		public NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true)
 		{
 			if (Connected && null != msg && !InProgress)
 			{
@@ -532,7 +537,7 @@ namespace NEXO.Client
 				if (!string.IsNullOrEmpty(SaleID))
 					msg.POIID = POIID;
 
-				string xml = msg.SerializeAndCompleteRequest();
+				string xml = (autoComplete ? msg.SerializeAndCompleteRequest() : msg.SerializedRequest);
 				if (!string.IsNullOrEmpty(xml))
 				{
 					// create the new request template
@@ -571,7 +576,7 @@ namespace NEXO.Client
 				CLog.Add(Description + "Not connected or invalid request to send", TLog.ERROR);
 			return null;
 		}
-		public NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null)
+		public NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true)
 		{
 			NexoItem item = new NexoItem(msg);
 			if (item.IsValid)
@@ -580,7 +585,7 @@ namespace NEXO.Client
 				if (null != nxo)
 				{
 					nxo.Request = msg;
-					return SendRequest(nxo, timer, settings);
+					return SendRequest(nxo, timer, settings, autoComplete);
 				}
 			}
 			return null;
@@ -592,10 +597,11 @@ namespace NEXO.Client
 		/// </summary>
 		/// <param name="msg"></param>
 		/// <param name="timer"></param>
+		/// <param name="autoComplete">true if the message must be auto completed before being sent, false to send it as it is</param>
 		/// <returns></returns>
-		public bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		public bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
-			NexoRetailerClientHandle handle = SendRequest(msg, timer, new NexoRetailerClientSettings());
+			NexoRetailerClientHandle handle = SendRequest(msg, timer, new NexoRetailerClientSettings(), autoComplete);
 			if (null != handle)
 			{
 				try
@@ -612,7 +618,7 @@ namespace NEXO.Client
 			}
 			return false;
 		}
-		public bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT)
+		public bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
 			NexoItem item = new NexoItem(msg);
 			if (item.IsValid)
@@ -621,7 +627,7 @@ namespace NEXO.Client
 				if (null != nxo)
 				{
 					nxo.Request = msg;
-					return SendRequestSync(nxo, timer);
+					return SendRequestSync(nxo, timer, autoComplete);
 				}
 			}
 			return false;
@@ -630,13 +636,14 @@ namespace NEXO.Client
 		/// Send a REPLY
 		/// </summary>
 		/// <param name="msg">response to send</param>
+		/// <param name="autoComplete">true if the message must be auto completed before being sent, false to send it as it is</param>
 		/// <returns>True if the message has been sent, false otherwise</returns>
-		public bool SendReply(NexoObject msg)
+		public bool SendReply(NexoObject msg, bool autoComplete = true)
 		{
 			if (Connected && null != msg)
 			{
 				NexoItem item = new NexoItem(msg.Reply);
-				string xml = msg.SerializeAndCompleteReply();
+				string xml = autoComplete ? msg.SerializeAndCompleteReply() : msg.SerializedReply;
 				if (!string.IsNullOrEmpty(xml))
 				{
 					if (!SendXML(xml, item))
@@ -647,7 +654,7 @@ namespace NEXO.Client
 			}
 			return false;
 		}
-		public bool SendReply(SaleToPOIResponse msg)
+		public bool SendReply(SaleToPOIResponse msg, bool autoComplete = true)
 		{
 			NexoItem item = new NexoItem(msg);
 			if (item.IsValid)
@@ -666,16 +673,17 @@ namespace NEXO.Client
 		/// </summary>
 		/// <param name="xml">Requets to send</param>
 		/// <param name="timer">timer to wait for a response (in seconds)</param>
+		/// <param name="autoComplete">true if the message must be auto completed before being sent, false to send it as it is</param>
 		/// <returns>An object if the message has been sent, null otherwise</returns>
-		public NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT)
+		public NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
 			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
-			return SendRequest(request, timer);
+			return SendRequest(request, timer, null, autoComplete);
 		}
-		public bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT)
+		public bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
 			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
-			return SendRequestSync(request, timer);
+			return SendRequestSync(request, timer, autoComplete);
 		}
 		#endregion
 

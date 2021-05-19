@@ -196,7 +196,13 @@ namespace NEXO
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
 		protected override InternalAction AutoCompleteRequest()
 		{
-			ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
+			RequestTransactionAction = (TransactionActionEnumeration)SetDefaultEnumValue(typeof(TransactionActionEnumeration), RequestTransactionAction, TransactionActionEnumeration.StartTransaction);
+			if (TransactionActionEnumeration.StartTransaction == RequestTransactionAction)
+				RequestServicesEnabled = SetDefaultStringValue(RequestServicesEnabled, ServicesEnabledEnumeration.CardAcquisition.ToString());
+			return InternalAction.noError;
+		}
+		protected override InternalAction AutoCompleteReply()
+		{
 			return InternalAction.noError;
 		}
 		#endregion

@@ -1029,7 +1029,7 @@ namespace XSDEx
 							List<CodeStatement> statements = new List<CodeStatement>();
 
 #if DECLAREHASBEENSET
-							// add init flag statements
+							// "GET" statements
 							AddComment(hasBeenSetProperty, b, true);
 							CodeExpression expression = new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name);
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
@@ -1078,6 +1078,7 @@ namespace XSDEx
 							hasBeenSetProperty.GetStatements.Add(new CodeMethodReturnStatement(expression));
 							AddComment(hasBeenSetProperty, e, true);
 
+							// "SET" statements
 							AddSetStatementFromValue(hasBeenSetProperty, hasBeenSetField, b, e);
 							AddComment(hasBeenSetProperty, b, false);
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
@@ -1109,7 +1110,7 @@ namespace XSDEx
 #endif
 
 #if DECLAREOPTIMIZER
-							//add set optimizing flag to all
+							// "GET" add set optimizing flag to all
 							AddGetStatementFromField(optimizingProperty, optimizingField, b, e);
 							AddSetStatementFromValue(optimizingProperty, optimizingField, b, e);
 							AddComment(optimizingProperty, b, false);

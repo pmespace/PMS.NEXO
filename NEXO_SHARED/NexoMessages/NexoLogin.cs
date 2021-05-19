@@ -355,12 +355,11 @@ namespace NEXO
 				ReplySoftwareVersion = SetDefaultStringValue(ReplySoftwareVersion, new NexoSoftwareVersion().DefaultValue);
 				ReplyCertificationCode = SetDefaultStringValue(ReplyCertificationCode, new NexoCertificationCode().DefaultValue);
 
-				ReplyPOICapabilities = null;
-				ReplyPOISerialNumber = SetDefaultStringValue(ReplyPOISerialNumber, new NexoPOISerialNumber().DefaultValue);
-				ReplyGlobalStatus = (GlobalStatusEnumeration)SetDefaultEnumValue(typeof(GlobalStatusEnumeration), ReplyGlobalStatus, CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), new NexoGlobalStatus().DefaultValue));
+				//ReplyPOISerialNumber = SetDefaultStringValue(ReplyPOISerialNumber, new NexoPOISerialNumber().DefaultValue);
+				//ReplyGlobalStatus = (GlobalStatusEnumeration)SetDefaultEnumValue(typeof(GlobalStatusEnumeration), ReplyGlobalStatus, CMisc.GetEnumValue(typeof(GlobalStatusEnumeration), new NexoGlobalStatus().DefaultValue));
 
-				if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData)
-					ReplyData.POISystemData.POITerminalData.TerminalEnvironment = RequestData.SaleTerminalData.TerminalEnvironment;
+				//if (null != ReplyData && null != ReplyData.POISystemData && null != ReplyData.POISystemData.POITerminalData)
+				//	ReplyData.POISystemData.POITerminalData.TerminalEnvironment = RequestData.SaleTerminalData.TerminalEnvironment;
 			}
 			return InternalAction.noError;
 		}

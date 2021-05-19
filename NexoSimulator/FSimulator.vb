@@ -800,6 +800,7 @@ Public Class FSimulator
 			If ConnectionSettings.UseCertificate Then
 				settings.ServerName = ConnectionSettings.ServerName
 			End If
+			settings.AllowedSslErrors = ConnectionSettings.AllowedSslErrors
 		Else
 			csettings = Nothing
 		End If
@@ -1088,7 +1089,7 @@ Public Class FSimulator
 			Dim client As NexoRetailerClient = CurrentClient()
 			If Not IsNothing(client) Then
 				If DirectCast(sender, Button).Equals(pbSendFreeMessage) Then
-					Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout())
+					Dim o As Object = client.SendRawRequest(efCommand.Text, GetTimeout(), False)
 					If Not IsNothing(o) Then
 						'AddLine(Position.client, Direction.right, "SENDING REQUEST" & MessageLength(command.Text) & vbCrLf & command.Text)
 					End If
@@ -1103,10 +1104,11 @@ Public Class FSimulator
 						If (item.IsDevice) Then
 							o.DeviceID = CMisc.Trimmed(efDeviceID.Text)
 						End If
-						Dim t = client.SendRequest(o.Request)
-						If IsNothing(t) Then
-							AddLine(Position.client, Direction.none, $"ERROR SENDING {item.Category} REQUEST" & MessageLength(item.XML) & vbCrLf & item.XML)
-						End If
+						Dim ox As Object = client.SendRawRequest(o.SerializedRequest, GetTimeout())
+						'Dim t = client.SendRequest(o.Request)
+						'If IsNothing(t) Then
+						'	AddLine(Position.client, Direction.none, $"ERROR SENDING {item.Category} REQUEST" & MessageLength(item.XML) & vbCrLf & item.XML)
+						'End If
 					End If
 				End If
 			End If
@@ -1187,7 +1189,26 @@ Public Class FSimulator
 		End If
 	End Sub
 
+	Private Function ReplaceChars(orig As String, toreplace As String, replacedby As String)
+		If orig.Contains(toreplace) Then
+			orig = orig.Replace(toreplace, replacedby)
+		End If
+		Return orig
+	End Function
+
 	Private Sub efCommand_TextChanged(sender As Object, e As EventArgs) Handles efCommand.TextChanged
+		Dim s As String = efCommand.Text
+		Dim pos As Integer = efCommand.SelectionStart
+		s = ReplaceChars(s, "\""", """")
+		s = ReplaceChars(s, Chars.CR, "")
+		s = ReplaceChars(s, Chars.LF, "")
+		s = ReplaceChars(s, Chars.TAB, "")
+		efCommand.Text = s
+		Try
+			efCommand.SelectionStart = pos - 1
+		Catch ex As Exception
+			efCommand.SelectionStart = 0
+		End Try
 		If -1 <> cbxCommands.SelectedIndex Then
 			DirectCast(cbxCommands.Items(cbxCommands.SelectedIndex), Command).Command = efCommand.Text
 		End If
@@ -1537,6 +1558,16 @@ Public Class FSimulator
 	Private Sub udServerDelay_ValueChanged(sender As Object, e As EventArgs) Handles udServerDelay.ValueChanged
 		If Not IsNothing(nexoServer) Then
 			nexoServer.TimerBeforeReply = udServerDelay.Value
+		End If
+	End Sub
+
+	Private Sub cbOptimize_CheckedChanged(sender As Object, e As EventArgs) Handles cbOptimize.CheckedChanged
+		If Not cbOptimize.Checked Then
+			Select Case MsgBox("Are you sure you want to disable optimisation ? Not optimised messages may generate errors when received.",
+									 MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2 Or MsgBoxStyle.Question)
+				Case MsgBoxResult.No
+					cbOptimize.Checked = True
+			End Select
 		End If
 	End Sub
 #End Region

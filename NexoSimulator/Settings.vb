@@ -1,4 +1,5 @@
-﻿Imports COMMON
+﻿Imports System.Net.Security
+Imports COMMON
 Imports NEXO.Client
 
 Public Enum TargetsEnum
@@ -81,4 +82,5 @@ Public Class SettingsConnectionSettings
 	Public Property ServerName As String
 	Public Property UseCertificate As Boolean = False
 	Public Property ConnectionTimer As Integer = 0
+	Public Property AllowedSslErrors As SslPolicyErrors = SslPolicyErrors.None
 End Class

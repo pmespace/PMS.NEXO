@@ -25,6 +25,10 @@ PMS.NEXOSALE (like PMS.COMMON and all PMS.NEXOxx components) is available on Git
 
 
 Releasenotes:
+3.0.3
+-----
+- Fixed NexoBuilderXX to help reuse a valid XML string when pasting it (reùmoving undesirable characters)
+
 3.0.2
 -----
 - Fixed a bug inside NEXO 3.0 and 3.1

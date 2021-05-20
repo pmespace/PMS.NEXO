@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>PMS.NEXO30</id>
+    <title>PMS.NEXO30</title>
+    <authors>philippemp31</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <repository type="git" url="https://github.com/pmespace/PMS.NEXO.git" branch="master" />
+    <projectUrl>https://github.com/pmespace/PMS.NEXO/</projectUrl>
+    <description>
+      Nexo Retailer v3.0 libraries supporting all messages defined inside the specifications.
+      Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
+    </description>
+    <copyright>PMS - philippemp31 at outlook dot com</copyright>
+    <developmentDependency>true</developmentDependency>
+    <tags>NEXO</tags>
+
+    <!-- Modifiable -->
+    <version>3.1.0</version>
+
+    <!-- Modifiable -->
+    <dependencies>
+      <group targetFramework=".NETFramework4.7">
+        <dependency id="PMS.COMMON" version="4.0.3" />
+      </group>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="PMS.COMMON" version="4.0.3" />
+      </group>
+    </dependencies>
+
+    <!-- Modifiable -->
+    <releaseNotes>
+      3.1.0
+      - Updated NewtonSoft.Json library
+      - Creation of a specific PMS.NEXOXX package
+
+      3.0.3
+      - Fixed NexoBuilderXX to help reuse a valid XML string when pasting it (removing undesirable characters)
+      - Added inside NexoSimulatorXX the possibility to ignore some SSL errors while trying to connect to a terminal over a 3G link (specific operation valid and tested only with 1 telco operator in France)
+
+      3.0.2
+      - Fixed a bug inside nexo 3.0 and 3.1
+      - Update NexoBuilder and NexoSimulator to avoid crashing when editing a response
+      - Updated NexoSimulator to allow sending RAW request and managed requests from the XML entry field
+      - Added a NexoBuilder31 (for nexo 3.1)
+
+      3.0.1
+      - Fixed a bug which prevented the ReponseType to be set appropriately
+
+      3.0.0
+      - All Nexo classes are now safe, no way to have a null reference if using the classes
+      - Nexo simulator now is fully operational to build any message
+      - Nexo simulator POI simulation can be set nexo service by nexo service to reply with a pre-defined message stored in a json file
+      - Nexo Retailer 4.0 is still NOT SUPPORTED though and will be in version 4.x
+      - Nexo simumulator now can use a database to store its activity
+
+      2.0.14
+      - Moved to PMS.COMMON 3.0.9
+
+      2.0.13
+      - Nexo libraries are now divided in PMS.NEXO30 (Nexo 3.0), PMS.NEXO31 (Nexo 3.1) and PMS.NEXO35 (Nexo 3.0 running .NET 3.5)
+      - Simulator exists now in 2 applications, 1 for Nexo 3.0 and 1 for Nexo 3.1
+
+      2.0.12
+      - Moved to PMS.NEXO 3.0.8 minimum
+      - Added a new Retailer message builder application
+      - Added new features to simulator (create any Retailer message using the builder, pre-connection settings,...)
+
+      2.0.11
+      - Fixed bugs linked to Nexo server database access + added scripts to create the database
+      - Moved to PMS.NEXO 3.0.4
+      - Full database support for Nexo server
+
+      2.0.10
+      - Moved to PMS.COMMON 3.02
+
+      2.0.9
+      - Fixed a bug inside NexoSimpleAmount type
+      - Moved to PMS.COMMON 3.0.0
+
+      2.0.8
+      - Fixed a bug of an event using the wrong type inside NexoRetailerCient
+      - Updated Nuget packages dependencies
+      - NexoSimulator is now installed with the DLLs
+
+      2.0.7
+      - Updated DLL version to 2.0.7
+
+      2.0.6
+      - [Failed] Missed updating COMMON minimum version to 2.0.4
+
+      2.0.5
+      - Updated COMMON nuget package
+
+      2.0.4
+      - Changes events type inside NexoRetailerClient and fixed a bug with ThreadDispatcher not well closed in certain conditions
+
+      2.0.3
+      - Updated the interfaces + bug fixes (ProtocolVersion,...)
+
+      2.0.2
+      - Modified decimal types to double for easier COM compatibility
+
+      2.0.1
+      - Adjusted version number
+
+      2.0.0
+      - Removed WMI dependency
+
+      1.1.0
+      - Adjusted version number
+
+      1.0.6
+      - Fixed a bug in case of timeout receiving the answer from the server, using Response.xxx crashed the application
+
+      1.0.5
+      - Fixed a bug preventing timeout to be raised in case of SendRequestSync in NexoRetailerClient
+
+      1.0.4
+      - Updated NexoSimulator to handle client diconnections
+      - A new OnDisconnect property has been added to NexoRetailerServerSettings for that matter
+
+      1.0.3
+      - Updates to project properties
+
+      1.0.2:
+      - Made objects available to COM
+
+      1.0.1:
+      - Added support for synchronous requests sent to the server.
+      - Using this mode with the simulator always makes the request to timeout as the server tries to access the application main thread already waiting an answer.
+      Synchronous requests can't therefore be used against the local server within the same simulator instance, but can be used if using 2 simulator instances communicating with each other.
+      This is not a bug, the simulator done like that and modifying it is not the subject. You can still run 2 simulator instances to test these synchrounous requests.
+
+      1.0.0:
+      - Creation
+    </releaseNotes>
+
+    <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+    <contentFiles>
+      <files include=".\Release\NexoBuilder30.exe" buildAction="None" copyToOutput="true"></files>
+      <files include=".\Release\NexoSimulator30.exe" buildAction="None" copyToOutput="true"></files>
+    </contentFiles>
+  </metadata>
+
+  <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+  <files>
+    <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
+    <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
+
+    <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
+    <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
+    <file src=".\Release\PMS.NEXO35.pdb" target="lib\net35"></file>
+  </files>
+</package>

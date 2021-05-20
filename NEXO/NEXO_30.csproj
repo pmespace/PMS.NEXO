@@ -33,9 +33,8 @@
     <DefineConstants>TRACE;DEBUG;NEXO30</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <DocumentationFile>
-    </DocumentationFile>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <DocumentationFile>..\Debug\PMS.NEXO30.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>
     </NoWarn>
@@ -55,11 +54,11 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.4.0.2\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.4.0.3\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -77,15 +76,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\NexoResources\Properties\NexoResources.resx">
       <Link>Properties\NexoResources.resx</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
   <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />

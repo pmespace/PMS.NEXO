@@ -25,7 +25,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "myXSD", "XSD\myXSD\myXSD.vb
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63391E4A-BFB7-4544-B808-2DD9BF632A40}"
 	ProjectSection(SolutionItems) = preProject
-		NUGET.nuspec = NUGET.nuspec
+		NUGET30.nuspec = NUGET30.nuspec
+		NUGET31.nuspec = NUGET31.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject

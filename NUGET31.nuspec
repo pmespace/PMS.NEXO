@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package>
   <metadata>
-    <id>PMS.NEXO</id>
-    <version>3.0.3</version>
-    <title>PMS.NEXO</title>
+    <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+    <id>PMS.NEXO31</id>
+    <title>PMS.NEXO31</title>
     <authors>philippemp31</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <repository type="git" url="https://github.com/pmespace/PMS.NEXO.git" branch="master" />
     <projectUrl>https://github.com/pmespace/PMS.NEXO/</projectUrl>
     <description>
-      Nexo Retailer v3.0 and 3.1 libraries supporting all messages defined inside the specifications.
+      Nexo Retailer v3.1 libraries supporting all messages defined inside the specifications.
       Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.
     </description>
+    <copyright>PMS - philippemp31 at outlook dot com</copyright>
+    <developmentDependency>true</developmentDependency>
+    <tags>NEXO</tags>
+
+    <!-- Modifiable -->
+    <version>3.1.0</version>
+
+    <!-- Modifiable -->
+    <dependencies>
+      <group targetFramework=".NETFramework4.7">
+        <dependency id="PMS.COMMON" version="4.0.3" />
+      </group>
+    </dependencies>
+
+    <!-- Modifiable -->
     <releaseNotes>
+      3.1.0
+      - Updated NewtonSoft.Json library
+      - Creation of a specific PMS.NEXOXX package
+
       3.0.3
       - Fixed NexoBuilderXX to help reuse a valid XML string when pasting it (removing undesirable characters)
       - Added inside NexoSimulatorXX the possibility to ignore some SSL errors while trying to connect to a terminal over a 3G link (specific operation valid and tested only with 1 telco operator in France)
@@ -115,35 +134,18 @@
       1.0.0:
       - Creation
     </releaseNotes>
-    <copyright>PMS - philippemp31 at outlook dot com</copyright>
-    <developmentDependency>true</developmentDependency>
-    <tags>NEXO</tags>
-    <dependencies>
-      <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="4.0.2" />
-      </group>
-      <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="4.0.2" />
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src=".\Release\NexoBuilder30.exe" target="lib\net47"></file>
-    <file src=".\Release\NexoSimulator30.exe" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.tlb" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
 
-    <file src=".\Release\NexoBuilder31.exe" target="lib\net47"></file>
-    <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
+    <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+    <contentFiles>
+      <files include=".\Release\NexoBuilder31.exe" buildAction="None" copyToOutput="true"></files>
+      <files include=".\Release\NexoSimulator31.exe" buildAction="None" copyToOutput="true"></files>
+    </contentFiles>
+  </metadata>
+
+  <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+  <files>
     <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO31.tlb" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO31.pdb" target="lib\net47"></file>
-
-    <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
-    <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
-    <file src=".\Release\PMS.NEXO35.pdb" target="lib\net35"></file>
   </files>
 </package>

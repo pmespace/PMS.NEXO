@@ -17,20 +17,26 @@
     <tags>NEXO</tags>
 
     <!-- Modifiable -->
-    <version>3.1.0</version>
-
-    <!-- Modifiable -->
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="4.0.3" />
+        <dependency id="PMS.COMMON" version="4.1.1" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="4.0.3" />
+        <dependency id="PMS.COMMON" version="4.1.1" />
       </group>
     </dependencies>
 
     <!-- Modifiable -->
+    <version>3.2.0</version>
     <releaseNotes>
+      3.2.0
+      - NexoBuilder now properly handles array in a nexo structure
+      - New ways to specify a message to send back in NexoSimulator (using SaleID, POIID, Name, all supporting wildcards now)
+      - Moved to PMS.COMMON 4.1.1
+
+      3.1.1
+      - Allowed NexoBuilder and NexoSimulator to be deployed with the package
+
       3.1.0
       - Updated NewtonSoft.Json library
       - Creation of a specific PMS.NEXOXX package
@@ -138,10 +144,13 @@
     </releaseNotes>
 
     <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
+    <!--
     <contentFiles>
-      <files include=".\Release\NexoBuilder30.exe" buildAction="None" copyToOutput="true"></files>
-      <files include=".\Release\NexoSimulator30.exe" buildAction="None" copyToOutput="true"></files>
+      <files include=".\Release\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
+      <files include=".\Release\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
     </contentFiles>
+    -->
+
   </metadata>
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
@@ -149,6 +158,8 @@
     <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
     <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
+    <file src=".\Release\NexoBuilder30.exe" target="lib\net47"></file>
+    <file src=".\Release\NexoSimulator30.exe" target="lib\net47"></file>
 
     <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>

@@ -54,6 +54,7 @@ Public Class Settings
 	Public Property UseDatabase As Boolean
 	Public Property UsePreConnection As Boolean
 	Public Property ConnectionSettings As New SettingsConnectionSettings
+	Public Property AutomaticMode As Boolean
 End Class
 
 Public Class Commands

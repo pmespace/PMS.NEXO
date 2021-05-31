@@ -127,7 +127,7 @@ namespace NEXO.Server
 			if (string.IsNullOrEmpty(databaseSettingsFileName))
 				return null;
 			CJson<NexoRetailerServerDatabaseSettings> json = new CJson<NexoRetailerServerDatabaseSettings>(databaseSettingsFileName);
-			return json.ReadSettings(true);
+			return json.ReadSettings(out bool except, true);
 		}
 		/// <summary>
 		/// Starts the Nexo server.

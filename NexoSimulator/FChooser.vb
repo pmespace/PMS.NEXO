@@ -2,6 +2,7 @@
 Imports NEXO
 Imports COMMON
 Imports Newtonsoft.Json
+Imports System.Xml
 
 Public Class FChooser
 	Public XML As String = Nothing
@@ -26,6 +27,7 @@ Public Class FChooser
 	Private Sub pbAnalyse_Click(sender As Object, e As EventArgs) Handles pbAnalyse.Click
 		Dim nxo As NexoObject = Nothing
 		Dim item As NexoItem = Nothing
+		efXML.Text = Trim(efXML.Text)
 		If Not String.IsNullOrEmpty(efXML.Text) Then
 			item = New NexoItem(efXML.Text)
 			If item.IsValid Then
@@ -152,9 +154,38 @@ Public Class FChooser
 
 	Private Sub SetButtons()
 		pbAnalyse.Enabled = Not String.IsNullOrEmpty(efXML.Text)
+		pbAnalyseJson.Enabled = Not String.IsNullOrEmpty(efJSON.Text)
 	End Sub
 
 	Private Sub pbCopy_Click(sender As Object, e As EventArgs) Handles pbCopy.Click
 		Clipboard.SetText(efXMLJson.Text)
+	End Sub
+
+	Private Sub pbAnalyseJson_Click(sender As Object, e As EventArgs) Handles pbAnalyseJson.Click
+		Dim nxo As NexoObject = Nothing
+		Dim item As NexoItem = Nothing
+		efJSON.Text = Trim(efJSON.Text)
+		If Not String.IsNullOrEmpty(efJSON.Text) Then
+			If Not efJSON.Text.StartsWith("""") Then efJSON.Text = """" & efJSON.Text
+			If Not efJSON.Text.EndsWith("""") Then efJSON.Text = efJSON.Text & """"
+			'from json to xml
+			Dim sz As String = String.Empty
+			Try
+				sz = JsonConvert.DeserializeObject(Of String)(efJSON.Text)
+			Catch ex As Exception
+			End Try
+			item = New NexoItem(sz)
+			If item.IsValid Then
+				nxo = NexoItem.ToNexoObject(item)
+				If Not IsNothing(nxo) Then
+					cbRequest.Checked = item.IsRequest
+					StartBuilder(nxo)
+				End If
+			End If
+		End If
+	End Sub
+
+	Private Sub efJSON_TextChanged(sender As Object, e As EventArgs) Handles efJSON.TextChanged
+		SetButtons()
 	End Sub
 End Class

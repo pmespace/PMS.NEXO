@@ -33,6 +33,8 @@ Public Class FSimulator
 	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
 	Private Const SETTINGS_FILE_EXT As String = ".json"
 	Private Const LOG_FILE_EXT As String = ".log"
+	Private Const WILDCARD As String = "*"
+	Private Const USERVAR As String = "$value$"
 	Private json As CJson(Of Settings)
 	Private isClosing As Boolean = False
 	Private nexoServerID As Integer
@@ -227,7 +229,8 @@ Public Class FSimulator
 	End Function
 
 	Private Sub LoadSettings()
-		Dim settings As Settings = json.ReadSettings()
+		Dim except As Boolean
+		Dim settings As Settings = json.ReadSettings(except)
 		If Not settings Is Nothing Then
 			cbAutostartServer.Checked = settings.Autostart
 			Try
@@ -298,6 +301,8 @@ Public Class FSimulator
 
 			cbUseConnectionSettings.Checked = settings.UsePreConnection
 			ConnectionSettings = settings.ConnectionSettings
+
+			cbAutomaticMode.Checked = settings.AutomaticMode
 		End If
 	End Sub
 
@@ -350,6 +355,8 @@ Public Class FSimulator
 
 		settings.UsePreConnection = cbUseConnectionSettings.Checked
 		settings.ConnectionSettings = ConnectionSettings
+
+		settings.AutomaticMode = cbAutomaticMode.Checked
 
 		json.WriteSettings(settings)
 	End Sub
@@ -599,9 +606,9 @@ Public Class FSimulator
 
 	Private Function IsRecognized(o As NexoObject, key As SimulatorResponse, allowWildCard As Boolean)
 		Return (o.SaleID = key.SaleID AndAlso o.POIID = key.POIID AndAlso Not allowWildCard) OrElse
-							(o.SaleID = key.SaleID AndAlso "*" = key.POIID AndAlso allowWildCard) OrElse
-							("*" = key.SaleID AndAlso o.POIID = key.POIID AndAlso allowWildCard) OrElse
-							("*" = key.SaleID AndAlso "*" = key.POIID AndAlso allowWildCard)
+							(o.SaleID = key.SaleID AndAlso WILDCARD = key.POIID AndAlso allowWildCard) OrElse
+							(WILDCARD = key.SaleID AndAlso o.POIID = key.POIID AndAlso allowWildCard) OrElse
+							(WILDCARD = key.SaleID AndAlso WILDCARD = key.POIID AndAlso allowWildCard)
 	End Function
 
 	Class SimulatorResponse
@@ -633,12 +640,16 @@ Public Class FSimulator
 			Return
 		End If
 
+		'if automatic mode let's run with it
+		'<<<>>>
+
 		'search the json file containing the response for that message category
 		Dim json As New CJson(Of SimulatorResponses)(($"{SettingsFileName()}.response.{cat}.json").ToLower())
 
 		'get records from this file
-		Dim data As SimulatorResponses = json.ReadSettings(True)
-		If IsNothing(data) Then
+		Dim except As Boolean
+		Dim data As SimulatorResponses = json.ReadSettings(except, True)
+		If IsNothing(data) AndAlso Not except Then
 			'no data at all, create a file with the fields inside for later update
 			Dim l As New SimulatorResponses
 			l.Add(New SimulatorResponse With
@@ -656,7 +667,11 @@ Public Class FSimulator
 				.Message = Nothing
 				})
 			json.WriteSettings(l, True)
-			'nothing else is done, the server decides of the action and simply returns the received message
+			'nothing else is done, the server decides of the action and simply returns the received message with a failure
+			NoAnswer(toprocess)
+		ElseIf except Then
+			RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.right, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = $"INVALID {json.FileName} FILE" & vbCrLf})
+			NoAnswer(toprocess)
 		Else
 			Dim response As SimulatorResponse = Nothing
 			Dim secondary As Object = Nothing
@@ -667,8 +682,9 @@ Public Class FSimulator
 			'almost exact (SaleID, POIID)
 			Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
 			'partial responses (using wildcards, Value)
-			'Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending
-			Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = secondary.ToString Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			'partial responses (using wildcards, Value is wildcard too)
+			Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = WILDCARD Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
 			'scarce responses (using wildcards)
 			Dim responsesScarce = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
 
@@ -679,25 +695,37 @@ Public Class FSimulator
 				response = responsesAlmost(0)
 			ElseIf 0 <> responsesPartial.Count Then
 				response = responsesPartial(0)
+			ElseIf 0 <> responsesPartialFull.Count Then
+				response = responsesPartialFull(0)
 			ElseIf 0 <> responsesScarce.Count Then
 				response = responsesScarce(0)
 			End If
 
 			'do we have a response ?
 			If Not IsNothing(response) Then
+				Dim sz As String = response.Message
+				'eventually replace the user var
+				If Not IsNothing(secondary) AndAlso Not String.IsNullOrEmpty(secondary.ToString) Then
+					sz = sz.Replace(USERVAR, secondary.ToString)
+				End If
 				'deserialize the response
-				Dim item As New NexoItem(response.Message)
+				Dim item As New NexoItem(sz)
 				'is the response is valid against the expected message we save it to send it back to the caller
 				If toprocess.Category = item.Category Then
 					toprocess.CurrentObject.FromItem(item)
 				End If
 			Else
 				'no answer is available, return an error
-				toprocess.CurrentObject.Result = ResultEnumeration.Failure
-				toprocess.CurrentObject.ErrorCondition = ErrorConditionEnumeration.NotFound
-				toprocess.CurrentObject.AdditionalResponse = "[SIMULATOR] No message found to send back for this request"
+				NoAnswer(toprocess)
 			End If
 		End If
+	End Sub
+
+	Private Sub NoAnswer(toprocess As NexoObjectToProcess)
+		'no answer is available, return an error
+		toprocess.CurrentObject.Result = ResultEnumeration.Failure
+		toprocess.CurrentObject.ErrorCondition = ErrorConditionEnumeration.NotFound
+		toprocess.CurrentObject.AdditionalResponse = "[SIMULATOR] No message found to send back for this request"
 	End Sub
 
 	Private Sub PrepareReceipt(s As String, clientText As List(Of String), merchantText As List(Of String))
@@ -717,7 +745,7 @@ Public Class FSimulator
 	End Sub
 
 	Private Function ServerOnStop(threadData As CThreadData, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER Is STOPPING"})
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = "SERVER IS STOPPING"})
 		Return True
 	End Function
 
@@ -1570,6 +1598,7 @@ Public Class FSimulator
 			End Select
 		End If
 	End Sub
+
 #End Region
 
 End Class

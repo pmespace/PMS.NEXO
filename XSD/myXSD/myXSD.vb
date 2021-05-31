@@ -158,8 +158,9 @@ Public Class myXSD
 	End Function
 
 	Private Sub FromSettings()
+		Dim except As Boolean
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
-		Dim settings As XSDSettings = json.ReadSettings()
+		Dim settings As XSDSettings = json.ReadSettings(except)
 		If IsNothing(settings) Then
 			settings = New XSDSettings
 		End If
@@ -277,8 +278,9 @@ Public Class myXSD
 
 	Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		files.Items.Clear()
+		Dim except As Boolean
 		Dim json As New CJson(Of Settings)(MYXSD_SETTINGS)
-		Dim settings As Settings = json.ReadSettings()
+		Dim settings As Settings = json.ReadSettings(except)
 		If IsNothing(settings) Then
 			settings = New Settings
 		End If

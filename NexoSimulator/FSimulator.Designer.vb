@@ -136,6 +136,7 @@ Partial Class FSimulator
 		Me.pbSendRequest = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+		Me.cbAutomaticMode = New System.Windows.Forms.CheckBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -416,7 +417,7 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelCommands.AutoSize = True
 		Me.panelCommands.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelCommands.ColumnCount = 12
+		Me.panelCommands.ColumnCount = 13
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -429,17 +430,19 @@ Partial Class FSimulator
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.Controls.Add(Me.pbLogin, 0, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogout, 1, 0)
-		Me.panelCommands.Controls.Add(Me.cbSynchronous, 10, 0)
-		Me.panelCommands.Controls.Add(Me.cbOptimize, 11, 0)
-		Me.panelCommands.Controls.Add(Me.cbAddReceipt, 8, 0)
-		Me.panelCommands.Controls.Add(Me.cbOnelineReceipt, 9, 0)
+		Me.panelCommands.Controls.Add(Me.cbSynchronous, 11, 0)
+		Me.panelCommands.Controls.Add(Me.cbOptimize, 12, 0)
+		Me.panelCommands.Controls.Add(Me.cbAddReceipt, 9, 0)
+		Me.panelCommands.Controls.Add(Me.cbOnelineReceipt, 10, 0)
 		Me.panelCommands.Controls.Add(Me.pbPayment, 2, 0)
 		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 5, 0)
 		Me.panelCommands.Controls.Add(Me.pbReversal, 3, 0)
 		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 6, 0)
 		Me.panelCommands.Controls.Add(Me.pbRefund, 4, 0)
+		Me.panelCommands.Controls.Add(Me.cbAutomaticMode, 8, 0)
 		Me.panelCommands.Location = New System.Drawing.Point(3, 226)
 		Me.panelCommands.Name = "panelCommands"
 		Me.panelCommands.RowCount = 1
@@ -478,7 +481,7 @@ Partial Class FSimulator
 		Me.cbSynchronous.Location = New System.Drawing.Point(844, 6)
 		Me.cbSynchronous.Name = "cbSynchronous"
 		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
-		Me.cbSynchronous.TabIndex = 9
+		Me.cbSynchronous.TabIndex = 10
 		Me.cbSynchronous.Text = "Synchronous"
 		Me.cbSynchronous.UseVisualStyleBackColor = True
 		'
@@ -491,7 +494,7 @@ Partial Class FSimulator
 		Me.cbOptimize.Location = New System.Drawing.Point(938, 6)
 		Me.cbOptimize.Name = "cbOptimize"
 		Me.cbOptimize.Size = New System.Drawing.Size(66, 17)
-		Me.cbOptimize.TabIndex = 10
+		Me.cbOptimize.TabIndex = 11
 		Me.cbOptimize.Text = "Optimize"
 		Me.cbOptimize.UseVisualStyleBackColor = True
 		'
@@ -504,7 +507,7 @@ Partial Class FSimulator
 		Me.cbAddReceipt.Location = New System.Drawing.Point(652, 6)
 		Me.cbAddReceipt.Name = "cbAddReceipt"
 		Me.cbAddReceipt.Size = New System.Drawing.Size(80, 17)
-		Me.cbAddReceipt.TabIndex = 7
+		Me.cbAddReceipt.TabIndex = 8
 		Me.cbAddReceipt.Text = "Add receipt"
 		Me.cbAddReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
 		Me.cbAddReceipt.UseVisualStyleBackColor = True
@@ -516,7 +519,7 @@ Partial Class FSimulator
 		Me.cbOnelineReceipt.Location = New System.Drawing.Point(738, 6)
 		Me.cbOnelineReceipt.Name = "cbOnelineReceipt"
 		Me.cbOnelineReceipt.Size = New System.Drawing.Size(100, 17)
-		Me.cbOnelineReceipt.TabIndex = 8
+		Me.cbOnelineReceipt.TabIndex = 9
 		Me.cbOnelineReceipt.Text = "One line receipt"
 		Me.cbOnelineReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
 		Me.cbOnelineReceipt.UseVisualStyleBackColor = True
@@ -889,7 +892,7 @@ Partial Class FSimulator
 		Me.cbConnected.Location = New System.Drawing.Point(287, 10)
 		Me.cbConnected.Name = "cbConnected"
 		Me.cbConnected.Size = New System.Drawing.Size(78, 17)
-		Me.cbConnected.TabIndex = 2
+		Me.cbConnected.TabIndex = 1
 		Me.cbConnected.Text = "Connected"
 		Me.cbConnected.UseVisualStyleBackColor = True
 		'
@@ -909,6 +912,7 @@ Partial Class FSimulator
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.panelServerButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
 		Me.panelServerButtons.Controls.Add(Me.cbAutostartServer, 3, 0)
 		Me.panelServerButtons.Controls.Add(Me.pbStopServer, 1, 0)
 		Me.panelServerButtons.Controls.Add(Me.pbStartServer, 0, 0)
@@ -921,7 +925,7 @@ Partial Class FSimulator
 		Me.panelServerButtons.RowCount = 1
 		Me.panelServerButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelServerButtons.Size = New System.Drawing.Size(633, 32)
-		Me.panelServerButtons.TabIndex = 7
+		Me.panelServerButtons.TabIndex = 2
 		'
 		'cbAutostartServer
 		'
@@ -930,7 +934,7 @@ Partial Class FSimulator
 		Me.cbAutostartServer.Location = New System.Drawing.Point(183, 7)
 		Me.cbAutostartServer.Name = "cbAutostartServer"
 		Me.cbAutostartServer.Size = New System.Drawing.Size(68, 17)
-		Me.cbAutostartServer.TabIndex = 0
+		Me.cbAutostartServer.TabIndex = 3
 		Me.cbAutostartServer.Text = "Autostart"
 		Me.cbAutostartServer.UseVisualStyleBackColor = True
 		'
@@ -942,7 +946,7 @@ Partial Class FSimulator
 		Me.pbStopServer.Location = New System.Drawing.Point(48, 4)
 		Me.pbStopServer.Name = "pbStopServer"
 		Me.pbStopServer.Size = New System.Drawing.Size(39, 23)
-		Me.pbStopServer.TabIndex = 5
+		Me.pbStopServer.TabIndex = 1
 		Me.pbStopServer.Text = "Stop"
 		Me.pbStopServer.UseVisualStyleBackColor = True
 		'
@@ -954,7 +958,7 @@ Partial Class FSimulator
 		Me.pbStartServer.Location = New System.Drawing.Point(3, 4)
 		Me.pbStartServer.Name = "pbStartServer"
 		Me.pbStartServer.Size = New System.Drawing.Size(39, 23)
-		Me.pbStartServer.TabIndex = 3
+		Me.pbStartServer.TabIndex = 0
 		Me.pbStartServer.Text = "Start"
 		Me.pbStartServer.UseVisualStyleBackColor = True
 		'
@@ -966,7 +970,7 @@ Partial Class FSimulator
 		Me.pbServerActivity.Location = New System.Drawing.Point(93, 4)
 		Me.pbServerActivity.Name = "pbServerActivity"
 		Me.pbServerActivity.Size = New System.Drawing.Size(84, 23)
-		Me.pbServerActivity.TabIndex = 4
+		Me.pbServerActivity.TabIndex = 2
 		Me.pbServerActivity.Text = "Server activity"
 		Me.pbServerActivity.UseVisualStyleBackColor = True
 		'
@@ -987,7 +991,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel2.RowCount = 1
 		Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel2.Size = New System.Drawing.Size(84, 26)
-		Me.TableLayoutPanel2.TabIndex = 6
+		Me.TableLayoutPanel2.TabIndex = 4
 		'
 		'udServerDelay
 		'
@@ -1018,7 +1022,7 @@ Partial Class FSimulator
 		Me.pbDatabaseSettings.Location = New System.Drawing.Point(445, 4)
 		Me.pbDatabaseSettings.Name = "pbDatabaseSettings"
 		Me.pbDatabaseSettings.Size = New System.Drawing.Size(55, 23)
-		Me.pbDatabaseSettings.TabIndex = 8
+		Me.pbDatabaseSettings.TabIndex = 7
 		Me.pbDatabaseSettings.Text = "Settings"
 		Me.pbDatabaseSettings.UseVisualStyleBackColor = True
 		'
@@ -1029,7 +1033,7 @@ Partial Class FSimulator
 		Me.cbUseDatabase.Location = New System.Drawing.Point(347, 7)
 		Me.cbUseDatabase.Name = "cbUseDatabase"
 		Me.cbUseDatabase.Size = New System.Drawing.Size(92, 17)
-		Me.cbUseDatabase.TabIndex = 7
+		Me.cbUseDatabase.TabIndex = 6
 		Me.cbUseDatabase.Text = "Use database"
 		Me.cbUseDatabase.UseVisualStyleBackColor = True
 		'
@@ -1050,7 +1054,7 @@ Partial Class FSimulator
 		Me.panelServerPort.RowCount = 1
 		Me.panelServerPort.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelServerPort.Size = New System.Drawing.Size(94, 32)
-		Me.panelServerPort.TabIndex = 1
+		Me.panelServerPort.TabIndex = 0
 		'
 		'udLocalServerPort
 		'
@@ -1762,6 +1766,17 @@ Partial Class FSimulator
 		Me.pbSendRequest.Text = "Send request"
 		Me.pbSendRequest.UseVisualStyleBackColor = True
 		'
+		'cbAutomaticMode
+		'
+		Me.cbAutomaticMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbAutomaticMode.AutoSize = True
+		Me.cbAutomaticMode.Location = New System.Drawing.Point(544, 6)
+		Me.cbAutomaticMode.Name = "cbAutomaticMode"
+		Me.cbAutomaticMode.Size = New System.Drawing.Size(102, 17)
+		Me.cbAutomaticMode.TabIndex = 7
+		Me.cbAutomaticMode.Text = "Automatic mode"
+		Me.cbAutomaticMode.UseVisualStyleBackColor = True
+		'
 		'FSimulator
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1960,4 +1975,5 @@ Partial Class FSimulator
 	Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
 	Friend WithEvents RenameToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents pbSendRequest As Button
+	Friend WithEvents cbAutomaticMode As CheckBox
 End Class

@@ -12,9 +12,10 @@ Public Class FServerSettings
 	End Sub
 
 	Private Sub LoadSettings()
+		Dim except As Boolean
 		If IsNothing(Settings) Then
 			Dim json As CJson(Of NexoRetailerServerDatabaseSettings) = New CJson(Of NexoRetailerServerDatabaseSettings)(FSimulator.ServerSettingsFileName)
-			Settings = json.ReadSettings()
+			Settings = json.ReadSettings(except)
 			If IsNothing(Settings) Then
 				Settings = New NexoRetailerServerDatabaseSettings
 				json.WriteSettings(Settings, True)

@@ -43,6 +43,7 @@ Public Class FBuilder
 		Public MI As List(Of MethodInfo) = Nothing
 		Public ParentObject As Object
 		Public ParentNode As TreeNode
+		Public Leaves As Integer = 0
 	End Class
 
 	Private Const NODE_TYPE As String = "Type:"
@@ -86,11 +87,12 @@ Public Class FBuilder
 
 	End Sub
 
-	Private Sub AddToTree(o As Object, tn As TreeNode)
+	Private Sub AddToTree(o As Object, parentNode As TreeNode)
 		If IsNothing(o) Then Return
 		'list all properties inside the object
 		Dim properties As List(Of PropertyInfo) = o.GetType().GetProperties().ToList()
 		Dim methods As List(Of MethodInfo) = o.GetType().GetMethods().ToList()
+		Dim myParentNode As MyNode = GetDetails(parentNode)
 		For Each p As PropertyInfo In properties
 			If MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith(NexoXSDStrings.XSD) Then
 				Dim value As Object = p.GetValue(o, Nothing)
@@ -102,25 +104,31 @@ Public Class FBuilder
 				'add the node
 				Dim myNode As New MyNode() With {.TypeX = valuetype, .Type = Type.GetType(.TypeX.AssemblyQualifiedName.Replace("[]", "")), .Name = p.Name, .IsArray = valuetype.IsArray, .PI = p, .MI = methods, .ParentObject = o}
 				Dim node As New TreeNode($"{myNode.Name}") With {.Tag = myNode}
-				Dim i As Integer = tn.Nodes.Add(node)
+				Dim i As Integer = parentNode.Nodes.Add(node)
 				If "System" = myNode.Type.Namespace OrElse myNode.IsArray Then
 					If myNode.IsArray Then
 						myNode.NodeType = MyNodeType.Array
 						node.Text = SetNodeText(node)
 						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.ArrayType, .Type = myNode.Type}}
 						node.Text = SetNodeText(node)
-						tn.Nodes(i).Nodes.Add(node)
+						parentNode.Nodes(i).Nodes.Add(node)
+						Dim arr As Array = value
+						If Not IsNothing(arr) Then
+							For j As Integer = 0 To arr.Length - 1
+								AddItem(node.Parent, arr(j))
+							Next
+						End If
 					Else
 						myNode.NodeType = MyNodeType.Leaf
 						node.Text = SetNodeText(node)
 						'type node
 						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Type, .Type = myNode.Type}}
 						node.Text = SetNodeText(node)
-						tn.Nodes(i).Nodes.Add(node)
+						parentNode.Nodes(i).Nodes.Add(node)
 						'value node
 						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Value, .Value = value, .Type = myNode.Type, .PI = p, .ParentObject = o}}
 						node.Text = SetNodeText(node)
-						tn.Nodes(i).Nodes.Add(node)
+						parentNode.Nodes(i).Nodes.Add(node)
 						SetNodeFont(node)
 					End If
 				Else
@@ -134,7 +142,7 @@ Public Class FBuilder
 		Next
 	End Sub
 
-	Private Sub SetNodeFont(node As TreeNode)
+	Private Sub SetNodeFont(node As TreeNode, Optional bold As Boolean = False)
 		Dim myNode As MyNode = GetDetails(node)
 		If Not IsNothing(myNode) Then
 			Dim style As FontStyle = TreeView1.Font.Style
@@ -145,6 +153,7 @@ Public Class FBuilder
 					Else
 						node.Parent.NodeFont = Nothing
 					End If
+
 				Case MyNodeType.Array
 					If 1 < node.Nodes.Count Then
 						node.NodeFont = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
@@ -213,7 +222,10 @@ Public Class FBuilder
 			Select Case MsgBox($"Serialized XML{vbCrLf}{vbCrLf}{XML}", MsgBoxStyle.YesNoCancel Or MsgBoxStyle.DefaultButton1)
 				Case MsgBoxResult.Yes
 					'copy xml to clipboard
-					Clipboard.SetText(XML)
+					Try
+						Clipboard.SetText(XML)
+					Catch ex As Exception
+					End Try
 					Dim f As New FMessage() With {.Message = "The object has been saved to clipboard", .Duration = 1}
 					f.ShowDialog()
 					f.Dispose()
@@ -413,7 +425,7 @@ Public Class FBuilder
 		SetNodeFont(node)
 	End Sub
 
-	Private Sub AddItem(parent As TreeNode)
+	Private Sub AddItem(parent As TreeNode, Optional item As Object = Nothing)
 		'Dim details As MyNode = GetDetails(currentNode)
 		Dim myNode As MyNode = GetDetails(parent)
 		If Not IsNothing(myNode) Then
@@ -425,30 +437,45 @@ Public Class FBuilder
 			If IsNothing(ci) Then
 				If GetType(Byte) = myNode.Type Then
 					Dim x As Byte = 0
+					If Not IsNothing(item) Then x = item
 					o = x
 				ElseIf GetType(Object) = myNode.Type Then
 					Dim x As Object = Nothing
+					If Not IsNothing(item) Then x = item
 					o = x
 				ElseIf GetType(String) = myNode.Type Then
 					Dim x As String = Nothing
+					If Not IsNothing(item) Then x = item
 					o = x
 				ElseIf GetType(Boolean) = myNode.Type Then
 					Dim x As Boolean = False
+					If Not IsNothing(item) Then x = item
 					o = x
 				ElseIf GetType(Integer) = myNode.Type Then
 					Dim x As Integer = 0
+					If Not IsNothing(item) Then x = item
 					o = x
 				ElseIf GetType(Double) = myNode.Type Then
 					Dim x As Double = 0
+					If Not IsNothing(item) Then x = item
 					o = x
 				Else
-					o = Activator.CreateInstance(myNode.Type, New Object() {Nothing})
+					If Not IsNothing(item) Then
+						o = item
+					Else
+						o = Activator.CreateInstance(myNode.Type, New Object() {Nothing})
+					End If
 					addIt = True
 				End If
 			Else
-				o = Activator.CreateInstance(myNode.Type)
+				If Not IsNothing(item) Then
+					o = item
+				Else
+					o = Activator.CreateInstance(myNode.Type)
+				End If
 				addIt = True
 			End If
+
 			'determine the type of the node to add
 			myNode = New MyNode() With {.Type = myNode.Type, .Value = o}
 			If addIt Then
@@ -460,21 +487,25 @@ Public Class FBuilder
 			Dim newNode As TreeNode = New TreeNode() With {.Tag = myNode}
 			newNode.Text = SetNodeText(newNode)
 
-			'add the item to the list of items
-			myNode = GetDetails(parent)
-			'search the method to add an item
-			Dim methodName As String = $"{myNode.Name}AddItem"
-			Dim addMethod As MethodInfo = Nothing
-			For Each mi As MethodInfo In myNode.MI
-				If mi.Name = methodName Then
-					addMethod = mi
-					Exit For
-				End If
-			Next
 			Dim ok As Boolean = False
-			If Not IsNothing(addMethod) Then
-				'call the add item method
-				ok = addMethod.Invoke(myNode.ParentObject, New Object() {o})
+			If IsNothing(item) Then
+				'add the item to the list of items
+				myNode = GetDetails(parent)
+				'search the method to add an item
+				Dim methodName As String = $"{myNode.Name}AddItem"
+				Dim addMethod As MethodInfo = Nothing
+				For Each mi As MethodInfo In myNode.MI
+					If mi.Name = methodName Then
+						addMethod = mi
+						Exit For
+					End If
+				Next
+				If Not IsNothing(addMethod) Then
+					'call the add item method
+					ok = addMethod.Invoke(myNode.ParentObject, New Object() {o})
+				End If
+			Else
+				ok = True
 			End If
 
 			'arrived here check whether the item has been added or not and add node it success

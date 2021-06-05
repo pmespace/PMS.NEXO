@@ -25,8 +25,11 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.2.0</version>
+    <version>3.2.1</version>
     <releaseNotes>
+      3.2.1
+      - Changed assembly description
+
       3.2.0
       - NexoBuilder now properly handles array in a nexo structure
       - New ways to specify a message to send back in NexoSimulator (using SaleID, POIID, Name, all supporting wildcards now)

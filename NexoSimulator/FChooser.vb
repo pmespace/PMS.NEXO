@@ -79,7 +79,7 @@ Public Class FChooser
 			ElseIf rbLoyalty.Checked Then
 				nxo = New NexoLoyalty
 			ElseIf rbPayment.Checked Then
-				nxo = New NexoFinancial
+				nxo = New NexoPayment
 			ElseIf rbPIN.Checked Then
 				nxo = New NexoPIN
 			ElseIf rbPrint.Checked Then

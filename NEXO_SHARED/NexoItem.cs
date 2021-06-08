@@ -385,7 +385,7 @@ namespace NEXO
 				case MessageCategoryEnumeration.Loyalty:
 					return new NexoLoyalty();
 				case MessageCategoryEnumeration.Payment:
-					return new NexoFinancial();
+					return new NexoPayment();
 				case MessageCategoryEnumeration.PIN:
 					return new NexoPIN();
 				case MessageCategoryEnumeration.Print:

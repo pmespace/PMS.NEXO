@@ -31,7 +31,7 @@
     <releaseNotes>
       3.2.2
       - Fixed a bug in NexoReversal
-      - Fixed a bug in NexoItem which instantiated only NexoPayment and never NexoRefund, it now creates a NexoFinancial
+      - Removed NexoFinancial and NexoRefund to use only NexoPayment
 
       3.2.1
       - Changed assembly description

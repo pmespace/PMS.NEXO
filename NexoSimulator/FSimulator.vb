@@ -627,7 +627,7 @@ Public Class FSimulator
 		'determine category with a name to use to select the response
 		Dim cat As String = toprocess.Category.ToString
 		If MessageCategoryEnumeration.Payment = toprocess.Category Then
-			Dim tmp As NexoFinancial = toprocess.CurrentObject
+			Dim tmp As NexoPayment = toprocess.CurrentObject
 			If PaymentTypeEnumeration.Normal <> tmp.PaymentType Then
 				cat = tmp.PaymentType.ToString
 			End If
@@ -895,7 +895,7 @@ Public Class FSimulator
 	Public Sub ClientOnSend(xml As String, obj As NexoItem, tcp As TcpClient, threadData As CThreadData, o As Object)
 		Dim s As String = obj.Category.ToString
 		If MessageCategoryEnumeration.Payment = obj.Category Then
-			Dim f As New NexoFinancial()
+			Dim f As New NexoPayment()
 			f.FromItem(obj)
 			If PaymentTypeEnumeration.Normal <> f.PaymentType Then
 				's = CMisc.GetEnumName(PaymentTypeEnumeration, f.PaymentType)
@@ -911,7 +911,7 @@ Public Class FSimulator
 
 		Dim s As String = obj.Type.ToString
 		If MessageCategoryEnumeration.Payment = obj.Category Then
-			Dim f As New NexoFinancial()
+			Dim f As New NexoPayment()
 			f.FromItem(obj.Item)
 			If PaymentTypeEnumeration.Normal <> f.PaymentType Then
 				's = CMisc.GetEnumName(PaymentTypeEnumeration, f.PaymentType)
@@ -1432,7 +1432,7 @@ Public Class FSimulator
 		Select Case payment.ShowDialog
 			Case DialogResult.OK
 				'create the NexoLogin object
-				Dim o As New NexoRefund()
+				Dim o As New NexoPayment(PaymentTypeEnumeration.Refund)
 				o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()

@@ -5,10 +5,10 @@ using COMMON;
 
 namespace NEXO
 {
-	[Guid("D649B63E-68DC-41F0-8531-09C6A98DAC6E")]
+	[Guid("BD2E9B0D-1DE8-4D77-A974-0E6078206FAA")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
-	public interface INexoFinancial
+	public interface INexoPayment
 	{
 		#region owned
 		[DispId(1)]
@@ -190,39 +190,17 @@ namespace NEXO
 		string EventsList();
 		#endregion
 	}
-	[Guid("7EA430E6-824D-4DAC-B512-FA6D76D36FFD")]
+	[Guid("0843A59A-874F-432C-B9C8-BD72757D4979")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(true)]
-	public class NexoPayment : NexoFinancial, INexoFinancial
+	public class NexoPayment : NexoService, INexoPayment
 	{
 		#region constructor
-		public NexoPayment()
-		{
-			RequestData.PaymentData.PaymentType = PaymentTypeEnumeration.Normal.ToString();
-		}
-		#endregion
-	}
-	[Guid("5C61E8A0-651D-4F96-94BB-942BF557FD10")]
-	[ClassInterface(ClassInterfaceType.None)]
-	[ComVisible(true)]
-	public class NexoRefund : NexoFinancial, INexoFinancial
-	{
-		#region constructor
-		public NexoRefund()
-		{
-			RequestData.PaymentData.PaymentType = PaymentTypeEnumeration.Refund.ToString();
-		}
-		#endregion
-	}
-
-	[ComVisible(false)]
-	public class NexoFinancial : NexoService, INexoFinancial
-	{
-		#region constructor
-		public NexoFinancial() : base(MessageCategoryEnumeration.Payment)
+		public NexoPayment(PaymentTypeEnumeration paymentType = PaymentTypeEnumeration.Normal) : base(MessageCategoryEnumeration.Payment)
 		{
 			RequestItem = new PaymentRequestType();
 			ReplyItem = new PaymentResponseType();
+			PaymentType = paymentType;
 		}
 		#endregion
 

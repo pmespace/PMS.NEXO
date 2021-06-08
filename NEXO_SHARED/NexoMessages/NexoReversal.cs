@@ -218,7 +218,7 @@ namespace NEXO
 		public ReversalReasonEnumeration RequestReversalReason
 		{
 			get => (ReversalReasonEnumeration)CMisc.GetEnumValue(typeof(ReversalReasonEnumeration), CMisc.Trimmed(RequestData.ReversalReason), NexoValues.None);
-			set => RequestData.ReversalReason = CMisc.GetEnumName(typeof(SoundActionEnumeration), value);
+			set => RequestData.ReversalReason = CMisc.GetEnumName(typeof(ReversalReasonEnumeration), value);
 		}
 		#endregion
 

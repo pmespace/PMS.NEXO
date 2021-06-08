@@ -25,8 +25,12 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.2.1</version>
+    <version>3.2.2</version>
     <releaseNotes>
+      3.2.2
+      - Fixed a bug in NexoReversal
+      - Fixed a bug in NexoItem which instantiated only NexoPayment and never NexoRefund, it now creates a NexoFinancial
+      
       3.2.1
       - Changed assembly description
 

@@ -120,7 +120,23 @@ Public Class FBuilder
 						End If
 					Else
 						myNode.NodeType = MyNodeType.Leaf
-						node.Text = SetNodeText(node)
+
+						'*****
+						'I really don't know why but sometimes this keeps giving an exception on first call, not on second one !
+						'what createds the exception is the assignment, not the function call and node.Type actually is being assigned the value
+						'I guess it is some kind of problem inside .NET because the node doesn't look right when displayed (the text is not completely displayed)
+						Dim sz As String = SetNodeText(node)
+						Try
+							node.Text = sz
+						Catch ex As Exception
+							Try
+								node.Text = sz
+							Catch ex1 As Exception
+
+							End Try
+						End Try
+						'*****
+
 						'type node
 						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Type, .Type = myNode.Type}}
 						node.Text = SetNodeText(node)
@@ -167,31 +183,36 @@ Public Class FBuilder
 	Private Function SetNodeText(node As TreeNode) As String
 		If Not IsNothing(node.Tag) Then
 			Dim myNode As MyNode = node.Tag
+			Try
 
-			If MyNodeType.Value = myNode.NodeType Then
-				If (myNode.Value <> myNode.PI.GetValue(myNode.ParentObject)) Then
-					myNode.PI.SetValue(myNode.ParentObject, myNode.Value)
+				If MyNodeType.Value = myNode.NodeType Then
+					If (myNode.Value <> myNode.PI.GetValue(myNode.ParentObject)) Then
+						myNode.PI.SetValue(myNode.ParentObject, myNode.Value)
+					End If
+					Return $"{NODE_VALUE} {myNode.Value}"
+
+				ElseIf MyNodeType.ArrayItem = myNode.NodeType Then
+					Return $"{NODE_ITEM} {myNode.Value}"
+
+				ElseIf MyNodeType.Type = myNode.NodeType Then
+					Return $"{NODE_TYPE} {myNode.Type.Name}"
+
+				ElseIf MyNodeType.ArrayType = myNode.NodeType Then
+					Return $"{NODE_ARRAY_TYPE} {myNode.Type.Name}"
+
+				ElseIf MyNodeType.Tree = myNode.NodeType Then
+					Return $"{myNode.Name} (Structure)"
+
+				ElseIf MyNodeType.Array = myNode.NodeType Then
+					Return $"{myNode.Name} (Array)"
+
+				ElseIf MyNodeType.Leaf = myNode.NodeType Then
+					Return $"{myNode.Name} (Data)"
 				End If
-				Return $"{NODE_VALUE} {myNode.Value}"
 
-			ElseIf MyNodeType.ArrayItem = myNode.NodeType Then
-				Return $"{NODE_ITEM} {myNode.Value}"
+			Catch ex As Exception
 
-			ElseIf MyNodeType.Type = myNode.NodeType Then
-				Return $"{NODE_TYPE} {myNode.Type.Name}"
-
-			ElseIf MyNodeType.ArrayType = myNode.NodeType Then
-				Return $"{NODE_ARRAY_TYPE} {myNode.Type.Name}"
-
-			ElseIf MyNodeType.Tree = myNode.NodeType Then
-				Return $"{myNode.Name} (Structure)"
-
-			ElseIf MyNodeType.Array = myNode.NodeType Then
-				Return $"{myNode.Name} (Array)"
-
-			ElseIf MyNodeType.Leaf = myNode.NodeType Then
-				Return $"{myNode.Name} (Data)"
-			End If
+			End Try
 
 		End If
 		Return Nothing

@@ -209,7 +209,7 @@ namespace NEXO
 		public string RequestOriginalPOITransactionTimestamp
 		{
 			get => CMisc.Trimmed(RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp);
-			set => RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			set => RequestData.LoyaltyTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = value;
 		}
 		public string RequestLoyaltyTransactionType
 		{

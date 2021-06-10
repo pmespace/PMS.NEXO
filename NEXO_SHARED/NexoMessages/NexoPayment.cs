@@ -238,7 +238,7 @@ namespace NEXO
 		public string RequestOriginalPOITransactionTimestamp
 		{
 			get => CMisc.Trimmed(RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp);
-			set => RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = new NexoISODateTime() { Value = value }.Value;
+			set => RequestData.PaymentTransaction.OriginalPOITransaction.POITransactionID.TimeStamp = value;
 		}
 		public double RequestRequestedAmount
 		{

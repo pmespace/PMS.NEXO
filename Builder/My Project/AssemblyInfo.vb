@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Builder")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("Builder")>
+<Assembly: AssemblyTitle("nexoBuilder (retailer v3.0)")>
+<Assembly: AssemblyDescription("nexoBuilder (retailer v3.0)")>
+<Assembly: AssemblyCompany("PMS")>
+<Assembly: AssemblyProduct("nexoBuilder (retailer v3.0)")>
 <Assembly: AssemblyCopyright("Copyright ©  2021")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("PMS")>
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("3.2.2.0")>
-<Assembly: AssemblyFileVersion("3.2.2.0")>
+<Assembly: AssemblyVersion("3.2.4.0")>
+<Assembly: AssemblyFileVersion("3.2.4.0")>

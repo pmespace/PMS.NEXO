@@ -27,8 +27,14 @@
     </dependencies>
 
     <!-- Modifiable -->
-   <version>3.2.2</version>
+    <version>3.2.4</version>
     <releaseNotes>
+      3.2.4 NOT PUBLISHED
+      - Fixed an exception in NexoBuilder and NexoSimulator, sometimes when setting the name of a node (no explanation why this happens)
+
+      3.2.3
+      - Fixed a bug with all POIOriginalTransactionTimestamp not initialised normally
+
       3.2.2
       - Fixed a bug in NexoReversal
       - Removed NexoFinancial and NexoRefund to use only NexoPayment

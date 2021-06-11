@@ -313,7 +313,7 @@ namespace NEXO
 		{
 			PaymentType = (PaymentTypeEnumeration)SetDefaultEnumValue(typeof(PaymentTypeEnumeration), PaymentType, PaymentTypeEnumeration.Normal);
 			RequestCurrency = SetDefaultStringValue(RequestCurrency, new NexoCurrencyEUR().Value);
-			RequestSaleTransactionID = SetDefaultStringValue(RequestSaleTransactionTimestamp, NexoAutoID.ID());
+			RequestSaleTransactionID = SetDefaultStringValue(RequestSaleTransactionID, NexoAutoID.ID());
 			RequestSaleTransactionTimestamp = SetDefaultStringValue(RequestSaleTransactionTimestamp, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
 			return InternalAction.noError;
 		}

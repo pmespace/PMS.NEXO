@@ -1,8 +1,4 @@
-﻿#define DECLAREHASBEENSET
-#define DECLAREOPTIMIZER
-#define USEOPTIMIZER
-
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -56,6 +52,7 @@ namespace XSDEx
 				}
 			}
 			private XSDAddActivity _processui = null;
+			public bool Silent { get; set; }
 			public string Header
 			{
 				get => _header;
@@ -70,6 +67,7 @@ namespace XSDEx
 			private string _text = null;
 			private void Set()
 			{
+				if (Silent) return;
 				if (null != Lbl)
 				{
 					string s = ((null != Header ? $"{Header}: " : null) + Text);
@@ -116,7 +114,7 @@ namespace XSDEx
 		/// <returns></returns>
 		public bool AnalyseXSD(AnalyseSettings settings)
 		{
-			Message msg = new Message() { Lbl = settings.lbl, WndDelegate = settings.processUI, threadData = settings.threadData };
+			Message msg = new Message() { Lbl = settings.lbl, WndDelegate = settings.processUI, threadData = settings.threadData, Silent = settings.xsdSettings.Silent };
 			XmlSchema xsd;
 			try
 			{
@@ -356,12 +354,15 @@ namespace XSDEx
 		{
 			CodeNamespace newCodeNamespace = null;
 
-			string bXSD = "BEGIN ADDED BY XSD";
-			string eXSD = "END ADDED BY XSD";
+			const string bXSD = "BEGIN ADDED BY XSD";
+			const string eXSD = "END ADDED BY XSD";
+			const string isSpecified = "Specified";
 
 			msg.Text = "Post process";
 			try
 			{
+				const string sizeMethod = "Size", getItemMethod = "GetItem", setItemMethod = "SetItem", addItemMethod = "AddItem", removeItemMethod = "RemoveItem", isArray = "array", isCounter = "i", isField = "Field", isLength = "Length", isEx = "ex", isIndex = "index";
+
 				// file specific objects to add
 				List<CodeTypeDeclaration> newCodeTypeDeclarations = new List<CodeTypeDeclaration>();
 
@@ -391,24 +392,20 @@ namespace XSDEx
 					internalcounter++;
 					msg.Header = $"{header} - Object #{internalcounter}";
 
-#if DECLAREHASBEENSET
-					// prepare init flag statements (create an additional bool value set to true if the data has been set, false otherwise)
-					CodeMemberField hasBeenSetField = CreateFieldMember(NexoXSDStrings.NexoHasBeenSetField, typeof(bool), MemberAttributes.Private, false);
-					CodeMemberProperty hasBeenSetProperty = CreatePropertyMember(NexoXSDStrings.NexoHasBeenSetProperty, typeof(bool), MemberAttributes.Public | MemberAttributes.Final, hasBeenSetField, bXSD, eXSD);
-#else
-					string hasBeenSetFieldStr = NexoXSDStrings.NexoHasBeenSetField;
-#endif
+					// create HASBEENSET flag stating a user type has or not been set (create an additional bool value set to true if the data has been set, false otherwise)
+					//CodeMemberField hasBeenSetField = CreateFieldMember(NexoXSDStrings.NexoHasBeenSetField, typeof(bool), MemberAttributes.Private, false);
+					CodeMemberProperty hasBeenSetProperty = CreatePropertyMember(NexoXSDStrings.NexoHasBeenSetProperty, typeof(bool), MemberAttributes.Public | MemberAttributes.Final);//, hasBeenSetField, bXSD, eXSD);
 
-#if DECLAREOPTIMIZER
-					// prepare optimizing flag statements as a FIELD (create an additional bool value set to true if optimizing the class, false otherwise)
+					// prepare OPTIMIZING flag statements as a FIELD (create an additional bool value set to true if optimizing the class, false otherwise)
 					CodeMemberField optimizingField = CreateFieldMember(NexoXSDStrings.NexoOptimizingField, typeof(bool), MemberAttributes.Private, false);
-					CodeMemberProperty optimizingProperty = CreatePropertyMember(NexoXSDStrings.NexoOptimizingProperty, typeof(bool), MemberAttributes.Assembly | MemberAttributes.Final, optimizingField, bXSD, eXSD);
-#else
-					string optimizerFieldStr = NexoXSDStrings.NexoOptimizingField;
-#endif
+					CodeMemberProperty optimizingProperty = CreatePropertyMember(NexoXSDStrings.NexoOptimizingProperty, typeof(bool), MemberAttributes.Assembly | MemberAttributes.Final);//, optimizingField, bXSD, eXSD);
 
 					// create a list of properties that will receive special processing from XSDEx
+					// properties that will require to be processed for HASBEENSET processing
 					List<CodeMemberProperty> propertiesToProcess = new List<CodeMemberProperty>();
+					// arrays that will require to be processed for HASBEENSET processing
+					List<CodeMemberProperty> arraysToProcess = new List<CodeMemberProperty>();
+					// properties having a "specified" flag that will require to be processed for HASBEENSET processing
 					List<CodeMemberProperty> optionalsToProcess = new List<CodeMemberProperty>();
 
 					try
@@ -444,15 +441,13 @@ namespace XSDEx
 							AddComVisible(codeType.CustomAttributes, addInterface);
 
 							// create a collection for all new members (created by XSDEx) inside the type
-							CodeTypeMemberCollection newCollection = new CodeTypeMemberCollection();
-
-							// create collection of objects setting the "HasBeenSet" flag
+							CodeTypeMemberCollection addedMethods = new CodeTypeMemberCollection();
+							// fields requiring to have a HASBEENSET flag
+							List<CodeMemberField> fieldsHasBeenSetFlag = new List<CodeMemberField>();
 
 							// parse all members
 							foreach (CodeTypeMember member in codeType.Members)
 							{
-								//msg.Text = member.Name;
-
 								// process fields...
 								if (member is CodeMemberField)
 								{
@@ -475,6 +470,9 @@ namespace XSDEx
 										field.Attributes = MemberAttributes.Assembly;
 									}
 
+									// is it a field indicating whether a property has been set or no
+									bool isSpecifiedField = field.Name.EndsWith(isSpecified);
+
 									// the field does not describe a System.<Type>, isn't an array or an enum, we provide an initializer
 									if (!IsPrimitiveType(field.Type) && !IsArray(field.Type) && (null == ctd || !ctd.IsEnum)
 										&& (null == parameters.TypesWithoutInitializer ||
@@ -493,10 +491,17 @@ namespace XSDEx
 										// create "field = new Type[0];"
 										field.InitExpression = new CodeArrayCreateExpression(field.Type.BaseType, 0);
 									}
-									else if (null == parameters.TypesWithoutInitializer ||
-										(null != parameters.TypesWithoutInitializer && !parameters.TypesWithoutInitializer.Contains(field.Type.BaseType)))
+									// the field is a primitive/system type, not an array, we provide a default initialiser and create a HASBEENSET flag
+									else if ((null == parameters.TypesWithoutInitializer ||
+										(null != parameters.TypesWithoutInitializer && !parameters.TypesWithoutInitializer.Contains(field.Type.BaseType))) &&
+										!isSpecifiedField)
 									{
 										field.InitExpression = new CodeDefaultValueExpression(field.Type);
+										fieldsHasBeenSetFlag.Add(new CodeMemberField() { Name = field.Name + NexoXSDStrings.NexoHasBeenSetField, InitExpression = new CodePrimitiveExpression(false), Type = new CodeTypeReference(typeof(bool)) });
+									}
+									else if (isSpecifiedField)
+									{
+										field.InitExpression = new CodePrimitiveExpression(false);
 									}
 									else
 									{
@@ -524,38 +529,39 @@ namespace XSDEx
 
 									// verify if type needs to be converted
 									CodeTypeReference t = ConvertType(settings, parameters, property.Type);
-									//if (property.Type != t)
-									//	AddElementAttribute(property.CustomAttributes, property.Name, Type.GetType(property.Type.BaseType));
 									property.Type = t;
 
-									// search linked field
-									const string specified = "Field";
-									CodeTypeMember propertyField = null;
+									// search field linked to the property 
+									//CodeTypeMember propertyField = null;
+									CodeMemberField propertyField = null;
 									foreach (CodeTypeMember mtb in codeType.Members)
 										if (mtb is CodeMemberField)
-											if (0 == string.Compare(property.Name + specified, mtb.Name, true))
+											if (0 == string.Compare(property.Name + isField, mtb.Name, true))
 											{
-												propertyField = mtb;
+												propertyField = (CodeMemberField)mtb;
 												break;
 											}
 
 									// search whether this property is optional (there's a <name>Specified property, generated by the framework)
 									bool optional = false;
-									const string optionalSpecified = "Specified";
 									CodeMemberProperty propertySpecified = null;
-									foreach (CodeTypeMember mtb in codeType.Members)
-										if (mtb is CodeMemberProperty)
-											if (optional = (0 == string.Compare(property.Name + optionalSpecified, mtb.Name, true)))
-											{
-												propertySpecified = (CodeMemberProperty)mtb;
-												break;
-											}
-
-									// search whether this is a "Specified" flag keeping track of the optional member
-									bool optionalAndPrimitive = property.Name.EndsWith(optionalSpecified) && IsPrimitiveType(property.Type);
+									if (IsPrimitiveType(property.Type))
+									{
+										foreach (CodeTypeMember mtb in codeType.Members)
+											if (mtb is CodeMemberProperty)
+												if (optional = (0 == string.Compare(property.Name + isSpecified, mtb.Name, true)))
+												{
+													propertySpecified = (CodeMemberProperty)mtb;
+													break;
+												}
+									}
 
 									// if not a system object or an array we add the object to the list of properties that will be treated by XSDEx
-									if (!IsPrimitiveType(property.Type) && null != ctd && !ctd.IsEnum && !optional)
+									if (IsArray(property.Type))
+									{
+										arraysToProcess.Add(property);
+									}
+									else if (!IsPrimitiveType(property.Type) && null != ctd && !ctd.IsEnum && !optional)
 									{
 										propertiesToProcess.Add(property);
 									}
@@ -601,13 +607,20 @@ namespace XSDEx
 													new CodeStatement[]
 														{
 															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), NexoXSDStrings.NexoHasBeenSetField), new CodeBinaryOperatorExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetFieldStr), CodeBinaryOperatorType.BitwiseOr, new CodePropertyReferenceExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), hasBeenSetFieldStr))),
-															new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), ce)
+															new CodeAssignStatement(
+																new CodeFieldReferenceExpression(
+																	new CodeThisReferenceExpression(),
+																	propertyField.Name), ce)
 														},
 													// if false
 													new CodeStatement[]
 														{
 															//new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), NexoXSDStrings.NexoHasBeenSetField), new CodePrimitiveExpression(true)),
-															new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(),propertyField.Name), new CodePropertySetValueReferenceExpression())
+															new CodeAssignStatement(
+																new CodeFieldReferenceExpression(
+																	new CodeThisReferenceExpression(),
+																	propertyField.Name),
+																new CodePropertySetValueReferenceExpression())
 														}
 													);
 												property.SetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - prevent {(IsArray(property.Type) ? "array" : "class")} from being null"));
@@ -628,19 +641,50 @@ namespace XSDEx
 											if (optional)
 											{
 												// set "...fieldSpecified=true" when setting the property
-												string st = property.Name + optionalSpecified;
-												cas = new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), st), new CodePrimitiveExpression(true));
-												property.SetStatements.Add(new CodeCommentStatement($"{bXSD} - indicate optional system property value may have been changed - {st} = true"));
+												string st = property.Name + isSpecified;
+												cas = new CodeAssignStatement(
+													new CodePropertyReferenceExpression(
+														new CodeThisReferenceExpression(),
+														st),
+													new CodePrimitiveExpression(true));
+												property.SetStatements.Add(new CodeCommentStatement($"{bXSD} - indicate optional system property value has been changed - {st} = true"));
 												property.SetStatements.Add(cas);
 												property.SetStatements.Add(new CodeCommentStatement($"{eXSD}"));
 											}
 										}
 
 										// add set the "has been set" flag once the property is set
-										cas = new CodeAssignStatement(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name), new CodePrimitiveExpression(true));
-										property.SetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - indicate system value has been changed"));
-										property.SetStatements.Insert(1, cas);
-										property.SetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
+										if (null != propertySpecified && null != propertyField)
+										{
+											// this is non nullable data managed with ...Specified, let's not add a HASBEEN SET flag
+											cas = null;
+										}
+										else if (null != propertyField && IsPrimitiveType(property.Type) && !IsArray(property.Type))
+										{
+											// this is standard data supporting null let's add a HASBEEN SET flag
+											cas = new CodeAssignStatement(
+											new CodeFieldReferenceExpression(
+												new CodeThisReferenceExpression(),
+												propertyField.Name + NexoXSDStrings.NexoHasBeenSetField),
+											new CodeBinaryOperatorExpression(
+												new CodeFieldReferenceExpression(
+													new CodeThisReferenceExpression(),
+													propertyField.Name),
+												CodeBinaryOperatorType.IdentityInequality,
+												new CodeDefaultValueExpression(propertyField.Type)));
+										}
+										else
+										{
+											cas = null;
+										}
+
+										// if a CodeAssignStatement has been created add it
+										if (null != cas)
+										{
+											property.SetStatements.Add(new CodeCommentStatement($"{bXSD} - indicate system value has been changed"));
+											property.SetStatements.Add(cas);
+											property.SetStatements.Add(new CodeCommentStatement($"{eXSD}"));
+										}
 									}
 
 									// "get" property part
@@ -663,7 +707,7 @@ namespace XSDEx
 														new CodePropertyReferenceExpression(
 															new CodeFieldReferenceExpression(
 																new CodeThisReferenceExpression(), propertyField.Name),
-															"Length"),
+															isLength),
 														CodeBinaryOperatorType.ValueEquality,
 														new CodePrimitiveExpression(0))),
 													new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
@@ -672,7 +716,6 @@ namespace XSDEx
 											property.GetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
 										}
 
-#if USEOPTIMIZER
 										// if it is not a System type, if optimizing is on and the class hasn't been updated return what's appropriate
 										else if (!IsPrimitiveType(property.Type))
 										{
@@ -696,7 +739,7 @@ namespace XSDEx
 																					CodeBinaryOperatorType.ValueEquality,
 																					new CodePrimitiveExpression(false))),
 																				new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
-												property.GetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - return null if array count is 0, still keeping the array"));
+												property.GetStatements.Insert(0, new CodeCommentStatement($"{bXSD} - return null if user type hasBeenModified=false"));
 												property.GetStatements.Insert(1, ccs);
 												property.GetStatements.Insert(2, new CodeCommentStatement($"{eXSD}"));
 											}
@@ -706,8 +749,6 @@ namespace XSDEx
 												// do nothing
 											}
 										}
-#endif
-
 									}
 
 									#region declare accessors
@@ -718,10 +759,8 @@ namespace XSDEx
 										(null == parameters.ArrayTypesWithoutAccessors ||
 											(null != parameters.ArrayTypesWithoutAccessors && !parameters.ArrayTypesWithoutAccessors.Contains(property.Type.BaseType))))
 									{
-										string isEx = "ex";
-										string isLength = "Length";
 										// get Size method (if null!=array ? return array.size : 0)
-										string addenda = "Size";
+										string addenda = sizeMethod;
 										CodeMemberMethod cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
@@ -741,11 +780,10 @@ namespace XSDEx
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ccs);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
-										newCollection.Add(cmm);
+										addedMethods.Add(cmm);
 
 										// get Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
-										addenda = "GetItem";
-										string isIndex = "index";
+										addenda = getItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
@@ -780,10 +818,10 @@ namespace XSDEx
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
-										newCollection.Add(cmm);
+										addedMethods.Add(cmm);
 
 										// set Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
-										addenda = "SetItem";
+										addenda = setItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
@@ -818,10 +856,10 @@ namespace XSDEx
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
-										newCollection.Add(cmm);
+										addedMethods.Add(cmm);
 
 										// add Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
-										addenda = "AddItem";
+										addenda = addItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
@@ -829,8 +867,6 @@ namespace XSDEx
 										cpde = new CodeParameterDeclarationExpression(
 											new CodeTypeReference(property.Type.BaseType), isValue);
 										cmm.Parameters.Add(cpde);
-										string isArray = "array";
-										string isCounter = "i";
 										ctcf = new CodeTryCatchFinallyStatement(
 											// try statement
 											new CodeStatement[]
@@ -859,7 +895,9 @@ namespace XSDEx
 													// for loop to copy old items inside the new array
 													new CodeIterationStatement(
 														// initializer
-														new CodeAssignStatement(new CodeVariableReferenceExpression(isCounter), new CodePrimitiveExpression(0)),
+														new CodeAssignStatement(
+															new CodeVariableReferenceExpression(isCounter),
+															new CodePrimitiveExpression(0)),
 														// test
 														new CodeBinaryOperatorExpression(
 															new CodeVariableReferenceExpression(isCounter),
@@ -903,10 +941,10 @@ namespace XSDEx
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
-										newCollection.Add(cmm);
+										addedMethods.Add(cmm);
 
 										// remove Item method 
-										addenda = "RemoveItem";
+										addenda = removeItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
@@ -1018,112 +1056,156 @@ namespace XSDEx
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
-										newCollection.Add(cmm);
+										addedMethods.Add(cmm);
 									}
 									#endregion
 								}
 							}
 
-							//msg.Text = $"Finalising";
-
 							List<CodeStatement> statements = new List<CodeStatement>();
 
-#if DECLAREHASBEENSET
+							// add all...hasBeenSet fields
+							foreach (CodeMemberField cmf in fieldsHasBeenSetFlag)
+							{
+								codeType.Members.Add(cmf);
+							}
+
+							//*****
+							// HASBEENSET property processing
 							// "GET" statements
 							AddComment(hasBeenSetProperty, b, true);
-							CodeExpression expression = new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), hasBeenSetField.Name);
+							CodeExpression expression = new CodePrimitiveExpression(false);
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
 							{
-								if (!IsArray(cmp.Type) && !IsPrimitiveType(cmp.Type))
-								{
-									//expression = new CodeBinaryOperatorExpression(
-									//	expression,
-									//	CodeBinaryOperatorType.BooleanOr,
-									//	new CodePropertyReferenceExpression(
-									//		new CodePropertyReferenceExpression(
-									//			new CodeThisReferenceExpression(),
-									//			cmp.Name),
-									//		hasBeenSetProperty.Name));
-
-									expression = new CodeBinaryOperatorExpression(
+								// add user types HASBEENSET flag
+								expression = new CodeBinaryOperatorExpression(
+									expression,
+									CodeBinaryOperatorType.BooleanOr,
+									new CodeBinaryOperatorExpression(
+										new CodeBinaryOperatorExpression(
+											new CodePropertyReferenceExpression(
+												new CodeThisReferenceExpression(),
+												cmp.Name),
+											CodeBinaryOperatorType.IdentityInequality,
+											new CodePrimitiveExpression(null)),
+										CodeBinaryOperatorType.BooleanAnd,
+										new CodePropertyReferenceExpression(
+											new CodePropertyReferenceExpression(
+												new CodeThisReferenceExpression(),
+												cmp.Name),
+											hasBeenSetProperty.Name)));
+							}
+							// add size of array element
+							foreach (CodeMemberProperty cmp in arraysToProcess)
+							{
+								expression = new CodeBinaryOperatorExpression(
+									expression,
+									CodeBinaryOperatorType.BooleanOr,
+									new CodeBinaryOperatorExpression(
+										new CodeMethodInvokeExpression(
+											new CodeMethodReferenceExpression(
+												new CodeThisReferenceExpression(),
+												cmp.Name + sizeMethod),
+											new CodeExpression[] { }),
+										CodeBinaryOperatorType.IdentityInequality,
+										new CodePrimitiveExpression(0)));
+							}
+							// add HASBEENSET flag of primitive data
+							foreach (CodeMemberField cmp in fieldsHasBeenSetFlag)
+							{
+								expression = new CodeBinaryOperatorExpression(
 										expression,
 										CodeBinaryOperatorType.BooleanOr,
-										new CodeBinaryOperatorExpression(
-											new CodeBinaryOperatorExpression(
-												new CodePropertyReferenceExpression(
-													new CodeThisReferenceExpression(),
-													cmp.Name),
-												CodeBinaryOperatorType.IdentityInequality,
-												new CodePrimitiveExpression(null)),
-											CodeBinaryOperatorType.BooleanAnd,
-											new CodePropertyReferenceExpression(
-												new CodePropertyReferenceExpression(
-													new CodeThisReferenceExpression(),
-													cmp.Name),
-												hasBeenSetProperty.Name)));
-								}
+										new CodeFieldReferenceExpression(
+											new CodeThisReferenceExpression(),
+											cmp.Name));
 							}
+							// add ...Specified flag of primitive data without null ability
 							foreach (CodeMemberProperty cmp in optionalsToProcess)
 							{
-								if (!IsArray(cmp.Type) && !IsPrimitiveType(cmp.Type))
-								{
-									expression = new CodeBinaryOperatorExpression(
+								expression = new CodeBinaryOperatorExpression(
 									expression,
 									CodeBinaryOperatorType.BooleanOr,
 									new CodePropertyReferenceExpression(
 										new CodeThisReferenceExpression(),
 										cmp.Name));
-								}
 							}
 							hasBeenSetProperty.GetStatements.Add(new CodeMethodReturnStatement(expression));
 							AddComment(hasBeenSetProperty, e, true);
 
-							// "SET" statements
-							AddSetStatementFromValue(hasBeenSetProperty, hasBeenSetField, b, e);
-							AddComment(hasBeenSetProperty, b, false);
-							foreach (CodeMemberProperty cmp in propertiesToProcess)
-							{
-								statements.Add(new CodeAssignStatement(
-									new CodePropertyReferenceExpression(
-										new CodeThisReferenceExpression(),
-										cmp.Name),
-									new CodePrimitiveExpression(null)));
-							}
-							foreach (CodeMemberProperty cmp in optionalsToProcess)
-							{
-								statements.Add(new CodeAssignStatement(
-									new CodePropertyReferenceExpression(
-										new CodeThisReferenceExpression(),
-										cmp.Name),
-									new CodePrimitiveExpression(false)));
-							}
-							hasBeenSetProperty.SetStatements.Add(new CodeConditionStatement(
-								new CodeBinaryOperatorExpression(
-									new CodePropertyReferenceExpression(
-										new CodeThisReferenceExpression(), hasBeenSetField.Name),
-										CodeBinaryOperatorType.IdentityEquality,
-										new CodePrimitiveExpression(false)),
-									statements.ToArray()));
-							AddComment(hasBeenSetProperty, e, false);
-							codeType.Members.Add(hasBeenSetField);
-							codeType.Members.Add(hasBeenSetProperty);
-#endif
+							//// "SET" statements
+							//AddSetStatementFromValue(hasBeenSetProperty, hasBeenSetField, b, e);
+							//AddComment(hasBeenSetProperty, b, false);
+							//statements.Add(new CodeConditionStatement(
+							//	new CodeBinaryOperatorExpression(
+							//		new CodePropertySetValueReferenceExpression(),
+							//		CodeBinaryOperatorType.IdentityEquality,
 
-#if DECLAREOPTIMIZER
+
+							//	new CodePropertyReferenceExpression(
+							//		new CodeThisReferenceExpression(),
+							//		cmp.Name),
+							//	new CodePrimitiveExpression(null)));
+							//foreach (CodeMemberProperty cmp in propertiesToProcess)
+							//{
+							//	statements.Add(new CodeAssignStatement(
+							//		new CodePropertyReferenceExpression(
+							//			new CodeThisReferenceExpression(),
+							//			cmp.Name),
+							//		new CodePrimitiveExpression(null)));
+							//}
+							//foreach (CodeMemberProperty cmp in optionalsToProcess)
+							//{
+							//	statements.Add(new CodeAssignStatement(
+							//		new CodePropertyReferenceExpression(
+							//			new CodeThisReferenceExpression(),
+							//			cmp.Name),
+							//		new CodePrimitiveExpression(false)));
+							//}
+							//foreach (CodeMemberField cmp in fieldsHasBeenSetFlag)
+							//{
+							//	statements.Add(new CodeAssignStatement(
+							//		new CodeFieldReferenceExpression(
+							//			new CodeThisReferenceExpression(),
+							//			cmp.Name),
+							//		new CodePrimitiveExpression(false)));
+							//}
+							//foreach (CodeMemberField cmp in fieldsHasBeenSetFlag)
+							//{
+							//	statements.Add(new CodeAssignStatement(
+							//		new CodeFieldReferenceExpression(
+							//			new CodeThisReferenceExpression(),
+							//			cmp.Name),
+							//		new CodePrimitiveExpression(false)));
+							//}
+							//hasBeenSetProperty.SetStatements.Add(new CodeConditionStatement(
+							//	new CodeBinaryOperatorExpression(
+							//		new CodePropertyReferenceExpression(
+							//			new CodeThisReferenceExpression(), hasBeenSetField.Name),
+							//			CodeBinaryOperatorType.IdentityEquality,
+							//			new CodePrimitiveExpression(false)),
+							//		statements.ToArray()));
+							//AddComment(hasBeenSetProperty, e, false);
+							//codeType.Members.Add(hasBeenSetField);
+							codeType.Members.Add(hasBeenSetProperty);
+
+							//*****
+							// OPTIMIZING property processing
 							// "GET" add set optimizing flag to all
 							AddGetStatementFromField(optimizingProperty, optimizingField, b, e);
 							AddSetStatementFromValue(optimizingProperty, optimizingField, b, e);
 							AddComment(optimizingProperty, b, false);
 							statements.Clear();
+							// process all user defined types to indicate OPTIMIZING is in progress
 							foreach (CodeMemberProperty cmp in propertiesToProcess)
 							{
-								if (!IsArray(cmp.Type))
-								{
-									statements.Add(new CodeConditionStatement(
+								//if (!IsArray(cmp.Type))
+								//{
+								statements.Add(new CodeConditionStatement(
 									new CodeBinaryOperatorExpression(
-										 new CodePropertyReferenceExpression(
-											 new CodeThisReferenceExpression(),
-											 cmp.Name),
+										new CodePropertyReferenceExpression(
+											new CodeThisReferenceExpression(),
+											cmp.Name),
 										CodeBinaryOperatorType.IdentityInequality,
 										new CodePrimitiveExpression(null)),
 									new CodeStatement[]
@@ -1138,19 +1220,68 @@ namespace XSDEx
 												new CodeThisReferenceExpression(),
 												optimizingField.Name))
 									}));
+								//}
+							}
+							// process all arrays to indicate OPTIMIZING is in progress
+							bool counterIsDeclared = false;
+							foreach (CodeMemberProperty cmp in arraysToProcess)
+							{
+								if (!IsPrimitiveType(cmp.Type))
+								{
+									if (!counterIsDeclared)
+									{
+										// declare a counter
+										statements.Add(new CodeVariableDeclarationStatement(
+											typeof(int),
+											isCounter,
+											new CodePrimitiveExpression(0)));
+										counterIsDeclared = true;
+									}
+									// for loop to copy old items inside the new array
+									statements.Add(new CodeIterationStatement(
+										// initializer
+										new CodeAssignStatement(
+											new CodeVariableReferenceExpression(isCounter),
+											new CodePrimitiveExpression(0)),
+										// test
+										new CodeBinaryOperatorExpression(
+											new CodeVariableReferenceExpression(isCounter),
+											CodeBinaryOperatorType.LessThan,
+											new CodeMethodInvokeExpression(
+												new CodeMethodReferenceExpression(
+													new CodeThisReferenceExpression(),
+													cmp.Name + sizeMethod))),
+										// iteration
+										new CodeAssignStatement(
+											new CodeVariableReferenceExpression(isCounter),
+											new CodeBinaryOperatorExpression(
+												new CodeVariableReferenceExpression(isCounter),
+												CodeBinaryOperatorType.Add,
+												new CodePrimitiveExpression(1))),
+										// set a value of any user defined record
+										new CodeAssignStatement(
+											new CodePropertyReferenceExpression(
+												new CodeArrayIndexerExpression(
+													new CodePropertyReferenceExpression(
+														new CodeThisReferenceExpression(),
+														cmp.Name),
+													new CodeArgumentReferenceExpression(isCounter)),
+												NexoXSDStrings.NexoOptimizingProperty),
+											new CodeFieldReferenceExpression(
+												new CodeThisReferenceExpression(),
+												NexoXSDStrings.NexoOptimizingField))));
 								}
 							}
 							optimizingProperty.SetStatements.AddRange(statements.ToArray());
 							AddComment(optimizingProperty, e, false);
 							codeType.Members.Add(optimizingField);
 							codeType.Members.Add(optimizingProperty);
-#endif
 
 							// update the collection of new members to the already existing ones inside this type
 							// they are new methods for instance
-							if (0 != newCollection.Count)
+							if (0 != addedMethods.Count)
 							{
-								codeType.Members.AddRange(newCollection);
+								codeType.Members.AddRange(addedMethods);
 							}
 
 							/*
@@ -1415,11 +1546,8 @@ namespace XSDEx
 		/// <param name="name"></param>
 		/// <param name="type"></param>
 		/// <param name="attr"></param>
-		/// <param name="field"></param>
-		/// <param name="b"></param>
-		/// <param name="e"></param>
 		/// <returns></returns>
-		private CodeMemberProperty CreatePropertyMember(string name, Type type, MemberAttributes attr, CodeMemberField field, string b = null, string e = null)
+		private CodeMemberProperty CreatePropertyMember(string name, Type type, MemberAttributes attr)//, CodeMemberField field, string b = null, string e = null)
 		{
 			CodeMemberProperty cmp = new CodeMemberProperty()
 			{

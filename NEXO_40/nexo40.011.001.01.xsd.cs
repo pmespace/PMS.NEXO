@@ -103,7 +103,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -119,7 +119,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DispOutpt != null))
 				{
-					this.DispOutpt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DispOutpt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -261,7 +261,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -277,15 +277,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Hdr != null))
 				{
-					this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Hdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Abrt != null))
 				{
-					this.Abrt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Abrt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SctyTrlr != null))
 				{
-					this.SctyTrlr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SctyTrlr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -461,7 +461,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -477,15 +477,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Envt != null))
 				{
-					this.Envt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Envt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Cntxt != null))
 				{
-					this.Cntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Cntxt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SysAbrt != null))
 				{
-					this.SysAbrt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SysAbrt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}

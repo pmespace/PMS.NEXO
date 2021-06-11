@@ -16,7 +16,6 @@
     }
   },
   "TypesWithoutInitializer": [
-    "System.Object",
     "myDummyFieldName1",
     "myDummyFieldName2"
   ],
@@ -26,7 +25,6 @@
     "myDummyArrayType2"
   ],
   "ArrayTypesWithoutAccessors": [
-    "System.Byte",
     "myDummyArrayType2"
   ]
 }

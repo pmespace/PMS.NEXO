@@ -87,7 +87,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -103,7 +103,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Id != null))
 				{
-					this.Id.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Id.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -325,7 +325,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -341,11 +341,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.RmotAccs != null))
 				{
-					this.RmotAccs.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.RmotAccs.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Glctn != null))
 				{
-					this.Glctn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Glctn.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -628,7 +628,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -840,7 +840,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -973,7 +973,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -989,11 +989,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.GeogcCordints != null))
 				{
-					this.GeogcCordints.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.GeogcCordints.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.UTMCordints != null))
 				{
-					this.UTMCordints.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.UTMCordints.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -1066,7 +1066,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -1167,7 +1167,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -1269,7 +1269,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -1575,7 +1575,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -1591,11 +1591,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.MsgCnttSgntr != null))
 				{
-					this.MsgCnttSgntr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.MsgCnttSgntr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.OutptBrcd != null))
 				{
-					this.OutptBrcd.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OutptBrcd.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -1787,7 +1787,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -1803,11 +1803,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.AuthntcdData != null))
 				{
-					this.AuthntcdData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AuthntcdData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SgndData != null))
 				{
-					this.SgndData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SgndData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -2038,7 +2038,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -2054,11 +2054,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.MACAlgo != null))
 				{
-					this.MACAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.MACAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.NcpsltdCntt != null))
 				{
-					this.NcpsltdCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NcpsltdCntt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -2246,7 +2246,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -2436,7 +2436,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -2452,11 +2452,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.KEKId != null))
 				{
-					this.KEKId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.KEKId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.KeyNcrptnAlgo != null))
 				{
-					this.KeyNcrptnAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.KeyNcrptnAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -2599,7 +2599,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -2700,7 +2700,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -2716,7 +2716,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -2901,7 +2901,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3125,7 +3125,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3141,11 +3141,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.RcptId != null))
 				{
-					this.RcptId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.RcptId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.KeyNcrptnAlgo != null))
 				{
-					this.KeyNcrptnAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.KeyNcrptnAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -3204,7 +3204,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3324,7 +3324,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3536,7 +3536,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3656,7 +3656,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3672,7 +3672,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -3825,7 +3825,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3841,7 +3841,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.MskGnrtrAlgo != null))
 				{
-					this.MskGnrtrAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.MskGnrtrAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -3959,7 +3959,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -3975,7 +3975,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -4060,7 +4060,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -4161,7 +4161,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -4177,7 +4177,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -4321,7 +4321,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -4422,7 +4422,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -4646,7 +4646,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -4662,7 +4662,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.NcpsltdCntt != null))
 				{
-					this.NcpsltdCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NcpsltdCntt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -4974,7 +4974,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5232,7 +5232,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5248,15 +5248,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.SgnrId != null))
 				{
-					this.SgnrId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SgnrId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.DgstAlgo != null))
 				{
-					this.DgstAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DgstAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SgntrAlgo != null))
 				{
-					this.SgntrAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SgntrAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -5457,7 +5457,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5558,7 +5558,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5574,7 +5574,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -5749,7 +5749,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5765,7 +5765,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.MskGnrtrAlgo != null))
 				{
-					this.MskGnrtrAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.MskGnrtrAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -5854,7 +5854,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -5870,7 +5870,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -5944,7 +5944,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6142,7 +6142,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6307,7 +6307,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6505,7 +6505,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6800,7 +6800,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6928,7 +6928,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -6944,7 +6944,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Param != null))
 				{
-					this.Param.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Param.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -7279,7 +7279,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -7295,11 +7295,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PmtAcctReq != null))
 				{
-					this.PmtAcctReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PmtAcctReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.LltyAcctReq != null))
 				{
-					this.LltyAcctReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.LltyAcctReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -7550,7 +7550,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -7566,7 +7566,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -7916,7 +7916,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -8036,7 +8036,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -8052,11 +8052,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Acct != null))
 				{
-					this.Acct.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Acct.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -8313,7 +8313,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -8637,7 +8637,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -8653,15 +8653,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.AcctId != null))
 				{
-					this.AcctId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AcctId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.OrgnlPOITx != null))
 				{
-					this.OrgnlPOITx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OrgnlPOITx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.HstTxId != null))
 				{
-					this.HstTxId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.HstTxId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -8961,7 +8961,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -9610,7 +9610,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -9626,23 +9626,23 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.TxId != null))
 				{
-					this.TxId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TxId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.OrgnlTx != null))
 				{
-					this.OrgnlTx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OrgnlTx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.TxDtls != null))
 				{
-					this.TxDtls.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TxDtls.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CstmrTkn != null))
 				{
-					this.CstmrTkn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrTkn.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -10202,7 +10202,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -10372,7 +10372,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -10388,15 +10388,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.TxId != null))
 				{
-					this.TxId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TxId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.POIId != null))
 				{
-					this.POIId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.POIId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CcyConvs != null))
 				{
-					this.CcyConvs.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CcyConvs.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -10535,7 +10535,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -10653,7 +10653,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -11223,7 +11223,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -11239,19 +11239,19 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.TrgtCcy != null))
 				{
-					this.TrgtCcy.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TrgtCcy.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SrcCcy != null))
 				{
-					this.SrcCcy.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SrcCcy.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.OrgnlAmt != null))
 				{
-					this.OrgnlAmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OrgnlAmt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.DclrtnDtls != null))
 				{
-					this.DclrtnDtls.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DclrtnDtls.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -11612,7 +11612,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -11750,7 +11750,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -11914,7 +11914,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -11999,7 +11999,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -12084,7 +12084,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -12728,7 +12728,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -12744,19 +12744,19 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DtldAmt != null))
 				{
-					this.DtldAmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DtldAmt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CcyConvsRslt != null))
 				{
-					this.CcyConvsRslt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CcyConvsRslt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Instlmt != null))
 				{
-					this.Instlmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Instlmt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.AggtnTx != null))
 				{
-					this.AggtnTx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AggtnTx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -13453,7 +13453,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -14050,7 +14050,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -14208,7 +14208,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -14224,7 +14224,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Convs != null))
 				{
-					this.Convs.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Convs.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -14593,7 +14593,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -14609,7 +14609,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.TtlAmt != null))
 				{
-					this.TtlAmt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TtlAmt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -14850,7 +14850,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -15298,7 +15298,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -15534,7 +15534,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -15550,7 +15550,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PrtctdVal != null))
 				{
-					this.PrtctdVal.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PrtctdVal.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -15741,7 +15741,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -15757,19 +15757,19 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.EnvlpdData != null))
 				{
-					this.EnvlpdData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.EnvlpdData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.AuthntcdData != null))
 				{
-					this.AuthntcdData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AuthntcdData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SgndData != null))
 				{
-					this.SgndData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SgndData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.DgstdData != null))
 				{
-					this.DgstdData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DgstdData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -15947,7 +15947,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -15963,7 +15963,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.NcrptdCntt != null))
 				{
-					this.NcrptdCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NcrptdCntt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -16213,7 +16213,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -16229,7 +16229,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.CnttNcrptnAlgo != null))
 				{
-					this.CnttNcrptnAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CnttNcrptnAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -16407,7 +16407,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -16423,11 +16423,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DgstAlgo != null))
 				{
-					this.DgstAlgo.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DgstAlgo.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.NcpsltdCntt != null))
 				{
-					this.NcpsltdCntt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NcpsltdCntt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -16652,7 +16652,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -16668,7 +16668,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.TknRqstr != null))
 				{
-					this.TknRqstr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.TknRqstr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -16869,7 +16869,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -16993,7 +16993,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -17193,7 +17193,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -17347,7 +17347,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -17363,11 +17363,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Tx != null))
 				{
-					this.Tx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Tx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -17671,7 +17671,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -17687,7 +17687,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.OrgnlPOITx != null))
 				{
-					this.OrgnlPOITx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OrgnlPOITx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -17978,7 +17978,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -17994,15 +17994,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Acct != null))
 				{
-					this.Acct.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Acct.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Amt != null))
 				{
-					this.Amt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Amt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -18108,7 +18108,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -18228,7 +18228,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -18244,7 +18244,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PmtTx != null))
 				{
-					this.PmtTx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PmtTx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -18532,7 +18532,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -18548,11 +18548,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.OrgnlPmtTx != null))
 				{
-					this.OrgnlPmtTx.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.OrgnlPmtTx.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CstmrOrdr != null))
 				{
-					this.CstmrOrdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrOrdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -18868,7 +18868,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19311,7 +19311,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19327,15 +19327,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DbtrId != null))
 				{
-					this.DbtrId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DbtrId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CdtrId != null))
 				{
-					this.CdtrId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CdtrId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.MndtRltdInf != null))
 				{
-					this.MndtRltdInf.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.MndtRltdInf.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -19443,7 +19443,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19459,11 +19459,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Dbtr != null))
 				{
-					this.Dbtr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Dbtr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.AcctId != null))
 				{
-					this.AcctId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AcctId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -19523,7 +19523,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19625,7 +19625,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19641,7 +19641,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Adr != null))
 				{
-					this.Adr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Adr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -19762,7 +19762,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19863,7 +19863,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -19953,7 +19953,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -20022,7 +20022,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -20140,7 +20140,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -20156,7 +20156,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Cdtr != null))
 				{
-					this.Cdtr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Cdtr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -20284,7 +20284,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -20453,7 +20453,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -20469,15 +20469,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PmtCntxt != null))
 				{
-					this.PmtCntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PmtCntxt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SaleCntxt != null))
 				{
-					this.SaleCntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SaleCntxt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.DrctDbtCntxt != null))
 				{
-					this.DrctDbtCntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DrctDbtCntxt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -20870,7 +20870,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -21554,7 +21554,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -22071,7 +22071,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -22578,7 +22578,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -22594,47 +22594,47 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Acqrr != null))
 				{
-					this.Acqrr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Acqrr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Mrchnt != null))
 				{
-					this.Mrchnt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Mrchnt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.POI != null))
 				{
-					this.POI.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.POI.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Card != null))
 				{
-					this.Card.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Card.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Chck != null))
 				{
-					this.Chck.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Chck.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CstmrDvc != null))
 				{
-					this.CstmrDvc.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CstmrDvc.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Wllt != null))
 				{
-					this.Wllt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Wllt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PmtTkn != null))
 				{
-					this.PmtTkn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PmtTkn.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Crdhldr != null))
 				{
-					this.Crdhldr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Crdhldr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PrtctdCrdhldrData != null))
 				{
-					this.PrtctdCrdhldrData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PrtctdCrdhldrData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SaleEnvt != null))
 				{
-					this.SaleEnvt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SaleEnvt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -23063,7 +23063,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -23079,11 +23079,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Id != null))
 				{
-					this.Id.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Id.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.LctnAndCtct != null))
 				{
-					this.LctnAndCtct.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.LctnAndCtct.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -23256,7 +23256,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -23272,7 +23272,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PstlAdr != null))
 				{
-					this.PstlAdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PstlAdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -23524,7 +23524,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -24015,7 +24015,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -24031,11 +24031,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Id != null))
 				{
-					this.Id.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Id.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Cpblties != null))
 				{
-					this.Cpblties.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Cpblties.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -24465,7 +24465,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -25109,7 +25109,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -25769,7 +25769,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -25785,15 +25785,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Id != null))
 				{
-					this.Id.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Id.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Sts != null))
 				{
-					this.Sts.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Sts.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Chrtcs != null))
 				{
-					this.Chrtcs.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Chrtcs.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -26201,7 +26201,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -26341,7 +26341,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -26459,7 +26459,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -26688,7 +26688,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -27188,7 +27188,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -27385,7 +27385,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -27401,11 +27401,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Params != null))
 				{
-					this.Params.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Params.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PhysIntrfc != null))
 				{
-					this.PhysIntrfc.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PhysIntrfc.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -27775,7 +27775,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -28123,7 +28123,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -28139,7 +28139,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.KeyVal != null))
 				{
-					this.KeyVal.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.KeyVal.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -28638,7 +28638,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -29197,7 +29197,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -29213,11 +29213,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PrtctdCardData != null))
 				{
-					this.PrtctdCardData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PrtctdCardData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PlainCardData != null))
 				{
-					this.PlainCardData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PlainCardData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -29434,7 +29434,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -29450,7 +29450,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.EnvlpdData != null))
 				{
-					this.EnvlpdData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.EnvlpdData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -29635,7 +29635,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -29847,7 +29847,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -29863,7 +29863,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.ChckTrckData2 != null))
 				{
-					this.ChckTrckData2.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.ChckTrckData2.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -29990,7 +29990,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -30131,7 +30131,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -30485,7 +30485,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -30501,19 +30501,19 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Id != null))
 				{
-					this.Id.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Id.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.BllgAdr != null))
 				{
-					this.BllgAdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.BllgAdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.ShppgAdr != null))
 				{
-					this.ShppgAdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.ShppgAdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Vhcl != null))
 				{
-					this.Vhcl.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Vhcl.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -31245,7 +31245,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -31261,7 +31261,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DtAndPlcOfBirth != null))
 				{
-					this.DtAndPlcOfBirth.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DtAndPlcOfBirth.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -31495,7 +31495,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -31580,7 +31580,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -31956,7 +31956,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -31972,7 +31972,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DrvrOrVhclCard != null))
 				{
-					this.DrvrOrVhclCard.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DrvrOrVhclCard.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -32271,7 +32271,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -32517,7 +32517,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -32834,7 +32834,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -32850,19 +32850,19 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.PrtctdAuthntcnVal != null))
 				{
-					this.PrtctdAuthntcnVal.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PrtctdAuthntcnVal.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CrdhldrOnLinePIN != null))
 				{
-					this.CrdhldrOnLinePIN.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CrdhldrOnLinePIN.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CrdhldrId != null))
 				{
-					this.CrdhldrId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CrdhldrId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.AdrVrfctn != null))
 				{
-					this.AdrVrfctn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.AdrVrfctn.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -32967,7 +32967,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -32983,7 +32983,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.NcrptdPINBlck != null))
 				{
-					this.NcrptdPINBlck.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NcrptdPINBlck.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -33142,7 +33142,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -33365,7 +33365,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -33381,15 +33381,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Glctn != null))
 				{
-					this.Glctn.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Glctn.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SnstvMobData != null))
 				{
-					this.SnstvMobData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SnstvMobData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PrtctdMobData != null))
 				{
-					this.PrtctdMobData.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PrtctdMobData.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -33478,7 +33478,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -33751,7 +33751,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34018,7 +34018,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34232,7 +34232,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34248,7 +34248,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.SaleToPOISvcReq != null))
 				{
-					this.SaleToPOISvcReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SaleToPOISvcReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -34390,7 +34390,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34406,15 +34406,15 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Hdr != null))
 				{
-					this.Hdr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Hdr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SvcReq != null))
 				{
-					this.SvcReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SvcReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.SctyTrlr != null))
 				{
-					this.SctyTrlr.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.SctyTrlr.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -34619,7 +34619,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34635,11 +34635,11 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.InitgPty != null))
 				{
-					this.InitgPty.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.InitgPty.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.RcptPty != null))
 				{
-					this.RcptPty.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.RcptPty.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -34948,7 +34948,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -34964,7 +34964,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.RlayId != null))
 				{
-					this.RlayId.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.RlayId.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -35393,7 +35393,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -35409,39 +35409,39 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.Envt != null))
 				{
-					this.Envt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Envt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.Cntxt != null))
 				{
-					this.Cntxt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.Cntxt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.PmtReq != null))
 				{
-					this.PmtReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.PmtReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.RvslReq != null))
 				{
-					this.RvslReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.RvslReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.BalNqryReq != null))
 				{
-					this.BalNqryReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.BalNqryReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.LltyReq != null))
 				{
-					this.LltyReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.LltyReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.BtchReq != null))
 				{
-					this.BtchReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.BtchReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.NblSvcReq != null))
 				{
-					this.NblSvcReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.NblSvcReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				if ((this.CardAcqstnReq != null))
 				{
-					this.CardAcqstnReq.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.CardAcqstnReq.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -35846,7 +35846,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -35862,7 +35862,7 @@ namespace NEXO
 				// BEGIN ADDED BY XSD
 				if ((this.DispOutpt != null))
 				{
-					this.DispOutpt.XSD_OptimizingProperty = this.XSD_OptimizingField;
+					this.DispOutpt.XSD_Optimizing = this.XSD_OptimizingField;
 				}
 				// END ADDED BY XSD
 			}
@@ -35964,7 +35964,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -36050,7 +36050,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{
@@ -36137,7 +36137,7 @@ namespace NEXO
 			}
 		}
 		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		internal bool XSD_OptimizingProperty
+		internal bool XSD_Optimizing
 		{
 			get
 			{

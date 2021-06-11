@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoEnableService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoGetTotals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLoyalty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoPayment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoPIN.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReconciliation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoStoredValue.cs" />
@@ -47,7 +48,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoDevicePrint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLogin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoLogout.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoPayment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessages\NexoReversal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NexoMessageHeader.cs" />

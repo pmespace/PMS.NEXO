@@ -44,68 +44,6 @@ namespace NEXO
 		}
 	}
 
-	//	[ComVisible(false)]
-	//	public static class NexoVersion
-	//	{
-	//#if NEXO30
-	//		public static readonly string Long = "Protocol Version 3.0 - Document Version 3.0 - 3 October 2016";
-	//		public static readonly string Short = "3.0";
-	//		public static readonly string StartName = "nexo30";
-	//#elif NEXO31
-	//		public static readonly string Long = "Protocol Version 3.1 - Document Version 3.1 - 31 July 2017";
-	//		public static readonly string Short = "3.1";
-	//		public static readonly string StartName = "nexo31";
-	//#endif
-	//	}
-
-	//	[ComVisible(false)]
-	//	public class NexoVersion
-	//	{
-	//		public string Version { get; set; }
-	//		public string Description { get; set; }
-	//		public string ResourceName { get; set; }
-	//		public string AssemblyName { get; set; }
-	//		public override string ToString()
-	//		{
-	//			return Version;
-	//		}
-	//	}
-
-	//	[ComVisible(false)]
-	//	public class NexoSupportedVersions : Dictionary<string, NexoVersion>
-	//	{
-	//		#region constructor
-	//		public NexoSupportedVersions()
-	//		{
-	//			NexoVersion version = new NexoVersion()
-	//			{
-	//				Description = "Version 3.0 - 3 October 2016",
-	//				ResourceName = "nexo30",
-	//				AssemblyName = "PMS.NEXO30.dll",
-	//				Version = "3.0",
-	//			};
-	//			Add(version.Version, version);
-
-	//#if !NET35
-	//			version = new NexoVersion()
-	//			{
-	//				Description = "Version 3.1 - 31 July 2017",
-	//				ResourceName = "nexo31",
-	//				AssemblyName = "PMS.NEXO31.dll",
-	//				Version = "3.1",
-	//			};
-	//			Add(version.Version, version);
-	//#endif
-	//		}
-	//		#endregion
-	//	}
-
-	//	[ComVisible(false)]
-	//	public static class NexoCurrentVersion
-	//	{
-	//		public static NexoVersion Version = null;
-	//	}
-
 	[ComVisible(true)]
 	public enum NexoValues
 	{
@@ -134,7 +72,12 @@ namespace NEXO
 		/// </summary>
 		/// <param name="value">Actual proposition to set the Name property value</param>
 		/// <returns>ACtual value to use</returns>
-		protected virtual string SetName(string value) { return value.Trim(); }
+		protected virtual string SetName(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return null;
+			return value.Trim();
+		}
 		#endregion
 	}
 

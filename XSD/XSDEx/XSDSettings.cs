@@ -143,5 +143,9 @@ namespace XSDEx
 		/// </summary>
 		public bool CreateArrayAccessors { get; set; }
 		public string Preprocessor { get; set; }
+		/// <summary>
+		/// Indicate whether messages must be displayed while processing
+		/// </summary>
+		public bool Silent { get; set; } = true;
 	}
 }

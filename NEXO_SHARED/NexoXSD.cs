@@ -13,10 +13,10 @@ namespace NEXO
 	public static class NexoXSDStrings
 	{
 		public static string XSD = "XSD_";
-		public static string NexoOptimizingProperty = $"{XSD}OptimizingProperty";
-		public static string NexoOptimizingField = $"{XSD}OptimizingField";
-		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSetProperty";
-		public static string NexoHasBeenSetField = $"{XSD}HasBeenSetField";
+		public static string NexoOptimizingProperty = $"{XSD}Optimizing";
+		public static string NexoOptimizingField = $"_{XSD}Optimizing";
+		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
+		public static string NexoHasBeenSetField = $"_{XSD}HasBeenSet";
 	}
 
 	public abstract class NexoDummy

@@ -289,10 +289,10 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				request.XSD_OptimizingProperty = OptimizeXml;
+				request.XSD_Optimizing = OptimizeXml;
 				try
 				{
-					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_OptimizingProperty);
+					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
 					//if (OptimizeXml)
 					//	Optimize(request, request.Item, true);
 				}
@@ -314,8 +314,8 @@ namespace NEXO
 			}
 			finally
 			{
-				request.XSD_OptimizingProperty = false;
-				SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_OptimizingProperty);
+				request.XSD_Optimizing = false;
+				SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
 			}
 			return serialized;
 		}
@@ -328,10 +328,10 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				reply.XSD_OptimizingProperty = OptimizeXml;
+				reply.XSD_Optimizing = OptimizeXml;
 				try
 				{
-					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_OptimizingProperty);
+					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
 					//if (OptimizeXml)
 					//	Optimize(reply, reply.Item, true);
 				}
@@ -353,8 +353,8 @@ namespace NEXO
 			}
 			finally
 			{
-				reply.XSD_OptimizingProperty = false;
-				SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_OptimizingProperty);
+				reply.XSD_Optimizing = false;
+				SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
 			}
 			return serialized;
 		}

@@ -27,9 +27,13 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.2.4</version>
+    <version>3.3.1</version>
     <releaseNotes>
-      3.2.4 NOT PUBLISHED
+      3.3.1
+      - Fixed a bug in NexoType which crashed when seting a data without a name
+      
+      3.3.0
+      - Reshaped the base classes for nexo 3.0 and 3.1 to fix some bugs with data being present in the XML though empty; the classes are now theoraticlly fully autonomous
       - Fixed an exception in NexoBuilder and NexoSimulator, sometimes when setting the name of a node (no explanation why this happens)
 
       3.2.3
@@ -159,8 +163,8 @@
     <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
     <!--
     <contentFiles>
-      <files include=".\Release\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
-      <files include=".\Release\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
+      <files include=".\Bin\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
+      <files include=".\Bin\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
     </contentFiles>
     -->
 
@@ -168,14 +172,14 @@
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Release\PMS.NEXO30.dll" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.xml" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO30.pdb" target="lib\net47"></file>
-    <file src=".\Release\NexoBuilder30.exe" target="lib\net47"></file>
-    <file src=".\Release\NexoSimulator30.exe" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.dll" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.xml" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.pdb" target="lib\net47"></file>
+    <file src=".\Bin\NexoBuilder30.exe" target="lib\net47"></file>
+    <file src=".\Bin\NexoSimulator30.exe" target="lib\net47"></file>
 
-    <file src=".\Release\PMS.NEXO35.dll" target="lib\net35"></file>
-    <file src=".\Release\PMS.NEXO35.xml" target="lib\net35"></file>
-    <file src=".\Release\PMS.NEXO35.pdb" target="lib\net35"></file>
+    <file src=".\Bin\PMS.NEXO35.dll" target="lib\net35"></file>
+    <file src=".\Bin\PMS.NEXO35.xml" target="lib\net35"></file>
+    <file src=".\Bin\PMS.NEXO35.pdb" target="lib\net35"></file>
   </files>
 </package>

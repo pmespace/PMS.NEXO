@@ -25,10 +25,14 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.2.4</version>
+    <version>3.3.1</version>
     <releaseNotes>
-      3.2.4
-      ...
+      3.3.1
+      - Fixed a bug in NexoType which crashed when seting a data without a name
+
+      3.3.0
+      - Reshaped the base classes for nexo 3.0 and 3.1 to fix some bugs with data being present in the XML though empty; the classes are now theoraticlly fully autonomous
+      - Fixed an exception in NexoBuilder and NexoSimulator, sometimes when setting the name of a node (no explanation why this happens)
 
       3.2.3
       - Fixed a bug with all POIOriginalTransactionTimestamp not initialised normally
@@ -157,8 +161,8 @@
     <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
     <!--
     <contentFiles>
-      <files include=".\Release\NexoBuilder31.exe" buildAction="None" copyToOutput="true"></files>
-      <files include=".\Release\NexoSimulator31.exe" buildAction="None" copyToOutput="true"></files>
+      <files include=".\Bin\NexoBuilder31.exe" buildAction="None" copyToOutput="true"></files>
+      <files include=".\Bin\NexoSimulator31.exe" buildAction="None" copyToOutput="true"></files>
     </contentFiles>
     -->
 
@@ -166,10 +170,10 @@
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Release\PMS.NEXO31.dll" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO31.xml" target="lib\net47"></file>
-    <file src=".\Release\PMS.NEXO31.pdb" target="lib\net47"></file>
-    <file src=".\Release\NexoBuilder31.exe" target="lib\net47"></file>
-    <file src=".\Release\NexoSimulator31.exe" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO31.dll" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO31.xml" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO31.pdb" target="lib\net47"></file>
+    <file src=".\Bin\NexoBuilder31.exe" target="lib\net47"></file>
+    <file src=".\Bin\NexoSimulator31.exe" target="lib\net47"></file>
   </files>
 </package>

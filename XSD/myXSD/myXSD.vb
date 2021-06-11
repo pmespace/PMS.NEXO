@@ -151,6 +151,7 @@ Public Class myXSD
 		settings.UseTypes = cbTypes.Checked
 		settings.PrivateByInternal = privateByInternal.Checked
 		settings.Preprocessor = efPreprocessor.Text
+		settings.Silent = cbSilent.Checked
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -194,6 +195,7 @@ Public Class myXSD
 		cbTypes.Checked = settings.UseTypes
 		privateByInternal.Checked = settings.PrivateByInternal
 		efPreprocessor.Text = settings.Preprocessor
+		cbSilent.Checked = settings.Silent
 	End Sub
 
 	Private Function GenerateFilesAsyncThread(threadData As CThreadData, o As Object) As Integer

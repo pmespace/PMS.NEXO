@@ -42,11 +42,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Bin\</OutputPath>
+    <OutputPath>..\Bin\net47\</OutputPath>
     <DefineConstants>TRACE;NEXO30</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Bin\PMS.NEXO30.xml</DocumentationFile>
+    <DocumentationFile>..\Bin\net47\PMS.NEXO30.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
@@ -57,8 +57,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.4.1.1\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.5.0.0\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

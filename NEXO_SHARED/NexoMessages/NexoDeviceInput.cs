@@ -159,6 +159,10 @@ namespace NEXO
 		string WarningsList();
 		[DispId(15504)]
 		string EventsList();
+		[DispId(15505)]
+		bool IsUsingJson();
+		[DispId(15506)]
+		void SetUsingJson(bool f = false);
 		#endregion
 	}
 	[Guid("AD272143-7CBD-4C8B-A766-EEF8B28197C8")]

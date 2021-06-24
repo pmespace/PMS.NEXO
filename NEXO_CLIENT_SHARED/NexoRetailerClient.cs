@@ -109,6 +109,10 @@ namespace NEXO.Client
 		string WarningsList();
 		[DispId(1103)]
 		string EventsList();
+		[DispId(1104)]
+		bool IsUsingJson();
+		[DispId(1105)]
+		void SetUsingJson(bool f = false);
 		#endregion
 	}
 	[Guid("48D91DB7-8D55-4151-B04D-02985CFCF6DF")]
@@ -677,12 +681,14 @@ namespace NEXO.Client
 		/// <returns>An object if the message has been sent, null otherwise</returns>
 		public NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
-			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			//SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			SaleToPOIRequest request = DeserializeRequest(xml);
 			return SendRequest(request, timer, null, autoComplete);
 		}
 		public bool SendRawRequestSync(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true)
 		{
-			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			//SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			SaleToPOIRequest request = DeserializeRequest(xml);
 			return SendRequestSync(request, timer, autoComplete);
 		}
 		#endregion

@@ -29,6 +29,8 @@ Public Class FSimulator
 		none
 		right
 	End Enum
+	Private Const REGISTRY_KEY As String = "HKEY_CURRENT_USER\Software\PMS\NEXO\Simulator"
+	Private Const REGISTRY_VALUE_SETTINGS As String = "Settings"
 	Private Const SERVER_SETTINGS_FILE_NAME As String = "server.database.json"
 	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
 	Private Const SETTINGS_FILE_EXT As String = ".json"
@@ -181,6 +183,8 @@ Public Class FSimulator
 		If cbAutostartGateway.Checked Then
 			StartGateway()
 		End If
+
+		ToolTip1.SetToolTip(pbResponseFolder, SettingsPath)
 		SetButtons()
 	End Sub
 
@@ -221,12 +225,25 @@ Public Class FSimulator
 	End Function
 
 	Public Function SettingsFileName() As String
-		Dim path As String = Registry.GetValue("HKEY_CURRENT_USER\Software\PMS\NEXO\Simulator", "Settings", ".\")
+		Return SettingsPath() & SETTINGS_FILE_NAME
+	End Function
+
+	Public Function SettingsPath() As String
+		Dim path As String = Registry.GetValue(REGISTRY_KEY, REGISTRY_VALUE_SETTINGS, ".\")
 		If String.IsNullOrEmpty(path) Then
 			path = ".\"
 		End If
-		Return path & SETTINGS_FILE_NAME
+		If path.EndsWith("\") Then
+			Return path
+		Else
+			Return path & "\"
+		End If
 	End Function
+
+	Public Sub SetSettingsPath(s As String)
+		Registry.SetValue(REGISTRY_KEY, REGISTRY_VALUE_SETTINGS, s)
+		ToolTip1.SetToolTip(pbResponseFolder, SettingsPath)
+	End Sub
 
 	Private Sub LoadSettings()
 		Dim except As Boolean
@@ -295,8 +312,8 @@ Public Class FSimulator
 				udServerDelay.Value = 0
 			End Try
 			cbSynchronous.Checked = settings.Synchronous
-			cbAddReceipt.Checked = settings.AddReceipt
-			cbOnelineReceipt.Checked = settings.OneLineReceipt
+			cbUseJson.Checked = settings.UseJson
+			NexoRetailer.UseJson = cbUseJson.Checked
 			cbUseDatabase.Checked = settings.UseDatabase
 
 			cbUseConnectionSettings.Checked = settings.UsePreConnection
@@ -349,8 +366,7 @@ Public Class FSimulator
 		settings.Infinite = cbInfinite.Checked
 		settings.ServerDelay = udServerDelay.Value
 		settings.Synchronous = cbSynchronous.Checked
-		settings.AddReceipt = cbAddReceipt.Checked
-		settings.OneLineReceipt = cbOnelineReceipt.Checked
+		settings.UseJson = cbUseJson.Checked
 		settings.UseDatabase = cbUseDatabase.Checked
 
 		settings.UsePreConnection = cbUseConnectionSettings.Checked
@@ -500,6 +516,8 @@ Public Class FSimulator
 			Close()
 		End If
 
+		pbBuild.Enabled = 0 < cbxCommands.Items.Count
+
 		pbConnectionSettings.Enabled = cbUseConnectionSettings.Checked
 	End Sub
 
@@ -617,7 +635,9 @@ Public Class FSimulator
 		Public POIID As String
 		Public Name As String
 		Public Value As Object
-		Public Message As String
+		'Public Message As String
+		Public XML As String
+		Public JSON As String
 	End Class
 	Class SimulatorResponses
 		Inherits List(Of SimulatorResponse)
@@ -656,15 +676,19 @@ Public Class FSimulator
 				{
 				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
 				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
+				.Name = Nothing,
 				.Value = Nothing,
-				.Message = Nothing
+				.XML = Nothing,
+				.JSON = Nothing
 				})
 			l.Add(New SimulatorResponse With
 				{
 				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
 				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
+				.Name = "any data name",
 				.Value = "any value",
-				.Message = Nothing
+				.XML = Nothing,
+				.JSON = Nothing
 				})
 			json.WriteSettings(l, True)
 			'nothing else is done, the server decides of the action and simply returns the received message with a failure
@@ -703,16 +727,27 @@ Public Class FSimulator
 
 			'do we have a response ?
 			If Not IsNothing(response) Then
-				Dim sz As String = response.Message
+				Dim sz As String
+				If cbUseJson.Checked Then
+					sz = response.JSON
+				Else
+					sz = response.XML
+				End If
 				'eventually replace the user var
 				If Not IsNothing(secondary) AndAlso Not String.IsNullOrEmpty(secondary.ToString) Then
 					sz = sz.Replace(USERVAR, secondary.ToString)
 				End If
 				'deserialize the response
 				Dim item As New NexoItem(sz)
-				'is the response is valid against the expected message we save it to send it back to the caller
-				If toprocess.Category = item.Category Then
-					toprocess.CurrentObject.FromItem(item)
+				If item.IsValid Then
+					'is the response is valid against the expected message we save it to send it back to the caller
+					If toprocess.Category = item.Category Then
+						toprocess.CurrentObject.FromItem(item)
+					Else
+						NoAnswer(toprocess)
+					End If
+				Else
+					NoAnswer(toprocess)
 				End If
 			Else
 				'no answer is available, return an error
@@ -876,7 +911,7 @@ Public Class FSimulator
 			Dim xml As String = o.ToString()
 			efConnectionReply.Text = xml
 			Try
-				Dim reply As ConnectReply = NexoRetailer.XmlDeserialize(Of ConnectReply)(xml)
+				Dim reply As ConnectReply = NexoRetailer.XmlDeserialize(Of ConnectReply)(xml, cbUseJson.Checked, False)
 				If 0 = reply.status Then
 					efConnectionReply.BackColor = Color.LightGreen
 					Return True
@@ -1176,7 +1211,7 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub AddCommand()
-		cbxCommands.SelectedIndex = cbxCommands.Items.Add(New Command With {.Name = $"item {cbxCommands.Items.Count + 1}", .Command = Nothing})
+		cbxCommands.SelectedIndex = cbxCommands.Items.Add(New Command With {.Name = $"item {cbxCommands.Items.Count + 1}", .Command = Nothing, .UseJson = cbUseJson.Checked})
 		SetButtons()
 	End Sub
 
@@ -1251,11 +1286,21 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub pbBuild_Click(sender As Object, e As EventArgs) Handles pbBuild.Click
-		Dim f As New FChooser
-		f.XML = efCommand.Text
+		Dim cmd As Command = cbxCommands.Items(cbxCommands.SelectedIndex)
+		Dim f As New FChooser With {.Data = cmd.Command}
+		If String.IsNullOrEmpty(f.Data) Then
+			f.UseJson = NexoRetailer.UseJson
+		Else
+			f.UseJson = cmd.UseJson
+		End If
 		f.ShowDialog()
-		If Clipboard.ContainsText() Then
-			efCommand.Text = Clipboard.GetText
+		If Not String.IsNullOrEmpty(f.Data) Then
+			cmd.UseJson = f.UseJson
+			cmd.Command = f.Data
+			cbxCommands.Items(cbxCommands.SelectedIndex) = cmd
+			efCommand.Text = cmd.Command
+			NexoRetailer.UseJson = cmd.UseJson
+			cbUseJson.Checked = NexoRetailer.UseJson
 		End If
 		f.Dispose()
 	End Sub
@@ -1265,7 +1310,7 @@ Public Class FSimulator
 	Private Sub pbLogin_Click(sender As Object, e As EventArgs) Handles pbLogin.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogin()
-		o.OptimizeXml = cbOptimize.Checked
+		'o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1295,7 +1340,7 @@ Public Class FSimulator
 	Private Sub pbLogout_Click(sender As Object, e As EventArgs) Handles pbLogout.Click
 		'create the NexoLogin object
 		Dim o As New NexoLogout()
-		o.OptimizeXml = cbOptimize.Checked
+		'o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1319,7 +1364,7 @@ Public Class FSimulator
 
 	Private Sub pbDeviceInput_Click(sender As Object, e As EventArgs) Handles pbDeviceInput.Click
 		Dim o As New NexoDeviceInput()
-		o.OptimizeXml = cbOptimize.Checked
+		'o.OptimizeXml = cbOptimize.Checked
 		o.SaleID = FullSaleID()
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1362,7 +1407,7 @@ Public Class FSimulator
 				TextToPrint = p.TextToPrint
 				'create the NexoLogin object
 				Dim o As New NexoDevicePrint()
-				o.OptimizeXml = cbOptimize.Checked
+				'o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1400,7 +1445,7 @@ Public Class FSimulator
 			Case DialogResult.OK
 				'create the NexoLogin object
 				Dim o As New NexoPayment()
-				o.OptimizeXml = cbOptimize.Checked
+				'o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1433,7 +1478,7 @@ Public Class FSimulator
 			Case DialogResult.OK
 				'create the NexoLogin object
 				Dim o As New NexoPayment(PaymentTypeEnumeration.Refund)
-				o.OptimizeXml = cbOptimize.Checked
+				'o.OptimizeXml = cbOptimize.Checked
 				o.SaleID = FullSaleID()
 				o.POIID = FullPOIID()
 				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
@@ -1596,6 +1641,17 @@ Public Class FSimulator
 				Case MsgBoxResult.No
 					cbOptimize.Checked = True
 			End Select
+		End If
+	End Sub
+
+	Private Sub cbUseJson_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseJson.CheckedChanged
+		NexoRetailer.UseJson = cbUseJson.Checked
+	End Sub
+
+	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles pbResponseFolder.Click
+		FolderBrowserDialog1.SelectedPath = SettingsPath()
+		If DialogResult.OK = FolderBrowserDialog1.ShowDialog Then
+			SetSettingsPath(FolderBrowserDialog1.SelectedPath)
 		End If
 	End Sub
 

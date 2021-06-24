@@ -7,7 +7,8 @@ Imports NEXO
 Public Class FBuilder
 	Public O As NexoObject = Nothing
 	Public MakeRequest As Boolean = True
-	Public XML As String = Nothing
+	Public Target As String = Nothing
+	Public NotTheTarget As String = Nothing
 	Private nexoRequest As SaleToPOIRequest
 	Private nexoReply As SaleToPOIResponse
 	Private nexoItem As Object = Nothing
@@ -229,22 +230,44 @@ Public Class FBuilder
 
 	Private Sub pbAccept_Click(sender As Object, e As EventArgs) Handles pbAccept.Click
 		Dim ok As Boolean = True
+		Dim captionToShow As String = Nothing
+		Target = Nothing
+		NotTheTarget = Nothing
 		If ok Then
-			O.OptimizeXml = cbOptimize.Checked
+			'O.OptimizeXml = cbOptimize.Checked
 			If MakeRequest Then
-				'XML = NexoRetailer.XmlSerialize(Of SaleToPOIRequest)(nexoRequest)
-				XML = O.SerializedRequest
+				If NexoRetailer.UseJson Then
+					captionToShow = "JSON"
+					Target = O.SerializedRequest
+					NexoRetailer.UseJson = Not NexoRetailer.UseJson
+					NotTheTarget = O.SerializedRequest
+				Else
+					captionToShow = "XML"
+					Target = O.SerializedRequest
+					NexoRetailer.UseJson = Not NexoRetailer.UseJson
+					NotTheTarget = O.SerializedRequest
+				End If
 			Else
-				'XML = NexoRetailer.XmlSerialize(Of SaleToPOIResponse)(nexoReply)
-				XML = O.SerializedReply
+				If NexoRetailer.UseJson Then
+					captionToShow = "JSON"
+					Target = O.SerializedReply
+					NexoRetailer.UseJson = Not NexoRetailer.UseJson
+					NotTheTarget = O.SerializedReply
+				Else
+					captionToShow = "XML"
+					Target = O.SerializedReply
+					NexoRetailer.UseJson = Not NexoRetailer.UseJson
+					NotTheTarget = O.SerializedReply
+				End If
 			End If
+			NexoRetailer.UseJson = Not NexoRetailer.UseJson
 		End If
-		If Not IsNothing(XML) Then
-			Select Case MsgBox($"Serialized XML{vbCrLf}{vbCrLf}{XML}", MsgBoxStyle.YesNoCancel Or MsgBoxStyle.DefaultButton1)
+		If Not IsNothing(Target) Then
+			Select Case MsgBox($"Serialized {captionToShow}{vbCrLf}{vbCrLf}{Target}", MsgBoxStyle.YesNoCancel Or MsgBoxStyle.DefaultButton1)
 				Case MsgBoxResult.Yes
 					'copy xml to clipboard
 					Try
-						Clipboard.SetText(XML)
+						Clipboard.SetText(Target)
 					Catch ex As Exception
 					End Try
 					Dim f As New FMessage() With {.Message = "The object has been saved to clipboard", .Duration = 1}

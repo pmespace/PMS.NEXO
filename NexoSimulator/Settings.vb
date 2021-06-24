@@ -55,6 +55,7 @@ Public Class Settings
 	Public Property UsePreConnection As Boolean
 	Public Property ConnectionSettings As New SettingsConnectionSettings
 	Public Property AutomaticMode As Boolean
+	Public Property UseJson As Boolean = False
 End Class
 
 Public Class Commands
@@ -73,6 +74,7 @@ Public Class Command
 	End Property
 	Private _name As String = Nothing
 	Public Property Command As String
+	Public Property UseJson As Boolean = False
 	Public Overrides Function ToString() As String
 		Return Name
 	End Function

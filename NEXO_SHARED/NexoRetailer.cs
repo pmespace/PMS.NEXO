@@ -17,7 +17,7 @@ using System.Text;
 using System.Collections;
 using System.Globalization;
 
-#if !NET35
+#if !OLD_NET35
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 #endif
@@ -75,6 +75,10 @@ namespace NEXO
 		string WarningsList();
 		[DispId(1103)]
 		string EventsList();
+		[DispId(1104)]
+		bool IsUsingJson();
+		[DispId(1105)]
+		void SetUsingJson(bool f = false);
 		#endregion
 	}
 	[ComVisible(false)]
@@ -141,11 +145,16 @@ namespace NEXO
 		/// Indicate whether serialisation events must be stored inside log file
 		/// </summary>
 		public bool LogSerialisationEvents { get; set; } = false;
+		///// <summary>
+		///// Indicates whether produced XML must be optimised or not
+		///// Optimisation allows dismissinig unchanged tags preventing them to appear in the resulting XML
+		///// </summary>
+		//public bool OptimizeXml { get; set; } = true;
+
 		/// <summary>
-		/// Indicates whether produced XML must be optimised or not
-		/// Optimisation allows dismissinig unchanged tags preventing them to appear in the resulting XML
+		/// Flag indicating whether use XML (false) or JSON (true) notation when exchanging messages
 		/// </summary>
-		public bool OptimizeXml { get; set; } = true;
+		static public bool UseJson { get; set; } = false;
 		#endregion
 
 		#region public methods
@@ -165,35 +174,248 @@ namespace NEXO
 		/// <returns></returns>
 		public string EventsList() { return EventsList(NexoSchemaEventType.All); }
 		/// <summary>
-		/// Deserialize a SaleToPOIXXX from an array of bytes
+		/// Allows retrieving whether using Json or XML notation
 		/// </summary>
-		/// <typeparam name="NxT">The type to deserialize</typeparam>
+		/// <returns>True if Json notation, False is XML</returns>
+		public bool IsUsingJson() { return UseJson; }
+		/// <summary>
+		/// Allows setting the use of Json or XML notation
+		/// </summary>
+		/// <param name="f">True is use Json, False if use XML (default)</param>
+		public void SetUsingJson(bool f = false) { UseJson = f; }
+
+		/// <summary>
+		/// Deserialize a <see cref="SaleToPOIRequest"/> from an array of bytes
+		/// </summary>
 		/// <param name="bxml">The message to deserialize</param>
 		/// <returns>The deserialized object or null if an error has occurred</returns>
-		public NxT Deserialize<NxT>(byte[] bxml)
-		{
-			if (null != bxml)
-				return Deserialize<NxT>(Encoding.UTF8.GetString(bxml));
-			return default;
-		}
+		public SaleToPOIRequest DeserializeRequest(byte[] bxml) { return DeserializeRequest(Encoding.UTF8.GetString(bxml)); }
 		/// <summary>
-		/// Deserialize a SaleToPOIXXX from a string
+		/// Deserialize a <see cref="SaleToPOIRequest"/> from a string
 		/// </summary>
-		/// <typeparam name="NxT">The type to deserialize</typeparam>
 		/// <param name="xml">String to deserialize</param>
 		/// <returns>The deserialized object or null if an error has occurred</returns>
-		public NxT Deserialize<NxT>(string xml)
+		public SaleToPOIRequest DeserializeRequest(string xml)
 		{
-			if (!string.IsNullOrEmpty(xml))
-				try
+			try
+			{
+				if (UseJson)
 				{
-					// validate XML
-					ValidateXML(xml);
-					return (NxT)XmlDeserialize<NxT>(xml, BOM);
+					XSaleToPOIRequest x = Deserialize<XSaleToPOIRequest>(xml);
+					if (null != x && null != x.SaleToPOIRequest)
+					{
+						JObject tk = (JObject)x.SaleToPOIRequest.Item;
+						switch (CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), x.SaleToPOIRequest.MessageHeader.MessageCategory))
+						{
+							case MessageCategoryEnumeration.Abort:
+								x.SaleToPOIRequest.Item = Deserialize<AbortRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Admin:
+								x.SaleToPOIRequest.Item = Deserialize<AdminRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.BalanceInquiry:
+								x.SaleToPOIRequest.Item = Deserialize<BalanceInquiryRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Batch:
+								x.SaleToPOIRequest.Item = Deserialize<BatchRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardAcquisition:
+								x.SaleToPOIRequest.Item = Deserialize<CardAcquisitionRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderAPDU:
+								x.SaleToPOIRequest.Item = Deserialize<CardReaderAPDURequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderInit:
+								x.SaleToPOIRequest.Item = Deserialize<CardReaderInitRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderPowerOff:
+								x.SaleToPOIRequest.Item = Deserialize<CardReaderPowerOffRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Diagnosis:
+								x.SaleToPOIRequest.Item = Deserialize<DiagnosisRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Display:
+								x.SaleToPOIRequest.Item = Deserialize<DisplayRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.EnableService:
+								x.SaleToPOIRequest.Item = Deserialize<EnableServiceRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Event:
+								x.SaleToPOIRequest.Item = Deserialize<EventNotificationType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.GetTotals:
+								x.SaleToPOIRequest.Item = Deserialize<GetTotalsRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Input:
+								x.SaleToPOIRequest.Item = Deserialize<InputRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.InputUpdate:
+								x.SaleToPOIRequest.Item = Deserialize<InputUpdateType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Login:
+								x.SaleToPOIRequest.Item = Deserialize<LoginRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Logout:
+								x.SaleToPOIRequest.Item = Deserialize<LogoutRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Loyalty:
+								x.SaleToPOIRequest.Item = Deserialize<LoyaltyRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Payment:
+								x.SaleToPOIRequest.Item = Deserialize<PaymentRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.PIN:
+								x.SaleToPOIRequest.Item = Deserialize<PINRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Print:
+								x.SaleToPOIRequest.Item = Deserialize<PrintRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reconciliation:
+								x.SaleToPOIRequest.Item = Deserialize<ReconciliationRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reversal:
+								x.SaleToPOIRequest.Item = Deserialize<ReversalRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Sound:
+								x.SaleToPOIRequest.Item = Deserialize<SoundRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.StoredValue:
+								x.SaleToPOIRequest.Item = Deserialize<StoredValueRequestType>(tk.ToString());
+								break;
+#if NEXO31
+							case MessageCategoryEnumeration.TransactionReport:
+								x.SaleToPOIRequest.Item = Deserialize<TransactionReportRequestType>(tk.ToString());
+								break;
+#endif
+							case MessageCategoryEnumeration.TransactionStatus:
+								x.SaleToPOIRequest.Item = Deserialize<TransactionStatusRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Transmit:
+								x.SaleToPOIRequest.Item = Deserialize<TransmitRequestType>(tk.ToString());
+								break;
+							default:
+								return null;
+						}
+						return x.SaleToPOIRequest;
+					}
 				}
-				catch (Exception ex) { /*CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);*/ }
-			// arrived here an error has occurred
-			return default;
+				else
+					return Deserialize<SaleToPOIRequest>(xml);
+			}
+			catch (Exception) { }
+			return null;
+		}
+		/// <summary>
+		/// Deserialize a <see cref="SaleToPOIResponse"/> from an array of bytes
+		/// </summary>
+		/// <param name="bxml">>The message to deserialize</param>
+		/// <returns>The deserialized object or null if an error has occurred</returns>
+		public SaleToPOIResponse DeserializeResponse(byte[] bxml) { return DeserializeResponse(Encoding.UTF8.GetString(bxml)); }
+		/// <summary>
+		/// Deserialize a <see cref="SaleToPOIResponse"/> from a string
+		/// </summary>
+		/// <param name="xml">String to deserialize</param>
+		/// <returns>The deserialized object or null if an error has occurred</returns>
+		public SaleToPOIResponse DeserializeResponse(string xml)
+		{
+			try
+			{
+				if (UseJson)
+				{
+					XSaleToPOIResponse x = Deserialize<XSaleToPOIResponse>(xml);
+					if (null != x && null != x.SaleToPOIResponse)
+					{
+						JObject tk = (JObject)x.SaleToPOIResponse.Item;
+						switch (CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), x.SaleToPOIResponse.MessageHeader.MessageCategory))
+						{
+							case MessageCategoryEnumeration.Admin:
+								x.SaleToPOIResponse.Item = Deserialize<AdminResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.BalanceInquiry:
+								x.SaleToPOIResponse.Item = Deserialize<BalanceInquiryResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Batch:
+								x.SaleToPOIResponse.Item = Deserialize<BatchResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardAcquisition:
+								x.SaleToPOIResponse.Item = Deserialize<CardAcquisitionResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderAPDU:
+								x.SaleToPOIResponse.Item = Deserialize<CardReaderAPDUResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderInit:
+								x.SaleToPOIResponse.Item = Deserialize<CardReaderInitResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderPowerOff:
+								x.SaleToPOIResponse.Item = Deserialize<CardReaderPowerOffResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Diagnosis:
+								x.SaleToPOIResponse.Item = Deserialize<DiagnosisResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Display:
+								x.SaleToPOIResponse.Item = Deserialize<DisplayResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.EnableService:
+								x.SaleToPOIResponse.Item = Deserialize<EnableServiceResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.GetTotals:
+								x.SaleToPOIResponse.Item = Deserialize<GetTotalsResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Input:
+								x.SaleToPOIResponse.Item = Deserialize<InputResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Login:
+								x.SaleToPOIResponse.Item = Deserialize<LoginResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Logout:
+								x.SaleToPOIResponse.Item = Deserialize<LogoutResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Loyalty:
+								x.SaleToPOIResponse.Item = Deserialize<LoyaltyResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Payment:
+								x.SaleToPOIResponse.Item = Deserialize<PaymentResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.PIN:
+								x.SaleToPOIResponse.Item = Deserialize<PINResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Print:
+								x.SaleToPOIResponse.Item = Deserialize<PrintResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reconciliation:
+								x.SaleToPOIResponse.Item = Deserialize<ReconciliationResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reversal:
+								x.SaleToPOIResponse.Item = Deserialize<ReversalResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Sound:
+								x.SaleToPOIResponse.Item = Deserialize<SoundResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.StoredValue:
+								x.SaleToPOIResponse.Item = Deserialize<StoredValueResponseType>(tk.ToString());
+								break;
+#if NEXO31
+							case MessageCategoryEnumeration.TransactionReport:
+								x.SaleToPOIResponse.Item = Deserialize<TransactionReportResponseType>(tk.ToString());
+								break;
+#endif
+							case MessageCategoryEnumeration.TransactionStatus:
+								x.SaleToPOIResponse.Item = Deserialize<TransactionStatusResponseType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Transmit:
+								x.SaleToPOIResponse.Item = Deserialize<TransmitResponseType>(tk.ToString());
+								break;
+							default:
+								return null;
+						}
+						return x.SaleToPOIResponse;
+					}
+				}
+				else
+					return Deserialize<SaleToPOIResponse>(xml);
+			}
+			catch (Exception) { }
+			return null;
 		}
 		#endregion
 
@@ -281,6 +503,40 @@ namespace NEXO
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); return string.Empty; }
 		}
 		/// <summary>
+		/// Deserialize a SaleToPOIXXX from an array of bytes
+		/// </summary>
+		/// <typeparam name="NxT">The type to deserialize</typeparam>
+		/// <param name="bxml">The message to deserialize</param>
+		/// <returns>The deserialized object or null if an error has occurred</returns>
+		private NxT Deserialize<NxT>(byte[] bxml)
+		{
+			if (null != bxml)
+			{
+				return Deserialize<NxT>(Encoding.UTF8.GetString(bxml));
+			}
+			return default;
+		}
+		/// <summary>
+		/// Deserialize a SaleToPOIXXX from a string
+		/// </summary>
+		/// <typeparam name="NxT">The type to deserialize</typeparam>
+		/// <param name="xml">String to deserialize</param>
+		/// <returns>The deserialized object or null if an error has occurred</returns>
+		private NxT Deserialize<NxT>(string xml)
+		{
+			if (!string.IsNullOrEmpty(xml))
+				try
+				{
+					// validate XML
+					if (!UseJson)
+						xml = ValidateXML(xml);
+					return (NxT)XmlDeserialize<NxT>(xml, UseJson, BOM);
+				}
+				catch (Exception) { }
+			// arrived here an error has occurred
+			return default;
+		}
+		/// <summary>
 		/// Optimize and serialize request
 		/// </summary>
 		/// <returns>The XML string representing the object</returns>
@@ -289,23 +545,18 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				request.XSD_Optimizing = OptimizeXml;
+				request.XSD_Optimizing = true;// OptimizeXml;
 				try
 				{
 					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
-					//if (OptimizeXml)
-					//	Optimize(request, request.Item, true);
 				}
 				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request optimisation"); }
 				finally
 				{
-					serialized = Serialize<SaleToPOIRequest>(request);
-					//try
-					//{
-					//	if (OptimizeXml)
-					//		Optimize(request, request.Item, false);
-					//}
-					//catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request de-optimisation"); }
+					if (UseJson)
+						serialized = Serialize<XSaleToPOIRequest>(new XSaleToPOIRequest() { SaleToPOIRequest = request });
+					else
+						serialized = Serialize<SaleToPOIRequest>(request);
 				}
 			}
 			catch (Exception ex)
@@ -319,6 +570,7 @@ namespace NEXO
 			}
 			return serialized;
 		}
+		class XSaleToPOIRequest { public SaleToPOIRequest SaleToPOIRequest; }
 		/// <summary>
 		/// Optimize and serialize response
 		/// </summary>
@@ -328,23 +580,18 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				reply.XSD_Optimizing = OptimizeXml;
+				reply.XSD_Optimizing = true;// OptimizeXml;
 				try
 				{
 					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
-					//if (OptimizeXml)
-					//	Optimize(reply, reply.Item, true);
 				}
 				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply optimisation"); }
 				finally
 				{
-					serialized = Serialize<SaleToPOIResponse>(reply);
-					//try
-					//{
-					//	if (OptimizeXml)
-					//		Optimize(reply, reply.Item, false);
-					//}
-					//catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply de-optimisation"); }
+					if (UseJson)
+						serialized = Serialize<XSaleToPOIResponse>(new XSaleToPOIResponse() { SaleToPOIResponse = reply });
+					else
+						serialized = Serialize<SaleToPOIResponse>(reply);
 				}
 			}
 			catch (Exception ex)
@@ -358,6 +605,7 @@ namespace NEXO
 			}
 			return serialized;
 		}
+		class XSaleToPOIResponse { public SaleToPOIResponse SaleToPOIResponse; }
 		/// <summary>
 		/// Serialize a SaleToPOIXXX
 		/// </summary>
@@ -368,7 +616,11 @@ namespace NEXO
 		{
 			try
 			{
-				string s = XmlSerialize<NxT>(request, BOM);
+				string s = XmlSerialize<NxT>(request, UseJson, BOM, false);
+				// return json string
+				if (UseJson)
+					return s;
+				// return xml string
 				return ValidateXML(s);
 			}
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
@@ -382,284 +634,100 @@ namespace NEXO
 		/// </summary>
 		/// <typeparam name="NxT">the class type to serialize</typeparam>
 		/// <param name="data">the object to serialize</param>
-		/// <param name="bom">true if BOM must be added, false otherwise</param>
-		/// <param name="ns">true if namespace must be added, false otherwise</param>
+		/// <param name="toJson">if true serialisation will produce json string, xml string if false</param>
+		/// <param name="bom">true if BOM must be added, false otherwise (default)</param>
+		/// <param name="ns">true if namespace must be added, false otherwise (default)</param>
 		/// <returns>a serialized string or an empty string if an error occurred</returns>
-		public static string XmlSerialize<NxT>(NxT data, bool bom = false, bool ns = false)
+		public static string XmlSerialize<NxT>(NxT data, bool toJson, bool bom = false, bool ns = false)
 		{
 			if (null == data)
 				return null;
 
-			// remove version
-			XmlWriterSettings settings = new XmlWriterSettings();
-			settings.Indent = false;
-			settings.CloseOutput = true;
-			settings.OmitXmlDeclaration = false;
-
-			XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
-			using (StringWriter sw = new UTF8StringWriter(bom))
-			using (XmlWriter writer = XmlWriter.Create(sw, settings))
+			try
 			{
-				var xmlns = new XmlSerializerNamespaces();
-				// removes namespace if requested
-				if (!ns)
-					xmlns.Add(string.Empty, string.Empty);
-				// serialize
-				xsSubmit.Serialize(writer, data, xmlns);
-				return sw.ToString();
+				if (toJson)
+				{
+					return JsonConvert.SerializeObject(data,
+						Newtonsoft.Json.Formatting.None,
+						new JsonSerializerSettings()
+						{
+							MissingMemberHandling = MissingMemberHandling.Ignore,
+							NullValueHandling = NullValueHandling.Ignore
+						});
+				}
+				else
+				{
+					// remove version
+					XmlWriterSettings settings = new XmlWriterSettings();
+					settings.Indent = false;
+					settings.CloseOutput = true;
+					settings.OmitXmlDeclaration = false;
+
+					XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
+					using (StringWriter sw = new UTF8StringWriter(bom))
+					using (XmlWriter writer = XmlWriter.Create(sw, settings))
+					{
+						var xmlns = new XmlSerializerNamespaces();
+						// removes namespace if requested
+						if (!ns)
+							xmlns.Add(string.Empty, string.Empty);
+						// serialize
+						xsSubmit.Serialize(writer, data, xmlns);
+						return sw.ToString();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				return null;
 			}
 		}
 		/// <summary>
 		/// Generic serializer
 		/// </summary>
 		/// <typeparam name="NxT">the class type to serialize</typeparam>
+		/// <param name="isJson">if true deserialisation will be made from json string, from xml string if false</param>
 		/// <param name="data">the object to serialize</param>
-		/// <param name="bom">true if BOM must be used, false otherwise</param>
+		/// <param name="bom">true if BOM must be used, false otherwise (default)</param>
 		/// <returns>a serialized string or an empty string if an error occurred</returns>
-		public static object XmlDeserialize<NxT>(string data, bool bom = false) //where NxT : class
+		public static object XmlDeserialize<NxT>(string data, bool isJson, bool bom = false) //where NxT : class
 		{
 			if (string.IsNullOrEmpty(data))
 				return null;
 
-			// remove version
-			XmlReaderSettings settings = new XmlReaderSettings();
-			settings.IgnoreComments = true;
-			settings.IgnoreProcessingInstructions = true;
-			settings.IgnoreWhitespace = true;
-			settings.CloseInput = true;
+			try
+			{
+				if (isJson)
+				{
+					return JsonConvert.DeserializeObject<NxT>(data,
+						new JsonSerializerSettings()
+						{
+							MissingMemberHandling = MissingMemberHandling.Ignore,
+							NullValueHandling = NullValueHandling.Ignore
+						});
+				}
+				else
+				{
+					// remove version
+					XmlReaderSettings settings = new XmlReaderSettings();
+					settings.IgnoreComments = true;
+					settings.IgnoreProcessingInstructions = true;
+					settings.IgnoreWhitespace = true;
+					settings.CloseInput = true;
 
-			XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
-			using (StreamReader stream = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(data ?? string.Empty)), Encoding.UTF8, bom))
-			using (XmlReader reader = XmlReader.Create(stream, settings))
-				return xsSubmit.Deserialize(reader);
+					XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
+					using (StreamReader stream = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(data ?? string.Empty)), Encoding.UTF8, bom))
+					using (XmlReader reader = XmlReader.Create(stream, settings))
+						return xsSubmit.Deserialize(reader);
+				}
+			}
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				return null;
+			}
 		}
-		/// <summary>
-		/// This function will optimize the XML structure to avoid declaring types not initialised (avoiding default values) when serializing a type
-		/// </summary>
-		/// <param name="o">The initial object to serialize (usually a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/>)</param>
-		/// <param name="data">The structure of the specific nexo object to optimize (Login, Payment,...). THIS PARAMETER MUST NEVER BE NULL WHEN CALLING THIS FUNCTION, only recursive calls can set the parameter to null</param>
-		/// <param name="optimize">Indicates whether optimisation must be turned on or off</param>
-		/// <returns></returns>
-		public static bool Optimize(object o, object data, bool optimize)
-		{
-			//// if no object it hasn't been modified
-			//if (null == o)
-			//	return false;
-			//bool hasbeenset = false;
-			//// get the modified flag of the current object
-			//PropertyInfo pi = o.GetType().GetProperty(Strings.NexoHasBeenSetProperty);
-			//if (null != pi)
-			//{
-			//	// get init flag
-			//	hasbeenset = (bool)pi.GetValue(o, null);
-			//	string nmspace = typeof(SaleToPOIRequest).Namespace;
-			//	// look for other objects inside this object
-			//	object targetObject = data ?? o;
-			//	List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
-			//	foreach (PropertyInfo pinfo in properties)
-			//	{
-			//		// verify only types defined inside the current namespace, others won't carry the set flag property
-			//		if (null != pinfo.GetValue(targetObject, null) &&
-			//			(nmspace == pinfo.PropertyType.Namespace ||
-			//			("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
-			//		{
-			//			int maxindex = 0;
-			//			bool mustOptimize = true;
-			//			// if array, an empty array indicates not set
-			//			if (pinfo.PropertyType.IsArray)
-			//				mustOptimize = 0 != (maxindex = ((Array)pinfo.GetValue(targetObject, null)).Length) && 1 == pinfo.PropertyType.GetArrayRank();
-			//			// we go inside the property only if optimization is necessary
-			//			if (mustOptimize)
-			//			{
-			//				// we do it only if the property owns other properties (useless otherwise)
-			//				List<PropertyInfo> subproperties = pinfo.GetType().GetProperties().ToList();
-			//				if (null != subproperties && 0 != subproperties.Count)
-			//				{
-			//					bool f = false;
-			//					if (pinfo.PropertyType.IsArray)
-			//					{
-			//						Array array = (Array)pinfo.GetValue(targetObject, null);
-			//						for (int i = 0; i < array.Length; i++)
-			//						{
-			//							object arrayObject = array.GetValue(i);
-			//							f = Optimize(arrayObject, null);
-			//							if (!f)
-			//								array.SetValue(null, i);
-			//							hasbeenset = hasbeenset || f;
-			//						}
-			//					}
-			//					//else
-			//					//{
-			//					//	// the object owns sub properties, we must recurse this processing
-			//					//	f = Optimize(pinfo.GetValue(targetObject, null), null);
-			//					//	if (!f)
-			//					//		pinfo.SetValue(targetObject, null, null);
-			//					//	hasbeenset = hasbeenset || f;
-			//					//}
-			//					else if (pinfo.PropertyType.IsClass)
-			//					{
-			//						// the object owns sub properties, we must recurse this processing
-			//						f = Optimize(pinfo.GetValue(targetObject, null), null);
-			//						if (!f)
-			//							pinfo.SetValue(targetObject, null, null);
-			//						hasbeenset = hasbeenset || f;
-			//					}
-			//				}
-			//			}
-			//		}
-			//	}
-			//}
-			//return hasbeenset;
-
-			//// if no object it hasn't been modified
-			//if (null == o) return false;
-
-			//// get the modified flag of the current object
-			//bool hasbeenset = false;
-			//PropertyInfo pi = o.GetType().GetProperty(NexoXSDStrings.NexoHasBeenSetProperty);
-			//if (null != pi)
-			//{
-			//	// get init flag
-			//	hasbeenset = (bool)pi.GetValue(o, null);
-			//	string nmspace = typeof(SaleToPOIRequest).Namespace;
-			//	// look for other objects inside this object
-			//	object targetObject = o;// data ?? o;
-			//	List<PropertyInfo> properties = targetObject.GetType().GetProperties().ToList();
-			//	foreach (PropertyInfo pinfo in properties)
-			//	{
-			//		object obj = o;
-			//		Type type = pinfo.PropertyType;
-			//		if (IsSystemObject(pinfo))
-			//		{
-			//			obj = pinfo.GetValue(o, null);
-			//			if (null != obj)
-			//				type = obj.GetType();
-			//		}
-			//		// verify only types defined inside the current namespace, others won't carry the set flag property
-			//		if (null != obj &&
-			//			  //(nmspace == pinfo.PropertyType.Namespace ||
-			//			  //("System" == pinfo.PropertyType.Namespace && pinfo.PropertyType.IsArray)))
-			//			  (nmspace == type.Namespace ||
-			//			  ("System" == type.Namespace && type.IsArray)))
-			//		{
-			//			int maxindex = 0;
-			//			bool mustOptimize = true;
-			//			// if array, an empty array indicates not set
-			//			if (pinfo.PropertyType.IsArray)
-			//			{
-			//				if (null != pinfo.GetValue(targetObject, null))
-			//					mustOptimize = 0 != (maxindex = ((Array)pinfo.GetValue(targetObject, null)).Length) && 1 == pinfo.PropertyType.GetArrayRank();
-			//				else
-			//					mustOptimize = false;
-			//			}
-			//			// we go inside the property only if optimization is necessary
-			//			if (mustOptimize)
-			//			{
-			//				// we do it only if the property owns other properties (useless otherwise)
-			//				List<PropertyInfo> subproperties = pinfo.GetType().GetProperties().ToList();
-			//				if (null != subproperties && 0 != subproperties.Count)
-			//				{
-			//					bool f = false;
-			//					if (pinfo.PropertyType.IsArray)
-			//					{
-			//						Array array = (Array)pinfo.GetValue(targetObject, null);
-			//						for (int i = 0; i < array.Length; i++)
-			//						{
-			//							object arrayObject = array.GetValue(i);
-			//							f = Optimize(arrayObject, null, optimize);
-			//							//if (!f)
-			//							//	array.SetValue(null, i);
-			//							hasbeenset = hasbeenset || f;
-			//						}
-			//					}
-			//					//else
-			//					//{
-			//					//	// the object owns sub properties, we must recurse this processing
-			//					//	f = Optimize(pinfo.GetValue(targetObject, null), null);
-			//					//	if (!f)
-			//					//		pinfo.SetValue(targetObject, null, null);
-			//					//	hasbeenset = hasbeenset || f;
-			//					//}
-			//					else if (pinfo.PropertyType.IsClass)
-			//					{
-			//						// the object owns sub properties, we must recurse this processing
-			//						f = Optimize(pinfo.GetValue(targetObject, null), null, optimize);
-			//						//if (!f)
-			//						//	pinfo.SetValue(targetObject, null, null);
-			//						hasbeenset = hasbeenset || f;
-			//					}
-			//				}
-			//			}
-			//		}
-			//	}
-
-			//	//if (null != optimizing)
-			//	//	optimizing.SetValue(targetObject, false, null);
-			//	pi.SetValue(o, hasbeenset, null);
-
-
-
-			//	//List<PropertyInfo> internalproperties = targetObject.GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic).ToList();
-
-			//	//PropertyInfo optimizing = null;
-			//	//try
-			//	//{
-			//	//	// indicate we're optimizing
-			//	//	foreach (PropertyInfo prop in internalproperties)
-			//	//		if (0 == string.Compare(prop.Name, Strings.OptimizingClassProperty, true))
-			//	//		{
-			//	//			optimizing = prop;
-			//	//			optimizing.SetValue(targetObject, optimize, null);
-			//	//			break;
-			//	//		}
-			//	//	if (null == optimizing)
-			//	//	{
-			//	//		// strange
-			//	//	}
-			//}
-			//return hasbeenset;
-
-			return true;
-		}
-		///// <summary>
-		///// Allows propagating the value of a bool property from a starting object to its leaves objects
-		///// That function DOES NOT SET the requested property inside the starting object
-		///// </summary>
-		///// <param name="initial">Starting object</param>
-		///// <param name="property">Property name to look for and to update</param>
-		///// <param name="value">Value to set</param>
-		///// <returns>True if the property was found inside the starting object, false otherwise</returns>
-		//public static bool SetBoolPropertyValue(object initial, string property, bool value)
-		//{
-		//	try
-		//	{
-		//		PropertyInfo pi = initial.GetType().GetProperty(property, typeof(bool));
-		//		if (null != pi)
-		//		{
-		//			// parse all properties inside this class searching for this same property
-		//			List<PropertyInfo> properties = initial.GetType().GetProperties().ToList();
-		//			foreach (PropertyInfo pinfo in properties)
-		//			{
-		//				// get the object holding the property we're looking for
-		//				object target = FindRealPropertyObject(initial, pinfo, out Type type);
-		//				if (null != target)
-		//				{
-		//					pi = type.GetProperty(property, typeof(bool));
-		//					if (null != pi)
-		//					{
-		//						pi.SetValue(target, value, null);
-		//					}
-		//				}
-		//			}
-		//			return true;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, $"Object: {initial.GetType()} - Property name: {property}");
-		//	}
-		//	return false;
-		//}
 		/// <summary>
 		/// Set a property value (not an array one) by name inside an object
 		/// </summary>
@@ -760,18 +828,6 @@ namespace NEXO
 			}
 			return type;
 		}
-		//private static bool IsSystemType(Type type)
-		//{
-		//	return (0 == string.Compare("system", type.Namespace, true));
-		//}
-		//private static bool IsSystemObject(Type type)
-		//{
-		//	return IsSystemType(type) && (0 == string.Compare("object", type.Name, true));
-		//}
-		//private static bool IsArray(Type type)
-		//{
-		//	return type.IsArray;
-		//}
 		#endregion
 	}
 }

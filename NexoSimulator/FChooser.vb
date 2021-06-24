@@ -5,14 +5,22 @@ Imports Newtonsoft.Json
 Imports System.Xml
 
 Public Class FChooser
-	Public XML As String = Nothing
+	Public Data As String = Nothing
+	Public UseJson As Boolean = False
+	Private IsReady As Boolean = False
 
 	Private Sub FChoser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If NEXO30 Then
 		rbTransactionReport.Visible = False
 #End If
-		efXML.Text = XML
+		efNotation.Text = Data
+		cbUseJson.Checked = UseJson
 		rbPayment.Checked = True
+
+		ToolTip1.SetToolTip(efCoded, "Enter a string compatible with storage inside a Json file" & vbCrLf & "All special characters must be escaped (ex: "" must be coded \"" ")
+		ToolTip1.SetToolTip(efTarget, "This is a string whose format is compliant with storage inside a Json file" & vbCrLf & "You can copy and paste it inside a Json file")
+
+		IsReady = True
 		SetButtons()
 	End Sub
 
@@ -21,15 +29,17 @@ Public Class FChooser
 	End Sub
 
 	Private Sub pbCancel_Click(sender As Object, e As EventArgs) Handles pbCancel.Click
+		Data = efNotation.Text
+		UseJson = cbUseJson.Checked
 		Close()
 	End Sub
 
 	Private Sub pbAnalyse_Click(sender As Object, e As EventArgs) Handles pbAnalyse.Click
 		Dim nxo As NexoObject = Nothing
 		Dim item As NexoItem = Nothing
-		efXML.Text = Trim(efXML.Text)
-		If Not String.IsNullOrEmpty(efXML.Text) Then
-			item = New NexoItem(efXML.Text)
+		efNotation.Text = Trim(efNotation.Text)
+		If Not String.IsNullOrEmpty(efNotation.Text) Then
+			item = New NexoItem(efNotation.Text)
 			If item.IsValid Then
 				nxo = NexoItem.ToNexoObject(item)
 				If Not IsNothing(nxo) Then
@@ -103,19 +113,19 @@ Public Class FChooser
 			End If
 		End If
 
-		Visible = False
+		'Visible = False
 		'call the builder window
-		Dim f As New FBuilder
-		f.O = nxo
-		f.MakeRequest = cbRequest.Checked
+		Dim f As New FBuilder With {.O = nxo, .MakeRequest = cbRequest.Checked}
 		Select Case f.ShowDialog()
 			Case DialogResult.Yes
 				dr = DialogResult.OK
-				efXML.Text = Clipboard.GetText
-				efXMLJson.Text = JsonConvert.SerializeObject(Clipboard.GetText)
+				efNotation.Text = f.Target
+				efTarget.Text = JsonConvert.SerializeObject(f.Target)
+				efNotTheTarget.Text = JsonConvert.SerializeObject(f.NotTheTarget)
 		End Select
 		nxo = Nothing
-		Visible = True
+		f.Dispose()
+		'Visible = True
 		Return dr
 	End Function
 
@@ -126,52 +136,70 @@ Public Class FChooser
 		Return orig
 	End Function
 
-	Private Sub efXML_TextChanged(sender As Object, e As EventArgs) Handles efXML.TextChanged
-		'Dim s = efXML.Text
-		'If s.Contains("\""") Then
-		'	Dim pos As Integer = efXML.SelectionStart
-		'	s = s.Replace("\""", """")
-		'	efXML.Text = s
-		'	Try
-		'		efXML.SelectionStart = pos - 1
-		'	Catch ex As Exception
-		'		efXML.SelectionStart = 0
-		'	End Try
-		Dim s As String = efXML.Text
-		Dim pos As Integer = efXML.SelectionStart
-		s = ReplaceChars(s, "\""", """")
-		s = ReplaceChars(s, Chars.CR, "")
-		s = ReplaceChars(s, Chars.LF, "")
-		s = ReplaceChars(s, Chars.TAB, "")
-		efXML.Text = s
-		Try
-			efXML.SelectionStart = pos - 1
-		Catch ex As Exception
-			efXML.SelectionStart = 0
-		End Try
-		SetButtons()
+	Private Sub efXML_TextChanged(sender As Object, e As EventArgs) Handles efNotation.TextChanged
+		If IsReady Then
+			'Dim s = efXML.Text
+			'If s.Contains("\""") Then
+			'	Dim pos As Integer = efXML.SelectionStart
+			'	s = s.Replace("\""", """")
+			'	efXML.Text = s
+			'	Try
+			'		efXML.SelectionStart = pos - 1
+			'	Catch ex As Exception
+			'		efXML.SelectionStart = 0
+			'	End Try
+			Dim s As String = efNotation.Text
+			Dim pos As Integer = efNotation.SelectionStart
+			s = ReplaceChars(s, "\""", """")
+			s = ReplaceChars(s, Chars.CR, "")
+			s = ReplaceChars(s, Chars.LF, "")
+			s = ReplaceChars(s, Chars.TAB, "")
+			efNotation.Text = s
+			Try
+				efNotation.SelectionStart = pos
+			Catch ex As Exception
+				efNotation.SelectionStart = 0
+			End Try
+			SetButtons()
+		End If
 	End Sub
 
 	Private Sub SetButtons()
-		pbAnalyse.Enabled = Not String.IsNullOrEmpty(efXML.Text)
-		pbAnalyseJson.Enabled = Not String.IsNullOrEmpty(efJSON.Text)
+		UseJson = cbUseJson.Checked
+		NexoRetailer.UseJson = UseJson
+
+		Dim sz1 As String, sz2 As String
+		If cbUseJson.Checked Then
+			sz1 = "JSON"
+			sz2 = "XML"
+		Else
+			sz1 = "XML"
+			sz2 = "JSON"
+		End If
+		lblNotation.Text = sz1
+		lblTargetNotation.Text = "Coded " & sz1
+		lblInverseNotation.Text = "Coded " & sz2
+		ToolTip1.SetToolTip(efNotation, "Enter a plain and valid " & sz1 & " text to analyze")
+
+		pbAnalyse.Enabled = Not String.IsNullOrEmpty(efNotation.Text)
+		pbAnalyseJson.Enabled = Not String.IsNullOrEmpty(efCoded.Text)
 	End Sub
 
-	Private Sub pbCopy_Click(sender As Object, e As EventArgs) Handles pbCopy.Click
-		Clipboard.SetText(efXMLJson.Text)
+	Private Sub pbCopy_Click(sender As Object, e As EventArgs) Handles pbCopy1.Click
+		Clipboard.SetText(efTarget.Text)
 	End Sub
 
 	Private Sub pbAnalyseJson_Click(sender As Object, e As EventArgs) Handles pbAnalyseJson.Click
 		Dim nxo As NexoObject = Nothing
 		Dim item As NexoItem = Nothing
-		efJSON.Text = Trim(efJSON.Text)
-		If Not String.IsNullOrEmpty(efJSON.Text) Then
-			If Not efJSON.Text.StartsWith("""") Then efJSON.Text = """" & efJSON.Text
-			If Not efJSON.Text.EndsWith("""") Then efJSON.Text = efJSON.Text & """"
+		efCoded.Text = Trim(efCoded.Text)
+		If Not String.IsNullOrEmpty(efCoded.Text) Then
+			If Not efCoded.Text.StartsWith("""") Then efCoded.Text = """" & efCoded.Text
+			If Not efCoded.Text.EndsWith("""") Then efCoded.Text = efCoded.Text & """"
 			'from json to xml
 			Dim sz As String = String.Empty
 			Try
-				sz = JsonConvert.DeserializeObject(Of String)(efJSON.Text)
+				sz = JsonConvert.DeserializeObject(Of String)(efCoded.Text)
 			Catch ex As Exception
 			End Try
 			item = New NexoItem(sz)
@@ -185,7 +213,24 @@ Public Class FChooser
 		End If
 	End Sub
 
-	Private Sub efJSON_TextChanged(sender As Object, e As EventArgs) Handles efJSON.TextChanged
-		SetButtons()
+	Private Sub efJSON_TextChanged(sender As Object, e As EventArgs) Handles efCoded.TextChanged
+		If IsReady Then
+			SetButtons()
+		End If
+	End Sub
+
+	Private Sub cbUseJson_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseJson.CheckedChanged
+		If IsReady Then
+			Dim sz As String = efTarget.Text
+			efTarget.Text = efNotTheTarget.Text
+			efNotTheTarget.Text = sz
+			efNotation.Text = Nothing
+			efCoded.Text = Nothing
+			SetButtons()
+		End If
+	End Sub
+
+	Private Sub pbCopy2_Click(sender As Object, e As EventArgs) Handles pbCopy2.Click
+		Clipboard.SetText(efNotTheTarget.Text)
 	End Sub
 End Class

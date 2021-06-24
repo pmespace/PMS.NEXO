@@ -101,7 +101,8 @@ namespace NEXO
 		public NexoItem(string xml)
 		{
 			// try deserializing the mesage to a request
-			SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			//SaleToPOIRequest request = Deserialize<SaleToPOIRequest>(xml);
+			SaleToPOIRequest request = DeserializeRequest(xml);
 			if (ValidMsg(request)
 				&& IdentifyNexoObject(request.MessageHeader))
 			{
@@ -112,7 +113,8 @@ namespace NEXO
 			else
 			{
 				// try deserializing the mesage to a response
-				SaleToPOIResponse reply = Deserialize<SaleToPOIResponse>(xml);
+				//SaleToPOIResponse reply = Deserialize<SaleToPOIResponse>(xml);
+				SaleToPOIResponse reply = DeserializeResponse(xml);
 				if (ValidMsg(reply)
 					&& IdentifyNexoObject(reply.MessageHeader))
 				//&& IdentifyNexoObject((MessageCategoryEnumeration)Enum.Parse(typeof(MessageCategoryEnumeration), reply.MessageHeader.MessageCategory)))

@@ -306,10 +306,11 @@ namespace XSDEx
 				msg.Text = "Finalising";
 
 				// add the required imports 
-				newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
+				//newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
 				if (settings.AddDispID && settings.DeclareClassInterface)
 					newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.InteropServices"));
-
+				//// add newtonsoft.json
+				//newCodeNamespace.Imports.Add(new CodeNamespaceImport("Newtonsoft.Json"));
 
 				// display in texbox
 				//CodeGenerator.ValidateIdentifiers(codeNamespace);
@@ -394,7 +395,7 @@ namespace XSDEx
 
 					// create HASBEENSET flag stating a user type has or not been set (create an additional bool value set to true if the data has been set, false otherwise)
 					//CodeMemberField hasBeenSetField = CreateFieldMember(NexoXSDStrings.NexoHasBeenSetField, typeof(bool), MemberAttributes.Private, false);
-					CodeMemberProperty hasBeenSetProperty = CreatePropertyMember(NexoXSDStrings.NexoHasBeenSetProperty, typeof(bool), MemberAttributes.Public | MemberAttributes.Final);//, hasBeenSetField, bXSD, eXSD);
+					CodeMemberProperty hasBeenSetProperty = CreatePropertyMember(NexoXSDStrings.NexoHasBeenSetProperty, typeof(bool), MemberAttributes.Assembly | MemberAttributes.Final);//, hasBeenSetField, bXSD, eXSD);
 
 					// prepare OPTIMIZING flag statements as a FIELD (create an additional bool value set to true if optimizing the class, false otherwise)
 					CodeMemberField optimizingField = CreateFieldMember(NexoXSDStrings.NexoOptimizingField, typeof(bool), MemberAttributes.Private, false);
@@ -1134,59 +1135,8 @@ namespace XSDEx
 							AddComment(hasBeenSetProperty, e, true);
 
 							//// "SET" statements
-							//AddSetStatementFromValue(hasBeenSetProperty, hasBeenSetField, b, e);
-							//AddComment(hasBeenSetProperty, b, false);
-							//statements.Add(new CodeConditionStatement(
-							//	new CodeBinaryOperatorExpression(
-							//		new CodePropertySetValueReferenceExpression(),
-							//		CodeBinaryOperatorType.IdentityEquality,
+							//AddSetStatementFromValue(hasBeenSetProperty, null, b, e);
 
-
-							//	new CodePropertyReferenceExpression(
-							//		new CodeThisReferenceExpression(),
-							//		cmp.Name),
-							//	new CodePrimitiveExpression(null)));
-							//foreach (CodeMemberProperty cmp in propertiesToProcess)
-							//{
-							//	statements.Add(new CodeAssignStatement(
-							//		new CodePropertyReferenceExpression(
-							//			new CodeThisReferenceExpression(),
-							//			cmp.Name),
-							//		new CodePrimitiveExpression(null)));
-							//}
-							//foreach (CodeMemberProperty cmp in optionalsToProcess)
-							//{
-							//	statements.Add(new CodeAssignStatement(
-							//		new CodePropertyReferenceExpression(
-							//			new CodeThisReferenceExpression(),
-							//			cmp.Name),
-							//		new CodePrimitiveExpression(false)));
-							//}
-							//foreach (CodeMemberField cmp in fieldsHasBeenSetFlag)
-							//{
-							//	statements.Add(new CodeAssignStatement(
-							//		new CodeFieldReferenceExpression(
-							//			new CodeThisReferenceExpression(),
-							//			cmp.Name),
-							//		new CodePrimitiveExpression(false)));
-							//}
-							//foreach (CodeMemberField cmp in fieldsHasBeenSetFlag)
-							//{
-							//	statements.Add(new CodeAssignStatement(
-							//		new CodeFieldReferenceExpression(
-							//			new CodeThisReferenceExpression(),
-							//			cmp.Name),
-							//		new CodePrimitiveExpression(false)));
-							//}
-							//hasBeenSetProperty.SetStatements.Add(new CodeConditionStatement(
-							//	new CodeBinaryOperatorExpression(
-							//		new CodePropertyReferenceExpression(
-							//			new CodeThisReferenceExpression(), hasBeenSetField.Name),
-							//			CodeBinaryOperatorType.IdentityEquality,
-							//			new CodePrimitiveExpression(false)),
-							//		statements.ToArray()));
-							//AddComment(hasBeenSetProperty, e, false);
-							//codeType.Members.Add(hasBeenSetField);
 							codeType.Members.Add(hasBeenSetProperty);
 
 							//*****
@@ -1523,23 +1473,29 @@ namespace XSDEx
 		}
 		private static void AddGuid(CodeAttributeDeclarationCollection attrs)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.GuidAttribute"), new CodeAttributeArgument(new CodePrimitiveExpression(Guid.NewGuid().ToString())))); }
+
 		private static void AddComVisible(CodeAttributeDeclarationCollection attrs, bool visible = true)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.ComVisibleAttribute"), new CodeAttributeArgument(new CodePrimitiveExpression(visible)))); }
+
 		private static void AddClassInterface(CodeAttributeDeclarationCollection attrs, ClassInterfaceType clsif = ClassInterfaceType.None)
 		{
 			attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.ClassInterface"),
 			 new CodeAttributeArgument(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("System.Runtime.InteropServices.ClassInterfaceType"), clsif.ToString()))));
 		}
+
 		private static void AddInterfaceType(CodeAttributeDeclarationCollection attrs, ComInterfaceType cit = ComInterfaceType.InterfaceIsDual)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("System.Runtime.InteropServices.InterfaceTypeAttribute"), new CodeAttributeArgument(new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("System.Runtime.InteropServices.ComInterfaceType"), cit.ToString())))); }
+
 		private static void AddDispID(CodeAttributeDeclarationCollection attrs, int dispid)
 		{ attrs.Add(new CodeAttributeDeclaration(new CodeTypeReference("DispId"), new CodeAttributeArgument(new CodePrimitiveExpression(dispid)))); }
+
 		private static void AddElementAttribute(CodeAttributeDeclarationCollection attrs, string name, Type type)
 		{
 			attrs.Add(new CodeAttributeDeclaration(
 				new CodeTypeReference("System.Xml.Serialization.XmlElementAttribute"),
 				new CodeAttributeArgument(new CodeTypeOfExpression(type))));
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -1555,6 +1511,11 @@ namespace XSDEx
 				Type = new CodeTypeReference(type),
 				Attributes = attr,
 			};
+
+			//*** for no reason I can understand JsonIgnore doesn't work !!!
+			//// that init flag statement will not be serialized inside Json
+			//cmp.CustomAttributes.Add(new CodeAttributeDeclaration("Newtonsoft.Json.JsonIgnore"));
+
 			// that init flag statement will not be serialized inside XML
 			cmp.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlIgnoreAttribute"));
 			return cmp;
@@ -1581,10 +1542,11 @@ namespace XSDEx
 		/// <param name="field"></param>
 		/// <param name="b"></param>
 		/// <param name="e"></param>
-		private void AddGetStatementFromField(CodeMemberProperty cmp, CodeMemberField field, string b = null, string e = null)
+		private void AddGetStatementFromField(CodeMemberProperty cmp, CodeMemberField field = null, string b = null, string e = null)
 		{
 			if (!string.IsNullOrEmpty(b)) cmp.GetStatements.Add(new CodeCommentStatement($"{b} - {MethodBase.GetCurrentMethod().Name}"));
-			cmp.GetStatements.Add(new CodeMethodReturnStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), field.Name)));
+			if (null != field)
+				cmp.GetStatements.Add(new CodeMethodReturnStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), field.Name)));
 			if (!string.IsNullOrEmpty(e)) cmp.GetStatements.Add(new CodeCommentStatement($"{e} - {MethodBase.GetCurrentMethod().Name}"));
 		}
 		/// <summary>
@@ -1597,7 +1559,8 @@ namespace XSDEx
 		private void AddSetStatementFromValue(CodeMemberProperty cmp, CodeMemberField field, string b = null, string e = null)
 		{
 			if (!string.IsNullOrEmpty(b)) cmp.SetStatements.Add(new CodeCommentStatement($"{b} - {MethodBase.GetCurrentMethod().Name}"));
-			cmp.SetStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), field.Name), new CodePropertySetValueReferenceExpression()));
+			if (null != field)
+				cmp.SetStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeThisReferenceExpression(), field.Name), new CodePropertySetValueReferenceExpression()));
 			if (!string.IsNullOrEmpty(e)) cmp.SetStatements.Add(new CodeCommentStatement($"{e} - {MethodBase.GetCurrentMethod().Name}"));
 		}
 		/// <summary>

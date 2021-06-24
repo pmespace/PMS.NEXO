@@ -40,15 +40,15 @@ Partial Class FSimulator
 		Me.panelCommands = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbLogin = New System.Windows.Forms.Button()
 		Me.pbLogout = New System.Windows.Forms.Button()
-		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
-		Me.cbOptimize = New System.Windows.Forms.CheckBox()
-		Me.cbAddReceipt = New System.Windows.Forms.CheckBox()
-		Me.cbOnelineReceipt = New System.Windows.Forms.CheckBox()
 		Me.pbPayment = New System.Windows.Forms.Button()
 		Me.pbDevicePrint = New System.Windows.Forms.Button()
 		Me.pbReversal = New System.Windows.Forms.Button()
 		Me.pbDeviceInput = New System.Windows.Forms.Button()
 		Me.pbRefund = New System.Windows.Forms.Button()
+		Me.cbAutomaticMode = New System.Windows.Forms.CheckBox()
+		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
+		Me.cbUseJson = New System.Windows.Forms.CheckBox()
+		Me.cbOptimize = New System.Windows.Forms.CheckBox()
 		Me.panelGateway = New System.Windows.Forms.TableLayoutPanel()
 		Me.serverToReachPanel14 = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelGatewayPort = New System.Windows.Forms.TableLayoutPanel()
@@ -136,7 +136,9 @@ Partial Class FSimulator
 		Me.pbSendRequest = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-		Me.cbAutomaticMode = New System.Windows.Forms.CheckBox()
+		Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+		Me.pbResponseFolder = New System.Windows.Forms.Button()
+		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -199,7 +201,7 @@ Partial Class FSimulator
 		Me.PanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.PanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.PanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.PanelMain.Size = New System.Drawing.Size(1019, 575)
+		Me.PanelMain.Size = New System.Drawing.Size(1132, 701)
 		Me.PanelMain.TabIndex = 0
 		'
 		'panelButtons
@@ -221,11 +223,11 @@ Partial Class FSimulator
 		Me.panelButtons.Controls.Add(Me.pbClear, 2, 0)
 		Me.panelButtons.Controls.Add(Me.pbSaveContent, 3, 0)
 		Me.panelButtons.Controls.Add(Me.pbSaveSettings, 1, 0)
-		Me.panelButtons.Location = New System.Drawing.Point(3, 543)
+		Me.panelButtons.Location = New System.Drawing.Point(3, 669)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
 		Me.panelButtons.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelButtons.Size = New System.Drawing.Size(1013, 29)
+		Me.panelButtons.Size = New System.Drawing.Size(1126, 29)
 		Me.panelButtons.TabIndex = 3
 		'
 		'pbClose
@@ -233,7 +235,7 @@ Partial Class FSimulator
 		Me.pbClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbClose.AutoSize = True
 		Me.pbClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbClose.Location = New System.Drawing.Point(967, 3)
+		Me.pbClose.Location = New System.Drawing.Point(1080, 3)
 		Me.pbClose.Name = "pbClose"
 		Me.pbClose.Size = New System.Drawing.Size(43, 23)
 		Me.pbClose.TabIndex = 4
@@ -245,7 +247,7 @@ Partial Class FSimulator
 		Me.pbClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbClear.AutoSize = True
 		Me.pbClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbClear.Location = New System.Drawing.Point(783, 3)
+		Me.pbClear.Location = New System.Drawing.Point(896, 3)
 		Me.pbClear.Name = "pbClear"
 		Me.pbClear.Size = New System.Drawing.Size(91, 23)
 		Me.pbClear.TabIndex = 2
@@ -257,7 +259,7 @@ Partial Class FSimulator
 		Me.pbSaveContent.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSaveContent.AutoSize = True
 		Me.pbSaveContent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSaveContent.Location = New System.Drawing.Point(880, 3)
+		Me.pbSaveContent.Location = New System.Drawing.Point(993, 3)
 		Me.pbSaveContent.Name = "pbSaveContent"
 		Me.pbSaveContent.Size = New System.Drawing.Size(81, 23)
 		Me.pbSaveContent.TabIndex = 3
@@ -269,7 +271,7 @@ Partial Class FSimulator
 		Me.pbSaveSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSaveSettings.AutoSize = True
 		Me.pbSaveSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSaveSettings.Location = New System.Drawing.Point(696, 3)
+		Me.pbSaveSettings.Location = New System.Drawing.Point(809, 3)
 		Me.pbSaveSettings.Name = "pbSaveSettings"
 		Me.pbSaveSettings.Size = New System.Drawing.Size(81, 23)
 		Me.pbSaveSettings.TabIndex = 1
@@ -292,7 +294,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel6.RowCount = 2
 		Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel6.Size = New System.Drawing.Size(1013, 264)
+		Me.TableLayoutPanel6.Size = New System.Drawing.Size(1126, 390)
 		Me.TableLayoutPanel6.TabIndex = 2
 		'
 		'RichTextBox1
@@ -304,7 +306,7 @@ Partial Class FSimulator
 		Me.RichTextBox1.Name = "RichTextBox1"
 		Me.RichTextBox1.ReadOnly = True
 		Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-		Me.RichTextBox1.Size = New System.Drawing.Size(1007, 232)
+		Me.RichTextBox1.Size = New System.Drawing.Size(1120, 358)
 		Me.RichTextBox1.TabIndex = 0
 		Me.RichTextBox1.Text = ""
 		'
@@ -326,7 +328,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
 		Me.TableLayoutPanel7.RowCount = 1
 		Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel7.Size = New System.Drawing.Size(1007, 20)
+		Me.TableLayoutPanel7.Size = New System.Drawing.Size(1120, 20)
 		Me.TableLayoutPanel7.TabIndex = 6
 		'
 		'lblGatewayHeader
@@ -335,9 +337,9 @@ Partial Class FSimulator
 		Me.lblGatewayHeader.AutoSize = True
 		Me.lblGatewayHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lblGatewayHeader.ForeColor = System.Drawing.Color.Crimson
-		Me.lblGatewayHeader.Location = New System.Drawing.Point(338, 0)
+		Me.lblGatewayHeader.Location = New System.Drawing.Point(376, 0)
 		Me.lblGatewayHeader.Name = "lblGatewayHeader"
-		Me.lblGatewayHeader.Size = New System.Drawing.Size(329, 20)
+		Me.lblGatewayHeader.Size = New System.Drawing.Size(367, 20)
 		Me.lblGatewayHeader.TabIndex = 3
 		Me.lblGatewayHeader.Text = "Gateway"
 		Me.lblGatewayHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -348,7 +350,7 @@ Partial Class FSimulator
 		Me.lblServerHeader.AutoSize = True
 		Me.lblServerHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lblServerHeader.ForeColor = System.Drawing.Color.Crimson
-		Me.lblServerHeader.Location = New System.Drawing.Point(943, 0)
+		Me.lblServerHeader.Location = New System.Drawing.Point(1056, 0)
 		Me.lblServerHeader.Name = "lblServerHeader"
 		Me.lblServerHeader.Size = New System.Drawing.Size(61, 20)
 		Me.lblServerHeader.TabIndex = 2
@@ -382,7 +384,7 @@ Partial Class FSimulator
 		Me.panelClientButtons.RowCount = 2
 		Me.panelClientButtons.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelClientButtons.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelClientButtons.Size = New System.Drawing.Size(1013, 1)
+		Me.panelClientButtons.Size = New System.Drawing.Size(1126, 1)
 		Me.panelClientButtons.TabIndex = 0
 		'
 		'panelOptions
@@ -405,9 +407,10 @@ Partial Class FSimulator
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.panelOptions.Size = New System.Drawing.Size(1013, 258)
+		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelOptions.Size = New System.Drawing.Size(1126, 258)
 		Me.panelOptions.TabIndex = 4
 		'
 		'panelCommands
@@ -431,23 +434,23 @@ Partial Class FSimulator
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelCommands.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommands.Controls.Add(Me.pbResponseFolder, 8, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogin, 0, 0)
 		Me.panelCommands.Controls.Add(Me.pbLogout, 1, 0)
-		Me.panelCommands.Controls.Add(Me.cbSynchronous, 11, 0)
-		Me.panelCommands.Controls.Add(Me.cbOptimize, 12, 0)
-		Me.panelCommands.Controls.Add(Me.cbAddReceipt, 9, 0)
-		Me.panelCommands.Controls.Add(Me.cbOnelineReceipt, 10, 0)
 		Me.panelCommands.Controls.Add(Me.pbPayment, 2, 0)
 		Me.panelCommands.Controls.Add(Me.pbDevicePrint, 5, 0)
 		Me.panelCommands.Controls.Add(Me.pbReversal, 3, 0)
 		Me.panelCommands.Controls.Add(Me.pbDeviceInput, 6, 0)
 		Me.panelCommands.Controls.Add(Me.pbRefund, 4, 0)
-		Me.panelCommands.Controls.Add(Me.cbAutomaticMode, 8, 0)
+		Me.panelCommands.Controls.Add(Me.cbAutomaticMode, 9, 0)
+		Me.panelCommands.Controls.Add(Me.cbSynchronous, 10, 0)
+		Me.panelCommands.Controls.Add(Me.cbUseJson, 12, 0)
+		Me.panelCommands.Controls.Add(Me.cbOptimize, 11, 0)
 		Me.panelCommands.Location = New System.Drawing.Point(3, 226)
 		Me.panelCommands.Name = "panelCommands"
 		Me.panelCommands.RowCount = 1
 		Me.panelCommands.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelCommands.Size = New System.Drawing.Size(1007, 29)
+		Me.panelCommands.Size = New System.Drawing.Size(1120, 29)
 		Me.panelCommands.TabIndex = 8
 		'
 		'pbLogin
@@ -473,56 +476,6 @@ Partial Class FSimulator
 		Me.pbLogout.TabIndex = 1
 		Me.pbLogout.Text = "Logout"
 		Me.pbLogout.UseVisualStyleBackColor = True
-		'
-		'cbSynchronous
-		'
-		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.cbSynchronous.AutoSize = True
-		Me.cbSynchronous.Location = New System.Drawing.Point(844, 6)
-		Me.cbSynchronous.Name = "cbSynchronous"
-		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
-		Me.cbSynchronous.TabIndex = 10
-		Me.cbSynchronous.Text = "Synchronous"
-		Me.cbSynchronous.UseVisualStyleBackColor = True
-		'
-		'cbOptimize
-		'
-		Me.cbOptimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cbOptimize.AutoSize = True
-		Me.cbOptimize.Checked = True
-		Me.cbOptimize.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.cbOptimize.Location = New System.Drawing.Point(938, 6)
-		Me.cbOptimize.Name = "cbOptimize"
-		Me.cbOptimize.Size = New System.Drawing.Size(66, 17)
-		Me.cbOptimize.TabIndex = 11
-		Me.cbOptimize.Text = "Optimize"
-		Me.cbOptimize.UseVisualStyleBackColor = True
-		'
-		'cbAddReceipt
-		'
-		Me.cbAddReceipt.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.cbAddReceipt.AutoSize = True
-		Me.cbAddReceipt.Checked = True
-		Me.cbAddReceipt.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.cbAddReceipt.Location = New System.Drawing.Point(652, 6)
-		Me.cbAddReceipt.Name = "cbAddReceipt"
-		Me.cbAddReceipt.Size = New System.Drawing.Size(80, 17)
-		Me.cbAddReceipt.TabIndex = 8
-		Me.cbAddReceipt.Text = "Add receipt"
-		Me.cbAddReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		Me.cbAddReceipt.UseVisualStyleBackColor = True
-		'
-		'cbOnelineReceipt
-		'
-		Me.cbOnelineReceipt.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.cbOnelineReceipt.AutoSize = True
-		Me.cbOnelineReceipt.Location = New System.Drawing.Point(738, 6)
-		Me.cbOnelineReceipt.Name = "cbOnelineReceipt"
-		Me.cbOnelineReceipt.Size = New System.Drawing.Size(100, 17)
-		Me.cbOnelineReceipt.TabIndex = 9
-		Me.cbOnelineReceipt.Text = "One line receipt"
-		Me.cbOnelineReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-		Me.cbOnelineReceipt.UseVisualStyleBackColor = True
 		'
 		'pbPayment
 		'
@@ -585,6 +538,54 @@ Partial Class FSimulator
 		Me.pbRefund.Text = "Refund"
 		Me.pbRefund.UseVisualStyleBackColor = True
 		'
+		'cbAutomaticMode
+		'
+		Me.cbAutomaticMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbAutomaticMode.AutoSize = True
+		Me.cbAutomaticMode.Location = New System.Drawing.Point(773, 6)
+		Me.cbAutomaticMode.Name = "cbAutomaticMode"
+		Me.cbAutomaticMode.Size = New System.Drawing.Size(102, 17)
+		Me.cbAutomaticMode.TabIndex = 8
+		Me.cbAutomaticMode.Text = "Automatic mode"
+		Me.cbAutomaticMode.UseVisualStyleBackColor = True
+		'
+		'cbSynchronous
+		'
+		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbSynchronous.AutoSize = True
+		Me.cbSynchronous.Location = New System.Drawing.Point(881, 6)
+		Me.cbSynchronous.Name = "cbSynchronous"
+		Me.cbSynchronous.Size = New System.Drawing.Size(88, 17)
+		Me.cbSynchronous.TabIndex = 9
+		Me.cbSynchronous.Text = "Synchronous"
+		Me.cbSynchronous.UseVisualStyleBackColor = True
+		'
+		'cbUseJson
+		'
+		Me.cbUseJson.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbUseJson.AutoSize = True
+		Me.cbUseJson.Location = New System.Drawing.Point(1047, 6)
+		Me.cbUseJson.Name = "cbUseJson"
+		Me.cbUseJson.Size = New System.Drawing.Size(70, 17)
+		Me.cbUseJson.TabIndex = 11
+		Me.cbUseJson.Text = "Use Json"
+		Me.cbUseJson.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+		Me.cbUseJson.UseVisualStyleBackColor = True
+		'
+		'cbOptimize
+		'
+		Me.cbOptimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbOptimize.AutoSize = True
+		Me.cbOptimize.Checked = True
+		Me.cbOptimize.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.cbOptimize.Enabled = False
+		Me.cbOptimize.Location = New System.Drawing.Point(975, 6)
+		Me.cbOptimize.Name = "cbOptimize"
+		Me.cbOptimize.Size = New System.Drawing.Size(66, 17)
+		Me.cbOptimize.TabIndex = 10
+		Me.cbOptimize.Text = "Optimize"
+		Me.cbOptimize.UseVisualStyleBackColor = True
+		'
 		'panelGateway
 		'
 		Me.panelGateway.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -606,7 +607,7 @@ Partial Class FSimulator
 		Me.panelGateway.Name = "panelGateway"
 		Me.panelGateway.RowCount = 1
 		Me.panelGateway.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelGateway.Size = New System.Drawing.Size(1007, 44)
+		Me.panelGateway.Size = New System.Drawing.Size(1120, 44)
 		Me.panelGateway.TabIndex = 1
 		'
 		'serverToReachPanel14
@@ -809,7 +810,7 @@ Partial Class FSimulator
 		Me.panelGatewayButtons.Name = "panelGatewayButtons"
 		Me.panelGatewayButtons.RowCount = 1
 		Me.panelGatewayButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelGatewayButtons.Size = New System.Drawing.Size(318, 38)
+		Me.panelGatewayButtons.Size = New System.Drawing.Size(431, 38)
 		Me.panelGatewayButtons.TabIndex = 0
 		'
 		'cbAutostartGateway
@@ -868,7 +869,7 @@ Partial Class FSimulator
 		Me.panelServer.Name = "panelServer"
 		Me.panelServer.RowCount = 1
 		Me.panelServer.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelServer.Size = New System.Drawing.Size(1007, 38)
+		Me.panelServer.Size = New System.Drawing.Size(1120, 38)
 		Me.panelServer.TabIndex = 0
 		'
 		'lblServer
@@ -924,7 +925,7 @@ Partial Class FSimulator
 		Me.panelServerButtons.Name = "panelServerButtons"
 		Me.panelServerButtons.RowCount = 1
 		Me.panelServerButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelServerButtons.Size = New System.Drawing.Size(633, 32)
+		Me.panelServerButtons.Size = New System.Drawing.Size(746, 32)
 		Me.panelServerButtons.TabIndex = 2
 		'
 		'cbAutostartServer
@@ -1096,7 +1097,7 @@ Partial Class FSimulator
 		Me.panelClient.RowCount = 2
 		Me.panelClient.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 		Me.panelClient.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.panelClient.Size = New System.Drawing.Size(1007, 88)
+		Me.panelClient.Size = New System.Drawing.Size(1120, 88)
 		Me.panelClient.TabIndex = 2
 		'
 		'lblClient
@@ -1132,7 +1133,7 @@ Partial Class FSimulator
 		Me.panelClientNexo.Name = "panelClientNexo"
 		Me.panelClientNexo.RowCount = 1
 		Me.panelClientNexo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelClientNexo.Size = New System.Drawing.Size(871, 38)
+		Me.panelClientNexo.Size = New System.Drawing.Size(984, 38)
 		Me.panelClientNexo.TabIndex = 8
 		'
 		'TableLayoutPanel10
@@ -1299,7 +1300,7 @@ Partial Class FSimulator
 		Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
 		Me.TableLayoutPanel3.RowCount = 1
 		Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel3.Size = New System.Drawing.Size(320, 32)
+		Me.TableLayoutPanel3.Size = New System.Drawing.Size(433, 32)
 		Me.TableLayoutPanel3.TabIndex = 4
 		'
 		'cbUseConnectionSettings
@@ -1318,7 +1319,7 @@ Partial Class FSimulator
 		Me.efConnectionReply.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efConnectionReply.Location = New System.Drawing.Point(189, 6)
 		Me.efConnectionReply.Name = "efConnectionReply"
-		Me.efConnectionReply.Size = New System.Drawing.Size(128, 20)
+		Me.efConnectionReply.Size = New System.Drawing.Size(241, 20)
 		Me.efConnectionReply.TabIndex = 2
 		'
 		'pbConnectionSettings
@@ -1357,7 +1358,7 @@ Partial Class FSimulator
 		Me.panelClientServer.Name = "panelClientServer"
 		Me.panelClientServer.RowCount = 1
 		Me.panelClientServer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelClientServer.Size = New System.Drawing.Size(1001, 38)
+		Me.panelClientServer.Size = New System.Drawing.Size(1114, 38)
 		Me.panelClientServer.TabIndex = 9
 		'
 		'panelClientTimeout
@@ -1537,7 +1538,7 @@ Partial Class FSimulator
 		Me.panelClientButtons1.Name = "panelClientButtons1"
 		Me.panelClientButtons1.RowCount = 1
 		Me.panelClientButtons1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelClientButtons1.Size = New System.Drawing.Size(249, 32)
+		Me.panelClientButtons1.Size = New System.Drawing.Size(362, 32)
 		Me.panelClientButtons1.TabIndex = 8
 		'
 		'pbConnect
@@ -1557,7 +1558,7 @@ Partial Class FSimulator
 		Me.pbDisconnect.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbDisconnect.AutoSize = True
 		Me.pbDisconnect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbDisconnect.Location = New System.Drawing.Point(175, 4)
+		Me.pbDisconnect.Location = New System.Drawing.Point(288, 4)
 		Me.pbDisconnect.Name = "pbDisconnect"
 		Me.pbDisconnect.Size = New System.Drawing.Size(71, 23)
 		Me.pbDisconnect.TabIndex = 7
@@ -1571,7 +1572,7 @@ Partial Class FSimulator
 		Me.cbxConnections.FormattingEnabled = True
 		Me.cbxConnections.Location = New System.Drawing.Point(66, 5)
 		Me.cbxConnections.Name = "cbxConnections"
-		Me.cbxConnections.Size = New System.Drawing.Size(103, 21)
+		Me.cbxConnections.Size = New System.Drawing.Size(216, 21)
 		Me.cbxConnections.TabIndex = 6
 		'
 		'panelClientTargets
@@ -1659,7 +1660,7 @@ Partial Class FSimulator
 		Me.panelRaw.Name = "panelRaw"
 		Me.panelRaw.RowCount = 1
 		Me.panelRaw.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelRaw.Size = New System.Drawing.Size(1007, 29)
+		Me.panelRaw.Size = New System.Drawing.Size(1120, 29)
 		Me.panelRaw.TabIndex = 3
 		'
 		'pbSendFreeMessage
@@ -1667,7 +1668,7 @@ Partial Class FSimulator
 		Me.pbSendFreeMessage.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSendFreeMessage.AutoSize = True
 		Me.pbSendFreeMessage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSendFreeMessage.Location = New System.Drawing.Point(855, 3)
+		Me.pbSendFreeMessage.Location = New System.Drawing.Point(968, 3)
 		Me.pbSendFreeMessage.Name = "pbSendFreeMessage"
 		Me.pbSendFreeMessage.Size = New System.Drawing.Size(62, 23)
 		Me.pbSendFreeMessage.TabIndex = 5
@@ -1690,7 +1691,7 @@ Partial Class FSimulator
 		Me.pbBuild.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbBuild.AutoSize = True
 		Me.pbBuild.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbBuild.Location = New System.Drawing.Point(809, 3)
+		Me.pbBuild.Location = New System.Drawing.Point(922, 3)
 		Me.pbBuild.Name = "pbBuild"
 		Me.pbBuild.Size = New System.Drawing.Size(40, 23)
 		Me.pbBuild.TabIndex = 4
@@ -1705,7 +1706,7 @@ Partial Class FSimulator
 		Me.cbxCommands.FormattingEnabled = True
 		Me.cbxCommands.Location = New System.Drawing.Point(174, 4)
 		Me.cbxCommands.Name = "cbxCommands"
-		Me.cbxCommands.Size = New System.Drawing.Size(139, 21)
+		Me.cbxCommands.Size = New System.Drawing.Size(167, 21)
 		Me.cbxCommands.TabIndex = 1
 		'
 		'ContextMenuStrip1
@@ -1735,10 +1736,10 @@ Partial Class FSimulator
 		'efCommand
 		'
 		Me.efCommand.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.efCommand.Location = New System.Drawing.Point(373, 4)
+		Me.efCommand.Location = New System.Drawing.Point(401, 4)
 		Me.efCommand.Multiline = True
 		Me.efCommand.Name = "efCommand"
-		Me.efCommand.Size = New System.Drawing.Size(430, 20)
+		Me.efCommand.Size = New System.Drawing.Size(515, 20)
 		Me.efCommand.TabIndex = 3
 		Me.efCommand.WordWrap = False
 		'
@@ -1747,7 +1748,7 @@ Partial Class FSimulator
 		Me.pbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbRemove.AutoSize = True
 		Me.pbRemove.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbRemove.Location = New System.Drawing.Point(319, 3)
+		Me.pbRemove.Location = New System.Drawing.Point(347, 3)
 		Me.pbRemove.Name = "pbRemove"
 		Me.pbRemove.Size = New System.Drawing.Size(48, 23)
 		Me.pbRemove.TabIndex = 2
@@ -1759,29 +1760,30 @@ Partial Class FSimulator
 		Me.pbSendRequest.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbSendRequest.AutoSize = True
 		Me.pbSendRequest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbSendRequest.Location = New System.Drawing.Point(923, 3)
+		Me.pbSendRequest.Location = New System.Drawing.Point(1036, 3)
 		Me.pbSendRequest.Name = "pbSendRequest"
 		Me.pbSendRequest.Size = New System.Drawing.Size(81, 23)
 		Me.pbSendRequest.TabIndex = 14
 		Me.pbSendRequest.Text = "Send request"
 		Me.pbSendRequest.UseVisualStyleBackColor = True
 		'
-		'cbAutomaticMode
+		'pbResponseFolder
 		'
-		Me.cbAutomaticMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cbAutomaticMode.AutoSize = True
-		Me.cbAutomaticMode.Location = New System.Drawing.Point(544, 6)
-		Me.cbAutomaticMode.Name = "cbAutomaticMode"
-		Me.cbAutomaticMode.Size = New System.Drawing.Size(102, 17)
-		Me.cbAutomaticMode.TabIndex = 7
-		Me.cbAutomaticMode.Text = "Automatic mode"
-		Me.cbAutomaticMode.UseVisualStyleBackColor = True
+		Me.pbResponseFolder.Anchor = System.Windows.Forms.AnchorStyles.Right
+		Me.pbResponseFolder.AutoSize = True
+		Me.pbResponseFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbResponseFolder.Location = New System.Drawing.Point(673, 3)
+		Me.pbResponseFolder.Name = "pbResponseFolder"
+		Me.pbResponseFolder.Size = New System.Drawing.Size(94, 23)
+		Me.pbResponseFolder.TabIndex = 7
+		Me.pbResponseFolder.Text = "Response folder"
+		Me.pbResponseFolder.UseVisualStyleBackColor = True
 		'
 		'FSimulator
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(1043, 600)
+		Me.ClientSize = New System.Drawing.Size(1156, 726)
 		Me.Controls.Add(Me.PanelMain)
 		Me.Name = "FSimulator"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1959,8 +1961,7 @@ Partial Class FSimulator
 	Friend WithEvents Label10 As Label
 	Friend WithEvents cbSynchronous As CheckBox
 	Friend WithEvents cbOptimize As CheckBox
-	Friend WithEvents cbAddReceipt As CheckBox
-	Friend WithEvents cbOnelineReceipt As CheckBox
+	Friend WithEvents cbUseJson As CheckBox
 	Friend WithEvents pbDatabaseSettings As Button
 	Friend WithEvents pbBuild As Button
 	Friend WithEvents cbUseDatabase As CheckBox
@@ -1976,4 +1977,7 @@ Partial Class FSimulator
 	Friend WithEvents RenameToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents pbSendRequest As Button
 	Friend WithEvents cbAutomaticMode As CheckBox
+	Friend WithEvents pbResponseFolder As Button
+	Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+	Friend WithEvents ToolTip1 As ToolTip
 End Class

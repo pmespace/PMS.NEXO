@@ -19,19 +19,23 @@
     <!-- Modifiable -->
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="4.1.1" />
+        <dependency id="PMS.COMMON" version="5.0.0" exclude="Build,Analyzers" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="4.1.1" />
+        <dependency id="PMS.COMMON" version="5.0.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.3.1</version>
+    <version>3.4.0</version>
     <releaseNotes>
+      3.4.0
+      - The whole system now supports XML and JSON to exchange with a POI
+      - NexoSimulator and NexoBuilder have been updated to support both notations
+
       3.3.1
       - Fixed a bug in NexoType which crashed when seting a data without a name
-      
+
       3.3.0
       - Reshaped the base classes for nexo 3.0 and 3.1 to fix some bugs with data being present in the XML though empty; the classes are now theoraticlly fully autonomous
       - Fixed an exception in NexoBuilder and NexoSimulator, sometimes when setting the name of a node (no explanation why this happens)
@@ -162,24 +166,24 @@
 
     <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
     <!--
-    <contentFiles>
-      <files include=".\Bin\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
-      <files include=".\Bin\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
-    </contentFiles>
     -->
+    <contentFiles>
+      <files include=".\Bin\net47\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
+      <files include=".\Bin\net47\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
+    </contentFiles>
 
   </metadata>
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Bin\PMS.NEXO30.dll" target="lib\net47"></file>
-    <file src=".\Bin\PMS.NEXO30.xml" target="lib\net47"></file>
-    <file src=".\Bin\PMS.NEXO30.pdb" target="lib\net47"></file>
-    <file src=".\Bin\NexoBuilder30.exe" target="lib\net47"></file>
-    <file src=".\Bin\NexoSimulator30.exe" target="lib\net47"></file>
+    <file src=".\Bin\net47\PMS.NEXO30.dll" target="lib\net47"></file>
+    <file src=".\Bin\net47\PMS.NEXO30.xml" target="lib\net47"></file>
+    <file src=".\Bin\net47\PMS.NEXO30.pdb" target="lib\net47"></file>
+    <file src=".\Bin\net47\NexoBuilder30.exe" target="lib\net47"></file>
+    <file src=".\Bin\net47\NexoSimulator30.exe" target="lib\net47"></file>
 
-    <file src=".\Bin\PMS.NEXO35.dll" target="lib\net35"></file>
-    <file src=".\Bin\PMS.NEXO35.xml" target="lib\net35"></file>
-    <file src=".\Bin\PMS.NEXO35.pdb" target="lib\net35"></file>
+    <file src=".\Bin\net35\PMS.NEXO35.dll" target="lib\net35"></file>
+    <file src=".\Bin\net35\PMS.NEXO35.xml" target="lib\net35"></file>
+    <file src=".\Bin\net35\PMS.NEXO35.pdb" target="lib\net35"></file>
   </files>
 </package>

@@ -25,6 +25,11 @@ namespace XSDEx
 	/// </summary>
 	public class XSD
 	{
+		#region const
+		private const string XML_IGNORE_ATTRIBUTE = "System.Xml.Serialization.XmlIgnoreAttribute";
+		private const string JSON_IGNORE_ATTRIBUTE = "Newtonsoft.Json.JsonIgnore";
+		#endregion
+
 		#region properties
 		public Control Ctrl = null;
 		public string Code { get; private set; }
@@ -1300,6 +1305,34 @@ namespace XSDEx
 					catch (Exception ex) { }
 				}
 
+				// review all properties to add a JsonIgnore if XML ignore
+				foreach (CodeTypeDeclaration codeType in codeNamespace.Types)
+				{
+					// process fields...
+					foreach (CodeTypeMember member in codeType.Members)
+					{
+						if (member is CodeMemberProperty)
+						{
+							CodeMemberProperty property = (CodeMemberProperty)member;
+							if (property.CustomAttributes.Contains(new CodeAttributeDeclaration(XML_IGNORE_ATTRIBUTE)) &&
+								!property.CustomAttributes.Contains(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE)))
+							{
+								property.CustomAttributes.Add(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE));
+							}
+							bool xmlIgnore = false, jsonIgnore = false;
+							foreach (CodeAttributeDeclaration attr in property.CustomAttributes)
+							{
+								xmlIgnore = xmlIgnore || 0 == string.Compare(attr.Name, XML_IGNORE_ATTRIBUTE, true);
+								jsonIgnore = jsonIgnore || 0 == string.Compare(attr.Name, JSON_IGNORE_ATTRIBUTE, true);
+							}
+							if (xmlIgnore && !jsonIgnore)
+								property.CustomAttributes.Add(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE));
+							if (!xmlIgnore && jsonIgnore)
+								property.CustomAttributes.Add(new CodeAttributeDeclaration(XML_IGNORE_ATTRIBUTE));
+						}
+					}
+				}
+
 				//// create a Decimal formatting attribute
 				//CodeAttributeDeclaration decimalFormat = new CodeAttributeDeclaration("DecimalFormatterAttribute");
 				//typesDeclaredInsideNamespace.Add(decimalFormat);
@@ -1517,7 +1550,8 @@ namespace XSDEx
 			//cmp.CustomAttributes.Add(new CodeAttributeDeclaration("Newtonsoft.Json.JsonIgnore"));
 
 			// that init flag statement will not be serialized inside XML
-			cmp.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlIgnoreAttribute"));
+			cmp.CustomAttributes.Add(new CodeAttributeDeclaration(XML_IGNORE_ATTRIBUTE));
+			cmp.CustomAttributes.Add(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE));
 			return cmp;
 		}
 		/// <summary>

@@ -27,8 +27,11 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.4.0</version>
+    <version>3.4.1</version>
     <releaseNotes>
+      3.4.1
+      - INvalid files in previous package
+      
       3.4.0
       - The whole system now supports XML and JSON to exchange with a POI
       - NexoSimulator and NexoBuilder have been updated to support both notations
@@ -166,21 +169,21 @@
 
     <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
     <!--
-    -->
     <contentFiles>
       <files include=".\Bin\net47\NexoBuilder30.exe" buildAction="Content" copyToOutput="true"/>
       <files include=".\Bin\net47\NexoSimulator30.exe" buildAction="None" copyToOutput ="true"/>
     </contentFiles>
+    -->
 
   </metadata>
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Bin\net47\PMS.NEXO30.dll" target="lib\net47"></file>
-    <file src=".\Bin\net47\PMS.NEXO30.xml" target="lib\net47"></file>
-    <file src=".\Bin\net47\PMS.NEXO30.pdb" target="lib\net47"></file>
-    <file src=".\Bin\net47\NexoBuilder30.exe" target="lib\net47"></file>
-    <file src=".\Bin\net47\NexoSimulator30.exe" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.dll" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.xml" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO30.pdb" target="lib\net47"></file>
+    <file src=".\Bin\NexoBuilder30.exe" target="lib\net47"></file>
+    <file src=".\Bin\NexoSimulator30.exe" target="lib\net47"></file>
 
     <file src=".\Bin\net35\PMS.NEXO35.dll" target="lib\net35"></file>
     <file src=".\Bin\net35\PMS.NEXO35.xml" target="lib\net35"></file>

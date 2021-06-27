@@ -248,6 +248,7 @@ Public Class FSimulator
 	Private Sub LoadSettings()
 		Dim except As Boolean
 		Dim settings As Settings = json.ReadSettings(except)
+		If IsNothing(settings) Then settings = New Settings
 		If Not settings Is Nothing Then
 			cbAutostartServer.Checked = settings.Autostart
 			Try
@@ -317,9 +318,10 @@ Public Class FSimulator
 			cbUseDatabase.Checked = settings.UseDatabase
 
 			cbUseConnectionSettings.Checked = settings.UsePreConnection
-			ConnectionSettings = settings.ConnectionSettings
 
-			cbAutomaticMode.Checked = settings.AutomaticMode
+			ConnectionSettings = settings.ConnectionSettings
+			If IsNothing(ConnectionSettings) Then ConnectionSettings = New SettingsConnectionSettings
+
 		End If
 	End Sub
 
@@ -371,8 +373,6 @@ Public Class FSimulator
 
 		settings.UsePreConnection = cbUseConnectionSettings.Checked
 		settings.ConnectionSettings = ConnectionSettings
-
-		settings.AutomaticMode = cbAutomaticMode.Checked
 
 		json.WriteSettings(settings)
 	End Sub
@@ -481,7 +481,7 @@ Public Class FSimulator
 		cbxCommands.Enabled = 0 <> cbxCommands.Items.Count
 
 		'existing buttons
-		panelCommands.Enabled = pbSendFreeMessage.Enabled
+		panelCommandButtons.Enabled = pbSendFreeMessage.Enabled
 		CanDisconnect()
 
 		'gateway part
@@ -733,26 +733,24 @@ Public Class FSimulator
 				Else
 					sz = response.XML
 				End If
-				'eventually replace the user var
-				If Not IsNothing(secondary) AndAlso Not String.IsNullOrEmpty(secondary.ToString) Then
-					sz = sz.Replace(USERVAR, secondary.ToString)
-				End If
-				'deserialize the response
-				Dim item As New NexoItem(sz)
-				If item.IsValid Then
-					'is the response is valid against the expected message we save it to send it back to the caller
-					If toprocess.Category = item.Category Then
-						toprocess.CurrentObject.FromItem(item)
-					Else
-						NoAnswer(toprocess)
+				If Not IsNothing(sz) Then
+					'eventually replace the user var
+					If Not IsNothing(secondary) AndAlso Not String.IsNullOrEmpty(secondary.ToString) Then
+						sz = sz.Replace(USERVAR, secondary.ToString)
 					End If
-				Else
-					NoAnswer(toprocess)
+					'deserialize the response
+					Dim item As New NexoItem(sz)
+					If item.IsValid Then
+						'is the response is valid against the expected message we save it to send it back to the caller
+						If toprocess.Category = item.Category Then
+							toprocess.CurrentObject.FromItem(item)
+							Return
+						End If
+					End If
 				End If
-			Else
-				'no answer is available, return an error
-				NoAnswer(toprocess)
 			End If
+			'no answer is available, return an error
+			NoAnswer(toprocess)
 		End If
 	End Sub
 

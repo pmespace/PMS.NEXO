@@ -25,8 +25,11 @@
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.4.0</version>
+    <version>3.4.1</version>
     <releaseNotes>
+      3.4.1
+      - INvalid files in previous package
+
       3.4.0
       - The whole system now supports XML and JSON to exchange with a POI
       - NexoSimulator and NexoBuilder have been updated to support both notations

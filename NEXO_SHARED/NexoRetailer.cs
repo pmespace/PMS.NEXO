@@ -145,11 +145,6 @@ namespace NEXO
 		/// Indicate whether serialisation events must be stored inside log file
 		/// </summary>
 		public bool LogSerialisationEvents { get; set; } = false;
-		///// <summary>
-		///// Indicates whether produced XML must be optimised or not
-		///// Optimisation allows dismissinig unchanged tags preventing them to appear in the resulting XML
-		///// </summary>
-		//public bool OptimizeXml { get; set; } = true;
 
 		/// <summary>
 		/// Flag indicating whether use XML (false) or JSON (true) notation when exchanging messages

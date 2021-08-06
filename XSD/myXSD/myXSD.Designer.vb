@@ -58,6 +58,7 @@ Partial Class myXSD
 		Me.csharp = New System.Windows.Forms.RadioButton()
 		Me.Label4 = New System.Windows.Forms.Label()
 		Me.efPreprocessor = New System.Windows.Forms.TextBox()
+		Me.cbSilent = New System.Windows.Forms.CheckBox()
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.convertTypes = New System.Windows.Forms.CheckBox()
 		Me.panelTypes = New System.Windows.Forms.TableLayoutPanel()
@@ -74,10 +75,11 @@ Partial Class myXSD
 		Me.arrayInitializer = New System.Windows.Forms.CheckBox()
 		Me.nullIfEmptyArray = New System.Windows.Forms.CheckBox()
 		Me.privateByInternal = New System.Windows.Forms.CheckBox()
+		Me.cbStringToIntegral = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.cbSilent = New System.Windows.Forms.CheckBox()
+		Me.cbUseDefaultValueForHasBeenModified = New System.Windows.Forms.CheckBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelGenerateButtons.SuspendLayout()
@@ -595,6 +597,17 @@ Partial Class myXSD
 		Me.efPreprocessor.Size = New System.Drawing.Size(90, 20)
 		Me.efPreprocessor.TabIndex = 2
 		'
+		'cbSilent
+		'
+		Me.cbSilent.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbSilent.AutoSize = True
+		Me.cbSilent.Location = New System.Drawing.Point(849, 6)
+		Me.cbSilent.Name = "cbSilent"
+		Me.cbSilent.Size = New System.Drawing.Size(52, 17)
+		Me.cbSilent.TabIndex = 3
+		Me.cbSilent.Text = "Silent"
+		Me.cbSilent.UseVisualStyleBackColor = True
+		'
 		'TableLayoutPanel2
 		'
 		Me.TableLayoutPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -772,7 +785,9 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel7.AutoSize = True
 		Me.TableLayoutPanel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel7.ColumnCount = 4
+		Me.TableLayoutPanel7.ColumnCount = 6
+		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -780,6 +795,8 @@ Partial Class myXSD
 		Me.TableLayoutPanel7.Controls.Add(Me.arrayInitializer, 0, 0)
 		Me.TableLayoutPanel7.Controls.Add(Me.nullIfEmptyArray, 1, 0)
 		Me.TableLayoutPanel7.Controls.Add(Me.privateByInternal, 2, 0)
+		Me.TableLayoutPanel7.Controls.Add(Me.cbStringToIntegral, 3, 0)
+		Me.TableLayoutPanel7.Controls.Add(Me.cbUseDefaultValueForHasBeenModified, 4, 0)
 		Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 147)
 		Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
 		Me.TableLayoutPanel7.RowCount = 1
@@ -820,6 +837,18 @@ Partial Class myXSD
 		Me.privateByInternal.Text = "Replace private by internal"
 		Me.privateByInternal.UseVisualStyleBackColor = True
 		'
+		'cbStringToIntegral
+		'
+		Me.cbStringToIntegral.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbStringToIntegral.AutoSize = True
+		Me.cbStringToIntegral.Enabled = False
+		Me.cbStringToIntegral.Location = New System.Drawing.Point(497, 3)
+		Me.cbStringToIntegral.Name = "cbStringToIntegral"
+		Me.cbStringToIntegral.Size = New System.Drawing.Size(102, 17)
+		Me.cbStringToIntegral.TabIndex = 3
+		Me.cbStringToIntegral.Text = "String to integral"
+		Me.cbStringToIntegral.UseVisualStyleBackColor = True
+		'
 		'result
 		'
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -842,16 +871,16 @@ Partial Class myXSD
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
 		'
-		'cbSilent
+		'cbUseDefaultValueForHasBeenModified
 		'
-		Me.cbSilent.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cbSilent.AutoSize = True
-		Me.cbSilent.Location = New System.Drawing.Point(849, 6)
-		Me.cbSilent.Name = "cbSilent"
-		Me.cbSilent.Size = New System.Drawing.Size(52, 17)
-		Me.cbSilent.TabIndex = 3
-		Me.cbSilent.Text = "Silent"
-		Me.cbSilent.UseVisualStyleBackColor = True
+		Me.cbUseDefaultValueForHasBeenModified.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbUseDefaultValueForHasBeenModified.AutoSize = True
+		Me.cbUseDefaultValueForHasBeenModified.Location = New System.Drawing.Point(605, 3)
+		Me.cbUseDefaultValueForHasBeenModified.Name = "cbUseDefaultValueForHasBeenModified"
+		Me.cbUseDefaultValueForHasBeenModified.Size = New System.Drawing.Size(139, 17)
+		Me.cbUseDefaultValueForHasBeenModified.TabIndex = 4
+		Me.cbUseDefaultValueForHasBeenModified.Text = "Use default value if available"
+		Me.cbUseDefaultValueForHasBeenModified.UseVisualStyleBackColor = True
 		'
 		'myXSD
 		'
@@ -954,4 +983,6 @@ Partial Class myXSD
 	Friend WithEvents Label5 As Label
 	Friend WithEvents panelGenerateButtons As TableLayoutPanel
 	Friend WithEvents cbSilent As CheckBox
+	Friend WithEvents cbStringToIntegral As CheckBox
+	Friend WithEvents cbUseDefaultValueForHasBeenModified As CheckBox
 End Class

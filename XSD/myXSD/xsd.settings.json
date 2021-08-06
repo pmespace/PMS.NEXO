@@ -24,6 +24,8 @@
   "ArrayGetReturnsNullEmpty": true,
   "PrivateByInternal": false,
   "CreateArrayAccessors": true,
-  "DerivedClassName": "",
-  "Preprocessor": "NEXO30"
+  "Preprocessor": "NEXO30",
+  "Silent": true,
+  "ConvertStringIntegralToIntegral": false,
+  "UseDefaultValueForHasBeenModified": false
 }

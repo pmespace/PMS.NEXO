@@ -177,10 +177,10 @@
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Bin\PMS.NEXO31.dll" target="lib\net47"></file>
-    <file src=".\Bin\PMS.NEXO31.xml" target="lib\net47"></file>
-    <file src=".\Bin\PMS.NEXO31.pdb" target="lib\net47"></file>
-    <file src=".\Bin\NexoBuilder31.exe" target="lib\net47"></file>
-    <file src=".\Bin\NexoSimulator31.exe" target="lib\net47"></file>
+    <file src=".\Bin\PMS.NEXO31.dll" target="lib"></file>
+    <file src=".\Bin\PMS.NEXO31.xml" target="lib"></file>
+    <file src=".\Bin\PMS.NEXO31.pdb" target="lib"></file>
+    <file src=".\Bin\NexoBuilder31.exe" target="lib"></file>
+    <file src=".\Bin\NexoSimulator31.exe" target="lib"></file>
   </files>
 </package>

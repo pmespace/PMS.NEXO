@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
-using COMMON;
 using System.Net.Sockets;
 using System.Net;
 using System.Data.Odbc;
+using COMMON;
+using COMMON.ODBC;
 
 namespace NEXO.Server
 {

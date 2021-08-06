@@ -521,7 +521,9 @@ namespace NEXO.Client
 					// cleanup
 					StopReceiverThread();
 					StopDispatcherThread();
+#if NETFRAMEWORK
 					CThread.SendNotification(Settings.ThreadData, ID, 0, true);
+#endif
 				}
 			}
 		}
@@ -691,9 +693,9 @@ namespace NEXO.Client
 			SaleToPOIRequest request = DeserializeRequest(xml);
 			return SendRequestSync(request, timer, autoComplete);
 		}
-		#endregion
+#endregion
 
-		#region static methods
+#region static methods
 		/// <summary>
 		/// Send request asynchronously within a new thread.
 		/// </summary>
@@ -706,9 +708,9 @@ namespace NEXO.Client
 		{
 			return CStream.ConnectSendReceive(settings, xml, out replySize, out timeout);
 		}
-		#endregion
+#endregion
 
-		#region private methods
+#region private methods
 		/// <summary>
 		/// Stops the receiver thread
 		/// </summary>
@@ -1094,7 +1096,7 @@ namespace NEXO.Client
 		{
 			((AutoResetEvent)state).Set();
 		}
-		#endregion
+#endregion
 	}
 
 	[ComVisible(false)]

@@ -1,5 +1,5 @@
 ﻿Imports System.Data.OleDb
-Imports COMMON
+Imports COMMON.ODBC
 Public Class FServerDatabase
 	Public AllowUpdate As Boolean = False
 	Public TableName As String

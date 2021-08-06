@@ -17,6 +17,7 @@ namespace NEXO
 		public static string NexoOptimizingField = $"_{XSD}Optimizing";
 		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
 		public static string NexoHasBeenSetField = $"_{XSD}HasBeenSet";
+		public static string NexoDefaultValueForProperty = $"DEFAULT_VALUE";
 	}
 
 	public abstract class NexoDummy

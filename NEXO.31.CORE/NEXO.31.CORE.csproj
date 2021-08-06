@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>NEXO._31.CORE</RootNamespace>
+    <Version>4.0.0</Version>
+    <FileVersion>4.0.0</FileVersion>
+    <AssemblyVersion>4.0.0</AssemblyVersion>
+    <AssemblyName>PMS.NEXO31.CORE</AssemblyName>
+    <Authors>philippemp31</Authors>
+    <Product>PMS.NEXO31.CORE nexo retailer v3.1</Product>
+    <Description>nexo retailer v3.1</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>PMS - philippemp31@outlook.com - 2021</Copyright>
+    <PackageProjectUrl>https://github.com/pmespace/PMS.NEXO</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pmespace/PMS.NEXO</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Refer to PMS.NEXO31</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+    <DocumentationFile>..\bin\PMS.NEXO31.CORE.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+    <DocumentationFile>..\bin\PMS.NEXO31.CORE.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\nexoCMS.xsd.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\nexoCMS.xsd.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PMS.COMMON.CORE" Version="5.1.0" />
+    <PackageReference Include="PMS.COMMON.CORE.ODBC" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="move /Y $(OutDir)..\$(TargetName).xml $(OutDir)" />
+  </Target>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)..\nuget\test" />
+  </Target>
+  
+</Project>

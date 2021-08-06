@@ -22,7 +22,7 @@ namespace NEXO
 		[DispId(5)]
 		InputCommandEnumeration RequestInputCommand { get; set; }
 		[DispId(6)]
-		uint RequestMaxInputTime { get; set; }
+		int RequestMaxInputTime { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -199,10 +199,12 @@ namespace NEXO
 			get => (InputCommandEnumeration)CMisc.GetEnumValue(typeof(InputCommandEnumeration), CMisc.Trimmed(RequestData.InputData.InputCommand), NexoValues.None);
 			set => RequestData.InputData.InputCommand = CMisc.GetEnumName(typeof(InputCommandEnumeration), value);
 		}
-		public uint RequestMaxInputTime
+		public int RequestMaxInputTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), true);
 			set => RequestData.InputData.MaxInputTime = value.ToString();
+			//get => RequestData.InputData.MaxInputTime;
+			//set => RequestData.InputData.MaxInputTime = value;
 		}
 		#endregion
 

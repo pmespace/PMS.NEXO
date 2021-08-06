@@ -35,8 +35,8 @@ namespace NEXO
 			{
 				Description = "Version 3.1 - 31st July 2017",
 				ResourceName = "nexo31",
-				Version = "3.1",
 				AssemblyName = "PMS.NEXO31.dll",
+				Version = "3.1",
 			};
 #else
 			null;

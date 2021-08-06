@@ -29,12 +29,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\</OutputPath>
+    <OutputPath>..\bin\net47\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NEXO30</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
-    <DocumentationFile>..\Bin\PMS.NEXO30.xml</DocumentationFile>
+    <DocumentationFile>..\bin\net47\PMS.NEXO30.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>
     </NoWarn>
@@ -42,11 +42,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Bin\net47\</OutputPath>
+    <OutputPath>..\bin\net47\</OutputPath>
     <DefineConstants>TRACE;NEXO30</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Bin\net47\PMS.NEXO30.xml</DocumentationFile>
+    <DocumentationFile>..\bin\net47\PMS.NEXO30.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
@@ -57,8 +57,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PMS.COMMON, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PMS.COMMON.5.0.0\lib\net47\PMS.COMMON.dll</HintPath>
+    <Reference Include="PMS.COMMON, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PMS.COMMON.5.1.0\lib\net47\PMS.COMMON.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,22 +69,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\NexoResources\Properties\NexoResources.Designer.cs">
-      <Link>Properties\NexoResources.Designer.cs</Link>
-    </Compile>
     <Compile Include="EpasSaleToPOIMessages.xsd.30.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\NexoResources\Properties\NexoResources.resx">
-      <Link>Properties\NexoResources.resx</Link>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\EpasCMS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\EpasCommonTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\EpasSaleToPOIMessages.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
   <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />

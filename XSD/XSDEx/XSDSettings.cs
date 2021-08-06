@@ -147,5 +147,13 @@ namespace XSDEx
 		/// Indicate whether messages must be displayed while processing
 		/// </summary>
 		public bool Silent { get; set; } = true;
+		/// <summary>
+		/// Allows replacing string representing an integral type to the integral type
+		/// </summary>
+		public bool ConvertStringIntegralToIntegral { get; set; } = false;
+		/// <summary>
+		/// Allows testing whether a data has been set using its default value (true) or its type's default value (false)
+		/// </summary>
+		public bool UseDefaultValueForHasBeenModified { get; set; } = false;
 	}
 }

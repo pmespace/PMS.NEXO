@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="EpasCommonTypes.xsd" />
+
+<!-- -->
+<!-- 1. Message Components Definition-->
+<!-- -->
+
+  <xs:simpleType name="AlgorithmTypeCode">
+    <xs:union memberTypes="AlgorithmEnumeration TypeCodeExtension"/>
+  </xs:simpleType>
+  <xs:simpleType name="AlgorithmEnumeration">
+    <xs:annotation><xs:documentation>Definition: Identification of a cryptographic algorithm -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate</xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="id-retail-cbc-mac"><xs:annotation><xs:documentation>Retail CBC-MAC (cf. ISO 9807, ANSI X9.19) - (OID: iso(1) member-body(2) fr(250) type-org (1) gie-cb(79) algorithm(10) epas(1) 2)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-retail-cbc-mac-sha-256"><xs:annotation><xs:documentation>Retail-CBC-MAC with SHA-256  - (OID: iso(1) member-body(2) fr(250) type-org (1) gie-cb(79) algorithm(10) epas(1) 3)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-ukpt-wrap "><xs:annotation><xs:documentation>The UKPT or Master Session Key key encryption - (OID: iso(1) member-body(2) fr(250) type-org (1) gie-cb(79) algorithm(10) epas(1) 4)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-dukpt-wrap"><xs:annotation><xs:documentation>DUKPT is specified in ANS X9.24-2004, Annex A, and ISO/DIS 13492-2006.  - (OID: iso(1) member-body(2) fr(250) type-org (1) gie-cb(79) algorithm(10) epas(1) 1)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="des-ede3-ecb"><xs:annotation><xs:documentation>Triple DES ECB encryption with double length key (112 Bit) as defined in FIPS PUB 46-3 - (OID: iso(1) member-body(2) fr(250) type-org (1) gie-cb(79)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="des-ede3-cbc"><xs:annotation><xs:documentation>Triple DES CBC encryption with double length key (112 Bit) as defined in FIPS PUB 46-3 - (OID: iso(1) member-body(2) us(840) rsadsi(113549)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-sha256"><xs:annotation><xs:documentation>Message Digest Algorithm SHA-256 as defined in FIPS 180-1 and 2 - (ISO20022 Label: SHA256)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="sha256WithRSAEncryption"><xs:annotation><xs:documentation>Signature Algorithms SHA-256 with RSA - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 11)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="rsaEncryption"><xs:annotation><xs:documentation>Key Transport Algorithm RSA - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 1)</xs:documentation></xs:annotation></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AttributeTypeTypeCode">
+    <xs:union memberTypes="AttributeTypeEnumeration TypeCodeExtension"/>
+  </xs:simpleType>
+  <xs:simpleType name="AttributeTypeEnumeration">
+    <xs:annotation><xs:documentation>Definition: Type of attribute of a distinguished name (DN) -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate -- Usage: Identifies the attribute.</xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="id-at-commonName"><xs:annotation><xs:documentation>Common Name - (OID: joint-iso-ccitt(2) ds(5) 4 3)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-at-localityName"><xs:annotation><xs:documentation>Locality - (OID: joint-iso-ccitt(2) ds(5) 4 7)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-at-organizationName"><xs:annotation><xs:documentation>Organization Name - (OID: joint-iso-ccitt(2) ds(5) 4 10)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-at-organizationalUnitName"><xs:annotation><xs:documentation>Organization Unit Name - (OID: joint-iso-ccitt(2) ds(5) 4 11)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-at-countryName"><xs:annotation><xs:documentation>Country Name - (OID: joint-iso-ccitt(2) ds(5) 4 6)</xs:documentation></xs:annotation></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AttributeValueType">
+    <xs:annotation><xs:documentation>Definition: Name of attribute of a distinguished name (DN) -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate -- Usage: Content of the attribute.</xs:documentation></xs:annotation>
+    <xs:restriction base="TextString">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AuthenticatedDataType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing MACed data with encryption key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (which is v0 in EPAS protocol context)  the protected encrytion key for every adressee (recipient)  the encrypted data</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="KeyTransport" type="KeyTransportType"><xs:annotation><xs:documentation>Encryption key using previously distributed asymmetric key --Rule: Key management with a previously distributed asymmetric key</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="KEK" type="KEKType"><xs:annotation><xs:documentation>Encryption key using previously distributed symmetric key --Rule: Key management with a previously distributed symmetric key</xs:documentation></xs:annotation></xs:element>
+      </xs:choice>
+      <xs:element name="MACAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Algorithm to compute Message Authentication Code (MAC)</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="EncapsulatedContent" type="EncapsulatedContentType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing content to authenticate</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v0"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+    <xs:attribute name="MAC" type="MACType" use="required"><xs:annotation><xs:documentation>Encrypted data transported in a CMS data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="CertificateType">
+    <xs:annotation><xs:documentation>Definition: A collection of X.509 certificates -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Certificates for the signature verification process (e.g. signer's certificate or complete certification path)</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ContentType">
+    <xs:annotation><xs:documentation>Definition: Data content to authenticate -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Data to be signed or MACedIn case of XML coded data the sender of a message should operate the cryptographic functions for the XML-Tag content without any control characters (e.g. no space, carriage returns or tabulators between Tags) to</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ContentTypeTypeCode">
+    <xs:union memberTypes="ContentTypeEnumeration TypeCodeExtension"/>
+  </xs:simpleType>
+  <xs:simpleType name="ContentTypeEnumeration">
+    <xs:annotation><xs:documentation>Definition: Identification of the type of a Cryptographic Message Syntax (CMS) data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Allow the recognition of the form of the CMS data structure.</xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="id-data"><xs:annotation><xs:documentation>Generic, non cryptographic, or unqualified data content - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs7(7) 1)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-signedData"><xs:annotation><xs:documentation>Signature CMS data content  - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs7(7) 2)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-envelopedData"><xs:annotation><xs:documentation>Encrypted CMS data content, with encryption key - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs7(7) 3)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-digestedData"><xs:annotation><xs:documentation>Message digest CMS data content - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs7(7) 5)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-encryptedData"><xs:annotation><xs:documentation>Encrypted CMS data content - (OID: iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs7(7) 6)</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="id-ct-authData"><xs:annotation><xs:documentation>MAC CMS data content, with encryption key - (OID: iso(1) member- body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9) smime(16) ct(1) 2)</xs:documentation></xs:annotation></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DerivationIdentifierType">
+    <xs:annotation><xs:documentation>Definition: Identification used for derivation of a unique key from a master key provided by the message sender -- Reference: RFC 3852: Cryptographic Message Syntax (CMS)  ISO 10118-2 Annex A:  -- Usage: Used by the recipient of a message (i.e. the host system) to derive a unique key per message sender from the previously distributed symmetric key with the following procedures.In case of id-ukpt-wrap: The following ISO-hash-function H(X)</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+      <xs:minLength value="5"/>
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DigestType">
+    <xs:annotation><xs:documentation>Definition: Result of message-digesting process -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Digest is used to provide content integrity. A message digest is computed on the content with a message-digest algorithm. This algorithm and the message digest are collected together with the content into a DigestData value. A recipient</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="DigestedDataType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing digested data -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure  the identifiers of the message digest algorithms  the encapsulated content  the digested data</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="DigestAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Identification of a digest algorithm</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="EncapsulatedContent" type="EncapsulatedContentType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing content to authenticate</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="Digest" type="DigestType"><xs:annotation><xs:documentation>Result of message-digesting process</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="EncapsulatedContentType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing content to authenticate -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains: the type of the encapsulated content, which is id-data for an application data or another CMS data structure the data to authenticate</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="Content" type="ContentType" minOccurs="0"><xs:annotation><xs:documentation>Data content to authenticate --Rule: If AuthenticatedData, DigestedData or SignedData is a detached signature, a detached digest or a detached MAC, Content</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="ContentType" type="ContentTypeTypeCode" use="required"><xs:annotation><xs:documentation>Identification of the type of a Cryptographic Message Syntax (CMS) data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="EncryptedDataType">
+    <xs:annotation><xs:documentation>Definition: Encrypted data transported in a CMS data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Padding The bytes padded at the end of the data of length L are: 01 - if L mod 8 = 7 02 02 - if L mod 8 = 6 ... 08 08 08 08  08 08 08 08 - if L mod 8 = 0Data Encryption Algorithm "des-ede3-cbc" The padded input is split in block of 8 bytes</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="EncryptedContentType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing encrypted data with encryption key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains: the type of the encrypted content, which is id-data for an application data or another CMS data structure the protected encryption key for every recipient the encrypted data</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="ContentEncryptionAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Algorithm to encrypt data</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="EncryptedData" type="EncryptedDataType"><xs:annotation><xs:documentation>Encrypted data transported in a CMS data structure</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="ContentType" type="ContentTypeTypeCode" use="required"><xs:annotation><xs:documentation>Identification of the type of a Cryptographic Message Syntax (CMS) data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="EncryptedKeyType">
+    <xs:annotation><xs:documentation>Definition: Encrypted key transported in a CMS data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: EncryptedKey value as described for "id-ukpt-wrap" Right-most 40 Bit of the KSN as described for "id-dukpt-wrap"</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="EnvelopedDataType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing encrypted data with encryption key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (which is v0 in EPAS protocol context)  the protected encrytion key for every adressee (recipient)  the encrypted data</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="KeyTransport" type="KeyTransportType"><xs:annotation><xs:documentation>Encryption key using previously distributed asymmetric key --Rule: Key management with a previously distributed asymmetric key</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="KEK" type="KEKType"><xs:annotation><xs:documentation>Encryption key using previously distributed symmetric key --Rule: Key management with a previously distributed symmetric key</xs:documentation></xs:annotation></xs:element>
+      </xs:choice>
+      <xs:element name="EncryptedContent" type="EncryptedContentType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing encrypted data with encryption key</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v0"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="InitialisationVectorType">
+    <xs:annotation><xs:documentation>Definition: Initialisation vector of a CBC mode encryption -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="IssuerType">
+    <xs:annotation><xs:documentation>Definition: Certificate issuer name (see X.501-88) -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate -- Usage: The Issuer field identifies the entity that has signed and issued the certificate.  It contains hierarchical name composed of attributes, such as country, organization, organizational-unit, common name.</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="RelativeDistinguishedName" type="RelativeDistinguishedNameType" maxOccurs="unbounded"><xs:annotation><xs:documentation>Certificate distinguished name (DN)</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="IssuerAndSerialNumberType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing the issuer name and certificate serial number  -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the issuer name (see X.501-88)  the certificate serial number (see X.509-97) This the value of input parameter sid.</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="Issuer" type="IssuerType"><xs:annotation><xs:documentation>Certificate issuer name (see X.501-88)</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="SerialNumber" type="SerialNumberType"><xs:annotation><xs:documentation>Certificate serial number (see X.509-97)</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="KEKType">
+    <xs:annotation><xs:documentation>Definition: Encryption key using previously distributed symmetric key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (v4)  the key identifier  the key encryption algorithm  the encrypted key</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="KEKIdentifier" type="KEKIdentifierType"><xs:annotation><xs:documentation>Identification of a key encryption key (key management using previously distributed symmetric key)</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="KeyEncryptionAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Algorithm to encrypt a key</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v4"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+    <xs:attribute name="EncryptedKey" type="EncryptedKeyType" use="required"><xs:annotation><xs:documentation>Encrypted key transported in a CMS data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="KEKIdentifierType">
+    <xs:annotation><xs:documentation>Definition: Identification of a key encryption key (key management using previously distributed symmetric key) -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the identification of the key  the date of the key</xs:documentation></xs:annotation>
+    <xs:attribute name="KeyIdentifier" type="KeyIdentifierType" use="required"><xs:annotation><xs:documentation>Identification of a key</xs:documentation></xs:annotation></xs:attribute>
+    <xs:attribute name="KeyVersion" type="KeyVersionType" use="required"><xs:annotation><xs:documentation>Version of the cryptographic key</xs:documentation></xs:annotation></xs:attribute>
+    <xs:attribute name="DerivationIdentifier" type="DerivationIdentifierType" use="optional"><xs:annotation><xs:documentation>Identification used for derivation of a unique key from a master key provided by the message sender</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="KeyIdentifierType">
+    <xs:annotation><xs:documentation>Definition: Identification of a key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Identification of key used by the CMS structure. The Acquirer protocol use the following key identifications for key encryption keys: e.g.  "AcqIDPINkey", to encrypt the PIN in the message  "AcqIDDATkey", to encrypt other data in the</xs:documentation></xs:annotation>
+    <xs:restriction base="TextString">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="KeyNameType">
+    <xs:annotation><xs:documentation>Definition: Name of encryption key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: KeyName identifies the key used for encryption of the data. The encryption key is not included in the content info. Thus the application of the recipient has to identify the required key by analyzing the keyName.</xs:documentation></xs:annotation>
+    <xs:restriction base="TextString">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="KeyTransportType">
+    <xs:annotation><xs:documentation>Definition: Encryption key using previously distributed asymmetric key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (v0)  the recipient identifier  the key encryption algorithm  the encrypted key</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="RecipientIdentifier" type="RecipientIdentifierType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing the Recipient Identifier</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="KeyEncryptionAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Algorithm to encrypt a key</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v0"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+    <xs:attribute name="EncryptedKey" type="EncryptedKeyType" use="required"><xs:annotation><xs:documentation>Encrypted key transported in a CMS data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="KeyVersionType">
+    <xs:annotation><xs:documentation>Definition: Version of the cryptographic key -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) ISO 8601 -- Usage: Activation date or version of the key to differentiate several key with the same name (KeyIdentifier) YYYYMMDDhh with  YYYY is a 4-digits numeral representing the year, 0000 is prohibited  MM is a 2-digits numeral representing the month</xs:documentation></xs:annotation>
+    <xs:restriction base="TextString">
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MACType">
+    <xs:annotation><xs:documentation>Definition: Encrypted data transported in a CMS data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: MAC Algorithm "id-retail-cbc-mac" The content of the Content data element is extracted as the input The minimum number (possibly zero) of byte with value zero are added at the end of the input to have a length multiple of 8. The padded</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="NamedKeyEncryptedDataType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing encrypted data and integrated optional data filed keyName. -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (which is v0 in EPAS protocol context)  the keyName  the encrypred content info including the encrypted data</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="KeyName" type="KeyNameType" minOccurs="0"><xs:annotation><xs:documentation>Name of encryption key</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="EncryptedContent" type="EncryptedContentType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing encrypted data with encryption key</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v0"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="ParameterType">
+    <xs:annotation><xs:documentation>Definition: Parameters associated to a cryptographic algorithm -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate</xs:documentation></xs:annotation>
+    <xs:attribute name="InitialisationVector" type="InitialisationVectorType" use="optional"><xs:annotation><xs:documentation>Initialisation vector of a CBC mode encryption --Rule: If algorithm is "des-ede3-cbc" default 0000000000000000</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="RecipientIdentifierType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing the Recipient Identifier -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the issuer name (see X.501-88)  the certificate serial number (see X.509-97)</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="IssuerAndSerialNumber" type="IssuerAndSerialNumberType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing the issuer name and certificate serial number </xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RelativeDistinguishedNameType">
+    <xs:annotation><xs:documentation>Definition: Certificate distinguished name (DN) -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate -- Usage: Identifies the issuer or the subject of a X.509 certificate.</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="AttributeType" type="AttributeTypeTypeCode"><xs:annotation><xs:documentation>Type of attribute of a distinguished name (DN)</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="AttributeValue" type="AttributeValueType"><xs:annotation><xs:documentation>Name of attribute of a distinguished name (DN)</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="SerialNumberType">
+    <xs:annotation><xs:documentation>Definition: Certificate serial number (see X.509-97) -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate</xs:documentation></xs:annotation>
+    <xs:restriction base="Integer">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SignatureType">
+    <xs:annotation><xs:documentation>Definition: Signature transported in a CMS data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Signature generation on the content of the Content. Message digest calculation on the content of the Content without tag and length.</xs:documentation></xs:annotation>
+    <xs:restriction base="ByteSequence">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="SignedDataType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing signed data  -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (which is v1 in EPAS protocol context)  the identifiers of the message digest algorithms  the encapsulated content  the certificates for the verification of the signature </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="DigestAlgorithm" type="AlgorithmIdentifier" maxOccurs="unbounded"><xs:annotation><xs:documentation>Identification of a digest algorithm</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="EncapsulatedContent" type="EncapsulatedContentType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing content to authenticate</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="Certificate" type="CertificateType" minOccurs="0" maxOccurs="unbounded"><xs:annotation><xs:documentation>A collection of X.509 certificates</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="Signer" type="SignerType" maxOccurs="unbounded"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing signer information </xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v1"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="SignerIdentifierType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing the Signer Identifier -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the issuer name (see X.501-88)  the certificate serial number (see X.509-97)</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="IssuerAndSerialNumber" type="IssuerAndSerialNumberType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing the issuer name and certificate serial number </xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SignerType">
+    <xs:annotation><xs:documentation>Definition: Cryptographic Message Syntax (CMS) data structure containing signer information  -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains:  the version of the data structure (which is v1 in EPAS protocol context)  the identifiers of the message digest algorithms  the encapsulated content  the information about the signer</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="SignerIdentifier" type="SignerIdentifierType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing the Signer Identifier</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="DigestAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Identification of a digest algorithm</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="SignatureAlgorithm" type="AlgorithmIdentifier"><xs:annotation><xs:documentation>Identification of a cryptographic algorithm</xs:documentation></xs:annotation></xs:element>
+      <xs:element name="Signature" type="SignatureType"><xs:annotation><xs:documentation>Signature transported in a CMS data structure</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Version" type="VersionTypeCode" use="optional" default="v1"><xs:annotation><xs:documentation>Version of various Cryptographic Message Syntax (CMS) data structures</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="VersionTypeCode">
+    <xs:union memberTypes="VersionEnumeration TypeCodeExtension"/>
+  </xs:simpleType>
+  <xs:simpleType name="VersionEnumeration">
+    <xs:annotation><xs:documentation>Definition: Version of various Cryptographic Message Syntax (CMS) data structures -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: Each data structure provides a rule, depending on presence of elements of this structure to determine the appropriate value of the version data element.</xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="v0"><xs:annotation><xs:documentation>Version 0</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="v1"><xs:annotation><xs:documentation>Version 1</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="v2"><xs:annotation><xs:documentation>Version 2</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="v3"><xs:annotation><xs:documentation>Version 3</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="v4"><xs:annotation><xs:documentation>Version 4</xs:documentation></xs:annotation></xs:enumeration>
+      <xs:enumeration value="v5"><xs:annotation><xs:documentation>Version 5</xs:documentation></xs:annotation></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+<!-- -->
+<!-- 2. Types Definition-->
+<!-- -->
+
+  <xs:complexType name="AlgorithmIdentifier">
+    <xs:annotation><xs:documentation>Definition: Identification of a cryptographic algorithm -- Reference: RFC 3880: Internet X.509 Public Key Infrastructure Certificate and Certificate -- Usage: This data structure contains:  the algorithm identifier  associated parameters</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="Parameter" type="ParameterType" minOccurs="0"><xs:annotation><xs:documentation>Parameters associated to a cryptographic algorithm --Rule: If content is not empty</xs:documentation></xs:annotation></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Algorithm" type="AlgorithmTypeCode" use="required"><xs:annotation><xs:documentation>Identification of a cryptographic algorithm</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="ContentInformationType">
+    <xs:annotation><xs:documentation>Definition: General Cryptographic Message Syntax (CMS) data structure -- Reference: RFC 3852: Cryptographic Message Syntax (CMS) -- Usage: This data structure contains two data elements:  The type of content of the CMS data structure   The content itself These CMS data structures could be nested to allow a sequence of cryptographic processings on a part of a message (e.g.</xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="EnvelopedData" type="EnvelopedDataType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing encrypted data with encryption key --Rule: If ContentType is "id-envelopedData"</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="AuthenticatedData" type="AuthenticatedDataType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing MACed data with encryption key --Rule: If ContentType is "id-ct-authData"</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="SignedData" type="SignedDataType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing signed data  --Rule: If ContentType is "id-signedData"</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="DigestedData" type="DigestedDataType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing digested data --Rule: If ContentType is "id- digestedData"</xs:documentation></xs:annotation></xs:element>
+        <xs:element name="NamedKeyEncryptedData" type="NamedKeyEncryptedDataType"><xs:annotation><xs:documentation>Cryptographic Message Syntax (CMS) data structure containing encrypted data and integrated optional data filed keyName. --Rule: If ContentType is "id- namedKeyEncryptedData "</xs:documentation></xs:annotation></xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="ContentType" type="ContentTypeTypeCode" use="required"><xs:annotation><xs:documentation>Identification of the type of a Cryptographic Message Syntax (CMS) data structure</xs:documentation></xs:annotation></xs:attribute>
+  </xs:complexType>
+
+</xs:schema>

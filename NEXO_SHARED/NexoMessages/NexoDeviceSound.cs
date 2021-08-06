@@ -18,7 +18,7 @@ namespace NEXO
 		[DispId(3)]
 		SoundActionEnumeration RequestSoundAction { get; set; }
 		[DispId(4)]
-		uint RequestSoundVolume { get; set; }
+		int RequestSoundVolume { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -185,10 +185,12 @@ namespace NEXO
 			get => (SoundActionEnumeration)CMisc.GetEnumValue(typeof(SoundActionEnumeration), CMisc.Trimmed(RequestData.SoundAction), NexoValues.None);
 			set => RequestData.SoundAction = CMisc.GetEnumName(typeof(SoundActionEnumeration), value);
 		}
-		public uint RequestSoundVolume
+		public int RequestSoundVolume
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true);
 			set => RequestData.SoundVolume = value.ToString();
+			//get => RequestData.SoundVolume;
+			//set => RequestData.SoundVolume = value;
 		}
 		#endregion
 

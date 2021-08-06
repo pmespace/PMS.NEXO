@@ -1,4 +1,5 @@
 ﻿Imports COMMON
+Imports COMMON.ODBC
 Imports NEXO.Server
 Public Class FServerSettings
 	Public Settings As NexoRetailerServerDatabaseSettings = Nothing

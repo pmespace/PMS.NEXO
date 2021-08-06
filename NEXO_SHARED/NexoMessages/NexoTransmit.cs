@@ -17,7 +17,7 @@ namespace NEXO
 		[DispId(2)]
 		TransmitResponseType ReplyData { get; }
 		[DispId(3)]
-		uint RequestMaximumTransmitTime { get; set; }
+		int RequestMaximumTransmitTime { get; set; }
 		[DispId(4)]
 		string RequestDestinationAddress { get; set; }
 		[DispId(5)]
@@ -183,10 +183,12 @@ namespace NEXO
 		#endregion
 
 		#region request inner properties
-		public uint RequestMaximumTransmitTime
+		public int RequestMaximumTransmitTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), true);
 			set => RequestData.MaximumTransmitTime = value.ToString();
+			//get => RequestData.MaximumTransmitTime;
+			//set => RequestData.MaximumTransmitTime = value;
 		}
 		public string RequestDestinationAddress
 		{

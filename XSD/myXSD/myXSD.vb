@@ -10,6 +10,7 @@ Imports System.CodeDom
 Imports System.CodeDom.Compiler
 Imports Microsoft.CSharp
 Imports Microsoft.VisualBasic
+Imports COMMON.WIN32
 Imports COMMON
 Imports XSDEx
 
@@ -152,6 +153,8 @@ Public Class myXSD
 		settings.PrivateByInternal = privateByInternal.Checked
 		settings.Preprocessor = efPreprocessor.Text
 		settings.Silent = cbSilent.Checked
+		settings.ConvertStringIntegralToIntegral = cbStringToIntegral.Checked
+		settings.UseDefaultValueForHasBeenModified = cbUseDefaultValueForHasBeenModified.Checked
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -196,6 +199,8 @@ Public Class myXSD
 		privateByInternal.Checked = settings.PrivateByInternal
 		efPreprocessor.Text = settings.Preprocessor
 		cbSilent.Checked = settings.Silent
+		cbStringToIntegral.Checked = settings.ConvertStringIntegralToIntegral
+		cbUseDefaultValueForHasBeenModified.Checked = settings.UseDefaultValueForHasBeenModified
 	End Sub
 
 	Private Function GenerateFilesAsyncThread(threadData As CThreadData, o As Object) As Integer

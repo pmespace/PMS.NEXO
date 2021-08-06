@@ -88,8 +88,21 @@ namespace NEXO
 		protected NexoRetailer()
 		{
 			// load XSD from resources
+
+			////Resources = new ResourceManager("NEXO.Properties.NexoResources", GetType().Assembly);
+			//Resources = new ResourceManager(typeof(NexoResources));
+			//ResourceSet resourceSet = Resources.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+			//XSD = new XmlSchemaSet();
+			//foreach (DictionaryEntry entry in resourceSet)
+			//{
+			//	string resourceKey = entry.Key.ToString();
+			//	if (resourceKey.StartsWith(NexoCurrentVersion.Current.ResourceName))
+			//		LoadAndSetXSD(resourceKey);
+			//}
+			//ResetSchemaValidationState();
+
 			//Resources = new ResourceManager("NEXO.Properties.NexoResources", GetType().Assembly);
-			Resources = new ResourceManager(typeof(NexoResources));
+			Resources = new ResourceManager(typeof(Resources));
 			ResourceSet resourceSet = Resources.GetResourceSet(CultureInfo.CurrentCulture, true, true);
 			XSD = new XmlSchemaSet();
 			foreach (DictionaryEntry entry in resourceSet)
@@ -656,7 +669,7 @@ namespace NEXO
 					XmlWriterSettings settings = new XmlWriterSettings();
 					settings.Indent = false;
 					settings.CloseOutput = true;
-					settings.OmitXmlDeclaration = false;
+					settings.OmitXmlDeclaration = true;
 
 					XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
 					using (StringWriter sw = new UTF8StringWriter(bom))

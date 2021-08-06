@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports System.Reflection
 Imports System.Runtime.Remoting
+Imports COMMON.WIN32
 Imports COMMON
 Imports NEXO
 

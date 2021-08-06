@@ -65,7 +65,7 @@ namespace NEXO.Client
 		public uint WMNexoMessage
 		{
 			get => _wmnexomessage;
-			set => _wmnexomessage = Win32.IsValidWM(value) ? value : _wmnexomessage;
+			set => _wmnexomessage = value;// Win32.IsValidWM(value) ? value : _wmnexomessage;
 		}
 		private uint _wmnexomessage = WM_NEXO_CLIENT_MESSAGE;
 		public const uint WM_NEXO_CLIENT_MESSAGE = 0x781;

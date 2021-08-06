@@ -18,7 +18,7 @@ namespace NEXO
 		[DispId(3)]
 		PINRequestTypeEnumeration RequestPINRequestType { get; set; }
 		[DispId(4)]
-		uint RequestMaxWaitingTime { get; set; }
+		int RequestMaxWaitingTime { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -185,10 +185,12 @@ namespace NEXO
 			get => (PINRequestTypeEnumeration)CMisc.GetEnumValue(typeof(PINRequestTypeEnumeration), CMisc.Trimmed(RequestData.PINRequestType1), NexoValues.None);
 			set => RequestData.PINRequestType1 = CMisc.GetEnumName(typeof(PINRequestTypeEnumeration), value);
 		}
-		public uint RequestMaxWaitingTime
+		public int RequestMaxWaitingTime
 		{
-			get => (uint)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true);
 			set => RequestData.MaxWaitingTime = value.ToString();
+			//get => RequestData.MaxWaitingTime;
+			//set => RequestData.MaxWaitingTime = value;
 		}
 		#endregion
 

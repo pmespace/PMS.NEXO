@@ -61,7 +61,7 @@ namespace NEXO.Server
 		/// <summary>
 		/// Indicates whether the serve ris actually running or not
 		/// </summary>
-		public bool IsRunning { get => null != StreamServer && StreamServer.IsRunning; }
+		public bool IsRunning { get => null != StreamServer && StreamServer.  IsRunning; }
 		/// <summary>
 		/// Thread of the server
 		/// </summary>

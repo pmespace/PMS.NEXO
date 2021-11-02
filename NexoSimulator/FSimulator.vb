@@ -790,7 +790,7 @@ Public Class FSimulator
 		Dim properties As List(Of PropertyInfo) = o.GetType().GetProperties().ToList()
 		Dim methods As List(Of MethodInfo) = o.GetType().GetMethods().ToList()
 		For Each p As PropertyInfo In properties
-			If Not p.PropertyType.IsArray AndAlso MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith("xsd") Then
+			If Not p.PropertyType.IsArray AndAlso MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith(NexoXSDStrings.XSD) Then
 				Dim pValue As Object = p.GetValue(o, Nothing)
 				Dim pValuetype As Type = p.PropertyType
 				If Not IsNothing(pValue) Then

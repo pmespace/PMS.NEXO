@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>NEXO._30.CORE</RootNamespace>
-    <Version>4.0.0</Version>
-    <FileVersion>4.0.0</FileVersion>
-    <AssemblyVersion>4.0.0</AssemblyVersion>
+    <RootNamespace>NEXO</RootNamespace>
+    <Version>4.1.0</Version>
+    <FileVersion>4.1.0</FileVersion>
+    <AssemblyVersion>4.1.0</AssemblyVersion>
     <AssemblyName>PMS.NEXO30.CORE</AssemblyName>
     <Authors>philippemp31</Authors>
     <Description>nexo retailer v3.0</Description>
@@ -22,16 +22,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin\</OutputPath>
     <DocumentationFile>..\bin\PMS.NEXO30.CORE.xml</DocumentationFile>
+    <DefineConstants>TRACE;NEXO30</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\bin\</OutputPath>
     <DocumentationFile>..\bin\PMS.NEXO30.CORE.xml</DocumentationFile>
+    <DefineConstants>TRACE;NEXO30</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON.CORE" Version="5.1.0" />
-    <PackageReference Include="PMS.COMMON.CORE.ODBC" Version="5.1.0" />
+    <Compile Include="..\NEXO\EpasSaleToPOIMessages.xsd.30.cs" Link="EpasSaleToPOIMessages.xsd.30.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PMS.COMMON.CORE" Version="5.2.4" />
+    <PackageReference Include="PMS.COMMON.CORE.ODBC" Version="5.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,5 +62,11 @@
   <Target Name="CopyPackage" AfterTargets="Pack">
     <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(SolutionDir)..\nuget\test" />
   </Target>
+
+  <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
+
+  <Import Project="..\NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems" Label="Shared" />
+
+  <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />
 
 </Project>

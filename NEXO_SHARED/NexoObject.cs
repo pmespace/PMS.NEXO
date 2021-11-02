@@ -111,6 +111,10 @@ namespace NEXO
 		ErrorConditionEnumeration ErrorCondition { get; set; }
 		[DispId(10074)]
 		string AdditionalResponse { get; set; }
+		[DispId(10075)]
+		string ResultAsString { get; }
+		[DispId(10076)]
+		string ErrorConditionAsString { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -319,10 +323,7 @@ namespace NEXO
 			get
 			{
 				ResponseType response = GetResponse();
-				if (null != response)
-					return (ResultEnumeration)GetResponseTag<ResultEnumeration>(response.Result);
-				else
-					return (ResultEnumeration)NexoValues.None;
+				return (null != response ? (ResultEnumeration)GetResponseTag<ResultEnumeration>(response.Result) : ResultEnumeration._none);
 			}
 			set
 			{
@@ -330,6 +331,10 @@ namespace NEXO
 				if (null != response)
 					response.Result = SetResponseTag<ResultEnumeration>(value);
 			}
+		}
+		public string ResultAsString
+		{
+			get => SetResponseTag<ResultEnumeration>(Result);
 		}
 		/// <summary>
 		/// Allows to easily manipulate the ErrorCondition value inside the ResponseType
@@ -339,10 +344,7 @@ namespace NEXO
 			get
 			{
 				ResponseType response = GetResponse();
-				if (null != response)
-					return (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(response.ErrorCondition);
-				else
-					return (ErrorConditionEnumeration)NexoValues.None;
+				return (null != response ? (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(response.Result) : ErrorConditionEnumeration._none);
 			}
 			set
 			{
@@ -350,6 +352,10 @@ namespace NEXO
 				if (null != response)
 					response.ErrorCondition = SetResponseTag<ErrorConditionEnumeration>(value);
 			}
+		}
+		public string ErrorConditionAsString
+		{
+			get => SetResponseTag<ErrorConditionEnumeration>(ErrorCondition);
 		}
 		/// <summary>
 		/// Allows to easily manipulate the AdditionalResponse value inside the ResponseType
@@ -359,10 +365,7 @@ namespace NEXO
 			get
 			{
 				ResponseType response = GetResponse();
-				if (null != response)
-					return response.AdditionalResponse;
-				else
-					return null;
+				return (null != response ? response.AdditionalResponse : null);
 			}
 			set
 			{
@@ -576,17 +579,24 @@ namespace NEXO
 		protected abstract void SetResponse(ResponseType r);
 		private object GetResponseTag<TxN>(string tag)
 		{
-			if (string.IsNullOrEmpty(tag)) return NexoValues.None;
+			if (string.IsNullOrEmpty(tag)) return DefaultEnumValue<TxN>();
 			object value = CMisc.GetEnumValue(typeof(TxN), tag);
-			return CMisc.IsEnumValue(typeof(TxN), value) ? value : NexoValues.None;
+			return (null == value || IsEnumBeginEnd<TxN>(value) ? DefaultEnumValue<TxN>() : value);
 		}
 		private string SetResponseTag<TxN>(object tag)
 		{
-			if (null == tag) return null;
-			Array array = Enum.GetValues(typeof(TxN));
-			if (CMisc.IsEnumValue(typeof(TxN), tag))
-				return CMisc.EnumValueToString(typeof(TxN), tag);
-			return null;
+			if (null == tag || tag == DefaultEnumValue<TxN>() || IsEnumBeginEnd<TxN>(tag) || !CMisc.IsEnumValue(typeof(TxN), tag))
+				return null;
+			return CMisc.EnumValueToString(typeof(TxN), tag);
+		}
+		private bool IsEnumBeginEnd<TxN>(object value)
+		{
+			string s = CMisc.GetEnumName(typeof(TxN), value);
+			return (0 == string.Compare(s, NexoXSDStrings.EnumBegin, true) || 0 == string.Compare(s, NexoXSDStrings.EnumEnd, true));
+		}
+		private object DefaultEnumValue<TxN>()
+		{
+			return CMisc.GetEnumValue(typeof(TxN), NexoXSDStrings.EnumNone) ?? 0;
 		}
 		/// <summary>
 		/// Allows copying data from the request to the reply.

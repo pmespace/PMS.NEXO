@@ -98,6 +98,10 @@ namespace NEXO
 		ErrorConditionEnumeration ErrorCondition { get; set; }
 		[DispId(10074)]
 		string AdditionalResponse { get; set; }
+		[DispId(10075)]
+		string ResultAsString { get; }
+		[DispId(10076)]
+		string ErrorConditionAsString { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }

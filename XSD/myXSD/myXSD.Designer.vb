@@ -71,15 +71,17 @@ Partial Class myXSD
 		Me.cbNotations = New System.Windows.Forms.CheckBox()
 		Me.cbTypes = New System.Windows.Forms.CheckBox()
 		Me.cbElements = New System.Windows.Forms.CheckBox()
-		Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+		Me.cbAddDefaultToEnum = New System.Windows.Forms.CheckBox()
 		Me.arrayInitializer = New System.Windows.Forms.CheckBox()
 		Me.nullIfEmptyArray = New System.Windows.Forms.CheckBox()
 		Me.privateByInternal = New System.Windows.Forms.CheckBox()
 		Me.cbStringToIntegral = New System.Windows.Forms.CheckBox()
+		Me.cbUseDefaultValueForHasBeenModified = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.cbUseDefaultValueForHasBeenModified = New System.Windows.Forms.CheckBox()
+		Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+		Me.cbAddBeginEnd = New System.Windows.Forms.CheckBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelGenerateButtons.SuspendLayout()
@@ -96,7 +98,7 @@ Partial Class myXSD
 		Me.panelTypes.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.TableLayoutPanel4.SuspendLayout()
-		Me.TableLayoutPanel7.SuspendLayout()
+		Me.FlowLayoutPanel1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'panelMain
@@ -254,7 +256,7 @@ Partial Class myXSD
 		Me.panelSettings.RowCount = 2
 		Me.panelSettings.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelSettings.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelSettings.Size = New System.Drawing.Size(916, 252)
+		Me.panelSettings.Size = New System.Drawing.Size(916, 275)
 		Me.panelSettings.TabIndex = 0
 		'
 		'panelFiles
@@ -330,7 +332,7 @@ Partial Class myXSD
 		Me.panelOptions.Controls.Add(Me.TableLayoutPanel1, 0, 0)
 		Me.panelOptions.Controls.Add(Me.TableLayoutPanel2, 0, 3)
 		Me.panelOptions.Controls.Add(Me.TableLayoutPanel3, 0, 1)
-		Me.panelOptions.Controls.Add(Me.TableLayoutPanel7, 0, 4)
+		Me.panelOptions.Controls.Add(Me.FlowLayoutPanel1, 0, 4)
 		Me.panelOptions.Location = New System.Drawing.Point(3, 76)
 		Me.panelOptions.Name = "panelOptions"
 		Me.panelOptions.RowCount = 5
@@ -339,7 +341,8 @@ Partial Class myXSD
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelOptions.Size = New System.Drawing.Size(910, 173)
+		Me.panelOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+		Me.panelOptions.Size = New System.Drawing.Size(910, 196)
 		Me.panelOptions.TabIndex = 1
 		'
 		'TableLayoutPanel6
@@ -778,31 +781,16 @@ Partial Class myXSD
 		Me.cbElements.Text = "Use elements"
 		Me.cbElements.UseVisualStyleBackColor = True
 		'
-		'TableLayoutPanel7
+		'cbAddDefaultToEnum
 		'
-		Me.TableLayoutPanel7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.TableLayoutPanel7.AutoSize = True
-		Me.TableLayoutPanel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel7.ColumnCount = 6
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel7.Controls.Add(Me.arrayInitializer, 0, 0)
-		Me.TableLayoutPanel7.Controls.Add(Me.nullIfEmptyArray, 1, 0)
-		Me.TableLayoutPanel7.Controls.Add(Me.privateByInternal, 2, 0)
-		Me.TableLayoutPanel7.Controls.Add(Me.cbStringToIntegral, 3, 0)
-		Me.TableLayoutPanel7.Controls.Add(Me.cbUseDefaultValueForHasBeenModified, 4, 0)
-		Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 147)
-		Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-		Me.TableLayoutPanel7.RowCount = 1
-		Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel7.Size = New System.Drawing.Size(904, 23)
-		Me.TableLayoutPanel7.TabIndex = 4
+		Me.cbAddDefaultToEnum.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbAddDefaultToEnum.AutoSize = True
+		Me.cbAddDefaultToEnum.Location = New System.Drawing.Point(773, 3)
+		Me.cbAddDefaultToEnum.Name = "cbAddDefaultToEnum"
+		Me.cbAddDefaultToEnum.Size = New System.Drawing.Size(121, 17)
+		Me.cbAddDefaultToEnum.TabIndex = 5
+		Me.cbAddDefaultToEnum.Text = "Add default to enum"
+		Me.cbAddDefaultToEnum.UseVisualStyleBackColor = True
 		'
 		'arrayInitializer
 		'
@@ -849,16 +837,27 @@ Partial Class myXSD
 		Me.cbStringToIntegral.Text = "String to integral"
 		Me.cbStringToIntegral.UseVisualStyleBackColor = True
 		'
+		'cbUseDefaultValueForHasBeenModified
+		'
+		Me.cbUseDefaultValueForHasBeenModified.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbUseDefaultValueForHasBeenModified.AutoSize = True
+		Me.cbUseDefaultValueForHasBeenModified.Location = New System.Drawing.Point(605, 3)
+		Me.cbUseDefaultValueForHasBeenModified.Name = "cbUseDefaultValueForHasBeenModified"
+		Me.cbUseDefaultValueForHasBeenModified.Size = New System.Drawing.Size(162, 17)
+		Me.cbUseDefaultValueForHasBeenModified.TabIndex = 4
+		Me.cbUseDefaultValueForHasBeenModified.Text = "Use default value if available"
+		Me.cbUseDefaultValueForHasBeenModified.UseVisualStyleBackColor = True
+		'
 		'result
 		'
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
 			Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.result.Location = New System.Drawing.Point(3, 261)
+		Me.result.Location = New System.Drawing.Point(3, 284)
 		Me.result.Multiline = True
 		Me.result.Name = "result"
 		Me.result.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.result.Size = New System.Drawing.Size(916, 112)
+		Me.result.Size = New System.Drawing.Size(916, 89)
 		Me.result.TabIndex = 0
 		'
 		'OpenFileDialog1
@@ -871,16 +870,33 @@ Partial Class myXSD
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
 		'
-		'cbUseDefaultValueForHasBeenModified
+		'FlowLayoutPanel1
 		'
-		Me.cbUseDefaultValueForHasBeenModified.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.cbUseDefaultValueForHasBeenModified.AutoSize = True
-		Me.cbUseDefaultValueForHasBeenModified.Location = New System.Drawing.Point(605, 3)
-		Me.cbUseDefaultValueForHasBeenModified.Name = "cbUseDefaultValueForHasBeenModified"
-		Me.cbUseDefaultValueForHasBeenModified.Size = New System.Drawing.Size(139, 17)
-		Me.cbUseDefaultValueForHasBeenModified.TabIndex = 4
-		Me.cbUseDefaultValueForHasBeenModified.Text = "Use default value if available"
-		Me.cbUseDefaultValueForHasBeenModified.UseVisualStyleBackColor = True
+		Me.FlowLayoutPanel1.AutoSize = True
+		Me.FlowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.FlowLayoutPanel1.Controls.Add(Me.arrayInitializer)
+		Me.FlowLayoutPanel1.Controls.Add(Me.nullIfEmptyArray)
+		Me.FlowLayoutPanel1.Controls.Add(Me.privateByInternal)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbStringToIntegral)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbUseDefaultValueForHasBeenModified)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbAddDefaultToEnum)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbAddBeginEnd)
+		Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 147)
+		Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+		Me.FlowLayoutPanel1.Size = New System.Drawing.Size(904, 46)
+		Me.FlowLayoutPanel1.TabIndex = 5
+		'
+		'cbAddBeginEnd
+		'
+		Me.cbAddBeginEnd.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbAddBeginEnd.AutoSize = True
+		Me.cbAddBeginEnd.Location = New System.Drawing.Point(3, 26)
+		Me.cbAddBeginEnd.Name = "cbAddBeginEnd"
+		Me.cbAddBeginEnd.Size = New System.Drawing.Size(138, 17)
+		Me.cbAddBeginEnd.TabIndex = 10
+		Me.cbAddBeginEnd.Text = "Add begin/end to enum"
+		Me.cbAddBeginEnd.UseVisualStyleBackColor = True
 		'
 		'myXSD
 		'
@@ -921,8 +937,8 @@ Partial Class myXSD
 		Me.TableLayoutPanel3.PerformLayout()
 		Me.TableLayoutPanel4.ResumeLayout(False)
 		Me.TableLayoutPanel4.PerformLayout()
-		Me.TableLayoutPanel7.ResumeLayout(False)
-		Me.TableLayoutPanel7.PerformLayout()
+		Me.FlowLayoutPanel1.ResumeLayout(False)
+		Me.FlowLayoutPanel1.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -962,7 +978,6 @@ Partial Class myXSD
 	Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
 	Friend WithEvents Label2 As Label
 	Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-	Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
 	Friend WithEvents arrayInitializer As CheckBox
 	Friend WithEvents nullIfEmptyArray As CheckBox
 	Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
@@ -985,4 +1000,7 @@ Partial Class myXSD
 	Friend WithEvents cbSilent As CheckBox
 	Friend WithEvents cbStringToIntegral As CheckBox
 	Friend WithEvents cbUseDefaultValueForHasBeenModified As CheckBox
+	Friend WithEvents cbAddDefaultToEnum As CheckBox
+	Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+	Friend WithEvents cbAddBeginEnd As CheckBox
 End Class

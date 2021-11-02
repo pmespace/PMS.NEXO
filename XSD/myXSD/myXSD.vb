@@ -155,6 +155,8 @@ Public Class myXSD
 		settings.Silent = cbSilent.Checked
 		settings.ConvertStringIntegralToIntegral = cbStringToIntegral.Checked
 		settings.UseDefaultValueForHasBeenModified = cbUseDefaultValueForHasBeenModified.Checked
+		settings.AddDefaultAttributesToEnum = cbAddDefaultToEnum.Checked
+		settings.UseEnumBeginEnd = cbAddBeginEnd.Checked
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -201,6 +203,9 @@ Public Class myXSD
 		cbSilent.Checked = settings.Silent
 		cbStringToIntegral.Checked = settings.ConvertStringIntegralToIntegral
 		cbUseDefaultValueForHasBeenModified.Checked = settings.UseDefaultValueForHasBeenModified
+		cbAddDefaultToEnum.Checked = settings.AddDefaultAttributesToEnum
+		cbAddBeginEnd.Checked = settings.UseEnumBeginEnd
+
 	End Sub
 
 	Private Function GenerateFilesAsyncThread(threadData As CThreadData, o As Object) As Integer

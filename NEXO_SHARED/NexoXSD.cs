@@ -18,6 +18,9 @@ namespace NEXO
 		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
 		public static string NexoHasBeenSetField = $"_{XSD}HasBeenSet";
 		public static string NexoDefaultValueForProperty = $"DEFAULT_VALUE";
+		public static string EnumNone = $"_none";
+		public static string EnumBegin = $"_begin";
+		public static string EnumEnd = $"_end";
 	}
 
 	public abstract class NexoDummy

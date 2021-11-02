@@ -647,6 +647,7 @@ namespace XSDEx
 									{
 										propertiesToProcess.Add(property);
 									}
+
 									// if it is an optional flag save it for later use
 									if (optional)
 									{
@@ -1382,6 +1383,26 @@ namespace XSDEx
 						else if (visible && codeType.IsEnum)
 						{
 							AddComVisible(codeType.CustomAttributes, settings.MakeEnumComVisible);
+
+							if (settings.AddDefaultAttributesToEnum)
+							{
+								// enum, let's add generic attributes
+								CodeMemberField cm;
+								// MUST BE PRESENT
+								cm = new CodeMemberField("System.Int32", NexoXSDStrings.EnumNone);
+								codeType.Members.Insert(0, cm);
+								if (settings.UseEnumBeginEnd)
+								{
+									cm = new CodeMemberField("System.Int32", NexoXSDStrings.EnumBegin);
+									//cm.InitExpression = new CodePrimitiveExpression("_none");
+									codeType.Members.Insert(0, cm);
+									cm = new CodeMemberField("System.Int32", NexoXSDStrings.EnumEnd);
+									codeType.Members.Add(cm);
+								}
+							}
+						}
+						else
+						{
 						}
 					}
 					catch (Exception ex) { }

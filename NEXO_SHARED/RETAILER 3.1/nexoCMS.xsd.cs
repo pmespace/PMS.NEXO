@@ -1,75 +1,726 @@
-#if NEXO30
+#if NEXO31
 namespace NEXO {
     using System.Runtime.InteropServices;
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum AlgorithmEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-retail-cbc-mac")]
+        idretailcbcmac,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-retail-cbc-mac-sha-256")]
+        idretailcbcmacsha256,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-ukpt-wrap ")]
+        idukptwrap,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-dukpt-wrap")]
+        iddukptwrap,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("des-ede3-ecb")]
+        desede3ecb,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("des-ede3-cbc")]
+        desede3cbc,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-sha256")]
+        idsha256,
+        /// <remarks/>
+        sha256WithRSAEncryption,
+        /// <remarks/>
+        rsaEncryption,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum AttributeTypeEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-at-commonName")]
+        idatcommonName,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-at-localityName")]
+        idatlocalityName,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-at-organizationName")]
+        idatorganizationName,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-at-organizationalUnitName")]
+        idatorganizationalUnitName,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-at-countryName")]
+        idatcountryName,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2b73b970-62d9-4f2c-b71b-555a1028f164")]
+    [System.Runtime.InteropServices.GuidAttribute("15dab92b-de4a-4b4d-93f6-04f32047629a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class AbortRequestType : IAbortRequestType {
-        private MessageReferenceType messageReferenceField = new MessageReferenceType();
-        private string abortReasonField = default(string);
-        private DisplayOutputType displayOutputField = new DisplayOutputType();
-        private bool abortReasonField_XSD_HasBeenSet = false;
+    public partial class AuthenticatedDataType : IAuthenticatedDataType {
+        private object[] itemsField = default(object[]);
+        private AlgorithmIdentifier mACAlgorithmField = new AlgorithmIdentifier();
+        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
+        private string versionField = default(string);
+        private byte[] mACField = new byte[0];
+        private bool itemsField_XSD_HasBeenSet = false;
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public AuthenticatedDataType() {
+            this.versionField = "v0";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("KEK", typeof(KEKType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("KeyTransport", typeof(KeyTransportType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public object[] Items {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.itemsField == null)
+                            || (this.itemsField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.itemsField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.itemsField = new object[0];
+                }
+                else {
+                    this.itemsField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier MACAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.mACAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.mACAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.mACAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.mACAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public EncapsulatedContentType EncapsulatedContent {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encapsulatedContentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.encapsulatedContentField = new EncapsulatedContentType();
+                }
+                else {
+                    this.encapsulatedContentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v0")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] MAC {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.mACField == null)
+                            || (this.mACField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.mACField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.mACField = new byte[0];
+                }
+                else {
+                    this.mACField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((((false
+                            || ((this.MACAlgorithm != null)
+                            && this.MACAlgorithm.XSD_HasBeenSet))
+                            || ((this.EncapsulatedContent != null)
+                            && this.EncapsulatedContent.XSD_HasBeenSet))
+                            || (this.ItemsSize() != 0))
+                            || (this.MACSize() != 0))
+                            || this.itemsField_XSD_HasBeenSet)
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.MACAlgorithm != null)) {
+                    this.MACAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.EncapsulatedContent != null)) {
+                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int ItemsSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.itemsField == null)) {
+                return 0;
+            }
+            else {
+                return this.itemsField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public object ItemsGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return default(object);
+                }
+                else {
+                    if (((this.itemsField.Length - 1)
+                                >= index)) {
+                        return this.itemsField[index];
+                    }
+                    else {
+                        return default(object);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(object);
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsSetItem(int index, object value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    this.itemsField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsAddItem(object value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    object[] array = new object[(this.itemsField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.itemsField.Length); i = (i + 1)) {
+                        array[i] = itemsField[i];
+                    }
+                    array[i] = value;
+                    this.Items = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.itemsField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        object[] array = new object[(this.itemsField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = itemsField[i];
+                        }
+                        for (i = (i + 1); (i < this.itemsField.Length); i = (i + 1)) {
+                            array[i] = itemsField[i];
+                        }
+                        this.Items = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public int MACSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.mACField == null)) {
+                return 0;
+            }
+            else {
+                return this.mACField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte MACGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.mACField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.mACField.Length - 1)
+                                >= index)) {
+                        return this.mACField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool MACSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.mACField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.mACField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool MACAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.mACField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.mACField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.mACField.Length); i = (i + 1)) {
+                        array[i] = mACField[i];
+                    }
+                    array[i] = value;
+                    this.MAC = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool MACRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.mACField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.mACField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.mACField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = mACField[i];
+                        }
+                        for (i = (i + 1); (i < this.mACField.Length); i = (i + 1)) {
+                            array[i] = mACField[i];
+                        }
+                        this.MAC = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("91b7c28f-c76b-49ce-997d-20dfc1b63ded")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class KEKType : IKEKType {
+        private KEKIdentifierType kEKIdentifierField = new KEKIdentifierType();
+        private AlgorithmIdentifier keyEncryptionAlgorithmField = new AlgorithmIdentifier();
+        private string versionField = default(string);
+        private byte[] encryptedKeyField = new byte[0];
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public KEKType() {
+            this.versionField = "v4";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public KEKIdentifierType KEKIdentifier {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.kEKIdentifierField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.kEKIdentifierField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.kEKIdentifierField = new KEKIdentifierType();
+                }
+                else {
+                    this.kEKIdentifierField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier KeyEncryptionAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.keyEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.keyEncryptionAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.keyEncryptionAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.keyEncryptionAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v4")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] EncryptedKey {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.encryptedKeyField == null)
+                            || (this.encryptedKeyField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encryptedKeyField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.encryptedKeyField = new byte[0];
+                }
+                else {
+                    this.encryptedKeyField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((false
+                            || ((this.KEKIdentifier != null)
+                            && this.KEKIdentifier.XSD_HasBeenSet))
+                            || ((this.KeyEncryptionAlgorithm != null)
+                            && this.KeyEncryptionAlgorithm.XSD_HasBeenSet))
+                            || (this.EncryptedKeySize() != 0))
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.KEKIdentifier != null)) {
+                    this.KEKIdentifier.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.KeyEncryptionAlgorithm != null)) {
+                    this.KeyEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int EncryptedKeySize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.encryptedKeyField == null)) {
+                return 0;
+            }
+            else {
+                return this.encryptedKeyField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte EncryptedKeyGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.encryptedKeyField.Length - 1)
+                                >= index)) {
+                        return this.encryptedKeyField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeySetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.encryptedKeyField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeyAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.encryptedKeyField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.encryptedKeyField.Length); i = (i + 1)) {
+                        array[i] = encryptedKeyField[i];
+                    }
+                    array[i] = value;
+                    this.EncryptedKey = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeyRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.encryptedKeyField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.encryptedKeyField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = encryptedKeyField[i];
+                        }
+                        for (i = (i + 1); (i < this.encryptedKeyField.Length); i = (i + 1)) {
+                            array[i] = encryptedKeyField[i];
+                        }
+                        this.EncryptedKey = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("1b260da7-def4-4d3c-be59-5ed564a37fca")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class KEKIdentifierType : IKEKIdentifierType {
+        private string keyIdentifierField = default(string);
+        private string keyVersionField = default(string);
+        private byte[] derivationIdentifierField = new byte[0];
+        private bool keyIdentifierField_XSD_HasBeenSet = false;
+        private bool keyVersionField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public MessageReferenceType MessageReference {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string KeyIdentifier {
             get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.messageReferenceField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.messageReferenceField;
+                return this.keyIdentifierField;
             }
             set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.messageReferenceField = new MessageReferenceType();
-                }
-                else {
-                    this.messageReferenceField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AbortReason {
-            get {
-                return this.abortReasonField;
-            }
-            set {
-                this.abortReasonField = value;
+                this.keyIdentifierField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.abortReasonField_XSD_HasBeenSet = (this.abortReasonField != default(string));
+                this.keyIdentifierField_XSD_HasBeenSet = (this.keyIdentifierField != default(string));
                 // END ADDED BY XSD
             }
         }
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public DisplayOutputType DisplayOutput {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string KeyVersion {
             get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.displayOutputField.XSD_HasBeenSet == false))) {
+                return this.keyVersionField;
+            }
+            set {
+                this.keyVersionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.keyVersionField_XSD_HasBeenSet = (this.keyVersionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] DerivationIdentifier {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.derivationIdentifierField == null)
+                            || (this.derivationIdentifierField.Length == 0))) {
                     return null;
                 }
                 // END ADDED BY XSD
-                return this.displayOutputField;
+                return this.derivationIdentifierField;
             }
             set {
-                // BEGIN ADDED BY XSD - prevent class from being null
+                // BEGIN ADDED BY XSD - prevent array from being null
                 if ((value == null)) {
-                    this.displayOutputField = new DisplayOutputType();
+                    this.derivationIdentifierField = new byte[0];
                 }
                 else {
-                    this.displayOutputField = value;
+                    this.derivationIdentifierField = value;
                 }
                 // END ADDED BY XSD
             }
@@ -80,132 +731,9 @@ namespace NEXO {
             get {
                 // BEGIN ADDED BY XSD
                 return (((false
-                            || ((this.MessageReference != null)
-                            && this.MessageReference.XSD_HasBeenSet))
-                            || ((this.DisplayOutput != null)
-                            && this.DisplayOutput.XSD_HasBeenSet))
-                            || this.abortReasonField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.MessageReference != null)) {
-                    this.MessageReference.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.DisplayOutput != null)) {
-                    this.DisplayOutput.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("88341b3e-e236-4a37-a195-62a8dd6775c9")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class MessageReferenceType : IMessageReferenceType {
-        private string messageCategoryField = default(string);
-        private string serviceIDField = default(string);
-        private string deviceIDField = default(string);
-        private string saleIDField = default(string);
-        private string pOIIDField = default(string);
-        private bool messageCategoryField_XSD_HasBeenSet = false;
-        private bool serviceIDField_XSD_HasBeenSet = false;
-        private bool deviceIDField_XSD_HasBeenSet = false;
-        private bool saleIDField_XSD_HasBeenSet = false;
-        private bool pOIIDField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MessageCategory {
-            get {
-                return this.messageCategoryField;
-            }
-            set {
-                this.messageCategoryField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.messageCategoryField_XSD_HasBeenSet = (this.messageCategoryField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ServiceID {
-            get {
-                return this.serviceIDField;
-            }
-            set {
-                this.serviceIDField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.serviceIDField_XSD_HasBeenSet = (this.serviceIDField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DeviceID {
-            get {
-                return this.deviceIDField;
-            }
-            set {
-                this.deviceIDField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.deviceIDField_XSD_HasBeenSet = (this.deviceIDField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SaleID {
-            get {
-                return this.saleIDField;
-            }
-            set {
-                this.saleIDField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.saleIDField_XSD_HasBeenSet = (this.saleIDField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string POIID {
-            get {
-                return this.pOIIDField;
-            }
-            set {
-                this.pOIIDField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.pOIIDField_XSD_HasBeenSet = (this.pOIIDField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((((false || this.messageCategoryField_XSD_HasBeenSet)
-                            || this.serviceIDField_XSD_HasBeenSet)
-                            || this.deviceIDField_XSD_HasBeenSet)
-                            || this.saleIDField_XSD_HasBeenSet)
-                            || this.pOIIDField_XSD_HasBeenSet);
+                            || (this.DerivationIdentifierSize() != 0))
+                            || this.keyIdentifierField_XSD_HasBeenSet)
+                            || this.keyVersionField_XSD_HasBeenSet);
                 // END ADDED BY XSD
             }
         }
@@ -225,13 +753,111 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        public int DerivationIdentifierSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.derivationIdentifierField == null)) {
+                return 0;
+            }
+            else {
+                return this.derivationIdentifierField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte DerivationIdentifierGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.derivationIdentifierField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.derivationIdentifierField.Length - 1)
+                                >= index)) {
+                        return this.derivationIdentifierField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool DerivationIdentifierSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.derivationIdentifierField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.derivationIdentifierField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DerivationIdentifierAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.derivationIdentifierField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.derivationIdentifierField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.derivationIdentifierField.Length); i = (i + 1)) {
+                        array[i] = derivationIdentifierField[i];
+                    }
+                    array[i] = value;
+                    this.DerivationIdentifier = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DerivationIdentifierRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.derivationIdentifierField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.derivationIdentifierField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.derivationIdentifierField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = derivationIdentifierField[i];
+                        }
+                        for (i = (i + 1); (i < this.derivationIdentifierField.Length); i = (i + 1)) {
+                            array[i] = derivationIdentifierField[i];
+                        }
+                        this.DerivationIdentifier = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
     }
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("eb6233d9-cc73-4f83-b6c6-516e76c22b0f")]
+    [System.Runtime.InteropServices.GuidAttribute("49f57e1e-547e-4ef9-8461-2c8457cd7f85")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayResponseType : IDisplayResponseType {
@@ -394,7 +1020,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ce7a662c-cc8a-4bd3-b068-5b159bf0e7ca")]
+    [System.Runtime.InteropServices.GuidAttribute("c09c1f84-ef12-47b3-9e80-2aaa34da7158")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputResultType : IOutputResultType {
@@ -491,7 +1117,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ceaf00b0-f0ed-4730-96b6-9ee7c75373fd")]
+    [System.Runtime.InteropServices.GuidAttribute("aae89c93-fa3a-4fcc-a539-d1d1f27d5b0b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ResponseType : IResponseType {
@@ -574,7 +1200,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4b7afd1e-d896-4738-9979-b47a1834d8b0")]
+    [System.Runtime.InteropServices.GuidAttribute("1fe2a711-00ba-4412-9ac7-9764ed0e4f6e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayRequestType : IDisplayRequestType {
@@ -737,7 +1363,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b6935d99-0826-484f-a981-8571b06e6b0a")]
+    [System.Runtime.InteropServices.GuidAttribute("0726d0f9-c1db-4d67-81b1-e1abf40562fa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayOutputType : IDisplayOutputType {
@@ -1122,7 +1748,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("85c7f7a3-98b7-47ba-b709-f51ec4bbed59")]
+    [System.Runtime.InteropServices.GuidAttribute("958aa795-d3c2-40af-8a70-b39f192f28db")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputContentType : IOutputContentType {
@@ -1482,7 +2108,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b7e3c9b4-c12b-4133-aadb-402988bf2547")]
+    [System.Runtime.InteropServices.GuidAttribute("2423dcef-7505-426d-ae81-f11c1c9e7763")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PredefinedContentType : IPredefinedContentType {
@@ -1549,7 +2175,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d15818fe-ed4a-453d-a8b9-3946effb3f10")]
+    [System.Runtime.InteropServices.GuidAttribute("92845360-d7ae-4ff1-9dc9-95fda0947ee0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputTextType : IOutputTextType {
@@ -1764,17 +2390,62 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1373983c-8d55-47a7-8571-7b83d2923246")]
+    [System.Runtime.InteropServices.GuidAttribute("c265e374-c3a1-4112-9c0c-359d92bc46fa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputBarcodeType : IOutputBarcodeType {
+        private string barcodeValueField = default(string);
+        private byte[] qRCodeBinaryValueField = new byte[0];
         private string barcodeTypeField = default(string);
-        private string valueField = default(string);
+        private string qRCodeVersionField = default(string);
+        private QRCodeEncodingModeEnumeration qRCodeEncodingModeField = default(QRCodeEncodingModeEnumeration);
+        private bool qRCodeEncodingModeFieldSpecified = false;
+        private QRCodeErrorCorrectionEnumeration qRCodeErrorCorrectionField = default(QRCodeErrorCorrectionEnumeration);
+        private bool qRCodeErrorCorrectionFieldSpecified = false;
+        private bool barcodeValueField_XSD_HasBeenSet = false;
         private bool barcodeTypeField_XSD_HasBeenSet = false;
-        private bool valueField_XSD_HasBeenSet = false;
+        private bool qRCodeVersionField_XSD_HasBeenSet = false;
+        private bool qRCodeEncodingModeField_XSD_HasBeenSet = false;
+        private bool qRCodeErrorCorrectionField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         public OutputBarcodeType() {
             this.barcodeTypeField = "EAN13";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string BarcodeValue {
+            get {
+                return this.barcodeValueField;
+            }
+            set {
+                this.barcodeValueField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.barcodeValueField_XSD_HasBeenSet = (this.barcodeValueField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] QRCodeBinaryValue {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.qRCodeBinaryValueField == null)
+                            || (this.qRCodeBinaryValueField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.qRCodeBinaryValueField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.qRCodeBinaryValueField = new byte[0];
+                }
+                else {
+                    this.qRCodeBinaryValueField = value;
+                }
+                // END ADDED BY XSD
+            }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1791,16 +2462,52 @@ namespace NEXO {
             }
         }
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string QRCodeVersion {
             get {
-                return this.valueField;
+                return this.qRCodeVersionField;
             }
             set {
-                this.valueField = value;
+                this.qRCodeVersionField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.valueField_XSD_HasBeenSet = (this.valueField != default(string));
+                this.qRCodeVersionField_XSD_HasBeenSet = (this.qRCodeVersionField != default(string));
                 // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public QRCodeEncodingModeEnumeration QRCodeEncodingMode {
+            get {
+                return this.qRCodeEncodingModeField;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool QRCodeEncodingModeSpecified {
+            get {
+                return this.qRCodeEncodingModeFieldSpecified;
+            }
+            set {
+                this.qRCodeEncodingModeFieldSpecified = value;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public QRCodeErrorCorrectionEnumeration QRCodeErrorCorrection {
+            get {
+                return this.qRCodeErrorCorrectionField;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool QRCodeErrorCorrectionSpecified {
+            get {
+                return this.qRCodeErrorCorrectionFieldSpecified;
+            }
+            set {
+                this.qRCodeErrorCorrectionFieldSpecified = value;
             }
         }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -1808,8 +2515,13 @@ namespace NEXO {
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((false || this.barcodeTypeField_XSD_HasBeenSet)
-                            || this.valueField_XSD_HasBeenSet);
+                return ((((((false
+                            || (this.QRCodeBinaryValueSize() != 0))
+                            || this.barcodeValueField_XSD_HasBeenSet)
+                            || this.barcodeTypeField_XSD_HasBeenSet)
+                            || this.qRCodeVersionField_XSD_HasBeenSet)
+                            || this.qRCodeEncodingModeField_XSD_HasBeenSet)
+                            || this.qRCodeErrorCorrectionField_XSD_HasBeenSet);
                 // END ADDED BY XSD
             }
         }
@@ -1829,13 +2541,147 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        public int QRCodeBinaryValueSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.qRCodeBinaryValueField == null)) {
+                return 0;
+            }
+            else {
+                return this.qRCodeBinaryValueField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte QRCodeBinaryValueGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.qRCodeBinaryValueField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.qRCodeBinaryValueField.Length - 1)
+                                >= index)) {
+                        return this.qRCodeBinaryValueField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool QRCodeBinaryValueSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.qRCodeBinaryValueField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.qRCodeBinaryValueField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool QRCodeBinaryValueAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.qRCodeBinaryValueField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.qRCodeBinaryValueField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.qRCodeBinaryValueField.Length); i = (i + 1)) {
+                        array[i] = qRCodeBinaryValueField[i];
+                    }
+                    array[i] = value;
+                    this.QRCodeBinaryValue = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool QRCodeBinaryValueRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.qRCodeBinaryValueField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.qRCodeBinaryValueField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.qRCodeBinaryValueField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = qRCodeBinaryValueField[i];
+                        }
+                        for (i = (i + 1); (i < this.qRCodeBinaryValueField.Length); i = (i + 1)) {
+                            array[i] = qRCodeBinaryValueField[i];
+                        }
+                        this.QRCodeBinaryValue = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum QRCodeEncodingModeEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        Numeric,
+        /// <remarks/>
+        Alphanumeric,
+        /// <remarks/>
+        Binary,
+        /// <remarks/>
+        Kanji,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum QRCodeErrorCorrectionEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        L,
+        /// <remarks/>
+        M,
+        /// <remarks/>
+        Q,
+        /// <remarks/>
+        H,
+        _end,
     }
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("aacd6137-a736-4881-a0e2-0c2dd965fe11")]
+    [System.Runtime.InteropServices.GuidAttribute("1c2da7cb-3410-4fe2-8e92-44d4b746c067")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MenuEntryType : IMenuEntryType {
@@ -2202,6 +3048,3020 @@ namespace NEXO {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("9e33d586-1c1d-487a-8ca2-b823437eddf6")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class AlgorithmIdentifier : IAlgorithmIdentifier {
+        private ParameterType parameterField = new ParameterType();
+        private string algorithmField = default(string);
+        private bool algorithmField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ParameterType Parameter {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.parameterField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.parameterField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.parameterField = new ParameterType();
+                }
+                else {
+                    this.parameterField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.algorithmField_XSD_HasBeenSet = (this.algorithmField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false
+                            || ((this.Parameter != null)
+                            && this.Parameter.XSD_HasBeenSet))
+                            || this.algorithmField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Parameter != null)) {
+                    this.Parameter.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("75784326-eeeb-4e04-87ba-24463b82e6d9")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class ParameterType : IParameterType {
+        private byte[] initialisationVectorField = new byte[0];
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] InitialisationVector {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.initialisationVectorField == null)
+                            || (this.initialisationVectorField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.initialisationVectorField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.initialisationVectorField = new byte[0];
+                }
+                else {
+                    this.initialisationVectorField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || (this.InitialisationVectorSize() != 0));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+        public int InitialisationVectorSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.initialisationVectorField == null)) {
+                return 0;
+            }
+            else {
+                return this.initialisationVectorField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte InitialisationVectorGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.initialisationVectorField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.initialisationVectorField.Length - 1)
+                                >= index)) {
+                        return this.initialisationVectorField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool InitialisationVectorSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.initialisationVectorField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.initialisationVectorField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool InitialisationVectorAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.initialisationVectorField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.initialisationVectorField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.initialisationVectorField.Length); i = (i + 1)) {
+                        array[i] = initialisationVectorField[i];
+                    }
+                    array[i] = value;
+                    this.InitialisationVector = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool InitialisationVectorRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.initialisationVectorField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.initialisationVectorField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.initialisationVectorField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = initialisationVectorField[i];
+                        }
+                        for (i = (i + 1); (i < this.initialisationVectorField.Length); i = (i + 1)) {
+                            array[i] = initialisationVectorField[i];
+                        }
+                        this.InitialisationVector = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("7ec85e90-210b-4f87-8212-8718663aad10")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class KeyTransportType : IKeyTransportType {
+        private RecipientIdentifierType recipientIdentifierField = new RecipientIdentifierType();
+        private AlgorithmIdentifier keyEncryptionAlgorithmField = new AlgorithmIdentifier();
+        private string versionField = default(string);
+        private byte[] encryptedKeyField = new byte[0];
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public KeyTransportType() {
+            this.versionField = "v0";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public RecipientIdentifierType RecipientIdentifier {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.recipientIdentifierField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.recipientIdentifierField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.recipientIdentifierField = new RecipientIdentifierType();
+                }
+                else {
+                    this.recipientIdentifierField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier KeyEncryptionAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.keyEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.keyEncryptionAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.keyEncryptionAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.keyEncryptionAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v0")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] EncryptedKey {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.encryptedKeyField == null)
+                            || (this.encryptedKeyField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encryptedKeyField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.encryptedKeyField = new byte[0];
+                }
+                else {
+                    this.encryptedKeyField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((false
+                            || ((this.RecipientIdentifier != null)
+                            && this.RecipientIdentifier.XSD_HasBeenSet))
+                            || ((this.KeyEncryptionAlgorithm != null)
+                            && this.KeyEncryptionAlgorithm.XSD_HasBeenSet))
+                            || (this.EncryptedKeySize() != 0))
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.RecipientIdentifier != null)) {
+                    this.RecipientIdentifier.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.KeyEncryptionAlgorithm != null)) {
+                    this.KeyEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int EncryptedKeySize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.encryptedKeyField == null)) {
+                return 0;
+            }
+            else {
+                return this.encryptedKeyField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte EncryptedKeyGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.encryptedKeyField.Length - 1)
+                                >= index)) {
+                        return this.encryptedKeyField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeySetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.encryptedKeyField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeyAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.encryptedKeyField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.encryptedKeyField.Length); i = (i + 1)) {
+                        array[i] = encryptedKeyField[i];
+                    }
+                    array[i] = value;
+                    this.EncryptedKey = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedKeyRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.encryptedKeyField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.encryptedKeyField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.encryptedKeyField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = encryptedKeyField[i];
+                        }
+                        for (i = (i + 1); (i < this.encryptedKeyField.Length); i = (i + 1)) {
+                            array[i] = encryptedKeyField[i];
+                        }
+                        this.EncryptedKey = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("450f8f95-07a9-40cd-b5f7-f73148ee503f")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class RecipientIdentifierType : IRecipientIdentifierType {
+        private IssuerAndSerialNumberType issuerAndSerialNumberField = new IssuerAndSerialNumberType();
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public IssuerAndSerialNumberType IssuerAndSerialNumber {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.issuerAndSerialNumberField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.issuerAndSerialNumberField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.issuerAndSerialNumberField = new IssuerAndSerialNumberType();
+                }
+                else {
+                    this.issuerAndSerialNumberField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || ((this.IssuerAndSerialNumber != null)
+                            && this.IssuerAndSerialNumber.XSD_HasBeenSet));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.IssuerAndSerialNumber != null)) {
+                    this.IssuerAndSerialNumber.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("90260452-f56a-4788-8dad-24f811e7827f")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class IssuerAndSerialNumberType : IIssuerAndSerialNumberType {
+        private RelativeDistinguishedNameType[] issuerField = new RelativeDistinguishedNameType[0];
+        private string serialNumberField = default(string);
+        private bool serialNumberField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("RelativeDistinguishedName", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public RelativeDistinguishedNameType[] Issuer {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.issuerField == null)
+                            || (this.issuerField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.issuerField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.issuerField = new RelativeDistinguishedNameType[0];
+                }
+                else {
+                    this.issuerField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
+        public string SerialNumber {
+            get {
+                return this.serialNumberField;
+            }
+            set {
+                this.serialNumberField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.serialNumberField_XSD_HasBeenSet = (this.serialNumberField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false
+                            || (this.IssuerSize() != 0))
+                            || this.serialNumberField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.IssuerSize()); i = (i + 1)) {
+                    this.Issuer[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int IssuerSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.issuerField == null)) {
+                return 0;
+            }
+            else {
+                return this.issuerField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public RelativeDistinguishedNameType IssuerGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
+                    return default(RelativeDistinguishedNameType);
+                }
+                else {
+                    if (((this.issuerField.Length - 1)
+                                >= index)) {
+                        return this.issuerField[index];
+                    }
+                    else {
+                        return default(RelativeDistinguishedNameType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(RelativeDistinguishedNameType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool IssuerSetItem(int index, RelativeDistinguishedNameType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    this.issuerField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool IssuerAddItem(RelativeDistinguishedNameType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.issuerField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.issuerField.Length); i = (i + 1)) {
+                        array[i] = issuerField[i];
+                    }
+                    array[i] = value;
+                    this.Issuer = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool IssuerRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.issuerField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.issuerField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = issuerField[i];
+                        }
+                        for (i = (i + 1); (i < this.issuerField.Length); i = (i + 1)) {
+                            array[i] = issuerField[i];
+                        }
+                        this.Issuer = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("5f55e12f-488d-4ccb-b311-2a1ca1d0d016")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class RelativeDistinguishedNameType : IRelativeDistinguishedNameType {
+        private string attributeTypeField = default(string);
+        private string attributeValueField = default(string);
+        private bool attributeTypeField_XSD_HasBeenSet = false;
+        private bool attributeValueField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AttributeType {
+            get {
+                return this.attributeTypeField;
+            }
+            set {
+                this.attributeTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.attributeTypeField_XSD_HasBeenSet = (this.attributeTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AttributeValue {
+            get {
+                return this.attributeValueField;
+            }
+            set {
+                this.attributeValueField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.attributeValueField_XSD_HasBeenSet = (this.attributeValueField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false || this.attributeTypeField_XSD_HasBeenSet)
+                            || this.attributeValueField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("bc79af27-954a-4027-9e94-cac77c91adde")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class EncapsulatedContentType : IEncapsulatedContentType {
+        private byte[] contentField = new byte[0];
+        private string contentTypeField = default(string);
+        private bool contentTypeField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Content {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.contentField == null)
+                            || (this.contentField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.contentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.contentField = new byte[0];
+                }
+                else {
+                    this.contentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false
+                            || (this.ContentSize() != 0))
+                            || this.contentTypeField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+        public int ContentSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.contentField == null)) {
+                return 0;
+            }
+            else {
+                return this.contentField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte ContentGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.contentField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.contentField.Length - 1)
+                                >= index)) {
+                        return this.contentField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool ContentSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.contentField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.contentField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ContentAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.contentField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.contentField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.contentField.Length); i = (i + 1)) {
+                        array[i] = contentField[i];
+                    }
+                    array[i] = value;
+                    this.Content = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ContentRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.contentField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.contentField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.contentField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = contentField[i];
+                        }
+                        for (i = (i + 1); (i < this.contentField.Length); i = (i + 1)) {
+                            array[i] = contentField[i];
+                        }
+                        this.Content = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum ContentTypeEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-data")]
+        iddata,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-signedData")]
+        idsignedData,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-envelopedData")]
+        idenvelopedData,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-digestedData")]
+        iddigestedData,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-encryptedData")]
+        idencryptedData,
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("id-ct-authData")]
+        idctauthData,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("c04199d4-5de7-4244-a1d3-8f3e648f21cd")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class DigestedDataType : IDigestedDataType {
+        private AlgorithmIdentifier digestAlgorithmField = new AlgorithmIdentifier();
+        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
+        private byte[] digestField = new byte[0];
+        private string versionField = default(string);
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier DigestAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.digestAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.digestAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.digestAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.digestAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public EncapsulatedContentType EncapsulatedContent {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encapsulatedContentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.encapsulatedContentField = new EncapsulatedContentType();
+                }
+                else {
+                    this.encapsulatedContentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Digest {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.digestField == null)
+                            || (this.digestField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.digestField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.digestField = new byte[0];
+                }
+                else {
+                    this.digestField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((false
+                            || ((this.DigestAlgorithm != null)
+                            && this.DigestAlgorithm.XSD_HasBeenSet))
+                            || ((this.EncapsulatedContent != null)
+                            && this.EncapsulatedContent.XSD_HasBeenSet))
+                            || (this.DigestSize() != 0))
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.DigestAlgorithm != null)) {
+                    this.DigestAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.EncapsulatedContent != null)) {
+                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int DigestSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.digestField == null)) {
+                return 0;
+            }
+            else {
+                return this.digestField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte DigestGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.digestField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.digestField.Length - 1)
+                                >= index)) {
+                        return this.digestField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.digestField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.digestField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.digestField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.digestField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.digestField.Length); i = (i + 1)) {
+                        array[i] = digestField[i];
+                    }
+                    array[i] = value;
+                    this.Digest = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.digestField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.digestField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.digestField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = digestField[i];
+                        }
+                        for (i = (i + 1); (i < this.digestField.Length); i = (i + 1)) {
+                            array[i] = digestField[i];
+                        }
+                        this.Digest = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("d4c252c6-567d-4312-9e5c-80a4b3248cc2")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class EncryptedContentType : IEncryptedContentType {
+        private AlgorithmIdentifier contentEncryptionAlgorithmField = new AlgorithmIdentifier();
+        private byte[] encryptedDataField = new byte[0];
+        private string contentTypeField = default(string);
+        private bool contentTypeField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier ContentEncryptionAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.contentEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.contentEncryptionAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.contentEncryptionAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.contentEncryptionAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] EncryptedData {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.encryptedDataField == null)
+                            || (this.encryptedDataField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encryptedDataField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.encryptedDataField = new byte[0];
+                }
+                else {
+                    this.encryptedDataField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((false
+                            || ((this.ContentEncryptionAlgorithm != null)
+                            && this.ContentEncryptionAlgorithm.XSD_HasBeenSet))
+                            || (this.EncryptedDataSize() != 0))
+                            || this.contentTypeField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.ContentEncryptionAlgorithm != null)) {
+                    this.ContentEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int EncryptedDataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.encryptedDataField == null)) {
+                return 0;
+            }
+            else {
+                return this.encryptedDataField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte EncryptedDataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.encryptedDataField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.encryptedDataField.Length - 1)
+                                >= index)) {
+                        return this.encryptedDataField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedDataSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.encryptedDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.encryptedDataField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedDataAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.encryptedDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.encryptedDataField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.encryptedDataField.Length); i = (i + 1)) {
+                        array[i] = encryptedDataField[i];
+                    }
+                    array[i] = value;
+                    this.EncryptedData = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool EncryptedDataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.encryptedDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.encryptedDataField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.encryptedDataField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = encryptedDataField[i];
+                        }
+                        for (i = (i + 1); (i < this.encryptedDataField.Length); i = (i + 1)) {
+                            array[i] = encryptedDataField[i];
+                        }
+                        this.EncryptedData = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("deeb2d17-fae1-40fb-821b-40d5e69a2752")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class EnvelopedDataType : IEnvelopedDataType {
+        private object[] itemsField = default(object[]);
+        private EncryptedContentType encryptedContentField = new EncryptedContentType();
+        private string versionField = default(string);
+        private bool itemsField_XSD_HasBeenSet = false;
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public EnvelopedDataType() {
+            this.versionField = "v0";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("KEK", typeof(KEKType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("KeyTransport", typeof(KeyTransportType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public object[] Items {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.itemsField == null)
+                            || (this.itemsField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.itemsField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.itemsField = new object[0];
+                }
+                else {
+                    this.itemsField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public EncryptedContentType EncryptedContent {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.encryptedContentField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encryptedContentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.encryptedContentField = new EncryptedContentType();
+                }
+                else {
+                    this.encryptedContentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v0")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((false
+                            || ((this.EncryptedContent != null)
+                            && this.EncryptedContent.XSD_HasBeenSet))
+                            || (this.ItemsSize() != 0))
+                            || this.itemsField_XSD_HasBeenSet)
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.EncryptedContent != null)) {
+                    this.EncryptedContent.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int ItemsSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.itemsField == null)) {
+                return 0;
+            }
+            else {
+                return this.itemsField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public object ItemsGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return default(object);
+                }
+                else {
+                    if (((this.itemsField.Length - 1)
+                                >= index)) {
+                        return this.itemsField[index];
+                    }
+                    else {
+                        return default(object);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(object);
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsSetItem(int index, object value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    this.itemsField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsAddItem(object value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    object[] array = new object[(this.itemsField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.itemsField.Length); i = (i + 1)) {
+                        array[i] = itemsField[i];
+                    }
+                    array[i] = value;
+                    this.Items = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ItemsRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.itemsField == default(object[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.itemsField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        object[] array = new object[(this.itemsField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = itemsField[i];
+                        }
+                        for (i = (i + 1); (i < this.itemsField.Length); i = (i + 1)) {
+                            array[i] = itemsField[i];
+                        }
+                        this.Items = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("fff5fe96-d733-4e8f-ad7f-26f5fba12d01")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class IssuerType : IIssuerType {
+        private RelativeDistinguishedNameType[] relativeDistinguishedNameField = new RelativeDistinguishedNameType[0];
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("RelativeDistinguishedName", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public RelativeDistinguishedNameType[] RelativeDistinguishedName {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.relativeDistinguishedNameField == null)
+                            || (this.relativeDistinguishedNameField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.relativeDistinguishedNameField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.relativeDistinguishedNameField = new RelativeDistinguishedNameType[0];
+                }
+                else {
+                    this.relativeDistinguishedNameField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || (this.RelativeDistinguishedNameSize() != 0));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.RelativeDistinguishedNameSize()); i = (i + 1)) {
+                    this.RelativeDistinguishedName[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int RelativeDistinguishedNameSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.relativeDistinguishedNameField == null)) {
+                return 0;
+            }
+            else {
+                return this.relativeDistinguishedNameField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public RelativeDistinguishedNameType RelativeDistinguishedNameGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
+                    return default(RelativeDistinguishedNameType);
+                }
+                else {
+                    if (((this.relativeDistinguishedNameField.Length - 1)
+                                >= index)) {
+                        return this.relativeDistinguishedNameField[index];
+                    }
+                    else {
+                        return default(RelativeDistinguishedNameType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(RelativeDistinguishedNameType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool RelativeDistinguishedNameSetItem(int index, RelativeDistinguishedNameType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    this.relativeDistinguishedNameField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool RelativeDistinguishedNameAddItem(RelativeDistinguishedNameType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.relativeDistinguishedNameField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.relativeDistinguishedNameField.Length); i = (i + 1)) {
+                        array[i] = relativeDistinguishedNameField[i];
+                    }
+                    array[i] = value;
+                    this.RelativeDistinguishedName = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool RelativeDistinguishedNameRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.relativeDistinguishedNameField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.relativeDistinguishedNameField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = relativeDistinguishedNameField[i];
+                        }
+                        for (i = (i + 1); (i < this.relativeDistinguishedNameField.Length); i = (i + 1)) {
+                            array[i] = relativeDistinguishedNameField[i];
+                        }
+                        this.RelativeDistinguishedName = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("00879306-f609-492d-8fa5-5da02e96fbb9")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class NamedKeyEncryptedDataType : INamedKeyEncryptedDataType {
+        private string keyNameField = default(string);
+        private EncryptedContentType encryptedContentField = new EncryptedContentType();
+        private string versionField = default(string);
+        private bool keyNameField_XSD_HasBeenSet = false;
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public NamedKeyEncryptedDataType() {
+            this.versionField = "v0";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string KeyName {
+            get {
+                return this.keyNameField;
+            }
+            set {
+                this.keyNameField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.keyNameField_XSD_HasBeenSet = (this.keyNameField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public EncryptedContentType EncryptedContent {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.encryptedContentField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encryptedContentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.encryptedContentField = new EncryptedContentType();
+                }
+                else {
+                    this.encryptedContentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v0")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((false
+                            || ((this.EncryptedContent != null)
+                            && this.EncryptedContent.XSD_HasBeenSet))
+                            || this.keyNameField_XSD_HasBeenSet)
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.EncryptedContent != null)) {
+                    this.EncryptedContent.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("db10af38-1200-45ae-a826-88510eca31f2")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SignedDataType : ISignedDataType {
+        private AlgorithmIdentifier[] digestAlgorithmField = new AlgorithmIdentifier[0];
+        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
+        private byte[] certificateField = new byte[0];
+        private SignerType[] signerField = new SignerType[0];
+        private string versionField = default(string);
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public SignedDataType() {
+            this.versionField = "v1";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DigestAlgorithm", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier[] DigestAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.digestAlgorithmField == null)
+                            || (this.digestAlgorithmField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.digestAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.digestAlgorithmField = new AlgorithmIdentifier[0];
+                }
+                else {
+                    this.digestAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public EncapsulatedContentType EncapsulatedContent {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.encapsulatedContentField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.encapsulatedContentField = new EncapsulatedContentType();
+                }
+                else {
+                    this.encapsulatedContentField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Certificate", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Certificate {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.certificateField == null)
+                            || (this.certificateField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.certificateField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.certificateField = new byte[0];
+                }
+                else {
+                    this.certificateField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Signer", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SignerType[] Signer {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.signerField == null)
+                            || (this.signerField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.signerField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.signerField = new SignerType[0];
+                }
+                else {
+                    this.signerField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v1")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((((false
+                            || ((this.EncapsulatedContent != null)
+                            && this.EncapsulatedContent.XSD_HasBeenSet))
+                            || (this.DigestAlgorithmSize() != 0))
+                            || (this.CertificateSize() != 0))
+                            || (this.SignerSize() != 0))
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.EncapsulatedContent != null)) {
+                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                int i = 0;
+                for (i = 0; (i < this.DigestAlgorithmSize()); i = (i + 1)) {
+                    this.DigestAlgorithm[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                for (i = 0; (i < this.SignerSize()); i = (i + 1)) {
+                    this.Signer[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int DigestAlgorithmSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.digestAlgorithmField == null)) {
+                return 0;
+            }
+            else {
+                return this.digestAlgorithmField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public AlgorithmIdentifier DigestAlgorithmGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
+                    return default(AlgorithmIdentifier);
+                }
+                else {
+                    if (((this.digestAlgorithmField.Length - 1)
+                                >= index)) {
+                        return this.digestAlgorithmField[index];
+                    }
+                    else {
+                        return default(AlgorithmIdentifier);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(AlgorithmIdentifier);
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
+                    return false;
+                }
+                else {
+                    this.digestAlgorithmField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestAlgorithmAddItem(AlgorithmIdentifier value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
+                    return false;
+                }
+                else {
+                    AlgorithmIdentifier[] array = new AlgorithmIdentifier[(this.digestAlgorithmField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.digestAlgorithmField.Length); i = (i + 1)) {
+                        array[i] = digestAlgorithmField[i];
+                    }
+                    array[i] = value;
+                    this.DigestAlgorithm = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool DigestAlgorithmRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.digestAlgorithmField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        AlgorithmIdentifier[] array = new AlgorithmIdentifier[(this.digestAlgorithmField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = digestAlgorithmField[i];
+                        }
+                        for (i = (i + 1); (i < this.digestAlgorithmField.Length); i = (i + 1)) {
+                            array[i] = digestAlgorithmField[i];
+                        }
+                        this.DigestAlgorithm = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public int CertificateSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.certificateField == null)) {
+                return 0;
+            }
+            else {
+                return this.certificateField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte CertificateGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.certificateField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.certificateField.Length - 1)
+                                >= index)) {
+                        return this.certificateField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool CertificateSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.certificateField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.certificateField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool CertificateAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.certificateField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.certificateField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.certificateField.Length); i = (i + 1)) {
+                        array[i] = certificateField[i];
+                    }
+                    array[i] = value;
+                    this.Certificate = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool CertificateRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.certificateField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.certificateField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.certificateField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = certificateField[i];
+                        }
+                        for (i = (i + 1); (i < this.certificateField.Length); i = (i + 1)) {
+                            array[i] = certificateField[i];
+                        }
+                        this.Certificate = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public int SignerSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.signerField == null)) {
+                return 0;
+            }
+            else {
+                return this.signerField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public SignerType SignerGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.signerField == default(SignerType[]))) {
+                    return default(SignerType);
+                }
+                else {
+                    if (((this.signerField.Length - 1)
+                                >= index)) {
+                        return this.signerField[index];
+                    }
+                    else {
+                        return default(SignerType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(SignerType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignerSetItem(int index, SignerType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.signerField == default(SignerType[]))) {
+                    return false;
+                }
+                else {
+                    this.signerField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignerAddItem(SignerType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.signerField == default(SignerType[]))) {
+                    return false;
+                }
+                else {
+                    SignerType[] array = new SignerType[(this.signerField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.signerField.Length); i = (i + 1)) {
+                        array[i] = signerField[i];
+                    }
+                    array[i] = value;
+                    this.Signer = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignerRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.signerField == default(SignerType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.signerField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        SignerType[] array = new SignerType[(this.signerField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = signerField[i];
+                        }
+                        for (i = (i + 1); (i < this.signerField.Length); i = (i + 1)) {
+                            array[i] = signerField[i];
+                        }
+                        this.Signer = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("fac8f466-ecf2-49ad-a6e1-a554da236034")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SignerType : ISignerType {
+        private SignerIdentifierType signerIdentifierField = new SignerIdentifierType();
+        private AlgorithmIdentifier digestAlgorithmField = new AlgorithmIdentifier();
+        private AlgorithmIdentifier signatureAlgorithmField = new AlgorithmIdentifier();
+        private byte[] signatureField = new byte[0];
+        private string versionField = default(string);
+        private bool versionField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public SignerType() {
+            this.versionField = "v1";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SignerIdentifierType SignerIdentifier {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.signerIdentifierField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.signerIdentifierField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.signerIdentifierField = new SignerIdentifierType();
+                }
+                else {
+                    this.signerIdentifierField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier DigestAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.digestAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.digestAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.digestAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.digestAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public AlgorithmIdentifier SignatureAlgorithm {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.signatureAlgorithmField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.signatureAlgorithmField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.signatureAlgorithmField = new AlgorithmIdentifier();
+                }
+                else {
+                    this.signatureAlgorithmField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] Signature {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.signatureField == null)
+                            || (this.signatureField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.signatureField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.signatureField = new byte[0];
+                }
+                else {
+                    this.signatureField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("v1")]
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((((false
+                            || ((this.SignerIdentifier != null)
+                            && this.SignerIdentifier.XSD_HasBeenSet))
+                            || ((this.DigestAlgorithm != null)
+                            && this.DigestAlgorithm.XSD_HasBeenSet))
+                            || ((this.SignatureAlgorithm != null)
+                            && this.SignatureAlgorithm.XSD_HasBeenSet))
+                            || (this.SignatureSize() != 0))
+                            || this.versionField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.SignerIdentifier != null)) {
+                    this.SignerIdentifier.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.DigestAlgorithm != null)) {
+                    this.DigestAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.SignatureAlgorithm != null)) {
+                    this.SignatureAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int SignatureSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.signatureField == null)) {
+                return 0;
+            }
+            else {
+                return this.signatureField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte SignatureGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.signatureField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.signatureField.Length - 1)
+                                >= index)) {
+                        return this.signatureField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignatureSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.signatureField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.signatureField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignatureAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.signatureField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.signatureField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.signatureField.Length); i = (i + 1)) {
+                        array[i] = signatureField[i];
+                    }
+                    array[i] = value;
+                    this.Signature = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SignatureRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.signatureField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.signatureField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.signatureField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = signatureField[i];
+                        }
+                        for (i = (i + 1); (i < this.signatureField.Length); i = (i + 1)) {
+                            array[i] = signatureField[i];
+                        }
+                        this.Signature = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("ed5d5b03-ee2a-4b32-bdc2-c3740be92e21")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SignerIdentifierType : ISignerIdentifierType {
+        private IssuerAndSerialNumberType issuerAndSerialNumberField = new IssuerAndSerialNumberType();
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public IssuerAndSerialNumberType IssuerAndSerialNumber {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.issuerAndSerialNumberField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.issuerAndSerialNumberField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.issuerAndSerialNumberField = new IssuerAndSerialNumberType();
+                }
+                else {
+                    this.issuerAndSerialNumberField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || ((this.IssuerAndSerialNumber != null)
+                            && this.IssuerAndSerialNumber.XSD_HasBeenSet));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.IssuerAndSerialNumber != null)) {
+                    this.IssuerAndSerialNumber.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum VersionEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        v0,
+        /// <remarks/>
+        v1,
+        /// <remarks/>
+        v2,
+        /// <remarks/>
+        v3,
+        /// <remarks/>
+        v4,
+        /// <remarks/>
+        v5,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("42649a6e-7563-406c-b503-602a65cdd9d8")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class ContentInformationType : IContentInformationType {
+        private object itemField = default(object);
+        private string contentTypeField = default(string);
+        private bool itemField_XSD_HasBeenSet = false;
+        private bool contentTypeField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AuthenticatedData", typeof(AuthenticatedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("DigestedData", typeof(DigestedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("EnvelopedData", typeof(EnvelopedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("NamedKeyEncryptedData", typeof(NamedKeyEncryptedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("SignedData", typeof(SignedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.itemField_XSD_HasBeenSet = (this.itemField != default(object));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ContentType {
+            get {
+                return this.contentTypeField;
+            }
+            set {
+                this.contentTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false || this.itemField_XSD_HasBeenSet)
+                            || this.contentTypeField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("bf3b0fab-1180-4442-a390-cb85d11e39f5")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class AbortRequestType : IAbortRequestType {
+        private MessageReferenceType messageReferenceField = new MessageReferenceType();
+        private string abortReasonField = default(string);
+        private DisplayOutputType displayOutputField = new DisplayOutputType();
+        private bool abortReasonField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public MessageReferenceType MessageReference {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.messageReferenceField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.messageReferenceField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.messageReferenceField = new MessageReferenceType();
+                }
+                else {
+                    this.messageReferenceField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AbortReason {
+            get {
+                return this.abortReasonField;
+            }
+            set {
+                this.abortReasonField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.abortReasonField_XSD_HasBeenSet = (this.abortReasonField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public DisplayOutputType DisplayOutput {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.displayOutputField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.displayOutputField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.displayOutputField = new DisplayOutputType();
+                }
+                else {
+                    this.displayOutputField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((false
+                            || ((this.MessageReference != null)
+                            && this.MessageReference.XSD_HasBeenSet))
+                            || ((this.DisplayOutput != null)
+                            && this.DisplayOutput.XSD_HasBeenSet))
+                            || this.abortReasonField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.MessageReference != null)) {
+                    this.MessageReference.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.DisplayOutput != null)) {
+                    this.DisplayOutput.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("c2790758-4123-41d7-99ff-8f24ef7755d7")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class MessageReferenceType : IMessageReferenceType {
+        private string messageCategoryField = default(string);
+        private string serviceIDField = default(string);
+        private string deviceIDField = default(string);
+        private string saleIDField = default(string);
+        private string pOIIDField = default(string);
+        private bool messageCategoryField_XSD_HasBeenSet = false;
+        private bool serviceIDField_XSD_HasBeenSet = false;
+        private bool deviceIDField_XSD_HasBeenSet = false;
+        private bool saleIDField_XSD_HasBeenSet = false;
+        private bool pOIIDField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MessageCategory {
+            get {
+                return this.messageCategoryField;
+            }
+            set {
+                this.messageCategoryField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.messageCategoryField_XSD_HasBeenSet = (this.messageCategoryField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceID {
+            get {
+                return this.serviceIDField;
+            }
+            set {
+                this.serviceIDField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.serviceIDField_XSD_HasBeenSet = (this.serviceIDField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DeviceID {
+            get {
+                return this.deviceIDField;
+            }
+            set {
+                this.deviceIDField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.deviceIDField_XSD_HasBeenSet = (this.deviceIDField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SaleID {
+            get {
+                return this.saleIDField;
+            }
+            set {
+                this.saleIDField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.saleIDField_XSD_HasBeenSet = (this.saleIDField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string POIID {
+            get {
+                return this.pOIIDField;
+            }
+            set {
+                this.pOIIDField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.pOIIDField_XSD_HasBeenSet = (this.pOIIDField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((((false || this.messageCategoryField_XSD_HasBeenSet)
+                            || this.serviceIDField_XSD_HasBeenSet)
+                            || this.deviceIDField_XSD_HasBeenSet)
+                            || this.saleIDField_XSD_HasBeenSet)
+                            || this.pOIIDField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public enum AccountTypeEnumeration {
@@ -2230,7 +6090,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("470e1e83-0a16-46f5-ad95-189ea89e963a")]
+    [System.Runtime.InteropServices.GuidAttribute("b0103d35-9f6c-4118-b795-2fb82839a595")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AdminRequestType : IAdminRequestType {
@@ -2281,7 +6141,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d538c05a-ef40-4a64-8589-58e061a0b593")]
+    [System.Runtime.InteropServices.GuidAttribute("731e397a-149a-4ba0-a630-02b77b0c0014")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AdminResponseType : IAdminResponseType {
@@ -2364,7 +6224,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("45b61994-402e-4050-8f49-5b90d9008b34")]
+    [System.Runtime.InteropServices.GuidAttribute("afa1bda6-6c81-45d4-b66e-fb2ed3d1f72d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AllowedProductType : IAllowedProductType {
@@ -2463,7 +6323,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a7440a1a-67e0-473e-8ca6-059f812f832c")]
+    [System.Runtime.InteropServices.GuidAttribute("a264542d-f7d7-4d44-8c9f-cd4e9550616b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountsReqType : IAmountsReqType {
@@ -2717,7 +6577,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c14fd681-3541-4eba-988d-694b0bed0acd")]
+    [System.Runtime.InteropServices.GuidAttribute("fea04a0f-7943-40bd-9db7-1f6ffcc18c97")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountsRespType : IAmountsRespType {
@@ -2900,7 +6760,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ed1c2596-b355-44e7-b0f9-97d2b27a6307")]
+    [System.Runtime.InteropServices.GuidAttribute("2da30af5-4f4d-4f71-92e3-8d6d44c58483")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AreaSizeType : IAreaSizeType {
@@ -2999,7 +6859,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("bfd83141-a4cf-4ef8-bda2-831daf861ca3")]
+    [System.Runtime.InteropServices.GuidAttribute("b3866076-27f7-4052-919b-841aecb6586d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BalanceInquiryRequestType : IBalanceInquiryRequestType {
@@ -3093,7 +6953,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("357db60b-24cd-4fe6-81e9-5ea1c5fe8c8a")]
+    [System.Runtime.InteropServices.GuidAttribute("0c6b0724-a266-4bd3-80b2-a856b16e09b0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAccountReqType : IPaymentAccountReqType {
@@ -3207,7 +7067,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fbf6d2da-f884-4648-9c0f-2644e8d1ea60")]
+    [System.Runtime.InteropServices.GuidAttribute("f2a5014e-9086-4217-89ea-21a19bfc59e8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionIdentificationType : ITransactionIdentificationType {
@@ -3274,7 +7134,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("115f47b9-217f-4194-b32f-a0f2622cde84")]
+    [System.Runtime.InteropServices.GuidAttribute("5b66232d-eef9-460f-a6a3-8e569f427cfd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentInstrumentDataType : IPaymentInstrumentDataType {
@@ -3413,7 +7273,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("42fc5fe8-2b9d-420f-bfec-692866c3804f")]
+    [System.Runtime.InteropServices.GuidAttribute("7d8f4b81-5584-4da6-82e2-92bbe38df560")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardDataType : ICardDataType {
@@ -4099,3374 +7959,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("cf3d4f0a-804d-4438-9784-549a5bc72608")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class ContentInformationType : IContentInformationType {
-        private object itemField = default(object);
-        private string contentTypeField = default(string);
-        private bool itemField_XSD_HasBeenSet = false;
-        private bool contentTypeField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("AuthenticatedData", typeof(AuthenticatedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("DigestedData", typeof(DigestedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("EnvelopedData", typeof(EnvelopedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("NamedKeyEncryptedData", typeof(NamedKeyEncryptedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("SignedData", typeof(SignedDataType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.itemField_XSD_HasBeenSet = (this.itemField != default(object));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ContentType {
-            get {
-                return this.contentTypeField;
-            }
-            set {
-                this.contentTypeField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((false || this.itemField_XSD_HasBeenSet)
-                            || this.contentTypeField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9a9e8995-4924-484a-9239-dc2bcb779d1e")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class AuthenticatedDataType : IAuthenticatedDataType {
-        private object[] itemsField = default(object[]);
-        private AlgorithmIdentifier mACAlgorithmField = new AlgorithmIdentifier();
-        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
-        private string versionField = default(string);
-        private byte[] mACField = new byte[0];
-        private bool itemsField_XSD_HasBeenSet = false;
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public AuthenticatedDataType() {
-            this.versionField = "v0";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("KEK", typeof(KEKType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("KeyTransport", typeof(KeyTransportType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public object[] Items {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.itemsField == null)
-                            || (this.itemsField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.itemsField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.itemsField = new object[0];
-                }
-                else {
-                    this.itemsField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier MACAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.mACAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.mACAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.mACAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.mACAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public EncapsulatedContentType EncapsulatedContent {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encapsulatedContentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.encapsulatedContentField = new EncapsulatedContentType();
-                }
-                else {
-                    this.encapsulatedContentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v0")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] MAC {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.mACField == null)
-                            || (this.mACField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.mACField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.mACField = new byte[0];
-                }
-                else {
-                    this.mACField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((((((false
-                            || ((this.MACAlgorithm != null)
-                            && this.MACAlgorithm.XSD_HasBeenSet))
-                            || ((this.EncapsulatedContent != null)
-                            && this.EncapsulatedContent.XSD_HasBeenSet))
-                            || (this.ItemsSize() != 0))
-                            || (this.MACSize() != 0))
-                            || this.itemsField_XSD_HasBeenSet)
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.MACAlgorithm != null)) {
-                    this.MACAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.EncapsulatedContent != null)) {
-                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int ItemsSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.itemsField == null)) {
-                return 0;
-            }
-            else {
-                return this.itemsField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public object ItemsGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return default(object);
-                }
-                else {
-                    if (((this.itemsField.Length - 1)
-                                >= index)) {
-                        return this.itemsField[index];
-                    }
-                    else {
-                        return default(object);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(object);
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsSetItem(int index, object value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    this.itemsField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsAddItem(object value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    object[] array = new object[(this.itemsField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.itemsField.Length); i = (i + 1)) {
-                        array[i] = itemsField[i];
-                    }
-                    array[i] = value;
-                    this.Items = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.itemsField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        object[] array = new object[(this.itemsField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = itemsField[i];
-                        }
-                        for (i = (i + 1); (i < this.itemsField.Length); i = (i + 1)) {
-                            array[i] = itemsField[i];
-                        }
-                        this.Items = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public int MACSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.mACField == null)) {
-                return 0;
-            }
-            else {
-                return this.mACField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte MACGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.mACField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.mACField.Length - 1)
-                                >= index)) {
-                        return this.mACField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool MACSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.mACField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.mACField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool MACAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.mACField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.mACField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.mACField.Length); i = (i + 1)) {
-                        array[i] = mACField[i];
-                    }
-                    array[i] = value;
-                    this.MAC = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool MACRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.mACField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.mACField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.mACField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = mACField[i];
-                        }
-                        for (i = (i + 1); (i < this.mACField.Length); i = (i + 1)) {
-                            array[i] = mACField[i];
-                        }
-                        this.MAC = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("28eb29d1-45b0-470b-96fd-e73277a8a80f")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class KEKType : IKEKType {
-        private KEKIdentifierType kEKIdentifierField = new KEKIdentifierType();
-        private AlgorithmIdentifier keyEncryptionAlgorithmField = new AlgorithmIdentifier();
-        private string versionField = default(string);
-        private byte[] encryptedKeyField = new byte[0];
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public KEKType() {
-            this.versionField = "v4";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public KEKIdentifierType KEKIdentifier {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.kEKIdentifierField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.kEKIdentifierField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.kEKIdentifierField = new KEKIdentifierType();
-                }
-                else {
-                    this.kEKIdentifierField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier KeyEncryptionAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.keyEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.keyEncryptionAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.keyEncryptionAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.keyEncryptionAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v4")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] EncryptedKey {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.encryptedKeyField == null)
-                            || (this.encryptedKeyField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encryptedKeyField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.encryptedKeyField = new byte[0];
-                }
-                else {
-                    this.encryptedKeyField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((((false
-                            || ((this.KEKIdentifier != null)
-                            && this.KEKIdentifier.XSD_HasBeenSet))
-                            || ((this.KeyEncryptionAlgorithm != null)
-                            && this.KeyEncryptionAlgorithm.XSD_HasBeenSet))
-                            || (this.EncryptedKeySize() != 0))
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.KEKIdentifier != null)) {
-                    this.KEKIdentifier.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.KeyEncryptionAlgorithm != null)) {
-                    this.KeyEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int EncryptedKeySize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.encryptedKeyField == null)) {
-                return 0;
-            }
-            else {
-                return this.encryptedKeyField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte EncryptedKeyGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.encryptedKeyField.Length - 1)
-                                >= index)) {
-                        return this.encryptedKeyField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeySetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.encryptedKeyField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeyAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.encryptedKeyField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.encryptedKeyField.Length); i = (i + 1)) {
-                        array[i] = encryptedKeyField[i];
-                    }
-                    array[i] = value;
-                    this.EncryptedKey = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeyRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.encryptedKeyField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.encryptedKeyField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = encryptedKeyField[i];
-                        }
-                        for (i = (i + 1); (i < this.encryptedKeyField.Length); i = (i + 1)) {
-                            array[i] = encryptedKeyField[i];
-                        }
-                        this.EncryptedKey = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("84ec218e-2a4c-4207-8454-7d1b7d7a8bee")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class KEKIdentifierType : IKEKIdentifierType {
-        private string keyIdentifierField = default(string);
-        private string keyVersionField = default(string);
-        private byte[] derivationIdentifierField = new byte[0];
-        private bool keyIdentifierField_XSD_HasBeenSet = false;
-        private bool keyVersionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string KeyIdentifier {
-            get {
-                return this.keyIdentifierField;
-            }
-            set {
-                this.keyIdentifierField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.keyIdentifierField_XSD_HasBeenSet = (this.keyIdentifierField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string KeyVersion {
-            get {
-                return this.keyVersionField;
-            }
-            set {
-                this.keyVersionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.keyVersionField_XSD_HasBeenSet = (this.keyVersionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] DerivationIdentifier {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.derivationIdentifierField == null)
-                            || (this.derivationIdentifierField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.derivationIdentifierField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.derivationIdentifierField = new byte[0];
-                }
-                else {
-                    this.derivationIdentifierField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((false
-                            || (this.DerivationIdentifierSize() != 0))
-                            || this.keyIdentifierField_XSD_HasBeenSet)
-                            || this.keyVersionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                // END ADDED BY XSD
-            }
-        }
-        public int DerivationIdentifierSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.derivationIdentifierField == null)) {
-                return 0;
-            }
-            else {
-                return this.derivationIdentifierField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte DerivationIdentifierGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.derivationIdentifierField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.derivationIdentifierField.Length - 1)
-                                >= index)) {
-                        return this.derivationIdentifierField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool DerivationIdentifierSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.derivationIdentifierField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.derivationIdentifierField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DerivationIdentifierAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.derivationIdentifierField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.derivationIdentifierField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.derivationIdentifierField.Length); i = (i + 1)) {
-                        array[i] = derivationIdentifierField[i];
-                    }
-                    array[i] = value;
-                    this.DerivationIdentifier = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DerivationIdentifierRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.derivationIdentifierField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.derivationIdentifierField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.derivationIdentifierField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = derivationIdentifierField[i];
-                        }
-                        for (i = (i + 1); (i < this.derivationIdentifierField.Length); i = (i + 1)) {
-                            array[i] = derivationIdentifierField[i];
-                        }
-                        this.DerivationIdentifier = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b1404522-8080-4813-a169-2f56c703a455")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class AlgorithmIdentifier : IAlgorithmIdentifier {
-        private ParameterType parameterField = new ParameterType();
-        private string algorithmField = default(string);
-        private bool algorithmField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public ParameterType Parameter {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.parameterField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.parameterField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.parameterField = new ParameterType();
-                }
-                else {
-                    this.parameterField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.algorithmField_XSD_HasBeenSet = (this.algorithmField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((false
-                            || ((this.Parameter != null)
-                            && this.Parameter.XSD_HasBeenSet))
-                            || this.algorithmField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.Parameter != null)) {
-                    this.Parameter.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5f2231c5-46f6-41b3-b942-33d325bab0c8")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class ParameterType : IParameterType {
-        private byte[] initialisationVectorField = new byte[0];
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] InitialisationVector {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.initialisationVectorField == null)
-                            || (this.initialisationVectorField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.initialisationVectorField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.initialisationVectorField = new byte[0];
-                }
-                else {
-                    this.initialisationVectorField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (false
-                            || (this.InitialisationVectorSize() != 0));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                // END ADDED BY XSD
-            }
-        }
-        public int InitialisationVectorSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.initialisationVectorField == null)) {
-                return 0;
-            }
-            else {
-                return this.initialisationVectorField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte InitialisationVectorGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.initialisationVectorField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.initialisationVectorField.Length - 1)
-                                >= index)) {
-                        return this.initialisationVectorField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool InitialisationVectorSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.initialisationVectorField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.initialisationVectorField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool InitialisationVectorAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.initialisationVectorField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.initialisationVectorField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.initialisationVectorField.Length); i = (i + 1)) {
-                        array[i] = initialisationVectorField[i];
-                    }
-                    array[i] = value;
-                    this.InitialisationVector = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool InitialisationVectorRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.initialisationVectorField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.initialisationVectorField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.initialisationVectorField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = initialisationVectorField[i];
-                        }
-                        for (i = (i + 1); (i < this.initialisationVectorField.Length); i = (i + 1)) {
-                            array[i] = initialisationVectorField[i];
-                        }
-                        this.InitialisationVector = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("027c09a0-ea12-4b47-a03c-200690d79628")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class KeyTransportType : IKeyTransportType {
-        private RecipientIdentifierType recipientIdentifierField = new RecipientIdentifierType();
-        private AlgorithmIdentifier keyEncryptionAlgorithmField = new AlgorithmIdentifier();
-        private string versionField = default(string);
-        private byte[] encryptedKeyField = new byte[0];
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public KeyTransportType() {
-            this.versionField = "v0";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RecipientIdentifierType RecipientIdentifier {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.recipientIdentifierField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.recipientIdentifierField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.recipientIdentifierField = new RecipientIdentifierType();
-                }
-                else {
-                    this.recipientIdentifierField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier KeyEncryptionAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.keyEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.keyEncryptionAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.keyEncryptionAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.keyEncryptionAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v0")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] EncryptedKey {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.encryptedKeyField == null)
-                            || (this.encryptedKeyField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encryptedKeyField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.encryptedKeyField = new byte[0];
-                }
-                else {
-                    this.encryptedKeyField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((((false
-                            || ((this.RecipientIdentifier != null)
-                            && this.RecipientIdentifier.XSD_HasBeenSet))
-                            || ((this.KeyEncryptionAlgorithm != null)
-                            && this.KeyEncryptionAlgorithm.XSD_HasBeenSet))
-                            || (this.EncryptedKeySize() != 0))
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.RecipientIdentifier != null)) {
-                    this.RecipientIdentifier.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.KeyEncryptionAlgorithm != null)) {
-                    this.KeyEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int EncryptedKeySize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.encryptedKeyField == null)) {
-                return 0;
-            }
-            else {
-                return this.encryptedKeyField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte EncryptedKeyGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.encryptedKeyField.Length - 1)
-                                >= index)) {
-                        return this.encryptedKeyField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeySetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.encryptedKeyField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeyAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.encryptedKeyField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.encryptedKeyField.Length); i = (i + 1)) {
-                        array[i] = encryptedKeyField[i];
-                    }
-                    array[i] = value;
-                    this.EncryptedKey = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedKeyRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.encryptedKeyField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.encryptedKeyField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.encryptedKeyField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = encryptedKeyField[i];
-                        }
-                        for (i = (i + 1); (i < this.encryptedKeyField.Length); i = (i + 1)) {
-                            array[i] = encryptedKeyField[i];
-                        }
-                        this.EncryptedKey = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f18daed4-47f9-4f58-9911-244cd60d4a56")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class RecipientIdentifierType : IRecipientIdentifierType {
-        private IssuerAndSerialNumberType issuerAndSerialNumberField = new IssuerAndSerialNumberType();
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public IssuerAndSerialNumberType IssuerAndSerialNumber {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.issuerAndSerialNumberField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.issuerAndSerialNumberField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.issuerAndSerialNumberField = new IssuerAndSerialNumberType();
-                }
-                else {
-                    this.issuerAndSerialNumberField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (false
-                            || ((this.IssuerAndSerialNumber != null)
-                            && this.IssuerAndSerialNumber.XSD_HasBeenSet));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.IssuerAndSerialNumber != null)) {
-                    this.IssuerAndSerialNumber.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("667a4ebb-5a4d-4ec6-90a0-50f41ad1341f")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class IssuerAndSerialNumberType : IIssuerAndSerialNumberType {
-        private RelativeDistinguishedNameType[] issuerField = new RelativeDistinguishedNameType[0];
-        private string serialNumberField = default(string);
-        private bool serialNumberField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("RelativeDistinguishedName", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RelativeDistinguishedNameType[] Issuer {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.issuerField == null)
-                            || (this.issuerField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.issuerField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.issuerField = new RelativeDistinguishedNameType[0];
-                }
-                else {
-                    this.issuerField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
-        public string SerialNumber {
-            get {
-                return this.serialNumberField;
-            }
-            set {
-                this.serialNumberField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.serialNumberField_XSD_HasBeenSet = (this.serialNumberField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((false
-                            || (this.IssuerSize() != 0))
-                            || this.serialNumberField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                int i = 0;
-                for (i = 0; (i < this.IssuerSize()); i = (i + 1)) {
-                    this.Issuer[i].XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int IssuerSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.issuerField == null)) {
-                return 0;
-            }
-            else {
-                return this.issuerField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public RelativeDistinguishedNameType IssuerGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
-                    return default(RelativeDistinguishedNameType);
-                }
-                else {
-                    if (((this.issuerField.Length - 1)
-                                >= index)) {
-                        return this.issuerField[index];
-                    }
-                    else {
-                        return default(RelativeDistinguishedNameType);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(RelativeDistinguishedNameType);
-            }
-            // END ADDED BY XSD
-        }
-        public bool IssuerSetItem(int index, RelativeDistinguishedNameType value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    this.issuerField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool IssuerAddItem(RelativeDistinguishedNameType value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.issuerField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.issuerField.Length); i = (i + 1)) {
-                        array[i] = issuerField[i];
-                    }
-                    array[i] = value;
-                    this.Issuer = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool IssuerRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.issuerField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.issuerField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.issuerField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = issuerField[i];
-                        }
-                        for (i = (i + 1); (i < this.issuerField.Length); i = (i + 1)) {
-                            array[i] = issuerField[i];
-                        }
-                        this.Issuer = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b4375e57-9606-4bda-b396-8518571e849b")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class RelativeDistinguishedNameType : IRelativeDistinguishedNameType {
-        private string attributeTypeField = default(string);
-        private string attributeValueField = default(string);
-        private bool attributeTypeField_XSD_HasBeenSet = false;
-        private bool attributeValueField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AttributeType {
-            get {
-                return this.attributeTypeField;
-            }
-            set {
-                this.attributeTypeField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.attributeTypeField_XSD_HasBeenSet = (this.attributeTypeField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AttributeValue {
-            get {
-                return this.attributeValueField;
-            }
-            set {
-                this.attributeValueField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.attributeValueField_XSD_HasBeenSet = (this.attributeValueField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((false || this.attributeTypeField_XSD_HasBeenSet)
-                            || this.attributeValueField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("561c333c-2ba0-4373-b2e5-726b541d18d6")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class EncapsulatedContentType : IEncapsulatedContentType {
-        private byte[] contentField = new byte[0];
-        private string contentTypeField = default(string);
-        private bool contentTypeField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Content {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.contentField == null)
-                            || (this.contentField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.contentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.contentField = new byte[0];
-                }
-                else {
-                    this.contentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ContentType {
-            get {
-                return this.contentTypeField;
-            }
-            set {
-                this.contentTypeField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((false
-                            || (this.ContentSize() != 0))
-                            || this.contentTypeField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                // END ADDED BY XSD
-            }
-        }
-        public int ContentSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.contentField == null)) {
-                return 0;
-            }
-            else {
-                return this.contentField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte ContentGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.contentField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.contentField.Length - 1)
-                                >= index)) {
-                        return this.contentField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool ContentSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.contentField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.contentField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ContentAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.contentField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.contentField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.contentField.Length); i = (i + 1)) {
-                        array[i] = contentField[i];
-                    }
-                    array[i] = value;
-                    this.Content = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ContentRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.contentField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.contentField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.contentField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = contentField[i];
-                        }
-                        for (i = (i + 1); (i < this.contentField.Length); i = (i + 1)) {
-                            array[i] = contentField[i];
-                        }
-                        this.Content = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("dd3a2dbc-4b8a-4cda-9bf5-65d7aec7ee14")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class DigestedDataType : IDigestedDataType {
-        private AlgorithmIdentifier digestAlgorithmField = new AlgorithmIdentifier();
-        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
-        private byte[] digestField = new byte[0];
-        private string versionField = default(string);
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier DigestAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.digestAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.digestAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.digestAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.digestAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public EncapsulatedContentType EncapsulatedContent {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encapsulatedContentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.encapsulatedContentField = new EncapsulatedContentType();
-                }
-                else {
-                    this.encapsulatedContentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Digest {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.digestField == null)
-                            || (this.digestField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.digestField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.digestField = new byte[0];
-                }
-                else {
-                    this.digestField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((((false
-                            || ((this.DigestAlgorithm != null)
-                            && this.DigestAlgorithm.XSD_HasBeenSet))
-                            || ((this.EncapsulatedContent != null)
-                            && this.EncapsulatedContent.XSD_HasBeenSet))
-                            || (this.DigestSize() != 0))
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.DigestAlgorithm != null)) {
-                    this.DigestAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.EncapsulatedContent != null)) {
-                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int DigestSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.digestField == null)) {
-                return 0;
-            }
-            else {
-                return this.digestField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte DigestGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.digestField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.digestField.Length - 1)
-                                >= index)) {
-                        return this.digestField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.digestField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.digestField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.digestField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.digestField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.digestField.Length); i = (i + 1)) {
-                        array[i] = digestField[i];
-                    }
-                    array[i] = value;
-                    this.Digest = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.digestField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.digestField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.digestField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = digestField[i];
-                        }
-                        for (i = (i + 1); (i < this.digestField.Length); i = (i + 1)) {
-                            array[i] = digestField[i];
-                        }
-                        this.Digest = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8b0ea572-44bc-4638-a438-73bd00b16f50")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class EnvelopedDataType : IEnvelopedDataType {
-        private object[] itemsField = default(object[]);
-        private EncryptedContentType encryptedContentField = new EncryptedContentType();
-        private string versionField = default(string);
-        private bool itemsField_XSD_HasBeenSet = false;
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public EnvelopedDataType() {
-            this.versionField = "v0";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("KEK", typeof(KEKType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("KeyTransport", typeof(KeyTransportType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public object[] Items {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.itemsField == null)
-                            || (this.itemsField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.itemsField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.itemsField = new object[0];
-                }
-                else {
-                    this.itemsField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public EncryptedContentType EncryptedContent {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.encryptedContentField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encryptedContentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.encryptedContentField = new EncryptedContentType();
-                }
-                else {
-                    this.encryptedContentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v0")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return ((((false
-                            || ((this.EncryptedContent != null)
-                            && this.EncryptedContent.XSD_HasBeenSet))
-                            || (this.ItemsSize() != 0))
-                            || this.itemsField_XSD_HasBeenSet)
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.EncryptedContent != null)) {
-                    this.EncryptedContent.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int ItemsSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.itemsField == null)) {
-                return 0;
-            }
-            else {
-                return this.itemsField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public object ItemsGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return default(object);
-                }
-                else {
-                    if (((this.itemsField.Length - 1)
-                                >= index)) {
-                        return this.itemsField[index];
-                    }
-                    else {
-                        return default(object);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(object);
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsSetItem(int index, object value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    this.itemsField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsAddItem(object value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    object[] array = new object[(this.itemsField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.itemsField.Length); i = (i + 1)) {
-                        array[i] = itemsField[i];
-                    }
-                    array[i] = value;
-                    this.Items = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool ItemsRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.itemsField == default(object[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.itemsField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        object[] array = new object[(this.itemsField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = itemsField[i];
-                        }
-                        for (i = (i + 1); (i < this.itemsField.Length); i = (i + 1)) {
-                            array[i] = itemsField[i];
-                        }
-                        this.Items = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f7efb344-40c4-4c4e-841b-a3c64d6d5695")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class EncryptedContentType : IEncryptedContentType {
-        private AlgorithmIdentifier contentEncryptionAlgorithmField = new AlgorithmIdentifier();
-        private byte[] encryptedDataField = new byte[0];
-        private string contentTypeField = default(string);
-        private bool contentTypeField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier ContentEncryptionAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.contentEncryptionAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.contentEncryptionAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.contentEncryptionAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.contentEncryptionAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] EncryptedData {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.encryptedDataField == null)
-                            || (this.encryptedDataField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encryptedDataField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.encryptedDataField = new byte[0];
-                }
-                else {
-                    this.encryptedDataField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ContentType {
-            get {
-                return this.contentTypeField;
-            }
-            set {
-                this.contentTypeField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.contentTypeField_XSD_HasBeenSet = (this.contentTypeField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((false
-                            || ((this.ContentEncryptionAlgorithm != null)
-                            && this.ContentEncryptionAlgorithm.XSD_HasBeenSet))
-                            || (this.EncryptedDataSize() != 0))
-                            || this.contentTypeField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.ContentEncryptionAlgorithm != null)) {
-                    this.ContentEncryptionAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int EncryptedDataSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.encryptedDataField == null)) {
-                return 0;
-            }
-            else {
-                return this.encryptedDataField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte EncryptedDataGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.encryptedDataField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.encryptedDataField.Length - 1)
-                                >= index)) {
-                        return this.encryptedDataField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedDataSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.encryptedDataField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.encryptedDataField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedDataAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.encryptedDataField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.encryptedDataField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.encryptedDataField.Length); i = (i + 1)) {
-                        array[i] = encryptedDataField[i];
-                    }
-                    array[i] = value;
-                    this.EncryptedData = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool EncryptedDataRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.encryptedDataField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.encryptedDataField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.encryptedDataField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = encryptedDataField[i];
-                        }
-                        for (i = (i + 1); (i < this.encryptedDataField.Length); i = (i + 1)) {
-                            array[i] = encryptedDataField[i];
-                        }
-                        this.EncryptedData = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f80012eb-ca3b-4f52-a77e-9b610290f853")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class NamedKeyEncryptedDataType : INamedKeyEncryptedDataType {
-        private string keyNameField = default(string);
-        private EncryptedContentType encryptedContentField = new EncryptedContentType();
-        private string versionField = default(string);
-        private bool keyNameField_XSD_HasBeenSet = false;
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public NamedKeyEncryptedDataType() {
-            this.versionField = "v0";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string KeyName {
-            get {
-                return this.keyNameField;
-            }
-            set {
-                this.keyNameField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.keyNameField_XSD_HasBeenSet = (this.keyNameField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public EncryptedContentType EncryptedContent {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.encryptedContentField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encryptedContentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.encryptedContentField = new EncryptedContentType();
-                }
-                else {
-                    this.encryptedContentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v0")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((false
-                            || ((this.EncryptedContent != null)
-                            && this.EncryptedContent.XSD_HasBeenSet))
-                            || this.keyNameField_XSD_HasBeenSet)
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.EncryptedContent != null)) {
-                    this.EncryptedContent.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ebdb86ee-7823-4471-b90a-1b5f65b5d0ac")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class SignedDataType : ISignedDataType {
-        private AlgorithmIdentifier[] digestAlgorithmField = new AlgorithmIdentifier[0];
-        private EncapsulatedContentType encapsulatedContentField = new EncapsulatedContentType();
-        private byte[] certificateField = new byte[0];
-        private SignerType[] signerField = new SignerType[0];
-        private string versionField = default(string);
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public SignedDataType() {
-            this.versionField = "v1";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DigestAlgorithm", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier[] DigestAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.digestAlgorithmField == null)
-                            || (this.digestAlgorithmField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.digestAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.digestAlgorithmField = new AlgorithmIdentifier[0];
-                }
-                else {
-                    this.digestAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public EncapsulatedContentType EncapsulatedContent {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.encapsulatedContentField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.encapsulatedContentField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.encapsulatedContentField = new EncapsulatedContentType();
-                }
-                else {
-                    this.encapsulatedContentField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Certificate", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Certificate {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.certificateField == null)
-                            || (this.certificateField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.certificateField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.certificateField = new byte[0];
-                }
-                else {
-                    this.certificateField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signer", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SignerType[] Signer {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.signerField == null)
-                            || (this.signerField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.signerField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.signerField = new SignerType[0];
-                }
-                else {
-                    this.signerField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v1")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((((false
-                            || ((this.EncapsulatedContent != null)
-                            && this.EncapsulatedContent.XSD_HasBeenSet))
-                            || (this.DigestAlgorithmSize() != 0))
-                            || (this.CertificateSize() != 0))
-                            || (this.SignerSize() != 0))
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.EncapsulatedContent != null)) {
-                    this.EncapsulatedContent.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                int i = 0;
-                for (i = 0; (i < this.DigestAlgorithmSize()); i = (i + 1)) {
-                    this.DigestAlgorithm[i].XSD_Optimizing = this._XSD_Optimizing;
-                }
-                for (i = 0; (i < this.SignerSize()); i = (i + 1)) {
-                    this.Signer[i].XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int DigestAlgorithmSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.digestAlgorithmField == null)) {
-                return 0;
-            }
-            else {
-                return this.digestAlgorithmField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public AlgorithmIdentifier DigestAlgorithmGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
-                    return default(AlgorithmIdentifier);
-                }
-                else {
-                    if (((this.digestAlgorithmField.Length - 1)
-                                >= index)) {
-                        return this.digestAlgorithmField[index];
-                    }
-                    else {
-                        return default(AlgorithmIdentifier);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(AlgorithmIdentifier);
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
-                    return false;
-                }
-                else {
-                    this.digestAlgorithmField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestAlgorithmAddItem(AlgorithmIdentifier value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
-                    return false;
-                }
-                else {
-                    AlgorithmIdentifier[] array = new AlgorithmIdentifier[(this.digestAlgorithmField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.digestAlgorithmField.Length); i = (i + 1)) {
-                        array[i] = digestAlgorithmField[i];
-                    }
-                    array[i] = value;
-                    this.DigestAlgorithm = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool DigestAlgorithmRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.digestAlgorithmField == default(AlgorithmIdentifier[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.digestAlgorithmField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        AlgorithmIdentifier[] array = new AlgorithmIdentifier[(this.digestAlgorithmField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = digestAlgorithmField[i];
-                        }
-                        for (i = (i + 1); (i < this.digestAlgorithmField.Length); i = (i + 1)) {
-                            array[i] = digestAlgorithmField[i];
-                        }
-                        this.DigestAlgorithm = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public int CertificateSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.certificateField == null)) {
-                return 0;
-            }
-            else {
-                return this.certificateField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte CertificateGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.certificateField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.certificateField.Length - 1)
-                                >= index)) {
-                        return this.certificateField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool CertificateSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.certificateField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.certificateField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool CertificateAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.certificateField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.certificateField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.certificateField.Length); i = (i + 1)) {
-                        array[i] = certificateField[i];
-                    }
-                    array[i] = value;
-                    this.Certificate = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool CertificateRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.certificateField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.certificateField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.certificateField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = certificateField[i];
-                        }
-                        for (i = (i + 1); (i < this.certificateField.Length); i = (i + 1)) {
-                            array[i] = certificateField[i];
-                        }
-                        this.Certificate = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public int SignerSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.signerField == null)) {
-                return 0;
-            }
-            else {
-                return this.signerField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public SignerType SignerGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.signerField == default(SignerType[]))) {
-                    return default(SignerType);
-                }
-                else {
-                    if (((this.signerField.Length - 1)
-                                >= index)) {
-                        return this.signerField[index];
-                    }
-                    else {
-                        return default(SignerType);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(SignerType);
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignerSetItem(int index, SignerType value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.signerField == default(SignerType[]))) {
-                    return false;
-                }
-                else {
-                    this.signerField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignerAddItem(SignerType value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.signerField == default(SignerType[]))) {
-                    return false;
-                }
-                else {
-                    SignerType[] array = new SignerType[(this.signerField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.signerField.Length); i = (i + 1)) {
-                        array[i] = signerField[i];
-                    }
-                    array[i] = value;
-                    this.Signer = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignerRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.signerField == default(SignerType[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.signerField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        SignerType[] array = new SignerType[(this.signerField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = signerField[i];
-                        }
-                        for (i = (i + 1); (i < this.signerField.Length); i = (i + 1)) {
-                            array[i] = signerField[i];
-                        }
-                        this.Signer = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e2638194-a5f4-427a-94a8-61a55e2990bf")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class SignerType : ISignerType {
-        private SignerIdentifierType signerIdentifierField = new SignerIdentifierType();
-        private AlgorithmIdentifier digestAlgorithmField = new AlgorithmIdentifier();
-        private AlgorithmIdentifier signatureAlgorithmField = new AlgorithmIdentifier();
-        private byte[] signatureField = new byte[0];
-        private string versionField = default(string);
-        private bool versionField_XSD_HasBeenSet = false;
-        private bool _XSD_Optimizing = false;
-        public SignerType() {
-            this.versionField = "v1";
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SignerIdentifierType SignerIdentifier {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.signerIdentifierField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.signerIdentifierField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.signerIdentifierField = new SignerIdentifierType();
-                }
-                else {
-                    this.signerIdentifierField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier DigestAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.digestAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.digestAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.digestAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.digestAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AlgorithmIdentifier SignatureAlgorithm {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.signatureAlgorithmField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.signatureAlgorithmField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.signatureAlgorithmField = new AlgorithmIdentifier();
-                }
-                else {
-                    this.signatureAlgorithmField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] Signature {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.signatureField == null)
-                            || (this.signatureField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.signatureField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.signatureField = new byte[0];
-                }
-                else {
-                    this.signatureField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("v1")]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.versionField_XSD_HasBeenSet = (this.versionField != default(string));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (((((false
-                            || ((this.SignerIdentifier != null)
-                            && this.SignerIdentifier.XSD_HasBeenSet))
-                            || ((this.DigestAlgorithm != null)
-                            && this.DigestAlgorithm.XSD_HasBeenSet))
-                            || ((this.SignatureAlgorithm != null)
-                            && this.SignatureAlgorithm.XSD_HasBeenSet))
-                            || (this.SignatureSize() != 0))
-                            || this.versionField_XSD_HasBeenSet);
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.SignerIdentifier != null)) {
-                    this.SignerIdentifier.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.DigestAlgorithm != null)) {
-                    this.DigestAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                if ((this.SignatureAlgorithm != null)) {
-                    this.SignatureAlgorithm.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int SignatureSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.signatureField == null)) {
-                return 0;
-            }
-            else {
-                return this.signatureField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public byte SignatureGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.signatureField == default(byte[]))) {
-                    return default(byte);
-                }
-                else {
-                    if (((this.signatureField.Length - 1)
-                                >= index)) {
-                        return this.signatureField[index];
-                    }
-                    else {
-                        return default(byte);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(byte);
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignatureSetItem(int index, byte value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.signatureField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    this.signatureField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignatureAddItem(byte value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.signatureField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    byte[] array = new byte[(this.signatureField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.signatureField.Length); i = (i + 1)) {
-                        array[i] = signatureField[i];
-                    }
-                    array[i] = value;
-                    this.Signature = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool SignatureRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.signatureField == default(byte[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.signatureField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        byte[] array = new byte[(this.signatureField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = signatureField[i];
-                        }
-                        for (i = (i + 1); (i < this.signatureField.Length); i = (i + 1)) {
-                            array[i] = signatureField[i];
-                        }
-                        this.Signature = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("02d1d1bb-c947-40cd-9148-fdb93ae1a59c")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class SignerIdentifierType : ISignerIdentifierType {
-        private IssuerAndSerialNumberType issuerAndSerialNumberField = new IssuerAndSerialNumberType();
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public IssuerAndSerialNumberType IssuerAndSerialNumber {
-            get {
-                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
-                if (((this._XSD_Optimizing == true)
-                            && (this.issuerAndSerialNumberField.XSD_HasBeenSet == false))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.issuerAndSerialNumberField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent class from being null
-                if ((value == null)) {
-                    this.issuerAndSerialNumberField = new IssuerAndSerialNumberType();
-                }
-                else {
-                    this.issuerAndSerialNumberField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (false
-                            || ((this.IssuerAndSerialNumber != null)
-                            && this.IssuerAndSerialNumber.XSD_HasBeenSet));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                if ((this.IssuerAndSerialNumber != null)) {
-                    this.IssuerAndSerialNumber.XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ed3948f4-8b96-4b1d-a95e-9d2b84150998")]
+    [System.Runtime.InteropServices.GuidAttribute("56d11cc0-c21e-476a-b2f2-942b33de7a3c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SensitiveCardDataType : ISensitiveCardDataType {
@@ -7677,7 +8170,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2d09a589-22a6-4530-b166-992d292d8827")]
+    [System.Runtime.InteropServices.GuidAttribute("7b339851-9e54-4760-8587-a29b6f1ca42b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TrackDataType : ITrackDataType {
@@ -7766,7 +8259,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("451cac1e-1cb6-4ba4-9b9d-06e445865d49")]
+    [System.Runtime.InteropServices.GuidAttribute("4e0bf2d6-b7dc-4992-82f8-deff5e137e3d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTokenType : IPaymentTokenType {
@@ -7862,7 +8355,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("70ae41fc-cff1-4744-9cc6-172295c8bbad")]
+    [System.Runtime.InteropServices.GuidAttribute("4761a281-2f33-4a51-bb2c-84e695b502ac")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CustomerOrderType : ICustomerOrderType {
@@ -7874,6 +8367,7 @@ namespace NEXO {
         private bool endDateFieldSpecified = false;
         private double forecastedAmountField = default(double);
         private double currentAmountField = default(double);
+        private bool currentAmountFieldSpecified = false;
         private string currencyField = default(string);
         private string accessedByField = default(string);
         private bool additionalInformationField_XSD_HasBeenSet = false;
@@ -7987,9 +8481,20 @@ namespace NEXO {
             }
             set {
                 this.currentAmountField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.currentAmountField_XSD_HasBeenSet = (this.currentAmountField != default(double));
+                // BEGIN ADDED BY XSD - indicate optional system property value has been changed - CurrentAmountSpecified = true
+                this.CurrentAmountSpecified = true;
                 // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool CurrentAmountSpecified {
+            get {
+                return this.currentAmountFieldSpecified;
+            }
+            set {
+                this.currentAmountFieldSpecified = value;
             }
         }
         /// <remarks/>
@@ -8023,7 +8528,7 @@ namespace NEXO {
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((((((((((false || this.additionalInformationField_XSD_HasBeenSet)
+                return (((((((((((false || this.additionalInformationField_XSD_HasBeenSet)
                             || this.customerOrderIDField_XSD_HasBeenSet)
                             || this.openOrderStateField_XSD_HasBeenSet)
                             || this.startDateField_XSD_HasBeenSet)
@@ -8032,7 +8537,8 @@ namespace NEXO {
                             || this.currentAmountField_XSD_HasBeenSet)
                             || this.currencyField_XSD_HasBeenSet)
                             || this.accessedByField_XSD_HasBeenSet)
-                            || this.EndDateSpecified);
+                            || this.EndDateSpecified)
+                            || this.CurrentAmountSpecified);
                 // END ADDED BY XSD
             }
         }
@@ -8058,7 +8564,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d1f2891c-a0c9-42ef-9f9d-9b942bd54515")]
+    [System.Runtime.InteropServices.GuidAttribute("b416f685-a112-48ae-b76e-45125c7510fa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CheckDataType : ICheckDataType {
@@ -8223,7 +8729,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("95beb9b9-2069-4306-a76a-6cdba99a7f90")]
+    [System.Runtime.InteropServices.GuidAttribute("d1b50629-211a-4327-9a63-a759afbde7c6")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MobileDataType : IMobileDataType {
@@ -8394,7 +8900,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("aca39cc7-2c0a-4276-a1df-5b5d9ba745ac")]
+    [System.Runtime.InteropServices.GuidAttribute("a5b085ec-1eb6-4112-a72c-98a8efe17d6c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GeolocationType : IGeolocationType {
@@ -8488,7 +8994,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("01442470-8569-4ec8-8b0d-3f934b27f94d")]
+    [System.Runtime.InteropServices.GuidAttribute("5132a7d8-4a9c-4732-b239-dc46267c4d86")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GeographicCoordinatesType : IGeographicCoordinatesType {
@@ -8555,7 +9061,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("28e9b932-d099-40ca-a1fd-5a6e11c33b77")]
+    [System.Runtime.InteropServices.GuidAttribute("f3607609-33ad-42fb-a752-ded25bb1d661")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class UTMCoordinatesType : IUTMCoordinatesType {
@@ -8638,7 +9144,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f92063a3-0471-466d-bd77-f19218336491")]
+    [System.Runtime.InteropServices.GuidAttribute("ca9794af-8191-46a0-b611-9543adeff859")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SensitiveMobileDataType : ISensitiveMobileDataType {
@@ -8721,7 +9227,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9f1bb4df-2b81-491a-8d36-c9be2316c026")]
+    [System.Runtime.InteropServices.GuidAttribute("1080fecc-0141-4bf3-ab27-33ef8181776b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountReqType : ILoyaltyAccountReqType {
@@ -8815,7 +9321,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("11a98fd0-2808-4ca5-802f-a7d2c86f3164")]
+    [System.Runtime.InteropServices.GuidAttribute("ecbc0f60-494f-414d-be2d-34a4ab55a492")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountIDType : ILoyaltyAccountIDType {
@@ -9022,7 +9528,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4f79adce-bfd3-44e8-b4a3-4086ec71e774")]
+    [System.Runtime.InteropServices.GuidAttribute("39e9e026-fe47-44bb-a8fd-c19927da3b34")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BalanceInquiryResponseType : IBalanceInquiryResponseType {
@@ -9145,7 +9651,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c3f1e809-993d-45af-a60b-ce6c7f766e29")]
+    [System.Runtime.InteropServices.GuidAttribute("22517369-703d-4ed3-88c0-09897268f9b4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAccountStatusType : IPaymentAccountStatusType {
@@ -9313,7 +9819,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("73031ca4-176a-42b3-b722-2610cdb37bc2")]
+    [System.Runtime.InteropServices.GuidAttribute("fe2fe636-332c-4cbe-a4ae-cd49bd326b3a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAcquirerDataType : IPaymentAcquirerDataType {
@@ -9442,7 +9948,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5bcb4f03-d0e3-4e87-b362-e47cd533a721")]
+    [System.Runtime.InteropServices.GuidAttribute("0e90f13e-bb1b-4d7e-8133-25bcb6bd15fb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountStatusType : ILoyaltyAccountStatusType {
@@ -9572,7 +10078,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("33d38f8f-9e46-4073-9f1b-8ac27a5319dc")]
+    [System.Runtime.InteropServices.GuidAttribute("a3ed9a4f-7277-4d2c-9564-394f3e686dec")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountType : ILoyaltyAccountType {
@@ -9677,7 +10183,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("042797a7-e767-432c-83cd-b60cd0dffd34")]
+    [System.Runtime.InteropServices.GuidAttribute("505a759e-6e90-4467-be56-fb0aad2dd388")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BatchRequestType : IBatchRequestType {
@@ -9869,7 +10375,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("374e4538-5bfa-4fbc-8c0c-9006ae84c4fd")]
+    [System.Runtime.InteropServices.GuidAttribute("9a40d8c0-75ec-4ab0-ba96-d8b9b381ac63")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionToPerformType : ITransactionToPerformType {
@@ -9922,7 +10428,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e4c3ef9b-6b91-4364-83dd-840aa59e390c")]
+    [System.Runtime.InteropServices.GuidAttribute("7f37e7b6-2b04-4330-a84b-ff9c2301a319")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyRequestType : ILoyaltyRequestType {
@@ -10143,7 +10649,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3f4dd24a-6f8b-4ad0-a875-c4108828666f")]
+    [System.Runtime.InteropServices.GuidAttribute("0e290d44-f51f-464f-b129-94a6af6d1b0a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleDataType : ISaleDataType {
@@ -10644,7 +11150,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7a0ccaa5-72d8-42e4-8888-51a1fb1cbdf0")]
+    [System.Runtime.InteropServices.GuidAttribute("3f253d8d-b9e0-45ea-bc6e-8fa121e47267")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleTerminalDataType : ISaleTerminalDataType {
@@ -10757,7 +11263,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("259eafa6-3765-4ec5-96bc-bdaa68c16b7a")]
+    [System.Runtime.InteropServices.GuidAttribute("04bd5f57-d4ab-470e-a3a4-451e615e9832")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleProfileType : ISaleProfileType {
@@ -10828,57 +11334,57 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("35e7171d-3b00-46ba-b907-f65babb84de3")]
+    [System.Runtime.InteropServices.GuidAttribute("41847b2f-d066-49ea-9ccc-c25db219026b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SponsoredMerchantType : ISponsoredMerchantType {
-        private string merchantNameField = default(string);
-        private string merchantAddressField = default(string);
-        private string merchantCountryField = default(string);
+        private string commonNameField = default(string);
+        private string addressField = default(string);
+        private string countryCodeField = default(string);
         private string merchantCategoryCodeField = default(string);
-        private string registrationIDField = default(string);
-        private bool merchantNameField_XSD_HasBeenSet = false;
-        private bool merchantAddressField_XSD_HasBeenSet = false;
-        private bool merchantCountryField_XSD_HasBeenSet = false;
+        private string registeredIdentifierField = default(string);
+        private bool commonNameField_XSD_HasBeenSet = false;
+        private bool addressField_XSD_HasBeenSet = false;
+        private bool countryCodeField_XSD_HasBeenSet = false;
         private bool merchantCategoryCodeField_XSD_HasBeenSet = false;
-        private bool registrationIDField_XSD_HasBeenSet = false;
+        private bool registeredIdentifierField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MerchantName {
+        public string CommonName {
             get {
-                return this.merchantNameField;
+                return this.commonNameField;
             }
             set {
-                this.merchantNameField = value;
+                this.commonNameField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.merchantNameField_XSD_HasBeenSet = (this.merchantNameField != default(string));
+                this.commonNameField_XSD_HasBeenSet = (this.commonNameField != default(string));
                 // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MerchantAddress {
+        public string Address {
             get {
-                return this.merchantAddressField;
+                return this.addressField;
             }
             set {
-                this.merchantAddressField = value;
+                this.addressField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.merchantAddressField_XSD_HasBeenSet = (this.merchantAddressField != default(string));
+                this.addressField_XSD_HasBeenSet = (this.addressField != default(string));
                 // END ADDED BY XSD
             }
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MerchantCountry {
+        public string CountryCode {
             get {
-                return this.merchantCountryField;
+                return this.countryCodeField;
             }
             set {
-                this.merchantCountryField = value;
+                this.countryCodeField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.merchantCountryField_XSD_HasBeenSet = (this.merchantCountryField != default(string));
+                this.countryCodeField_XSD_HasBeenSet = (this.countryCodeField != default(string));
                 // END ADDED BY XSD
             }
         }
@@ -10897,14 +11403,14 @@ namespace NEXO {
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RegistrationID {
+        public string RegisteredIdentifier {
             get {
-                return this.registrationIDField;
+                return this.registeredIdentifierField;
             }
             set {
-                this.registrationIDField = value;
+                this.registeredIdentifierField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.registrationIDField_XSD_HasBeenSet = (this.registrationIDField != default(string));
+                this.registeredIdentifierField_XSD_HasBeenSet = (this.registeredIdentifierField != default(string));
                 // END ADDED BY XSD
             }
         }
@@ -10913,11 +11419,11 @@ namespace NEXO {
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return (((((false || this.merchantNameField_XSD_HasBeenSet)
-                            || this.merchantAddressField_XSD_HasBeenSet)
-                            || this.merchantCountryField_XSD_HasBeenSet)
+                return (((((false || this.commonNameField_XSD_HasBeenSet)
+                            || this.addressField_XSD_HasBeenSet)
+                            || this.countryCodeField_XSD_HasBeenSet)
                             || this.merchantCategoryCodeField_XSD_HasBeenSet)
-                            || this.registrationIDField_XSD_HasBeenSet);
+                            || this.registeredIdentifierField_XSD_HasBeenSet);
                 // END ADDED BY XSD
             }
         }
@@ -10943,7 +11449,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f47120ea-4214-4175-bf78-958525ccc106")]
+    [System.Runtime.InteropServices.GuidAttribute("4e66783a-55cb-4a26-a980-2626a9dfc1f0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToIssuerDataType : ISaleToIssuerDataType {
@@ -10994,7 +11500,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d18386f7-d0ea-4da1-9891-bf0fa18940b3")]
+    [System.Runtime.InteropServices.GuidAttribute("d4fe3d3e-245d-431a-a638-165f6d93a588")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyTransactionType : ILoyaltyTransactionType {
@@ -11276,7 +11782,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8690fe0c-47a3-4bc5-9fc3-9d4ec3f486d1")]
+    [System.Runtime.InteropServices.GuidAttribute("e047fa30-b542-41fa-bbb2-4d95a9018874")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OriginalPOITransactionType : IOriginalPOITransactionType {
@@ -11288,12 +11794,15 @@ namespace NEXO {
         private bool reuseCardDataFlagField = default(bool);
         private string customerLanguageField = default(string);
         private string acquirerIDField = default(string);
+        private bool lastTransactionFlagField = default(bool);
+        private bool lastTransactionFlagFieldSpecified = false;
         private bool approvalCodeField_XSD_HasBeenSet = false;
         private bool saleIDField_XSD_HasBeenSet = false;
         private bool pOIIDField_XSD_HasBeenSet = false;
         private bool reuseCardDataFlagField_XSD_HasBeenSet = false;
         private bool customerLanguageField_XSD_HasBeenSet = false;
         private bool acquirerIDField_XSD_HasBeenSet = false;
+        private bool lastTransactionFlagField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         public OriginalPOITransactionType() {
             this.reuseCardDataFlagField = true;
@@ -11423,12 +11932,36 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool LastTransactionFlag {
+            get {
+                return this.lastTransactionFlagField;
+            }
+            set {
+                this.lastTransactionFlagField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value has been changed - LastTransactionFlagSpecified = true
+                this.LastTransactionFlagSpecified = true;
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool LastTransactionFlagSpecified {
+            get {
+                return this.lastTransactionFlagFieldSpecified;
+            }
+            set {
+                this.lastTransactionFlagFieldSpecified = value;
+            }
+        }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [Newtonsoft.Json.JsonIgnore()]
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((((((((false
+                return ((((((((((false
                             || ((this.POITransactionID != null)
                             && this.POITransactionID.XSD_HasBeenSet))
                             || ((this.HostTransactionID != null)
@@ -11438,7 +11971,9 @@ namespace NEXO {
                             || this.pOIIDField_XSD_HasBeenSet)
                             || this.reuseCardDataFlagField_XSD_HasBeenSet)
                             || this.customerLanguageField_XSD_HasBeenSet)
-                            || this.acquirerIDField_XSD_HasBeenSet);
+                            || this.acquirerIDField_XSD_HasBeenSet)
+                            || this.lastTransactionFlagField_XSD_HasBeenSet)
+                            || this.LastTransactionFlagSpecified);
                 // END ADDED BY XSD
             }
         }
@@ -11470,7 +12005,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b0102bbb-1314-487d-baa6-850724769824")]
+    [System.Runtime.InteropServices.GuidAttribute("9914efe9-492e-4c48-8174-4e5d2568c0a1")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionConditionsType : ITransactionConditionsType {
@@ -12086,7 +12621,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("93772704-63ee-4887-9b17-7de78be9498c")]
+    [System.Runtime.InteropServices.GuidAttribute("5dbb619d-73eb-452e-96e7-8ae30fb202db")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleItemType : ISaleItemType {
@@ -12323,7 +12858,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5da4d151-17ee-43cc-831b-9e5d8ad8247b")]
+    [System.Runtime.InteropServices.GuidAttribute("ba1fb5ad-12c2-4555-a7fb-a2f3b43c1e45")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyDataType : ILoyaltyDataType {
@@ -12446,7 +12981,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("91ffe5ea-dc76-4e2c-ac22-476ecf22aa76")]
+    [System.Runtime.InteropServices.GuidAttribute("2f8f2c53-2ab9-4e47-889f-12ad30412f96")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAmountType : ILoyaltyAmountType {
@@ -12533,7 +13068,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b60f11a4-ac0e-4a43-9fe4-e71576f5ac91")]
+    [System.Runtime.InteropServices.GuidAttribute("3d138bae-8398-44a4-b229-2340606b4d75")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentRequestType : IPaymentRequestType {
@@ -12783,7 +13318,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d929be9a-3410-4ed2-af95-aa4cc495eb1b")]
+    [System.Runtime.InteropServices.GuidAttribute("fba9f647-9654-4b36-be4a-85515743c789")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTransactionType : IPaymentTransactionType {
@@ -13033,7 +13568,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3dc02178-7d9e-48df-ad90-a1bb4e2dcd70")]
+    [System.Runtime.InteropServices.GuidAttribute("1219dce0-8430-456e-b27d-fb3fe95b7982")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentDataType : IPaymentDataType {
@@ -13239,7 +13774,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1d18291d-aca3-4063-a1b5-fdad99a0f56c")]
+    [System.Runtime.InteropServices.GuidAttribute("aa5b14b6-5590-4b0d-b572-b456df6a20ae")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InstalmentType : IInstalmentType {
@@ -13473,20 +14008,42 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("69aad135-a3be-4e18-9b98-a80191959b1e")]
+    [System.Runtime.InteropServices.GuidAttribute("21fbbe2d-81c3-4be9-9736-3ab05c11a3c4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReversalRequestType : IReversalRequestType {
+        private SaleDataType saleDataField = new SaleDataType();
         private OriginalPOITransactionType originalPOITransactionField = new OriginalPOITransactionType();
-        private CustomerOrderType customerOrderIDField = new CustomerOrderType();
-        private string saleReferenceIDField = default(string);
+        private CustomerOrderType customerOrderField = new CustomerOrderType();
         private string reversalReasonField = default(string);
         private double reversedAmountField = default(double);
         private bool reversedAmountFieldSpecified = false;
-        private bool saleReferenceIDField_XSD_HasBeenSet = false;
         private bool reversalReasonField_XSD_HasBeenSet = false;
         private bool reversedAmountField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SaleDataType SaleData {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.saleDataField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.saleDataField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.saleDataField = new SaleDataType();
+                }
+                else {
+                    this.saleDataField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public OriginalPOITransactionType OriginalPOITransaction {
@@ -13512,37 +14069,24 @@ namespace NEXO {
         }
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public CustomerOrderType CustomerOrderID {
+        public CustomerOrderType CustomerOrder {
             get {
                 // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
                 if (((this._XSD_Optimizing == true)
-                            && (this.customerOrderIDField.XSD_HasBeenSet == false))) {
+                            && (this.customerOrderField.XSD_HasBeenSet == false))) {
                     return null;
                 }
                 // END ADDED BY XSD
-                return this.customerOrderIDField;
+                return this.customerOrderField;
             }
             set {
                 // BEGIN ADDED BY XSD - prevent class from being null
                 if ((value == null)) {
-                    this.customerOrderIDField = new CustomerOrderType();
+                    this.customerOrderField = new CustomerOrderType();
                 }
                 else {
-                    this.customerOrderIDField = value;
+                    this.customerOrderField = value;
                 }
-                // END ADDED BY XSD
-            }
-        }
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SaleReferenceID {
-            get {
-                return this.saleReferenceIDField;
-            }
-            set {
-                this.saleReferenceIDField = value;
-                // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.saleReferenceIDField_XSD_HasBeenSet = (this.saleReferenceIDField != default(string));
                 // END ADDED BY XSD
             }
         }
@@ -13589,11 +14133,12 @@ namespace NEXO {
             get {
                 // BEGIN ADDED BY XSD
                 return ((((((false
+                            || ((this.SaleData != null)
+                            && this.SaleData.XSD_HasBeenSet))
                             || ((this.OriginalPOITransaction != null)
                             && this.OriginalPOITransaction.XSD_HasBeenSet))
-                            || ((this.CustomerOrderID != null)
-                            && this.CustomerOrderID.XSD_HasBeenSet))
-                            || this.saleReferenceIDField_XSD_HasBeenSet)
+                            || ((this.CustomerOrder != null)
+                            && this.CustomerOrder.XSD_HasBeenSet))
                             || this.reversalReasonField_XSD_HasBeenSet)
                             || this.reversedAmountField_XSD_HasBeenSet)
                             || this.ReversedAmountSpecified);
@@ -13613,11 +14158,14 @@ namespace NEXO {
                 this._XSD_Optimizing = value;
                 // END ADDED BY XSD - AddSetStatementFromValue
                 // BEGIN ADDED BY XSD
+                if ((this.SaleData != null)) {
+                    this.SaleData.XSD_Optimizing = this._XSD_Optimizing;
+                }
                 if ((this.OriginalPOITransaction != null)) {
                     this.OriginalPOITransaction.XSD_Optimizing = this._XSD_Optimizing;
                 }
-                if ((this.CustomerOrderID != null)) {
-                    this.CustomerOrderID.XSD_Optimizing = this._XSD_Optimizing;
+                if ((this.CustomerOrder != null)) {
+                    this.CustomerOrder.XSD_Optimizing = this._XSD_Optimizing;
                 }
                 // END ADDED BY XSD
             }
@@ -13628,7 +14176,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3b47dc10-0f7c-4ed2-ba2d-8b03fcfa78bf")]
+    [System.Runtime.InteropServices.GuidAttribute("a1808de1-d4e9-417b-86b2-5b9e0f17de57")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BatchResponseType : IBatchResponseType {
@@ -13820,7 +14368,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e72018da-2574-4c0f-8b67-0c423c1d8946")]
+    [System.Runtime.InteropServices.GuidAttribute("f71108de-5276-4e5c-9b34-6ae3fe78209f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PerformedTransactionType : IPerformedTransactionType {
@@ -14128,7 +14676,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("247228f1-e79b-422a-95cd-59027f0ad05e")]
+    [System.Runtime.InteropServices.GuidAttribute("978345d9-8cae-4568-a9c7-48cf0cdb90d7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIDataType : IPOIDataType {
@@ -14209,7 +14757,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("66013897-2ccc-4c23-8594-e323fc778f28")]
+    [System.Runtime.InteropServices.GuidAttribute("aa613c27-1e9c-4556-9b70-fd18045b617c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentResultType : IPaymentResultType {
@@ -14757,7 +15305,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2bf53146-3a68-4264-b5d5-c2a3446d562e")]
+    [System.Runtime.InteropServices.GuidAttribute("e112fcb1-30b1-4f1a-941a-ac6b226ba548")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CurrencyConversionType : ICurrencyConversionType {
@@ -14945,7 +15493,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3be8586f-1357-4f38-9a84-0cbd369c8bb7")]
+    [System.Runtime.InteropServices.GuidAttribute("4484a388-f774-43dc-b1f9-cd0e4889201b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountType : IAmountType {
@@ -15012,10 +15560,104 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2cf047e0-b2e5-4c37-b412-21712ea987be")]
+    [System.Runtime.InteropServices.GuidAttribute("eab055b9-eb99-4eda-b50c-6744a63e208c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CapturedSignatureType : ICapturedSignatureType {
+        private RawSignatureType rawSignatureField = new RawSignatureType();
+        private SignatureImageType signatureImageField = new SignatureImageType();
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public RawSignatureType RawSignature {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.rawSignatureField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.rawSignatureField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.rawSignatureField = new RawSignatureType();
+                }
+                else {
+                    this.rawSignatureField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SignatureImageType SignatureImage {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.signatureImageField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.signatureImageField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.signatureImageField = new SignatureImageType();
+                }
+                else {
+                    this.signatureImageField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((false
+                            || ((this.RawSignature != null)
+                            && this.RawSignature.XSD_HasBeenSet))
+                            || ((this.SignatureImage != null)
+                            && this.SignatureImage.XSD_HasBeenSet));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.RawSignature != null)) {
+                    this.RawSignature.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.SignatureImage != null)) {
+                    this.SignatureImage.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("6d0c996d-fbc7-4263-b7af-fffcf03be752")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class RawSignatureType : IRawSignatureType {
         private AreaSizeType areaSizeField = new AreaSizeType();
         private SignaturePointType[] signaturePointField = new SignaturePointType[0];
         private bool _XSD_Optimizing = false;
@@ -15204,7 +15846,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("50b9dc32-93e0-48dd-bf31-65ff0101ea0e")]
+    [System.Runtime.InteropServices.GuidAttribute("abb137cf-7f54-42f7-85c8-8a8a7dbc2fa9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SignaturePointType : ISignaturePointType {
@@ -15271,7 +15913,198 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fe46dfd3-8d24-4fe7-87bd-817b29df070a")]
+    [System.Runtime.InteropServices.GuidAttribute("7daff127-409e-4767-b862-8313be8ce696")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SignatureImageType : ISignatureImageType {
+        private string imageFormatField = default(string);
+        private byte[] imageDataField = new byte[0];
+        private string imageReferenceField = default(string);
+        private bool imageFormatField_XSD_HasBeenSet = false;
+        private bool imageReferenceField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ImageFormat {
+            get {
+                return this.imageFormatField;
+            }
+            set {
+                this.imageFormatField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.imageFormatField_XSD_HasBeenSet = (this.imageFormatField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] ImageData {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.imageDataField == null)
+                            || (this.imageDataField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.imageDataField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.imageDataField = new byte[0];
+                }
+                else {
+                    this.imageDataField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ImageReference {
+            get {
+                return this.imageReferenceField;
+            }
+            set {
+                this.imageReferenceField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.imageReferenceField_XSD_HasBeenSet = (this.imageReferenceField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((false
+                            || (this.ImageDataSize() != 0))
+                            || this.imageFormatField_XSD_HasBeenSet)
+                            || this.imageReferenceField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+        public int ImageDataSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.imageDataField == null)) {
+                return 0;
+            }
+            else {
+                return this.imageDataField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public byte ImageDataGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.imageDataField == default(byte[]))) {
+                    return default(byte);
+                }
+                else {
+                    if (((this.imageDataField.Length - 1)
+                                >= index)) {
+                        return this.imageDataField[index];
+                    }
+                    else {
+                        return default(byte);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(byte);
+            }
+            // END ADDED BY XSD
+        }
+        public bool ImageDataSetItem(int index, byte value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.imageDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    this.imageDataField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ImageDataAddItem(byte value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.imageDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    byte[] array = new byte[(this.imageDataField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.imageDataField.Length); i = (i + 1)) {
+                        array[i] = imageDataField[i];
+                    }
+                    array[i] = value;
+                    this.ImageData = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool ImageDataRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.imageDataField == default(byte[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.imageDataField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        byte[] array = new byte[(this.imageDataField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = imageDataField[i];
+                        }
+                        for (i = (i + 1); (i < this.imageDataField.Length); i = (i + 1)) {
+                            array[i] = imageDataField[i];
+                        }
+                        this.ImageData = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("c91850a0-a984-494d-803b-86880627018c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyResultType : ILoyaltyResultType {
@@ -15452,7 +16285,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("919210bb-c6f6-48bf-b3b6-9d8823af341b")]
+    [System.Runtime.InteropServices.GuidAttribute("f4e66f09-8aeb-4783-aa5c-8d8dadf46ab7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAcquirerDataType : ILoyaltyAcquirerDataType {
@@ -15565,7 +16398,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("90f3b25a-d067-4fa5-8977-3a61da89339b")]
+    [System.Runtime.InteropServices.GuidAttribute("a535e84a-85eb-43e4-814f-782f00fa04ca")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RebatesType : IRebatesType {
@@ -15773,7 +16606,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("74350fd9-bef4-49d2-a19e-9a785354221b")]
+    [System.Runtime.InteropServices.GuidAttribute("792be3e3-c797-49c3-9c44-b72f6bb4b551")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleItemRebateType : ISaleItemRebateType {
@@ -15946,7 +16779,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("44fbe8bc-bd7e-482a-8347-28331f669fc0")]
+    [System.Runtime.InteropServices.GuidAttribute("df325f00-9f65-4932-aa0c-26450901054b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionRequestType : ICardAcquisitionRequestType {
@@ -16040,7 +16873,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f6bfec9a-cecf-4e12-abe3-b5e4e3d6c842")]
+    [System.Runtime.InteropServices.GuidAttribute("7934f7ca-f9ce-4445-abad-131d5ccc71b9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionTransactionType : ICardAcquisitionTransactionType {
@@ -16573,7 +17406,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0872fb2b-b6aa-4553-b06c-e9a00649017f")]
+    [System.Runtime.InteropServices.GuidAttribute("5f60cca0-0486-4de4-8c18-bb456f05b483")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionResponseType : ICardAcquisitionResponseType {
@@ -17101,7 +17934,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("096d7dd7-c73b-4574-b681-38701acbcdf8")]
+    [System.Runtime.InteropServices.GuidAttribute("bc77c808-636a-4b3b-a893-89f8768d9aba")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardholderPINType : ICardholderPINType {
@@ -17198,7 +18031,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ee501dba-39ee-453f-82d1-980f0c7b29d9")]
+    [System.Runtime.InteropServices.GuidAttribute("3b9598e0-505f-43fd-957d-d3eb73263d78")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderAPDURequestType : ICardReaderAPDURequestType {
@@ -17972,7 +18805,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ff852232-31b6-4042-833d-86b319191b12")]
+    [System.Runtime.InteropServices.GuidAttribute("9b67b610-f411-4197-9431-b0db277a6d22")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderAPDUResponseType : ICardReaderAPDUResponseType {
@@ -18283,7 +19116,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("127f8dca-54f9-4b17-b51e-932050b0943a")]
+    [System.Runtime.InteropServices.GuidAttribute("aab606af-2603-4072-bb04-610ebc3955c2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderInitRequestType : ICardReaderInitRequestType {
@@ -18536,7 +19369,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("14cb5b06-6c74-4904-b986-b0715ac0e51b")]
+    [System.Runtime.InteropServices.GuidAttribute("65834c7a-a7e0-4231-ae6d-874b0552bffe")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderInitResponseType : ICardReaderInitResponseType {
@@ -18880,7 +19713,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ca691c99-bf04-42c6-8569-7f53a6eb786b")]
+    [System.Runtime.InteropServices.GuidAttribute("c2d4b979-ed2c-439c-9250-ac9f750c0ae3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ICCResetDataType : IICCResetDataType {
@@ -19162,7 +19995,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("53d08c72-10a8-428a-b0cd-8e3c6eddef58")]
+    [System.Runtime.InteropServices.GuidAttribute("2358c737-3eef-4307-9baf-6f2de76a7661")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderPowerOffRequestType : ICardReaderPowerOffRequestType {
@@ -19243,7 +20076,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("406f3ddc-a5ef-41cc-a67a-332269a83f7b")]
+    [System.Runtime.InteropServices.GuidAttribute("2beec5e2-c60b-42e3-8cf8-0f23cb79bc64")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderPowerOffResponseType : ICardReaderPowerOffResponseType {
@@ -19308,7 +20141,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("32622255-3b29-41b7-8b08-79a837bec8ad")]
+    [System.Runtime.InteropServices.GuidAttribute("b4b42fb9-9b72-4049-ac8d-9f2b219c2e2e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CashHandlingDeviceType : ICashHandlingDeviceType {
@@ -19503,7 +20336,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b8268f73-c15c-40fa-be57-95eb97125358")]
+    [System.Runtime.InteropServices.GuidAttribute("f9126625-43f9-407f-a7a9-6aa49241b429")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CoinsOrBillsType : ICoinsOrBillsType {
@@ -19656,6 +20489,57 @@ namespace NEXO {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("8398f842-5181-43f4-af7a-9b9ac610181d")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class CriteriaOrderType : ICriteriaOrderType {
+        private string targetField = default(string);
+        private bool targetField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Target {
+            get {
+                return this.targetField;
+            }
+            set {
+                this.targetField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.targetField_XSD_HasBeenSet = (this.targetField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false || this.targetField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public enum CustomerOrderReqEnumeration {
@@ -19692,7 +20576,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("63ff7d36-83e6-4a97-9299-0d3c7597ef8d")]
+    [System.Runtime.InteropServices.GuidAttribute("e09921a1-dfdb-4f0e-933a-8f5cc8047c01")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DiagnosisRequestType : IDiagnosisRequestType {
@@ -19887,7 +20771,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("6ab0ed8b-e1c6-427e-aff8-aabd93db880c")]
+    [System.Runtime.InteropServices.GuidAttribute("3f47dca0-d47a-4670-a036-c9b1b7bfd44e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DiagnosisResponseType : IDiagnosisResponseType {
@@ -20231,7 +21115,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d711dbc8-adaf-4ba8-a1a5-504bb5792331")]
+    [System.Runtime.InteropServices.GuidAttribute("41dcd0fa-a8c4-4cb8-bec2-58aa91f1b7d8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIStatusType : IPOIStatusType {
@@ -20571,7 +21455,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8e8b4370-b578-4888-b332-4455452afa72")]
+    [System.Runtime.InteropServices.GuidAttribute("3042251d-c917-489f-bb5a-c0f37b780734")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class HostStatusType : IHostStatusType {
@@ -20664,7 +21548,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("68b01682-4453-4a1c-8741-9055a070d2df")]
+    [System.Runtime.InteropServices.GuidAttribute("56ea97c4-b66c-4156-9643-bdbd8ce92416")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EnableServiceRequestType : IEnableServiceRequestType {
@@ -20761,7 +21645,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("eea2061c-99d2-4483-9f70-54832a64f111")]
+    [System.Runtime.InteropServices.GuidAttribute("e91c194f-d371-42e5-8ffc-1c9d779d60a4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EnableServiceResponseType : IEnableServiceResponseType {
@@ -20902,7 +21786,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("bb225def-c7e5-4d0f-a614-c699e16b0cea")]
+    [System.Runtime.InteropServices.GuidAttribute("fb5e9f76-061e-4532-9511-eeddfe7a50bc")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EventNotificationType : IEventNotificationType {
@@ -21264,7 +22148,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d221b785-add8-4aef-89a0-f443aa67f103")]
+    [System.Runtime.InteropServices.GuidAttribute("f38fc9e2-676e-4119-bb63-0b01bca13c3f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GetTotalsRequestType : IGetTotalsRequestType {
@@ -21345,7 +22229,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c72180d8-5978-405f-887e-ab345484c337")]
+    [System.Runtime.InteropServices.GuidAttribute("91e2383d-ec2e-4919-a178-45103ed27f36")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TotalFilterType : ITotalFilterType {
@@ -21460,7 +22344,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9d0b62bf-ffc5-443b-b866-be64a6d137d6")]
+    [System.Runtime.InteropServices.GuidAttribute("f90096a4-4f65-48aa-addf-f11468eeb39d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GetTotalsResponseType : IGetTotalsResponseType {
@@ -21668,7 +22552,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5536cddb-0f44-4091-8917-9ddfad30910f")]
+    [System.Runtime.InteropServices.GuidAttribute("9e926310-bd72-4fd0-893f-bac22f3fd5bf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionTotalsType : ITransactionTotalsType {
@@ -22169,7 +23053,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ebb15dab-15d3-4bca-8b00-c46b4e5e630d")]
+    [System.Runtime.InteropServices.GuidAttribute("ed8f26df-6bc2-4649-a58a-e2f7e9aace51")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTotalsType : IPaymentTotalsType {
@@ -22252,7 +23136,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("935d212a-3f93-4297-b0e9-f9f4985594ba")]
+    [System.Runtime.InteropServices.GuidAttribute("e56a7636-363e-45d0-85db-22113298a8a0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyTotalsType : ILoyaltyTotalsType {
@@ -22421,7 +23305,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("042d62c9-8472-46fe-8515-a715b11030e2")]
+    [System.Runtime.InteropServices.GuidAttribute("9fc7e26a-88a9-4e77-a6bd-12c3bbb0833d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputType : IInputType {
@@ -22623,7 +23507,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e22ff058-e597-4325-89a6-f5a0edd960eb")]
+    [System.Runtime.InteropServices.GuidAttribute("ac3ea586-620f-45cd-8ca1-9a0c167d8a0c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputDataType : IInputDataType {
@@ -23002,7 +23886,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("522cd209-fef0-4123-bce7-d22b9168e4cc")]
+    [System.Runtime.InteropServices.GuidAttribute("add0a0ef-cd95-4cd0-9171-9ea438c57ca7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputRequestType : IInputRequestType {
@@ -23096,7 +23980,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3b55b774-72b3-4274-bbb3-000e9aaf005a")]
+    [System.Runtime.InteropServices.GuidAttribute("acebe331-9362-4c8e-9534-095f677e40f0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputResponseType : IInputResponseType {
@@ -23190,7 +24074,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c6e1d335-691a-4cbc-8ff4-d16e38fbbd2d")]
+    [System.Runtime.InteropServices.GuidAttribute("8b70a08a-ab1e-4d50-afbc-63c317e861fd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputResultType : IInputResultType {
@@ -23316,7 +24200,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("987164b5-3b60-469c-8a96-973876a1cddd")]
+    [System.Runtime.InteropServices.GuidAttribute("d6a8b005-a6c2-4a2d-bbaa-1dd2272afcc4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputUpdateType : IInputUpdateType {
@@ -23724,7 +24608,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ff496d7f-283c-421d-9450-52712cc71267")]
+    [System.Runtime.InteropServices.GuidAttribute("dc6b6799-d624-4eea-af91-ce8609e32cd4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoginRequestType : ILoginRequestType {
@@ -24057,29 +24941,33 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("866950d2-c9c7-4654-8e22-fbe0e06eee1e")]
+    [System.Runtime.InteropServices.GuidAttribute("2ad443ac-4e09-4182-a8bf-f7312930015b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleSoftwareType : ISaleSoftwareType {
-        private string manufacturerIDField = default(string);
+        private string providerIdentificationField = default(string);
         private string applicationNameField = default(string);
         private string softwareVersionField = default(string);
         private string certificationCodeField = default(string);
-        private bool manufacturerIDField_XSD_HasBeenSet = false;
+        private string componentDescriptionField = default(string);
+        private string componentTypeField = default(string);
+        private bool providerIdentificationField_XSD_HasBeenSet = false;
         private bool applicationNameField_XSD_HasBeenSet = false;
         private bool softwareVersionField_XSD_HasBeenSet = false;
         private bool certificationCodeField_XSD_HasBeenSet = false;
+        private bool componentDescriptionField_XSD_HasBeenSet = false;
+        private bool componentTypeField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ManufacturerID {
+        public string ProviderIdentification {
             get {
-                return this.manufacturerIDField;
+                return this.providerIdentificationField;
             }
             set {
-                this.manufacturerIDField = value;
+                this.providerIdentificationField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.manufacturerIDField_XSD_HasBeenSet = (this.manufacturerIDField != default(string));
+                this.providerIdentificationField_XSD_HasBeenSet = (this.providerIdentificationField != default(string));
                 // END ADDED BY XSD
             }
         }
@@ -24122,15 +25010,43 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ComponentDescription {
+            get {
+                return this.componentDescriptionField;
+            }
+            set {
+                this.componentDescriptionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.componentDescriptionField_XSD_HasBeenSet = (this.componentDescriptionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ComponentType {
+            get {
+                return this.componentTypeField;
+            }
+            set {
+                this.componentTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.componentTypeField_XSD_HasBeenSet = (this.componentTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [Newtonsoft.Json.JsonIgnore()]
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((((false || this.manufacturerIDField_XSD_HasBeenSet)
+                return ((((((false || this.providerIdentificationField_XSD_HasBeenSet)
                             || this.applicationNameField_XSD_HasBeenSet)
                             || this.softwareVersionField_XSD_HasBeenSet)
-                            || this.certificationCodeField_XSD_HasBeenSet);
+                            || this.certificationCodeField_XSD_HasBeenSet)
+                            || this.componentDescriptionField_XSD_HasBeenSet)
+                            || this.componentTypeField_XSD_HasBeenSet);
                 // END ADDED BY XSD
             }
         }
@@ -24156,7 +25072,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("16852c5a-8e13-493e-bbe6-6879adfd7c00")]
+    [System.Runtime.InteropServices.GuidAttribute("6947e5f7-4ac2-467f-8321-7c5171be6800")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoginResponseType : ILoginResponseType {
@@ -24250,7 +25166,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fac56ac9-83be-40e4-bcff-e0f62fe40890")]
+    [System.Runtime.InteropServices.GuidAttribute("80346146-6d11-4190-b370-5110ff784843")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POISystemDataType : IPOISystemDataType {
@@ -24258,7 +25174,13 @@ namespace NEXO {
         private POISoftwareType pOISoftwareField = new POISoftwareType();
         private POITerminalDataType pOITerminalDataField = new POITerminalDataType();
         private POIStatusType pOIStatusField = new POIStatusType();
+        private bool tokenRequestStatusField = default(bool);
+        private bool tokenRequestStatusFieldSpecified = false;
+        private bool customerOrderStatusField = default(bool);
+        private bool customerOrderStatusFieldSpecified = false;
         private bool dateTimeField_XSD_HasBeenSet = false;
+        private bool tokenRequestStatusField_XSD_HasBeenSet = false;
+        private bool customerOrderStatusField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -24342,19 +25264,71 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool TokenRequestStatus {
+            get {
+                return this.tokenRequestStatusField;
+            }
+            set {
+                this.tokenRequestStatusField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value has been changed - TokenRequestStatusSpecified = true
+                this.TokenRequestStatusSpecified = true;
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool TokenRequestStatusSpecified {
+            get {
+                return this.tokenRequestStatusFieldSpecified;
+            }
+            set {
+                this.tokenRequestStatusFieldSpecified = value;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool CustomerOrderStatus {
+            get {
+                return this.customerOrderStatusField;
+            }
+            set {
+                this.customerOrderStatusField = value;
+                // BEGIN ADDED BY XSD - indicate optional system property value has been changed - CustomerOrderStatusSpecified = true
+                this.CustomerOrderStatusSpecified = true;
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        public bool CustomerOrderStatusSpecified {
+            get {
+                return this.customerOrderStatusFieldSpecified;
+            }
+            set {
+                this.customerOrderStatusFieldSpecified = value;
+            }
+        }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [Newtonsoft.Json.JsonIgnore()]
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((((false
+                return ((((((((false
                             || ((this.POISoftware != null)
                             && this.POISoftware.XSD_HasBeenSet))
                             || ((this.POITerminalData != null)
                             && this.POITerminalData.XSD_HasBeenSet))
                             || ((this.POIStatus != null)
                             && this.POIStatus.XSD_HasBeenSet))
-                            || this.dateTimeField_XSD_HasBeenSet);
+                            || this.dateTimeField_XSD_HasBeenSet)
+                            || this.tokenRequestStatusField_XSD_HasBeenSet)
+                            || this.customerOrderStatusField_XSD_HasBeenSet)
+                            || this.TokenRequestStatusSpecified)
+                            || this.CustomerOrderStatusSpecified);
                 // END ADDED BY XSD
             }
         }
@@ -24389,29 +25363,33 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0c2aa225-a542-451d-ac9e-2a95c6ecbff8")]
+    [System.Runtime.InteropServices.GuidAttribute("8f18f53e-07c3-40a9-911f-2013be685e56")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POISoftwareType : IPOISoftwareType {
-        private string manufacturerIDField = default(string);
+        private string providerIdentificationField = default(string);
         private string applicationNameField = default(string);
         private string softwareVersionField = default(string);
         private string certificationCodeField = default(string);
-        private bool manufacturerIDField_XSD_HasBeenSet = false;
+        private string componentDescriptionField = default(string);
+        private string componentTypeField = default(string);
+        private bool providerIdentificationField_XSD_HasBeenSet = false;
         private bool applicationNameField_XSD_HasBeenSet = false;
         private bool softwareVersionField_XSD_HasBeenSet = false;
         private bool certificationCodeField_XSD_HasBeenSet = false;
+        private bool componentDescriptionField_XSD_HasBeenSet = false;
+        private bool componentTypeField_XSD_HasBeenSet = false;
         private bool _XSD_Optimizing = false;
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ManufacturerID {
+        public string ProviderIdentification {
             get {
-                return this.manufacturerIDField;
+                return this.providerIdentificationField;
             }
             set {
-                this.manufacturerIDField = value;
+                this.providerIdentificationField = value;
                 // BEGIN ADDED BY XSD - indicate system value has been changed
-                this.manufacturerIDField_XSD_HasBeenSet = (this.manufacturerIDField != default(string));
+                this.providerIdentificationField_XSD_HasBeenSet = (this.providerIdentificationField != default(string));
                 // END ADDED BY XSD
             }
         }
@@ -24454,15 +25432,43 @@ namespace NEXO {
                 // END ADDED BY XSD
             }
         }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ComponentDescription {
+            get {
+                return this.componentDescriptionField;
+            }
+            set {
+                this.componentDescriptionField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.componentDescriptionField_XSD_HasBeenSet = (this.componentDescriptionField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ComponentType {
+            get {
+                return this.componentTypeField;
+            }
+            set {
+                this.componentTypeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.componentTypeField_XSD_HasBeenSet = (this.componentTypeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         [Newtonsoft.Json.JsonIgnore()]
         internal bool XSD_HasBeenSet {
             get {
                 // BEGIN ADDED BY XSD
-                return ((((false || this.manufacturerIDField_XSD_HasBeenSet)
+                return ((((((false || this.providerIdentificationField_XSD_HasBeenSet)
                             || this.applicationNameField_XSD_HasBeenSet)
                             || this.softwareVersionField_XSD_HasBeenSet)
-                            || this.certificationCodeField_XSD_HasBeenSet);
+                            || this.certificationCodeField_XSD_HasBeenSet)
+                            || this.componentDescriptionField_XSD_HasBeenSet)
+                            || this.componentTypeField_XSD_HasBeenSet);
                 // END ADDED BY XSD
             }
         }
@@ -24488,7 +25494,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f11f2f04-be34-4be9-89c5-c3766d65ce1a")]
+    [System.Runtime.InteropServices.GuidAttribute("a07a0865-43a2-48ac-a0b3-4a8533d82b43")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POITerminalDataType : IPOITerminalDataType {
@@ -24601,7 +25607,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("df984f03-0945-4abd-894d-3b7d2620ab92")]
+    [System.Runtime.InteropServices.GuidAttribute("6d1f7c07-f7c0-44d3-9f53-1d3c8cbc21f4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIProfileType : IPOIProfileType {
@@ -24672,7 +25678,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9c3a1adf-4e87-4667-83f0-91d4f6f3f592")]
+    [System.Runtime.InteropServices.GuidAttribute("5531c83c-2b12-4bef-af14-29c9d2c56ddb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LogoutRequestType : ILogoutRequestType {
@@ -24727,7 +25733,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9459931e-ee60-4b85-b7c8-d6f48076876c")]
+    [System.Runtime.InteropServices.GuidAttribute("2b70d497-d00f-4fb5-849a-179e562b17c9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LogoutResponseType : ILogoutResponseType {
@@ -24812,7 +25818,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9b175b72-6d8b-4cf6-abc1-d7e610d3998f")]
+    [System.Runtime.InteropServices.GuidAttribute("0b71630e-a1ed-435b-8d04-a2c5fd1c4744")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyResponseType : ILoyaltyResponseType {
@@ -25188,7 +26194,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ae4999cc-cc22-42c8-9a75-ad42351981b4")]
+    [System.Runtime.InteropServices.GuidAttribute("d69bc8be-e340-41cc-8dcc-e07ef153e7ae")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentReceiptType : IPaymentReceiptType {
@@ -25443,7 +26449,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7f1d9311-5890-4f40-824b-c600c058fc24")]
+    [System.Runtime.InteropServices.GuidAttribute("4e0a8830-0e5b-423f-ba7b-5b4524627c2d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MessageHeaderType : IMessageHeaderType {
@@ -25622,6 +26628,26 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public enum OperatorEnumeration {
+        _none,
+        _begin,
+        /// <remarks/>
+        EQ,
+        /// <remarks/>
+        LE,
+        /// <remarks/>
+        LT,
+        /// <remarks/>
+        GE,
+        /// <remarks/>
+        GT,
+        _end,
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public enum OutputFormatEnumeration {
         _none,
         _begin,
@@ -25660,7 +26686,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("50167c91-b332-456c-b45d-2d57bce33fe3")]
+    [System.Runtime.InteropServices.GuidAttribute("ab1e98cd-71e2-4cb7-b16f-8eb62ba55953")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentResponseType : IPaymentResponseType {
@@ -26218,6 +27244,8 @@ namespace NEXO {
         IssuerInstalment,
         /// <remarks/>
         PaidOut,
+        /// <remarks/>
+        VoiceAuthorisation,
         _end,
     }
     /// <remarks/>
@@ -26261,7 +27289,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5733207f-d6a5-44e5-a594-60285a3841a8")]
+    [System.Runtime.InteropServices.GuidAttribute("5bd0ec84-2293-4c74-91fa-f9e9e4b072e2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PINRequestType : IPINRequestType {
@@ -26454,7 +27482,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4141245e-b574-4352-9659-c61401dafff3")]
+    [System.Runtime.InteropServices.GuidAttribute("449e952c-4374-43e6-ae39-3e9a569ad5a3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PINResponseType : IPINResponseType {
@@ -26604,7 +27632,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1893a17c-11d3-47a6-b09e-6969e6c502df")]
+    [System.Runtime.InteropServices.GuidAttribute("199344f5-6237-483e-ac92-21cdba2407ef")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintOutputType : IPrintOutputType {
@@ -26862,7 +27890,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("456514b5-b679-4c3a-bdd9-51129bb2aadf")]
+    [System.Runtime.InteropServices.GuidAttribute("8add198f-a6ec-49cb-97d5-f9d48e2f355f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintRequestType : IPrintRequestType {
@@ -26927,7 +27955,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("daed4868-26d8-44b3-839c-2c2a58a52dde")]
+    [System.Runtime.InteropServices.GuidAttribute("912c7c47-92ca-4ffc-93ec-adb8d9e0f57f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintResponseType : IPrintResponseType {
@@ -27008,7 +28036,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("97d582b0-9cc6-47c0-9af2-6e1015cf52c9")]
+    [System.Runtime.InteropServices.GuidAttribute("64692482-d50d-4858-9cf8-0f8e2f4beecf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationRequestType : IReconciliationRequestType {
@@ -27199,7 +28227,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("964f8971-c775-4160-b314-5afb78ff88a2")]
+    [System.Runtime.InteropServices.GuidAttribute("451e3fa3-b3be-483a-a843-634052d8660a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationResponseType : IReconciliationResponseType {
@@ -27441,7 +28469,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d1b32829-ece2-4478-a57a-0984322166a7")]
+    [System.Runtime.InteropServices.GuidAttribute("a711858e-68b4-4b04-b215-d6c84057cd29")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RepeatedMessageResponseType : IRepeatedMessageResponseType {
@@ -27527,7 +28555,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fd48dd25-d832-4a03-9f4f-a71774c1a708")]
+    [System.Runtime.InteropServices.GuidAttribute("da182dce-56b6-4d05-bde0-5598bedee45d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReversalResponseType : IReversalResponseType {
@@ -27822,7 +28850,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ed3d2f6b-a527-4b24-bc99-40e5a81a0282")]
+    [System.Runtime.InteropServices.GuidAttribute("39387437-6a27-4243-9f43-bc1afc76287c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueResponseType : IStoredValueResponseType {
@@ -28072,7 +29100,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d7dc0cdf-123b-43a4-816e-a6fb267fef58")]
+    [System.Runtime.InteropServices.GuidAttribute("5783200c-b659-459d-bdd6-8dd04a66d829")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueResultType : IStoredValueResultType {
@@ -28246,7 +29274,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7b2c0e14-d48a-4a34-91f8-8e3d1e9f2ca3")]
+    [System.Runtime.InteropServices.GuidAttribute("260ecd58-b630-462e-a4ee-5eb62e3caa6e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueAccountStatusType : IStoredValueAccountStatusType {
@@ -28340,7 +29368,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("519a2d2b-35d2-482c-8bf7-1fad968e9f8d")]
+    [System.Runtime.InteropServices.GuidAttribute("7c9dd805-00f7-4428-865f-84dac10e6b7b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueAccountIDType : IStoredValueAccountIDType {
@@ -28685,6 +29713,573 @@ namespace NEXO {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
     [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("406024e2-01d9-46c8-97f4-a4b753d58cf0")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SearchANDType : ISearchANDType {
+        private string targetField = default(string);
+        private OperatorEnumeration operatorField = default(OperatorEnumeration);
+        private string valueField = default(string);
+        private bool targetField_XSD_HasBeenSet = false;
+        private bool operatorField_XSD_HasBeenSet = false;
+        private bool valueField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Target {
+            get {
+                return this.targetField;
+            }
+            set {
+                this.targetField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.targetField_XSD_HasBeenSet = (this.targetField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public OperatorEnumeration Operator {
+            get {
+                return this.operatorField;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.valueField_XSD_HasBeenSet = (this.valueField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((false || this.targetField_XSD_HasBeenSet)
+                            || this.operatorField_XSD_HasBeenSet)
+                            || this.valueField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("a617de51-49bf-4753-aa93-b68553fb4577")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SearchCriteriasType : ISearchCriteriasType {
+        private SearchANDType[] searchORField = new SearchANDType[0];
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("SearchAND", typeof(SearchANDType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public SearchANDType[] SearchOR {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.searchORField == null)
+                            || (this.searchORField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.searchORField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.searchORField = new SearchANDType[0];
+                }
+                else {
+                    this.searchORField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || (this.SearchORSize() != 0));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.SearchORSize()); i = (i + 1)) {
+                    this.SearchOR[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int SearchORSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.searchORField == null)) {
+                return 0;
+            }
+            else {
+                return this.searchORField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public SearchANDType SearchORGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.searchORField == default(SearchANDType[]))) {
+                    return default(SearchANDType);
+                }
+                else {
+                    if (((this.searchORField.Length - 1)
+                                >= index)) {
+                        return this.searchORField[index];
+                    }
+                    else {
+                        return default(SearchANDType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(SearchANDType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchORSetItem(int index, SearchANDType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.searchORField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    this.searchORField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchORAddItem(SearchANDType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.searchORField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    SearchANDType[] array = new SearchANDType[(this.searchORField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.searchORField.Length); i = (i + 1)) {
+                        array[i] = searchORField[i];
+                    }
+                    array[i] = value;
+                    this.SearchOR = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchORRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.searchORField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.searchORField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        SearchANDType[] array = new SearchANDType[(this.searchORField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = searchORField[i];
+                        }
+                        for (i = (i + 1); (i < this.searchORField.Length); i = (i + 1)) {
+                            array[i] = searchORField[i];
+                        }
+                        this.SearchOR = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("410e7b5d-027c-4441-92de-84abe2a3c1c8")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SearchORType : ISearchORType {
+        private SearchANDType[] searchANDField = new SearchANDType[0];
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SearchAND", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SearchANDType[] SearchAND {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.searchANDField == null)
+                            || (this.searchANDField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.searchANDField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.searchANDField = new SearchANDType[0];
+                }
+                else {
+                    this.searchANDField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || (this.SearchANDSize() != 0));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.SearchANDSize()); i = (i + 1)) {
+                    this.SearchAND[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int SearchANDSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.searchANDField == null)) {
+                return 0;
+            }
+            else {
+                return this.searchANDField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public SearchANDType SearchANDGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.searchANDField == default(SearchANDType[]))) {
+                    return default(SearchANDType);
+                }
+                else {
+                    if (((this.searchANDField.Length - 1)
+                                >= index)) {
+                        return this.searchANDField[index];
+                    }
+                    else {
+                        return default(SearchANDType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(SearchANDType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchANDSetItem(int index, SearchANDType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.searchANDField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    this.searchANDField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchANDAddItem(SearchANDType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.searchANDField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    SearchANDType[] array = new SearchANDType[(this.searchANDField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.searchANDField.Length); i = (i + 1)) {
+                        array[i] = searchANDField[i];
+                    }
+                    array[i] = value;
+                    this.SearchAND = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchANDRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.searchANDField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.searchANDField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        SearchANDType[] array = new SearchANDType[(this.searchANDField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = searchANDField[i];
+                        }
+                        for (i = (i + 1); (i < this.searchANDField.Length); i = (i + 1)) {
+                            array[i] = searchANDField[i];
+                        }
+                        this.SearchAND = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("8ccf844b-3800-4c64-b6ab-67a4d8154cfa")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class SearchOutputOrderType : ISearchOutputOrderType {
+        private CriteriaOrderType[] criteriaOrderField = new CriteriaOrderType[0];
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CriteriaOrder", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public CriteriaOrderType[] CriteriaOrder {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.criteriaOrderField == null)
+                            || (this.criteriaOrderField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.criteriaOrderField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.criteriaOrderField = new CriteriaOrderType[0];
+                }
+                else {
+                    this.criteriaOrderField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (false
+                            || (this.CriteriaOrderSize() != 0));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.CriteriaOrderSize()); i = (i + 1)) {
+                    this.CriteriaOrder[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int CriteriaOrderSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.criteriaOrderField == null)) {
+                return 0;
+            }
+            else {
+                return this.criteriaOrderField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public CriteriaOrderType CriteriaOrderGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.criteriaOrderField == default(CriteriaOrderType[]))) {
+                    return default(CriteriaOrderType);
+                }
+                else {
+                    if (((this.criteriaOrderField.Length - 1)
+                                >= index)) {
+                        return this.criteriaOrderField[index];
+                    }
+                    else {
+                        return default(CriteriaOrderType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(CriteriaOrderType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool CriteriaOrderSetItem(int index, CriteriaOrderType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.criteriaOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    this.criteriaOrderField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool CriteriaOrderAddItem(CriteriaOrderType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.criteriaOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    CriteriaOrderType[] array = new CriteriaOrderType[(this.criteriaOrderField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.criteriaOrderField.Length); i = (i + 1)) {
+                        array[i] = criteriaOrderField[i];
+                    }
+                    array[i] = value;
+                    this.CriteriaOrder = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool CriteriaOrderRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.criteriaOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.criteriaOrderField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        CriteriaOrderType[] array = new CriteriaOrderType[(this.criteriaOrderField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = criteriaOrderField[i];
+                        }
+                        for (i = (i + 1); (i < this.criteriaOrderField.Length); i = (i + 1)) {
+                            array[i] = criteriaOrderField[i];
+                        }
+                        this.CriteriaOrder = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public enum ServicesEnabledEnumeration {
@@ -28749,7 +30344,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("165e5964-610d-4df7-99fb-a159a38ea83d")]
+    [System.Runtime.InteropServices.GuidAttribute("3ca21917-a1bc-4132-8831-a87612ce9ba5")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundContentType : ISoundContentType {
@@ -28848,7 +30443,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("cf041765-2a40-47ca-9390-fd79841df8fe")]
+    [System.Runtime.InteropServices.GuidAttribute("7786c38c-acde-4311-b138-4d34efbb0ca9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundRequestType : ISoundRequestType {
@@ -28965,7 +30560,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9fa8fb7f-734d-4441-9a70-764dd15b859a")]
+    [System.Runtime.InteropServices.GuidAttribute("4967e28b-9450-4b10-bc33-9e55d4283867")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundResponseType : ISoundResponseType {
@@ -29062,7 +30657,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b75b4e0a-1d61-43bd-979b-a066311dd476")]
+    [System.Runtime.InteropServices.GuidAttribute("1ed3c62d-39eb-415f-9130-5b71f181baa9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueDataType : IStoredValueDataType {
@@ -29252,7 +30847,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("34f4d604-a27d-4fa6-b6d4-876485236695")]
+    [System.Runtime.InteropServices.GuidAttribute("2c9cff1a-9b23-4580-b123-418688e36a41")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueRequestType : IStoredValueRequestType {
@@ -29558,7 +31153,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d57f9e62-32e0-477f-b451-08f401caa0d4")]
+    [System.Runtime.InteropServices.GuidAttribute("04ddce50-915e-4a25-a1ae-6f2865d09852")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransmitRequestType : ITransmitRequestType {
@@ -29769,7 +31364,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8d327b12-838f-4763-bc8e-8516b6b41ca5")]
+    [System.Runtime.InteropServices.GuidAttribute("40715294-ed62-4d10-97cc-827cdbd92f2b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransmitResponseType : ITransmitResponseType {
@@ -29957,7 +31552,745 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9b15c225-4967-4357-8479-b9db2eabcda8")]
+    [System.Runtime.InteropServices.GuidAttribute("76b27a13-5b8a-4e8a-8e8c-6dfbf6f9162c")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class TransactionReportType : ITransactionReportType {
+        private ResponseType responseField = new ResponseType();
+        private SaleDataType saleDataField = new SaleDataType();
+        private POIDataType pOIDataField = new POIDataType();
+        private PaymentResultType paymentResultField = new PaymentResultType();
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ResponseType Response {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.responseField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.responseField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.responseField = new ResponseType();
+                }
+                else {
+                    this.responseField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public SaleDataType SaleData {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.saleDataField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.saleDataField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.saleDataField = new SaleDataType();
+                }
+                else {
+                    this.saleDataField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public POIDataType POIData {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.pOIDataField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.pOIDataField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.pOIDataField = new POIDataType();
+                }
+                else {
+                    this.pOIDataField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public PaymentResultType PaymentResult {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.paymentResultField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.paymentResultField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.paymentResultField = new PaymentResultType();
+                }
+                else {
+                    this.paymentResultField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return ((((false
+                            || ((this.Response != null)
+                            && this.Response.XSD_HasBeenSet))
+                            || ((this.SaleData != null)
+                            && this.SaleData.XSD_HasBeenSet))
+                            || ((this.POIData != null)
+                            && this.POIData.XSD_HasBeenSet))
+                            || ((this.PaymentResult != null)
+                            && this.PaymentResult.XSD_HasBeenSet));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Response != null)) {
+                    this.Response.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.SaleData != null)) {
+                    this.SaleData.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.POIData != null)) {
+                    this.POIData.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                if ((this.PaymentResult != null)) {
+                    this.PaymentResult.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("29f56c50-cda2-4eb0-89ba-919eeb0ef5be")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class TransactionReportRequestType : ITransactionReportRequestType {
+        private SearchANDType[] searchCriteriasField = new SearchANDType[0];
+        private CriteriaOrderType[] searchOutputOrderField = new CriteriaOrderType[0];
+        private bool descendingOrderField = default(bool);
+        private string blockStartField = default(string);
+        private string blockStopField = default(string);
+        private bool descendingOrderField_XSD_HasBeenSet = false;
+        private bool blockStartField_XSD_HasBeenSet = false;
+        private bool blockStopField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        public TransactionReportRequestType() {
+            this.descendingOrderField = false;
+            this.blockStartField = "0";
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("SearchOR", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("SearchAND", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false, NestingLevel=1)]
+        public SearchANDType[] SearchCriterias {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.searchCriteriasField == null)
+                            || (this.searchCriteriasField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.searchCriteriasField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.searchCriteriasField = new SearchANDType[0];
+                }
+                else {
+                    this.searchCriteriasField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("CriteriaOrder", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+        public CriteriaOrderType[] SearchOutputOrder {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.searchOutputOrderField == null)
+                            || (this.searchOutputOrderField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.searchOutputOrderField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.searchOutputOrderField = new CriteriaOrderType[0];
+                }
+                else {
+                    this.searchOutputOrderField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool DescendingOrder {
+            get {
+                return this.descendingOrderField;
+            }
+            set {
+                this.descendingOrderField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.descendingOrderField_XSD_HasBeenSet = (this.descendingOrderField != default(bool));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        [System.ComponentModel.DefaultValueAttribute("0")]
+        public string BlockStart {
+            get {
+                return this.blockStartField;
+            }
+            set {
+                this.blockStartField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.blockStartField_XSD_HasBeenSet = (this.blockStartField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string BlockStop {
+            get {
+                return this.blockStopField;
+            }
+            set {
+                this.blockStopField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.blockStopField_XSD_HasBeenSet = (this.blockStopField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((((false
+                            || (this.SearchCriteriasSize() != 0))
+                            || (this.SearchOutputOrderSize() != 0))
+                            || this.descendingOrderField_XSD_HasBeenSet)
+                            || this.blockStartField_XSD_HasBeenSet)
+                            || this.blockStopField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                int i = 0;
+                for (i = 0; (i < this.SearchCriteriasSize()); i = (i + 1)) {
+                    this.SearchCriterias[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                for (i = 0; (i < this.SearchOutputOrderSize()); i = (i + 1)) {
+                    this.SearchOutputOrder[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int SearchCriteriasSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.searchCriteriasField == null)) {
+                return 0;
+            }
+            else {
+                return this.searchCriteriasField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public SearchANDType SearchCriteriasGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.searchCriteriasField == default(SearchANDType[]))) {
+                    return default(SearchANDType);
+                }
+                else {
+                    if (((this.searchCriteriasField.Length - 1)
+                                >= index)) {
+                        return this.searchCriteriasField[index];
+                    }
+                    else {
+                        return default(SearchANDType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(SearchANDType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchCriteriasSetItem(int index, SearchANDType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.searchCriteriasField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    this.searchCriteriasField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchCriteriasAddItem(SearchANDType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.searchCriteriasField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    SearchANDType[] array = new SearchANDType[(this.searchCriteriasField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.searchCriteriasField.Length); i = (i + 1)) {
+                        array[i] = searchCriteriasField[i];
+                    }
+                    array[i] = value;
+                    this.SearchCriterias = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchCriteriasRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.searchCriteriasField == default(SearchANDType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.searchCriteriasField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        SearchANDType[] array = new SearchANDType[(this.searchCriteriasField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = searchCriteriasField[i];
+                        }
+                        for (i = (i + 1); (i < this.searchCriteriasField.Length); i = (i + 1)) {
+                            array[i] = searchCriteriasField[i];
+                        }
+                        this.SearchCriterias = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public int SearchOutputOrderSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.searchOutputOrderField == null)) {
+                return 0;
+            }
+            else {
+                return this.searchOutputOrderField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public CriteriaOrderType SearchOutputOrderGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.searchOutputOrderField == default(CriteriaOrderType[]))) {
+                    return default(CriteriaOrderType);
+                }
+                else {
+                    if (((this.searchOutputOrderField.Length - 1)
+                                >= index)) {
+                        return this.searchOutputOrderField[index];
+                    }
+                    else {
+                        return default(CriteriaOrderType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(CriteriaOrderType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchOutputOrderSetItem(int index, CriteriaOrderType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.searchOutputOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    this.searchOutputOrderField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchOutputOrderAddItem(CriteriaOrderType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.searchOutputOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    CriteriaOrderType[] array = new CriteriaOrderType[(this.searchOutputOrderField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.searchOutputOrderField.Length); i = (i + 1)) {
+                        array[i] = searchOutputOrderField[i];
+                    }
+                    array[i] = value;
+                    this.SearchOutputOrder = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool SearchOutputOrderRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.searchOutputOrderField == default(CriteriaOrderType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.searchOutputOrderField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        CriteriaOrderType[] array = new CriteriaOrderType[(this.searchOutputOrderField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = searchOutputOrderField[i];
+                        }
+                        for (i = (i + 1); (i < this.searchOutputOrderField.Length); i = (i + 1)) {
+                            array[i] = searchOutputOrderField[i];
+                        }
+                        this.SearchOutputOrder = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("dacf2121-ab50-4791-905e-bb1a96d7a25c")]
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public partial class TransactionReportResponseType : ITransactionReportResponseType {
+        private ResponseType responseField = new ResponseType();
+        private TransactionReportType[] transactionReportField = new TransactionReportType[0];
+        private string reportFullSizeField = default(string);
+        private string blockStartField = default(string);
+        private string blockStopField = default(string);
+        private bool reportFullSizeField_XSD_HasBeenSet = false;
+        private bool blockStartField_XSD_HasBeenSet = false;
+        private bool blockStopField_XSD_HasBeenSet = false;
+        private bool _XSD_Optimizing = false;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ResponseType Response {
+            get {
+                // BEGIN ADDED BY XSD - return null if user type hasBeenModified=false
+                if (((this._XSD_Optimizing == true)
+                            && (this.responseField.XSD_HasBeenSet == false))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.responseField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent class from being null
+                if ((value == null)) {
+                    this.responseField = new ResponseType();
+                }
+                else {
+                    this.responseField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("TransactionReport", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public TransactionReportType[] TransactionReport {
+            get {
+                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
+                if (((this.transactionReportField == null)
+                            || (this.transactionReportField.Length == 0))) {
+                    return null;
+                }
+                // END ADDED BY XSD
+                return this.transactionReportField;
+            }
+            set {
+                // BEGIN ADDED BY XSD - prevent array from being null
+                if ((value == null)) {
+                    this.transactionReportField = new TransactionReportType[0];
+                }
+                else {
+                    this.transactionReportField = value;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string ReportFullSize {
+            get {
+                return this.reportFullSizeField;
+            }
+            set {
+                this.reportFullSizeField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.reportFullSizeField_XSD_HasBeenSet = (this.reportFullSizeField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string BlockStart {
+            get {
+                return this.blockStartField;
+            }
+            set {
+                this.blockStartField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.blockStartField_XSD_HasBeenSet = (this.blockStartField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string BlockStop {
+            get {
+                return this.blockStopField;
+            }
+            set {
+                this.blockStopField = value;
+                // BEGIN ADDED BY XSD - indicate system value has been changed
+                this.blockStopField_XSD_HasBeenSet = (this.blockStopField != default(string));
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_HasBeenSet {
+            get {
+                // BEGIN ADDED BY XSD
+                return (((((false
+                            || ((this.Response != null)
+                            && this.Response.XSD_HasBeenSet))
+                            || (this.TransactionReportSize() != 0))
+                            || this.reportFullSizeField_XSD_HasBeenSet)
+                            || this.blockStartField_XSD_HasBeenSet)
+                            || this.blockStopField_XSD_HasBeenSet);
+                // END ADDED BY XSD
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [Newtonsoft.Json.JsonIgnore()]
+        internal bool XSD_Optimizing {
+            get {
+                // BEGIN ADDED BY XSD - AddGetStatementFromField
+                return this._XSD_Optimizing;
+                // END ADDED BY XSD - AddGetStatementFromField
+            }
+            set {
+                // BEGIN ADDED BY XSD - AddSetStatementFromValue
+                this._XSD_Optimizing = value;
+                // END ADDED BY XSD - AddSetStatementFromValue
+                // BEGIN ADDED BY XSD
+                if ((this.Response != null)) {
+                    this.Response.XSD_Optimizing = this._XSD_Optimizing;
+                }
+                int i = 0;
+                for (i = 0; (i < this.TransactionReportSize()); i = (i + 1)) {
+                    this.TransactionReport[i].XSD_Optimizing = this._XSD_Optimizing;
+                }
+                // END ADDED BY XSD
+            }
+        }
+        public int TransactionReportSize() {
+            // BEGIN ADDED BY XSD - array Size accessor
+            if ((this.transactionReportField == null)) {
+                return 0;
+            }
+            else {
+                return this.transactionReportField.Length;
+            }
+            // END ADDED BY XSD
+        }
+        public TransactionReportType TransactionReportGetItem(int index) {
+            // BEGIN ADDED BY XSD - array GetItem accessor
+            try {
+                if ((this.transactionReportField == default(TransactionReportType[]))) {
+                    return default(TransactionReportType);
+                }
+                else {
+                    if (((this.transactionReportField.Length - 1)
+                                >= index)) {
+                        return this.transactionReportField[index];
+                    }
+                    else {
+                        return default(TransactionReportType);
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return default(TransactionReportType);
+            }
+            // END ADDED BY XSD
+        }
+        public bool TransactionReportSetItem(int index, TransactionReportType value) {
+            // BEGIN ADDED BY XSD - array SetItem accessor
+            try {
+                if ((this.transactionReportField == default(TransactionReportType[]))) {
+                    return false;
+                }
+                else {
+                    this.transactionReportField[index] = value;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool TransactionReportAddItem(TransactionReportType value) {
+            // BEGIN ADDED BY XSD - array AddItem accessor
+            try {
+                if ((this.transactionReportField == default(TransactionReportType[]))) {
+                    return false;
+                }
+                else {
+                    TransactionReportType[] array = new TransactionReportType[(this.transactionReportField.Length + 1)];
+                    int i = 0;
+                    for (i = 0; (i < this.transactionReportField.Length); i = (i + 1)) {
+                        array[i] = transactionReportField[i];
+                    }
+                    array[i] = value;
+                    this.TransactionReport = array;
+                    return true;
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+        public bool TransactionReportRemoveItem(int index) {
+            // BEGIN ADDED BY XSD - array RemoveItem accessor
+            try {
+                if ((this.transactionReportField == default(TransactionReportType[]))) {
+                    return false;
+                }
+                else {
+                    if ((this.transactionReportField.Length <= index)) {
+                        return false;
+                    }
+                    else {
+                        TransactionReportType[] array = new TransactionReportType[(this.transactionReportField.Length - 1)];
+                        int i = 0;
+                        for (i = 0; (i < index); i = (i + 1)) {
+                            array[i] = transactionReportField[i];
+                        }
+                        for (i = (i + 1); (i < this.transactionReportField.Length); i = (i + 1)) {
+                            array[i] = transactionReportField[i];
+                        }
+                        this.TransactionReport = array;
+                        return true;
+                    }
+                }
+            }
+            catch (System.Exception ex) {
+                return false;
+            }
+            // END ADDED BY XSD
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Runtime.InteropServices.GuidAttribute("8efa586b-b7cf-4115-adfc-496918e9c634")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionStatusRequestType : ITransactionStatusRequestType {
@@ -30165,7 +32498,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e2ee12ff-49cd-484e-9223-2c4dd64082fd")]
+    [System.Runtime.InteropServices.GuidAttribute("a870b0c4-90c6-490a-bd14-92689399b65f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionStatusResponseType : ITransactionStatusResponseType {
@@ -30399,7 +32732,7 @@ namespace NEXO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.GuidAttribute("d40f8e08-af40-4e4d-a5a6-fdce0532111e")]
+    [System.Runtime.InteropServices.GuidAttribute("00350f33-4a05-4d03-824b-3fcd83c9f7a3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIRequest : ISaleToPOIRequest {
@@ -30457,6 +32790,7 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute("ReversalRequest", typeof(ReversalRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("SoundRequest", typeof(SoundRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("StoredValueRequest", typeof(StoredValueRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("TransactionReportRequest", typeof(TransactionReportRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionStatusRequest", typeof(TransactionStatusRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("TransmitRequest", typeof(TransmitRequestType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public object Item {
@@ -30536,7 +32870,7 @@ namespace NEXO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.GuidAttribute("85b81884-ad79-4200-af67-c34431a89918")]
+    [System.Runtime.InteropServices.GuidAttribute("7d24ad14-9e9b-4e5a-a9e0-65539463b68d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIResponse : ISaleToPOIResponse {
@@ -30591,6 +32925,7 @@ namespace NEXO {
         [System.Xml.Serialization.XmlElementAttribute("ReversalResponse", typeof(ReversalResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("SoundResponse", typeof(SoundResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("StoredValueResponse", typeof(StoredValueResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlElementAttribute("TransactionReportResponse", typeof(TransactionReportResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("TransactionStatusResponse", typeof(TransactionStatusResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlElementAttribute("TransmitResponse", typeof(TransmitResponseType), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public object Item {
@@ -30664,338 +32999,134 @@ namespace NEXO {
             }
         }
     }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public enum AlgorithmEnumeration {
-        _none,
-        _begin,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-retail-cbc-mac")]
-        idretailcbcmac,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-retail-cbc-mac-sha-256")]
-        idretailcbcmacsha256,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-ukpt-wrap ")]
-        idukptwrap,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-dukpt-wrap")]
-        iddukptwrap,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("des-ede3-ecb")]
-        desede3ecb,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("des-ede3-cbc")]
-        desede3cbc,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-sha256")]
-        idsha256,
-        /// <remarks/>
-        sha256WithRSAEncryption,
-        /// <remarks/>
-        rsaEncryption,
-        _end,
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public enum AttributeTypeEnumeration {
-        _none,
-        _begin,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-at-commonName")]
-        idatcommonName,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-at-localityName")]
-        idatlocalityName,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-at-organizationName")]
-        idatorganizationName,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-at-organizationalUnitName")]
-        idatorganizationalUnitName,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-at-countryName")]
-        idatcountryName,
-        _end,
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public enum ContentTypeEnumeration {
-        _none,
-        _begin,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-data")]
-        iddata,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-signedData")]
-        idsignedData,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-envelopedData")]
-        idenvelopedData,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-digestedData")]
-        iddigestedData,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-encryptedData")]
-        idencryptedData,
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("id-ct-authData")]
-        idctauthData,
-        _end,
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("99c6ab30-99e1-4dbe-9492-3c5ef4604bf8")]
-    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class IssuerType : IIssuerType {
-        private RelativeDistinguishedNameType[] relativeDistinguishedNameField = new RelativeDistinguishedNameType[0];
-        private bool _XSD_Optimizing = false;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("RelativeDistinguishedName", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RelativeDistinguishedNameType[] RelativeDistinguishedName {
-            get {
-                // BEGIN ADDED BY XSD - return null if array count is 0, still keeping the array
-                if (((this.relativeDistinguishedNameField == null)
-                            || (this.relativeDistinguishedNameField.Length == 0))) {
-                    return null;
-                }
-                // END ADDED BY XSD
-                return this.relativeDistinguishedNameField;
-            }
-            set {
-                // BEGIN ADDED BY XSD - prevent array from being null
-                if ((value == null)) {
-                    this.relativeDistinguishedNameField = new RelativeDistinguishedNameType[0];
-                }
-                else {
-                    this.relativeDistinguishedNameField = value;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_HasBeenSet {
-            get {
-                // BEGIN ADDED BY XSD
-                return (false
-                            || (this.RelativeDistinguishedNameSize() != 0));
-                // END ADDED BY XSD
-            }
-        }
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        [Newtonsoft.Json.JsonIgnore()]
-        internal bool XSD_Optimizing {
-            get {
-                // BEGIN ADDED BY XSD - AddGetStatementFromField
-                return this._XSD_Optimizing;
-                // END ADDED BY XSD - AddGetStatementFromField
-            }
-            set {
-                // BEGIN ADDED BY XSD - AddSetStatementFromValue
-                this._XSD_Optimizing = value;
-                // END ADDED BY XSD - AddSetStatementFromValue
-                // BEGIN ADDED BY XSD
-                int i = 0;
-                for (i = 0; (i < this.RelativeDistinguishedNameSize()); i = (i + 1)) {
-                    this.RelativeDistinguishedName[i].XSD_Optimizing = this._XSD_Optimizing;
-                }
-                // END ADDED BY XSD
-            }
-        }
-        public int RelativeDistinguishedNameSize() {
-            // BEGIN ADDED BY XSD - array Size accessor
-            if ((this.relativeDistinguishedNameField == null)) {
-                return 0;
-            }
-            else {
-                return this.relativeDistinguishedNameField.Length;
-            }
-            // END ADDED BY XSD
-        }
-        public RelativeDistinguishedNameType RelativeDistinguishedNameGetItem(int index) {
-            // BEGIN ADDED BY XSD - array GetItem accessor
-            try {
-                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
-                    return default(RelativeDistinguishedNameType);
-                }
-                else {
-                    if (((this.relativeDistinguishedNameField.Length - 1)
-                                >= index)) {
-                        return this.relativeDistinguishedNameField[index];
-                    }
-                    else {
-                        return default(RelativeDistinguishedNameType);
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return default(RelativeDistinguishedNameType);
-            }
-            // END ADDED BY XSD
-        }
-        public bool RelativeDistinguishedNameSetItem(int index, RelativeDistinguishedNameType value) {
-            // BEGIN ADDED BY XSD - array SetItem accessor
-            try {
-                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    this.relativeDistinguishedNameField[index] = value;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool RelativeDistinguishedNameAddItem(RelativeDistinguishedNameType value) {
-            // BEGIN ADDED BY XSD - array AddItem accessor
-            try {
-                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.relativeDistinguishedNameField.Length + 1)];
-                    int i = 0;
-                    for (i = 0; (i < this.relativeDistinguishedNameField.Length); i = (i + 1)) {
-                        array[i] = relativeDistinguishedNameField[i];
-                    }
-                    array[i] = value;
-                    this.RelativeDistinguishedName = array;
-                    return true;
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-        public bool RelativeDistinguishedNameRemoveItem(int index) {
-            // BEGIN ADDED BY XSD - array RemoveItem accessor
-            try {
-                if ((this.relativeDistinguishedNameField == default(RelativeDistinguishedNameType[]))) {
-                    return false;
-                }
-                else {
-                    if ((this.relativeDistinguishedNameField.Length <= index)) {
-                        return false;
-                    }
-                    else {
-                        RelativeDistinguishedNameType[] array = new RelativeDistinguishedNameType[(this.relativeDistinguishedNameField.Length - 1)];
-                        int i = 0;
-                        for (i = 0; (i < index); i = (i + 1)) {
-                            array[i] = relativeDistinguishedNameField[i];
-                        }
-                        for (i = (i + 1); (i < this.relativeDistinguishedNameField.Length); i = (i + 1)) {
-                            array[i] = relativeDistinguishedNameField[i];
-                        }
-                        this.RelativeDistinguishedName = array;
-                        return true;
-                    }
-                }
-            }
-            catch (System.Exception ex) {
-                return false;
-            }
-            // END ADDED BY XSD
-        }
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("myXSD", "4.1.0.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public enum VersionEnumeration {
-        _none,
-        _begin,
-        /// <remarks/>
-        v0,
-        /// <remarks/>
-        v1,
-        /// <remarks/>
-        v2,
-        /// <remarks/>
-        v3,
-        /// <remarks/>
-        v4,
-        /// <remarks/>
-        v5,
-        _end,
-    }
-    [System.Runtime.InteropServices.GuidAttribute("c5e020ad-03af-4246-a593-9d011162f92e")]
+    [System.Runtime.InteropServices.GuidAttribute("89a67fc1-7da0-4597-93a7-f1afcc6f0617")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IAbortRequestType {
-        /// <remarks/>
-        [DispId(1)]
-        MessageReferenceType MessageReference {
-            get;
-            set;
-        }
+    public interface IAuthenticatedDataType {
         /// <remarks/>
         [DispId(2)]
-        string AbortReason {
+        object[] Items {
             get;
             set;
         }
         /// <remarks/>
         [DispId(3)]
-        DisplayOutputType DisplayOutput {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("75ee8f56-9a94-4d14-8e51-c12e2fbd997b")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IMessageReferenceType {
-        /// <remarks/>
-        [DispId(1)]
-        string MessageCategory {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string ServiceID {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string DeviceID {
+        AlgorithmIdentifier MACAlgorithm {
             get;
             set;
         }
         /// <remarks/>
         [DispId(4)]
-        string SaleID {
+        EncapsulatedContentType EncapsulatedContent {
             get;
             set;
         }
         /// <remarks/>
         [DispId(5)]
-        string POIID {
+        string Version {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(6)]
+        byte[] MAC {
+            get;
+            set;
+        }
+        [DispId(7)]
+        int ItemsSize();
+        [DispId(8)]
+        object ItemsGetItem(int index);
+        [DispId(9)]
+        bool ItemsSetItem(int index, object value);
+        [DispId(10)]
+        bool ItemsAddItem(object value);
+        [DispId(11)]
+        bool ItemsRemoveItem(int index);
+        [DispId(12)]
+        int MACSize();
+        [DispId(13)]
+        byte MACGetItem(int index);
+        [DispId(14)]
+        bool MACSetItem(int index, byte value);
+        [DispId(15)]
+        bool MACAddItem(byte value);
+        [DispId(16)]
+        bool MACRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("a2a6fcb4-c2a1-43d2-b4e5-1369646b1f14")]
+    [System.Runtime.InteropServices.GuidAttribute("16393291-27f5-4e1d-a3fe-cb42356c2a14")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IKEKType {
+        /// <remarks/>
+        [DispId(2)]
+        KEKIdentifierType KEKIdentifier {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        AlgorithmIdentifier KeyEncryptionAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Version {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        byte[] EncryptedKey {
+            get;
+            set;
+        }
+        [DispId(6)]
+        int EncryptedKeySize();
+        [DispId(7)]
+        byte EncryptedKeyGetItem(int index);
+        [DispId(8)]
+        bool EncryptedKeySetItem(int index, byte value);
+        [DispId(9)]
+        bool EncryptedKeyAddItem(byte value);
+        [DispId(10)]
+        bool EncryptedKeyRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("1d614f7e-f41d-4b9e-aeb7-c7280cd5c48c")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IKEKIdentifierType {
+        /// <remarks/>
+        [DispId(1)]
+        string KeyIdentifier {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string KeyVersion {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        byte[] DerivationIdentifier {
+            get;
+            set;
+        }
+        [DispId(4)]
+        int DerivationIdentifierSize();
+        [DispId(5)]
+        byte DerivationIdentifierGetItem(int index);
+        [DispId(6)]
+        bool DerivationIdentifierSetItem(int index, byte value);
+        [DispId(7)]
+        bool DerivationIdentifierAddItem(byte value);
+        [DispId(8)]
+        bool DerivationIdentifierRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("59c01048-68db-40e0-a140-9352daf06baa")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayResponseType {
@@ -31016,7 +33147,7 @@ namespace NEXO {
         [DispId(6)]
         bool OutputResultRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("ff24441a-2d32-43c3-bb28-9d82171a5bcb")]
+    [System.Runtime.InteropServices.GuidAttribute("0e2f635c-ecda-4141-ba02-45d3cd6eacf5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputResultType {
@@ -31039,7 +33170,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("969512f9-f82b-477e-b499-80a83ec33b7f")]
+    [System.Runtime.InteropServices.GuidAttribute("21e3cb8a-6e33-4815-8137-2c42034e962d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IResponseType {
@@ -31062,7 +33193,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("232d9547-6fcc-49e3-9a92-400c79d71252")]
+    [System.Runtime.InteropServices.GuidAttribute("392a4171-718a-4fbd-9e2c-aeaef54ca076")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayRequestType {
@@ -31083,7 +33214,7 @@ namespace NEXO {
         [DispId(6)]
         bool DisplayOutputRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("07546fb1-0726-497c-8fc2-8fd015694d18")]
+    [System.Runtime.InteropServices.GuidAttribute("37cfdc27-c5b8-46cf-9768-c11b1bdc293a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayOutputType {
@@ -31150,7 +33281,7 @@ namespace NEXO {
         [DispId(18)]
         bool OutputSignatureRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("a4e0efe8-1356-4f7c-917a-5d5ebddf116d")]
+    [System.Runtime.InteropServices.GuidAttribute("cf87ec9a-12c2-4099-8e72-d645b97d8075")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputContentType {
@@ -31205,7 +33336,7 @@ namespace NEXO {
         [DispId(15)]
         bool OutputXHTMLRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b6a49b2b-a30a-4a0d-abf2-9b357a56dc91")]
+    [System.Runtime.InteropServices.GuidAttribute("24e33d49-fb7f-421b-809e-e1acd3c21724")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPredefinedContentType {
@@ -31222,7 +33353,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("69f077f8-c314-48a5-8282-da20012f5e31")]
+    [System.Runtime.InteropServices.GuidAttribute("4ba7b216-36ed-4eeb-bf07-9623be59c1cd")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputTextType {
@@ -31293,24 +33424,68 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c3655dc8-f8cb-44ee-bae6-50bc124128cc")]
+    [System.Runtime.InteropServices.GuidAttribute("56940cfc-cb00-41dd-bc9e-c086c3f91943")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputBarcodeType {
         /// <remarks/>
         [DispId(2)]
-        string BarcodeType {
+        string BarcodeValue {
             get;
             set;
         }
         /// <remarks/>
         [DispId(3)]
-        string Value {
+        byte[] QRCodeBinaryValue {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(4)]
+        string BarcodeType {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string QRCodeVersion {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        QRCodeEncodingModeEnumeration QRCodeEncodingMode {
+            get;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        bool QRCodeEncodingModeSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        QRCodeErrorCorrectionEnumeration QRCodeErrorCorrection {
+            get;
+        }
+        /// <remarks/>
+        [DispId(9)]
+        bool QRCodeErrorCorrectionSpecified {
+            get;
+            set;
+        }
+        [DispId(10)]
+        int QRCodeBinaryValueSize();
+        [DispId(11)]
+        byte QRCodeBinaryValueGetItem(int index);
+        [DispId(12)]
+        bool QRCodeBinaryValueSetItem(int index, byte value);
+        [DispId(13)]
+        bool QRCodeBinaryValueAddItem(byte value);
+        [DispId(14)]
+        bool QRCodeBinaryValueRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("dcda9801-dd5a-4b60-a78b-df92c5dddd7c")]
+    [System.Runtime.InteropServices.GuidAttribute("13dd76d6-f624-44af-b9df-288c1de91dd6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMenuEntryType {
@@ -31371,7 +33546,511 @@ namespace NEXO {
         [DispId(17)]
         bool OutputXHTMLRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("655f19dd-eb4a-459b-85c9-c2591f2d83c6")]
+    [System.Runtime.InteropServices.GuidAttribute("675698b3-9921-4bae-9e57-ee3bc387401d")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IAlgorithmIdentifier {
+        /// <remarks/>
+        [DispId(1)]
+        ParameterType Parameter {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string Algorithm {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("f6975e93-1f44-4f11-89cf-1716c1e6771a")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IParameterType {
+        /// <remarks/>
+        [DispId(1)]
+        byte[] InitialisationVector {
+            get;
+            set;
+        }
+        [DispId(2)]
+        int InitialisationVectorSize();
+        [DispId(3)]
+        byte InitialisationVectorGetItem(int index);
+        [DispId(4)]
+        bool InitialisationVectorSetItem(int index, byte value);
+        [DispId(5)]
+        bool InitialisationVectorAddItem(byte value);
+        [DispId(6)]
+        bool InitialisationVectorRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("c515504d-112e-486c-99b1-5d3345c534ad")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IKeyTransportType {
+        /// <remarks/>
+        [DispId(2)]
+        RecipientIdentifierType RecipientIdentifier {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        AlgorithmIdentifier KeyEncryptionAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Version {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        byte[] EncryptedKey {
+            get;
+            set;
+        }
+        [DispId(6)]
+        int EncryptedKeySize();
+        [DispId(7)]
+        byte EncryptedKeyGetItem(int index);
+        [DispId(8)]
+        bool EncryptedKeySetItem(int index, byte value);
+        [DispId(9)]
+        bool EncryptedKeyAddItem(byte value);
+        [DispId(10)]
+        bool EncryptedKeyRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("0d24dbf1-6b02-452d-8cf5-a15ba1f80bb7")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IRecipientIdentifierType {
+        /// <remarks/>
+        [DispId(1)]
+        IssuerAndSerialNumberType IssuerAndSerialNumber {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("a8aa092f-46d9-484f-b5fd-e3c34dda3abb")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IIssuerAndSerialNumberType {
+        /// <remarks/>
+        [DispId(1)]
+        RelativeDistinguishedNameType[] Issuer {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string SerialNumber {
+            get;
+            set;
+        }
+        [DispId(3)]
+        int IssuerSize();
+        [DispId(4)]
+        RelativeDistinguishedNameType IssuerGetItem(int index);
+        [DispId(5)]
+        bool IssuerSetItem(int index, RelativeDistinguishedNameType value);
+        [DispId(6)]
+        bool IssuerAddItem(RelativeDistinguishedNameType value);
+        [DispId(7)]
+        bool IssuerRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("563ef123-4322-4a61-83ee-d939f1972126")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IRelativeDistinguishedNameType {
+        /// <remarks/>
+        [DispId(1)]
+        string AttributeType {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string AttributeValue {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("52400219-d644-43c4-85c7-9ffb6b0be119")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IEncapsulatedContentType {
+        /// <remarks/>
+        [DispId(1)]
+        byte[] Content {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string ContentType {
+            get;
+            set;
+        }
+        [DispId(3)]
+        int ContentSize();
+        [DispId(4)]
+        byte ContentGetItem(int index);
+        [DispId(5)]
+        bool ContentSetItem(int index, byte value);
+        [DispId(6)]
+        bool ContentAddItem(byte value);
+        [DispId(7)]
+        bool ContentRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("82be5c30-bc06-4c21-ae9f-c5920d27f5c5")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IDigestedDataType {
+        /// <remarks/>
+        [DispId(1)]
+        AlgorithmIdentifier DigestAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        EncapsulatedContentType EncapsulatedContent {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        byte[] Digest {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Version {
+            get;
+            set;
+        }
+        [DispId(5)]
+        int DigestSize();
+        [DispId(6)]
+        byte DigestGetItem(int index);
+        [DispId(7)]
+        bool DigestSetItem(int index, byte value);
+        [DispId(8)]
+        bool DigestAddItem(byte value);
+        [DispId(9)]
+        bool DigestRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("21765921-762a-4dfc-bfae-5016cd5f888c")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IEncryptedContentType {
+        /// <remarks/>
+        [DispId(1)]
+        AlgorithmIdentifier ContentEncryptionAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        byte[] EncryptedData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string ContentType {
+            get;
+            set;
+        }
+        [DispId(4)]
+        int EncryptedDataSize();
+        [DispId(5)]
+        byte EncryptedDataGetItem(int index);
+        [DispId(6)]
+        bool EncryptedDataSetItem(int index, byte value);
+        [DispId(7)]
+        bool EncryptedDataAddItem(byte value);
+        [DispId(8)]
+        bool EncryptedDataRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("dcfe29eb-8fd1-4580-8c12-c869cd1c4924")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IEnvelopedDataType {
+        /// <remarks/>
+        [DispId(2)]
+        object[] Items {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        EncryptedContentType EncryptedContent {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Version {
+            get;
+            set;
+        }
+        [DispId(5)]
+        int ItemsSize();
+        [DispId(6)]
+        object ItemsGetItem(int index);
+        [DispId(7)]
+        bool ItemsSetItem(int index, object value);
+        [DispId(8)]
+        bool ItemsAddItem(object value);
+        [DispId(9)]
+        bool ItemsRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("53a14c82-a7a3-4e84-9c88-ff25d02a9c7c")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IIssuerType {
+        /// <remarks/>
+        [DispId(1)]
+        RelativeDistinguishedNameType[] RelativeDistinguishedName {
+            get;
+            set;
+        }
+        [DispId(2)]
+        int RelativeDistinguishedNameSize();
+        [DispId(3)]
+        RelativeDistinguishedNameType RelativeDistinguishedNameGetItem(int index);
+        [DispId(4)]
+        bool RelativeDistinguishedNameSetItem(int index, RelativeDistinguishedNameType value);
+        [DispId(5)]
+        bool RelativeDistinguishedNameAddItem(RelativeDistinguishedNameType value);
+        [DispId(6)]
+        bool RelativeDistinguishedNameRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("bb4d16d2-3678-4ec9-9715-a669f59f03bc")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface INamedKeyEncryptedDataType {
+        /// <remarks/>
+        [DispId(2)]
+        string KeyName {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        EncryptedContentType EncryptedContent {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string Version {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("f3b972d8-326b-4451-9416-249e22014134")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISignedDataType {
+        /// <remarks/>
+        [DispId(2)]
+        AlgorithmIdentifier[] DigestAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        EncapsulatedContentType EncapsulatedContent {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        byte[] Certificate {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        SignerType[] Signer {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string Version {
+            get;
+            set;
+        }
+        [DispId(7)]
+        int DigestAlgorithmSize();
+        [DispId(8)]
+        AlgorithmIdentifier DigestAlgorithmGetItem(int index);
+        [DispId(9)]
+        bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value);
+        [DispId(10)]
+        bool DigestAlgorithmAddItem(AlgorithmIdentifier value);
+        [DispId(11)]
+        bool DigestAlgorithmRemoveItem(int index);
+        [DispId(12)]
+        int CertificateSize();
+        [DispId(13)]
+        byte CertificateGetItem(int index);
+        [DispId(14)]
+        bool CertificateSetItem(int index, byte value);
+        [DispId(15)]
+        bool CertificateAddItem(byte value);
+        [DispId(16)]
+        bool CertificateRemoveItem(int index);
+        [DispId(17)]
+        int SignerSize();
+        [DispId(18)]
+        SignerType SignerGetItem(int index);
+        [DispId(19)]
+        bool SignerSetItem(int index, SignerType value);
+        [DispId(20)]
+        bool SignerAddItem(SignerType value);
+        [DispId(21)]
+        bool SignerRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("a45e7176-1e41-46fb-a678-aa435d0160d5")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISignerType {
+        /// <remarks/>
+        [DispId(2)]
+        SignerIdentifierType SignerIdentifier {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        AlgorithmIdentifier DigestAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        AlgorithmIdentifier SignatureAlgorithm {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        byte[] Signature {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string Version {
+            get;
+            set;
+        }
+        [DispId(7)]
+        int SignatureSize();
+        [DispId(8)]
+        byte SignatureGetItem(int index);
+        [DispId(9)]
+        bool SignatureSetItem(int index, byte value);
+        [DispId(10)]
+        bool SignatureAddItem(byte value);
+        [DispId(11)]
+        bool SignatureRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("47e32ccf-b971-4c5f-a391-b882daf822f4")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISignerIdentifierType {
+        /// <remarks/>
+        [DispId(1)]
+        IssuerAndSerialNumberType IssuerAndSerialNumber {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("41ac8cd2-1dc7-4375-93a3-7c28cf0c10a5")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IContentInformationType {
+        /// <remarks/>
+        [DispId(1)]
+        object Item {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string ContentType {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("2e3007e8-278d-4e24-b2c7-585dc7d8c81c")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IAbortRequestType {
+        /// <remarks/>
+        [DispId(1)]
+        MessageReferenceType MessageReference {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string AbortReason {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        DisplayOutputType DisplayOutput {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("8d57a19f-6d2b-49c7-9326-911837093c5a")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IMessageReferenceType {
+        /// <remarks/>
+        [DispId(1)]
+        string MessageCategory {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        string ServiceID {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string DeviceID {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string SaleID {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string POIID {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("442f1c79-b19c-4b04-a781-f7572ca12f4a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAdminRequestType {
@@ -31382,7 +34061,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4bba2ec6-0ad2-4e6e-a552-29602822f212")]
+    [System.Runtime.InteropServices.GuidAttribute("be477053-9116-4f3f-886e-132b21737ec4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAdminResponseType {
@@ -31393,7 +34072,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9ae0a513-09be-4e15-af27-8de095cb405b")]
+    [System.Runtime.InteropServices.GuidAttribute("4d0268e8-af70-4ef1-87fb-b6564b1a31bd")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAllowedProductType {
@@ -31422,7 +34101,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f7cccd70-2e46-4a98-baf2-8ef4ba86139d")]
+    [System.Runtime.InteropServices.GuidAttribute("1796d856-7e31-4f08-a6d1-f5ed9202f796")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountsReqType {
@@ -31517,7 +34196,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0970cf00-c509-46e9-9860-5a634c0ccc9f")]
+    [System.Runtime.InteropServices.GuidAttribute("582b3085-ff51-4234-97ae-4f66269826c3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountsRespType {
@@ -31582,7 +34261,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4b728c9f-2d87-4d45-a5e4-c866d0a10a4d")]
+    [System.Runtime.InteropServices.GuidAttribute("2634a802-e3ba-427f-aa7d-f8ee3ba40003")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAreaSizeType {
@@ -31599,7 +34278,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("e4d30950-02fd-4afc-87be-f370b5e26409")]
+    [System.Runtime.InteropServices.GuidAttribute("a0525b34-d11d-4c44-81d8-3305c05c9f1a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBalanceInquiryRequestType {
@@ -31616,7 +34295,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("06cd9447-b4dc-4969-a027-e38e5f5874a9")]
+    [System.Runtime.InteropServices.GuidAttribute("55366950-87ee-4a8e-9bb0-0ae0a709bdb4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAccountReqType {
@@ -31639,7 +34318,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d7f55286-a63e-4162-9e67-280cd733e12a")]
+    [System.Runtime.InteropServices.GuidAttribute("7d06823e-7a05-4aaa-bea9-c58ed731d36e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionIdentificationType {
@@ -31656,7 +34335,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9d5187a6-8e46-42dd-a8a0-3cab7f3a0aa0")]
+    [System.Runtime.InteropServices.GuidAttribute("08e7f527-bf73-48d1-b18c-ab003a051c3b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentInstrumentDataType {
@@ -31685,7 +34364,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("abb789d9-2df7-43ae-a9a3-edf39a0927aa")]
+    [System.Runtime.InteropServices.GuidAttribute("cda6850e-fca6-4158-8068-c4ea7f5d580f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardDataType {
@@ -31796,559 +34475,7 @@ namespace NEXO {
         [DispId(31)]
         bool EntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("65d80f63-6e05-4378-81f2-3d7e10014c44")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IContentInformationType {
-        /// <remarks/>
-        [DispId(1)]
-        object Item {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string ContentType {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("b3552514-3f1a-4186-a63d-04a3eccfcc4d")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IAuthenticatedDataType {
-        /// <remarks/>
-        [DispId(2)]
-        object[] Items {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        AlgorithmIdentifier MACAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        EncapsulatedContentType EncapsulatedContent {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        string Version {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(6)]
-        byte[] MAC {
-            get;
-            set;
-        }
-        [DispId(7)]
-        int ItemsSize();
-        [DispId(8)]
-        object ItemsGetItem(int index);
-        [DispId(9)]
-        bool ItemsSetItem(int index, object value);
-        [DispId(10)]
-        bool ItemsAddItem(object value);
-        [DispId(11)]
-        bool ItemsRemoveItem(int index);
-        [DispId(12)]
-        int MACSize();
-        [DispId(13)]
-        byte MACGetItem(int index);
-        [DispId(14)]
-        bool MACSetItem(int index, byte value);
-        [DispId(15)]
-        bool MACAddItem(byte value);
-        [DispId(16)]
-        bool MACRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("7871b47e-0e4e-4daf-a30c-4e3ac154d9f3")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IKEKType {
-        /// <remarks/>
-        [DispId(2)]
-        KEKIdentifierType KEKIdentifier {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        AlgorithmIdentifier KeyEncryptionAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        string Version {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        byte[] EncryptedKey {
-            get;
-            set;
-        }
-        [DispId(6)]
-        int EncryptedKeySize();
-        [DispId(7)]
-        byte EncryptedKeyGetItem(int index);
-        [DispId(8)]
-        bool EncryptedKeySetItem(int index, byte value);
-        [DispId(9)]
-        bool EncryptedKeyAddItem(byte value);
-        [DispId(10)]
-        bool EncryptedKeyRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("5def0633-63c6-4349-8e15-36b05ec05c93")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IKEKIdentifierType {
-        /// <remarks/>
-        [DispId(1)]
-        string KeyIdentifier {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string KeyVersion {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        byte[] DerivationIdentifier {
-            get;
-            set;
-        }
-        [DispId(4)]
-        int DerivationIdentifierSize();
-        [DispId(5)]
-        byte DerivationIdentifierGetItem(int index);
-        [DispId(6)]
-        bool DerivationIdentifierSetItem(int index, byte value);
-        [DispId(7)]
-        bool DerivationIdentifierAddItem(byte value);
-        [DispId(8)]
-        bool DerivationIdentifierRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("bb18f5af-e8e5-4621-860e-f63d76c88c35")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IAlgorithmIdentifier {
-        /// <remarks/>
-        [DispId(1)]
-        ParameterType Parameter {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string Algorithm {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("23ebc2ea-4e46-4681-ad77-f727b8a71563")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IParameterType {
-        /// <remarks/>
-        [DispId(1)]
-        byte[] InitialisationVector {
-            get;
-            set;
-        }
-        [DispId(2)]
-        int InitialisationVectorSize();
-        [DispId(3)]
-        byte InitialisationVectorGetItem(int index);
-        [DispId(4)]
-        bool InitialisationVectorSetItem(int index, byte value);
-        [DispId(5)]
-        bool InitialisationVectorAddItem(byte value);
-        [DispId(6)]
-        bool InitialisationVectorRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("704b7c2e-a60a-4c18-848b-280abdbd3af8")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IKeyTransportType {
-        /// <remarks/>
-        [DispId(2)]
-        RecipientIdentifierType RecipientIdentifier {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        AlgorithmIdentifier KeyEncryptionAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        string Version {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        byte[] EncryptedKey {
-            get;
-            set;
-        }
-        [DispId(6)]
-        int EncryptedKeySize();
-        [DispId(7)]
-        byte EncryptedKeyGetItem(int index);
-        [DispId(8)]
-        bool EncryptedKeySetItem(int index, byte value);
-        [DispId(9)]
-        bool EncryptedKeyAddItem(byte value);
-        [DispId(10)]
-        bool EncryptedKeyRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("ffbd1147-ee4d-4b62-a8d2-4a0b8c24ed42")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IRecipientIdentifierType {
-        /// <remarks/>
-        [DispId(1)]
-        IssuerAndSerialNumberType IssuerAndSerialNumber {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("e3bf92f2-8808-4aad-a6f4-1dcb9fe49452")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IIssuerAndSerialNumberType {
-        /// <remarks/>
-        [DispId(1)]
-        RelativeDistinguishedNameType[] Issuer {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string SerialNumber {
-            get;
-            set;
-        }
-        [DispId(3)]
-        int IssuerSize();
-        [DispId(4)]
-        RelativeDistinguishedNameType IssuerGetItem(int index);
-        [DispId(5)]
-        bool IssuerSetItem(int index, RelativeDistinguishedNameType value);
-        [DispId(6)]
-        bool IssuerAddItem(RelativeDistinguishedNameType value);
-        [DispId(7)]
-        bool IssuerRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("25de9be8-8c13-4b31-be31-cacfad2473c4")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IRelativeDistinguishedNameType {
-        /// <remarks/>
-        [DispId(1)]
-        string AttributeType {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string AttributeValue {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("2a7b784c-4cc3-46c4-900b-37b07d0d4a8a")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IEncapsulatedContentType {
-        /// <remarks/>
-        [DispId(1)]
-        byte[] Content {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        string ContentType {
-            get;
-            set;
-        }
-        [DispId(3)]
-        int ContentSize();
-        [DispId(4)]
-        byte ContentGetItem(int index);
-        [DispId(5)]
-        bool ContentSetItem(int index, byte value);
-        [DispId(6)]
-        bool ContentAddItem(byte value);
-        [DispId(7)]
-        bool ContentRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("7325a1b6-67d1-4474-9935-bea63dfc0ca0")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IDigestedDataType {
-        /// <remarks/>
-        [DispId(1)]
-        AlgorithmIdentifier DigestAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        EncapsulatedContentType EncapsulatedContent {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        byte[] Digest {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        string Version {
-            get;
-            set;
-        }
-        [DispId(5)]
-        int DigestSize();
-        [DispId(6)]
-        byte DigestGetItem(int index);
-        [DispId(7)]
-        bool DigestSetItem(int index, byte value);
-        [DispId(8)]
-        bool DigestAddItem(byte value);
-        [DispId(9)]
-        bool DigestRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("7bd71eca-e6ba-44a7-99a1-8a47a7aeb7f9")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IEnvelopedDataType {
-        /// <remarks/>
-        [DispId(2)]
-        object[] Items {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        EncryptedContentType EncryptedContent {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        string Version {
-            get;
-            set;
-        }
-        [DispId(5)]
-        int ItemsSize();
-        [DispId(6)]
-        object ItemsGetItem(int index);
-        [DispId(7)]
-        bool ItemsSetItem(int index, object value);
-        [DispId(8)]
-        bool ItemsAddItem(object value);
-        [DispId(9)]
-        bool ItemsRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("69c002f5-c81d-4b7c-8c2e-6a4378e587c8")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IEncryptedContentType {
-        /// <remarks/>
-        [DispId(1)]
-        AlgorithmIdentifier ContentEncryptionAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(2)]
-        byte[] EncryptedData {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        string ContentType {
-            get;
-            set;
-        }
-        [DispId(4)]
-        int EncryptedDataSize();
-        [DispId(5)]
-        byte EncryptedDataGetItem(int index);
-        [DispId(6)]
-        bool EncryptedDataSetItem(int index, byte value);
-        [DispId(7)]
-        bool EncryptedDataAddItem(byte value);
-        [DispId(8)]
-        bool EncryptedDataRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("29b48318-8843-4493-b169-4a7369b85ed3")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface INamedKeyEncryptedDataType {
-        /// <remarks/>
-        [DispId(2)]
-        string KeyName {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        EncryptedContentType EncryptedContent {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        string Version {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("1c3de987-2146-441b-9c77-247ad73a0977")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISignedDataType {
-        /// <remarks/>
-        [DispId(2)]
-        AlgorithmIdentifier[] DigestAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        EncapsulatedContentType EncapsulatedContent {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        byte[] Certificate {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        SignerType[] Signer {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(6)]
-        string Version {
-            get;
-            set;
-        }
-        [DispId(7)]
-        int DigestAlgorithmSize();
-        [DispId(8)]
-        AlgorithmIdentifier DigestAlgorithmGetItem(int index);
-        [DispId(9)]
-        bool DigestAlgorithmSetItem(int index, AlgorithmIdentifier value);
-        [DispId(10)]
-        bool DigestAlgorithmAddItem(AlgorithmIdentifier value);
-        [DispId(11)]
-        bool DigestAlgorithmRemoveItem(int index);
-        [DispId(12)]
-        int CertificateSize();
-        [DispId(13)]
-        byte CertificateGetItem(int index);
-        [DispId(14)]
-        bool CertificateSetItem(int index, byte value);
-        [DispId(15)]
-        bool CertificateAddItem(byte value);
-        [DispId(16)]
-        bool CertificateRemoveItem(int index);
-        [DispId(17)]
-        int SignerSize();
-        [DispId(18)]
-        SignerType SignerGetItem(int index);
-        [DispId(19)]
-        bool SignerSetItem(int index, SignerType value);
-        [DispId(20)]
-        bool SignerAddItem(SignerType value);
-        [DispId(21)]
-        bool SignerRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("ddaa89d1-c540-4842-b5d4-ee3701fd6d88")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISignerType {
-        /// <remarks/>
-        [DispId(2)]
-        SignerIdentifierType SignerIdentifier {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(3)]
-        AlgorithmIdentifier DigestAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(4)]
-        AlgorithmIdentifier SignatureAlgorithm {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(5)]
-        byte[] Signature {
-            get;
-            set;
-        }
-        /// <remarks/>
-        [DispId(6)]
-        string Version {
-            get;
-            set;
-        }
-        [DispId(7)]
-        int SignatureSize();
-        [DispId(8)]
-        byte SignatureGetItem(int index);
-        [DispId(9)]
-        bool SignatureSetItem(int index, byte value);
-        [DispId(10)]
-        bool SignatureAddItem(byte value);
-        [DispId(11)]
-        bool SignatureRemoveItem(int index);
-    }
-    [System.Runtime.InteropServices.GuidAttribute("9f1e2fce-38d2-489f-96b8-2920800a3ddd")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface ISignerIdentifierType {
-        /// <remarks/>
-        [DispId(1)]
-        IssuerAndSerialNumberType IssuerAndSerialNumber {
-            get;
-            set;
-        }
-    }
-    [System.Runtime.InteropServices.GuidAttribute("490f374a-6e56-462d-9641-2a29f13e04d9")]
+    [System.Runtime.InteropServices.GuidAttribute("751e8fcb-f6a0-4bb9-a684-03cb4f698f24")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISensitiveCardDataType {
@@ -32387,7 +34514,7 @@ namespace NEXO {
         [DispId(9)]
         bool TrackDataRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("97592899-8d82-4ee6-aeab-70b04dc79398")]
+    [System.Runtime.InteropServices.GuidAttribute("64083620-0d57-4d0e-b90e-c157dd847084")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITrackDataType {
@@ -32410,7 +34537,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("db6c2392-b95f-4151-8801-7a6d7a3fdab2")]
+    [System.Runtime.InteropServices.GuidAttribute("94ccdca5-0d71-47c9-af67-6bb93b60af46")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTokenType {
@@ -32439,7 +34566,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("009e463f-a8f5-4e96-aed6-d24905201083")]
+    [System.Runtime.InteropServices.GuidAttribute("ee88cb16-ef20-4356-82cd-a2fd2d9a7770")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICustomerOrderType {
@@ -32493,18 +34620,24 @@ namespace NEXO {
         }
         /// <remarks/>
         [DispId(10)]
-        string Currency {
+        bool CurrentAmountSpecified {
             get;
             set;
         }
         /// <remarks/>
         [DispId(11)]
+        string Currency {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(12)]
         string AccessedBy {
             get;
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("55b7fbde-1a98-4904-a633-7b8b0212931a")]
+    [System.Runtime.InteropServices.GuidAttribute("56cfc9e4-c48b-4276-bb49-b2a3b2c21501")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICheckDataType {
@@ -32551,7 +34684,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ecce290a-3b5b-4a96-8297-7a970a785b91")]
+    [System.Runtime.InteropServices.GuidAttribute("859e097b-c6fa-4771-8413-b838443f6873")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMobileDataType {
@@ -32592,7 +34725,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a5d86101-0136-41e4-a4f2-fa3ecda98c01")]
+    [System.Runtime.InteropServices.GuidAttribute("76dfa826-d500-4a5f-90eb-976934773961")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGeolocationType {
@@ -32609,7 +34742,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4316d822-b59c-49ca-8536-c10fe32b1529")]
+    [System.Runtime.InteropServices.GuidAttribute("46889b26-3cef-4e92-9add-5c47031d0640")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGeographicCoordinatesType {
@@ -32626,7 +34759,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7ec24ea9-59fd-4154-9185-52ae8d0e3a96")]
+    [System.Runtime.InteropServices.GuidAttribute("d84a24ad-1fc6-415e-9def-c33f53534405")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IUTMCoordinatesType {
@@ -32649,7 +34782,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0748d8ab-4d73-4d9c-b04a-3b2ba466285a")]
+    [System.Runtime.InteropServices.GuidAttribute("35d5a0b7-0403-4638-a733-e653f75c63b2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISensitiveMobileDataType {
@@ -32672,7 +34805,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("60b9d209-87ef-40ad-a0e0-c43e6dac7f89")]
+    [System.Runtime.InteropServices.GuidAttribute("1f5bf829-9e9d-4b6c-a854-61005aab5e35")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountReqType {
@@ -32689,7 +34822,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c9453a38-c1dd-4fee-afe3-a8de6ac40af5")]
+    [System.Runtime.InteropServices.GuidAttribute("51987219-1fb2-488b-a3f7-ce3b131ca800")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountIDType {
@@ -32728,7 +34861,7 @@ namespace NEXO {
         [DispId(9)]
         bool EntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("3b804fd0-bbec-400c-957d-9bdf85689764")]
+    [System.Runtime.InteropServices.GuidAttribute("0a33492b-1086-4c02-871c-3e2db23345a1")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBalanceInquiryResponseType {
@@ -32751,7 +34884,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("bb9e98f8-f6ee-4e03-8d01-e64f12a306b3")]
+    [System.Runtime.InteropServices.GuidAttribute("8d037723-e8db-44d0-a11d-0137ee4bcda4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAccountStatusType {
@@ -32792,7 +34925,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("af1d2767-1f41-4ee0-8a0a-0459d7dd6735")]
+    [System.Runtime.InteropServices.GuidAttribute("3d88395c-c528-4b02-9874-eb7028a4493e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAcquirerDataType {
@@ -32827,7 +34960,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("b37d6cb1-9edf-48ab-92e5-4c220217d60c")]
+    [System.Runtime.InteropServices.GuidAttribute("77a1ab4c-b171-4556-a9cd-bc93c6ed0528")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountStatusType {
@@ -32862,7 +34995,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("287de815-a2d6-48d1-85cc-f7488d1085bb")]
+    [System.Runtime.InteropServices.GuidAttribute("8503e729-3b97-4924-92b0-28f913bdf1cf")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountType {
@@ -32879,7 +35012,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("22407c4a-838a-4b26-a38a-637da7bbe183")]
+    [System.Runtime.InteropServices.GuidAttribute("1740f59e-bd56-4a5a-953a-ed12c7f679f1")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBatchRequestType {
@@ -32912,7 +35045,7 @@ namespace NEXO {
         [DispId(8)]
         bool TransactionToPerformRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("4f82bfe1-ecad-4854-b7d7-bb0b98fa6e13")]
+    [System.Runtime.InteropServices.GuidAttribute("9166e4c7-a636-497e-bd7b-cb1750060067")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionToPerformType {
@@ -32923,7 +35056,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ee97b242-65e3-493d-ad3b-ecd10a388a53")]
+    [System.Runtime.InteropServices.GuidAttribute("e6d80068-6baf-40d8-b3b8-56973cafc79b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyRequestType {
@@ -32956,7 +35089,7 @@ namespace NEXO {
         [DispId(8)]
         bool LoyaltyDataRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("d46c4931-b928-4d7b-b615-837fc05e36b2")]
+    [System.Runtime.InteropServices.GuidAttribute("bd7adc54-4a88-4ae4-a5f2-c82659cd13c9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleDataType {
@@ -33059,7 +35192,7 @@ namespace NEXO {
         [DispId(23)]
         bool CustomerOrderReqRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("304b970e-dbdd-4db9-8488-de07b474e322")]
+    [System.Runtime.InteropServices.GuidAttribute("1167cd98-5f79-4c30-9aed-cf42a1ea44f2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleTerminalDataType {
@@ -33088,7 +35221,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("31cddb94-bd6c-4698-a115-493141af1e84")]
+    [System.Runtime.InteropServices.GuidAttribute("77312174-998a-4454-9d53-07168c0bf130")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleProfileType {
@@ -33105,25 +35238,25 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("54189210-5254-4a85-8ea5-8deede696918")]
+    [System.Runtime.InteropServices.GuidAttribute("f76870a5-f39b-49f6-82be-26ea8119546d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISponsoredMerchantType {
         /// <remarks/>
         [DispId(1)]
-        string MerchantName {
+        string CommonName {
             get;
             set;
         }
         /// <remarks/>
         [DispId(2)]
-        string MerchantAddress {
+        string Address {
             get;
             set;
         }
         /// <remarks/>
         [DispId(3)]
-        string MerchantCountry {
+        string CountryCode {
             get;
             set;
         }
@@ -33135,12 +35268,12 @@ namespace NEXO {
         }
         /// <remarks/>
         [DispId(5)]
-        string RegistrationID {
+        string RegisteredIdentifier {
             get;
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("cd9da93f-bc0b-414a-8d01-1a12c81d7d0b")]
+    [System.Runtime.InteropServices.GuidAttribute("406c8d9d-c085-474d-9a8c-91aad0e72bd1")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToIssuerDataType {
@@ -33151,7 +35284,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d39f07b3-0d8e-4a96-be8e-c35d36dbf0cb")]
+    [System.Runtime.InteropServices.GuidAttribute("40592074-806e-46a8-bd10-f15d6c69179c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyTransactionType {
@@ -33208,7 +35341,7 @@ namespace NEXO {
         [DispId(12)]
         bool SaleItemRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("e1877db6-33ab-402a-b472-383dafb73cba")]
+    [System.Runtime.InteropServices.GuidAttribute("60be0537-890b-454b-94d9-1e0f99e0f44c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOriginalPOITransactionType {
@@ -33260,8 +35393,20 @@ namespace NEXO {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(10)]
+        bool LastTransactionFlag {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(11)]
+        bool LastTransactionFlagSpecified {
+            get;
+            set;
+        }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2e22b71e-8505-4c39-9928-5bfbd38aeb7d")]
+    [System.Runtime.InteropServices.GuidAttribute("85fbb6dc-1f9a-4acc-8094-8012676a5c90")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionConditionsType {
@@ -33360,7 +35505,7 @@ namespace NEXO {
         [DispId(30)]
         bool ForceEntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("c63399f3-9aee-4d08-9b79-50363220224d")]
+    [System.Runtime.InteropServices.GuidAttribute("cac42221-401f-444c-8ce6-6f3dfeb2c63e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleItemType {
@@ -33443,7 +35588,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("93299ee1-c94f-4f80-af53-81fdda97ad12")]
+    [System.Runtime.InteropServices.GuidAttribute("5d267914-5a93-456b-8935-d42f5bca185f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyDataType {
@@ -33466,7 +35611,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("506c086a-01a1-4031-a53b-7ed82b49640c")]
+    [System.Runtime.InteropServices.GuidAttribute("56acc3d3-17b7-4067-9306-b45c2572205c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAmountType {
@@ -33489,7 +35634,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("11cc1d24-35b4-461d-82b7-5ced1fbe0999")]
+    [System.Runtime.InteropServices.GuidAttribute("a50bc9b5-0593-42c2-9957-4888d409182f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentRequestType {
@@ -33528,7 +35673,7 @@ namespace NEXO {
         [DispId(9)]
         bool LoyaltyDataRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("3397fd7e-4cfe-4382-a3c4-20a4fcfe6074")]
+    [System.Runtime.InteropServices.GuidAttribute("1724a360-c5b6-4d78-9dd2-688a753557f0")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTransactionType {
@@ -33567,7 +35712,7 @@ namespace NEXO {
         [DispId(9)]
         bool SaleItemRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("5752f8df-1027-413f-8b39-7f05ead0f911")]
+    [System.Runtime.InteropServices.GuidAttribute("76a1f77f-2950-40d2-8f36-560a6d1afe00")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentDataType {
@@ -33614,7 +35759,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5ecfc584-e787-429a-9d82-6199b8ab731f")]
+    [System.Runtime.InteropServices.GuidAttribute("f189a15e-7f16-49d0-91db-96cf5cf95d95")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInstalmentType {
@@ -33697,25 +35842,25 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("8b529f56-5012-4925-8b5a-d0924ce8584a")]
+    [System.Runtime.InteropServices.GuidAttribute("7b33ffb1-dd7f-4804-9810-334ce9f359d2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReversalRequestType {
         /// <remarks/>
         [DispId(1)]
-        OriginalPOITransactionType OriginalPOITransaction {
+        SaleDataType SaleData {
             get;
             set;
         }
         /// <remarks/>
         [DispId(2)]
-        CustomerOrderType CustomerOrderID {
+        OriginalPOITransactionType OriginalPOITransaction {
             get;
             set;
         }
         /// <remarks/>
         [DispId(3)]
-        string SaleReferenceID {
+        CustomerOrderType CustomerOrder {
             get;
             set;
         }
@@ -33738,7 +35883,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("90a65940-14c5-4b5e-940e-b5289b9af047")]
+    [System.Runtime.InteropServices.GuidAttribute("2e7eab6f-13c0-499d-a6b5-8ab04e054531")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBatchResponseType {
@@ -33765,7 +35910,7 @@ namespace NEXO {
         [DispId(7)]
         bool PerformedTransactionRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("4e1f6e98-a7a5-4a48-a7ee-d1843248cd45")]
+    [System.Runtime.InteropServices.GuidAttribute("ec45d436-a5b2-49a5-a103-ac6a44abc27e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPerformedTransactionType {
@@ -33822,7 +35967,7 @@ namespace NEXO {
         [DispId(12)]
         bool LoyaltyResultRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("43ad27d5-b7f2-4ae4-8de8-5b97604b31d8")]
+    [System.Runtime.InteropServices.GuidAttribute("d14d733e-9e3b-4313-bd33-8e9e2c2aaeca")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIDataType {
@@ -33839,7 +35984,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("77c7966f-f23b-4c11-9763-41e5a85f27f8")]
+    [System.Runtime.InteropServices.GuidAttribute("e81435ba-941f-4145-9e3b-37da4cca81c9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentResultType {
@@ -33942,7 +36087,7 @@ namespace NEXO {
         [DispId(24)]
         bool AuthenticationMethodRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("8a9af9e9-b8a0-4fde-8a74-5b1b0f9e6237")]
+    [System.Runtime.InteropServices.GuidAttribute("b5d77f4c-eddb-4d9f-8701-1c32bad6d31a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICurrencyConversionType {
@@ -34001,7 +36146,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ff0201af-b074-42db-9ea1-86754708b2d2")]
+    [System.Runtime.InteropServices.GuidAttribute("2a76d2f0-f6fd-4934-a8f6-0a4865bafd87")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountType {
@@ -34018,10 +36163,27 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f637ab6a-4c01-4006-bcb4-8a3aec16f60d")]
+    [System.Runtime.InteropServices.GuidAttribute("6d906fc3-6abe-4e9c-812d-8e70cc8e0d15")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICapturedSignatureType {
+        /// <remarks/>
+        [DispId(1)]
+        RawSignatureType RawSignature {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        SignatureImageType SignatureImage {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("32673dde-20e2-44ed-8a68-09ff0a3f86f4")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface IRawSignatureType {
         /// <remarks/>
         [DispId(1)]
         AreaSizeType AreaSize {
@@ -34045,7 +36207,7 @@ namespace NEXO {
         [DispId(7)]
         bool SignaturePointRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("a74c2f19-b720-4112-9fd9-1bc3dd2bdf09")]
+    [System.Runtime.InteropServices.GuidAttribute("ca2b1f59-d65a-48f6-afa7-72df23a1ca10")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISignaturePointType {
@@ -34062,7 +36224,40 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0d963bdc-4004-483b-99a6-ebd2d1628579")]
+    [System.Runtime.InteropServices.GuidAttribute("2647450b-cfba-4df7-be9c-a9a15b5e6479")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISignatureImageType {
+        /// <remarks/>
+        [DispId(1)]
+        string ImageFormat {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        byte[] ImageData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string ImageReference {
+            get;
+            set;
+        }
+        [DispId(4)]
+        int ImageDataSize();
+        [DispId(5)]
+        byte ImageDataGetItem(int index);
+        [DispId(6)]
+        bool ImageDataSetItem(int index, byte value);
+        [DispId(7)]
+        bool ImageDataAddItem(byte value);
+        [DispId(8)]
+        bool ImageDataRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("356d580d-7696-4a31-a14e-926f8d0f8bd6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyResultType {
@@ -34103,7 +36298,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ab313944-c564-4bf2-af65-a6d972e78d41")]
+    [System.Runtime.InteropServices.GuidAttribute("ba39857e-69ef-4391-8a74-1f31aa6f931f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAcquirerDataType {
@@ -34132,7 +36327,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c0009ac5-6ec5-4368-8057-a38359352372")]
+    [System.Runtime.InteropServices.GuidAttribute("ea725813-b3fb-4943-a610-60657eb8e3d3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRebatesType {
@@ -34171,7 +36366,7 @@ namespace NEXO {
         [DispId(9)]
         bool SaleItemRebateRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("e2760dad-6705-48fd-b851-5e652a368e1f")]
+    [System.Runtime.InteropServices.GuidAttribute("4091f3be-a998-4fd5-978e-4e4b9f587ee4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleItemRebateType {
@@ -34230,7 +36425,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2a3394f9-d552-46c9-9a08-59a1e6771043")]
+    [System.Runtime.InteropServices.GuidAttribute("722da38b-9494-41d4-b843-33b951194aa7")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionRequestType {
@@ -34247,7 +36442,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("8cea141a-c2cc-437b-928c-2f537b0dea33")]
+    [System.Runtime.InteropServices.GuidAttribute("f571859e-ae0a-4d04-815a-f94e9c1f6e75")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionTransactionType {
@@ -34348,7 +36543,7 @@ namespace NEXO {
         [DispId(27)]
         bool ForceEntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("224a36f3-b5ed-4221-a3ea-eb949168c1dc")]
+    [System.Runtime.InteropServices.GuidAttribute("0b057d19-dc1f-4d34-a6f8-1f96a5662003")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionResponseType {
@@ -34425,7 +36620,7 @@ namespace NEXO {
         [DispId(22)]
         bool CustomerOrderRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("e5604f37-5585-41df-92e8-38cc2ce3df54")]
+    [System.Runtime.InteropServices.GuidAttribute("61658b34-8a1a-4080-8345-6e728a007aaa")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardholderPINType {
@@ -34448,7 +36643,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ab2adc47-6bc8-4881-bc33-63067bb9e6b1")]
+    [System.Runtime.InteropServices.GuidAttribute("580dcf2c-d5fe-4115-9797-43d5eae0fc98")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderAPDURequestType {
@@ -34549,7 +36744,7 @@ namespace NEXO {
         [DispId(36)]
         bool APDUExpectedLengthRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("e3340f3d-fa77-48a0-897f-98673452a2fa")]
+    [System.Runtime.InteropServices.GuidAttribute("9f5a152f-374c-4c00-b56d-47ca07d4c3c9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderAPDUResponseType {
@@ -34592,7 +36787,7 @@ namespace NEXO {
         [DispId(13)]
         bool CardStatusWordsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("7e5939d8-3f95-447e-b87b-19a01a16d9ee")]
+    [System.Runtime.InteropServices.GuidAttribute("a4f14046-a497-415e-962c-0680bbabba25")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderInitRequestType {
@@ -34643,7 +36838,7 @@ namespace NEXO {
         [DispId(12)]
         bool ForceEntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("0e652c5f-351a-4de0-a8ac-ef00f087b74c")]
+    [System.Runtime.InteropServices.GuidAttribute("f8cd2caf-c6d0-4143-b013-e594f531866c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderInitResponseType {
@@ -34692,7 +36887,7 @@ namespace NEXO {
         [DispId(14)]
         bool EntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("c94d55e2-0981-4548-b176-a8d630aa3d91")]
+    [System.Runtime.InteropServices.GuidAttribute("246cd471-b33b-414a-a640-48d8067a725e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IICCResetDataType {
@@ -34729,7 +36924,7 @@ namespace NEXO {
         [DispId(12)]
         bool CardStatusWordsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("0f37aa6e-7bbe-4ea0-9536-4c2b1120de60")]
+    [System.Runtime.InteropServices.GuidAttribute("9bb4e024-655c-4c1f-b146-7eca4f6bb697")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderPowerOffRequestType {
@@ -34746,7 +36941,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f7beee28-4c68-4d21-b887-68d0a7684b29")]
+    [System.Runtime.InteropServices.GuidAttribute("5739ccb6-9e2d-42ec-8ee9-f22a7a307d72")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderPowerOffResponseType {
@@ -34757,7 +36952,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5b37b855-ccbd-4c6d-9a78-a936d5020b21")]
+    [System.Runtime.InteropServices.GuidAttribute("14675de5-9663-4c7f-95cb-ba1504f7cf94")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICashHandlingDeviceType {
@@ -34790,7 +36985,7 @@ namespace NEXO {
         [DispId(8)]
         bool CoinsOrBillsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("be70374b-c96f-41a7-b6d8-cfd9762c739c")]
+    [System.Runtime.InteropServices.GuidAttribute("6af688e6-079b-4fe1-8d8a-66e5d4927e74")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICoinsOrBillsType {
@@ -34807,7 +37002,18 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("eae43883-60ed-4ff3-8dd1-c6a1d19ae394")]
+    [System.Runtime.InteropServices.GuidAttribute("36c13bae-8937-4a18-9acc-3d25f3be6337")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ICriteriaOrderType {
+        /// <remarks/>
+        [DispId(1)]
+        string Target {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("13802bcb-dd79-4bb6-be83-8345f71172b3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDiagnosisRequestType {
@@ -34840,7 +37046,7 @@ namespace NEXO {
         [DispId(9)]
         bool AcquirerIDRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b6e7646d-d023-46bc-b5b8-3364687afceb")]
+    [System.Runtime.InteropServices.GuidAttribute("f6492812-cc75-4b53-9145-af17674c3484")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDiagnosisResponseType {
@@ -34889,7 +37095,7 @@ namespace NEXO {
         [DispId(14)]
         bool HostStatusRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("949cb5ce-8b22-4b44-a5bd-fe6a6e8aaabf")]
+    [System.Runtime.InteropServices.GuidAttribute("a82871fd-cd80-47dd-8837-56ceaca2d75e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIStatusType {
@@ -34982,7 +37188,7 @@ namespace NEXO {
         [DispId(18)]
         bool CashHandlingDeviceRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("905f5c8f-4123-4b79-9fa5-0b64b42e24de")]
+    [System.Runtime.InteropServices.GuidAttribute("424f226d-cc6f-4a74-808f-3c8ef2dd8165")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IHostStatusType {
@@ -34999,7 +37205,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4b44a04f-8ccf-42ee-9f37-419419624d40")]
+    [System.Runtime.InteropServices.GuidAttribute("84886e43-c0a4-42a7-87f4-f3d8c910e6f3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEnableServiceRequestType {
@@ -35022,7 +37228,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a4b99a8c-6a10-4aee-849a-360b48f7ff7c")]
+    [System.Runtime.InteropServices.GuidAttribute("a3cbad03-8aa0-41a2-864b-b3301b63e37a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEnableServiceResponseType {
@@ -35033,7 +37239,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9a0938b2-3b49-4a20-a971-8439147287dd")]
+    [System.Runtime.InteropServices.GuidAttribute("c8c3c6c8-4cce-4cba-a587-1cdfb989ce8e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEventNotificationType {
@@ -35090,7 +37296,7 @@ namespace NEXO {
         [DispId(13)]
         bool RejectedMessageRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("41de2b53-7bf3-49a5-88f3-deaddd98f0b5")]
+    [System.Runtime.InteropServices.GuidAttribute("06526a5d-314f-4c1e-92e9-84d4c9aec5f2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGetTotalsRequestType {
@@ -35107,7 +37313,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6b842368-47b3-494c-983b-a2cc12de7276")]
+    [System.Runtime.InteropServices.GuidAttribute("a3bd652e-73de-4d2a-b1b2-838e35dabd6c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITotalFilterType {
@@ -35142,7 +37348,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("fc7c9ad6-2339-4b64-b625-0b06fe660bab")]
+    [System.Runtime.InteropServices.GuidAttribute("276d290f-ae6c-40af-9bb0-252db3dd1e51")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGetTotalsResponseType {
@@ -35175,7 +37381,7 @@ namespace NEXO {
         [DispId(8)]
         bool TransactionTotalsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("85724c73-5efe-4742-9f2f-43f8c9a9fa6e")]
+    [System.Runtime.InteropServices.GuidAttribute("78b2ab51-8754-4a5f-baed-81be04bcd2b5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionTotalsType {
@@ -35290,7 +37496,7 @@ namespace NEXO {
         [DispId(26)]
         bool LoyaltyTotalsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("bae75b9a-92c4-451c-b3df-9c018031586f")]
+    [System.Runtime.InteropServices.GuidAttribute("81016d26-42d9-47c7-af90-fa1068a5808b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTotalsType {
@@ -35313,7 +37519,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("bf17d9ce-056f-4125-bb2a-53d42111611d")]
+    [System.Runtime.InteropServices.GuidAttribute("6ce6aa6e-856d-4b9c-b84d-7ff971f46ae0")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyTotalsType {
@@ -35336,7 +37542,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("8abe5ae8-8b9e-4cf5-ab10-f27ace758f23")]
+    [System.Runtime.InteropServices.GuidAttribute("ad2596f0-c40b-44dd-9920-89d065940e3f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputType {
@@ -35389,7 +37595,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0124af02-3b88-430a-9459-32d499d0bae2")]
+    [System.Runtime.InteropServices.GuidAttribute("bd9344dc-7e55-43a9-9375-515c578c4eba")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputDataType {
@@ -35514,7 +37720,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("bd489d43-1484-4118-886b-a199f58a8745")]
+    [System.Runtime.InteropServices.GuidAttribute("4f4ed3b6-c3f6-4a2d-8409-c4d2198c4395")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputRequestType {
@@ -35531,7 +37737,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("54c4a6b5-501a-47b9-9877-a2b389f783a4")]
+    [System.Runtime.InteropServices.GuidAttribute("1b039603-6571-4c8b-9bee-d917d86b76e2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputResponseType {
@@ -35548,7 +37754,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("de9e7157-fcdd-4820-b9f2-d3cf372370b1")]
+    [System.Runtime.InteropServices.GuidAttribute("dd3d7280-c4bd-426c-99f5-3c3c1337e66b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputResultType {
@@ -35577,7 +37783,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("134e5e37-fc6c-48c1-8b67-d3b60e92e183")]
+    [System.Runtime.InteropServices.GuidAttribute("1772510a-46f0-4968-b1a4-92439dffc1b5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputUpdateType {
@@ -35644,7 +37850,7 @@ namespace NEXO {
         [DispId(17)]
         bool OutputSignatureRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("623c0f55-6209-407b-a8c1-7b1f34377e4f")]
+    [System.Runtime.InteropServices.GuidAttribute("31b63187-8962-4db7-9872-78c187ce2cef")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoginRequestType {
@@ -35719,13 +37925,13 @@ namespace NEXO {
         [DispId(16)]
         bool CustomerOrderReqRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b1023342-3db0-4d23-9455-a392acd2ba03")]
+    [System.Runtime.InteropServices.GuidAttribute("b306d063-cf5f-456d-8810-cab98ab1fcf9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleSoftwareType {
         /// <remarks/>
         [DispId(1)]
-        string ManufacturerID {
+        string ProviderIdentification {
             get;
             set;
         }
@@ -35747,8 +37953,20 @@ namespace NEXO {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(5)]
+        string ComponentDescription {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string ComponentType {
+            get;
+            set;
+        }
     }
-    [System.Runtime.InteropServices.GuidAttribute("025dea7d-18e8-4aa1-8f91-3a63feffc022")]
+    [System.Runtime.InteropServices.GuidAttribute("bf739817-09f7-4d19-8c83-c768178212a3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoginResponseType {
@@ -35765,7 +37983,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c752eb74-477b-4765-b095-c1078ea66536")]
+    [System.Runtime.InteropServices.GuidAttribute("0b22f19f-1d11-44e5-a05d-7dbfa88bced5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOISystemDataType {
@@ -35793,14 +38011,38 @@ namespace NEXO {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(5)]
+        bool TokenRequestStatus {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        bool TokenRequestStatusSpecified {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(7)]
+        bool CustomerOrderStatus {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(8)]
+        bool CustomerOrderStatusSpecified {
+            get;
+            set;
+        }
     }
-    [System.Runtime.InteropServices.GuidAttribute("bc265efc-ef86-482b-a27d-7f948101c8e5")]
+    [System.Runtime.InteropServices.GuidAttribute("2aef91d5-6fa0-4382-a83c-047af9b8dad7")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOISoftwareType {
         /// <remarks/>
         [DispId(1)]
-        string ManufacturerID {
+        string ProviderIdentification {
             get;
             set;
         }
@@ -35822,8 +38064,20 @@ namespace NEXO {
             get;
             set;
         }
+        /// <remarks/>
+        [DispId(5)]
+        string ComponentDescription {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string ComponentType {
+            get;
+            set;
+        }
     }
-    [System.Runtime.InteropServices.GuidAttribute("fab1b90f-c166-4ea4-aa97-340ff99d55d1")]
+    [System.Runtime.InteropServices.GuidAttribute("a8a756a9-a296-4144-97ae-77d481bf46bc")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOITerminalDataType {
@@ -35852,7 +38106,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f56d22ed-3ffb-4d92-a944-76829dbc5015")]
+    [System.Runtime.InteropServices.GuidAttribute("b4ed5f62-39a5-4bc9-a8e7-13ef79e200a6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIProfileType {
@@ -35869,7 +38123,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2f0f7254-8184-47c2-9dfd-7cc9e83cbac1")]
+    [System.Runtime.InteropServices.GuidAttribute("a2d19254-4732-4963-9ead-b3234049a0c8")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILogoutRequestType {
@@ -35880,7 +38134,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a31262e5-bf47-48a8-b163-9938ca7d2a27")]
+    [System.Runtime.InteropServices.GuidAttribute("e28c4541-bf18-4a86-904c-cb63d4df667a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILogoutResponseType {
@@ -35891,7 +38145,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("74a6fad4-8b42-4ab9-9a31-b364073dbbfa")]
+    [System.Runtime.InteropServices.GuidAttribute("07504f4c-9582-4ffa-8b84-7b888c826def")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyResponseType {
@@ -35946,7 +38200,7 @@ namespace NEXO {
         [DispId(15)]
         bool PaymentReceiptRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("11107441-5a83-424f-a65f-22277b08b215")]
+    [System.Runtime.InteropServices.GuidAttribute("ba9463d1-5226-4213-b682-d761aa66a0b9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentReceiptType {
@@ -35975,7 +38229,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("3e5f9545-e9eb-42d5-994d-bd9cca1f4dc1")]
+    [System.Runtime.InteropServices.GuidAttribute("3ed0f633-7871-46f1-afe5-3c7df7d621a4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMessageHeaderType {
@@ -36028,7 +38282,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ce955550-9f49-44ed-b183-6b25ae6cc4d2")]
+    [System.Runtime.InteropServices.GuidAttribute("bf446681-4244-4898-842e-e751d19ce48e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentResponseType {
@@ -36105,7 +38359,7 @@ namespace NEXO {
         [DispId(22)]
         bool CustomerOrderRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b5cb8db5-e96e-45c4-b030-4a163f6a431e")]
+    [System.Runtime.InteropServices.GuidAttribute("ad938ee6-4c5d-4ea0-bb36-36c5e58b2d3e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPINRequestType {
@@ -36158,7 +38412,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("02efee03-b5f4-4f40-b7d9-18af1d0d5ac4")]
+    [System.Runtime.InteropServices.GuidAttribute("1bf2ee93-f3ea-4c43-844f-6b3ffdf67c39")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPINResponseType {
@@ -36175,7 +38429,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ef975298-e832-41e9-ad74-cddc8e08c476")]
+    [System.Runtime.InteropServices.GuidAttribute("1fa9555b-5eb2-4dc9-b043-976dd3619e50")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintOutputType {
@@ -36226,7 +38480,7 @@ namespace NEXO {
         [DispId(12)]
         bool OutputSignatureRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("482d1245-c17e-437a-a038-269970c82095")]
+    [System.Runtime.InteropServices.GuidAttribute("cc18bcbd-cfcc-4ec9-a28f-06e5e734e910")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintRequestType {
@@ -36237,7 +38491,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("83c74bdc-46cd-4a79-8c5d-8f2fd5992c6a")]
+    [System.Runtime.InteropServices.GuidAttribute("e76d50c9-27ba-48cc-b393-cba333cecfe9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintResponseType {
@@ -36254,7 +38508,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("eb85d625-a17d-4602-93a8-3b3721445ee4")]
+    [System.Runtime.InteropServices.GuidAttribute("2025643a-b2f3-4db0-b5c7-f9f7a06f0474")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReconciliationRequestType {
@@ -36287,7 +38541,7 @@ namespace NEXO {
         [DispId(8)]
         bool AcquirerIDRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("fe34d82b-bc41-445f-8078-32ac65555a45")]
+    [System.Runtime.InteropServices.GuidAttribute("4c7a48c2-930d-4a11-91ea-0f9eb3c8d8bb")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReconciliationResponseType {
@@ -36326,7 +38580,7 @@ namespace NEXO {
         [DispId(9)]
         bool TransactionTotalsRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("c749dd32-0ef9-45b1-8f4d-ce379262ba29")]
+    [System.Runtime.InteropServices.GuidAttribute("2d72c73c-4305-4a51-bbfd-e02da1b84fa9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRepeatedMessageResponseType {
@@ -36343,7 +38597,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c2eb752a-5c51-419f-a576-0d9288ed8679")]
+    [System.Runtime.InteropServices.GuidAttribute("42bca5c1-dfb9-4a0d-b8c7-54e99e63740e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReversalResponseType {
@@ -36400,7 +38654,7 @@ namespace NEXO {
         [DispId(12)]
         bool PaymentReceiptRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("bf206404-67d1-4003-977a-4850a3c97de3")]
+    [System.Runtime.InteropServices.GuidAttribute("0986b777-f371-401f-9942-538e3dad01f9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueResponseType {
@@ -36439,7 +38693,7 @@ namespace NEXO {
         [DispId(9)]
         bool StoredValueResultRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("35c961b9-8ec0-4437-a298-d496c21fd14c")]
+    [System.Runtime.InteropServices.GuidAttribute("c39e0f64-c077-4d6b-8f2c-0fc74ecadf5f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueResultType {
@@ -36486,7 +38740,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a775198a-b721-4f7b-8a8e-945440302d26")]
+    [System.Runtime.InteropServices.GuidAttribute("efc22470-bc95-4019-92c8-077d2579904c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueAccountStatusType {
@@ -36509,7 +38763,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a90b2684-60fd-47fd-92ab-efbac2df352b")]
+    [System.Runtime.InteropServices.GuidAttribute("d6b1cc9e-a1c7-4b8a-abfb-ae424f1eeee1")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueAccountIDType {
@@ -36566,7 +38820,92 @@ namespace NEXO {
         [DispId(12)]
         bool EntryModeRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("6bf9ced0-1839-4e31-9724-a0d2c2b7ce40")]
+    [System.Runtime.InteropServices.GuidAttribute("0eb7b989-88ff-4d56-b0cf-378916bec6ab")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISearchANDType {
+        /// <remarks/>
+        [DispId(1)]
+        string Target {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        OperatorEnumeration Operator {
+            get;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string Value {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("e9bdb350-3f97-4b22-b96d-2aa26fd19937")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISearchCriteriasType {
+        /// <remarks/>
+        [DispId(1)]
+        SearchANDType[] SearchOR {
+            get;
+            set;
+        }
+        [DispId(2)]
+        int SearchORSize();
+        [DispId(3)]
+        SearchANDType SearchORGetItem(int index);
+        [DispId(4)]
+        bool SearchORSetItem(int index, SearchANDType value);
+        [DispId(5)]
+        bool SearchORAddItem(SearchANDType value);
+        [DispId(6)]
+        bool SearchORRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("5d60c9c5-064f-4820-9e07-9f98588ceee5")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISearchORType {
+        /// <remarks/>
+        [DispId(1)]
+        SearchANDType[] SearchAND {
+            get;
+            set;
+        }
+        [DispId(2)]
+        int SearchANDSize();
+        [DispId(3)]
+        SearchANDType SearchANDGetItem(int index);
+        [DispId(4)]
+        bool SearchANDSetItem(int index, SearchANDType value);
+        [DispId(5)]
+        bool SearchANDAddItem(SearchANDType value);
+        [DispId(6)]
+        bool SearchANDRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("34707f0e-68a5-40b3-a50d-f3ce8db9967b")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ISearchOutputOrderType {
+        /// <remarks/>
+        [DispId(1)]
+        CriteriaOrderType[] CriteriaOrder {
+            get;
+            set;
+        }
+        [DispId(2)]
+        int CriteriaOrderSize();
+        [DispId(3)]
+        CriteriaOrderType CriteriaOrderGetItem(int index);
+        [DispId(4)]
+        bool CriteriaOrderSetItem(int index, CriteriaOrderType value);
+        [DispId(5)]
+        bool CriteriaOrderAddItem(CriteriaOrderType value);
+        [DispId(6)]
+        bool CriteriaOrderRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("1cdf08fb-13d6-4065-828b-01d672be1772")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundContentType {
@@ -36595,7 +38934,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("b3205770-4f4a-45de-b2d3-6bf54467bc73")]
+    [System.Runtime.InteropServices.GuidAttribute("88462ba3-3ca1-432d-adc3-06d76f844d8c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundRequestType {
@@ -36624,7 +38963,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("e7c38429-493e-47bb-819a-b1dd087bf21b")]
+    [System.Runtime.InteropServices.GuidAttribute("e9dc528f-5811-400b-a140-65605c26324a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundResponseType {
@@ -36635,7 +38974,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5ecc1655-f10b-4c30-a0c6-b00d77eb2269")]
+    [System.Runtime.InteropServices.GuidAttribute("13c50913-78e9-4034-901c-01ed45e4b6e4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueDataType {
@@ -36688,7 +39027,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4b12728f-c9ab-40ef-9ed9-f35c1751667c")]
+    [System.Runtime.InteropServices.GuidAttribute("52d37ddc-311b-4a9c-b710-1cd05dbd4543")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueRequestType {
@@ -36721,7 +39060,7 @@ namespace NEXO {
         [DispId(8)]
         bool StoredValueDataRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("ad1e1c3f-aa13-4d48-a093-e21b7c56a0dc")]
+    [System.Runtime.InteropServices.GuidAttribute("17d8688a-6b0f-4526-98cc-e7669c0046bd")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransmitRequestType {
@@ -36760,7 +39099,7 @@ namespace NEXO {
         [DispId(10)]
         bool MessageRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("324528ce-be0d-4c3c-81c5-f33764cb6077")]
+    [System.Runtime.InteropServices.GuidAttribute("4dd916d0-862f-4d7c-9612-fa460e8ea38b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransmitResponseType {
@@ -36787,7 +39126,136 @@ namespace NEXO {
         [DispId(7)]
         bool MessageRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("02cb01e6-027b-46d0-925a-f86ed6851adc")]
+    [System.Runtime.InteropServices.GuidAttribute("8b6b6d1d-781f-4629-b2dd-1e7a878b491c")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ITransactionReportType {
+        /// <remarks/>
+        [DispId(1)]
+        ResponseType Response {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        SaleDataType SaleData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        POIDataType POIData {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        PaymentResultType PaymentResult {
+            get;
+            set;
+        }
+    }
+    [System.Runtime.InteropServices.GuidAttribute("d36998d2-16c8-4620-9ad3-bbff2f4ce2a6")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ITransactionReportRequestType {
+        /// <remarks/>
+        [DispId(2)]
+        SearchANDType[] SearchCriterias {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        CriteriaOrderType[] SearchOutputOrder {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        bool DescendingOrder {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string BlockStart {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(6)]
+        string BlockStop {
+            get;
+            set;
+        }
+        [DispId(7)]
+        int SearchCriteriasSize();
+        [DispId(8)]
+        SearchANDType SearchCriteriasGetItem(int index);
+        [DispId(9)]
+        bool SearchCriteriasSetItem(int index, SearchANDType value);
+        [DispId(10)]
+        bool SearchCriteriasAddItem(SearchANDType value);
+        [DispId(11)]
+        bool SearchCriteriasRemoveItem(int index);
+        [DispId(12)]
+        int SearchOutputOrderSize();
+        [DispId(13)]
+        CriteriaOrderType SearchOutputOrderGetItem(int index);
+        [DispId(14)]
+        bool SearchOutputOrderSetItem(int index, CriteriaOrderType value);
+        [DispId(15)]
+        bool SearchOutputOrderAddItem(CriteriaOrderType value);
+        [DispId(16)]
+        bool SearchOutputOrderRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("7f4356e5-c327-44dd-a089-1572316aa450")]
+    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    public interface ITransactionReportResponseType {
+        /// <remarks/>
+        [DispId(1)]
+        ResponseType Response {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(2)]
+        TransactionReportType[] TransactionReport {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(3)]
+        string ReportFullSize {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(4)]
+        string BlockStart {
+            get;
+            set;
+        }
+        /// <remarks/>
+        [DispId(5)]
+        string BlockStop {
+            get;
+            set;
+        }
+        [DispId(6)]
+        int TransactionReportSize();
+        [DispId(7)]
+        TransactionReportType TransactionReportGetItem(int index);
+        [DispId(8)]
+        bool TransactionReportSetItem(int index, TransactionReportType value);
+        [DispId(9)]
+        bool TransactionReportAddItem(TransactionReportType value);
+        [DispId(10)]
+        bool TransactionReportRemoveItem(int index);
+    }
+    [System.Runtime.InteropServices.GuidAttribute("1af5132b-5f78-4a7e-91a2-44a0a616b09e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionStatusRequestType {
@@ -36820,7 +39288,7 @@ namespace NEXO {
         [DispId(9)]
         bool DocumentQualifierRemoveItem(int index);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b6e7c94a-c68e-4b89-98fb-2e054255a7f1")]
+    [System.Runtime.InteropServices.GuidAttribute("aed343df-bbfe-49ea-bf81-7c83b8ecdb84")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionStatusResponseType {
@@ -36843,7 +39311,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c486a857-d1ed-4945-a566-038bec00986a")]
+    [System.Runtime.InteropServices.GuidAttribute("d0599d24-22ed-42db-9f6a-79f5e5bd817f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIRequest {
@@ -36866,7 +39334,7 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5bdf2e2e-d2aa-4784-a12e-6a924d171e94")]
+    [System.Runtime.InteropServices.GuidAttribute("bdf28b79-1e06-41d7-b35e-3910aaf9fe00")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIResponse {
@@ -36889,27 +39357,6 @@ namespace NEXO {
             set;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("68d48783-9320-42fc-a563-68fc832c7de6")]
-    [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public interface IIssuerType {
-        /// <remarks/>
-        [DispId(1)]
-        RelativeDistinguishedNameType[] RelativeDistinguishedName {
-            get;
-            set;
-        }
-        [DispId(2)]
-        int RelativeDistinguishedNameSize();
-        [DispId(3)]
-        RelativeDistinguishedNameType RelativeDistinguishedNameGetItem(int index);
-        [DispId(4)]
-        bool RelativeDistinguishedNameSetItem(int index, RelativeDistinguishedNameType value);
-        [DispId(5)]
-        bool RelativeDistinguishedNameAddItem(RelativeDistinguishedNameType value);
-        [DispId(6)]
-        bool RelativeDistinguishedNameRemoveItem(int index);
-    }
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public enum TagsEnumeration {
         AbortReason,
@@ -36923,6 +39370,7 @@ namespace NEXO {
         AdditionalInput,
         AdditionalProductInfo,
         AdditionalResponse,
+        Address,
         Algorithm,
         Alignment,
         AllowedLoyaltyBrand,
@@ -36947,7 +39395,10 @@ namespace NEXO {
         AuthorizedAmount,
         BankID,
         BarcodeType,
+        BarcodeValue,
         BeepKeyFlag,
+        BlockStart,
+        BlockStop,
         CapturedSignature,
         CardAcquisitionReference,
         CardAcquisitionTransaction,
@@ -36980,8 +39431,11 @@ namespace NEXO {
         Color,
         Commission,
         CommissionSpecified,
+        CommonName,
         CommunicationOKFlag,
         CommunicationOKFlagSpecified,
+        ComponentDescription,
+        ComponentType,
         ConfirmedFlag,
         ConfirmedFlagSpecified,
         Content,
@@ -36989,11 +39443,14 @@ namespace NEXO {
         ContentType,
         ConvertedAmount,
         Country,
+        CountryCode,
+        CriteriaOrder,
         CumulativeAmount,
         CumulativeAmountSpecified,
         Currency,
         CurrencyConversion,
         CurrentAmount,
+        CurrentAmountSpecified,
         CurrentBalance,
         CurrentBalanceSpecified,
         CustomerApprovedFlag,
@@ -37001,12 +39458,15 @@ namespace NEXO {
         CustomerOrder,
         CustomerOrderID,
         CustomerOrderReq,
+        CustomerOrderStatus,
+        CustomerOrderStatusSpecified,
         DateTime,
         DebitPreferredFlag,
         Declaration,
         DefaultInputString,
         DefaultSelectedFlag,
         DerivationIdentifier,
+        DescendingOrder,
         DestinationAddress,
         Device,
         DeviceID,
@@ -37058,6 +39518,9 @@ namespace NEXO {
         ICCResetData,
         IdentificationSupport,
         IdentificationType,
+        ImageData,
+        ImageFormat,
+        ImageReference,
         IMEI,
         ImmediateResponseFlag,
         IMSI,
@@ -37085,6 +39548,8 @@ namespace NEXO {
         KeyReference,
         KeyVersion,
         Language,
+        LastTransactionFlag,
+        LastTransactionFlagSpecified,
         Latitude,
         LeaveCardFlag,
         LoggedSaleID,
@@ -37153,6 +39618,7 @@ namespace NEXO {
         Number,
         OnlineFlag,
         OpenOrderState,
+        Operator,
         OperatorID,
         OperatorLanguage,
         OriginalPOITransaction,
@@ -37214,22 +39680,32 @@ namespace NEXO {
         ProtectedMobileData,
         ProtectedSignature,
         ProtocolVersion,
+        ProviderIdentification,
+        QRCodeBinaryValue,
+        QRCodeEncodingMode,
+        QRCodeEncodingModeSpecified,
+        QRCodeErrorCorrection,
+        QRCodeErrorCorrectionSpecified,
+        QRCodeVersion,
         Quantity,
         QuantitySpecified,
         Rate,
         RateSpecified,
+        RawSignature,
         RebateLabel,
         Rebates,
         ReceiptReprintFlag,
         RecipientIdentifier,
         ReconciliationType,
         ReferenceID,
+        RegisteredIdentifier,
         RegistrationID,
         RejectedMessage,
         RelativeDistinguishedName,
         RemoveAllFlag,
         RemoveAllFlagSpecified,
         RepeatedMessageResponse,
+        ReportFullSize,
         RequestedAmount,
         RequestedAmountSpecified,
         RequestedValidityDate,
@@ -37256,6 +39732,10 @@ namespace NEXO {
         SaleToIssuerData,
         SaleToPOIData,
         SaleTransactionID,
+        SearchAND,
+        SearchCriterias,
+        SearchOR,
+        SearchOutputOrder,
         SecurityOKFlag,
         SecurityOKFlagSpecified,
         SecurityTrailer,
@@ -37270,6 +39750,7 @@ namespace NEXO {
         ShiftNumber,
         Signature,
         SignatureAlgorithm,
+        SignatureImage,
         SignaturePoint,
         Signer,
         SignerIdentifier,
@@ -37292,6 +39773,7 @@ namespace NEXO {
         StoredValueResult,
         StoredValueTransactionType,
         StringMask,
+        Target,
         TaxCode,
         TerminalEnvironment,
         TextInput,
@@ -37299,6 +39781,8 @@ namespace NEXO {
         TipAmount,
         TipAmountSpecified,
         TokenRequestedType,
+        TokenRequestStatus,
+        TokenRequestStatusSpecified,
         TokenValue,
         TotalAmount,
         TotalAmountSpecified,
@@ -37321,6 +39805,7 @@ namespace NEXO {
         TransactionConditions,
         TransactionCount,
         TransactionID,
+        TransactionReport,
         TransactionToPerform,
         TransactionTotals,
         TransactionType,

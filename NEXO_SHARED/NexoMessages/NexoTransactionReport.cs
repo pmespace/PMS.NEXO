@@ -10,14 +10,14 @@ namespace NEXO
 	[ComVisible(false)]
 	public interface INexoTransactionReport
 	{
-#region owned
+		#region owned
 		[DispId(1)]
 		TransactionReportRequestType RequestData { get; }
 		[DispId(2)]
 		TransactionReportResponseType ReplyData { get; }
-#endregion
+		#endregion
 
-#region inherited from NexoObject
+		#region inherited from NexoObject
 		[DispId(10000)]
 		SaleToPOIRequest Request { get; }
 		[DispId(10001)]
@@ -98,6 +98,10 @@ namespace NEXO
 		ErrorConditionEnumeration ErrorCondition { get; set; }
 		[DispId(10074)]
 		string AdditionalResponse { get; set; }
+		[DispId(10075)]
+		string ResultAsString { get; }
+		[DispId(10076)]
+		string ErrorConditionAsString { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -124,9 +128,9 @@ namespace NEXO
 		NexoISOLanguage2A SetDefaultLanguage(NexoISOLanguage2A language, string defaultValue);
 		[DispId(11009)]
 		bool FromItem(NexoItem item);
-#endregion
+		#endregion
 
-#region inherited from NexoRetailer
+		#region inherited from NexoRetailer
 		[DispId(15000)]
 		bool SendWithErrors { get; set; }
 		[DispId(15001)]
@@ -155,33 +159,33 @@ namespace NEXO
 		bool IsUsingJson();
 		[DispId(15506)]
 		void SetUsingJson(bool f = false);
-	#endregion
+		#endregion
 	}
 	[Guid("274078B2-60DC-448C-BE96-85993946985E")]
 	[ClassInterface(ClassInterfaceType.None)]
 	[ComVisible(false)]
 	public class NexoTransactionReport : NexoService, INexoTransactionReport
 	{
-#region constructor
+		#region constructor
 		public NexoTransactionReport() : base(MessageCategoryEnumeration.TransactionStatus)
 		{
 			RequestItem = new TransactionReportRequestType();
 			ReplyItem = new TransactionReportResponseType();
 		}
-#endregion
+		#endregion
 
-#region shared properties
+		#region shared properties
 		public TransactionReportRequestType RequestData { get => (TransactionReportRequestType)RequestItem; }
 		public TransactionReportResponseType ReplyData { get => (TransactionReportResponseType)ReplyItem; }
-#endregion
+		#endregion
 
-#region request inner properties
-#endregion
+		#region request inner properties
+		#endregion
 
-#region reply inner properties
-#endregion
+		#region reply inner properties
+		#endregion
 
-#region methods
+		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.Response; }
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
 		protected override InternalAction AutoCompleteRequest()
@@ -193,7 +197,7 @@ namespace NEXO
 		{
 			return InternalAction.noError;
 		}
-#endregion
+		#endregion
 	}
 #endif
 }

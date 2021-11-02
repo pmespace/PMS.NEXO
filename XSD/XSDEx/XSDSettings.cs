@@ -155,5 +155,10 @@ namespace XSDEx
 		/// Allows testing whether a data has been set using its default value (true) or its type's default value (false)
 		/// </summary>
 		public bool UseDefaultValueForHasBeenModified { get; set; } = false;
+		/// <summary>
+		/// Allows generating enum default attributes (_node, _begin, _end)
+		/// </summary>
+		public bool AddDefaultAttributesToEnum { get; set; } = true;
+		public bool UseEnumBeginEnd { get; set; } = true;
 	}
 }

@@ -20,13 +20,21 @@
     <!-- Modifiable -->
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="PMS.COMMON" version="5.2.4" exclude="Build,Analyzers" />
       </group>
     </dependencies>
 
     <!-- Modifiable -->
-    <version>3.4.1</version>
+    <version>4.1.0</version>
     <releaseNotes>
+      4.1.0
+      - PMS.COMMON 5.2.4
+      - Added (nexo)Listener application for .NET 5.0
+
+      4.0.0
+      - PMS.COMMON 5.1.0
+      - Updated nexo retailer base classes
+
       3.4.1
       - INvalid files in previous package
 
@@ -177,10 +185,11 @@
 
   <!-- Specific part, DO NOT MODIFY UNLESS REALLY NECESSARY -->
   <files>
-    <file src=".\Bin\PMS.NEXO31.dll" target="lib"></file>
-    <file src=".\Bin\PMS.NEXO31.xml" target="lib"></file>
-    <file src=".\Bin\PMS.NEXO31.pdb" target="lib"></file>
-    <file src=".\Bin\NexoBuilder31.exe" target="lib"></file>
-    <file src=".\Bin\NexoSimulator31.exe" target="lib"></file>
+    <file src=".\bin\net47\PMS.NEXO31.dll" target="lib\net47"></file>
+    <file src=".\bin\net47\PMS.NEXO31.xml" target="lib\net47"></file>
+    <file src=".\bin\net47\PMS.NEXO31.pdb" target="lib\net47"></file>
+    <file src=".\bin\net47\PMS.NEXO31.tlb" target="lib\net47"></file>
+    <file src=".\bin\net47\NexoBuilder31.exe" target="lib\net47"></file>
+    <file src=".\bin\net47\NexoSimulator31.exe" target="lib\net47"></file>
   </files>
 </package>

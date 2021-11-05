@@ -344,7 +344,7 @@ namespace NEXO
 			get
 			{
 				ResponseType response = GetResponse();
-				return (null != response ? (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(response.Result) : ErrorConditionEnumeration._none);
+				return (null != response ? (ErrorConditionEnumeration)GetResponseTag<ErrorConditionEnumeration>(response.ErrorCondition) : ErrorConditionEnumeration._none);
 			}
 			set
 			{

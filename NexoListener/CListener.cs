@@ -312,6 +312,13 @@ namespace NexoListener
 			}
 			nexo.SaleID = listenerRequest.SaleID;
 			nexo.POIID = listenerRequest.POIID;
+			if (MessageCategoryEnumeration.Payment == category)
+			{
+				PaymentTypeEnumeration? pt = (PaymentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentTypeEnumeration), listenerRequest.PaymentType);
+				if (null != pt)
+					((NexoPayment)nexo).PaymentType = (PaymentTypeEnumeration)pt;
+				((NexoPayment)nexo).RequestRequestedAmount = listenerRequest.RequestedAmount;
+			}
 
 			/*
 			 * set specific data

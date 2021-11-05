@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using NEXO;
 using COMMON;
 
 namespace NexoListener
@@ -89,7 +90,10 @@ namespace NexoListener
 		/// <returns></returns>
 		static bool TestListener(MenuList menu, CMenu entry, char option, ref CListener o)
 		{
-			var json = new CJson<CListenerRequest>(LISTENER_TEST_FILE);
+			string fileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
+			if (string.IsNullOrEmpty(fileToUse)) return true;
+
+			var json = new CJson<CListenerRequest>(fileToUse);
 			var request = json.ReadSettings(out bool except);
 			if (null != request)
 			{
@@ -115,13 +119,16 @@ namespace NexoListener
 		/// <returns></returns>
 		static bool TestListenerCreate(MenuList menu, CMenu entry, char option, ref CListener o)
 		{
-			FileInfo fi = new FileInfo(LISTENER_TEST_FILE);
-			if (!fi.Exists || YesNo("A test file already exists, do you want to override it ?"))
+			string fileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
+			if (string.IsNullOrEmpty(fileToUse)) return true;
+
+			FileInfo fi = new FileInfo(fileToUse);
+			if (!fi.Exists || YesNo($"A test file called {fileToUse} already exists, do you want to override it ?"))
 			{
-				var json = new CJson<CListenerRequest>(LISTENER_TEST_FILE);
+				var json = new CJson<CListenerRequest>(fileToUse);
 				CListenerRequest req = json.ReadSettings(out bool except);
 
-				string ip = Input("POI IP", (null != req ? req.IP : CStream.Localhost()), out bool isdef);
+				string ip = Input("POI IP", (null != req ? req.IP : CStream.Localhost()), out isdef);
 				if (null == ip) return true;
 
 				int port;
@@ -142,40 +149,57 @@ namespace NexoListener
 				string poiid = Input($"POI ID", (null != req ? req.POIID : "POIID"), out isdef);
 				if (null == poiid) return true;
 
-				bool def = false;
-				string service = Input($"Retailer service to call", (null != req ? req.Service : "Login"), out def);
+				string service = Input($"Retailer service to call", (null != req ? req.Service : MessageCategoryEnumeration.Login.ToString()), out isdef);
 				if (null == service) return true;
 
-				string dts = (def ? "LoginRequest.SaleSoftware.ManufacturerID" : null);
-				string value = "NOTHING";
-				if (0 != req.ElementsToSend.Count)
-					foreach (KeyValuePair<string, CListenerDataElement> k in req.ElementsToSend)
+				bool isLogin = (0 == string.Compare(MessageCategoryEnumeration.Login.ToString(), service, true));
+				bool isPay = (0 == string.Compare(MessageCategoryEnumeration.Payment.ToString(), service, true));
+
+				double amount = 0D;
+				PaymentTypeEnumeration pt = PaymentTypeEnumeration.Normal;
+				if (isPay)
+				{
+					if (!YesNo("Normal Payment (otherwise it will be a Refund)"))
+						pt = PaymentTypeEnumeration.Refund;
+
+					try
 					{
-						dts = k.Key;
-						value = k.Value.Value.ToString();
-						break;
+						amount = double.Parse(Input("Amount", "1", out isdef));
 					}
+					catch (Exception)
+					{
+						amount = 0D;
+					}
+				}
+
+				string dts = (isLogin ? "LoginRequest.SaleSoftware.ManufacturerID" : null);
+				string value = null;
+				if (null != dts)
+					try
+					{
+						value = req.ElementsToSend[dts].Value.ToString();
+					}
+					catch (Exception) { }
 				dts = Input("Data to send", dts, out isdef);
-				if (null == dts)
-					return true;
-				else
+				if (null != dts)
 					value = Input($"Value for {dts}", value, out isdef);
 
-				string dtr = (def ? "LoginResponse.POISystemData.POISoftware.ManufacturerID" : null);
-				if (0 != req.ElementsToSend.Count)
-					foreach (KeyValuePair<string, CListenerDataElement> k in req.ElementsToReturn)
-					{
-						dtr = k.Key;
-						break;
-					}
+				string dtr = (isLogin ? "LoginResponse.POISystemData.POISoftware.ManufacturerID" : null);
+				//if (0 != req.ElementsToSend.Count)
+				//	foreach (KeyValuePair<string, CListenerDataElement> k in req.ElementsToReturn)
+				//	{
+				//		dtr = k.Key;
+				//		break;
+				//	}
 				dtr = Input("Data to return", dtr, out isdef);
-				if (null == dtr) return true;
 
 				var toSend = new CListenerDataElements();
-				toSend.Add(dts, new CListenerDataElement() { Value = value });
+				if (null != dts)
+					toSend.Add(dts, new CListenerDataElement() { Value = value });
 				var toReturn = new CListenerDataElements();
-				toReturn.Add(dtr, new CListenerDataElement());
-				var request = new CListenerRequest() { ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
+				if (null != dtr)
+					toReturn.Add(dtr, new CListenerDataElement());
+				var request = new CListenerRequest() { RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
 
 				json.WriteSettings(request);
 				Console.WriteLine();

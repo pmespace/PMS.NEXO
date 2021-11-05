@@ -28,8 +28,10 @@ namespace NexoListener
 		public string Service { get; set; }
 		public string SaleID { get; set; }
 		public string POIID { get; set; }
-		public CListenerDataElements ElementsToSend { get; set; }
-		public CListenerDataElements ElementsToReturn { get; set; }
+		public string PaymentType { get; set; }
+		public double RequestedAmount { get; set; }
+		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
+		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();
 
 		public override string ToString()
 		{

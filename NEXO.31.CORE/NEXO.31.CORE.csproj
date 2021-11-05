@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>NEXO</RootNamespace>
-    <Version>4.1.0</Version>
-    <FileVersion>4.1.0</FileVersion>
-    <AssemblyVersion>4.1.0</AssemblyVersion>
+    <Version>4.1.1</Version>
+    <FileVersion>4.1.1</FileVersion>
+    <AssemblyVersion>4.1.1</AssemblyVersion>
     <AssemblyName>PMS.NEXO31.CORE</AssemblyName>
     <Authors>philippemp31</Authors>
     <Product>PMS.NEXO31.CORE nexo retailer v3.1</Product>

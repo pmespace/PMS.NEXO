@@ -41,7 +41,6 @@ namespace NexoListener
 		private class SettingsType
 		{
 			public uint Port { get; set; }
-			public bool AutoLoginLogout { get; set; }
 			public List<string> AllowedIP { get; set; } = new List<string>();
 			public List<string> AllowedServices { get; set; } = new List<string>();
 			[JsonIgnore]
@@ -90,7 +89,7 @@ namespace NexoListener
 				{
 					CLogger.Add("Failed to read settings", TLog.ERROR);
 
-					Settings = new SettingsType() { Port = 29134, AutoLoginLogout = true, };
+					Settings = new SettingsType() { Port = 29134, };
 
 					json.WriteSettings(Settings, true);
 					return false;
@@ -312,12 +311,20 @@ namespace NexoListener
 			}
 			nexo.SaleID = listenerRequest.SaleID;
 			nexo.POIID = listenerRequest.POIID;
+
+			// specific service processing
 			if (MessageCategoryEnumeration.Payment == category)
 			{
 				PaymentTypeEnumeration? pt = (PaymentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentTypeEnumeration), listenerRequest.PaymentType);
 				if (null != pt)
 					((NexoPayment)nexo).PaymentType = (PaymentTypeEnumeration)pt;
 				((NexoPayment)nexo).RequestRequestedAmount = listenerRequest.RequestedAmount;
+			}
+			else if (MessageCategoryEnumeration.Reversal == category)
+			{
+				((NexoReversal)nexo).RequestOriginalPOITransactionID = listenerRequest.POITransaction?.TransactionID;
+				((NexoReversal)nexo).RequestOriginalPOITransactionTimestamp = listenerRequest.POITransaction?.TimeStamp;
+				((NexoReversal)nexo).RequestReversalReason = ReversalReasonEnumeration.MerchantCancel;
 			}
 
 			/*
@@ -392,6 +399,7 @@ namespace NexoListener
 			//}
 			#endregion
 
+			// search and set data to send
 			DataToExchangeList tosend = new DataToExchangeList();
 			foreach (KeyValuePair<string, CListenerDataElement> k in listenerRequest.ElementsToSend)
 			{
@@ -410,14 +418,39 @@ namespace NexoListener
 			 * process the nexo retailer message
 			 */
 
-
+			bool timedout = false, cancelled = false, received = false;
 			NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
 			NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = new CStreamClientSettings() { IP = listenerRequest.IP, Port = (uint)listenerRequest.Port } };
 			if (client.Connect(clientSettings))
 			{
-				// send the request synchronously
-				if (!client.SendRequestSync(nexo))
-					CLogger.Add(listenerReply.Message = $"An error has occurred while tryingto exchange the nexo retailer order", TLog.ERROR);
+				bool ok = true;
+
+				// auto login ?
+				if (listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+				{
+					CLogger.Add($"Performing auto login");
+					NexoLogin login = new NexoLogin() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
+					if (!(ok = client.SendRequestSync(login)))
+						CLogger.Add(listenerReply.Message = $"An error has occurred while trying to log to the POI", TLog.ERROR);
+				}
+
+				if (ok)
+				{
+					// send the request synchronously
+					if (!client.SendRequestSync(nexo))
+						CLogger.Add(listenerReply.Message = $"An error has occurred while trying to exchange the nexo retailer order", TLog.ERROR);
+					timedout = client.TimedOut;
+					cancelled = client.Cancelled;
+					received = client.Received;
+				}
+
+				// auto logout ?
+				if (ok && listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+				{
+					CLogger.Add($"Performing auto login");
+					NexoLogout logout = new NexoLogout() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
+					client.SendRequestSync(logout);
+				}
 				client.Disconnect();
 			}
 			else
@@ -426,33 +459,76 @@ namespace NexoListener
 				listenerReply.Status = ReplyStatus.failedToConnectToPOI;
 			}
 
-			// check result
+			/*
+			 * check result
+			 */
+
 			bool nexoProcessed = false;
-			if (client.TimedOut)
+			if (timedout)
 			{
 				CLogger.Add(listenerReply.Message = $"Timeout on receiving {nexo.MessageCategory} service listenerReply", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.timeout;
 			}
-			else if (client.Cancelled)
+			else if (cancelled)
 			{
 				CLogger.Add(listenerReply.Message = $"Operation manually cancelled while processing {nexo.MessageCategory} service", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.cancelled;
 			}
-			else if (client.Received)
+			else if (received)
 			{
 				nexoProcessed = true;
 				listenerReply.Status = (nexo.Success ? ReplyStatus.Success : nexo.Failure ? ReplyStatus.Failure : nexo.Partial ? ReplyStatus.Partial : ReplyStatus.unknownError);
+
+				// specific message processing
+				if (MessageCategoryEnumeration.Payment == category)
+				{
+					listenerRequest.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoPayment)nexo).ReplyPOITransactionID, TimeStamp = ((NexoPayment)nexo).ReplyPOITransactionTimestamp };
+				}
+				else if (MessageCategoryEnumeration.Reversal == category)
+				{
+					listenerRequest.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoReversal)nexo).ReplyPOITransactionID, TimeStamp = ((NexoReversal)nexo).ReplyPOITimestamp };
+				}
+
 				switch (listenerReply.Status)
 				{
 					case ReplyStatus.Success:
 						CLogger.Add(listenerReply.Message = $"SUCCESS processing {nexo.MessageCategory} service");
+
+						// specific message processing
+						if (MessageCategoryEnumeration.Payment == category)
+						{
+							listenerRequest.AuthorizedAmount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
+						}
+						else if (MessageCategoryEnumeration.Reversal == category)
+						{
+						}
 						break;
-					case ReplyStatus.Failure:
-						CLogger.Add(listenerReply.Message = $"FAILURE processing {nexo.MessageCategory} service");
-						break;
+
 					case ReplyStatus.Partial:
 						CLogger.Add(listenerReply.Message = $"PARTIAL processing {nexo.MessageCategory} service");
+
+						// specific message processing
+						if (MessageCategoryEnumeration.Payment == category)
+						{
+							listenerRequest.AuthorizedAmount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
+						}
+						else if (MessageCategoryEnumeration.Reversal == category)
+						{
+						}
 						break;
+
+					case ReplyStatus.Failure:
+						CLogger.Add(listenerReply.Message = $"FAILURE processing {nexo.MessageCategory} service");
+
+						// specific message processing
+						if (MessageCategoryEnumeration.Payment == category)
+						{
+						}
+						else if (MessageCategoryEnumeration.Reversal == category)
+						{
+						}
+						break;
+
 					case ReplyStatus.unknownError:
 						CLogger.Add(listenerReply.Message = $"UNKNOWN ERROR processing {nexo.MessageCategory} service");
 						break;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NEXO;
 using COMMON;
 
 namespace NexoListener
@@ -25,18 +26,21 @@ namespace NexoListener
 	{
 		public string IP { get; set; }
 		public int Port { get; set; }
+		public bool AutoLoginLogout { get; set; } = false;
 		public string Service { get; set; }
 		public string SaleID { get; set; }
 		public string POIID { get; set; }
 		public string PaymentType { get; set; }
 		public double RequestedAmount { get; set; }
+		public double AuthorizedAmount { get; set; }
+		public TransactionIdentificationType POITransaction { get; set; }
 		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
 		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();
 
 		public override string ToString()
 		{
 			string s = null;
-			s = $"Service: {Service}, SaleID: {SaleID}, POIID: {POIID}";
+			s = $"Service: {Service}, SaleID: {SaleID}, POIID: {POIID}, Autologin: {AutoLoginLogout }";
 
 			s += (0 != ElementsToSend.Count ? $"{Chars.CRLF}To send:" : null);
 			foreach (KeyValuePair<string, CListenerDataElement> k in ElementsToSend)

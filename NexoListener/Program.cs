@@ -155,6 +155,12 @@ namespace NexoListener
 				bool isLogin = (0 == string.Compare(MessageCategoryEnumeration.Login.ToString(), service, true));
 				bool isPay = (0 == string.Compare(MessageCategoryEnumeration.Payment.ToString(), service, true));
 
+				bool autologin = false;
+				if (!isLogin)
+				{
+					autologin = YesNo("Autologin");
+				}
+
 				double amount = 0D;
 				PaymentTypeEnumeration pt = PaymentTypeEnumeration.Normal;
 				if (isPay)
@@ -199,7 +205,7 @@ namespace NexoListener
 				var toReturn = new CListenerDataElements();
 				if (null != dtr)
 					toReturn.Add(dtr, new CListenerDataElement());
-				var request = new CListenerRequest() { RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
+				var request = new CListenerRequest() { AutoLoginLogout = autologin, RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
 
 				json.WriteSettings(request);
 				Console.WriteLine();
@@ -273,6 +279,7 @@ namespace NexoListener
 		/// <returns>True if YES, false if NO</returns>
 		static bool YesNo(string msg)
 		{
+			Console.WriteLine();
 			Console.Write(msg + " [Y/N] ");
 			string yes = "Yy", no = "Nn";
 			string confirm = yes + no;

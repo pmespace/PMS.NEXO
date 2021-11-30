@@ -52,6 +52,10 @@ namespace NEXO
 		bool Accepted { get; }
 		[DispId(501)]
 		PaymentTypeEnumeration PaymentType { get; }
+		[DispId(502)]
+		bool IsNormalPayment { get; }
+		[DispId(503)]
+		bool IsRefund { get; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -219,6 +223,8 @@ namespace NEXO
 		#endregion
 
 		#region common properties
+		public bool IsNormalPayment { get => PaymentTypeEnumeration.Normal == PaymentType; }
+		public bool IsRefund { get => PaymentTypeEnumeration.Refund == PaymentType; }
 		public bool Accepted { get => Success; }
 		public PaymentTypeEnumeration PaymentType
 		{

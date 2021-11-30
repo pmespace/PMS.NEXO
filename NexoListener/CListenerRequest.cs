@@ -26,7 +26,7 @@ namespace NexoListener
 	{
 		public string IP { get; set; }
 		public int Port { get; set; }
-		public bool AutoLoginLogout { get; set; } = false;
+		//public bool AutoLoginLogout { get; set; } = false;
 		public string Service { get; set; }
 		public string SaleID { get; set; }
 		public string POIID { get; set; }
@@ -40,7 +40,7 @@ namespace NexoListener
 		public override string ToString()
 		{
 			string s = null;
-			s = $"Service: {Service}, SaleID: {SaleID}, POIID: {POIID}, Autologin: {AutoLoginLogout }";
+			s = $"Service: {Service}, SaleID: {SaleID}, POIID: {POIID}";//, Autologin: {AutoLoginLogout }";
 
 			s += (0 != ElementsToSend.Count ? $"{Chars.CRLF}To send:" : null);
 			foreach (KeyValuePair<string, CListenerDataElement> k in ElementsToSend)

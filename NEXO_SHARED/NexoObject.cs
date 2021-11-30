@@ -726,9 +726,9 @@ namespace NEXO
 					return Serialize(_request);
 				}
 				else
-					CLog.Add("Request serialization failed with error code: " + error.ToString(), TLog.ERROR);
+					CLog.Add("REQUEST SERIALIZATION FAILED WITH ERROR CODE: " + error.ToString(), TLog.ERROR);
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
 			return null;
 		}
 		/// <summary>
@@ -747,9 +747,9 @@ namespace NEXO
 					return Serialize(Reply);
 				}
 				else
-					CLog.Add("Reply serialization failed with error code: " + error.ToString(), TLog.ERROR);
+					CLog.Add("REPLY SERIALIZATION FAILED WITH ERROR CODE: " + error.ToString(), TLog.ERROR);
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
 			return null;
 		}
 		#endregion

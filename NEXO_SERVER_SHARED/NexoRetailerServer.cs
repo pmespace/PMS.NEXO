@@ -61,7 +61,7 @@ namespace NEXO.Server
 		/// <summary>
 		/// Indicates whether the serve ris actually running or not
 		/// </summary>
-		public bool IsRunning { get => null != StreamServer && StreamServer.  IsRunning; }
+		public bool IsRunning { get => null != StreamServer && StreamServer.IsRunning; }
 		/// <summary>
 		/// Thread of the server
 		/// </summary>
@@ -140,7 +140,7 @@ namespace NEXO.Server
 				return true;
 			if (!settings.IsValid)
 			{
-				CLog.Add("Server settings are invalid, can't start server", TLog.ERROR);
+				CLog.Add("SERVER SETTINGS ARE INVALID, CAN'T START SERVER", TLog.ERROR);
 				return false;
 			}
 			else if (UseDatabase)
@@ -153,7 +153,7 @@ namespace NEXO.Server
 					if (!Database.IsOpen)
 					{
 						// database is required but not available
-						CLog.Add("Unable to connect to the database, check settings", TLog.ERROR);
+						CLog.Add("UNABLE TO CONNECT TO THE DATABASE, CHECK SETTINGS", TLog.ERROR);
 						Database = null;
 						return false;
 					}
@@ -256,10 +256,10 @@ namespace NEXO.Server
 						return true;
 					}
 					ep.AddConnection(false);
-					CLog.Add($"{StreamServer.Description} EndPoint not allowed to connect: {ep.Key}", TLog.ERROR);
+					CLog.Add($"{StreamServer.Description} ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
 				}
 				else
-					CLog.Add($"{StreamServer.Description} EndPoint not allowed to connect: {ep.Key}", TLog.ERROR);
+					CLog.Add($"{StreamServer.Description} ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
 			}
 			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
 			return false;
@@ -294,9 +294,10 @@ namespace NEXO.Server
 		/// <param name="request"></param>
 		/// <param name="addBufferSize"></param>
 		/// <param name="threadData"></param>
+		/// <param name="parameters"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThreadData threadData = null, object o = null)
+		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThreadData threadData = null, object parameters = null, object o = null)
 		{
 			addBufferSize = true;
 			byte[] reply = null;
@@ -383,11 +384,11 @@ namespace NEXO.Server
 						try
 						{
 							if (item.IsNotification)
-								Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, o);
+								Settings.OnReceivedNotification?.Invoke(xml, toprocess, tcp, threadData, parameters);
 							else if (item.IsRequest)
-								Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, o);
+								Settings.OnReceivedRequest?.Invoke(xml, toprocess, tcp, threadData, parameters);
 							else if (item.IsReply)
-								Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, o);
+								Settings.OnReceivedReply?.Invoke(xml, toprocess, tcp, threadData, parameters);
 						}
 						catch (Exception ex)
 						{
@@ -449,7 +450,7 @@ namespace NEXO.Server
 							try
 							{
 								Thread.Sleep(TimerBeforeReply * CStreamClientSettings.ONESECOND);
-								Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, o);
+								Settings.OnSend?.Invoke(s, itemToSend, tcp, threadData, parameters);
 							}
 							catch (Exception ex)
 							{
@@ -481,7 +482,7 @@ namespace NEXO.Server
 						}
 						else
 						{
-							CLog.Add(StreamServer.Description + "No message could be generated to send to the client", TLog.ERROR);
+							CLog.Add(StreamServer.Description + "NO MESSAGE COULD BE GENERATED TO SEND TO THE CLIENT", TLog.ERROR);
 						}
 					}
 					catch (Exception ex)

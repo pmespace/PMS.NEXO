@@ -343,3 +343,6 @@ healthchecksdb
 # nuget private files
 Nuget/
 *.nupkg
+
+NexoListener/
+*.pdf

@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>NEXO</RootNamespace>
-    <Version>4.1.1</Version>
-    <FileVersion>4.1.1</FileVersion>
-    <AssemblyVersion>4.1.1</AssemblyVersion>
+    <Version>4.2.0</Version>
+    <FileVersion>4.2.0</FileVersion>
+    <AssemblyVersion>4.2.0</AssemblyVersion>
     <AssemblyName>PMS.NEXO31.CORE</AssemblyName>
     <Authors>philippemp31</Authors>
     <Product>PMS.NEXO31.CORE nexo retailer v3.1</Product>
@@ -44,8 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON.CORE" Version="5.2.4" />
-    <PackageReference Include="PMS.COMMON.CORE.ODBC" Version="5.2.4" />
+    <PackageReference Include="PMS.COMMON.CORE" Version="5.4.0" />
+    <PackageReference Include="PMS.COMMON.CORE.ODBC" Version="5.4.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -102,7 +102,7 @@ namespace NEXO
 	//		}
 	//		catch (Exception ex)
 	//		{
-	//			CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, $"Object: {initial.GetType()} - Property name: {property}");
+	//			CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, $"Object: {initial.GetType()} - Property name: {property}");
 	//		}
 	//		return false;
 	//	}

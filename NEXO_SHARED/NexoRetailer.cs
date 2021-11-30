@@ -452,7 +452,7 @@ namespace NEXO
 					throw new Exception(EventsList());
 				return true;
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, Chars.CRLF + "=> XSD: " + xsd); }
+			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, Chars.CRLF + "=> XSD: " + xsd); }
 			return false;
 		}
 		private void ResetSchemaValidationState() { NbErrors = 0; NbWarnings = 0; Events.Clear(); }
@@ -508,7 +508,7 @@ namespace NEXO
 					CLog.Add(EventsList());
 				return (ok ? xml : string.Empty);
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); return string.Empty; }
+			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); return string.Empty; }
 		}
 		/// <summary>
 		/// Deserialize a SaleToPOIXXX from an array of bytes
@@ -558,7 +558,7 @@ namespace NEXO
 				{
 					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
 				}
-				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request optimisation"); }
+				catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request optimisation"); }
 				finally
 				{
 					if (UseJson)
@@ -569,7 +569,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Request processing");
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request processing");
 			}
 			finally
 			{
@@ -593,7 +593,7 @@ namespace NEXO
 				{
 					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
 				}
-				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply optimisation"); }
+				catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply optimisation"); }
 				finally
 				{
 					if (UseJson)
@@ -604,7 +604,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Reply processing");
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply processing");
 			}
 			finally
 			{
@@ -631,7 +631,7 @@ namespace NEXO
 				// return xml string
 				return ValidateXML(s);
 			}
-			catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
 			return null;
 		}
 		#endregion
@@ -687,7 +687,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
 				return null;
 			}
 		}
@@ -732,7 +732,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
 				return null;
 			}
 		}
@@ -759,7 +759,7 @@ namespace NEXO
 				}
 				catch (Exception ex)
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, $"Object: {type} - Property name: {property} - Value to set: {value}");
+					CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, $"Object: {type} - Property name: {property} - Value to set: {value}");
 				}
 			}
 			return false;

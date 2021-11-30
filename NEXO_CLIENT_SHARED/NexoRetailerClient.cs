@@ -453,7 +453,7 @@ namespace NEXO.Client
 							}
 							else
 							{
-								CLog.Add("Connection process failed returning a null request", TLog.ERROR);
+								CLog.Add("CONNECTION PROCESS FAILED RETURNING A NULL REQUEST", TLog.ERROR);
 							}
 
 							// restore standard receive timeout
@@ -461,10 +461,13 @@ namespace NEXO.Client
 						}
 						else
 						{
-							CLog.Add("Connection process failed returning a null request", TLog.ERROR);
+							CLog.Add("CONNECTION PROCESS FAILED RETURNING A NULL REQUEST", TLog.ERROR);
 						}
 					}
-					catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnPreConnectionGetRequest generated an exception"); }
+					catch (Exception ex)
+					{
+						CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "OnConnectionRequest generated an exception");
+					}
 				}
 
 				// arrived here if check connection status
@@ -488,7 +491,7 @@ namespace NEXO.Client
 						}
 						else
 						{
-							CLog.Add(Description + "Failed to start receiver thread", TLog.ERROR);
+							CLog.Add(Description + "FAILED TO START RECEIVER THREAD", TLog.ERROR);
 							// stop the dispatcher
 							evtStopDispatcher.Set();
 							DispatchEvents.WaitStopped();
@@ -497,7 +500,7 @@ namespace NEXO.Client
 					}
 					else
 					{
-						CLog.Add(Description + "Failed to start dispatcher thread", TLog.ERROR);
+						CLog.Add(Description + "FAILED TO START DISPATCHER THREAD", TLog.ERROR);
 						DispatchThread = null;
 					}
 				}
@@ -565,7 +568,7 @@ namespace NEXO.Client
 							exchange = null;
 							settingsToUse = null;
 							lastRequestedObject = null;
-							CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "FATAL ERROR while sending request" + MessageDescription(xml) + " - Receiving the reponse won't be reported");
+							CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "FATAL ERROR while sending request" + MessageDescription(xml) + " - Receiving the reponse won't be reported");
 						}
 						finally { Monitor.Exit(myLock); }
 						if (null != exchange)
@@ -573,13 +576,13 @@ namespace NEXO.Client
 					}
 					else
 					{
-						CLog.Add(Description + "Error sending request" + MessageDescription(xml), TLog.ERROR);
+						CLog.Add(Description + "ERROR SENDING REQUEST" + MessageDescription(xml), TLog.ERROR);
 					}
 				}
-				CLog.Add(Description + "Invalid request to send" + MessageDescription(xml), TLog.ERROR);
+				CLog.Add(Description + "INVALID REQUEST TO SEND" + MessageDescription(xml), TLog.ERROR);
 			}
 			else
-				CLog.Add(Description + "Not connected or invalid request to send", TLog.ERROR);
+				CLog.Add(Description + "NOT CONNECTED OR INVALID REQUEST TO SEND", TLog.ERROR);
 			return null;
 		}
 		public NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true)
@@ -619,7 +622,7 @@ namespace NEXO.Client
 				}
 				catch (Exception ex)
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "Error waiting synchronous response" + MessageDescription(handle.XML));
+					CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Error waiting synchronous response" + MessageDescription(handle.XML));
 				}
 			}
 			return false;
@@ -654,7 +657,7 @@ namespace NEXO.Client
 				{
 					if (!SendXML(xml, item))
 					{
-						CLog.Add(Description + "Error sending reply" + MessageDescription(xml), TLog.ERROR);
+						CLog.Add(Description + "ERROR SENDING REPLY" + MessageDescription(xml), TLog.ERROR);
 					}
 				}
 			}
@@ -728,7 +731,7 @@ namespace NEXO.Client
 						CStream.Disconnect(StreamIO);
 					}
 				}
-				catch (Exception ex) { CLog.AddException(MethodBase.GetCurrentMethod().Name, ex); }
+				catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
 				finally { StreamIO = null; }
 			}
 			catch (Exception) { }
@@ -770,7 +773,7 @@ namespace NEXO.Client
 					if (timeout)
 					{
 						// that should never happen as reading here is not subject to timeout
-						CLog.Add(ReceiverThread.Description + "Timeout receiving threaddata, THAT SHOULD NEVER HAPPEN !", TLog.ERROR);
+						CLog.Add(ReceiverThread.Description + "TIMEOUT RECEIVING THREADDATA, THAT SHOULD NEVER HAPPEN !", TLog.ERROR);
 					}
 					else
 					{
@@ -850,7 +853,7 @@ namespace NEXO.Client
 							}
 							catch (Exception ex)
 							{
-								CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+								CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
 								res = (int)ThreadResult.Exception;
 							}
 							finally { Monitor.Exit(myLock); }
@@ -874,7 +877,7 @@ namespace NEXO.Client
 				}
 				else
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+					CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
 					res = (int)ThreadResult.Exception;
 				}
 			}
@@ -946,7 +949,7 @@ namespace NEXO.Client
 									}
 									catch (Exception ex)
 									{
-										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, (toprocess.Item.IsReply ? "OnReceivedReply" : toprocess.Item.IsRequest ? "OnReceivedRequest" : "OnReceivedNotification") + " exception");
+										CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, (toprocess.Item.IsReply ? "OnReceivedReply" : toprocess.Item.IsRequest ? "OnReceivedRequest" : "OnReceivedNotification") + " exception");
 									}
 								}
 								// check what really happened on receiving the message
@@ -1001,7 +1004,7 @@ namespace NEXO.Client
 									}
 									catch (Exception ex)
 									{
-										CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnReceivedIgnoredMessage exception");
+										CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "OnReceivedIgnoredMessage exception");
 									}
 							}
 						}
@@ -1027,7 +1030,7 @@ namespace NEXO.Client
 								}
 								catch (Exception ex)
 								{
-									CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, "OnSentRequestStatusChanged exception");
+									CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "OnSentRequestStatusChanged exception");
 								}
 							}
 							// indicate which action has occurred
@@ -1037,7 +1040,7 @@ namespace NEXO.Client
 						//else
 						//{
 						//	// timeout, this should never happen
-						//	CLog.Add(DispatchThread.Description + "Unknown system error", TLog.ERROR);
+						//	CLog.Add(DispatchThread.Description + "UNKNOWN SYSTEM ERROR", TLog.ERROR);
 						//}
 					}
 				} while (keepOnRunning);
@@ -1046,7 +1049,7 @@ namespace NEXO.Client
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex);
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
 				res = (int)ThreadResult.Exception;
 			}
 			DispatchEvents.SetStopped();
@@ -1067,7 +1070,7 @@ namespace NEXO.Client
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Name, ex, Name + " - OnSend generated an exception, sending anyway");
+				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, Name + " - OnSend generated an exception, sending anyway");
 			}
 			bool f;
 			CLog.Add("Sending " + MessageDescription(xml));

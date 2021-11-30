@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using NEXO;
 using COMMON;
@@ -10,7 +11,7 @@ namespace NexoListener
 	{
 		#region menu
 		private class MenuList : SortedDictionary<char, CMenu> { }
-		private delegate bool DFnc(MenuList menu, CMenu entry, char option, ref CListener o);
+		private delegate bool DFnc(MenuList menu, CMenu entry, char option, object o);
 		class CMenu
 		{
 			public string Text { get; set; }
@@ -23,17 +24,36 @@ namespace NexoListener
 		private const string LISTENER_TEST_FILE = "listener.request.json";
 		private const string ACTIVATE_DISPLAY = "Activate activity display";
 		private const string DEACTIVATE_DISPLAY = "Deactivate activity display";
+
+		private const string OPTION_SETTINGS_FILE_NAME = "-s";
+
+		private const char TEST_LISTENER = '0';
+		private const char TEST_LISTENER_CREATE = '1';
+		private const char DISPLAY_SETTINGS = '2';
+		private const char RELOAD_SETTINGS = '3';
 		#endregion
 
 		#region main
 		static void Main(string[] args)
 		{
-			int i = 0;
+			string settingsFile = null;
+			// get start options
+			foreach (string s in args)
+			{
+				// has the settings file been specified
+				if ((s.StartsWith(OPTION_SETTINGS_FILE_NAME, true, null)) && OPTION_SETTINGS_FILE_NAME.Length < s.Length && string.IsNullOrEmpty(settingsFile))
+					settingsFile = s.Substring(OPTION_SETTINGS_FILE_NAME.Length);
+			}
+
+			if (string.IsNullOrEmpty(settingsFile))
+				settingsFile = LISTENER_SETTINGS_FILE;
+			CLogger.Add($"Using settings file: {settingsFile}");
+
 			MenuList menu = new MenuList();
-			menu.Add(i++.ToString()[0], new CMenu() { Text = "Test listener", Fnc = TestListener });
-			menu.Add(i++.ToString()[0], new CMenu() { Text = "Generate listener test file", Fnc = TestListenerCreate });
-			menu.Add(i++.ToString()[0], new CMenu() { Text = "Display settings", Fnc = DisplaySettings });
-			menu.Add(i++.ToString()[0], new CMenu() { Text = "Reload settings", Fnc = ReloadSettings });
+			menu.Add(TEST_LISTENER, new CMenu() { Text = "Test listener", Fnc = TestListener });
+			menu.Add(TEST_LISTENER_CREATE, new CMenu() { Text = "Generate listener test file", Fnc = TestListenerCreate });
+			menu.Add(DISPLAY_SETTINGS, new CMenu() { Text = "Display settings", Fnc = DisplaySettings });
+			menu.Add(RELOAD_SETTINGS, new CMenu() { Text = "Reload settings", Fnc = ReloadSettings });
 			//menu.Add(i++.ToString()[0], new CMenu() { Text = ACTIVATE_DISPLAY, Fnc = ActivityDisplay });
 			menu.Add('X', new CMenu() { Text = "Exit", Fnc = Exit });
 
@@ -43,12 +63,41 @@ namespace NexoListener
 
 			// Start listener
 			CListener listener = new CListener();
-			bool ok = listener.Start(LISTENER_SETTINGS_FILE);
+			bool ok = listener.Start(settingsFile);
+			TestListenerType testListenerType = new TestListenerType() { FileToUse = LISTENER_TEST_FILE, Port = listener.Port, IP = listener.IP };
 			while (ok)
 			{
 				CMenu entry = DisplayMenu(menu, out char option);
 				if (null != entry)
-					ok = entry.Fnc(menu, entry, option, ref listener);
+					switch (option)
+					{
+						case RELOAD_SETTINGS:
+							{
+								ReloadSettingsType type = new ReloadSettingsType() { SettingsFile = settingsFile, Listener = listener };
+								if (ok = entry.Fnc(menu, entry, option, type))
+								{
+									settingsFile = type.SettingsFile;
+									listener = type.Listener;
+								}
+								break;
+							}
+
+						case TEST_LISTENER:
+							{
+								ok = entry.Fnc(menu, entry, option, testListenerType);
+								break;
+							}
+
+						case DISPLAY_SETTINGS:
+							{
+								ok = entry.Fnc(menu, entry, option, listener);
+								break;
+							}
+
+						default:
+							ok = entry.Fnc(menu, entry, option, null);
+							break;
+					}
 			}
 			listener.Stop();
 		}
@@ -88,26 +137,79 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool TestListener(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool TestListener(MenuList menu, CMenu entry, char option, object o)
 		{
-			string fileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
-			if (string.IsNullOrEmpty(fileToUse)) return true;
+			TestListenerType type = (TestListenerType)o;
 
-			var json = new CJson<CListenerRequest>(fileToUse);
+			type.FileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
+			if (string.IsNullOrEmpty(type.FileToUse))
+			{
+				Console.WriteLine("Invalid test file");
+				return true;
+			}
+
+			type.IP = Input("Listener IP", CStream.Localhost(), out isdef);
+			if (string.IsNullOrEmpty(type.IP))
+			{
+				Console.WriteLine("Invalid IP");
+				return true;
+			}
+
+			string sport = Input("Listener port to reach", type.Port.ToString(), out isdef);
+			if (string.IsNullOrEmpty(sport)) return true;
+			try
+			{
+				type.Port = uint.Parse(sport);
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Invalid port number");
+				return true;
+			}
+
+			//var json = new CJson<CListenerRequest>(fileToUse);
+			//var request = json.ReadSettings(out bool except);
+			//if (null != request)
+			//{
+			//	var sreply = CStream.ConnectSendReceive(new CStreamClientSettings() { IP = ip, Port = port }, CJson<CListenerRequest>.Serialize(request), out int size, out bool error);
+			//	if (!string.IsNullOrEmpty(sreply))
+			//	{
+			//		CLogger.Add(sreply);
+			//		var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
+			//		CLogger.Add(reply.ToString());
+			//	}
+			//	else
+			//		CLogger.Add("No reply has been received");
+			//}
+
+			var json = new CJson<CListenerRequest>(type.FileToUse);
 			var request = json.ReadSettings(out bool except);
 			if (null != request)
 			{
-				var sreply = CStream.ConnectSendReceive(new CStreamClientSettings() { IP = CStream.Localhost(), Port = 29134, }, CJson<CListenerRequest>.Serialize(request), out int size, out bool error);
-				if (!string.IsNullOrEmpty(sreply))
+				CStreamClientIO streamIO = CStream.Connect(new CStreamClientSettings() { IP = type.IP, Port = type.Port });
+				if (null != streamIO)
 				{
-					CLogger.Add(sreply);
-					var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
-					CLogger.Add(reply.ToString());
+					if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
+					{
+						string sreply;
+						while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out bool error)))
+						{
+							var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
+							CLogger.Add($"{reply.ToString()} (received message)");
+							if (!reply.Notification)
+								break;
+						}
+					}
 				}
-				else
-					CLogger.Add("No reply has been received");
 			}
+
 			return true;
+		}
+		class TestListenerType
+		{
+			public uint Port;
+			public string FileToUse;
+			public string IP;
 		}
 		/// <summary>
 		/// 
@@ -117,7 +219,7 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool TestListenerCreate(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool TestListenerCreate(MenuList menu, CMenu entry, char option, object o)
 		{
 			string fileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
 			if (string.IsNullOrEmpty(fileToUse)) return true;
@@ -155,11 +257,13 @@ namespace NexoListener
 				bool isLogin = (0 == string.Compare(MessageCategoryEnumeration.Login.ToString(), service, true));
 				bool isPay = (0 == string.Compare(MessageCategoryEnumeration.Payment.ToString(), service, true));
 
+				/*
 				bool autologin = false;
 				if (!isLogin)
 				{
 					autologin = YesNo("Autologin");
 				}
+				*/
 
 				double amount = 0D;
 				PaymentTypeEnumeration pt = PaymentTypeEnumeration.Normal;
@@ -205,7 +309,7 @@ namespace NexoListener
 				var toReturn = new CListenerDataElements();
 				if (null != dtr)
 					toReturn.Add(dtr, new CListenerDataElement());
-				var request = new CListenerRequest() { AutoLoginLogout = autologin, RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
+				var request = new CListenerRequest() { /*AutoLoginLogout = autologin,*/ RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
 
 				json.WriteSettings(request);
 				Console.WriteLine();
@@ -221,7 +325,7 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool Exit(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool Exit(MenuList menu, CMenu entry, char option, object o)
 		{
 			return !YesNo("Confirm exit ?");
 		}
@@ -233,7 +337,7 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool ActivityDisplay(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool ActivityDisplay(MenuList menu, CMenu entry, char option, ref object o)
 		{
 			try
 			{
@@ -253,11 +357,23 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool ReloadSettings(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool ReloadSettings(MenuList menu, CMenu entry, char option, object o)
 		{
-			o.Stop();
-			o = new CListener();
-			return o.Start(LISTENER_SETTINGS_FILE);
+			ReloadSettingsType type = (ReloadSettingsType)o;
+			type.SettingsFile = Input("Settings file to load", type.SettingsFile, out bool isdef);
+			if (string.IsNullOrEmpty(type.SettingsFile))
+			{
+				CLogger.Add("No settings modified", TLog.WARNG);
+				return true;
+			}
+			type.Listener.Stop();
+			type.Listener = new CListener();
+			return type.Listener.Start(type.SettingsFile);
+		}
+		class ReloadSettingsType
+		{
+			public CListener Listener;
+			public string SettingsFile;
 		}
 		/// <summary>
 		/// 
@@ -267,7 +383,7 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool DisplaySettings(MenuList menu, CMenu entry, char option, ref CListener o)
+		static bool DisplaySettings(MenuList menu, CMenu entry, char option, object o)
 		{
 			Console.WriteLine(o.ToString());
 			return true;

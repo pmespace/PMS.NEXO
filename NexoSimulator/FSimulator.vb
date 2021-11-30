@@ -1103,7 +1103,7 @@ Public Class FSimulator
 		End If
 	End Sub
 
-	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, threadData As CThreadData, o As Object) As Byte()
+	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, threadData As CThreadData, parameters As Object, ox As Object) As Byte()
 		'the gateway received a request that must be forwarded to the distant server
 		Dim settings As New CStreamClientSettings
 		If cbGatewayUseLocalHost.Checked Then

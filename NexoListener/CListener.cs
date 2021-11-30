@@ -10,6 +10,7 @@ using COMMON;
 using Newtonsoft.Json;
 using NEXO.Client;
 using NEXO;
+using System.Threading;
 
 namespace NexoListener
 {
@@ -41,6 +42,8 @@ namespace NexoListener
 		private class SettingsType
 		{
 			public uint Port { get; set; }
+			public bool AutoLoginLogout { get; set; } = false;
+			//public bool ConcurrencyAccess { get; set; } = false;
 			public List<string> AllowedIP { get; set; } = new List<string>();
 			public List<string> AllowedServices { get; set; } = new List<string>();
 			[JsonIgnore]
@@ -50,7 +53,7 @@ namespace NexoListener
 
 			public override string ToString()
 			{
-				string s = $"Port: {Port}" + Chars.CRLF;
+				string s = $"Port: {Port} - AutoLoginLogout: {AutoLoginLogout}{Chars.CRLF}";
 				s += $"AllowedIP:" + Chars.CRLF;
 				foreach (string k in AllowedIP)
 					s += " - " + k + Chars.CRLF;
@@ -66,6 +69,11 @@ namespace NexoListener
 		private int NbTxns = 0;
 		private const int MaxTxns = 10;
 		private int counter = 0;
+		#endregion
+
+		#region properties
+		public uint Port { get => Settings.Port; }
+		public string IP { get => CStream.Localhost(); }
 		#endregion
 
 		#region methods
@@ -206,17 +214,17 @@ namespace NexoListener
 			{
 				if (settings.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
 				{
-					CLogger.Add($"Accepting connection from {tcp.Client.RemoteEndPoint}");
+					CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Accepting connection from client");
 					return true;
 				}
 				else
 				{
-					CLogger.Add($"Connection from {tcp.Client.RemoteEndPoint} has been declined");
+					CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Connection from client has been declined");
 				}
 			}
 			catch (Exception)
 			{
-				CLogger.Add($"Exception while connecting a client {tcp.Client.RemoteEndPoint}, connection declined");
+				CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Exception while connecting client, connection declined");
 			}
 			return false;
 		}
@@ -228,7 +236,7 @@ namespace NexoListener
 		/// <param name="o"></param>
 		private static void OnDisconnect(string tcp, CThreadData threadData = null, object o = null)
 		{
-			CLogger.Add($"Disconnecting {tcp}");
+			CLogger.Add($"[{tcp}] Client has been disconnected");
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnMessage"/>
@@ -239,13 +247,13 @@ namespace NexoListener
 		/// <param name="threadData"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		private static byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThreadData threadData = null, object o = null)
+		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThreadData threadData, object parameters, object o)
 		{
 			addBufferSize = true;
-			SettingsType settings = (SettingsType)o;
+			SettingsType settings = (SettingsType)parameters;
 
 			string srequest = Encoding.ASCII.GetString(request);
-			CLogger.Add($"+++ Starting processing message [{request.Length} bytes] {srequest}");
+			CLogger.Add($"[{tcp.Client.RemoteEndPoint}]  Starting processing message from client [{request.Length} bytes] {srequest}");
 
 			/*
 			 * process settings
@@ -255,7 +263,7 @@ namespace NexoListener
 			CListenerReply listenerReply = new CListenerReply() { Request = listenerRequest, };
 			if (null == listenerRequest)
 			{
-				CLogger.Add(listenerReply.Message = $"Message can't be converted to a request [{srequest}]", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Message can't be converted to a request [{srequest}]", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.invalidRequest;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
 			}
@@ -266,7 +274,7 @@ namespace NexoListener
 			MessageCategoryEnumeration? category = (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), listenerRequest.Service);
 			if (null == category)
 			{
-				CLogger.Add(listenerReply.Message = $"The requested service is invalid [{listenerRequest.Service}]", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] The requested service is invalid [{listenerRequest.Service}]", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.invalidService;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
 			}
@@ -285,7 +293,7 @@ namespace NexoListener
 
 			if (!settings.AllowedCategories.Contains((MessageCategoryEnumeration)category))
 			{
-				CLogger.Add(listenerReply.Message = $"The requested service is invalid [{listenerRequest.Service}]", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] The requested service is invalid [{listenerRequest.Service}]", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.serviceNotSupported;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
 			}
@@ -293,7 +301,7 @@ namespace NexoListener
 			// test parameters
 			if (string.IsNullOrEmpty(listenerRequest.SaleID) || string.IsNullOrEmpty(listenerRequest.POIID))
 			{
-				CLogger.Add(listenerReply.Message = $"Request parameters are not set properly, SaleID: {(string.IsNullOrEmpty(listenerRequest.SaleID) ? "<is missing>" : listenerRequest.SaleID)}, SaleID: {(string.IsNullOrEmpty(listenerRequest.POIID) ? "<is missing>" : listenerRequest.POIID)}", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Request parameters are not set properly, SaleID: {(string.IsNullOrEmpty(listenerRequest.SaleID) ? "<is missing>" : listenerRequest.SaleID)}, SaleID: {(string.IsNullOrEmpty(listenerRequest.POIID) ? "<is missing>" : listenerRequest.POIID)}", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.mandatoryObjectNotSet;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
 			}
@@ -305,7 +313,7 @@ namespace NexoListener
 			NexoObject nexo = NexoItem.AllocateObject((MessageCategoryEnumeration)category);
 			if (null == nexo)
 			{
-				CLogger.Add(listenerReply.Message = $"Failed creating the nexo object, no more processing will occur", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Failed creating the nexo object, no more processing will occur", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.unknownError;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
 			}
@@ -407,10 +415,10 @@ namespace NexoListener
 				if (null != dte.Path)
 				{
 					if (!(dte.Data.Status = SearchAndProcessProperty(nexo.Request, dte.LPath, ref dte.Data.Value, true)))
-						CLogger.Add(dte.Data.Message = $"Failed settings data {dte.Path} with {dte.Data.Value}", TLog.ERROR);
+						CLogger.Add(dte.Data.Message = $"[{tcp.Client.RemoteEndPoint}] Failed settings data {dte.Path} with {dte.Data.Value}", TLog.ERROR);
 				}
 				else
-					CLogger.Add(dte.Data.Message = $"Failed creating the send data path {k.Key}, that data won't be set", TLog.ERROR);
+					CLogger.Add(dte.Data.Message = $"[{tcp.Client.RemoteEndPoint}] Failed creating the send data path {k.Key}, that data won't be set", TLog.ERROR);
 				tosend.Add(dte);
 			}
 
@@ -418,45 +426,200 @@ namespace NexoListener
 			 * process the nexo retailer message
 			 */
 
+			// if concurrency access is activated check whether an access to the requested resource is already active
+			string resourceName = $"{listenerRequest.IP}:{listenerRequest.Port}.mutex";
 			bool timedout = false, cancelled = false, received = false;
-			NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
-			NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = new CStreamClientSettings() { IP = listenerRequest.IP, Port = (uint)listenerRequest.Port } };
-			if (client.Connect(clientSettings))
 			{
-				bool ok = true;
-
-				// auto login ?
-				if (listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+				bool created = false;
+				Mutex mutex = null;
+				try
 				{
-					CLogger.Add($"Performing auto login");
-					NexoLogin login = new NexoLogin() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
-					if (!(ok = client.SendRequestSync(login)))
-						CLogger.Add(listenerReply.Message = $"An error has occurred while trying to log to the POI", TLog.ERROR);
-				}
+					string action = "ListenerAsynchronousMessage";
+					ReplyStatus sts = ReplyStatus.unknownError;
 
-				if (ok)
-				{
-					// send the request synchronously
-					if (!client.SendRequestSync(nexo))
-						CLogger.Add(listenerReply.Message = $"An error has occurred while trying to exchange the nexo retailer order", TLog.ERROR);
-					timedout = client.TimedOut;
-					cancelled = client.Cancelled;
-					received = client.Received;
-				}
+					// build resource to access name
+					mutex = new Mutex(true, resourceName, out created);
+					if (!created)
+					{
+						sts = ReplyStatus.waitingToGainAccessToPOI;
+						StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+							new CListenerReply()
+							{
+								Notification = true,
+								Status = sts,
+								Label = sts.ToString(),
+								Message = $"[{tcp.Client.RemoteEndPoint}] POI is already in use, please wait",
+							})),
+							addBufferSize, action, o);
+						mutex.WaitOne();
+						sts = ReplyStatus.accessToPOIHasBeenGranted;
+						StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+							new CListenerReply()
+							{
+								Notification = true,
+								Status = sts,
+								Label = sts.ToString(),
+								Message = $"[{tcp.Client.RemoteEndPoint}] POI access has been granted",
+							})),
+							addBufferSize, action, o);
+					}
 
-				// auto logout ?
-				if (ok && listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
-				{
-					CLogger.Add($"Performing auto login");
-					NexoLogout logout = new NexoLogout() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
-					client.SendRequestSync(logout);
+					NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
+					NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = new CStreamClientSettings() { IP = listenerRequest.IP, Port = (uint)listenerRequest.Port } };
+					if (client.Connect(clientSettings))
+					{
+						bool ok = true;
+
+						// auto login ?
+						//if (listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+						if (settings.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+						{
+							CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Performing auto log-in");
+							NexoLogin login = new NexoLogin() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
+							sts = ReplyStatus.login;
+							StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+								new CListenerReply()
+								{
+									Notification = true,
+									Status = sts,
+									Label = sts.ToString(),
+									Message = $"[{tcp.Client.RemoteEndPoint}] Trying to log from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
+								})),
+								addBufferSize, action, o);
+							if (!(ok = client.SendRequestSync(login)))
+							{
+								CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] An error has occurred while trying to log to the POI", TLog.ERROR);
+								StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+									new CListenerReply()
+									{
+										Notification = true,
+										Status = sts,
+										Label = sts.ToString(),
+										Message = $"[{tcp.Client.RemoteEndPoint}] Failed to log from from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
+									})),
+									addBufferSize, action, o);
+							}
+						}
+
+						if (ok)
+						{
+							string serviceName = nexo.MessageCategory.ToString();
+							ReplyStatus sts2 = ReplyStatus.unknownError;
+							switch (nexo.MessageCategory)
+							{
+								case MessageCategoryEnumeration.Login:
+									sts = sts2 = ReplyStatus.login;
+									break;
+
+								case MessageCategoryEnumeration.Logout:
+									sts = sts2 = ReplyStatus.logout;
+									break;
+
+								case MessageCategoryEnumeration.Payment:
+									if (((NexoPayment)nexo).IsNormalPayment)
+									{
+										sts = ReplyStatus.beginPayment;
+										sts2 = ReplyStatus.endPayment;
+										serviceName = "Normal payment";
+									}
+									else if (((NexoPayment)nexo).IsRefund)
+									{
+										sts = ReplyStatus.beginRefund;
+										sts2 = ReplyStatus.endRefund;
+										serviceName = "Refund";
+									}
+									else
+									{
+										sts = ReplyStatus.beginOtherPayment;
+										sts = ReplyStatus.endOtherPayment;
+										serviceName = "Other payment";
+									}
+									break;
+
+								case MessageCategoryEnumeration.Reversal:
+									sts = ReplyStatus.beginReversal;
+									sts2 = ReplyStatus.endReversal;
+									break;
+
+								case MessageCategoryEnumeration.Reconciliation:
+									sts = ReplyStatus.beginReconciliation;
+									sts2 = ReplyStatus.endReconciliation;
+									break;
+
+								case MessageCategoryEnumeration.Abort:
+									sts = ReplyStatus.beginAbort;
+									sts2 = ReplyStatus.endAbort;
+									break;
+
+								default:
+									sts = ReplyStatus.beginOtherService;
+									sts2 = ReplyStatus.endOtherService;
+									break;
+							}
+							serviceName = serviceName.ToUpper();
+							StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+								new CListenerReply()
+								{
+									Notification = true,
+									Status = sts,
+									Label = sts.ToString(),
+									Message = $"[{tcp.Client.RemoteEndPoint}] Starting service {serviceName}",
+								})),
+								addBufferSize, action, o);
+							// send the request synchronously
+							if (!client.SendRequestSync(nexo))
+								CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] An error has occurred while trying to exchange the nexo retailer order", TLog.ERROR);
+							StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+								new CListenerReply()
+								{
+									Notification = true,
+									Status = sts2,
+									Label = sts2.ToString(),
+									Message = $"[{tcp.Client.RemoteEndPoint}] Service {serviceName} is finished",
+								})),
+								addBufferSize, action, o);
+							timedout = client.TimedOut;
+							cancelled = client.Cancelled;
+							received = client.Received;
+						}
+
+						// auto logout ?
+						//if (ok && listenerRequest.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+						if (ok && settings.AutoLoginLogout && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Login) && !((MessageCategoryEnumeration)category == MessageCategoryEnumeration.Logout))
+						{
+							CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Performing auto logout");
+							NexoLogout logout = new NexoLogout() { SaleID = listenerRequest.SaleID, POIID = listenerRequest.POIID };
+							sts = ReplyStatus.logout;
+							StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+								new CListenerReply()
+								{
+									Notification = true,
+									Status = sts,
+									Label = sts.ToString(),
+									Message = $"[{tcp.Client.RemoteEndPoint}] Log-out from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
+								})),
+								addBufferSize, action, o);
+							client.SendRequestSync(logout);
+						}
+						client.Disconnect();
+					}
+					else
+					{
+						CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Error connecting to the POI using [{clientSettings.StreamClientSettings}], no message has been sent", TLog.ERROR);
+						listenerReply.Status = ReplyStatus.failedToConnectToPOI;
+					}
 				}
-				client.Disconnect();
-			}
-			else
-			{
-				CLogger.Add(listenerReply.Message = $"Error connecting to the POI using [{clientSettings.StreamClientSettings}], no message has been sent", TLog.ERROR);
-				listenerReply.Status = ReplyStatus.failedToConnectToPOI;
+				catch (Exception)
+				{
+				}
+				finally
+				{
+					if (null != mutex)
+					{
+						mutex.ReleaseMutex();
+						mutex.Close();
+					}
+				}
 			}
 
 			/*
@@ -466,12 +629,12 @@ namespace NexoListener
 			bool nexoProcessed = false;
 			if (timedout)
 			{
-				CLogger.Add(listenerReply.Message = $"Timeout on receiving {nexo.MessageCategory} service listenerReply", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Timeout on receiving {nexo.MessageCategory} service listenerReply", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.timeout;
 			}
 			else if (cancelled)
 			{
-				CLogger.Add(listenerReply.Message = $"Operation manually cancelled while processing {nexo.MessageCategory} service", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Operation manually cancelled while processing {nexo.MessageCategory} service", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.cancelled;
 			}
 			else if (received)
@@ -492,7 +655,7 @@ namespace NexoListener
 				switch (listenerReply.Status)
 				{
 					case ReplyStatus.Success:
-						CLogger.Add(listenerReply.Message = $"SUCCESS processing {nexo.MessageCategory} service");
+						CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] SUCCESS processing {nexo.MessageCategory} service");
 
 						// specific message processing
 						if (MessageCategoryEnumeration.Payment == category)
@@ -505,7 +668,7 @@ namespace NexoListener
 						break;
 
 					case ReplyStatus.Partial:
-						CLogger.Add(listenerReply.Message = $"PARTIAL processing {nexo.MessageCategory} service");
+						CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] PARTIAL processing {nexo.MessageCategory} service");
 
 						// specific message processing
 						if (MessageCategoryEnumeration.Payment == category)
@@ -518,7 +681,7 @@ namespace NexoListener
 						break;
 
 					case ReplyStatus.Failure:
-						CLogger.Add(listenerReply.Message = $"FAILURE processing {nexo.MessageCategory} service");
+						CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] FAILURE processing {nexo.MessageCategory} service");
 
 						// specific message processing
 						if (MessageCategoryEnumeration.Payment == category)
@@ -530,7 +693,7 @@ namespace NexoListener
 						break;
 
 					case ReplyStatus.unknownError:
-						CLogger.Add(listenerReply.Message = $"UNKNOWN ERROR processing {nexo.MessageCategory} service");
+						CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] UNKNOWN ERROR processing {nexo.MessageCategory} service");
 						break;
 				}
 				listenerReply.NexoError = nexo.ErrorCondition.ToString();
@@ -538,7 +701,7 @@ namespace NexoListener
 			}
 			else
 			{
-				CLogger.Add(listenerReply.Message = $"Unknown error while processing {nexo.MessageCategory} service", TLog.ERROR);
+				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Unknown error while processing {nexo.MessageCategory} service", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.unknownError;
 			}
 
@@ -553,10 +716,10 @@ namespace NexoListener
 				if (null != dte.Path && nexoProcessed)
 				{
 					if (!(dte.Data.Status = SearchAndProcessProperty(nexo.Reply, dte.LPath, ref dte.Data.Value, false)))
-						CLogger.Add(dte.Data.Message = $"Failed fetching data {dte.Path}", TLog.ERROR);
+						CLogger.Add(dte.Data.Message = $"[{tcp.Client.RemoteEndPoint}] Failed fetching data {dte.Path}", TLog.ERROR);
 				}
 				else
-					CLogger.Add(dte.Data.Message = $"Failed creating the return data path {k.Key}, that data won't be fetched", TLog.ERROR);
+					CLogger.Add(dte.Data.Message = $"[{tcp.Client.RemoteEndPoint}] Failed creating the return data path {k.Key}, that data won't be fetched", TLog.ERROR);
 				toreturn.Add(dte);
 			}
 

@@ -25,15 +25,41 @@ namespace NexoListener
 		timeout,
 		cancelled,
 		unknownError,
+
+		asynchronousMessage = 100,
+		waitingToGainAccessToPOI,
+		accessToPOIHasBeenGranted,
+
+		login = 500,
+		logout,
+		beginPayment,
+		endPayment,
+		beginOtherPayment,
+		endOtherPayment,
+		beginRefund,
+		endRefund,
+		beginReversal,
+		endReversal,
+		beginReconciliation,
+		endReconciliation,
+		beginAbort,
+		endAbort,
+		beginOtherService = 600,
+		endOtherService,
 	}
 
 	public class CListenerReply
 	{
+		public bool Notification { get; set; } = false;
 		public ReplyStatus Status { get; set; }
 		public string Label { get; set; }
 		public string Message { get; set; }
 		public string NexoError { get; set; }
 		public string NexoInformation { get; set; }
 		public CListenerRequest Request { get; set; }
+		public override string ToString()
+		{
+			return Message;
+		}
 	}
 }

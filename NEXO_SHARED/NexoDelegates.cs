@@ -40,27 +40,27 @@ namespace NEXO
 		/// Function called when the server thread starts, before having received any request to process.
 		/// </summary>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		/// <returns>FALSE if the server must stop immediately before receiving any request, TRUE if the server must carry on</returns>
 		[ComVisible(false)]
-		public delegate bool OnStartDelegate(CThreadData threadData, object o);
+		public delegate bool OnStartDelegate(CThreadData threadData, object parameters);
 		/// <summary>
 		/// Function called when a client connects to the server
 		/// </summary>
 		/// <param name="tcp">Information about the connecting client</param>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		/// <returns>FALSE if the server must stop immediately before receiving any request, TRUE if the server must carry on</returns>
 		[ComVisible(false)]
-		public delegate bool OnConnectDelegate(TcpClient tcp, CThreadData threadData, object o);
+		public delegate bool OnConnectDelegate(TcpClient tcp, CThreadData threadData, object parameters);
 		/// <summary>
 		/// Function called when a client disconnects from the server
 		/// </summary>
 		/// <param name="remoteClient">The remote address being disconnected</param>
 		/// <param name="threadData">Thread ID as given by the creator of the thread</param>
-		/// <param name="o">Private parameters to pass to the thread</param>
+		/// <param name="parameters">Private parameters to pass to the thread</param>
 		[ComVisible(false)]
-		public delegate void OnDisconnectDelegate(string remoteClient, CThreadData threadData, object o);
+		public delegate void OnDisconnectDelegate(string remoteClient, CThreadData threadData, object parameters);
 		/// <summary>
 		/// Called whenever a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/> has been received and needs to be processed by the application.
 		/// The function is expected to either (1) produce a reply (2) produce a new request (device) (3) do nothing.
@@ -69,9 +69,9 @@ namespace NEXO
 		/// <param name="msg">The message to process</param>
 		/// <param name="tcp">Tcp details of the calling client</param>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		[ComVisible(false)]
-		public delegate void OnReceivedDelegate(string xml, NexoObjectToProcess msg, TcpClient tcp, CThreadData threadData, object o);
+		public delegate void OnReceivedDelegate(string xml, NexoObjectToProcess msg, TcpClient tcp, CThreadData threadData, object parameters);
 		/// <summary>
 		/// Called to inform the application of the message which will be sent back after having received a message.
 		/// If no message to send back this function is not called.
@@ -80,16 +80,16 @@ namespace NEXO
 		/// <param name="item">The message as it will be sent, no modification is possible</param>
 		/// <param name="tcp">Tcp details of the calling client</param>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		[ComVisible(false)]
-		public delegate void OnSendDelegate(string xml, NexoItem item, TcpClient tcp, CThreadData threadData, object o);
+		public delegate void OnSendDelegate(string xml, NexoItem item, TcpClient tcp, CThreadData threadData, object parameters);
 		/// <summary>
 		/// Function called when the server is stopping (after having received a stop order).
 		/// </summary>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		[ComVisible(false)]
-		public delegate void OnStopDelegate(CThreadData threadData, object o);
+		public delegate void OnStopDelegate(CThreadData threadData, object parameters);
 		/// <summary>
 		/// Called to inform the application a request message hasn't received a response and the message has been dismissed.
 		/// </summary>
@@ -98,9 +98,9 @@ namespace NEXO
 		/// <param name="status">Indicates the status of the message explaining why it hasn't been processed</param>
 		/// <param name="tcp">Tcp details of the called server</param>
 		/// <param name="threadData">Thread data</param>
-		/// <param name="o">Private parameters passed by the caller</param>
+		/// <param name="parameters">Private parameters passed by the caller</param>
 		[ComVisible(false)]
-		public delegate void OnSentRequestStatusChangedDelegate(string xml, NexoObjectToProcess msg, NexoMessageStatus status, TcpClient tcp, CThreadData threadData, object o);
+		public delegate void OnSentRequestStatusChangedDelegate(string xml, NexoObjectToProcess msg, NexoMessageStatus status, TcpClient tcp, CThreadData threadData, object parameters);
 		/// <summary>
 		/// Called to set the pre-connection request string to send before sending any Nexo message
 		/// </summary>

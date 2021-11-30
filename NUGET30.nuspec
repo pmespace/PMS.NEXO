@@ -19,16 +19,20 @@
     <!-- Modifiable -->
     <dependencies>
       <group targetFramework=".NETFramework4.7">
-        <dependency id="PMS.COMMON" version="5.2.4" exclude="Build,Analyzers" />
+        <dependency id="PMS.COMMON" version="5.4.0" exclude="Build,Analyzers" />
       </group>
       <group targetFramework=".NETFramework3.5">
-        <dependency id="PMS.COMMON" version="5.2.4" exclude="Build,Analyzers" />
+        <dependency id="PMS.COMMON" version="5.4.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
 
     <!-- Modifiable -->
-    <version>4.1.0</version>
+    <version>4.2.0</version>
     <releaseNotes>
+      4.2.0
+      - PMS.COMMON 5.4.0
+      - Enhanced NexoListener capabilities: added a mode to manage concurrent access to the same POI
+
       4.1.0
       - PMS.COMMON 5.2.4
       - Added (nexo)Listener application for .NET 5.0
@@ -38,7 +42,7 @@
       - Updated nexo retailer base classes
 
       3.4.1
-      - INvalid files in previous package
+      - Invalid files in previous package
 
       3.4.0
       - The whole system now supports XML and JSON to exchange with a POI

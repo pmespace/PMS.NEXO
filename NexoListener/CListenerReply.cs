@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NEXO;
 
 namespace NexoListener
 {
@@ -56,6 +57,8 @@ namespace NexoListener
 		public string Message { get; set; }
 		public string NexoError { get; set; }
 		public string NexoInformation { get; set; }
+		public double Amount { get; set; }
+		public TransactionIdentificationType POITransaction { get; set; }
 		public CListenerRequest Request { get; set; }
 		public override string ToString()
 		{

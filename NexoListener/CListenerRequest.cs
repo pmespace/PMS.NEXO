@@ -31,8 +31,8 @@ namespace NexoListener
 		public string SaleID { get; set; }
 		public string POIID { get; set; }
 		public string PaymentType { get; set; }
-		public double RequestedAmount { get; set; }
-		public double AuthorizedAmount { get; set; }
+		public double Amount { get; set; }
+		public string Currency { get; set; } = "EUR";
 		public TransactionIdentificationType POITransaction { get; set; }
 		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
 		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();

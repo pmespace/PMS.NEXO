@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using NEXO.Client;
 using NEXO;
 using System.Threading;
+using System.IO;
 
 namespace NexoListener
 {
@@ -43,7 +44,8 @@ namespace NexoListener
 		{
 			public uint Port { get; set; }
 			public bool AutoLoginLogout { get; set; } = false;
-			//public bool ConcurrencyAccess { get; set; } = false;
+			public bool LogExchanges { get; set; } = false;
+			public bool DisplayMessages { get; set; } = false;
 			public List<string> AllowedIP { get; set; } = new List<string>();
 			public List<string> AllowedServices { get; set; } = new List<string>();
 			[JsonIgnore]
@@ -253,7 +255,7 @@ namespace NexoListener
 			SettingsType settings = (SettingsType)parameters;
 
 			string srequest = Encoding.ASCII.GetString(request);
-			CLogger.Add($"[{tcp.Client.RemoteEndPoint}]  Starting processing message from client [{request.Length} bytes] {srequest}");
+			CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Request from client [{request.Length} bytes] {srequest}", TLog.INFOR, settings.DisplayMessages);
 
 			/*
 			 * process settings
@@ -266,6 +268,20 @@ namespace NexoListener
 				CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] Message can't be converted to a request [{srequest}]", TLog.ERROR);
 				listenerReply.Status = ReplyStatus.invalidRequest;
 				return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
+			}
+
+			string path = null;
+			string tempName = null;
+			string fileNameHeader = $"nexolistener.{tcp.Client.RemoteEndPoint}.{listenerReply.Request.SaleID}.{listenerReply.Request.POIID}";
+			char[] chars = Path.GetInvalidFileNameChars();
+			foreach (char c in chars)
+				fileNameHeader = fileNameHeader.Replace(c, '.');
+
+			// log request if requested
+			if (settings.LogExchanges)
+			{
+				CJson<CListenerRequest> json = new CJson<CListenerRequest>(GetTempFileName(fileNameHeader + ".request", ref path, ref tempName));
+				json.WriteSettings(listenerRequest);
 			}
 
 			// arrived here the message has been decoded, let's determine what to do
@@ -326,7 +342,8 @@ namespace NexoListener
 				PaymentTypeEnumeration? pt = (PaymentTypeEnumeration)CMisc.GetEnumValue(typeof(PaymentTypeEnumeration), listenerRequest.PaymentType);
 				if (null != pt)
 					((NexoPayment)nexo).PaymentType = (PaymentTypeEnumeration)pt;
-				((NexoPayment)nexo).RequestRequestedAmount = listenerRequest.RequestedAmount;
+				((NexoPayment)nexo).RequestRequestedAmount = listenerRequest.Amount;
+				((NexoPayment)nexo).RequestCurrency = listenerRequest.Currency;
 			}
 			else if (MessageCategoryEnumeration.Reversal == category)
 			{
@@ -645,11 +662,11 @@ namespace NexoListener
 				// specific message processing
 				if (MessageCategoryEnumeration.Payment == category)
 				{
-					listenerRequest.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoPayment)nexo).ReplyPOITransactionID, TimeStamp = ((NexoPayment)nexo).ReplyPOITransactionTimestamp };
+					listenerReply.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoPayment)nexo).ReplyPOITransactionID, TimeStamp = ((NexoPayment)nexo).ReplyPOITransactionTimestamp };
 				}
 				else if (MessageCategoryEnumeration.Reversal == category)
 				{
-					listenerRequest.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoReversal)nexo).ReplyPOITransactionID, TimeStamp = ((NexoReversal)nexo).ReplyPOITimestamp };
+					listenerReply.POITransaction = new TransactionIdentificationType() { TransactionID = ((NexoReversal)nexo).ReplyPOITransactionID, TimeStamp = ((NexoReversal)nexo).ReplyPOITimestamp };
 				}
 
 				switch (listenerReply.Status)
@@ -660,7 +677,7 @@ namespace NexoListener
 						// specific message processing
 						if (MessageCategoryEnumeration.Payment == category)
 						{
-							listenerRequest.AuthorizedAmount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
+							listenerReply.Amount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
 						}
 						else if (MessageCategoryEnumeration.Reversal == category)
 						{
@@ -673,7 +690,7 @@ namespace NexoListener
 						// specific message processing
 						if (MessageCategoryEnumeration.Payment == category)
 						{
-							listenerRequest.AuthorizedAmount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
+							listenerReply.Amount = ((NexoPayment)nexo).ReplyAuthorizedAmount;
 						}
 						else if (MessageCategoryEnumeration.Reversal == category)
 						{
@@ -734,7 +751,18 @@ namespace NexoListener
 				listenerReply.Request.ElementsToReturn.Add(dte.Path, dte.Data);
 			listenerReply.Label = listenerReply.Status.ToString();
 
-			return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply));
+			// log reply if requested
+			if (settings.LogExchanges)
+			{
+				CJson<CListenerReply> json = new CJson<CListenerReply>(GetTempFileName(fileNameHeader + ".reply", ref path, ref tempName));
+				json.WriteSettings(listenerReply);
+			}
+
+			string sreply = CJson<CListenerReply>.Serialize(listenerReply);
+			byte[] breply = Encoding.UTF8.GetBytes(sreply);
+			CLogger.Add($"[{tcp.Client.RemoteEndPoint}] Reply to client [{breply.Length} bytes] {sreply}", TLog.INFOR, settings.DisplayMessages);
+
+			return breply;
 		}
 
 		// convert a "aaa.bbb.ccc" string to a list of strings [0]=aaa, [1]=bbb,...
@@ -823,6 +851,23 @@ namespace NexoListener
 				}
 			}
 			return false;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
+		/// <param name="path"></param>
+		/// <param name="tempName"></param>
+		/// <returns></returns>
+		private static string GetTempFileName(string s, ref string path, ref string tempName)
+		{
+			if (string.IsNullOrEmpty(tempName))
+			{
+				string fullname = Path.GetTempFileName();
+				tempName = Path.GetFileName(fullname);
+				path = Path.GetDirectoryName(fullname);
+			}
+			return $"{path}{Path.DirectorySeparatorChar}{s}-{tempName}.json";
 		}
 		#endregion
 	}

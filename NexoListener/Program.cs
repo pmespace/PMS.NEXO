@@ -22,10 +22,15 @@ namespace NexoListener
 		#region const
 		private const string LISTENER_SETTINGS_FILE = "listener.settings.json";
 		private const string LISTENER_TEST_FILE = "listener.request.json";
+		private const string LISTENER_LOG_FILE = "listener.log";
+
 		private const string ACTIVATE_DISPLAY = "Activate activity display";
 		private const string DEACTIVATE_DISPLAY = "Deactivate activity display";
 
 		private const string OPTION_SETTINGS_FILE_NAME = "-s";
+		private const string OPTION_LOG_FILE_NAME = "-l";
+		private const string OPTION_LOG_AUTO_PURGE = "-a";
+		private const string OPTION_LOG_NUMBER_OF_FILES = "-n";
 
 		private const char TEST_LISTENER = '0';
 		private const char TEST_LISTENER_CREATE = '1';
@@ -36,17 +41,63 @@ namespace NexoListener
 		#region main
 		static void Main(string[] args)
 		{
+			string logFile = null;
 			string settingsFile = null;
+			string autoPurge = null;
+			string numberOfFiles = null;
+
+			// take a list of strings (refer to PathToData) and add it to a dictionary of paths + save the value to use
+			Func<string, string, string, string> CheckOption = (string arg, string option, string data) =>
+			{
+				try
+				{
+					if ((arg.StartsWith(option, true, null)) && option.Length < arg.Length && string.IsNullOrEmpty(data))
+						return arg.Substring(option.Length);
+					return data;
+				}
+				catch (Exception) { }
+				return null;
+			};
+
 			// get start options
 			foreach (string s in args)
 			{
 				// has the settings file been specified
-				if ((s.StartsWith(OPTION_SETTINGS_FILE_NAME, true, null)) && OPTION_SETTINGS_FILE_NAME.Length < s.Length && string.IsNullOrEmpty(settingsFile))
-					settingsFile = s.Substring(OPTION_SETTINGS_FILE_NAME.Length);
+				//if ((s.StartsWith(OPTION_SETTINGS_FILE_NAME, true, null)) && OPTION_SETTINGS_FILE_NAME.Length < s.Length && string.IsNullOrEmpty(settingsFile))
+				//settingsFile = s.Substring(OPTION_SETTINGS_FILE_NAME.Length);
+
+				// has the log file been specified
+				//if ((s.StartsWith(OPTION_LOG_FILE_NAME, true, null)) && OPTION_LOG_FILE_NAME.Length < s.Length && string.IsNullOrEmpty(logFile))
+				//	logFile = s.Substring(OPTION_LOG_FILE_NAME.Length);
+
+				settingsFile = CheckOption(s, OPTION_SETTINGS_FILE_NAME, settingsFile);
+				logFile = CheckOption(s, OPTION_LOG_FILE_NAME, logFile);
+				numberOfFiles = CheckOption(s, OPTION_LOG_NUMBER_OF_FILES, numberOfFiles);
+				autoPurge = CheckOption(s, OPTION_LOG_AUTO_PURGE, autoPurge);
 			}
 
 			if (string.IsNullOrEmpty(settingsFile))
 				settingsFile = LISTENER_SETTINGS_FILE;
+			if (string.IsNullOrEmpty(logFile))
+				logFile = LISTENER_LOG_FILE;
+			try
+			{
+				CLog.AutoPurgeLogFiles = bool.Parse(autoPurge);
+			}
+			catch
+			{
+				CLog.AutoPurgeLogFiles = true;
+			}
+			try
+			{
+				CLog.NumberOfFilesToKeep = int.Parse(numberOfFiles);
+			}
+			catch
+			{
+				CLog.NumberOfFilesToKeep = 3;
+			}
+			CLog.LogFileName = logFile;
+
 			CLogger.Add($"Using settings file: {settingsFile}");
 
 			MenuList menu = new MenuList();
@@ -56,10 +107,6 @@ namespace NexoListener
 			menu.Add(RELOAD_SETTINGS, new CMenu() { Text = "Reload settings", Fnc = ReloadSettings });
 			//menu.Add(i++.ToString()[0], new CMenu() { Text = ACTIVATE_DISPLAY, Fnc = ActivityDisplay });
 			menu.Add('X', new CMenu() { Text = "Exit", Fnc = Exit });
-
-			CLog.AutoPurgeLogFiles = true;
-			CLog.NumberOfFilesToKeep = 3;
-			CLog.LogFileName = "listener.log";
 
 			// Start listener
 			CListener listener = new CListener();
@@ -309,7 +356,7 @@ namespace NexoListener
 				var toReturn = new CListenerDataElements();
 				if (null != dtr)
 					toReturn.Add(dtr, new CListenerDataElement());
-				var request = new CListenerRequest() { /*AutoLoginLogout = autologin,*/ RequestedAmount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
+				var request = new CListenerRequest() { Amount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
 
 				json.WriteSettings(request);
 				Console.WriteLine();

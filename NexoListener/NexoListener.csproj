@@ -17,6 +17,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove=".~lock.Listener user guide.odt#" />
+    <None Remove="Listener user guide - v2.1 - revision marks.pdf" />
+    <None Remove="Listener user guide - v2.1.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PMS.COMMON.CORE" Version="5.4.0" />
   </ItemGroup>
 

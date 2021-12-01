@@ -9,7 +9,14 @@ namespace NexoListener
 {
 	static class CLogger
 	{
-		public static string Add(string text, TLog tlog = TLog.INFOR) { Console.WriteLine(CLog.Add(text, tlog)); return text; }
+		public static string Add(string text, TLog tlog = TLog.INFOR, bool display = true)
+		{
+			if (display)
+				Console.WriteLine(CLog.Add(text, tlog));
+			else
+				CLog.Add(text, tlog);
+			return text;
+		}
 		public static string Display(string text) { Console.WriteLine(text); return text; }
 	}
 }

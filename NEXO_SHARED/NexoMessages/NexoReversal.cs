@@ -210,10 +210,10 @@ namespace NEXO
 		}
 		public string RequestSaleReferenceID
 		{
-#if NEXO30
+#if RETAILER30
 			get => CMisc.Trimmed(RequestData.SaleReferenceID);
 			set => RequestData.SaleReferenceID = value;
-#elif NEXO31
+#else
 		get => CMisc.Trimmed(RequestData.SaleData.SaleReferenceID);
 		set => RequestData.SaleData.SaleReferenceID = value;
 #endif
@@ -255,8 +255,8 @@ namespace NEXO
 		{
 			ServiceID = SetDefaultStringValue(ServiceID, new NexoID().DefaultValue);
 
-#if NEXO30
-#elif NEXO31
+#if RETAILER30
+#elif RETAILER31
 			RequestData.SaleData.SaleTransactionID.TimeStamp = SetDefaultStringValue(RequestData.SaleData.SaleTransactionID.TimeStamp, NexoISODateTime.CurrentDateTime(Utc, AddMilliseconds));
 #endif
 

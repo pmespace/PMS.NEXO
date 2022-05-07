@@ -230,10 +230,10 @@ namespace NEXO
 		#region request inner properties
 		public string RequestManufacturerID
 		{
-#if NEXO30
+#if RETAILER30
 			get => CMisc.Trimmed(RequestData.SaleSoftware.ManufacturerID);
 			set => RequestData.SaleSoftware.ManufacturerID = value;
-#elif NEXO31
+#else
 			get => CMisc.Trimmed(RequestData.SaleSoftware.ProviderIdentification);
 			set => RequestData.SaleSoftware.ProviderIdentification = value;
 #endif
@@ -293,12 +293,13 @@ namespace NEXO
 		}
 		public string ReplyManufacturerID
 		{
-#if NEXO30
+#if RETAILER30
 			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ManufacturerID);
 			set => ReplyData.POISystemData.POISoftware.ManufacturerID = value;
-#elif NEXO31
-			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification) ;
-			set => ReplyData.POISystemData.POISoftware.ProviderIdentification = value; 
+			//#elif RETAILER31
+#else
+			get => CMisc.Trimmed(ReplyData.POISystemData.POISoftware.ProviderIdentification);
+			set => ReplyData.POISystemData.POISoftware.ProviderIdentification = value;
 #endif
 		}
 		public string ReplySoftwareVersion

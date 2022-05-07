@@ -191,7 +191,7 @@ namespace NEXO
 		}
 		public int RequestSoundVolume
 		{
-			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.SoundVolume), 0, true);
 			set => RequestData.SoundVolume = value.ToString();
 			//get => RequestData.SoundVolume;
 			//set => RequestData.SoundVolume = value;

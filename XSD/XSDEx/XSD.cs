@@ -191,8 +191,10 @@ namespace XSDEx
 					// load all selected files into a schema and compile
 					foreach (string file in settings.xsdSettings.Files)
 					{
-						if (string.IsNullOrEmpty(fileName))
-							fileName = settings.xsdSettings.Files[0] + GetExtension(settings.xsdSettings);
+						FileInfo fi = new FileInfo(file);
+						//if (string.IsNullOrEmpty(fileName))
+						//fileName = settings.xsdSettings.Files[0] + GetExtension(settings.xsdSettings);
+						fileName = fi.Directory.FullName + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(fi.FullName) + GetExtension(settings.xsdSettings);
 						using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read))
 						{
 							xsd = XmlSchema.Read(stream, null);
@@ -209,7 +211,8 @@ namespace XSDEx
 					// load all selected files into a schema and compile
 					for (int i = 0; i < settings.xsdSettings.Files.Count; i++)
 					{
-						string fileName = settings.xsdSettings.Files[i] + GetExtension(settings.xsdSettings);
+						FileInfo fi = new FileInfo(settings.xsdSettings.Files[i]);
+						string fileName = fi.Directory.FullName + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(fi.FullName) + GetExtension(settings.xsdSettings);
 						XmlSchemas xsds = new XmlSchemas();
 						using (var stream = new FileStream(settings.xsdSettings.Files[i], FileMode.Open, FileAccess.Read))
 						{
@@ -258,6 +261,8 @@ namespace XSDEx
 				// create the context
 				if (string.IsNullOrEmpty(settings.Nmspace))
 					settings.Nmspace = "XSD";
+				settings.Nmspace += (XSDSettings.NameSpace.None == settings.NamespaceToDeclare ? null : $".{settings.NamespaceToDeclare}");
+
 				XmlSchemaImporter schemaImporter = new XmlSchemaImporter(xsds);
 				CodeNamespace codeNamespace = new CodeNamespace(settings.Nmspace);
 
@@ -310,13 +315,6 @@ namespace XSDEx
 
 				msg.Text = "Finalising";
 
-				// add the required imports 
-				//newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
-				if (settings.AddDispID && settings.DeclareClassInterface)
-					newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.InteropServices"));
-				//// add newtonsoft.json
-				//newCodeNamespace.Imports.Add(new CodeNamespaceImport("Newtonsoft.Json"));
-
 				// display in texbox
 				//CodeGenerator.ValidateIdentifiers(codeNamespace);
 				CodeGenerator.ValidateIdentifiers(newCodeNamespace);
@@ -324,12 +322,13 @@ namespace XSDEx
 				// create the code
 				msg.Text = "Generating code";
 
-				//Code = GenerateCode(settings, codeNamespace);
 				Code = GenerateCode(settings, newCodeNamespace);
-				if (!string.IsNullOrEmpty(beginPreprocessor))
-				{
-					Code = $"{beginPreprocessor}\r\n{Code}{endPreprocessor}";
-				}
+
+				// add preprocessor around the code
+				//if (!string.IsNullOrEmpty(beginPreprocessor))
+				//{
+				//Code = $"{beginPreprocessor}\r\n{Code}{endPreprocessor}";
+				//}
 
 				msg.Text = "Writing file";
 
@@ -358,6 +357,8 @@ namespace XSDEx
 		/// <returns></returns>
 		private CodeNamespace PostProcess(XSDSettings settings, XSDParams parameters, CodeNamespace codeNamespace, bool lastFile, Message msg)
 		{
+			bool addNewtonSoft = false;
+			bool addSerialization = false;
 			CodeNamespace newCodeNamespace = null;
 
 			const string bXSD = "BEGIN ADDED BY XSD";
@@ -367,7 +368,20 @@ namespace XSDEx
 			msg.Text = "Post process";
 			try
 			{
-				const string sizeMethod = "Size", getItemMethod = "GetItem", setItemMethod = "SetItem", addItemMethod = "AddItem", removeItemMethod = "RemoveItem", isArray = "array", isCounter = "i", isField = "Field", isLength = "Length", isEx = "ex", isIndex = "index";
+				const string lengthMethod = "Length",
+					getItemMethod = "GetItem",
+					setItemMethod = "SetItem",
+					addItemMethod = "AddItem",
+					removeItemMethod = "RemoveItem",
+					insertItemMethod = "InsertItem",
+					isArray = "array",
+					isCounterI = "i",
+					isCounterJ = "j",
+					isField = "Field",
+					isLength = "Length",
+					isEx = "ex",
+					isIndex = "index",
+					isValue = "value";
 
 				// file specific objects to add
 				List<CodeTypeDeclaration> newCodeTypeDeclarations = new List<CodeTypeDeclaration>();
@@ -405,6 +419,9 @@ namespace XSDEx
 					// prepare OPTIMIZING flag statements as a FIELD (create an additional bool value set to true if optimizing the class, false otherwise)
 					CodeMemberField optimizingField = CreateFieldMember(NexoXSDStrings.NexoOptimizingField, typeof(bool), MemberAttributes.Private, false);
 					CodeMemberProperty optimizingProperty = CreatePropertyMember(NexoXSDStrings.NexoOptimizingProperty, typeof(bool), MemberAttributes.Assembly | MemberAttributes.Final);//, optimizingField, bXSD, eXSD);
+
+					// create class name property ( flag stating a user type has or not been set (create an additional bool value set to true if the data has been set, false otherwise)
+					CodeMemberProperty className = CreatePropertyMember(NexoXSDStrings.NexoClassName, typeof(string), MemberAttributes.Public | MemberAttributes.Final);
 
 					// create a list of properties that will receive special processing from XSDEx
 					// properties that will require to be processed for HASBEENSET processing
@@ -843,30 +860,47 @@ namespace XSDEx
 										(null == parameters.ArrayTypesWithoutAccessors ||
 											(null != parameters.ArrayTypesWithoutAccessors && !parameters.ArrayTypesWithoutAccessors.Contains(property.Type.BaseType))))
 									{
-										// get Size method (if null!=array ? return array.size : 0)
-										string addenda = sizeMethod;
+										#region length
+										// getLength method
+										string addenda = lengthMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
 										cmm.ReturnType = new CodeTypeReference(typeof(int));
-										CodeConditionStatement ccs = new CodeConditionStatement(
-											new CodeBinaryOperatorExpression(
-												new CodeFieldReferenceExpression(
-													new CodeThisReferenceExpression(), propertyField.Name),
-												CodeBinaryOperatorType.ValueEquality,
-												new CodePrimitiveExpression(null)),
-											new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(0)) },
-											new CodeStatement[] { new CodeMethodReturnStatement(
-											new CodePropertyReferenceExpression(
-												new CodeFieldReferenceExpression(
-													new CodeThisReferenceExpression(), propertyField.Name),
-													isLength)) });
+										CodeConditionStatement ccs =
+											new CodeConditionStatement(
+												// itemlist==null
+												new CodeBinaryOperatorExpression(
+													new CodeFieldReferenceExpression(
+														new CodeThisReferenceExpression(),
+														propertyField.Name),
+													CodeBinaryOperatorType.ValueEquality,
+													new CodeDefaultValueExpression(property.Type)
+													),
+												// return 0
+												new CodeStatement[]
+												{
+													new CodeMethodReturnStatement(
+														new CodePrimitiveExpression(0))
+												},
+												new CodeStatement[]
+												{
+													// return itemlist.Length
+													new CodeMethodReturnStatement(
+														new CodePropertyReferenceExpression(
+															new CodeFieldReferenceExpression(
+																new CodeThisReferenceExpression(),
+																propertyField.Name),
+															isLength))
+												});
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ccs);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
 										addedMembers.Add(cmm);
+										#endregion
 
-										// get Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
+										#region get item
+										// getItem method
 										addenda = getItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -875,36 +909,87 @@ namespace XSDEx
 										CodeParameterDeclarationExpression cpde = new CodeParameterDeclarationExpression(
 											new CodeTypeReference(typeof(int)), isIndex);
 										cmm.Parameters.Add(cpde);
-										CodeTryCatchFinallyStatement ctcf = new CodeTryCatchFinallyStatement(
-											new CodeStatement[]
-												{ new CodeConditionStatement(
-												new CodeBinaryOperatorExpression(
-													new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-													CodeBinaryOperatorType.ValueEquality,
-													new CodeDefaultValueExpression(property.Type)),
-												new CodeStatement[] { new CodeMethodReturnStatement(new CodeDefaultValueExpression(cmm.ReturnType)) },
-												new CodeStatement[] {
+										CodeTryCatchFinallyStatement ctcf =
+											new CodeTryCatchFinallyStatement(
+												new CodeStatement[]
+												{
 													new CodeConditionStatement(
+														// itemlist==null
 														new CodeBinaryOperatorExpression(
-															new CodeBinaryOperatorExpression(
-																new CodePropertyReferenceExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), isLength),
-																CodeBinaryOperatorType.Subtract,
-																new CodePrimitiveExpression(1)),
-															CodeBinaryOperatorType.GreaterThanOrEqual,
-															//new CodePrimitiveExpression(parameter)),
-															new CodeArgumentReferenceExpression(isIndex)),
-														new CodeStatement[] { new CodeMethodReturnStatement(new CodeArrayIndexerExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), new CodeArgumentReferenceExpression(isIndex))) },
-														new CodeStatement[] { new CodeMethodReturnStatement(new CodeDefaultValueExpression(cmm.ReturnType)) }) }) },
-											new CodeCatchClause[] { new CodeCatchClause(
-											isEx,
-											new CodeTypeReference(typeof(Exception)),
-											new CodeStatement[] { new CodeMethodReturnStatement(new CodeDefaultValueExpression(cmm.ReturnType)) }) });
+															new CodeFieldReferenceExpression(
+																new CodeThisReferenceExpression(),
+																propertyField.Name),
+															CodeBinaryOperatorType.ValueEquality,
+															new CodeDefaultValueExpression(property.Type)),
+														// then return null
+														new CodeStatement[]
+														{
+															new CodeMethodReturnStatement(
+																new CodeDefaultValueExpression(cmm.ReturnType)),
+														},
+														// else
+														new CodeStatement[]
+														{
+															new CodeConditionStatement(
+																// 0 > index
+																new CodeBinaryOperatorExpression(
+																	new CodePrimitiveExpression(0),
+																	CodeBinaryOperatorType.GreaterThan,
+																	new CodeArgumentReferenceExpression(isIndex)),
+																// then return null
+																new CodeStatement[]
+																{
+																	new CodeMethodReturnStatement(
+																		new CodeDefaultValueExpression(cmm.ReturnType)),
+																},
+																// else
+																new CodeStatement[]
+																{
+																	new CodeConditionStatement(
+																		// itemlist.length <= index
+																		new CodeBinaryOperatorExpression(
+																			new CodePropertyReferenceExpression(
+																				new CodeFieldReferenceExpression(
+																					new CodeThisReferenceExpression(),
+																					propertyField.Name),
+																				isLength),
+																			CodeBinaryOperatorType.LessThanOrEqual,
+																			new CodeArgumentReferenceExpression(isIndex)),
+																		// then return null
+																		new CodeStatement[]
+																		{
+																			new CodeMethodReturnStatement(
+																				new CodeDefaultValueExpression(cmm.ReturnType)),
+																		},
+																		// else
+																		new CodeStatement[]
+																		{
+																			new CodeMethodReturnStatement(
+																				new CodeArrayIndexerExpression(
+																					new CodeFieldReferenceExpression(
+																						new CodeThisReferenceExpression(),
+																						propertyField.Name),
+																					new CodeArgumentReferenceExpression(isIndex)))
+																		})
+																})
+														}),
+												},
+												new CodeCatchClause[]
+												{
+													new CodeCatchClause(
+														isEx,
+														new CodeTypeReference(typeof(Exception)),
+														new CodeMethodReturnStatement(
+															new CodeDefaultValueExpression(cmm.ReturnType)))
+												});
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
 										addedMembers.Add(cmm);
+										#endregion
 
-										// set Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
+										#region set item
+										// setItem method
 										addenda = setItemMethod;
 										cmm = new CodeMemberMethod();
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -913,35 +998,91 @@ namespace XSDEx
 										cpde = new CodeParameterDeclarationExpression(
 											new CodeTypeReference(typeof(int)), isIndex);
 										cmm.Parameters.Add(cpde);
-										string isValue = "value";
 										cpde = new CodeParameterDeclarationExpression(
 											new CodeTypeReference(property.Type.BaseType), isValue);
 										cmm.Parameters.Add(cpde);
 										ctcf = new CodeTryCatchFinallyStatement(
 											new CodeStatement[]
-												{ new CodeConditionStatement(
-												new CodeBinaryOperatorExpression(
-													new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-													CodeBinaryOperatorType.ValueEquality,
-													new CodeDefaultValueExpression(property.Type)),
-												new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) },
-												new CodeStatement[] {
-														new CodeAssignStatement(
-															new CodeArrayIndexerExpression(
-																new CodeFieldReferenceExpression(
-																	new CodeThisReferenceExpression(), propertyField.Name),
-																new CodeArgumentReferenceExpression(isIndex)),
-															new CodeArgumentReferenceExpression(isValue)),
-														new CodeMethodReturnStatement(new CodePrimitiveExpression(true))}) },
-											new CodeCatchClause[] { new CodeCatchClause(
-											isEx,
-											new CodeTypeReference(typeof(Exception)),
-											new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) }) });
+											{
+												new CodeConditionStatement(
+													// itemlist==null
+													new CodeBinaryOperatorExpression(
+														new CodeFieldReferenceExpression(
+															new CodeThisReferenceExpression(),
+															propertyField.Name),
+														CodeBinaryOperatorType.ValueEquality,
+														new CodeDefaultValueExpression(property.Type)),
+													// then return null
+													new CodeStatement[]
+													{
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(false)),
+													},
+													// else
+													new CodeStatement[]
+													{
+													new CodeConditionStatement(
+														// 0 > index
+														new CodeBinaryOperatorExpression(
+															new CodePrimitiveExpression(0),
+															CodeBinaryOperatorType.GreaterThan,
+															new CodeArgumentReferenceExpression(isIndex)),
+														// then return null
+														new CodeStatement[]
+														{
+															new CodeMethodReturnStatement(
+																new CodePrimitiveExpression(false)),
+														},
+														// else
+														new CodeStatement[]
+														{
+															new CodeConditionStatement(
+																// itemlist.length <= index
+																new CodeBinaryOperatorExpression(
+																	new CodePropertyReferenceExpression(
+																		new CodeFieldReferenceExpression(
+																			new CodeThisReferenceExpression(),
+																			propertyField.Name),
+																		isLength),
+																	CodeBinaryOperatorType.LessThanOrEqual,
+																	new CodeArgumentReferenceExpression(isIndex)),
+																// then return null
+																new CodeStatement[]
+																{
+																	new CodeMethodReturnStatement(
+																		new CodePrimitiveExpression(false))
+																},
+																// else
+																new CodeStatement[]
+																{
+																	new CodeAssignStatement(
+																		new CodeArrayIndexerExpression(
+																			new CodeFieldReferenceExpression(
+																				new CodeThisReferenceExpression(),
+																				propertyField.Name),
+																			new CodeArgumentReferenceExpression(isIndex)),
+																		new CodeArgumentReferenceExpression(isValue)),
+																	new CodeMethodReturnStatement(
+																		new CodePrimitiveExpression(true))
+																}),
+														})
+													})
+											},
+											new CodeCatchClause[]
+											{
+												new CodeCatchClause(
+													isEx,
+													new CodeTypeReference(typeof(Exception)),
+													new CodeMethodReturnStatement(
+														new CodePrimitiveExpression(false)))
+											});
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
 										addedMembers.Add(cmm);
+										#endregion
 
+										#region add item
 										// add Item method (try	{return null != array ? array.Length - 1 >= index ? array[index] : default : default;}	catch (Exception) { return default; })
 										addenda = addItemMethod;
 										cmm = new CodeMemberMethod();
@@ -954,79 +1095,110 @@ namespace XSDEx
 										ctcf = new CodeTryCatchFinallyStatement(
 											// try statement
 											new CodeStatement[]
-												{ new CodeConditionStatement(
-												new CodeBinaryOperatorExpression(
-													new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-													CodeBinaryOperatorType.ValueEquality,
-													new CodeDefaultValueExpression(property.Type)),
-												new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) },
-												new CodeStatement[] {
-													// declare a new array of the same type + 1 item
-													new CodeVariableDeclarationStatement(
-														//new CodeTypeReference(m.Type.BaseType),
-														property.Type,
-														isArray,
-														new CodeArrayCreateExpression(
-															new CodeTypeReference(property.Type.BaseType),
-															new CodeBinaryOperatorExpression(
-																new CodePropertyReferenceExpression(
-																	new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-																	isLength),
-																CodeBinaryOperatorType.Add,
-																new CodePrimitiveExpression(1)))),
-													// declare the counter
-													new CodeVariableDeclarationStatement(typeof(int), isCounter, new CodePrimitiveExpression(0)),
-													// for loop to copy old items inside the new array
-													new CodeIterationStatement(
-														// initializer
-														new CodeAssignStatement(
-															new CodeVariableReferenceExpression(isCounter),
+											{
+												new CodeConditionStatement(
+													// itemlist==null
+													new CodeBinaryOperatorExpression(
+														new CodeFieldReferenceExpression(
+															new CodeThisReferenceExpression(),
+															propertyField.Name),
+														CodeBinaryOperatorType.ValueEquality,
+														new CodeDefaultValueExpression(property.Type)),
+													// then return null
+													new CodeStatement[]
+													{
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(false))
+													},
+													// else
+													new CodeStatement[]
+													{
+														// declare a new array of the same type + 1 item
+														new CodeVariableDeclarationStatement(
+															//new CodeTypeReference(m.Type.BaseType),
+															property.Type,
+															isArray,
+															new CodeArrayCreateExpression(
+																new CodeTypeReference(property.Type.BaseType),
+																new CodeBinaryOperatorExpression(
+																	new CodePropertyReferenceExpression(
+																		new CodeFieldReferenceExpression(
+																			new CodeThisReferenceExpression(),
+																			propertyField.Name),
+																		isLength),
+																	CodeBinaryOperatorType.Add,
+																	new CodePrimitiveExpression(1)))),
+														// declare the counter
+														new CodeVariableDeclarationStatement(
+															typeof(int),
+															isCounterI,
 															new CodePrimitiveExpression(0)),
-														// test
-														new CodeBinaryOperatorExpression(
-															new CodeVariableReferenceExpression(isCounter),
-															CodeBinaryOperatorType.LessThan,
-															new CodePropertyReferenceExpression(
-																new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-																isLength)),
-														// update counter
-														new CodeAssignStatement(
-															new CodeVariableReferenceExpression(isCounter),
-															new CodeBinaryOperatorExpression(
-																new CodeVariableReferenceExpression(isCounter),
-																CodeBinaryOperatorType.Add,
-																new CodePrimitiveExpression(1))),
-														new CodeStatement[] { 
-															// assign existing values to the new array
+														// for loop to copy old items inside the new array
+														new CodeIterationStatement(
+															// initializer
 															new CodeAssignStatement(
-																new CodeArrayIndexerExpression(
-																	new CodeArgumentReferenceExpression(isArray),
-																	new CodeArgumentReferenceExpression(isCounter)),
-																new CodeArrayIndexerExpression(
-																	new CodeArgumentReferenceExpression(propertyField.Name),
-																	new CodeArgumentReferenceExpression(isCounter))) }),
-													// copy new value to the new array
-													new CodeAssignStatement(
-														new CodeArrayIndexerExpression(
-															new CodeArgumentReferenceExpression(isArray),
-															new CodeArgumentReferenceExpression(isCounter)),
-														new CodeArgumentReferenceExpression(isValue)),
-													// replace existing array by new array
-													new CodeAssignStatement(
-														new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), property.Name),
-														new CodeArgumentReferenceExpression(isArray)),
-													// return true
-													new CodeMethodReturnStatement(new CodePrimitiveExpression(true)) }) },
-											// catch statement
-											new CodeCatchClause[] { new CodeCatchClause(
-											isEx,
-											new CodeTypeReference(typeof(Exception)),
-											new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) }) });
+																new CodeVariableReferenceExpression(isCounterI),
+																new CodePrimitiveExpression(0)),
+															// test
+															new CodeBinaryOperatorExpression(
+																new CodeVariableReferenceExpression(isCounterI),
+																CodeBinaryOperatorType.LessThan,
+																new CodePropertyReferenceExpression(
+																	new CodeFieldReferenceExpression(
+																		new CodeThisReferenceExpression(),
+																		propertyField.Name),
+																	isLength)),
+															// update counter
+															new CodeAssignStatement(
+																new CodeVariableReferenceExpression(isCounterI),
+																new CodeBinaryOperatorExpression(
+																	new CodeVariableReferenceExpression(isCounterI),
+																	CodeBinaryOperatorType.Add,
+																	new CodePrimitiveExpression(1))),
+															new CodeStatement[]
+															{
+																// assign existing values to the new array
+																new CodeAssignStatement(
+																	new CodeArrayIndexerExpression(
+																		new CodeArgumentReferenceExpression(isArray),
+																		new CodeArgumentReferenceExpression(isCounterI)),
+																	new CodeArrayIndexerExpression(
+																		new CodeArgumentReferenceExpression(propertyField.Name),
+																		new CodeArgumentReferenceExpression(isCounterI)))
+															}),
+														// copy new value to the new array
+														new CodeAssignStatement(
+															new CodeArrayIndexerExpression(
+																new CodeArgumentReferenceExpression(isArray),
+																new CodeArgumentReferenceExpression(isCounterI)),
+															new CodeArgumentReferenceExpression(isValue)),
+														// replace existing array by new array
+														new CodeAssignStatement(
+															new CodeFieldReferenceExpression(
+																new CodeThisReferenceExpression(),
+																property.Name),
+															new CodeArgumentReferenceExpression(isArray)),
+														// return true
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(true))
+													})
+											},
+										// catch statement
+										new CodeCatchClause[]
+										{
+											new CodeCatchClause(
+												isEx,
+												new CodeTypeReference(typeof(Exception)),
+												new CodeMethodReturnStatement(
+													new CodePrimitiveExpression(false)))
+										});
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
 										addedMembers.Add(cmm);
+										#endregion
 
+										#region remove item
 										// remove Item method 
 										addenda = removeItemMethod;
 										cmm = new CodeMemberMethod();
@@ -1037,110 +1209,374 @@ namespace XSDEx
 											new CodeTypeReference(typeof(int)), isIndex);
 										cmm.Parameters.Add(cpde);
 										ctcf = new CodeTryCatchFinallyStatement(
-											// try statement
 											new CodeStatement[]
-												{ new CodeConditionStatement(
+											{
+												new CodeConditionStatement(
+													// itemlist==null
+													new CodeBinaryOperatorExpression(
+														new CodeFieldReferenceExpression(
+															new CodeThisReferenceExpression(),
+															propertyField.Name),
+														CodeBinaryOperatorType.ValueEquality,
+														new CodeDefaultValueExpression(property.Type)
+														),
+													// then return null
+													new CodeStatement[]
+													{
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(false)),
+													},
+													// else
+													new CodeStatement[]
+													{
+														new CodeConditionStatement(
+															// 0 > index
+															new CodeBinaryOperatorExpression(
+																new CodePrimitiveExpression(0),
+																CodeBinaryOperatorType.GreaterThan,
+																new CodeArgumentReferenceExpression(isIndex)),
+															// then return null
+															new CodeStatement[]
+															{
+																new CodeMethodReturnStatement(
+																	new CodePrimitiveExpression(false)),
+															},
+															// else
+															new CodeStatement[]
+															{
+																new CodeConditionStatement(
+																	// itemlist.length <= index
+																	new CodeBinaryOperatorExpression(
+																		new CodePropertyReferenceExpression(
+																			new CodeFieldReferenceExpression(
+																				new CodeThisReferenceExpression(),
+																				propertyField.Name),
+																			isLength),
+																		CodeBinaryOperatorType.LessThanOrEqual,
+																		new CodeArgumentReferenceExpression(isIndex)),
+																	// then return null
+																	new CodeStatement[]
+																	{
+																		new CodeMethodReturnStatement(
+																			new CodePrimitiveExpression(false)),
+																	},
+																	// else
+																	new CodeStatement[]
+																	{
+																		// declare a new array of the same type - 1 item
+																		new CodeVariableDeclarationStatement(
+																			//new CodeTypeReference(m.Type.BaseType),
+																			property.Type,
+																			isArray,
+																			new CodeArrayCreateExpression(
+																				new CodeTypeReference(property.Type.BaseType),
+																				new CodeBinaryOperatorExpression(
+																					new CodePropertyReferenceExpression(
+																						new CodeFieldReferenceExpression(
+																							new CodeThisReferenceExpression(),
+																							propertyField.Name),
+																						isLength),
+																					CodeBinaryOperatorType.Subtract,
+																					new CodePrimitiveExpression(1)))),
+																		// declare the counter
+																		new CodeVariableDeclarationStatement(
+																			typeof(int),
+																			isCounterI,
+																			new CodePrimitiveExpression(0)),
+																		// for loop to copy old items below requested index inside the new array
+																		new CodeIterationStatement(
+																			// initializer
+																			new CodeAssignStatement(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				new CodePrimitiveExpression(0)),
+																			// test
+																			new CodeBinaryOperatorExpression(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				CodeBinaryOperatorType.LessThan,
+																				new CodeVariableReferenceExpression(isIndex)),
+																			// update counter
+																			new CodeAssignStatement(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				new CodeBinaryOperatorExpression(
+																					new CodeVariableReferenceExpression(isCounterI),
+																					CodeBinaryOperatorType.Add,
+																					new CodePrimitiveExpression(1))),
+																			new CodeStatement[]
+																			{ 
+																				// assign existing values to the new array
+																				new CodeAssignStatement(
+																					new CodeArrayIndexerExpression(
+																						new CodeArgumentReferenceExpression(isArray),
+																						new CodeArgumentReferenceExpression(isCounterI)),
+																					new CodeArrayIndexerExpression(
+																						new CodeArgumentReferenceExpression(propertyField.Name),
+																						new CodeArgumentReferenceExpression(isCounterI)))
+																			}),
+																		// for loop to copy old items above requested index inside the new array
+																		new CodeIterationStatement(
+																			// initializer
+																			new CodeAssignStatement(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				new CodeBinaryOperatorExpression(
+																					new CodeVariableReferenceExpression(isCounterI),
+																					CodeBinaryOperatorType.Add,
+																					new CodePrimitiveExpression(1))),
+																			// test
+																			new CodeBinaryOperatorExpression(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				CodeBinaryOperatorType.LessThan,
+																				new CodePropertyReferenceExpression(
+																					new CodeFieldReferenceExpression(
+																						new CodeThisReferenceExpression(),
+																						propertyField.Name),
+																					isLength)),																
+																			// update counter
+																			new CodeAssignStatement(
+																				new CodeVariableReferenceExpression(isCounterI),
+																				new CodeBinaryOperatorExpression(
+																					new CodeVariableReferenceExpression(isCounterI),
+																					CodeBinaryOperatorType.Add,
+																					new CodePrimitiveExpression(1))),
+																			new CodeStatement[]
+																			{
+																				// assign existing values to the new array
+																				new CodeAssignStatement(
+																					new CodeArrayIndexerExpression(
+																						new CodeArgumentReferenceExpression(isArray),
+																						new CodeArgumentReferenceExpression(isCounterI)),
+																					new CodeArrayIndexerExpression(
+																						new CodeArgumentReferenceExpression(propertyField.Name),
+																						new CodeArgumentReferenceExpression(isCounterI))),
+																			}),
+																		// replace existing array by new array
+																		new CodeAssignStatement(
+																			new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), property.Name),
+																			new CodeArgumentReferenceExpression(isArray)),
+																		// return true
+																		new CodeMethodReturnStatement(new CodePrimitiveExpression(true))
+																	})
+															})
+													})
+											},
+											// catch statement
+											new CodeCatchClause[] {
+												new CodeCatchClause(
+													isEx,
+													new CodeTypeReference(typeof(Exception)),
+													new CodeStatement[] {
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(false))
+													})
+											});
+										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
+										cmm.Statements.Add(ctcf);
+										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
+										addedMembers.Add(cmm);
+										#endregion
+
+										#region insert item
+										// insert Item method 
+										addenda = insertItemMethod;
+										cmm = new CodeMemberMethod();
+										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+										cmm.Name = property.Name + addenda;
+										cmm.ReturnType = new CodeTypeReference(typeof(int));
+										cpde = new CodeParameterDeclarationExpression(
+											new CodeTypeReference(typeof(int)), isIndex);
+										cmm.Parameters.Add(cpde);
+										cpde = new CodeParameterDeclarationExpression(
+											new CodeTypeReference(property.Type.BaseType), isValue);
+										cmm.Parameters.Add(cpde);
+										ctcf = new CodeTryCatchFinallyStatement(
+											new CodeStatement[]
+											{
+											new CodeConditionStatement(
+												// itemlist==null
 												new CodeBinaryOperatorExpression(
-													new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
+													new CodeFieldReferenceExpression(
+														new CodeThisReferenceExpression(),
+														propertyField.Name),
 													CodeBinaryOperatorType.ValueEquality,
 													new CodeDefaultValueExpression(property.Type)),
-												new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) },
+												// then return -1
 												new CodeStatement[]
-													{
+												{
+													new CodeMethodReturnStatement(
+														new CodePrimitiveExpression(-1))
+												},
+												new CodeStatement[]
+												{
+													// if index over Length
 													new CodeConditionStatement(
 														new CodeBinaryOperatorExpression(
-															new CodePropertyReferenceExpression(new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name), isLength),
-															CodeBinaryOperatorType.LessThanOrEqual,
-															new CodeArgumentReferenceExpression(isIndex)),
-														new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) },
-														new CodeStatement[] {
-															// declare a new array of the same type - 1 item
+															new CodePropertyReferenceExpression(
+																new CodeFieldReferenceExpression(
+																	new CodeThisReferenceExpression(),
+																	propertyField.Name),
+																isLength),
+																CodeBinaryOperatorType.LessThanOrEqual,
+																new CodeArgumentReferenceExpression(isIndex)),
+														// then call the addItem method
+														new CodeStatement[]
+														{
+															new CodeConditionStatement(
+																new CodeBinaryOperatorExpression(
+																	new CodeMethodInvokeExpression(
+																		new CodeMethodReferenceExpression(
+																			new CodeThisReferenceExpression(),
+																			property.Name + addItemMethod),
+																		new CodeArgumentReferenceExpression(isValue)),
+																	CodeBinaryOperatorType.ValueEquality,
+																	new CodePrimitiveExpression(true)),
+																// then return length
+																new CodeStatement[]
+																{
+																new CodeMethodReturnStatement(
+																	new CodeMethodInvokeExpression(
+																			new CodeMethodReferenceExpression(
+																				new CodeThisReferenceExpression(),
+																				property.Name + lengthMethod)))
+																},
+																// else return -1
+																new CodeStatement[]
+																{
+																	new CodeMethodReturnStatement(
+																		new CodePrimitiveExpression(-1))
+																})
+														},
+														// else
+														new CodeStatement[]
+														{
+															// if index < 0
+															new CodeConditionStatement(
+																new CodeBinaryOperatorExpression(
+																	new CodeArgumentReferenceExpression(isIndex),
+																	CodeBinaryOperatorType.LessThan,
+																	new CodePrimitiveExpression(0)),
+																new CodeStatement[]
+																{
+																	new CodeAssignStatement(
+																		new CodeArgumentReferenceExpression(isIndex),
+																		new CodePrimitiveExpression(0)),
+																},
+																new CodeStatement[] { }),
+															// declare a new array of the same type
 															new CodeVariableDeclarationStatement(
-																//new CodeTypeReference(m.Type.BaseType),
 																property.Type,
 																isArray,
 																new CodeArrayCreateExpression(
 																	new CodeTypeReference(property.Type.BaseType),
 																	new CodeBinaryOperatorExpression(
 																		new CodePropertyReferenceExpression(
-																			new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
+																			new CodeFieldReferenceExpression(
+																				new CodeThisReferenceExpression(),
+																				propertyField.Name),
 																			isLength),
-																		CodeBinaryOperatorType.Subtract,
+																		CodeBinaryOperatorType.Add,
 																		new CodePrimitiveExpression(1)))),
 															// declare the counter
-															new CodeVariableDeclarationStatement(typeof(int), isCounter, new CodePrimitiveExpression(0)),
+															new CodeVariableDeclarationStatement(
+																typeof(int),
+																isCounterI,
+																new CodePrimitiveExpression(0)),
 															// for loop to copy old items below requested index inside the new array
 															new CodeIterationStatement(
 																// initializer
-																new CodeAssignStatement(new CodeVariableReferenceExpression(isCounter), new CodePrimitiveExpression(0)),
+																new CodeAssignStatement(
+																	new CodeVariableReferenceExpression(isCounterI),
+																	new CodePrimitiveExpression(0)),
 																// test
 																new CodeBinaryOperatorExpression(
-																	new CodeVariableReferenceExpression(isCounter),
+																	new CodeVariableReferenceExpression(isCounterI),
 																	CodeBinaryOperatorType.LessThan,
-																	new CodeVariableReferenceExpression(isIndex)),
+																	new CodeArgumentReferenceExpression(isIndex)),
 																// update counter
 																new CodeAssignStatement(
-																	new CodeVariableReferenceExpression(isCounter),
+																	new CodeVariableReferenceExpression(isCounterI),
 																	new CodeBinaryOperatorExpression(
-																		new CodeVariableReferenceExpression(isCounter),
+																		new CodeVariableReferenceExpression(isCounterI),
 																		CodeBinaryOperatorType.Add,
 																		new CodePrimitiveExpression(1))),
-																new CodeStatement[] { 
+																new CodeStatement[]
+																{ 
 																	// assign existing values to the new array
 																	new CodeAssignStatement(
 																		new CodeArrayIndexerExpression(
-																			new CodeArgumentReferenceExpression(isArray),
-																			new CodeArgumentReferenceExpression(isCounter)),
+																			new CodeVariableReferenceExpression(isArray),
+																			new CodeVariableReferenceExpression(isCounterI)),
 																		new CodeArrayIndexerExpression(
 																			new CodeArgumentReferenceExpression(propertyField.Name),
-																			new CodeArgumentReferenceExpression(isCounter))) }),
+																			new CodeArgumentReferenceExpression(isCounterI)))
+																}),
+															// insert new item
+															new CodeAssignStatement(
+																new CodeArrayIndexerExpression(
+																	new CodeVariableReferenceExpression(isArray),
+																	new CodeArgumentReferenceExpression(isIndex)),
+																new CodeArgumentReferenceExpression(isValue)),
+															// declare J counter
+															new CodeVariableDeclarationStatement(
+																typeof(int),
+																isCounterJ,
+																new CodePrimitiveExpression(0)),
 															// for loop to copy old items above requested index inside the new array
 															new CodeIterationStatement(
 																// initializer
 																new CodeAssignStatement(
-																	new CodeVariableReferenceExpression(isCounter),
-																	new CodeBinaryOperatorExpression(
-																		new CodeVariableReferenceExpression(isCounter),
-																		CodeBinaryOperatorType.Add,
-																		new CodePrimitiveExpression(1))),
+																	new CodeVariableReferenceExpression(isCounterJ),
+																		new CodeVariableReferenceExpression(isCounterI)),
 																// test
 																new CodeBinaryOperatorExpression(
-																	new CodeVariableReferenceExpression(isCounter),
+																	new CodeVariableReferenceExpression(isCounterJ),
 																	CodeBinaryOperatorType.LessThan,
 																	new CodePropertyReferenceExpression(
-																		new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), propertyField.Name),
-																		isLength)),																
+																		new CodeFieldReferenceExpression(
+																			new CodeThisReferenceExpression(),
+																			propertyField.Name),
+																		isLength)),
 																// update counter
 																new CodeAssignStatement(
-																	new CodeVariableReferenceExpression(isCounter),
+																	new CodeVariableReferenceExpression(isCounterJ),
 																	new CodeBinaryOperatorExpression(
-																		new CodeVariableReferenceExpression(isCounter),
+																		new CodeVariableReferenceExpression(isCounterJ),
 																		CodeBinaryOperatorType.Add,
 																		new CodePrimitiveExpression(1))),
-																new CodeStatement[] { 
+																new CodeStatement[]
+																{ 
 																	// assign existing values to the new array
 																	new CodeAssignStatement(
 																		new CodeArrayIndexerExpression(
 																			new CodeArgumentReferenceExpression(isArray),
-																			new CodeArgumentReferenceExpression(isCounter)),
+																			new CodeArgumentReferenceExpression(isCounterJ)),
 																		new CodeArrayIndexerExpression(
 																			new CodeArgumentReferenceExpression(propertyField.Name),
-																			new CodeArgumentReferenceExpression(isCounter))) }),
+																			new CodeArgumentReferenceExpression(isCounterJ)))
+																}),
 															// replace existing array by new array
 															new CodeAssignStatement(
 																new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), property.Name),
 																new CodeArgumentReferenceExpression(isArray)),
 															// return true
-															new CodeMethodReturnStatement(new CodePrimitiveExpression(true)) }) }) },
+															new CodeMethodReturnStatement(
+																new CodeVariableReferenceExpression(isIndex))
+														})
+												})
+											},
 											// catch statement
-											new CodeCatchClause[] { new CodeCatchClause(
-											isEx,
-											new CodeTypeReference(typeof(Exception)),
-											new CodeStatement[] { new CodeMethodReturnStatement(new CodePrimitiveExpression(false)) }) });
+											new CodeCatchClause[] {
+												new CodeCatchClause(
+													isEx,
+													new CodeTypeReference(typeof(Exception)),
+													new CodeStatement[] {
+														new CodeMethodReturnStatement(
+															new CodePrimitiveExpression(-1))
+													})
+											});
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
 										cmm.Statements.Add(new CodeCommentStatement($"{eXSD}"));
 										addedMembers.Add(cmm);
+										#endregion
 									}
 									#endregion
 								}
@@ -1191,7 +1627,7 @@ namespace XSDEx
 										new CodeMethodInvokeExpression(
 											new CodeMethodReferenceExpression(
 												new CodeThisReferenceExpression(),
-												xcmp.Name + sizeMethod),
+												xcmp.Name + lengthMethod),
 											new CodeExpression[] { }),
 										CodeBinaryOperatorType.IdentityInequality,
 										new CodePrimitiveExpression(0)));
@@ -1218,14 +1654,13 @@ namespace XSDEx
 							}
 							hasBeenSetProperty.GetStatements.Add(new CodeMethodReturnStatement(expression));
 							AddComment(hasBeenSetProperty, e, true);
+
+							//// "SET" statements
+							//AddSetStatementFromValue(hasBeenSetProperty, null, b, e);
+							codeType.Members.Add(hasBeenSetProperty);
 							#endregion
 
 							#region optimizing management
-							//// "SET" statements
-							//AddSetStatementFromValue(hasBeenSetProperty, null, b, e);
-
-							codeType.Members.Add(hasBeenSetProperty);
-
 							//*****
 							// OPTIMIZING property processing
 							// "GET" add set optimizing flag to all
@@ -1270,7 +1705,7 @@ namespace XSDEx
 										// declare a counter
 										statements.Add(new CodeVariableDeclarationStatement(
 											typeof(int),
-											isCounter,
+											isCounterI,
 											new CodePrimitiveExpression(0)));
 										counterIsDeclared = true;
 									}
@@ -1278,21 +1713,21 @@ namespace XSDEx
 									statements.Add(new CodeIterationStatement(
 										// initializer
 										new CodeAssignStatement(
-											new CodeVariableReferenceExpression(isCounter),
+											new CodeVariableReferenceExpression(isCounterI),
 											new CodePrimitiveExpression(0)),
 										// test
 										new CodeBinaryOperatorExpression(
-											new CodeVariableReferenceExpression(isCounter),
+											new CodeVariableReferenceExpression(isCounterI),
 											CodeBinaryOperatorType.LessThan,
 											new CodeMethodInvokeExpression(
 												new CodeMethodReferenceExpression(
 													new CodeThisReferenceExpression(),
-													xcmp.Name + sizeMethod))),
+													xcmp.Name + lengthMethod))),
 										// iteration
 										new CodeAssignStatement(
-											new CodeVariableReferenceExpression(isCounter),
+											new CodeVariableReferenceExpression(isCounterI),
 											new CodeBinaryOperatorExpression(
-												new CodeVariableReferenceExpression(isCounter),
+												new CodeVariableReferenceExpression(isCounterI),
 												CodeBinaryOperatorType.Add,
 												new CodePrimitiveExpression(1))),
 										// set a value of any user defined record
@@ -1302,7 +1737,7 @@ namespace XSDEx
 													new CodePropertyReferenceExpression(
 														new CodeThisReferenceExpression(),
 														xcmp.Name),
-													new CodeArgumentReferenceExpression(isCounter)),
+													new CodeArgumentReferenceExpression(isCounterI)),
 												NexoXSDStrings.NexoOptimizingProperty),
 											new CodeFieldReferenceExpression(
 												new CodeThisReferenceExpression(),
@@ -1314,6 +1749,121 @@ namespace XSDEx
 							codeType.Members.Add(optimizingField);
 							codeType.Members.Add(optimizingProperty);
 							#endregion
+
+							#region class name management
+							//*****
+							// class name property
+							// "GET" statements
+							AddComment(className, b, true);
+							className.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(codeType.Name)));
+							AddComment(className, e, true);
+							codeType.Members.Add(className);
+							#endregion
+
+							#region alternate constructor
+							// is there already a basic constructor member
+							CodeConstructor constructor = new CodeConstructor();
+							// basic constructor
+							constructor.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+							// create the constructor code framework
+							CodeStatement[] cs = new CodeStatement[] { };
+							constructor.Statements.AddRange(cs);
+							bool constructorIsPresent = false;
+							for (i = 0; i < codeType.Members.Count && !constructorIsPresent; i++)
+							{
+								constructorIsPresent = codeType.Members[i] is CodeConstructor && ((CodeConstructor)codeType.Members[i]).Parameters.Count == 0;
+							}
+							if (!constructorIsPresent)
+							{
+								codeType.Members.Add(constructor);
+							}
+
+							// specific constructor to copy an object to another one
+							constructor = new CodeConstructor();
+							constructor.Attributes = MemberAttributes.Public | MemberAttributes.Final;
+							// Add parameter of the same type
+							constructor.Parameters.Add(
+								new CodeParameterDeclarationExpression(
+									new CodeTypeReference(
+										codeType.Name),
+									isValue));
+							// add all member assignment 
+							List<CodeStatement> lcs = new List<CodeStatement>();
+							Func<CodeTypeMember, int> AddAssignment = (CodeTypeMember mbr) =>
+								 {
+									 cas = new CodeAssignStatement(
+										new CodePropertyReferenceExpression(
+											new CodeThisReferenceExpression(),
+											mbr.Name),
+										new CodePropertyReferenceExpression(
+											new CodeArgumentReferenceExpression(isValue),
+											mbr.Name));
+									 lcs.Add(cas);
+									 return lcs.Count;
+								 };
+							foreach (CodeTypeMember mbr in codeType.Members)
+							{
+								if (mbr is CodeMemberProperty &&
+									(((mbr.Attributes & MemberAttributes.AccessMask) == MemberAttributes.Public) ||
+									((mbr.Attributes & MemberAttributes.AccessMask) == MemberAttributes.Assembly)) &&
+									((CodeMemberProperty)mbr).HasSet)
+									AddAssignment(mbr);
+								//cas = new CodeAssignStatement(
+								//	new CodePropertyReferenceExpression(
+								//		new CodeArgumentReferenceExpression(isValue),
+								//		xcmp.Name),
+								//	new CodePropertyReferenceExpression(
+								//		new CodeThisReferenceExpression(),
+								//		xcmp.Name));
+								//lcs.Add(cas);
+							}
+							//foreach (CodeMemberProperty xcmp in propertiesToProcess)
+							//{
+							//	AddAssignment(xcmp);
+							//	//cas = new CodeAssignStatement(
+							//	//	new CodePropertyReferenceExpression(
+							//	//		new CodeArgumentReferenceExpression(isValue),
+							//	//		xcmp.Name),
+							//	//	new CodePropertyReferenceExpression(
+							//	//		new CodeThisReferenceExpression(),
+							//	//		xcmp.Name));
+							//	//lcs.Add(cas);
+							//}
+							//foreach (CodeMemberProperty xcmp in arraysToProcess)
+							//{
+							//	AddAssignment(xcmp);
+							//}
+							//foreach (CodeMemberField xcmp in fieldsHasBeenSetFlag)
+							//{
+							//	AddAssignment(xcmp);
+							//}
+							//foreach (CodeMemberProperty xcmp in optionalsToProcess)
+							//{
+							//	AddAssignment(xcmp);
+							//}
+							// create the constructor code framework
+							cs = new CodeStatement[]
+							{
+								new CodeConditionStatement(
+									new CodeBinaryOperatorExpression(
+										new CodeArgumentReferenceExpression(isValue),
+										CodeBinaryOperatorType.ValueEquality,
+										new CodeDefaultValueExpression(
+											new CodeTypeReference(codeType.Name))),
+									//then
+									new CodeStatement[] { },
+									// else
+									lcs.ToArray()
+									)
+						};
+							constructor.Statements.Add(new CodeCommentStatement($"{bXSD} - copy constructor"));
+							constructor.Statements.AddRange(cs);
+							constructor.Statements.Add(new CodeCommentStatement($"{eXSD} - copy constructor"));
+							codeType.Members.Add(constructor);
+							#endregion
+
+
+
 
 							// update the collection of new members to the already existing ones inside this type
 							// they are new methods for instance
@@ -1405,7 +1955,9 @@ namespace XSDEx
 						{
 						}
 					}
-					catch (Exception ex) { }
+					catch (Exception ex)
+					{
+					}
 				}
 
 				// review all properties to add a JsonIgnore if XML ignore
@@ -1420,6 +1972,7 @@ namespace XSDEx
 							if (property.CustomAttributes.Contains(new CodeAttributeDeclaration(XML_IGNORE_ATTRIBUTE)) &&
 								!property.CustomAttributes.Contains(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE)))
 							{
+								addNewtonSoft = true;
 								property.CustomAttributes.Add(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE));
 							}
 							bool xmlIgnore = false, jsonIgnore = false;
@@ -1429,9 +1982,16 @@ namespace XSDEx
 								jsonIgnore = jsonIgnore || 0 == string.Compare(attr.Name, JSON_IGNORE_ATTRIBUTE, true);
 							}
 							if (xmlIgnore && !jsonIgnore)
+							{
+								addNewtonSoft = true;
 								property.CustomAttributes.Add(new CodeAttributeDeclaration(JSON_IGNORE_ATTRIBUTE));
+
+							}
 							if (!xmlIgnore && jsonIgnore)
+							{
+								addSerialization = true;
 								property.CustomAttributes.Add(new CodeAttributeDeclaration(XML_IGNORE_ATTRIBUTE));
+							}
 						}
 					}
 				}
@@ -1467,6 +2027,14 @@ namespace XSDEx
 				newCodeNamespace = new CodeNamespace(codeNamespace.Name);
 				newCodeNamespace.Types.AddRange(thisFileTypes);
 				newCodeNamespace.Types.AddRange(newCodeTypeDeclarations.ToArray());
+
+				// add the required imports 
+				if (addNewtonSoft)
+					newCodeNamespace.Imports.Add(new CodeNamespaceImport("Newtonsoft.Json"));
+				if (addSerialization)
+					newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.Serialization"));
+				if (settings.AddDispID && settings.DeclareClassInterface)
+					newCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Runtime.InteropServices"));
 			}
 			catch (Exception ex)
 			{

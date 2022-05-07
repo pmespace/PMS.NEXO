@@ -333,7 +333,8 @@ namespace NEXO
 		}
 		protected override InternalAction AutoCompleteReply()
 		{
-			ReplyData.PaymentResult.PaymentType = CMisc.EnumValueToString(typeof(PaymentTypeEnumeration), PaymentType);
+			//ReplyData.PaymentResult.PaymentType = CMisc.EnumValueToString(typeof(PaymentTypeEnumeration), PaymentType);
+			ReplyData.PaymentResult.PaymentType = CMisc.GetEnumName(typeof(PaymentTypeEnumeration), PaymentType);
 
 			if (Success)
 			{

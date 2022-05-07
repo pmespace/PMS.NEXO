@@ -74,9 +74,9 @@ namespace NEXO.Client
 		[DispId(121)]
 		bool SendRequestSync(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(200)]
-		bool SendReply(NexoObject msg, bool autoComplete = true);
+		bool SendReply(NexoObject msg, CThread thread, bool autoComplete = true);
 		[DispId(201)]
-		bool SendReply(SaleToPOIResponse msg, bool autoComplete = true);
+		bool SendReply(SaleToPOIResponse msg, CThread thread, bool autoComplete = true);
 		[DispId(300)]
 		NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(301)]
@@ -553,7 +553,7 @@ namespace NEXO.Client
 					NexoItem item = new NexoItem(msg.Request);
 					// store the request
 					settingsToUse = settings ?? Settings;
-					if (SendXML(xml, item))
+					if (SendXML(xml, item, null))
 					{
 						Monitor.Enter(myLock);
 						try
@@ -645,9 +645,10 @@ namespace NEXO.Client
 		/// Send a REPLY
 		/// </summary>
 		/// <param name="msg">response to send</param>
+		/// <param name="thread">CThread currently running, or null if main thread</param>
 		/// <param name="autoComplete">true if the message must be auto completed before being sent, false to send it as it is</param>
 		/// <returns>True if the message has been sent, false otherwise</returns>
-		public bool SendReply(NexoObject msg, bool autoComplete = true)
+		public bool SendReply(NexoObject msg, CThread thread, bool autoComplete = true)
 		{
 			if (Connected && null != msg)
 			{
@@ -655,7 +656,7 @@ namespace NEXO.Client
 				string xml = autoComplete ? msg.SerializeAndCompleteReply() : msg.SerializedReply;
 				if (!string.IsNullOrEmpty(xml))
 				{
-					if (!SendXML(xml, item))
+					if (!SendXML(xml, item, thread))
 					{
 						CLog.Add(Description + "ERROR SENDING REPLY" + MessageDescription(xml), TLog.ERROR);
 					}
@@ -663,7 +664,7 @@ namespace NEXO.Client
 			}
 			return false;
 		}
-		public bool SendReply(SaleToPOIResponse msg, bool autoComplete = true)
+		public bool SendReply(SaleToPOIResponse msg, CThread thread, bool autoComplete = true)
 		{
 			NexoItem item = new NexoItem(msg);
 			if (item.IsValid)
@@ -672,7 +673,7 @@ namespace NEXO.Client
 				if (null != nxo)
 				{
 					nxo.Reply = msg;
-					return SendReply(nxo);
+					return SendReply(nxo, thread);
 				}
 			}
 			return false;
@@ -755,10 +756,10 @@ namespace NEXO.Client
 		/// <summary>
 		/// Thread function receiving messages from the server
 		/// </summary>
-		/// <param name="threadData"><see cref="CThreadData"/></param>
+		/// <param name="thread"><see cref="CThread"/></param>
 		/// <param name="o">parameters passed to the thread</param>
 		/// <returns><see cref="CThread"/></returns>
-		private int ThreadReceive(CThreadData threadData, object o)
+		private int ThreadReceive(CThread thread, object o)
 		{
 			NexoRetailerClientSettings nexoRetailerClientSettings = (NexoRetailerClientSettings)o;
 			int res = 0;
@@ -888,10 +889,10 @@ namespace NEXO.Client
 		/// <summary>
 		/// Dispatch received messages to the sale
 		/// </summary>
-		/// <param name="threadData"><see cref="CThreadData"/></param>
+		/// <param name="thread"><see cref="CThread"/></param>
 		/// <param name="o">parameters passed to the thread</param>
 		/// <returns><see cref="CThread"/></returns>
-		private int ThreadDispatch(CThreadData threadData, object o)
+		private int ThreadDispatch(CThread thread, object o)
 		{
 			NexoRetailerClientSettings nexoRetailerClientSettings = (NexoRetailerClientSettings)o;
 			int res = 0;
@@ -945,7 +946,7 @@ namespace NEXO.Client
 									try
 									{
 										// inform the application of the received message waiting for next step
-										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
+										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, thread, o);
 									}
 									catch (Exception ex)
 									{
@@ -964,7 +965,7 @@ namespace NEXO.Client
 								{
 									case NexoNextAction.sendReply:
 										//case NexoNextAction.sendReplyWithError:
-										SendReply(toprocess.CurrentObject.Reply);
+										SendReply(toprocess.CurrentObject.Reply, thread);
 										break;
 									case NexoNextAction.final:
 									case NexoNextAction.sendRequest:
@@ -1000,7 +1001,7 @@ namespace NEXO.Client
 									try
 									{
 										// inform the application of the ignored message 
-										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, threadData, o);
+										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, thread, o);
 									}
 									catch (Exception ex)
 									{
@@ -1026,7 +1027,7 @@ namespace NEXO.Client
 								toprocess = new NexoObjectToProcess(tmp.Outgoing);
 								try
 								{
-									settingsToUse.OnSentRequestStatusChanged(tmp.Outgoing.XML, toprocess, evtTimeout == handles[index] ? NexoMessageStatus.timeout : NexoMessageStatus.cancelled, StreamIO.Tcp, threadData, o);
+									settingsToUse.OnSentRequestStatusChanged(tmp.Outgoing.XML, toprocess, evtTimeout == handles[index] ? NexoMessageStatus.timeout : NexoMessageStatus.cancelled, StreamIO.Tcp, thread, o);
 								}
 								catch (Exception ex)
 								{
@@ -1061,12 +1062,13 @@ namespace NEXO.Client
 		/// </summary>
 		/// <param name="xml">XML message to send</param>
 		/// <param name="item">The message informationformat</param>
+		/// <param name="thread"><see cref="CThread"/> object being used (if sending from inside a thread)</param>
 		/// <returns>true if sent, false optherwise</returns>
-		private bool SendXML(string xml, NexoItem item)
+		private bool SendXML(string xml, NexoItem item, CThread thread)
 		{
 			try
 			{
-				settingsToUse.OnSend?.Invoke(xml, item, StreamIO.Tcp, Settings.ThreadData, Settings.Parameters);
+				settingsToUse.OnSend?.Invoke(xml, item, StreamIO.Tcp, thread, Settings.ThreadData, Settings.Parameters);
 			}
 			catch (Exception ex)
 			{

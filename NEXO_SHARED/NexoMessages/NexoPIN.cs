@@ -191,7 +191,7 @@ namespace NEXO
 		}
 		public int RequestMaxWaitingTime
 		{
-			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaxWaitingTime), 0, true);
 			set => RequestData.MaxWaitingTime = value.ToString();
 			//get => RequestData.MaxWaitingTime;
 			//set => RequestData.MaxWaitingTime = value;

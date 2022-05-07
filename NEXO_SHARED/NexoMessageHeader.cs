@@ -14,12 +14,8 @@ using System.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-#if !NET35
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-#endif
-
 //using NEXO.Properties;
 using COMMON;
 
@@ -243,15 +239,18 @@ namespace NEXO
 		#region methods
 		private static MessageTypeEnumeration MessageHeaderToType(MessageHeaderType mh)
 		{
-			return (MessageTypeEnumeration)CMisc.StringToEnumValue(typeof(MessageTypeEnumeration), mh.MessageType);
+			//return (MessageTypeEnumeration)CMisc.StringToEnumValue(typeof(MessageTypeEnumeration), mh.MessageType);
+			return (MessageTypeEnumeration)CMisc.GetEnumValue(typeof(MessageTypeEnumeration), mh.MessageType);
 		}
 		private static MessageClassEnumeration MessageHeaderToClass(MessageHeaderType mh)
 		{
-			return (MessageClassEnumeration)CMisc.StringToEnumValue(typeof(MessageClassEnumeration), mh.MessageClass);
+			//return (MessageClassEnumeration)CMisc.StringToEnumValue(typeof(MessageClassEnumeration), mh.MessageClass);
+			return (MessageClassEnumeration)CMisc.GetEnumValue(typeof(MessageClassEnumeration), mh.MessageClass);
 		}
 		private static MessageCategoryEnumeration MessageHeaderToCategory(MessageHeaderType mh)
 		{
-			return (MessageCategoryEnumeration)CMisc.StringToEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory);
+			//return (MessageCategoryEnumeration)CMisc.StringToEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory);
+			return (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory);
 		}
 		public override string ToString()
 		{

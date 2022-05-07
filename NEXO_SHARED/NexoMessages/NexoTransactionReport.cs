@@ -4,7 +4,7 @@ using COMMON;
 
 namespace NEXO
 {
-#if NEXO31
+#if RETAILER31
 	[Guid("1306128B-D26D-4A99-8223-62478FFA8F36")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(false)]

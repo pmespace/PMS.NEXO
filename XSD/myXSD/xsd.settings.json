@@ -2,9 +2,9 @@
   "Language": 0,
   "ParametersFileName": "xsd.params.json",
   "Files": [
-    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasSaleToPOIMessages.xsd",
-    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasCMS.xsd",
-    "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\NEXO_SHARED\\RETAILER 3.0\\EpasCommonTypes.xsd"
+    "C:\\Users\\philippe\\Documents\\Dev\\RETAILER3X\\NEXO.30\\RETAILER 3.0\\EpasCMS.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\RETAILER3X\\NEXO.30\\RETAILER 3.0\\EpasCommonTypes.xsd",
+    "C:\\Users\\philippe\\Documents\\Dev\\RETAILER3X\\NEXO.30\\RETAILER 3.0\\EpasSaleToPOIMessages.xsd"
   ],
   "Nmspace": "NEXO",
   "UseTypes": true,
@@ -27,5 +27,8 @@
   "Preprocessor": "NEXO30",
   "Silent": true,
   "ConvertStringIntegralToIntegral": false,
-  "UseDefaultValueForHasBeenModified": false
+  "UseDefaultValueForHasBeenModified": false,
+  "AddDefaultAttributesToEnum": true,
+  "UseEnumBeginEnd": true,
+  "IsRetailer": true
 }

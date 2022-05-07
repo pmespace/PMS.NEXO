@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>4.5.1</Version>
+    <FileVersion>4.5.1</FileVersion>
+    <AssemblyVersion>4.5.1</AssemblyVersion>
+    <RootNamespace>NexoListener</RootNamespace>
+    <AssemblyName>NexoListener30</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".~lock.Listener user guide.odt#" />
+    <None Remove="Listener user guide - v2.1 - revision marks.pdf" />
+    <None Remove="Listener user guide - v2.1.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEXO.30\NEXO.30.csproj" />
+  </ItemGroup>
+
+</Project>

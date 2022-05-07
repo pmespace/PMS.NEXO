@@ -14,7 +14,7 @@ namespace NEXO
 	/// <summary>
 	/// A client is a currently connected to the server POS (sale)
 	/// </summary>
-	public class NexoPartner: NexoKey
+	public class NexoPartner : NexoKey
 	{
 		#region constructor
 		public NexoPartner(TcpClient tcp, MessageHeaderType mh)
@@ -26,12 +26,12 @@ namespace NEXO
 			_sessions = new NexoListOfSessions("SESSIONS");
 			_messages = new NexoDictionaryOfMessages();
 
-#if NET35
-			Sessions = _sessions;
-			Messages = _messages;
-#else
 			Sessions = new ReadOnlyCollection<NexoSession>(_sessions);
+
+#if NET45_OR_GREATER
 			Messages = new ReadOnlyDictionary<string, NexoMessage>(_messages);
+#else
+			Messages = _messages;
 #endif
 
 			Timestamp = DateTime.Now;
@@ -62,24 +62,24 @@ namespace NEXO
 		/// </summary>
 		public bool Connected { get => 0 == Sessions.Count ? false : Sessions[Sessions.Count - 1].Connected; }
 
-#if NET35
-		/// <summary>
-		/// all connections originating from this client
-		/// </summary>
-		public NexoListOfSessions Sessions { get => _sessions; private set => _sessions = value; }
-		/// <summary>
-		/// all messages exchanged with this client
-		/// </summary>
-		public NexoDictionaryOfMessages Messages { get => _messages; private set => _messages = value; }
-#else
 		/// <summary>
 		/// all connections originating from this client
 		/// </summary>
 		public ReadOnlyCollection<NexoSession> Sessions { get; private set; }
+#if NET45_OR_GREATER
 		/// <summary>
 		/// all messages exchanged with this client
 		/// </summary>
 		public ReadOnlyDictionary<string, NexoMessage> Messages { get; private set; }
+#else
+		///// <summary>
+		///// all connections originating from this client
+		///// </summary>
+		//public NexoListOfSessions Sessions { get => _sessions; private set => _sessions = value; }
+		/// <summary>
+		/// all messages exchanged with this client
+		/// </summary>
+		public NexoDictionaryOfMessages Messages { get => _messages; private set => _messages = value; }
 #endif
 
 		private NexoDictionaryOfMessages _messages { get; set; }
@@ -280,7 +280,7 @@ namespace NEXO
 	/// Disconnected POS (sale) are no longer inside this list
 	/// </summary>
 	[ComVisible(false)]
-	public class NexoDictionaryOfPartners: NexoDictionaryOfObjects<NexoPartner>
+	public class NexoDictionaryOfPartners : NexoDictionaryOfObjects<NexoPartner>
 	{
 		#region constructor
 		public NexoDictionaryOfPartners(string title) : base(title) { }

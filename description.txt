@@ -1,0 +1,2 @@
+﻿Nexo Retailer v3.0/v3.1/v3.2 (depending on the assembly) libraries supporting all messages defined inside the specifications.
+Nexo Retailer specs can be found at https://www.nexo-standards.org/standards/nexo-retailer-protocol, subscription is free of charges.

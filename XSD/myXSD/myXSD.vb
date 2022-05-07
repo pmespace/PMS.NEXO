@@ -1,9 +1,9 @@
-﻿Imports System
+﻿Imports System.Runtime.Serialization.Formatters.Binary
+Imports System
 Imports System.IO
 Imports System.Collections.Generic
 Imports System.Reflection
 Imports System.Runtime.InteropServices
-Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Xml.Serialization
 Imports System.Xml.Schema
 Imports System.CodeDom
@@ -22,6 +22,7 @@ Public Class myXSD
 	Private statusText As String, updateStatusText As String
 	Private thread As CThread
 	Private Const WM_EVENT As Integer = Win32.WM_USER + 1
+	Private started As DateTime
 
 #Region "serverThread management"
 	Private myDelegate As New XSDAddActivity(AddressOf ProcessUI)
@@ -84,11 +85,13 @@ Public Class myXSD
 	Private Sub SetHourglass()
 		Me.Cursor = Cursors.WaitCursor
 		SetStatus("Running")
+		started = DateTime.Now
 	End Sub
 
 	Private Sub SetDefaultCursor()
 		Me.Cursor = Cursors.Default
-		SetStatus("Completed")
+		Dim ts As TimeSpan = DateTime.Now - started
+		SetStatus($"Completed ({ts})")
 	End Sub
 
 	Private Sub SetButtons()
@@ -158,6 +161,16 @@ Public Class myXSD
 		settings.AddDefaultAttributesToEnum = cbAddDefaultToEnum.Checked
 		settings.UseEnumBeginEnd = cbAddBeginEnd.Checked
 
+		If rbRetailer.Checked Then
+			settings.NamespaceToDeclare = XSDSettings.NameSpace.Retailer
+		ElseIf rbAcquirer.Checked Then
+			settings.NamespaceToDeclare = XSDSettings.NameSpace.Acquirer
+		ElseIf rbTMS.Checked Then
+			settings.NamespaceToDeclare = XSDSettings.NameSpace.TMS
+		Else
+			settings.NamespaceToDeclare = XSDSettings.NameSpace.None
+		End If
+
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
 		Return settings
@@ -206,11 +219,22 @@ Public Class myXSD
 		cbAddDefaultToEnum.Checked = settings.AddDefaultAttributesToEnum
 		cbAddBeginEnd.Checked = settings.UseEnumBeginEnd
 
+		Select Case settings.NamespaceToDeclare
+			Case XSDSettings.NameSpace.Retailer
+				rbRetailer.Checked = True
+			Case XSDSettings.NameSpace.Acquirer
+				rbAcquirer.Checked = True
+			Case XSDSettings.NameSpace.TMS
+				rbTMS.Checked = True
+			Case Else
+				rbNone.Checked = True
+		End Select
+
 	End Sub
 
-	Private Function GenerateFilesAsyncThread(threadData As CThreadData, o As Object) As Integer
+	Private Function GenerateFilesAsyncThread(thread As CThread, o As Object) As Integer
 		Dim myParams As myParams = o
-		Dim mySettings As New XSD.AnalyseSettings With {.threadData = threadData, .mixFiles = myParams.mixfiles, .lbl = Label5, .processUI = AddressOf ProcessUI, .xsdSettings = myParams.xsdSettings}
+		Dim mySettings As New XSD.AnalyseSettings With {.threadData = thread.ThreadData, .mixFiles = myParams.mixfiles, .lbl = Label5, .processUI = AddressOf ProcessUI, .xsdSettings = myParams.xsdSettings}
 		If xsdex.AnalyseXSD(mySettings) Then
 		End If
 		Return ThreadResult.OK
@@ -241,7 +265,7 @@ Public Class myXSD
 	End Sub
 
 	Private Sub pbGenerateNFiles_Click(sender As Object, e As EventArgs) Handles pbGenerateNFiles.Click
-		GenerateFilesAsync(True)
+		GenerateFilesAsync(False)
 	End Sub
 
 	Private Shared Function CloneMember(ByVal m As CodeTypeMember) As CodeTypeMember

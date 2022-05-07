@@ -15,12 +15,8 @@ using System.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-#if !NET35
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-#endif
-
 using COMMON;
 
 namespace NEXO
@@ -587,7 +583,8 @@ namespace NEXO
 		{
 			if (null == tag || tag == DefaultEnumValue<TxN>() || IsEnumBeginEnd<TxN>(tag) || !CMisc.IsEnumValue(typeof(TxN), tag))
 				return null;
-			return CMisc.EnumValueToString(typeof(TxN), tag);
+			//return CMisc.EnumValueToString(typeof(TxN), tag);
+			return CMisc.GetEnumName(typeof(TxN), tag);
 		}
 		private bool IsEnumBeginEnd<TxN>(object value)
 		{
@@ -772,6 +769,4 @@ namespace NEXO
 	{
 		protected NexoNotification() : base(MessageCategoryEnumeration.Event) { MessageClass = MessageClassEnumeration.Event; }
 	}
-
-
 }

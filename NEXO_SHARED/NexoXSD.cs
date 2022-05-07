@@ -16,6 +16,7 @@ namespace NEXO
 		public static string NexoOptimizingProperty = $"{XSD}Optimizing";
 		public static string NexoOptimizingField = $"_{XSD}Optimizing";
 		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
+		public static string NexoClassName = $"{XSD}ClassName";
 		public static string NexoHasBeenSetField = $"_{XSD}HasBeenSet";
 		public static string NexoDefaultValueForProperty = $"DEFAULT_VALUE";
 		public static string EnumNone = $"_none";
@@ -23,11 +24,13 @@ namespace NEXO
 		public static string EnumEnd = $"_end";
 	}
 
-	public abstract class NexoDummy
-	{
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public string MyString { get; set; }
-	}
+	#region commented
+	//public abstract class NexoDummy
+	//{
+	//	[System.Xml.Serialization.XmlIgnoreAttribute()]
+	//	public string MyString { get; set; }
+	//}
+
 	//public static class NexoTools
 	//{
 	//	#region methods
@@ -263,4 +266,5 @@ namespace NEXO
 	//	}
 	//	#endregion
 	//}
+	#endregion
 }

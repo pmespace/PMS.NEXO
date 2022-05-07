@@ -22,7 +22,7 @@ namespace NEXO
 	public static class NexoCurrentVersion
 	{
 		public readonly static NexoVersion Current =
-#if NEXO30
+#if RETAILER30
 			new NexoVersion()
 			{
 				Description = "Version 3.0 - 3rd October 2016",
@@ -30,7 +30,7 @@ namespace NEXO
 				AssemblyName = "PMS.NEXO30.dll",
 				Version = "3.0",
 			};
-#elif NEXO31
+#elif RETAILER31
 			new NexoVersion()
 			{
 				Description = "Version 3.1 - 31st July 2017",

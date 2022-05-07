@@ -68,6 +68,13 @@ namespace XSDEx
 
 			CreateArrayAccessors = true;
 		}
+		public enum NameSpace
+		{
+			Retailer,
+			Acquirer,
+			TMS,
+			None,
+		}
 		public string Exception; // if an exception occurred it is reported here
 		public string ParametersFileName { get; set; }
 		public enumLanguage Language;
@@ -160,5 +167,9 @@ namespace XSDEx
 		/// </summary>
 		public bool AddDefaultAttributesToEnum { get; set; } = true;
 		public bool UseEnumBeginEnd { get; set; } = true;
+		/// <summary>
+		/// Type of namespace to create
+		/// </summary>
+		public NameSpace NamespaceToDeclare { get; set; } = NameSpace.None;
 	}
 }

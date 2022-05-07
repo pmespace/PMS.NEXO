@@ -118,7 +118,7 @@ namespace NEXO
 			get => _suggestedaction;
 			internal set
 			{
-				_suggestedaction = (NexoNextAction)CMisc.GetEnumValue(typeof(NexoNextAction), value, NexoNextAction.nothing);
+				_suggestedaction = (CMisc.IsEnumValue(typeof(NexoNextAction), value) ? value : NexoNextAction.nothing);
 				_action = _suggestedaction;
 			}
 		}

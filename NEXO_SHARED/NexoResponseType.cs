@@ -45,7 +45,8 @@ namespace NEXO
 		private ResponseType response = new ResponseType();
 		public ResultEnumeration Result
 		{
-			get => (ResultEnumeration)CMisc.StringToEnumValue(typeof(ResultEnumeration), response.Result);
+			//get => (ResultEnumeration)CMisc.StringToEnumValue(typeof(ResultEnumeration), response.Result);
+			get => (ResultEnumeration)CMisc.GetEnumValue(typeof(ResultEnumeration), response.Result);
 			set
 			{
 				if (CMisc.IsEnumValue(typeof(ResultEnumeration), value))
@@ -56,7 +57,8 @@ namespace NEXO
 		}
 		public ErrorConditionEnumeration ErrorCondition
 		{
-			get => (ErrorConditionEnumeration)CMisc.StringToEnumValue(typeof(ErrorConditionEnumeration), response.ErrorCondition);
+			//get => (ErrorConditionEnumeration)CMisc.StringToEnumValue(typeof(ErrorConditionEnumeration), response.ErrorCondition);
+			get => (ErrorConditionEnumeration)CMisc.GetEnumValue(typeof(ErrorConditionEnumeration), response.ErrorCondition);
 			set
 			{
 				if (CMisc.IsEnumValue(typeof(ErrorConditionEnumeration), value))

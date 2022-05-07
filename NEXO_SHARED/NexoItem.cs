@@ -324,7 +324,7 @@ namespace NEXO
 				case MessageCategoryEnumeration.StoredValue:
 					SupportsAbort = true;
 					break;
-#if NEXO31
+#if RETAILER31
 				case MessageCategoryEnumeration.TransactionReport:
 					break;
 #endif
@@ -400,7 +400,7 @@ namespace NEXO
 					return new NexoDeviceSound();
 				case MessageCategoryEnumeration.StoredValue:
 					return new NexoStoredValue();
-#if NEXO31
+#if RETAILER31
 				case MessageCategoryEnumeration.TransactionReport:
 					return new NexoTransactionReport();
 #endif

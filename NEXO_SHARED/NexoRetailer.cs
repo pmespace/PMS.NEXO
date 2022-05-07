@@ -16,12 +16,8 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Globalization;
-
-#if !OLD_NET35
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-#endif
-
 using COMMON;
 using NEXO.Properties;
 
@@ -290,7 +286,7 @@ namespace NEXO
 							case MessageCategoryEnumeration.StoredValue:
 								x.SaleToPOIRequest.Item = Deserialize<StoredValueRequestType>(tk.ToString());
 								break;
-#if NEXO31
+#if RETAILER31
 							case MessageCategoryEnumeration.TransactionReport:
 								x.SaleToPOIRequest.Item = Deserialize<TransactionReportRequestType>(tk.ToString());
 								break;
@@ -402,7 +398,7 @@ namespace NEXO
 							case MessageCategoryEnumeration.StoredValue:
 								x.SaleToPOIResponse.Item = Deserialize<StoredValueResponseType>(tk.ToString());
 								break;
-#if NEXO31
+#if RETAILER31
 							case MessageCategoryEnumeration.TransactionReport:
 								x.SaleToPOIResponse.Item = Deserialize<TransactionReportResponseType>(tk.ToString());
 								break;

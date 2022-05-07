@@ -5,12 +5,8 @@ using System.Text.RegularExpressions;
 using System.Resources;
 using System.Collections.Generic;
 using System.Reflection;
-
-#if !NET35
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-#endif
-
 using NEXO.Properties;
 using COMMON;
 
@@ -586,6 +582,7 @@ namespace NEXO
 		#region constructor
 		public NexoEnumeration() { }
 		public NexoEnumeration(string name) : base(name) { }
+		public NexoEnumeration(Type t) { SetName(t.Name); }
 		#endregion
 
 		#region properties
@@ -611,6 +608,26 @@ namespace NEXO
 
 		#region methods
 		protected override string GetRegularExpression(string value) { return string.Empty; }
+		///// <summary>
+		///// Initialise the enumaration using an enum type
+		///// </summary>
+		///// <param name="t"></param>
+		///// <returns></returns>
+		//public bool SetFromEnum(Type t)
+		//{
+		//	try
+		//	{
+		//		if (t.IsEnum)
+		//		{
+		//			string[] names = Enum.GetNames(t);
+		//			for (int i = 0; i < names.Length; i++)
+		//				AddLabel(names[i]);
+		//			SetName(t.ToString());
+		//		}
+		//	}
+		//	catch (Exception) { }
+		//	return false;
+		//}
 		/// <summary>
 		/// Indicates whether a passed value is valid or not
 		/// </summary>
@@ -704,9 +721,16 @@ namespace NEXO
 				{
 					// arrived here we can save a list of valid items for that data
 					foreach (string k in names)
+					{
 						try
-						{ Labels.Add(k, new NexoLabel(k)); }
-						catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
+						{
+							Labels.Add(k, new NexoLabel(k));
+						}
+						catch (Exception ex)
+						{
+							CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
+						}
+					}
 				}
 			}
 			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
@@ -1395,7 +1419,7 @@ namespace NEXO
 		/// String representation of the data
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString() { return CMisc.BytesToStr(Value); }
+		public override string ToString() { return CMisc.AsHexString(Value); }
 		#endregion
 	}
 
@@ -1572,9 +1596,9 @@ namespace NEXO
 	public class NexoManufacturerID : NexoTextString, INexoTextString
 	{
 		public NexoManufacturerID() : base(
-#if NEXO30
+#if RETAILER30
 			TagsEnumeration.ManufacturerID.ToString()
-#elif NEXO31
+#elif RETAILER31
 			TagsEnumeration.ProviderIdentification.ToString()
 #endif
 			)

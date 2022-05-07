@@ -27,26 +27,20 @@ namespace NEXO
 		#region constructor
 		public NexoActivity()
 		{
-#if (NEXO30 || NEXO31)
 			_sentmessages = new NexoListOfAnyMessages("SENT MESSAGES");
 			_receivedmessages = new NexoListOfAnyMessages("RECEIVED MESSAGES");
-#else
-						SentMessages = new ReadOnlyCollection<NexoAnyMessage>(_sentmessages);
-						ReceivedMessages = new ReadOnlyCollection<NexoAnyMessage>(_receivedmessages);
-#endif
+
+			SentMessages = new ReadOnlyCollection<NexoAnyMessage>(_sentmessages);
+			ReceivedMessages = new ReadOnlyCollection<NexoAnyMessage>(_receivedmessages);
 		}
 		#endregion
 
 		#region properties
 		private NexoListOfAnyMessages _sentmessages { get; set; }
 		private NexoListOfAnyMessages _receivedmessages { get; set; }
-#if (NEXO30 || NEXO31)
-		public NexoListOfAnyMessages SentMessages { get => _sentmessages; private set => _sentmessages = value; }
-		public NexoListOfAnyMessages ReceivedMessages { get => _receivedmessages; private set => _receivedmessages = value; }
-#else
-				public ReadOnlyCollection<NexoAnyMessage> SentMessages { get; }
-				public ReadOnlyCollection<NexoAnyMessage> ReceivedMessages { get; }
-#endif
+
+		public ReadOnlyCollection<NexoAnyMessage> SentMessages { get; }
+		public ReadOnlyCollection<NexoAnyMessage> ReceivedMessages { get; }
 
 		//internal CDatabase Database = new CDatabase();
 		//internal NexoRetailerServerDatabase DatabaseSettings

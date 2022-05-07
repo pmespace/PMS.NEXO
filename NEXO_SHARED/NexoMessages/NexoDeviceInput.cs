@@ -205,7 +205,7 @@ namespace NEXO
 		}
 		public int RequestMaxInputTime
 		{
-			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), true);
+			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), 0, true);
 			set => RequestData.InputData.MaxInputTime = value.ToString();
 			//get => RequestData.InputData.MaxInputTime;
 			//set => RequestData.InputData.MaxInputTime = value;

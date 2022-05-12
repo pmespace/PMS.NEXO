@@ -497,7 +497,7 @@ namespace NexoListener
 					}
 
 					NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
-					NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = new CStreamClientSettings() { IP = listenerRequest.IP, Port = (uint)listenerRequest.Port } };
+					NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = new CStreamClientSettings() { IP = listenerRequest.IP, Port = (uint)listenerRequest.Port, ReceiveTimeout = listenerRequest.ReceiveTimeout } };
 					if (client.Connect(clientSettings))
 					{
 						bool ok = true;
@@ -641,8 +641,10 @@ namespace NexoListener
 						listenerReply.Status = ReplyStatus.failedToConnectToPOI;
 					}
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
+					CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+					listenerReply.Status = ReplyStatus.unknownError;
 				}
 				finally
 				{
@@ -779,8 +781,6 @@ namespace NexoListener
 
 			return breply;
 		}
-
-		// convert a "aaa.bbb.ccc" string to a list of strings [0]=aaa, [1]=bbb,...
 		/// <summary>
 		/// Converts a "aaa.bbb.ccc" string to a list of strings [0]=aaa, [1]=bbb,...
 		/// </summary>

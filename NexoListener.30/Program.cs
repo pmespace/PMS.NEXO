@@ -214,6 +214,8 @@ namespace NexoListener
 				return true;
 			}
 
+			//bool useasync = CMisc.YesNo("Use asynchronous communication", true, false, false, null, null, false);
+
 			//var json = new CJson<CListenerRequest>(fileToUse);
 			//var request = json.ReadSettings(out bool except);
 			//if (null != request)
@@ -233,13 +235,22 @@ namespace NexoListener
 			var request = json.ReadSettings(out bool except);
 			if (null != request)
 			{
-				CStreamClientIO streamIO = CStream.Connect(new CStreamClientSettings() { IP = type.IP, Port = type.Port });
+				CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = type.Port, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
+				CStreamClientIO streamIO = CStream.Connect(clientSettings);
 				if (null != streamIO)
 				{
+					//CThread thread = null;
+					//if (useasync && (null != (thread = CStream.SendAsync(new CStream.SendAsyncType() { OnReply = OnReply, Settings = clientSettings, Parameters = null, ThreadData = null, }, CJson<CListenerRequest>.Serialize(request)))))
+					//{
+					//	CLogger.Add($"{request} (sent message, asynchronously)");
+					//}
+					//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 					if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 					{
+						bool error = false;
 						string sreply;
-						while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out bool error)))
+						CLogger.Add($"{request} (sent message, timeout is {clientSettings.ReceiveTimeout} seconds)");
+						while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out error)))
 						{
 							var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
 							CLogger.Add($"{reply.ToString()} (received message)");
@@ -247,9 +258,12 @@ namespace NexoListener
 								break;
 						}
 					}
+					else
+					{
+						CLogger.Add($"Failed to send the request", TLog.ERROR);
+					}
 				}
 			}
-
 			return true;
 		}
 		class TestListenerType
@@ -258,6 +272,19 @@ namespace NexoListener
 			public string FileToUse;
 			public string IP;
 		}
+		//private static bool OnReply(byte[] reply, bool error, CThread thread, object parameters)
+		//{
+		//	string sreply;
+		//	while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out bool error)))
+		//	{
+		//		var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
+		//		CLogger.Add($"{reply.ToString()} (received message)");
+		//		if (!reply.Notification)
+		//			break;
+		//	}
+
+		//	return true;
+		//}
 		/// <summary>
 		/// 
 		/// </summary>

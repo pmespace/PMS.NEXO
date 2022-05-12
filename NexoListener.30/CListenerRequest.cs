@@ -36,6 +36,7 @@ namespace NexoListener
 		public TransactionIdentificationType POITransaction { get; set; }
 		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
 		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();
+		public int ReceiveTimeout { get; set; } = 0;
 
 		public override string ToString()
 		{

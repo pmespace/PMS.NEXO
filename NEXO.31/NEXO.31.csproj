@@ -6,7 +6,7 @@
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO31</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.5.1</Version>
+    <Version>4.6.0</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.0.1" />
+    <PackageReference Include="PMS.COMMON" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,20 +56,9 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.5.1</FileVersion>
-    <AssemblyVersion>4.5.1</AssemblyVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;RETAILER31;RETAILER3X</DefineConstants>
-    <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO31.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DefineConstants>TRACE;RETAILER31;RETAILER3X</DefineConstants>
-    <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO31.xml</DocumentationFile>
+    <FileVersion>4.6.0</FileVersion>
+    <AssemblyVersion>4.6.0</AssemblyVersion>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -85,28 +74,22 @@
   </PropertyGroup>
 
   <Target Name="ResetPackages" BeforeTargets="DispatchToInnerBuilds">
-    <ItemGroup>
-      <NuSpecFiles Include="$(OutputPath)$(PackageId)*.nupkg" Exclude="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" />
-    </ItemGroup>
-    <Delete Files="@(NuSpecFiles)" />
   </Target>
 
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <PropertyGroup>
       <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)/release notes.txt"))</PackageReleaseNotes>
-      <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)/description.txt"))</PackageReleaseNotes>
-      <!--
-      <PackageVersion>4.5.1</PackageVersion>
-      -->
+      <PackageDescription>$([System.IO.File]::ReadAllText("$(SolutionDir)/description.txt"))</PackageDescription>
     </PropertyGroup>
   </Target>
 
   <Target Name="CopyPackage" AfterTargets="Pack">
+    <ItemGroup>
+      <NuSpecFiles Include="$(PackageOutputPath)\*.nupkg" Exclude="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" />
+    </ItemGroup>
+    <Delete Files="@(NuSpecFiles)" />
     <MakeDir Directories="$(TestNugetPath)" Condition="!Exists('$(TestNugetPath)')" />
-    <!--
-    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
-    -->
-    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
+    <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
   </Target>
 
 </Project>

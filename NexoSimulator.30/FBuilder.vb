@@ -533,7 +533,7 @@ Public Class FBuilder
 			newNode.Text = SetNodeText(newNode)
 
 			Dim ok As Boolean = False
-			If IsNothing(item) Then
+			If Not IsNothing(item) Then
 				'add the item to the list of items
 				myNode = GetDetails(parent)
 

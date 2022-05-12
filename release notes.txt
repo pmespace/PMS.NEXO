@@ -1,3 +1,8 @@
+4.6.0
+- Made PackageReference
+- Added signature to package
+- Added a new readonly property (Name) to any XSD based nexo class (through myXSD.exe)
+
 4.5.1
 - Added a constructor to nexo classes to allow creating a new object from an existing object, copying all properties
 - Changed "<className>Size" method name of array objects inside nexo classes to "<className>Length" method name

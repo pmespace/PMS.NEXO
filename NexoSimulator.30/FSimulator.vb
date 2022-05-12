@@ -124,9 +124,9 @@ Public Class FSimulator
 		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
 		Select Case r
 			Case Direction.left
-				txt = $"<<< {txt} <<<"
+				txt = $"<<< {txt}"
 			Case Direction.right
-				txt = $">>> {txt} >>>"
+				txt = $">>> {txt}"
 			Case Direction.none
 		End Select
 		RichTextBox1.SelectionStart = start

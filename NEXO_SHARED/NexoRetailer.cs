@@ -98,16 +98,31 @@ namespace NEXO
 			//ResetSchemaValidationState();
 
 			//Resources = new ResourceManager("NEXO.Properties.NexoResources", GetType().Assembly);
-			Resources = new ResourceManager(typeof(Resources));
-			ResourceSet resourceSet = Resources.GetResourceSet(CultureInfo.CurrentCulture, true, true);
-			XSD = new XmlSchemaSet();
-			foreach (DictionaryEntry entry in resourceSet)
+			try
 			{
-				string resourceKey = entry.Key.ToString();
-				if (resourceKey.StartsWith(NexoCurrentVersion.Current.ResourceName))
-					LoadAndSetXSD(resourceKey);
+				Resources = new ResourceManager(typeof(Resources));
+				if (null != Resources)
+				{
+					{
+						ResourceSet resourceSet = Resources.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+						if (null != resourceSet)
+						{
+							XSD = new XmlSchemaSet();
+							foreach (DictionaryEntry entry in resourceSet)
+							{
+								string resourceKey = entry.Key.ToString();
+								if (resourceKey.StartsWith(NexoCurrentVersion.Current.ResourceName))
+									LoadAndSetXSD(resourceKey);
+							}
+							ResetSchemaValidationState();
+						}
+					}
+				}
 			}
-			ResetSchemaValidationState();
+			catch (Exception ex)
+			{
+				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+			}
 		}
 		#endregion
 

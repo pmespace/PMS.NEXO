@@ -1,0 +1,12 @@
+{
+  "IP": "192.168.0.111",
+  "Port": 2018,
+  "Service": "Payment",
+  "SaleID": "SaleID",
+  "POIID": "POIID",
+  "PaymentType": "Normal",
+  "RequestedAmount": 0.0,
+  "AuthorizedAmount": 0.0,
+  "ElementsToSend": {},
+  "ElementsToReturn": {}
+}

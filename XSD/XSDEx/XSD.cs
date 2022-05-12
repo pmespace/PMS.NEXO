@@ -368,20 +368,20 @@ namespace XSDEx
 			msg.Text = "Post process";
 			try
 			{
-				const string lengthMethod = "Length",
-					getItemMethod = "GetItem",
-					setItemMethod = "SetItem",
-					addItemMethod = "AddItem",
-					removeItemMethod = "RemoveItem",
-					insertItemMethod = "InsertItem",
-					isArray = "array",
-					isCounterI = "i",
-					isCounterJ = "j",
-					isField = "Field",
-					isLength = "Length",
-					isEx = "ex",
-					isIndex = "index",
-					isValue = "value";
+				string lengthMethod = NexoXSDStrings.ObjectLength,
+				 getItemMethod = NexoXSDStrings.ObjectGetItem,
+				 setItemMethod = NexoXSDStrings.ObjectSetItem,
+				 addItemMethod = NexoXSDStrings.ObjectAddItem,
+				 removeItemMethod = NexoXSDStrings.ObjectRemoveItem,
+				 insertItemMethod = NexoXSDStrings.ObjectInsertItem,
+				 isArray = "array",
+				 isCounterI = "i",
+				 isCounterJ = "j",
+				 isField = "Field",
+				 isLength = "Length",
+				 isEx = "ex",
+				 isIndex = "index",
+				 isValue = "value";
 
 				// file specific objects to add
 				List<CodeTypeDeclaration> newCodeTypeDeclarations = new List<CodeTypeDeclaration>();

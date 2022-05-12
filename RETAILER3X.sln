@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		description.txt = description.txt
 		README.md = README.md
 		release notes.txt = release notes.txt
-		version.txt = version.txt
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NexoBuilder.30", "Builder.30\NexoBuilder.30.vbproj", "{9937CEEC-C795-4F00-9C2E-179A41A7CFFD}"
@@ -41,8 +40,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NEXO.30", "NEXO.30\NEXO.30.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NEXO.31", "NEXO.31\NEXO.31.csproj", "{FB23554B-7EBC-4908-BA4A-8C880FBEB5A2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NEXO.30.STD", "NEXO.30.STD\NEXO.30.STD.csproj", "{168FCF82-C1FB-4314-95BD-84319D4AB647}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{168fcf82-c1fb-4314-95bd-84319d4ab647}*SharedItemsImports = 5
+		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{168fcf82-c1fb-4314-95bd-84319d4ab647}*SharedItemsImports = 5
+		NEXO_SHARED\NEXO_SHARED.projitems*{168fcf82-c1fb-4314-95bd-84319d4ab647}*SharedItemsImports = 5
 		NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems*{1c9d3f04-a1b0-4090-82d0-b55e5a1f2c78}*SharedItemsImports = 5
 		NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems*{1c9d3f04-a1b0-4090-82d0-b55e5a1f2c78}*SharedItemsImports = 5
 		NEXO_SHARED\NEXO_SHARED.projitems*{1c9d3f04-a1b0-4090-82d0-b55e5a1f2c78}*SharedItemsImports = 5
@@ -83,7 +87,9 @@ Global
 		{362CB463-04FA-4DE8-B3C0-C3780FF70EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{362CB463-04FA-4DE8-B3C0-C3780FF70EA3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8421A135-FBE6-496F-9E6D-5C66DFACB803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8421A135-FBE6-496F-9E6D-5C66DFACB803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8421A135-FBE6-496F-9E6D-5C66DFACB803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8421A135-FBE6-496F-9E6D-5C66DFACB803}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C9D3F04-A1B0-4090-82D0-B55E5A1F2C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C9D3F04-A1B0-4090-82D0-B55E5A1F2C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C9D3F04-A1B0-4090-82D0-B55E5A1F2C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -92,6 +98,10 @@ Global
 		{FB23554B-7EBC-4908-BA4A-8C880FBEB5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB23554B-7EBC-4908-BA4A-8C880FBEB5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB23554B-7EBC-4908-BA4A-8C880FBEB5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{168FCF82-C1FB-4314-95BD-84319D4AB647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{168FCF82-C1FB-4314-95BD-84319D4AB647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{168FCF82-C1FB-4314-95BD-84319D4AB647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{168FCF82-C1FB-4314-95BD-84319D4AB647}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +115,7 @@ Global
 		{43829C4D-F366-4890-AF4B-A40F583A8265} = {16D6D994-6D81-4F3B-9953-227995EEAC7D}
 		{362CB463-04FA-4DE8-B3C0-C3780FF70EA3} = {16D6D994-6D81-4F3B-9953-227995EEAC7D}
 		{8421A135-FBE6-496F-9E6D-5C66DFACB803} = {F3A7AABA-EE1A-4FC8-8CD8-5AA2D32B8FCC}
+		{168FCF82-C1FB-4314-95BD-84319D4AB647} = {F3A7AABA-EE1A-4FC8-8CD8-5AA2D32B8FCC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2D01539-A981-428F-8F33-F80B9CF47AE6}

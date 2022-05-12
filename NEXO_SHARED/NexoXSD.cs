@@ -22,6 +22,12 @@ namespace NEXO
 		public static string EnumNone = $"_none";
 		public static string EnumBegin = $"_begin";
 		public static string EnumEnd = $"_end";
+		public static string ObjectLength = $"_end";
+		public static string ObjectAddItem = $"AddItem";
+		public static string ObjectGetItem = $"GetItem";
+		public static string ObjectSetItem = $"SetItem";
+		public static string ObjectRemoveItem = $"RemoveItem";
+		public static string ObjectInsertItem = $"InsertItem";
 	}
 
 	#region commented

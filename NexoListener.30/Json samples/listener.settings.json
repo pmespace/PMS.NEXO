@@ -1,0 +1,8 @@
+{
+  "Port": 29134,
+  "AutoLoginLogout": false,
+  "LogExchanges": false,
+  "DisplayMessages": true,
+  "AllowedIP": [],
+  "AllowedServices": []
+}

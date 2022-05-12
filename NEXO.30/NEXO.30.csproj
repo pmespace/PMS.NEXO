@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO30</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.5.1</Version>
+    <Version>4.6.0</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -14,18 +14,6 @@
     <RepositoryUrl>https://github.com/pmespace/PMS.NEXO</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO30.xml</DocumentationFile>
-    <DefineConstants>TRACE;DEBUG;RETAILER30;RETAILER3X;</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO30.xml</DocumentationFile>
-    <DefineConstants>TRACE;RETAILER30;RETAILER3X;</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.0.1" />
+    <PackageReference Include="PMS.COMMON" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,8 +53,10 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.5.1</FileVersion>
-    <AssemblyVersion>4.5.1</AssemblyVersion>
+    <FileVersion>4.6.0</FileVersion>
+    <AssemblyVersion>4.6.0</AssemblyVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>pms.key.file.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -82,28 +72,22 @@
   </PropertyGroup>
 
   <Target Name="ResetPackages" BeforeTargets="DispatchToInnerBuilds">
-    <ItemGroup>
-      <NuSpecFiles Include="$(OutputPath)$(PackageId)*.nupkg" Exclude="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" />
-    </ItemGroup>
-    <Delete Files="@(NuSpecFiles)" />
   </Target>
 
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <PropertyGroup>
       <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)/release notes.txt"))</PackageReleaseNotes>
       <PackageDescription>$([System.IO.File]::ReadAllText("$(SolutionDir)/description.txt"))</PackageDescription>
-      <!--
-      <PackageVersion>4.5.1</PackageVersion>
-      -->
     </PropertyGroup>
   </Target>
 
   <Target Name="CopyPackage" AfterTargets="Pack">
+    <ItemGroup>
+      <NuSpecFiles Include="$(PackageOutputPath)\*.nupkg" Exclude="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" />
+    </ItemGroup>
+    <Delete Files="@(NuSpecFiles)" />
     <MakeDir Directories="$(TestNugetPath)" Condition="!Exists('$(TestNugetPath)')" />
-    <!--
-    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
-    -->
-    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
+    <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
   </Target>
 
 </Project>

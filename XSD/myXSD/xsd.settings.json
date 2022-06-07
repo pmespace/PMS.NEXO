@@ -26,9 +26,11 @@
   "CreateArrayAccessors": true,
   "Preprocessor": "NEXO30",
   "Silent": true,
-  "ConvertStringIntegralToIntegral": false,
+  "ConvertStringIntegralToIntegral": true,
   "UseDefaultValueForHasBeenModified": false,
   "AddDefaultAttributesToEnum": true,
   "UseEnumBeginEnd": true,
-  "IsRetailer": true
+  "IsRetailer": true,
+  "UseNullableIntegralTypes": false,
+  "UseOptimizingFlag": false
 }

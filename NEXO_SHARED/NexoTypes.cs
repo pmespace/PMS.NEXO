@@ -1434,6 +1434,8 @@ namespace NEXO
 		string Value { get; set; }
 		[DispId(3)]
 		uint DecimalPlaces { get; set; }
+		[DispId(4)]
+		uint Divider { get; }
 
 		[DispId(100)]
 		string ToString();
@@ -1450,6 +1452,10 @@ namespace NEXO
 		/// Number of digits in the decimal part
 		/// </summary>
 		public virtual uint DecimalPlaces { get; set; } = 2;
+		/// <summary>
+		/// The divider to use to convert an integer to a real amount
+		/// </summary>
+		public uint Divider { get => (uint)Math.Pow(10, DecimalPlaces); }
 		#endregion
 
 		#region constuctors

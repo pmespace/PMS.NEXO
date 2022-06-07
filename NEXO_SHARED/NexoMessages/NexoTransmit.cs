@@ -189,10 +189,10 @@ namespace NEXO
 		#region request inner properties
 		public int RequestMaximumTransmitTime
 		{
-			get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), 0, true);
-			set => RequestData.MaximumTransmitTime = value.ToString();
-			//get => RequestData.MaximumTransmitTime;
-			//set => RequestData.MaximumTransmitTime = value;
+			//get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.MaximumTransmitTime), 0, true);
+			//set => RequestData.MaximumTransmitTime = value.ToString();
+			get => RequestData.MaximumTransmitTime;
+			set => RequestData.MaximumTransmitTime = value;
 		}
 		public string RequestDestinationAddress
 		{

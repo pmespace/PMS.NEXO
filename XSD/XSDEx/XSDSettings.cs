@@ -65,7 +65,6 @@ namespace XSDEx
 
 			ArrayCreateInitializer = false;
 			ArrayGetReturnsNullEmpty = false;
-
 			CreateArrayAccessors = true;
 		}
 		public enum NameSpace
@@ -100,10 +99,16 @@ namespace XSDEx
 		/// Com interface to use when generating the classes
 		/// </summary>
 		public ComInterfaceType ComInterface { get; set; }
+		/// <summary>
+		/// Indicate whether DisopID must be added or not
+		/// </summary>
 		public bool AddDispID { get; set; }
+		/// <summary>
+		/// Indicate whether enums must be made COM visible
+		/// </summary>
 		public bool MakeEnumComVisible { get; set; }
 		/// <summary>
-		/// Make the class visible and inherit its interface to be visible on COM
+		/// Indicate whether classes must be made COM visible
 		/// </summary>
 		public bool MakeClassComVisible { get; set; }
 		/// <summary>
@@ -149,6 +154,9 @@ namespace XSDEx
 		/// Indicate whether array accessors must be created or not
 		/// </summary>
 		public bool CreateArrayAccessors { get; set; }
+		/// <summary>
+		/// name of preprocessor directive to use
+		/// </summary>
 		public string Preprocessor { get; set; }
 		/// <summary>
 		/// Indicate whether messages must be displayed while processing
@@ -171,5 +179,10 @@ namespace XSDEx
 		/// Type of namespace to create
 		/// </summary>
 		public NameSpace NamespaceToDeclare { get; set; } = NameSpace.None;
+		/// <summary>
+		/// Use nullable integral types for properties
+		/// </summary>
+		public bool UseNullableIntegralTypes { get; set; } = true;
+		public bool UseOptimizingFlag { get; set; } = true;
 	}
 }

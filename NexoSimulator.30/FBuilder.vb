@@ -16,6 +16,7 @@ Public Class FBuilder
 	Private currentParentNode As TreeNode
 	Private currentNode As TreeNode
 	Private valueNode As TreeNode
+	Private fontN, fontB As Font
 
 	Enum MyNodeAction
 		Update
@@ -62,6 +63,9 @@ Public Class FBuilder
 	End Sub
 
 	Private Sub FBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		fontN = New Font(TreeView1.Font, TreeView1.Font.Style)
+		fontB = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+
 		Dim s As String
 		DialogResult = DialogResult.None
 		nexoRequest = O.Request
@@ -167,14 +171,14 @@ Public Class FBuilder
 			Select Case myNode.NodeType
 				Case MyNodeType.Value
 					If Not IsNothing(myNode.Value) Then
-						node.Parent.NodeFont = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+						node.Parent.NodeFont = fontB 'New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
 					Else
 						node.Parent.NodeFont = Nothing
 					End If
 
 				Case MyNodeType.Array
 					If 1 < node.Nodes.Count Then
-						node.NodeFont = New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+						node.NodeFont = fontB 'New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
 					Else
 						node.NodeFont = Nothing
 					End If

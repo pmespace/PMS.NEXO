@@ -70,9 +70,12 @@ Partial Class FChooser
 		Me.pbCopy2 = New System.Windows.Forms.Button()
 		Me.rbTransactionReport = New System.Windows.Forms.RadioButton()
 		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+		Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.TranslateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
+		Me.ContextMenuStrip1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'rbLogin
@@ -581,6 +584,7 @@ Partial Class FChooser
 		'efNotation
 		'
 		Me.efNotation.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.efNotation.ContextMenuStrip = Me.ContextMenuStrip1
 		Me.efNotation.Location = New System.Drawing.Point(47, 26)
 		Me.efNotation.Multiline = True
 		Me.efNotation.Name = "efNotation"
@@ -696,8 +700,17 @@ Partial Class FChooser
 		Me.rbTransactionReport.Text = "Transaction report"
 		Me.rbTransactionReport.UseVisualStyleBackColor = True
 		'
-		'ToolTip1
+		'ContextMenuStrip1
 		'
+		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TranslateToolStripMenuItem})
+		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+		'
+		'TranslateToolStripMenuItem
+		'
+		Me.TranslateToolStripMenuItem.Name = "TranslateToolStripMenuItem"
+		Me.TranslateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.TranslateToolStripMenuItem.Text = "Translate"
 		'
 		'FChooser
 		'
@@ -718,6 +731,7 @@ Partial Class FChooser
 		Me.TableLayoutPanel2.PerformLayout()
 		Me.TableLayoutPanel3.ResumeLayout(False)
 		Me.TableLayoutPanel3.PerformLayout()
+		Me.ContextMenuStrip1.ResumeLayout(False)
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -769,4 +783,6 @@ Partial Class FChooser
 	Friend WithEvents efNotTheTarget As TextBox
 	Friend WithEvents lblTargetNotation As Label
 	Friend WithEvents pbCopy2 As Button
+	Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+	Friend WithEvents TranslateToolStripMenuItem As ToolStripMenuItem
 End Class

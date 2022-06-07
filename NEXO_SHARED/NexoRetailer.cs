@@ -564,19 +564,19 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				request.XSD_Optimizing = true;// OptimizeXml;
-				try
-				{
-					SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
-				}
-				catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request optimisation"); }
-				finally
-				{
-					if (UseJson)
-						serialized = Serialize<XSaleToPOIRequest>(new XSaleToPOIRequest() { SaleToPOIRequest = request });
-					else
-						serialized = Serialize<SaleToPOIRequest>(request);
-				}
+				//request.XSD_Optimizing = true;// OptimizeXml;
+				//try
+				//{
+				//	SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
+				//}
+				//catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request optimisation"); }
+				//finally
+				//{
+				if (UseJson)
+					serialized = Serialize<XSaleToPOIRequest>(new XSaleToPOIRequest() { SaleToPOIRequest = request });
+				else
+					serialized = Serialize<SaleToPOIRequest>(request);
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -584,8 +584,8 @@ namespace NEXO
 			}
 			finally
 			{
-				request.XSD_Optimizing = false;
-				SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
+				//request.XSD_Optimizing = false;
+				//SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
 			}
 			return serialized;
 		}
@@ -599,19 +599,19 @@ namespace NEXO
 			string serialized = null;
 			try
 			{
-				reply.XSD_Optimizing = true;// OptimizeXml;
-				try
-				{
-					SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
-				}
-				catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply optimisation"); }
-				finally
-				{
-					if (UseJson)
-						serialized = Serialize<XSaleToPOIResponse>(new XSaleToPOIResponse() { SaleToPOIResponse = reply });
-					else
-						serialized = Serialize<SaleToPOIResponse>(reply);
-				}
+				//reply.XSD_Optimizing = true;// OptimizeXml;
+				//try
+				//{
+				//	SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
+				//}
+				//catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply optimisation"); }
+				//finally
+				//{
+				if (UseJson)
+					serialized = Serialize<XSaleToPOIResponse>(new XSaleToPOIResponse() { SaleToPOIResponse = reply });
+				else
+					serialized = Serialize<SaleToPOIResponse>(reply);
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -619,8 +619,8 @@ namespace NEXO
 			}
 			finally
 			{
-				reply.XSD_Optimizing = false;
-				SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
+				//reply.XSD_Optimizing = false;
+				//SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
 			}
 			return serialized;
 		}

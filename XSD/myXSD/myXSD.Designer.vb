@@ -56,11 +56,14 @@ Partial Class myXSD
 		Me.Label4 = New System.Windows.Forms.Label()
 		Me.efPreprocessor = New System.Windows.Forms.TextBox()
 		Me.cbSilent = New System.Windows.Forms.CheckBox()
+		Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
+		Me.csharp = New System.Windows.Forms.RadioButton()
+		Me.vb = New System.Windows.Forms.RadioButton()
 		Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
 		Me.rbRetailer = New System.Windows.Forms.RadioButton()
 		Me.rbAcquirer = New System.Windows.Forms.RadioButton()
-		Me.vb = New System.Windows.Forms.RadioButton()
-		Me.csharp = New System.Windows.Forms.RadioButton()
+		Me.rbTMS = New System.Windows.Forms.RadioButton()
+		Me.rbNone = New System.Windows.Forms.RadioButton()
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.convertTypes = New System.Windows.Forms.CheckBox()
 		Me.panelTypes = New System.Windows.Forms.TableLayoutPanel()
@@ -81,12 +84,11 @@ Partial Class myXSD
 		Me.cbUseDefaultValueForHasBeenModified = New System.Windows.Forms.CheckBox()
 		Me.cbAddDefaultToEnum = New System.Windows.Forms.CheckBox()
 		Me.cbAddBeginEnd = New System.Windows.Forms.CheckBox()
+		Me.cbuseNullableIntegralTypes = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
-		Me.rbNone = New System.Windows.Forms.RadioButton()
-		Me.rbTMS = New System.Windows.Forms.RadioButton()
+		Me.cbOptimizing = New System.Windows.Forms.CheckBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelGenerateButtons.SuspendLayout()
@@ -98,13 +100,13 @@ Partial Class myXSD
 		Me.panelInterface.SuspendLayout()
 		Me.panelCOM.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
+		Me.FlowLayoutPanel3.SuspendLayout()
 		Me.FlowLayoutPanel2.SuspendLayout()
 		Me.TableLayoutPanel2.SuspendLayout()
 		Me.panelTypes.SuspendLayout()
 		Me.TableLayoutPanel3.SuspendLayout()
 		Me.TableLayoutPanel4.SuspendLayout()
 		Me.FlowLayoutPanel1.SuspendLayout()
-		Me.FlowLayoutPanel3.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'panelMain
@@ -578,6 +580,46 @@ Partial Class myXSD
 		Me.cbSilent.Text = "Silent"
 		Me.cbSilent.UseVisualStyleBackColor = True
 		'
+		'FlowLayoutPanel3
+		'
+		Me.FlowLayoutPanel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.FlowLayoutPanel3.AutoSize = True
+		Me.FlowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.FlowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.FlowLayoutPanel3.Controls.Add(Me.csharp)
+		Me.FlowLayoutPanel3.Controls.Add(Me.vb)
+		Me.FlowLayoutPanel3.Location = New System.Drawing.Point(615, 3)
+		Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
+		Me.FlowLayoutPanel3.Size = New System.Drawing.Size(117, 25)
+		Me.FlowLayoutPanel3.TabIndex = 6
+		Me.FlowLayoutPanel3.WrapContents = False
+		'
+		'csharp
+		'
+		Me.csharp.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.csharp.AutoSize = True
+		Me.csharp.Checked = True
+		Me.csharp.Location = New System.Drawing.Point(3, 3)
+		Me.csharp.Name = "csharp"
+		Me.csharp.Size = New System.Drawing.Size(39, 17)
+		Me.csharp.TabIndex = 0
+		Me.csharp.TabStop = True
+		Me.csharp.Text = "C#"
+		Me.csharp.UseVisualStyleBackColor = True
+		'
+		'vb
+		'
+		Me.vb.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.vb.AutoSize = True
+		Me.vb.Location = New System.Drawing.Point(48, 3)
+		Me.vb.Name = "vb"
+		Me.vb.Size = New System.Drawing.Size(64, 17)
+		Me.vb.TabIndex = 1
+		Me.vb.Text = "VB.NET"
+		Me.vb.UseVisualStyleBackColor = True
+		'
 		'FlowLayoutPanel2
 		'
 		Me.FlowLayoutPanel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -618,29 +660,29 @@ Partial Class myXSD
 		Me.rbAcquirer.Text = "Acquirer"
 		Me.rbAcquirer.UseVisualStyleBackColor = True
 		'
-		'vb
+		'rbTMS
 		'
-		Me.vb.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.vb.AutoSize = True
-		Me.vb.Location = New System.Drawing.Point(48, 3)
-		Me.vb.Name = "vb"
-		Me.vb.Size = New System.Drawing.Size(64, 17)
-		Me.vb.TabIndex = 1
-		Me.vb.Text = "VB.NET"
-		Me.vb.UseVisualStyleBackColor = True
+		Me.rbTMS.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.rbTMS.AutoSize = True
+		Me.rbTMS.Location = New System.Drawing.Point(140, 3)
+		Me.rbTMS.Name = "rbTMS"
+		Me.rbTMS.Size = New System.Drawing.Size(48, 17)
+		Me.rbTMS.TabIndex = 3
+		Me.rbTMS.TabStop = True
+		Me.rbTMS.Text = "TMS"
+		Me.rbTMS.UseVisualStyleBackColor = True
 		'
-		'csharp
+		'rbNone
 		'
-		Me.csharp.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.csharp.AutoSize = True
-		Me.csharp.Checked = True
-		Me.csharp.Location = New System.Drawing.Point(3, 3)
-		Me.csharp.Name = "csharp"
-		Me.csharp.Size = New System.Drawing.Size(39, 17)
-		Me.csharp.TabIndex = 0
-		Me.csharp.TabStop = True
-		Me.csharp.Text = "C#"
-		Me.csharp.UseVisualStyleBackColor = True
+		Me.rbNone.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.rbNone.AutoSize = True
+		Me.rbNone.Location = New System.Drawing.Point(194, 3)
+		Me.rbNone.Name = "rbNone"
+		Me.rbNone.Size = New System.Drawing.Size(51, 17)
+		Me.rbNone.TabIndex = 2
+		Me.rbNone.TabStop = True
+		Me.rbNone.Text = "None"
+		Me.rbNone.UseVisualStyleBackColor = True
 		'
 		'TableLayoutPanel2
 		'
@@ -823,6 +865,8 @@ Partial Class myXSD
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbUseDefaultValueForHasBeenModified)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbAddDefaultToEnum)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbAddBeginEnd)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbuseNullableIntegralTypes)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbOptimizing)
 		Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 149)
 		Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
@@ -907,6 +951,16 @@ Partial Class myXSD
 		Me.cbAddBeginEnd.Text = "Add begin/end to enum"
 		Me.cbAddBeginEnd.UseVisualStyleBackColor = True
 		'
+		'cbuseNullableIntegralTypes
+		'
+		Me.cbuseNullableIntegralTypes.AutoSize = True
+		Me.cbuseNullableIntegralTypes.Location = New System.Drawing.Point(147, 26)
+		Me.cbuseNullableIntegralTypes.Name = "cbuseNullableIntegralTypes"
+		Me.cbuseNullableIntegralTypes.Size = New System.Drawing.Size(149, 17)
+		Me.cbuseNullableIntegralTypes.TabIndex = 11
+		Me.cbuseNullableIntegralTypes.Text = "Use nullable integral types"
+		Me.cbuseNullableIntegralTypes.UseVisualStyleBackColor = True
+		'
 		'result
 		'
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -929,45 +983,15 @@ Partial Class myXSD
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
 		'
-		'FlowLayoutPanel3
+		'cbOptimizing
 		'
-		Me.FlowLayoutPanel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.FlowLayoutPanel3.AutoSize = True
-		Me.FlowLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.FlowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.FlowLayoutPanel3.Controls.Add(Me.csharp)
-		Me.FlowLayoutPanel3.Controls.Add(Me.vb)
-		Me.FlowLayoutPanel3.Location = New System.Drawing.Point(615, 3)
-		Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
-		Me.FlowLayoutPanel3.Size = New System.Drawing.Size(117, 25)
-		Me.FlowLayoutPanel3.TabIndex = 6
-		Me.FlowLayoutPanel3.WrapContents = False
-		'
-		'rbNone
-		'
-		Me.rbNone.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.rbNone.AutoSize = True
-		Me.rbNone.Location = New System.Drawing.Point(194, 3)
-		Me.rbNone.Name = "rbNone"
-		Me.rbNone.Size = New System.Drawing.Size(51, 17)
-		Me.rbNone.TabIndex = 2
-		Me.rbNone.TabStop = True
-		Me.rbNone.Text = "None"
-		Me.rbNone.UseVisualStyleBackColor = True
-		'
-		'rbTMS
-		'
-		Me.rbTMS.Anchor = System.Windows.Forms.AnchorStyles.Left
-		Me.rbTMS.AutoSize = True
-		Me.rbTMS.Location = New System.Drawing.Point(140, 3)
-		Me.rbTMS.Name = "rbTMS"
-		Me.rbTMS.Size = New System.Drawing.Size(48, 17)
-		Me.rbTMS.TabIndex = 3
-		Me.rbTMS.TabStop = True
-		Me.rbTMS.Text = "TMS"
-		Me.rbTMS.UseVisualStyleBackColor = True
+		Me.cbOptimizing.AutoSize = True
+		Me.cbOptimizing.Location = New System.Drawing.Point(302, 26)
+		Me.cbOptimizing.Name = "cbOptimizing"
+		Me.cbOptimizing.Size = New System.Drawing.Size(94, 17)
+		Me.cbOptimizing.TabIndex = 12
+		Me.cbOptimizing.Text = "Use optimizing"
+		Me.cbOptimizing.UseVisualStyleBackColor = True
 		'
 		'myXSD
 		'
@@ -998,6 +1022,8 @@ Partial Class myXSD
 		Me.panelCOM.ResumeLayout(False)
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.TableLayoutPanel1.PerformLayout()
+		Me.FlowLayoutPanel3.ResumeLayout(False)
+		Me.FlowLayoutPanel3.PerformLayout()
 		Me.FlowLayoutPanel2.ResumeLayout(False)
 		Me.FlowLayoutPanel2.PerformLayout()
 		Me.TableLayoutPanel2.ResumeLayout(False)
@@ -1010,8 +1036,6 @@ Partial Class myXSD
 		Me.TableLayoutPanel4.PerformLayout()
 		Me.FlowLayoutPanel1.ResumeLayout(False)
 		Me.FlowLayoutPanel1.PerformLayout()
-		Me.FlowLayoutPanel3.ResumeLayout(False)
-		Me.FlowLayoutPanel3.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -1081,4 +1105,6 @@ Partial Class myXSD
 	Friend WithEvents FlowLayoutPanel3 As FlowLayoutPanel
 	Friend WithEvents rbNone As RadioButton
 	Friend WithEvents rbTMS As RadioButton
+	Friend WithEvents cbuseNullableIntegralTypes As CheckBox
+	Friend WithEvents cbOptimizing As CheckBox
 End Class

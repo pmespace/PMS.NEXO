@@ -15,19 +15,21 @@ namespace NEXO
 		public static string XSD = "XSD_";
 		public static string NexoOptimizingProperty = $"{XSD}Optimizing";
 		public static string NexoOptimizingField = $"_{XSD}Optimizing";
-		public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
-		public static string NexoClassName = $"{XSD}ClassName";
+		//public static string NexoHasBeenSetProperty = $"{XSD}HasBeenSet";
+		public static string NexoHasBeenSetProperty = $"ObjectHasBeenSet";
+		//public static string NexoClassName = $"{XSD}ClassName";
+		public static string NexoClassName = $"ClassName";
 		public static string NexoHasBeenSetField = $"_{XSD}HasBeenSet";
-		public static string NexoDefaultValueForProperty = $"DEFAULT_VALUE";
+		public static string NexoDefaultValueForProperty = $"DefaultValue";
 		public static string EnumNone = $"_none";
 		public static string EnumBegin = $"_begin";
 		public static string EnumEnd = $"_end";
-		public static string ObjectLength = $"_end";
-		public static string ObjectAddItem = $"AddItem";
-		public static string ObjectGetItem = $"GetItem";
-		public static string ObjectSetItem = $"SetItem";
-		public static string ObjectRemoveItem = $"RemoveItem";
-		public static string ObjectInsertItem = $"InsertItem";
+		public static string AccessorLength = $"Length";
+		public static string AccessorAddItem = $"AddItem";
+		public static string AccessorGetItem = $"GetItem";
+		public static string AccessorSetItem = $"SetItem";
+		public static string AccessorRemoveItem = $"RemoveItem";
+		public static string AccessorInsertItem = $"InsertItem";
 	}
 
 	#region commented

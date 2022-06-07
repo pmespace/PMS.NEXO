@@ -233,4 +233,12 @@ Public Class FChooser
 	Private Sub pbCopy2_Click(sender As Object, e As EventArgs) Handles pbCopy2.Click
 		Clipboard.SetText(efNotTheTarget.Text)
 	End Sub
+
+	Private Sub TranslateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TranslateToolStripMenuItem.Click
+		efTarget.Text = JsonConvert.SerializeObject(efNotation.Text)
+	End Sub
+
+	Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
+		TranslateToolStripMenuItem.Enabled = Not String.IsNullOrEmpty(efNotation.Text)
+	End Sub
 End Class

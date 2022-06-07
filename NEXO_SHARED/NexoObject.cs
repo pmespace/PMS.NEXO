@@ -430,7 +430,7 @@ namespace NEXO
 		/// <param name="typeDefaultValue">The data type default value</param>
 		/// <param name="defaultValue">The default value if no other value is available</param>
 		/// <returns>The value to assign to the data</returns>
-		public string SetDefaultStringValue(string value, string defaultValue, string typeDefaultValue = "")
+		public string SetDefaultStringValue(string value, string defaultValue, string typeDefaultValue = null)
 		{
 			if (string.IsNullOrEmpty(value))
 				if (string.IsNullOrEmpty(typeDefaultValue))
@@ -446,9 +446,9 @@ namespace NEXO
 		/// <param name="value">The data to test, eventually to set</param>
 		/// <param name="defaultValue">The default value if no other value is available</param>
 		/// <returns>The value to assign to the data</returns>
-		public double SetDefaultDoubleValue(double value, double defaultValue = 0)
+		public double SetDefaultDoubleValue(double value, double defaultValue = default)
 		{
-			if (0 == value)
+			if (default == value)
 				return defaultValue;
 			else
 				return value;

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;netstandard2.0;net35;net40;net45</TargetFrameworks>
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO31</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -14,7 +14,6 @@
     <RepositoryUrl>https://github.com/pmespace/PMS.NEXO</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.1.0" />
+    <PackageReference Include="PMS.COMMON" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup>

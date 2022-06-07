@@ -171,6 +171,10 @@ Public Class myXSD
 			settings.NamespaceToDeclare = XSDSettings.NameSpace.None
 		End If
 
+		settings.UseNullableIntegralTypes = cbuseNullableIntegralTypes.Checked
+		settings.UseOptimizingFlag = cbOptimizing.Checked
+
+
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
 		Return settings
@@ -229,6 +233,10 @@ Public Class myXSD
 			Case Else
 				rbNone.Checked = True
 		End Select
+
+		cbuseNullableIntegralTypes.Checked = settings.UseNullableIntegralTypes
+		cbOptimizing.Checked = settings.UseOptimizingFlag
+
 
 	End Sub
 

@@ -102,7 +102,7 @@ Public Class FSimulator
 
 	Private Sub ProcessUI(activity As Activity)
 		If ActivityEvent.none <> activity.Evt Then
-			AddLine(activity.position, activity.direction, activity.Message)
+			CLog.Add(AddLine(activity.position, activity.direction, activity.Message))
 			Select Case activity.Evt
 				Case ActivityEvent.serverStopped
 					If isClosing Then
@@ -118,7 +118,7 @@ Public Class FSimulator
 		SetButtons()
 	End Sub
 
-	Private Sub AddLine(position As Position, r As Direction, s As String, Optional reset As Boolean = False)
+	Private Function AddLine(position As Position, r As Direction, s As String, Optional reset As Boolean = False) As String
 		Dim dt As DateTime = Now
 		Dim start As Integer = RichTextBox1.TextLength
 		Dim txt As String = dt.ToString("s") & ": " & s & vbCrLf
@@ -146,7 +146,8 @@ Public Class FSimulator
 		RichTextBox1.AppendText(txt & vbCrLf)
 		RichTextBox1.SelectionLength = RichTextBox1.TextLength - start
 		RichTextBox1.ScrollToCaret()
-	End Sub
+		Return txt
+	End Function
 
 	Private Function MessageLength(s As String) As String
 		Return " [" & s.Length & " bytes]"

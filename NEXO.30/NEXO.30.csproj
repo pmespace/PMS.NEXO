@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net35;net40;net45</TargetFrameworks>
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO30</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.6.0</Version>
+    <Version>4.7.0</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -14,6 +14,7 @@
     <RepositoryUrl>https://github.com/pmespace/PMS.NEXO</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.0.3" />
+    <PackageReference Include="PMS.COMMON" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,8 +54,8 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.6.0</FileVersion>
-    <AssemblyVersion>4.6.0</AssemblyVersion>
+    <FileVersion>4.7.0</FileVersion>
+    <AssemblyVersion>4.7.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>pms.key.file.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>

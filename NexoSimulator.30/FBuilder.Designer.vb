@@ -23,6 +23,7 @@ Partial Class FBuilder
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FBuilder))
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbAccept = New System.Windows.Forms.Button()
@@ -30,6 +31,7 @@ Partial Class FBuilder
 		Me.pbExpandAll = New System.Windows.Forms.Button()
 		Me.cbOptimize = New System.Windows.Forms.CheckBox()
 		Me.TreeView1 = New System.Windows.Forms.TreeView()
+		Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
 		Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.SetValueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ResetvalueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -140,47 +142,62 @@ Partial Class FBuilder
 		Me.TreeView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
 			Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.TreeView1.ImageIndex = 0
+		Me.TreeView1.ImageList = Me.ImageList1
 		Me.TreeView1.LabelEdit = True
 		Me.TreeView1.Location = New System.Drawing.Point(3, 3)
 		Me.TreeView1.Name = "TreeView1"
+		Me.TreeView1.SelectedImageIndex = 0
 		Me.TreeView1.Size = New System.Drawing.Size(813, 418)
 		Me.TreeView1.TabIndex = 0
+		'
+		'ImageList1
+		'
+		Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+		Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+		Me.ImageList1.Images.SetKeyName(0, "home")
+		Me.ImageList1.Images.SetKeyName(1, "array")
+		Me.ImageList1.Images.SetKeyName(2, "arrayitem")
+		Me.ImageList1.Images.SetKeyName(3, "tree")
+		Me.ImageList1.Images.SetKeyName(4, "leaf")
+		Me.ImageList1.Images.SetKeyName(5, "question")
+		Me.ImageList1.Images.SetKeyName(6, "type")
+		Me.ImageList1.Images.SetKeyName(7, "value")
 		'
 		'ContextMenuStrip1
 		'
 		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetValueToolStripMenuItem, Me.ResetvalueToolStripMenuItem, Me.AddItemToolStripMenuItem, Me.InsertItemToolStripMenuItem, Me.RemoveItemToolStripMenuItem})
 		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-		Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 136)
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(145, 114)
 		'
 		'SetValueToolStripMenuItem
 		'
 		Me.SetValueToolStripMenuItem.Name = "SetValueToolStripMenuItem"
-		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.SetValueToolStripMenuItem.Text = "Set value"
 		'
 		'ResetvalueToolStripMenuItem
 		'
 		Me.ResetvalueToolStripMenuItem.Name = "ResetvalueToolStripMenuItem"
-		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.ResetvalueToolStripMenuItem.Text = "Reset value"
 		'
 		'AddItemToolStripMenuItem
 		'
 		Me.AddItemToolStripMenuItem.Name = "AddItemToolStripMenuItem"
-		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.AddItemToolStripMenuItem.Text = "Add item"
 		'
 		'InsertItemToolStripMenuItem
 		'
-		Me.InsertItemToolStripMenuItem.Enabled = False
 		Me.InsertItemToolStripMenuItem.Name = "InsertItemToolStripMenuItem"
-		Me.InsertItemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.InsertItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.InsertItemToolStripMenuItem.Text = "Insert item"
 		'
 		'RemoveItemToolStripMenuItem
 		'
 		Me.RemoveItemToolStripMenuItem.Name = "RemoveItemToolStripMenuItem"
-		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
 		Me.RemoveItemToolStripMenuItem.Text = "Remove item"
 		'
 		'FBuilder
@@ -215,4 +232,5 @@ Partial Class FBuilder
 	Friend WithEvents RemoveItemToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents cbOptimize As CheckBox
 	Friend WithEvents InsertItemToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ImageList1 As ImageList
 End Class

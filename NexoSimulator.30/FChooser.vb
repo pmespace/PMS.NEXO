@@ -17,6 +17,8 @@ Public Class FChooser
 		cbUseJson.Checked = UseJson
 		rbPayment.Checked = True
 
+		CLog.LogFileName = "nexo.builder.log"
+
 		ToolTip1.SetToolTip(efCoded, "Enter a string compatible with storage inside a Json file" & vbCrLf & "All special characters must be escaped (ex: "" must be coded \"" ")
 		ToolTip1.SetToolTip(efTarget, "This is a string whose format is compliant with storage inside a Json file" & vbCrLf & "You can copy and paste it inside a Json file")
 
@@ -32,22 +34,6 @@ Public Class FChooser
 		Data = efNotation.Text
 		UseJson = cbUseJson.Checked
 		Close()
-	End Sub
-
-	Private Sub pbAnalyse_Click(sender As Object, e As EventArgs) Handles pbAnalyse.Click
-		Dim nxo As NexoObject = Nothing
-		Dim item As NexoItem = Nothing
-		efNotation.Text = Trim(efNotation.Text)
-		If Not String.IsNullOrEmpty(efNotation.Text) Then
-			item = New NexoItem(efNotation.Text)
-			If item.IsValid Then
-				nxo = NexoItem.ToNexoObject(item)
-				If Not IsNothing(nxo) Then
-					cbRequest.Checked = item.IsRequest
-					StartBuilder(nxo)
-				End If
-			End If
-		End If
 	End Sub
 
 	Private Function StartBuilder(nxo As NexoObject) As DialogResult
@@ -189,28 +175,57 @@ Public Class FChooser
 		Clipboard.SetText(efTarget.Text)
 	End Sub
 
-	Private Sub pbAnalyseJson_Click(sender As Object, e As EventArgs) Handles pbAnalyseJson.Click
-		Dim nxo As NexoObject = Nothing
-		Dim item As NexoItem = Nothing
-		efCoded.Text = Trim(efCoded.Text)
-		If Not String.IsNullOrEmpty(efCoded.Text) Then
-			If Not efCoded.Text.StartsWith("""") Then efCoded.Text = """" & efCoded.Text
-			If Not efCoded.Text.EndsWith("""") Then efCoded.Text = efCoded.Text & """"
-			'from json to xml
-			Dim sz As String = String.Empty
-			Try
-				sz = JsonConvert.DeserializeObject(Of String)(efCoded.Text)
-			Catch ex As Exception
-			End Try
-			item = New NexoItem(sz)
-			If item.IsValid Then
-				nxo = NexoItem.ToNexoObject(item)
-				If Not IsNothing(nxo) Then
-					cbRequest.Checked = item.IsRequest
-					StartBuilder(nxo)
+	Private Sub pbAnalyse_Click(sender As Object, e As EventArgs) Handles pbAnalyse.Click
+		Try
+			Dim nxo As NexoObject = Nothing
+			Dim item As NexoItem = Nothing
+			efNotation.Text = efNotation.Text.Replace("""", "")
+			efNotation.Text = Trim(efNotation.Text)
+			CLog.TRACE($"Processing: {efNotation.Text}")
+			If Not String.IsNullOrEmpty(efNotation.Text) Then
+				item = New NexoItem(efNotation.Text)
+				If item.IsValid Then
+					nxo = NexoItem.ToNexoObject(item)
+					If Not IsNothing(nxo) Then
+						cbRequest.Checked = item.IsRequest
+						StartBuilder(nxo)
+					End If
 				End If
 			End If
-		End If
+		Catch ex As Exception
+			MsgBox("An error has occurred")
+			CLog.EXCEPT(ex)
+		End Try
+	End Sub
+
+	Private Sub pbAnalyseJson_Click(sender As Object, e As EventArgs) Handles pbAnalyseJson.Click
+		Try
+			Dim nxo As NexoObject = Nothing
+			Dim item As NexoItem = Nothing
+			efCoded.Text = Trim(efCoded.Text)
+			If Not String.IsNullOrEmpty(efCoded.Text) Then
+				If Not efCoded.Text.StartsWith("""") Then efCoded.Text = """" & efCoded.Text
+				If Not efCoded.Text.EndsWith("""") Then efCoded.Text = efCoded.Text & """"
+				CLog.TRACE($"Processing: {efCoded.Text}")
+				'from json to xml
+				Dim sz As String = String.Empty
+				Try
+					sz = JsonConvert.DeserializeObject(Of String)(efCoded.Text)
+				Catch ex As Exception
+				End Try
+				item = New NexoItem(sz)
+				If item.IsValid Then
+					nxo = NexoItem.ToNexoObject(item)
+					If Not IsNothing(nxo) Then
+						cbRequest.Checked = item.IsRequest
+						StartBuilder(nxo)
+					End If
+				End If
+			End If
+		Catch ex As Exception
+			MsgBox("An error has occurred")
+			CLog.EXCEPT(ex)
+		End Try
 	End Sub
 
 	Private Sub efJSON_TextChanged(sender As Object, e As EventArgs) Handles efCoded.TextChanged

@@ -217,7 +217,31 @@ namespace NEXO
 
 		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.InputResult.Response; }
-		protected override void SetResponse(ResponseType r) { ReplyData.InputResult.Response = r; }
+		protected override void SetResponse(ResponseType r)
+		{
+			if (null != RequestData.DisplayOutput)
+			{
+				ReplyData.OutputResult.Device = RequestData.DisplayOutput.Device;
+				ReplyData.OutputResult.InfoQualify = RequestData.DisplayOutput.InfoQualify;
+				ReplyData.OutputResult.Response = r;
+			}
+			ReplyData.InputResult.Device = RequestData.InputData.Device;
+			ReplyData.InputResult.InfoQualify = RequestData.InputData.InfoQualify;
+			ReplyData.InputResult.Response = r;
+			//if (ReplyData.InputResult.Response.Result.IsSuccess())
+			//{
+			//	ReplyData.InputResult.Input.InputCommand = RequestData.InputData.InputCommand;
+			//	switch (CMisc.GetEnumValue(typeof(InputCommandEnumeration), ReplyData.InputResult.Input.InputCommand))
+			//	{
+			//		case InputCommandEnumeration.TextString:
+			//		case InputCommandEnumeration.DecimalString:
+			//			ReplyData.InputResult.Input.TextInput= = RequestData.InputData.InputCommand;
+
+			//		default:
+			//			break;
+			//	}
+			//}
+		}
 		protected override void SetReplyFromRequest() { }
 		protected override InternalAction AutoCompleteRequest()
 		{

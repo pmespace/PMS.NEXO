@@ -121,7 +121,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 			}
 		}
 		#endregion
@@ -463,7 +463,8 @@ namespace NEXO
 					throw new Exception(EventsList());
 				return true;
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, Chars.CRLF + "=> XSD: " + xsd); }
+			catch (Exception ex) { 
+				CLog.EXCEPT(ex, $"{Chars.CRLF}=> XSD: {xsd}"); }
 			return false;
 		}
 		private void ResetSchemaValidationState() { NbErrors = 0; NbWarnings = 0; Events.Clear(); }
@@ -490,7 +491,7 @@ namespace NEXO
 			foreach (NexoSchemaEvent evt in Events)
 				if (NexoSchemaEventType.All == type || evt.Type == type)
 				{
-					s += "(" + i.ToString(fmt) + ") Error type: " + evt.Type.ToString() + " - " + evt.Description + Chars.CRLF;
+					s += $"({i.ToString(fmt)}) Error type: {evt.Type} - {evt.Description}{Chars.CRLF}";
 					i++;
 				}
 			return s;
@@ -511,7 +512,7 @@ namespace NEXO
 				// if errors or warnings but send is not allowed for these cases, return an empty string
 				if ((ContainsErrors && !SendWithErrors) || (ContainsWarnings && !SendWithWarnings))
 				{
-					CLog.Add("Serialized XML message is invalid");
+					CLog.Add($"Serialized XML message is invalid");
 					ok = false;
 				}
 				string s = EventsList();
@@ -519,7 +520,11 @@ namespace NEXO
 					CLog.Add(EventsList());
 				return (ok ? xml : string.Empty);
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); return string.Empty; }
+			catch (Exception ex)
+			{
+				CLog.EXCEPT(ex);
+				return string.Empty;
+			}
 		}
 		/// <summary>
 		/// Deserialize a SaleToPOIXXX from an array of bytes
@@ -569,7 +574,7 @@ namespace NEXO
 				//{
 				//	SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
 				//}
-				//catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request optimisation"); }
+				//catch (Exception ex) { CLog.EXCEPT(ex, "Request optimisation"); }
 				//finally
 				//{
 				if (UseJson)
@@ -580,7 +585,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Request processing");
+				CLog.EXCEPT(ex, "Request processing");
 			}
 			finally
 			{
@@ -604,7 +609,7 @@ namespace NEXO
 				//{
 				//	SetObjectProperty(reply.Item, NexoXSDStrings.NexoOptimizingProperty, reply.XSD_Optimizing);
 				//}
-				//catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply optimisation"); }
+				//catch (Exception ex) { CLog.EXCEPT(ex, "Reply optimisation"); }
 				//finally
 				//{
 				if (UseJson)
@@ -615,7 +620,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Reply processing");
+				CLog.EXCEPT(ex, "Reply processing");
 			}
 			finally
 			{
@@ -642,7 +647,7 @@ namespace NEXO
 				// return xml string
 				return ValidateXML(s);
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
+			catch (Exception ex) { CLog.EXCEPT(ex); }
 			return null;
 		}
 		#endregion
@@ -698,7 +703,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
+				CLog.EXCEPT(ex);
 				return null;
 			}
 		}
@@ -738,12 +743,20 @@ namespace NEXO
 					XmlSerializer xsSubmit = new XmlSerializer(typeof(NxT));
 					using (StreamReader stream = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(data ?? string.Empty)), Encoding.UTF8, bom))
 					using (XmlReader reader = XmlReader.Create(stream, settings))
-						return xsSubmit.Deserialize(reader);
+						try
+						{
+							return xsSubmit.Deserialize(reader);
+						}
+						catch (Exception)
+						{
+							// no specific processing as we may not be processing the requested class thus generating an exception, in this case just return null
+							return null;
+						}
 				}
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
+				CLog.EXCEPT(ex);
 				return null;
 			}
 		}
@@ -770,7 +783,7 @@ namespace NEXO
 				}
 				catch (Exception ex)
 				{
-					CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, $"Object: {type} - Property name: {property} - Value to set: {value}");
+					CLog.EXCEPT(ex, $"Object: {type} - Property name: {property} - Value to set: {value}");
 				}
 			}
 			return false;

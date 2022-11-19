@@ -187,7 +187,14 @@ namespace NEXO
 
 		#region methods
 		protected override ResponseType GetResponse() { return null; }
-		protected override void SetResponse(ResponseType r) { }
+		protected override void SetResponse(ResponseType r)
+		{
+			for (int i = 0; i < RequestData.DisplayOutputLength(); i++)
+			{
+				DisplayOutputType dot = RequestData.DisplayOutputGetItem(i);
+				ReplyData.OutputResultAddItem(new OutputResultType() { Device = dot.Device, InfoQualify = dot.InfoQualify, Response = r });
+			}
+		}
 		protected override InternalAction AutoCompleteRequest()
 		{
 			DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);

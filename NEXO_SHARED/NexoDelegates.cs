@@ -50,17 +50,19 @@ namespace NEXO
 		/// <param name="tcp">Information about the connecting client</param>
 		/// <param name="thread">Thread object</param>
 		/// <param name="parameters">Private parameters passed by the caller</param>
+		/// <param name="privateData">Private data which can be allocated per client at connection time</param>
 		/// <returns>FALSE if the server must stop immediately before receiving any request, TRUE if the server must carry on</returns>
 		[ComVisible(false)]
-		public delegate bool OnConnectDelegate(TcpClient tcp, CThread thread, object parameters);
+		public delegate bool OnConnectDelegate(TcpClient tcp, CThread thread, object parameters, ref object privateData);
 		/// <summary>
 		/// Function called when a client disconnects from the server
 		/// </summary>
 		/// <param name="remoteClient">The remote address being disconnected</param>
 		/// <param name="thread">Thread object</param>
 		/// <param name="parameters">Private parameters to pass to the thread</param>
+		/// <param name="statistics">Statistics  of exchanges with the client</param>
 		[ComVisible(false)]
-		public delegate void OnDisconnectDelegate(string remoteClient, CThread thread, object parameters);
+		public delegate void OnDisconnectDelegate(TcpClient remoteClient, CThread thread, object parameters, CStreamServerStatistics statistics);
 		/// <summary>
 		/// Called whenever a <see cref="SaleToPOIRequest"/> or <see cref="SaleToPOIResponse"/> has been received and needs to be processed by the application.
 		/// The function is expected to either (1) produce a reply (2) produce a new request (device) (3) do nothing.

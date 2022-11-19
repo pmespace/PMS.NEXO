@@ -56,6 +56,7 @@ Public Class Settings
 	Public Property ConnectionSettings As New SettingsConnectionSettings
 	Public Property AutomaticMode As Boolean
 	Public Property UseJson As Boolean = False
+	Public Property TLog As String
 End Class
 
 Public Class Commands

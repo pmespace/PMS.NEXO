@@ -39,16 +39,17 @@ Partial Class FSimulator
 		Me.panelOptions = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelCommands = New System.Windows.Forms.TableLayoutPanel()
 		Me.pbResponseFolder = New System.Windows.Forms.Button()
-		Me.pbLogin = New System.Windows.Forms.Button()
-		Me.pbLogout = New System.Windows.Forms.Button()
-		Me.pbPayment = New System.Windows.Forms.Button()
-		Me.pbDevicePrint = New System.Windows.Forms.Button()
-		Me.pbReversal = New System.Windows.Forms.Button()
-		Me.pbDeviceInput = New System.Windows.Forms.Button()
-		Me.pbRefund = New System.Windows.Forms.Button()
 		Me.cbSynchronous = New System.Windows.Forms.CheckBox()
 		Me.cbUseJson = New System.Windows.Forms.CheckBox()
 		Me.cbOptimize = New System.Windows.Forms.CheckBox()
+		Me.panelCommandButtons = New System.Windows.Forms.TableLayoutPanel()
+		Me.pbDeviceInput = New System.Windows.Forms.Button()
+		Me.pbLogin = New System.Windows.Forms.Button()
+		Me.pbDevicePrint = New System.Windows.Forms.Button()
+		Me.pbLogout = New System.Windows.Forms.Button()
+		Me.pbRefund = New System.Windows.Forms.Button()
+		Me.pbPayment = New System.Windows.Forms.Button()
+		Me.pbReversal = New System.Windows.Forms.Button()
 		Me.panelGateway = New System.Windows.Forms.TableLayoutPanel()
 		Me.serverToReachPanel14 = New System.Windows.Forms.TableLayoutPanel()
 		Me.panelGatewayPort = New System.Windows.Forms.TableLayoutPanel()
@@ -138,13 +139,14 @@ Partial Class FSimulator
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
 		Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
 		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-		Me.panelCommandButtons = New System.Windows.Forms.TableLayoutPanel()
+		Me.cbxLog = New System.Windows.Forms.ComboBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
 		Me.TableLayoutPanel7.SuspendLayout()
 		Me.panelOptions.SuspendLayout()
 		Me.panelCommands.SuspendLayout()
+		Me.panelCommandButtons.SuspendLayout()
 		Me.panelGateway.SuspendLayout()
 		Me.serverToReachPanel14.SuspendLayout()
 		Me.panelGatewayPort.SuspendLayout()
@@ -178,7 +180,6 @@ Partial Class FSimulator
 		Me.panelClientTargets.SuspendLayout()
 		Me.panelRaw.SuspendLayout()
 		Me.ContextMenuStrip1.SuspendLayout()
-		Me.panelCommandButtons.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'PanelMain
@@ -212,18 +213,18 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelButtons.AutoSize = True
 		Me.panelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelButtons.ColumnCount = 5
+		Me.panelButtons.ColumnCount = 6
+		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.panelButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.panelButtons.Controls.Add(Me.pbClose, 4, 0)
-		Me.panelButtons.Controls.Add(Me.pbClear, 2, 0)
-		Me.panelButtons.Controls.Add(Me.pbSaveContent, 3, 0)
-		Me.panelButtons.Controls.Add(Me.pbSaveSettings, 1, 0)
+		Me.panelButtons.Controls.Add(Me.pbClose, 5, 0)
+		Me.panelButtons.Controls.Add(Me.pbClear, 3, 0)
+		Me.panelButtons.Controls.Add(Me.pbSaveContent, 4, 0)
+		Me.panelButtons.Controls.Add(Me.pbSaveSettings, 2, 0)
+		Me.panelButtons.Controls.Add(Me.cbxLog, 0, 0)
 		Me.panelButtons.Location = New System.Drawing.Point(3, 452)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
@@ -452,91 +453,6 @@ Partial Class FSimulator
 		Me.pbResponseFolder.Text = "Response folder"
 		Me.pbResponseFolder.UseVisualStyleBackColor = True
 		'
-		'pbLogin
-		'
-		Me.pbLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbLogin.AutoSize = True
-		Me.pbLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbLogin.Location = New System.Drawing.Point(3, 3)
-		Me.pbLogin.Name = "pbLogin"
-		Me.pbLogin.Size = New System.Drawing.Size(43, 23)
-		Me.pbLogin.TabIndex = 0
-		Me.pbLogin.Text = "Login"
-		Me.pbLogin.UseVisualStyleBackColor = True
-		'
-		'pbLogout
-		'
-		Me.pbLogout.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbLogout.AutoSize = True
-		Me.pbLogout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbLogout.Location = New System.Drawing.Point(52, 3)
-		Me.pbLogout.Name = "pbLogout"
-		Me.pbLogout.Size = New System.Drawing.Size(50, 23)
-		Me.pbLogout.TabIndex = 1
-		Me.pbLogout.Text = "Logout"
-		Me.pbLogout.UseVisualStyleBackColor = True
-		'
-		'pbPayment
-		'
-		Me.pbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbPayment.AutoSize = True
-		Me.pbPayment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbPayment.Location = New System.Drawing.Point(108, 3)
-		Me.pbPayment.Name = "pbPayment"
-		Me.pbPayment.Size = New System.Drawing.Size(58, 23)
-		Me.pbPayment.TabIndex = 2
-		Me.pbPayment.Text = "Payment"
-		Me.pbPayment.UseVisualStyleBackColor = True
-		'
-		'pbDevicePrint
-		'
-		Me.pbDevicePrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbDevicePrint.AutoSize = True
-		Me.pbDevicePrint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbDevicePrint.Location = New System.Drawing.Point(295, 3)
-		Me.pbDevicePrint.Name = "pbDevicePrint"
-		Me.pbDevicePrint.Size = New System.Drawing.Size(75, 23)
-		Me.pbDevicePrint.TabIndex = 5
-		Me.pbDevicePrint.Text = "Device Print"
-		Me.pbDevicePrint.UseVisualStyleBackColor = True
-		'
-		'pbReversal
-		'
-		Me.pbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbReversal.AutoSize = True
-		Me.pbReversal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbReversal.Enabled = False
-		Me.pbReversal.Location = New System.Drawing.Point(172, 3)
-		Me.pbReversal.Name = "pbReversal"
-		Me.pbReversal.Size = New System.Drawing.Size(59, 23)
-		Me.pbReversal.TabIndex = 3
-		Me.pbReversal.Text = "Reversal"
-		Me.pbReversal.UseVisualStyleBackColor = True
-		'
-		'pbDeviceInput
-		'
-		Me.pbDeviceInput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbDeviceInput.AutoSize = True
-		Me.pbDeviceInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbDeviceInput.Location = New System.Drawing.Point(376, 3)
-		Me.pbDeviceInput.Name = "pbDeviceInput"
-		Me.pbDeviceInput.Size = New System.Drawing.Size(78, 23)
-		Me.pbDeviceInput.TabIndex = 6
-		Me.pbDeviceInput.Text = "Device Input"
-		Me.pbDeviceInput.UseVisualStyleBackColor = True
-		'
-		'pbRefund
-		'
-		Me.pbRefund.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.pbRefund.AutoSize = True
-		Me.pbRefund.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbRefund.Location = New System.Drawing.Point(237, 3)
-		Me.pbRefund.Name = "pbRefund"
-		Me.pbRefund.Size = New System.Drawing.Size(52, 23)
-		Me.pbRefund.TabIndex = 4
-		Me.pbRefund.Text = "Refund"
-		Me.pbRefund.UseVisualStyleBackColor = True
-		'
 		'cbSynchronous
 		'
 		Me.cbSynchronous.Anchor = System.Windows.Forms.AnchorStyles.Left
@@ -573,6 +489,120 @@ Partial Class FSimulator
 		Me.cbOptimize.TabIndex = 10
 		Me.cbOptimize.Text = "Optimize"
 		Me.cbOptimize.UseVisualStyleBackColor = True
+		'
+		'panelCommandButtons
+		'
+		Me.panelCommandButtons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+			Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.panelCommandButtons.AutoSize = True
+		Me.panelCommandButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.panelCommandButtons.ColumnCount = 7
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+		Me.panelCommandButtons.Controls.Add(Me.pbDeviceInput, 6, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbLogin, 0, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbDevicePrint, 5, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbLogout, 1, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbRefund, 4, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbPayment, 2, 0)
+		Me.panelCommandButtons.Controls.Add(Me.pbReversal, 3, 0)
+		Me.panelCommandButtons.Location = New System.Drawing.Point(3, 3)
+		Me.panelCommandButtons.Name = "panelCommandButtons"
+		Me.panelCommandButtons.RowCount = 1
+		Me.panelCommandButtons.RowStyles.Add(New System.Windows.Forms.RowStyle())
+		Me.panelCommandButtons.Size = New System.Drawing.Size(457, 29)
+		Me.panelCommandButtons.TabIndex = 12
+		'
+		'pbDeviceInput
+		'
+		Me.pbDeviceInput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbDeviceInput.AutoSize = True
+		Me.pbDeviceInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbDeviceInput.Location = New System.Drawing.Point(376, 3)
+		Me.pbDeviceInput.Name = "pbDeviceInput"
+		Me.pbDeviceInput.Size = New System.Drawing.Size(78, 23)
+		Me.pbDeviceInput.TabIndex = 6
+		Me.pbDeviceInput.Text = "Device Input"
+		Me.pbDeviceInput.UseVisualStyleBackColor = True
+		'
+		'pbLogin
+		'
+		Me.pbLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbLogin.AutoSize = True
+		Me.pbLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbLogin.Location = New System.Drawing.Point(3, 3)
+		Me.pbLogin.Name = "pbLogin"
+		Me.pbLogin.Size = New System.Drawing.Size(43, 23)
+		Me.pbLogin.TabIndex = 0
+		Me.pbLogin.Text = "Login"
+		Me.pbLogin.UseVisualStyleBackColor = True
+		'
+		'pbDevicePrint
+		'
+		Me.pbDevicePrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbDevicePrint.AutoSize = True
+		Me.pbDevicePrint.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbDevicePrint.Location = New System.Drawing.Point(295, 3)
+		Me.pbDevicePrint.Name = "pbDevicePrint"
+		Me.pbDevicePrint.Size = New System.Drawing.Size(75, 23)
+		Me.pbDevicePrint.TabIndex = 5
+		Me.pbDevicePrint.Text = "Device Print"
+		Me.pbDevicePrint.UseVisualStyleBackColor = True
+		'
+		'pbLogout
+		'
+		Me.pbLogout.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbLogout.AutoSize = True
+		Me.pbLogout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbLogout.Location = New System.Drawing.Point(52, 3)
+		Me.pbLogout.Name = "pbLogout"
+		Me.pbLogout.Size = New System.Drawing.Size(50, 23)
+		Me.pbLogout.TabIndex = 1
+		Me.pbLogout.Text = "Logout"
+		Me.pbLogout.UseVisualStyleBackColor = True
+		'
+		'pbRefund
+		'
+		Me.pbRefund.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbRefund.AutoSize = True
+		Me.pbRefund.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbRefund.Location = New System.Drawing.Point(237, 3)
+		Me.pbRefund.Name = "pbRefund"
+		Me.pbRefund.Size = New System.Drawing.Size(52, 23)
+		Me.pbRefund.TabIndex = 4
+		Me.pbRefund.Text = "Refund"
+		Me.pbRefund.UseVisualStyleBackColor = True
+		'
+		'pbPayment
+		'
+		Me.pbPayment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbPayment.AutoSize = True
+		Me.pbPayment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbPayment.Location = New System.Drawing.Point(108, 3)
+		Me.pbPayment.Name = "pbPayment"
+		Me.pbPayment.Size = New System.Drawing.Size(58, 23)
+		Me.pbPayment.TabIndex = 2
+		Me.pbPayment.Text = "Payment"
+		Me.pbPayment.UseVisualStyleBackColor = True
+		'
+		'pbReversal
+		'
+		Me.pbReversal.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.pbReversal.AutoSize = True
+		Me.pbReversal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pbReversal.Enabled = False
+		Me.pbReversal.Location = New System.Drawing.Point(172, 3)
+		Me.pbReversal.Name = "pbReversal"
+		Me.pbReversal.Size = New System.Drawing.Size(59, 23)
+		Me.pbReversal.TabIndex = 3
+		Me.pbReversal.Text = "Reversal"
+		Me.pbReversal.UseVisualStyleBackColor = True
 		'
 		'panelGateway
 		'
@@ -1755,34 +1785,15 @@ Partial Class FSimulator
 		Me.pbSendRequest.Text = "Send request"
 		Me.pbSendRequest.UseVisualStyleBackColor = True
 		'
-		'panelCommandButtons
+		'cbxLog
 		'
-		Me.panelCommandButtons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.panelCommandButtons.AutoSize = True
-		Me.panelCommandButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelCommandButtons.ColumnCount = 7
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-		Me.panelCommandButtons.Controls.Add(Me.pbDeviceInput, 6, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbLogin, 0, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbDevicePrint, 5, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbLogout, 1, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbRefund, 4, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbPayment, 2, 0)
-		Me.panelCommandButtons.Controls.Add(Me.pbReversal, 3, 0)
-		Me.panelCommandButtons.Location = New System.Drawing.Point(3, 3)
-		Me.panelCommandButtons.Name = "panelCommandButtons"
-		Me.panelCommandButtons.RowCount = 1
-		Me.panelCommandButtons.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelCommandButtons.Size = New System.Drawing.Size(457, 29)
-		Me.panelCommandButtons.TabIndex = 12
+		Me.cbxLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbxLog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		Me.cbxLog.FormattingEnabled = True
+		Me.cbxLog.Location = New System.Drawing.Point(3, 4)
+		Me.cbxLog.Name = "cbxLog"
+		Me.cbxLog.Size = New System.Drawing.Size(121, 21)
+		Me.cbxLog.TabIndex = 5
 		'
 		'FSimulator
 		'
@@ -1806,6 +1817,8 @@ Partial Class FSimulator
 		Me.panelOptions.PerformLayout()
 		Me.panelCommands.ResumeLayout(False)
 		Me.panelCommands.PerformLayout()
+		Me.panelCommandButtons.ResumeLayout(False)
+		Me.panelCommandButtons.PerformLayout()
 		Me.panelGateway.ResumeLayout(False)
 		Me.panelGateway.PerformLayout()
 		Me.serverToReachPanel14.ResumeLayout(False)
@@ -1865,8 +1878,6 @@ Partial Class FSimulator
 		Me.panelRaw.ResumeLayout(False)
 		Me.panelRaw.PerformLayout()
 		Me.ContextMenuStrip1.ResumeLayout(False)
-		Me.panelCommandButtons.ResumeLayout(False)
-		Me.panelCommandButtons.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -1988,4 +1999,5 @@ Partial Class FSimulator
 	Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
 	Friend WithEvents ToolTip1 As ToolTip
 	Friend WithEvents panelCommandButtons As TableLayoutPanel
+	Friend WithEvents cbxLog As ComboBox
 End Class

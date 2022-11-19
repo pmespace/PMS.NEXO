@@ -13,9 +13,9 @@ Public Class FBuilder
 	Private nexoRequest As SaleToPOIRequest
 	Private nexoReply As SaleToPOIResponse
 	Private nexoItem As Object = Nothing
-	Private currentParentNode As TreeNode
-	Private currentNode As TreeNode
-	Private valueNode As TreeNode
+	Private contextCurrentParentNode As TreeNode
+	Private contextCurrentNode As TreeNode
+	Private contextCurrentValueNode As TreeNode
 	Private fontN, fontB As Font
 
 	Enum MyNodeAction
@@ -83,7 +83,7 @@ Public Class FBuilder
 
 		If Not IsNothing(nexoItem) Then
 			Text = $"Creating SaleToPOI{s} with {item.GetType}"
-			TreeView1.Nodes.Add(New TreeNode($"{nexoItem.GetType().Name}")) '[{T}]"))
+			TreeView1.Nodes.Add(New TreeNode($"{nexoItem.GetType().Name}") With {.ImageIndex = TreeView1.ImageList.Images.IndexOfKey("home"), .SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("home")})
 			AddToTree(nexoItem, TreeView1.TopNode)
 			TreeView1.TopNode.Expand()
 		Else
@@ -100,7 +100,15 @@ Public Class FBuilder
 		Dim methods As List(Of MethodInfo) = o.GetType().GetMethods().ToList()
 		Dim myParentNode As MyNode = GetDetails(parentNode)
 		For Each p As PropertyInfo In properties
-			If MemberTypes.Property = p.MemberType AndAlso p.PropertyType.IsPublic AndAlso Not p.Name.StartsWith(NexoXSDStrings.XSD) Then
+			If MemberTypes.Property = p.MemberType _
+				AndAlso p.PropertyType.IsPublic _
+				AndAlso Not p.Name.StartsWith(NexoXSDStrings.XSD) _
+				AndAlso Not p.Name.EndsWith(NexoXSDStrings.Specified) _
+				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoHasBeenSetProperty) _
+				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoClassName) _
+				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoDefaultValueForProperty) _
+				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoOptimizingProperty) _
+				AndAlso p.CanWrite Then
 				Dim value As Object = p.GetValue(o, Nothing)
 				Dim valuetype As Type = p.PropertyType
 				Dim target As Object = value
@@ -114,18 +122,22 @@ Public Class FBuilder
 				If "System" = myNode.Type.Namespace OrElse myNode.IsArray Then
 					If myNode.IsArray Then
 						myNode.NodeType = MyNodeType.Array
+						node.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("array")
+						node.ImageIndex = node.SelectedImageIndex
 						node.Text = SetNodeText(node)
-						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.ArrayType, .Type = myNode.Type}}
-						node.Text = SetNodeText(node)
-						parentNode.Nodes(i).Nodes.Add(node)
+						'node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.ArrayType, .Type = myNode.Type}}
+						'node.Text = SetNodeText(node)
+						'parentNode.Nodes(i).Nodes.Add(node)
 						Dim arr As Array = value
 						If Not IsNothing(arr) Then
 							For j As Integer = 0 To arr.Length - 1
-								AddItem(node.Parent, arr(j))
+								AddItem(node, arr(j))
 							Next
 						End If
 					Else
 						myNode.NodeType = MyNodeType.Leaf
+						node.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("leaf")
+						node.ImageIndex = node.SelectedImageIndex
 
 						'*****
 						'I really don't know why but sometimes this keeps giving an exception on first call, not on second one !
@@ -144,11 +156,17 @@ Public Class FBuilder
 						'*****
 
 						'type node
-						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Type, .Type = myNode.Type}}
+						Dim myNewNode As New MyNode() With {.NodeType = MyNodeType.Type, .Type = myNode.Type}
+						node = New TreeNode() With {.Tag = myNewNode}
+						node.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("type")
+						node.ImageIndex = node.SelectedImageIndex
 						node.Text = SetNodeText(node)
 						parentNode.Nodes(i).Nodes.Add(node)
 						'value node
-						node = New TreeNode() With {.Tag = New MyNode() With {.NodeType = MyNodeType.Value, .Value = value, .Type = myNode.Type, .PI = p, .ParentObject = o}}
+						myNewNode = New MyNode() With {.NodeType = MyNodeType.Value, .Value = value, .Type = myNode.Type, .PI = p, .ParentObject = o}
+						node = New TreeNode() With {.Tag = myNewNode}
+						node.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("value")
+						node.ImageIndex = node.SelectedImageIndex
 						node.Text = SetNodeText(node)
 						parentNode.Nodes(i).Nodes.Add(node)
 						SetNodeFont(node)
@@ -156,7 +174,10 @@ Public Class FBuilder
 				Else
 					myNode.NodeType = MyNodeType.Tree
 					node.Text = SetNodeText(node)
+					node.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("tree")
+					node.ImageIndex = node.SelectedImageIndex
 					AddToTree(target, node)
+					SetNodeFont(node)
 				End If
 				'If "System" <> myNode.Type.Namespace AndAlso Not IsNothing(valuetype) Then
 				'End If
@@ -171,17 +192,19 @@ Public Class FBuilder
 			Select Case myNode.NodeType
 				Case MyNodeType.Value
 					If Not IsNothing(myNode.Value) Then
-						node.Parent.NodeFont = fontB 'New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+						node.Parent.NodeFont = fontB
 					Else
 						node.Parent.NodeFont = Nothing
 					End If
+					node.Parent.Text = node.Parent.Text
 
 				Case MyNodeType.Array
 					If 1 < node.Nodes.Count Then
-						node.NodeFont = fontB 'New Font(TreeView1.Font, TreeView1.Font.Style Or FontStyle.Bold)
+						node.NodeFont = fontB
 					Else
 						node.NodeFont = Nothing
 					End If
+					node.Text = node.Text
 			End Select
 		End If
 	End Sub
@@ -197,8 +220,8 @@ Public Class FBuilder
 					End If
 					Return $"{NODE_VALUE} {myNode.Value}"
 
-				ElseIf MyNodeType.ArrayItem = myNode.NodeType Then
-					Return $"{NODE_ITEM} {myNode.Value}"
+					'ElseIf MyNodeType.ArrayItem = myNode.NodeType Then
+					'	Return $"{NODE_ITEM} {myNode.Value}"
 
 				ElseIf MyNodeType.Type = myNode.NodeType Then
 					Return $"{NODE_TYPE} {myNode.Type.Name}"
@@ -206,7 +229,7 @@ Public Class FBuilder
 				ElseIf MyNodeType.ArrayType = myNode.NodeType Then
 					Return $"{NODE_ARRAY_TYPE} {myNode.Type.Name}"
 
-				ElseIf MyNodeType.Tree = myNode.NodeType Then
+				ElseIf MyNodeType.Tree = myNode.NodeType OrElse MyNodeType.ArrayItem = myNode.NodeType Then
 					Return $"{myNode.Name} (Structure)"
 
 				ElseIf MyNodeType.Array = myNode.NodeType Then
@@ -214,6 +237,9 @@ Public Class FBuilder
 
 				ElseIf MyNodeType.Leaf = myNode.NodeType Then
 					Return $"{myNode.Name} (Data)"
+
+				Else
+					Return $"{myNode.Name} (???)"
 				End If
 
 			Catch ex As Exception
@@ -309,7 +335,10 @@ Public Class FBuilder
 			Select Case DirectCast(node.Tag, MyNode).NodeType
 				Case MyNodeType.Tree, MyNodeType.Array, MyNodeType.Leaf
 					Return node
-				Case MyNodeType.ArrayItem, MyNodeType.ArrayType, MyNodeType.Type, MyNodeType.Value
+				Case MyNodeType.ArrayItem,
+					  MyNodeType.Type,
+					  MyNodeType.Value,
+					  MyNodeType.ArrayType
 					Return node.Parent
 			End Select
 		End If
@@ -342,39 +371,51 @@ Public Class FBuilder
 
 	Private Sub TreeView1_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseDoubleClick
 		'is it a value node
-		If MyNodeType.Value = GetNodeType(e.Node) OrElse MyNodeType.ArrayItem = GetNodeType(e.Node) Then
-			currentNode = e.Node
-			valueNode = currentNode
-			currentParentNode = GetParentNode(currentNode)
-			StartEditNodeValue(currentNode)
+		If MyNodeType.Value = GetNodeType(e.Node) Then 'OrElse MyNodeType.ArrayItem = GetNodeType(e.Node) Then
+			contextCurrentNode = e.Node
+			contextCurrentValueNode = contextCurrentNode
+			contextCurrentParentNode = GetParentNode(contextCurrentNode)
+			StartEditNodeValue(contextCurrentNode)
 		End If
 	End Sub
 
+	''' <summary>
+	''' Set the current context based on a specified node
+	''' Context is set through <see cref="contextCurrentNode"/>, <see cref="contextCurrentParentNode"/> and <see cref="contextCurrentValueNode"/>
+	''' </summary>
+	''' <param name="node">The currently selected or pointed node</param>
 	Private Sub SetNodeContext(node As TreeNode)
-		currentNode = node
-		currentParentNode = GetParentNode(currentNode)
-		Dim myNode As MyNode = currentNode.Tag
+		contextCurrentNode = node
+		contextCurrentParentNode = GetParentNode(contextCurrentNode)
+		Dim myNode As MyNode = contextCurrentNode.Tag
 		If myNode.NodeType = MyNodeType.Leaf OrElse myNode.NodeType = MyNodeType.Type Then
-			valueNode = GetNodeOfType(currentParentNode, MyNodeType.Value)
-		ElseIf myNode.NodeType = MyNodeType.Value OrElse myNode.NodeType = MyNodeType.ArrayItem Then
-			valueNode = currentNode
+			contextCurrentValueNode = GetNodeOfType(contextCurrentParentNode, MyNodeType.Value)
+			'ElseIf myNode.NodeType = MyNodeType.Value OrElse myNode.NodeType = MyNodeType.ArrayItem Then
+		ElseIf myNode.NodeType = MyNodeType.Value Then
+			contextCurrentValueNode = contextCurrentNode
 		Else
-			valueNode = Nothing
+			contextCurrentValueNode = Nothing
 		End If
 	End Sub
 
 	Private Sub TreeView1_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles TreeView1.NodeMouseClick
 		If Not IsNothing(e.Node.Tag) AndAlso MouseButtons.Right = e.Button AndAlso 1 = e.Clicks Then
 			SetNodeContext(e.Node)
-			Dim myNode As MyNode = currentNode.Tag
-			TreeView1.SelectedNode = currentNode
+			Dim myNode As MyNode = contextCurrentNode.Tag
+			TreeView1.SelectedNode = contextCurrentNode
 			'hide unnecessary items inside the contextmenu
-			SetValueToolStripMenuItem.Visible = Not IsNothing(valueNode)
-			ResetvalueToolStripMenuItem.Visible = Not IsNothing(valueNode)
-			Dim inArray As Boolean = myNode.NodeType = MyNodeType.Array OrElse myNode.NodeType = MyNodeType.ArrayType OrElse myNode.NodeType = MyNodeType.ArrayItem
+			SetValueToolStripMenuItem.Visible = Not IsNothing(contextCurrentValueNode)
+			ResetvalueToolStripMenuItem.Visible = Not IsNothing(contextCurrentValueNode)
+			Dim inArray As Boolean = myNode.NodeType = MyNodeType.Array _
+				OrElse myNode.NodeType = MyNodeType.ArrayItem _
+				OrElse myNode.NodeType = MyNodeType.ArrayType
+			'_
+			'	OrElse mynode.NodeType=MyNodeType.Tree AndAlso DirectCast(contextCurrentParentNode.Tag, MyNode).NodeType=mynode
+
 			AddItemToolStripMenuItem.Visible = inArray
 			RemoveItemToolStripMenuItem.Visible = myNode.NodeType = MyNodeType.ArrayItem
-			If Not IsNothing(valueNode) OrElse inArray Then
+			InsertItemToolStripMenuItem.Visible = myNode.NodeType = MyNodeType.ArrayItem
+			If Not IsNothing(contextCurrentValueNode) OrElse inArray Then
 				ContextMenuStrip1.Show(TreeView1, New Point(e.X, e.Y), ToolStripDropDownDirection.Default)
 			End If
 		End If
@@ -391,14 +432,14 @@ Public Class FBuilder
 	End Sub
 
 	Private Sub SetValueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetValueToolStripMenuItem.Click
-		If Not IsNothing(valueNode) Then
-			StartEditNodeValue(valueNode)
+		If Not IsNothing(contextCurrentValueNode) Then
+			StartEditNodeValue(contextCurrentValueNode)
 		End If
 	End Sub
 
 	Private Sub ResetvalueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetvalueToolStripMenuItem.Click
-		If Not IsNothing(valueNode) Then
-			Dim myNode As MyNode = valueNode.Tag
+		If Not IsNothing(contextCurrentValueNode) Then
+			Dim myNode As MyNode = contextCurrentValueNode.Tag
 			If myNode.Type = GetType(String) Then
 				myNode.Value = Nothing
 			ElseIf myNode.Type = GetType(Integer) Then
@@ -410,9 +451,9 @@ Public Class FBuilder
 			Else
 				myNode.Value = Nothing
 			End If
-			'valueNode.Text = SetNodeText(valueNode)
-			'SetNodeFont(valueNode)
-			UpdateLabelAppearance(valueNode)
+			'contextCurrentValueNode.Text = SetNodeText(contextCurrentValueNode)
+			'SetNodeFont(contextCurrentValueNode)
+			UpdateLabelAppearance(contextCurrentValueNode)
 		End If
 	End Sub
 
@@ -424,7 +465,7 @@ Public Class FBuilder
 		'If Not IsNothing(e.Label) Then
 		'	Dim ok As Boolean = False
 		'	SetNodeContext(e.Node)
-		'	Dim myNode As MyNode = valueNode.Tag
+		'	Dim myNode As MyNode = contextCurrentValueNode.Tag
 		'	'editing a node has ended, test the value
 		'	If GetType(String) = myNode.Type Then
 		'		Dim x As New NexoTextString() With {.Value = e.Label}
@@ -448,7 +489,7 @@ Public Class FBuilder
 		If Not IsNothing(e.Label) Then
 			Dim ok As Boolean = False
 			SetNodeContext(e.Node)
-			Dim myNode As MyNode = valueNode.Tag
+			Dim myNode As MyNode = contextCurrentValueNode.Tag
 			'editing a node has ended, test the value
 			If GetType(String) = myNode.Type Then
 				Dim x As New NexoTextString() With {.Value = e.Label}
@@ -470,41 +511,41 @@ Public Class FBuilder
 	End Sub
 
 	Private Sub UpdateLabelAppearance(node As TreeNode)
-		node.Text = SetNodeText(node)
 		SetNodeFont(node)
+		node.Text = SetNodeText(node)
 	End Sub
 
-	Private Sub AddItem(parent As TreeNode, Optional item As Object = Nothing, Optional currentNode As TreeNode = Nothing)
-		'Dim details As MyNode = GetDetails(currentNode)
-		Dim myNode As MyNode = GetDetails(parent)
-		If Not IsNothing(myNode) Then
+	Private Sub AddItem(parent As TreeNode, Optional item As Object = Nothing, Optional contextCurrentNode As TreeNode = Nothing)
+		'Dim details As MyNode = GetDetails(contextCurrentNode)
+		Dim myParentNode As MyNode = GetDetails(parent)
+		If Not IsNothing(myParentNode) Then
 			'check whether a no parameter constructor exists
-			Dim ci As ConstructorInfo = myNode.Type.GetConstructor(Type.EmptyTypes)
+			Dim ci As ConstructorInfo = myParentNode.Type.GetConstructor(Type.EmptyTypes)
 			Dim addIt As Boolean = False
 			Dim o As Object
 			'create a new object to analyse
 			If IsNothing(ci) Then
-				If GetType(Byte) = myNode.Type Then
+				If GetType(Byte) = myParentNode.Type Then
 					Dim x As Byte = 0
 					If Not IsNothing(item) Then x = item
 					o = x
-				ElseIf GetType(Object) = myNode.Type Then
+				ElseIf GetType(Object) = myParentNode.Type Then
 					Dim x As Object = Nothing
 					If Not IsNothing(item) Then x = item
 					o = x
-				ElseIf GetType(String) = myNode.Type Then
+				ElseIf GetType(String) = myParentNode.Type Then
 					Dim x As String = Nothing
 					If Not IsNothing(item) Then x = item
 					o = x
-				ElseIf GetType(Boolean) = myNode.Type Then
+				ElseIf GetType(Boolean) = myParentNode.Type Then
 					Dim x As Boolean = False
 					If Not IsNothing(item) Then x = item
 					o = x
-				ElseIf GetType(Integer) = myNode.Type Then
+				ElseIf GetType(Integer) = myParentNode.Type Then
 					Dim x As Integer = 0
 					If Not IsNothing(item) Then x = item
 					o = x
-				ElseIf GetType(Double) = myNode.Type Then
+				ElseIf GetType(Double) = myParentNode.Type Then
 					Dim x As Double = 0
 					If Not IsNothing(item) Then x = item
 					o = x
@@ -512,7 +553,7 @@ Public Class FBuilder
 					If Not IsNothing(item) Then
 						o = item
 					Else
-						o = Activator.CreateInstance(myNode.Type, New Object() {Nothing})
+						o = Activator.CreateInstance(myParentNode.Type, New Object() {Nothing})
 					End If
 					addIt = True
 				End If
@@ -520,36 +561,42 @@ Public Class FBuilder
 				If Not IsNothing(item) Then
 					o = item
 				Else
-					o = Activator.CreateInstance(myNode.Type)
+					o = Activator.CreateInstance(myParentNode.Type)
 				End If
 				addIt = True
 			End If
 
-			'determine the type of the node to add
-			myNode = New MyNode() With {.Type = myNode.Type, .Value = o}
-			If addIt Then
-				myNode.NodeType = MyNodeType.Tree
-				myNode.Name = DirectCast(parent.Tag, MyNode).Name
-			Else
-				myNode.NodeType = MyNodeType.ArrayItem
-			End If
-			Dim newNode As TreeNode = New TreeNode() With {.Tag = myNode}
-			newNode.Text = SetNodeText(newNode)
+			If Not IsNothing(o) Then
+				Dim ok As Boolean = False
+				Dim methodName As String
 
-			Dim ok As Boolean = False
-			If Not IsNothing(item) Then
+				'determine the type of the node to add
+				Dim myNode As New MyNode() With {.Type = myParentNode.Type, .Value = o}
+				If addIt Then
+					If myParentNode.NodeType = MyNodeType.Array Then
+						myNode.NodeType = MyNodeType.ArrayItem
+					Else
+						myNode.NodeType = MyNodeType.Tree
+					End If
+					myNode.Name = DirectCast(parent.Tag, MyNode).Name
+				Else
+					myNode.NodeType = MyNodeType.ArrayItem
+				End If
+				Dim newNode As TreeNode = New TreeNode() With {.Tag = myNode}
+				newNode.Text = SetNodeText(newNode)
+
 				'add the item to the list of items
 				myNode = GetDetails(parent)
 
 				'is it an insert or an add operation
-				Dim methodName As String = $"{myNode.Name}AddItem"
 				Dim paramsToUse() As Object
-				If Not IsNothing(currentNode) Then
-					methodName = $"{myNode.Name}InsertItem"
+				Dim isInserting As Boolean = Not IsNothing(contextCurrentNode)
+				If isInserting Then
+					methodName = $"{myNode.Name}{NexoXSDStrings.AccessorInsertItem}"
 					ReDim paramsToUse(1)
-					paramsToUse = {currentNode.Index, o}
+					paramsToUse = {contextCurrentNode.Index, o}
 				Else
-					methodName = $"{myNode.Name}AddItem"
+					methodName = $"{myNode.Name}{NexoXSDStrings.AccessorAddItem}"
 					ReDim paramsToUse(0)
 					paramsToUse = {o}
 				End If
@@ -561,33 +608,42 @@ Public Class FBuilder
 						Exit For
 					End If
 				Next
+				Dim pos As Integer = -1
 				If Not IsNothing(myMethod) Then
 					'call the add item method
 					Dim res = myMethod.Invoke(myNode.ParentObject, paramsToUse)
-					If Not IsNothing(currentNode) Then
+					If isInserting Then
 						ok = -1 <> res
+						pos = res
 					Else
 						ok = res
 					End If
 				Else
 					ok = True
 				End If
-			End If
 
-			'arrived here check whether the item has been added or not and add node it success
-			If ok Then
-				'add the node and add the array item to the nexo object
-				parent.Nodes.Add(newNode)
-				SetNodeFont(parent)
-				If addIt Then
-					AddToTree(o, newNode)
+				'arrived here check whether the item has been added or not and add node it success
+				If ok Then
+					'add the node and add the array item to the nexo object
+					If isInserting Then
+						parent.Nodes.Insert(pos, newNode)
+					Else
+						parent.Nodes.Add(newNode)
+					End If
+					newNode.SelectedImageIndex = TreeView1.ImageList.Images.IndexOfKey("arrayitem")
+					newNode.ImageIndex = newNode.SelectedImageIndex
+					SetNodeFont(parent)
+					If addIt Then
+						AddToTree(o, newNode)
+					End If
+					parent.Expand()
 				End If
 			End If
 		End If
 	End Sub
 
 	Private Sub AddItemToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddItemToolStripMenuItem.Click
-		AddItem(currentParentNode)
+		AddItem(contextCurrentParentNode)
 	End Sub
 
 	Private Sub RemoveItem(node As TreeNode, parent As TreeNode)
@@ -605,16 +661,16 @@ Public Class FBuilder
 		Dim ok As Boolean = False
 		If Not IsNothing(removeMethod) Then
 			'call the add item method
-			ok = removeMethod.Invoke(mynode.ParentObject, New Object() {currentNode.Index - 1})
+			ok = removeMethod.Invoke(mynode.ParentObject, New Object() {contextCurrentNode.Index - 1})
 		End If
 		If ok Then
-			parent.Nodes.Remove(node)
 			SetNodeFont(parent)
+			parent.Nodes.Remove(node)
 		End If
 	End Sub
 
 	Private Sub RemoveItemToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveItemToolStripMenuItem.Click
-		RemoveItem(currentNode, currentParentNode)
+		RemoveItem(contextCurrentNode, contextCurrentParentNode)
 	End Sub
 
 	Private Sub FBuilder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -622,7 +678,7 @@ Public Class FBuilder
 	End Sub
 
 	Private Sub InsertItemToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertItemToolStripMenuItem.Click
-		'AddItem(currentParentNode, Nothing, currentNode)
+		AddItem(contextCurrentParentNode, Nothing, contextCurrentNode)
 	End Sub
 
 End Class

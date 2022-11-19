@@ -356,7 +356,7 @@ namespace NEXO
 				int i = int.Parse(value);
 				return i.ToString(CultureInfo.InvariantCulture);
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, "Value: " + value); }
+			catch (Exception ex) { CLog.EXCEPT(ex, "Value: " + value); }
 			return null;
 		}
 		protected override string GetRegularExpression(string value) { return @"^[-+]?([1]?[0-9]{0,9}|20[0-9]{0,8}|21[0-3]?[0-9]{0,7}|214[0-6]?[0-9]{0,6}|2147[0-3]?[0-9]{0,5}|21474[0-7]?[0-9]{0,4}|214748[0-2]?[0-9]{0,3}|2147483[0-5]?[0-9]{0,2}|21474836[0-3]?[0-9]{0,1}|214748364[0-7]?)$"; }
@@ -700,7 +700,7 @@ namespace NEXO
 			}
 			catch (Exception ex)
 			{
-				//CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
+				//CLog.EXCEPT(ex);
 				// arrived here the value is not valid, we ignore it
 				valueToStore = null;
 			}
@@ -728,12 +728,12 @@ namespace NEXO
 						}
 						catch (Exception ex)
 						{
-							CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex);
+							CLog.EXCEPT(ex);
 						}
 					}
 				}
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
+			catch (Exception ex) { CLog.EXCEPT(ex); }
 			return value;
 		}
 		/// <summary>

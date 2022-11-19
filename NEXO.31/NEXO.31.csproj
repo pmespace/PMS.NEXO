@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net35;net40;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net35</TargetFrameworks>
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO31</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.7.0</Version>
+    <Version>4.7.1</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.1.0" />
+    <PackageReference Include="PMS.COMMON" Version="6.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,8 +56,8 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.7.0</FileVersion>
-    <AssemblyVersion>4.7.0</AssemblyVersion>
+    <FileVersion>4.7.1</FileVersion>
+    <AssemblyVersion>4.7.1</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 

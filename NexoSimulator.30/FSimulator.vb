@@ -171,6 +171,15 @@ Public Class FSimulator
 		Dim sfn As String = SettingsFileName()
 		json = New CJson(Of Settings)(sfn & SETTINGS_FILE_EXT)
 		CLog.LogFileName = sfn & LOG_FILE_EXT
+		CLog.SeverityToLog = TLog.TRACE
+
+		cbxLog.Items.Add(TLog.EXCPT.ToString)
+		cbxLog.Items.Add(TLog.ERROR.ToString)
+		cbxLog.Items.Add(TLog.WARNG.ToString)
+		cbxLog.Items.Add(TLog.TRACE.ToString)
+		cbxLog.Items.Add(TLog.INFOR.ToString)
+		cbxLog.Items.Add(TLog.DEBUG.ToString)
+		cbxLog.SelectedItem = CLog.SeverityToLog.ToString
 
 		connected = New FConnected
 		connected.Warn = cbConnected
@@ -323,6 +332,12 @@ Public Class FSimulator
 
 			cbUseConnectionSettings.Checked = settings.UsePreConnection
 
+			Try
+				cbxLog.SelectedText = settings.TLog
+			Catch ex As Exception
+				cbxLog.SelectedText = TLog.TRACE.ToString
+			End Try
+
 			ConnectionSettings = settings.ConnectionSettings
 			If IsNothing(ConnectionSettings) Then ConnectionSettings = New SettingsConnectionSettings
 
@@ -377,6 +392,8 @@ Public Class FSimulator
 
 		settings.UsePreConnection = cbUseConnectionSettings.Checked
 		settings.ConnectionSettings = ConnectionSettings
+
+		settings.TLog = cbxLog.SelectedText
 
 		json.WriteSettings(settings)
 	End Sub
@@ -587,8 +604,8 @@ Public Class FSimulator
 						.OnStart = AddressOf ServerOnStart,
 						.OnConnect = AddressOf ServerOnConnect,
 						.OnDisconnect = AddressOf ServerOnDisconnect,
-						.OnReceivedRequest = AddressOf ServerOnReceivedRequest,
-						.OnReceivedReply = AddressOf ServerOnReceivedReply,
+						.OnReceivedRequest = AddressOf ServerOnReceivedRequestReply,
+						.OnReceivedReply = AddressOf ServerOnReceivedRequestReply,
 						.OnReceivedNotification = AddressOf ServerOnReceivedNotification,
 						.OnSend = AddressOf ServerOnSend,
 						.OnStop = AddressOf ServerOnStop,
@@ -617,13 +634,13 @@ Public Class FSimulator
 		Return True
 	End Function
 
-	Private Function ServerOnConnect(tcp As TcpClient, thread As CThread, o As Object) As Boolean
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT CONNECTED (" & tcp.Client.RemoteEndPoint.ToString & ")"})
+	Private Function ServerOnConnect(tcp As TcpClient, thread As CThread, parameters As Object, ByRef privateData As Object) As Boolean
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = $"CLIENT CONNECTED ({tcp.Client.RemoteEndPoint})"})
 		Return True
 	End Function
 
-	Private Sub ServerOnDisconnect(tcp As String, thread As CThread, o As Object)
-		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = "CLIENT DISCONNECTED (" & tcp & ")"})
+	Private Sub ServerOnDisconnect(tcp As TcpClient, thread As CThread, parameters As Object, statistics As CStreamServerStatistics)
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.updateConnected, .Message = $"CLIENT DISCONNECTED ({tcp.Client.RemoteEndPoint})"})
 	End Sub
 
 	Private Function IsRecognized(o As NexoObject, key As SimulatorResponse, allowWildCard As Boolean)
@@ -633,10 +650,16 @@ Public Class FSimulator
 							(WILDCARD = key.SaleID AndAlso WILDCARD = key.POIID AndAlso allowWildCard)
 	End Function
 
+	Class Criteria
+		Public Name As String
+		Public Value As Object
+	End Class
+
 	Class SimulatorResponse
 		Public Index As Integer
 		Public SaleID As String
 		Public POIID As String
+		Public Values As Criteria()
 		Public Name As String
 		Public Value As Object
 		'Public Message As String
@@ -673,29 +696,30 @@ Public Class FSimulator
 
 		'get records from this file
 		Dim except As Boolean
+		Dim sr As SimulatorResponse
 		Dim data As SimulatorResponses = json.ReadSettings(except, True)
 		If IsNothing(data) AndAlso Not except Then
 			'no data at all, create a file with the fields inside for later update
 			Dim l As New SimulatorResponses
-			l.Add(New SimulatorResponse With
+			sr = New SimulatorResponse With
 				{
 				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
 				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
-				.Name = Nothing,
-				.Value = Nothing,
 				.XML = Nothing,
 				.JSON = Nothing
-				})
-			l.Add(New SimulatorResponse With
+				}
+			sr.Values = {New Criteria() With {.Name = "Name1", .Value = 1}, New Criteria() With {.Name = "Name2", .Value = "hello"}}
+			l.Add(sr)
+			sr = New SimulatorResponse With
 				{
 				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
 				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
-				.Name = "any data name",
-				.Value = "any value",
 				.XML = Nothing,
 				.JSON = Nothing
-				})
-			json.WriteSettings(l, True)
+				}
+			sr.Values = {New Criteria() With {.Name = "Name3", .Value = 1}, New Criteria() With {.Name = "Name4", .Value = "hello"}}
+			l.Add(sr)
+			json.WriteSettings(l, True, False)
 			'nothing else is done, the server decides of the action and simply returns the received message with a failure
 			NoAnswer(toprocess)
 		ElseIf except Then
@@ -704,18 +728,23 @@ Public Class FSimulator
 		Else
 			Dim response As SimulatorResponse = Nothing
 			Dim secondary As Object = Nothing
+			Dim nb As Integer
 
 			'exact responses (SaleID, POIID, Value)
 			'Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending
-			Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			'Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
 			'almost exact (SaleID, POIID)
-			Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			'Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Index Descending
 			'partial responses (using wildcards, Value)
-			Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = secondary.ToString Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			'Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = secondary.ToString Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
 			'partial responses (using wildcards, Value is wildcard too)
-			Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = WILDCARD Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			'Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = WILDCARD Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
 			'scarce responses (using wildcards)
-			Dim responsesScarce = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesScarce = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) Select v Order By v.SaleID Descending, v.POIID Descending, v.Index Descending
 
 			'choose the response to use
 			If 0 <> responsesExact.Count Then
@@ -750,12 +779,171 @@ Public Class FSimulator
 						If toprocess.Category = item.Category Then
 							toprocess.CurrentObject.FromItem(item)
 							Return
+						Else
+							toprocess.NextObject = NexoItem.AllocateObject(item.Category)
+							toprocess.NextObject.FromItem(item)
+							If item.Type = MessageTypeEnumeration.Request Then
+								toprocess.Action = NexoNextAction.sendRequest
+							ElseIf item.Type = MessageTypeEnumeration.Response Then
+								toprocess.Action = NexoNextAction.sendReply
+							Else
+								toprocess.Action = NexoNextAction.sendNotification
+							End If
+							Return
 						End If
 					End If
 				End If
+				'no answer is available, return an error
+				NoAnswer(toprocess)
 			End If
-			'no answer is available, return an error
+		End If
+	End Sub
+
+	Private Sub ServerOnReceivedRequestReply(xml As String, toprocess As NexoObjectToProcess, tcp As TcpClient, thread As CThread, o As Object)
+		'determine category with a name to use to select the response
+		Dim cat As String = toprocess.Category.ToString
+		If MessageCategoryEnumeration.Payment = toprocess.Category Then
+			Dim tmp As NexoPayment = toprocess.CurrentObject
+			If PaymentTypeEnumeration.Normal <> tmp.PaymentType Then
+				cat = tmp.PaymentType.ToString
+			End If
+		End If
+
+		Dim str As String
+		Dim direction As Direction
+		Dim position As Position
+		Dim evt As ActivityEvent
+		If toprocess.Item.IsRequest Then
+			direction = Direction.right
+			position = Position.server
+			evt = ActivityEvent.receivedRequest
+			str = $"RECEIVED {cat.ToUpper} REQUEST FROM {tcp.Client.RemoteEndPoint} {MessageLength(xml)}{vbCrLf}{xml}"
+		Else
+			direction = Direction.left
+			position = Position.server
+			evt = ActivityEvent.receivedReply
+			str = $"RECEIVED {cat.ToUpper} RESPONSE FROM {tcp.Client.RemoteEndPoint} {MessageLength(xml)}{vbCrLf}{xml}"
+		End If
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = direction, .position = position, .Evt = evt, .Message = str})
+
+		If toprocess.Item.IsRequest Then
+			'if the request is proposed declined by the library we do not process the message any further
+			If Not toprocess.CurrentObject.Success Then
+				Return
+			End If
+			str = $"{SettingsFileName()}.response.{cat}.json".ToLower()
+		Else
+			str = $"{SettingsFileName()}.request.{cat}.json".ToLower()
+		End If
+
+		'search the json file containing the response for that message category
+		Dim json As New CJson(Of SimulatorResponses)(str)
+		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = direction, .position = position, .Evt = evt, .Message = $"Trying to use {json.FileName}{vbCrLf}"})
+
+		'get records from this file
+		Dim except As Boolean
+		Dim sr As SimulatorResponse
+		Dim data As SimulatorResponses = json.ReadSettings(except, True)
+		If IsNothing(data) AndAlso Not except Then
+			'no data at all, create a file with the fields inside for later update
+			Dim l As New SimulatorResponses
+			sr = New SimulatorResponse With
+				{
+				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
+				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
+				.XML = Nothing,
+				.JSON = Nothing
+				}
+			sr.Values = {New Criteria() With {.Name = "Name1", .Value = 1}, New Criteria() With {.Name = "Name2", .Value = "hello"}}
+			l.Add(sr)
+			sr = New SimulatorResponse With
+				{
+				.SaleID = toprocess.CurrentObject.Request.MessageHeader.SaleID,
+				.POIID = toprocess.CurrentObject.Request.MessageHeader.POIID,
+				.XML = Nothing,
+				.JSON = Nothing
+				}
+			sr.Values = {New Criteria() With {.Name = "Name3", .Value = 1}, New Criteria() With {.Name = "Name4", .Value = "hello"}}
+			l.Add(sr)
+			json.WriteSettings(l, True, False)
+			'nothing else is done, the server decides of the action and simply returns the received message with a failure
 			NoAnswer(toprocess)
+		ElseIf except Then
+			RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = $"INVALID {json.FileName} FILE" & vbCrLf})
+			NoAnswer(toprocess)
+		Else
+			Dim response As SimulatorResponse = Nothing
+			Dim secondary As Object = Nothing
+			Dim nb As Integer
+
+			'exact responses (SaleID, POIID, Value)
+			'Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending
+			'Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value = secondary Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesExact = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
+			'almost exact (SaleID, POIID)
+			'Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesAlmost = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, False) Select v Order By v.SaleID Descending, v.POIID Descending, v.Index Descending
+			'partial responses (using wildcards, Value)
+			'Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = secondary.ToString Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesPartial = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
+			'partial responses (using wildcards, Value is wildcard too)
+			'Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso SearchNamedValue(toprocess.CurrentObject.Request, v.Name, secondary) AndAlso v.Value.ToString = WILDCARD Select v Order By v.SaleID Descending, v.POIID Descending, v.Value Descending, v.Index Descending
+			Dim responsesPartialFull = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) AndAlso nb = SearchNamedValue(toprocess.CurrentObject.Request, v) Select v Order By v.SaleID Descending, v.POIID Descending, nb Descending, v.Index Descending
+			'scarce responses (using wildcards)
+			Dim responsesScarce = From v In data Where Not IsNothing(v) AndAlso IsRecognized(toprocess.CurrentObject, v, True) Select v Order By v.SaleID Descending, v.POIID Descending, v.Index Descending
+
+			'choose the response to use
+			If 0 <> responsesExact.Count Then
+				response = responsesExact(0)
+			ElseIf 0 <> responsesAlmost.Count Then
+				response = responsesAlmost(0)
+			ElseIf 0 <> responsesPartial.Count Then
+				response = responsesPartial(0)
+			ElseIf 0 <> responsesPartialFull.Count Then
+				response = responsesPartialFull(0)
+			ElseIf 0 <> responsesScarce.Count Then
+				response = responsesScarce(0)
+			End If
+
+			'do we have a response ?
+			If Not IsNothing(response) Then
+				Dim sz As String
+				If cbUseJson.Checked Then
+					sz = response.JSON
+				Else
+					sz = response.XML
+				End If
+				If Not IsNothing(sz) Then
+					'eventually replace the user var
+					If Not IsNothing(secondary) AndAlso Not String.IsNullOrEmpty(secondary.ToString) Then
+						sz = sz.Replace(USERVAR, secondary.ToString)
+					End If
+					'deserialize the response
+					Dim item As New NexoItem(sz)
+					If item.IsValid Then
+						'is the response is valid against the expected message we save it to send it back to the caller
+						If toprocess.Category = item.Category Then
+							toprocess.CurrentObject.FromItem(item)
+							Return
+						Else
+							toprocess.NextObject = NexoItem.AllocateObject(item.Category)
+							toprocess.NextObject.FromItem(item)
+							If item.Type = MessageTypeEnumeration.Request Then
+								toprocess.Action = NexoNextAction.sendRequest
+							ElseIf item.Type = MessageTypeEnumeration.Response Then
+								toprocess.Action = NexoNextAction.sendReply
+							Else
+								toprocess.Action = NexoNextAction.sendNotification
+							End If
+							Return
+						End If
+					End If
+				End If
+				If toprocess.Item.IsRequest Then
+					'no answer is available, return an error
+					NoAnswer(toprocess)
+				End If
+			End If
 		End If
 	End Sub
 
@@ -809,6 +997,30 @@ Public Class FSimulator
 			End If
 		Next
 		Return False
+	End Function
+
+	Private Function SearchNamedValue(o As Object, response As SimulatorResponse, Optional acceptWildCard As Boolean = False) As Integer
+		SearchNamedValue = 0
+		If IsNothing(o) OrElse IsNothing(Name) Then Return Nothing
+		'list all properties inside the object
+		'Dim properties As List(Of PropertyInfo) = o.GetType().GetProperties().ToList()
+		'Dim methods As List(Of MethodInfo) = o.GetType().GetMethods().ToList()
+		Dim value As Object = Nothing
+		If Not IsNothing(response.Values) Then
+			For Each criteria As Criteria In response.Values
+				If SearchNamedValue(o, criteria.Name, value) Then
+					If value.ToString = criteria.Value.ToString OrElse (acceptWildCard AndAlso value.ToString = WILDCARD) Then
+						SearchNamedValue = SearchNamedValue + 1
+					End If
+				End If
+			Next
+		End If
+		If SearchNamedValue(o, response.Name, value) Then
+			If value.ToString = response.Value.ToString OrElse (acceptWildCard AndAlso value.ToString = WILDCARD) Then
+				SearchNamedValue = SearchNamedValue + 1
+			End If
+		End If
+		Return SearchNamedValue
 	End Function
 
 	Private Sub pbStop_Click(sender As Object, e As EventArgs) Handles pbStopServer.Click
@@ -1109,7 +1321,7 @@ Public Class FSimulator
 		End If
 	End Sub
 
-	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, thread As CThread, parameters As Object, ox As Object) As Byte()
+	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, thread As CThread, parameters As Object, privateData As Object, reserved As Object) As Byte()
 		'the gateway received a request that must be forwarded to the distant server
 		Dim settings As New CStreamClientSettings
 		If cbGatewayUseLocalHost.Checked Then
@@ -1136,12 +1348,12 @@ Public Class FSimulator
 		Return True
 	End Function
 
-	Private Function GatewayOnConnect(tcp As TcpClient, thread As CThread, o As Object) As Boolean
+	Private Function GatewayOnConnect(tcp As TcpClient, thread As CThread, parameters As Object, ByRef privateData As Object) As Boolean
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
 		Return True
 	End Function
 
-	Private Function GatewayOnDisconnect(tcp As String, thread As CThread, o As Object) As Boolean
+	Private Function GatewayOnDisconnect(tcp As TcpClient, thread As CThread, parameters As Object, statistics As CStreamServerStatistics) As Boolean
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.message, .Message = "GATEWAY CONNECTED"})
 		Return True
 	End Function
@@ -1659,6 +1871,10 @@ Public Class FSimulator
 		If DialogResult.OK = FolderBrowserDialog1.ShowDialog Then
 			SetSettingsPath(FolderBrowserDialog1.SelectedPath)
 		End If
+	End Sub
+
+	Private Sub cbxLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxLog.SelectedIndexChanged
+		CLog.SeverityToLog = CMisc.GetEnumValue(GetType(TLog), cbxLog.SelectedItem)
 	End Sub
 
 #End Region

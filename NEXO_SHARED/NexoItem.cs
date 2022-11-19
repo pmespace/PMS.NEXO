@@ -215,7 +215,7 @@ namespace NEXO
 			}
 			else
 			{
-				CLog.Add("Messages do not match - Invalid message type", TLog.WARNG);
+				CLog.Add($"Messages do not match - Invalid message type", TLog.WARNG);
 				return false;
 
 			}

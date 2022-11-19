@@ -21,6 +21,14 @@ using COMMON;
 
 namespace NEXO
 {
+	public static class NexoObjectExtension
+	{
+		public static bool IsSuccess(this string str, bool ignoreCase = true)
+		{
+			return 0 == string.Compare(str, ResultEnumeration.Success.ToString(), ignoreCase);
+		}
+	}
+
 	[Guid("70469D2A-4EFD-4023-82BB-7F6D382A5D83")]
 	[InterfaceType(ComInterfaceType.InterfaceIsDual)]
 	[ComVisible(true)]
@@ -723,9 +731,9 @@ namespace NEXO
 					return Serialize(_request);
 				}
 				else
-					CLog.Add("REQUEST SERIALIZATION FAILED WITH ERROR CODE: " + error.ToString(), TLog.ERROR);
+					CLog.Add($"REQUEST SERIALIZATION FAILED WITH ERROR CODE: {error}", TLog.ERROR);
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
+			catch (Exception ex) { CLog.EXCEPT(ex); }
 			return null;
 		}
 		/// <summary>
@@ -744,9 +752,9 @@ namespace NEXO
 					return Serialize(Reply);
 				}
 				else
-					CLog.Add("REPLY SERIALIZATION FAILED WITH ERROR CODE: " + error.ToString(), TLog.ERROR);
+					CLog.Add($"REPLY SERIALIZATION FAILED WITH ERROR CODE: {error}", TLog.ERROR);
 			}
-			catch (Exception ex) { CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex); }
+			catch (Exception ex) { CLog.EXCEPT(ex); }
 			return null;
 		}
 		#endregion

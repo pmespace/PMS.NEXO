@@ -372,14 +372,14 @@ namespace XSDEx
 				 isArray = "array",
 				 isCounterI = "i",
 				 isCounterJ = "j",
+				 isCounterK = "k",
 				 isField = "Field",
 				 isLength = "Length",
 				 isEx = "ex",
 				 isIndex = "index",
 				 isValue = "value",
 				 bXSD = "BEGIN ADDED BY XSD",
-				 eXSD = "END ADDED BY XSD",
-				 isSpecified = "Specified";
+				 eXSD = "END ADDED BY XSD";
 
 				// file specific objects to add
 				List<CodeTypeDeclaration> newCodeTypeDeclarations = new List<CodeTypeDeclaration>();
@@ -568,14 +568,14 @@ namespace XSDEx
 									// search field linked to the property
 									string pname;
 									CodeMemberField propertyField = null;
-									if (!property.Name.EndsWith(isSpecified))
+									if (!property.Name.EndsWith(NexoXSDStrings.Specified))
 									{
 										pname = property.Name + isField;
 									}
 									else
 									{
-										int index = property.Name.LastIndexOf(isSpecified);
-										pname = property.Name.Substring(0, index) + isField + isSpecified;
+										int index = property.Name.LastIndexOf(NexoXSDStrings.Specified);
+										pname = property.Name.Substring(0, index) + isField + NexoXSDStrings.Specified;
 									}
 									propertyField = (CodeMemberField)GetMemberByName<CodeMemberField>(codeType, property, pname);
 									if (null == propertyField)
@@ -655,16 +655,16 @@ namespace XSDEx
 
 									#region <property>Specified management
 									// if the property is not a ...Specified property search the attached ...Specified property and field, create them if they don't exist
-									bool propertyToProcessInHasBeenSet = !property.Name.EndsWith(isSpecified);
+									bool propertyToProcessInHasBeenSet = !property.Name.EndsWith(NexoXSDStrings.Specified);
 									CodeMemberProperty propertySpecifiedProperty = null;
 									CodeMemberField propertySpecifiedPropertyField = null;
 									// only integral types and classes declared inside the namespace will have a ..Specified linked property
 									// by doing so we allow any namespace defined class to be present or not inside the resulting XML by setting the <memberName>Specified proerpty to true (present) or false (not present)
-									if (!property.Name.EndsWith(isSpecified))// && (IsPrimitiveType(property.Type) || null != ctd || IsArray(property.Type)))
+									if (!property.Name.EndsWith(NexoXSDStrings.Specified))// && (IsPrimitiveType(property.Type) || null != ctd || IsArray(property.Type)))
 									{
 										//bool propertySpecifiedPropertyWasCreated = false;
 										// <property>Specified
-										pname = property.Name + isSpecified;
+										pname = property.Name + NexoXSDStrings.Specified;
 										propertySpecifiedProperty = (CodeMemberProperty)GetMemberByName<CodeMemberProperty>(codeType, property, pname);
 										if (null == propertySpecifiedProperty)
 										{
@@ -674,7 +674,7 @@ namespace XSDEx
 										}
 
 										// <property>FieldSpecified
-										pname = propertyField.Name + isSpecified;
+										pname = propertyField.Name + NexoXSDStrings.Specified;
 										propertySpecifiedPropertyField = (CodeMemberField)GetMemberByName<CodeMemberField>(codeType, propertySpecifiedProperty, pname);
 										if (null == propertySpecifiedPropertyField)
 										{
@@ -1593,12 +1593,20 @@ namespace XSDEx
 																typeof(int),
 																isCounterJ,
 																new CodePrimitiveExpression(0)),
+															// declare K counter
+															new CodeVariableDeclarationStatement(
+																typeof(int),
+																isCounterK,
+																new CodeBinaryOperatorExpression(
+																	new CodeArgumentReferenceExpression(isIndex),
+																	CodeBinaryOperatorType.Add,
+																	new CodePrimitiveExpression(1))),
 															// for loop to copy old items above requested index inside the new array
 															new CodeIterationStatement(
 																// initializer
 																new CodeAssignStatement(
 																	new CodeVariableReferenceExpression(isCounterJ),
-																		new CodeVariableReferenceExpression(isCounterI)),
+																	new CodeVariableReferenceExpression(isCounterI)),
 																// test
 																new CodeBinaryOperatorExpression(
 																	new CodeVariableReferenceExpression(isCounterJ),
@@ -1621,10 +1629,16 @@ namespace XSDEx
 																	new CodeAssignStatement(
 																		new CodeArrayIndexerExpression(
 																			new CodeArgumentReferenceExpression(isArray),
-																			new CodeArgumentReferenceExpression(isCounterJ)),
+																			new CodeArgumentReferenceExpression(isCounterK)),
 																		new CodeArrayIndexerExpression(
 																			new CodeArgumentReferenceExpression(propertyField.Name),
-																			new CodeArgumentReferenceExpression(isCounterJ)))
+																			new CodeArgumentReferenceExpression(isCounterJ))),
+																	new CodeAssignStatement(
+																		new CodeArgumentReferenceExpression(isCounterK),
+																		new CodeBinaryOperatorExpression(
+																			new CodeVariableReferenceExpression(isCounterK),
+																			CodeBinaryOperatorType.Add,
+																			new CodePrimitiveExpression(1))),
 																}),
 															// replace existing array by new array
 															new CodeAssignStatement(
@@ -1703,7 +1717,7 @@ namespace XSDEx
 										CodeBinaryOperatorType.BooleanAnd,
 										new CodeFieldReferenceExpression(
 											new CodeThisReferenceExpression(),
-											xcmp.Name + isSpecified)));
+											xcmp.Name + NexoXSDStrings.Specified)));
 							}
 							// add size of array element
 							foreach (CodeMemberProperty xcmp in arraysToProcessInHadBeenSet)
@@ -1754,7 +1768,7 @@ namespace XSDEx
 										CodeBinaryOperatorType.BooleanAnd,
 										new CodePropertyReferenceExpression(
 											new CodeThisReferenceExpression(),
-											xcmp.Name + isSpecified)));
+											xcmp.Name + NexoXSDStrings.Specified)));
 							}
 							//// add ...Specified flag of primitive data without null ability
 							//foreach (CodeMemberProperty xcmp in optionalsToProcessInHadBeenSet)

@@ -313,7 +313,7 @@ namespace NEXO.Server
 			if (fOK)
 				foreach (TxN txn in list)
 					rules += txn.ToString() + "; ";
-			CLog.Add((fOK ? $"Access granted [{sqlx}] by {list.Count} rules [{rules}]" : $"Access not granted [{sqlx}]"), fOK ? TLog.INFOR : TLog.WARNG);
+			CLog.Add($"Access {(fOK ? $"granted [{sqlx}] by {list.Count} rules [{rules}]" : $"not granted [{sqlx}]")}", fOK ? TLog.INFOR : TLog.WARNG);
 			return fOK;
 		}
 		public bool CloseAllConnections()

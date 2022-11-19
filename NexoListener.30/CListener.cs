@@ -205,11 +205,12 @@ namespace NexoListener
 		/// </summary>
 		/// <param name="tcp"></param>
 		/// <param name="thread"></param>
-		/// <param name="o"></param>
+		/// <param name="parameters"></param>
+		/// <param name="privateData"></param>
 		/// <returns></returns>
-		private static bool OnConnect(TcpClient tcp, CThread thread = null, object o = null)
+		private static bool OnConnect(TcpClient tcp, CThread thread, object parameters, ref object privateData)
 		{
-			SettingsType settings = (SettingsType)o;
+			SettingsType settings = (SettingsType)parameters;
 			try
 			{
 				if (settings.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
@@ -233,8 +234,9 @@ namespace NexoListener
 		/// </summary>
 		/// <param name="tcp"></param>
 		/// <param name="thread"></param>
-		/// <param name="o"></param>
-		private static void OnDisconnect(string tcp, CThread thread = null, object o = null)
+		/// <param name="parameters"></param>
+		/// <param name="statistics"></param>
+		private static void OnDisconnect(TcpClient tcp, CThread thread, object parameters, CStreamServerStatistics statistics)
 		{
 			CLogger.Add($"[{tcp}] Client has been disconnected");
 		}
@@ -245,9 +247,11 @@ namespace NexoListener
 		/// <param name="request"></param>
 		/// <param name="addBufferSize"></param>
 		/// <param name="thread"></param>
-		/// <param name="o"></param>
+		/// <param name="parameters"></param>
+		/// <param name="privateData"></param>
+		/// <param name="reserved"></param>
 		/// <returns></returns>
-		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThread thread, object parameters, object o)
+		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThread thread, object parameters, object privateData, object reserved)
 		{
 			addBufferSize = true;
 			SettingsType settings = (SettingsType)parameters;
@@ -482,7 +486,7 @@ namespace NexoListener
 								Label = sts.ToString(),
 								Message = $"[{tcp.Client.RemoteEndPoint}] POI is already in use, please wait",
 							})),
-							addBufferSize, action, o);
+							addBufferSize, action, reserved);
 						mutex.WaitOne();
 						sts = ReplyStatus.accessToPOIHasBeenGranted;
 						StreamServer.Send1WayNotification(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
@@ -493,7 +497,7 @@ namespace NexoListener
 								Label = sts.ToString(),
 								Message = $"[{tcp.Client.RemoteEndPoint}] POI access has been granted",
 							})),
-							addBufferSize, action, o);
+							addBufferSize, action, reserved);
 					}
 
 					NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
@@ -517,7 +521,7 @@ namespace NexoListener
 									Label = sts.ToString(),
 									Message = $"[{tcp.Client.RemoteEndPoint}] Trying to log from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
 								})),
-								addBufferSize, action, o);
+								addBufferSize, action, reserved);
 							if (!(ok = client.SendRequestSync(login)))
 							{
 								CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] An error has occurred while trying to log to the POI", TLog.ERROR);
@@ -529,7 +533,7 @@ namespace NexoListener
 										Label = sts.ToString(),
 										Message = $"[{tcp.Client.RemoteEndPoint}] Failed to log from from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
 									})),
-									addBufferSize, action, o);
+									addBufferSize, action, reserved);
 							}
 						}
 
@@ -597,7 +601,7 @@ namespace NexoListener
 									Label = sts.ToString(),
 									Message = $"[{tcp.Client.RemoteEndPoint}] Starting service {serviceName}",
 								})),
-								addBufferSize, action, o);
+								addBufferSize, action, reserved);
 							// send the request synchronously
 							if (!client.SendRequestSync(nexo))
 								CLogger.Add(listenerReply.Message = $"[{tcp.Client.RemoteEndPoint}] An error has occurred while trying to exchange the nexo retailer order", TLog.ERROR);
@@ -609,7 +613,7 @@ namespace NexoListener
 									Label = sts2.ToString(),
 									Message = $"[{tcp.Client.RemoteEndPoint}] Service {serviceName} is finished",
 								})),
-								addBufferSize, action, o);
+								addBufferSize, action, reserved);
 							timedout = client.TimedOut;
 							cancelled = client.Cancelled;
 							received = client.Received;
@@ -630,7 +634,7 @@ namespace NexoListener
 									Label = sts.ToString(),
 									Message = $"[{tcp.Client.RemoteEndPoint}] Log-out from SaleID: {listenerRequest.SaleID} to POIID: {listenerRequest.POIID}",
 								})),
-								addBufferSize, action, o);
+								addBufferSize, action, reserved);
 							client.SendRequestSync(logout);
 						}
 						client.Disconnect();
@@ -643,7 +647,7 @@ namespace NexoListener
 				}
 				catch (Exception ex)
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+					CLog.EXCEPT(ex);
 					listenerReply.Status = ReplyStatus.unknownError;
 				}
 				finally

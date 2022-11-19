@@ -65,7 +65,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("28646416-c4aa-48c5-b28b-2d5181947b0f")]
+    [System.Runtime.InteropServices.GuidAttribute("0c7633dd-c344-4b30-86b8-d63a6af885da")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AuthenticatedDataType : IAuthenticatedDataType {
@@ -455,8 +455,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.itemsField.Length); j = (j + 1)) {
-                            array[j] = itemsField[j];
+                            array[k] = itemsField[j];
+                            k = (k + 1);
                         }
                         this.Items = array;
                         return index;
@@ -611,8 +613,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.mACField.Length); j = (j + 1)) {
-                            array[j] = mACField[j];
+                            array[k] = mACField[j];
+                            k = (k + 1);
                         }
                         this.MAC = array;
                         return index;
@@ -630,7 +634,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("08a62571-a400-43b2-a9ee-a173513ef720")]
+    [System.Runtime.InteropServices.GuidAttribute("9cc55a45-5e18-43fd-8047-2794d0c6ae21")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class KEKType : IKEKType {
@@ -979,8 +983,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.encryptedKeyField.Length); j = (j + 1)) {
-                            array[j] = encryptedKeyField[j];
+                            array[k] = encryptedKeyField[j];
+                            k = (k + 1);
                         }
                         this.EncryptedKey = array;
                         return index;
@@ -998,7 +1004,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("516737c0-3310-4934-a905-81342fbce4eb")]
+    [System.Runtime.InteropServices.GuidAttribute("923bed51-615d-4266-b1fd-821d8317b6e9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class KEKIdentifierType : IKEKIdentifierType {
@@ -1293,8 +1299,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.derivationIdentifierField.Length); j = (j + 1)) {
-                            array[j] = derivationIdentifierField[j];
+                            array[k] = derivationIdentifierField[j];
+                            k = (k + 1);
                         }
                         this.DerivationIdentifier = array;
                         return index;
@@ -1312,7 +1320,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ee1b1e0d-e225-4750-b041-2539a50cee50")]
+    [System.Runtime.InteropServices.GuidAttribute("846e4475-e30a-490d-8d13-b36678f4b5ff")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayResponseType : IDisplayResponseType {
@@ -1527,8 +1535,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputResultField.Length); j = (j + 1)) {
-                            array[j] = outputResultField[j];
+                            array[k] = outputResultField[j];
+                            k = (k + 1);
                         }
                         this.OutputResult = array;
                         return index;
@@ -1546,7 +1556,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e7956cb2-0d62-4b22-bfc7-ea38b9280456")]
+    [System.Runtime.InteropServices.GuidAttribute("5bf7a3c5-622f-425e-b244-e9e84d29566d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputResultType : IOutputResultType {
@@ -1704,7 +1714,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("47d1b9f9-0c52-4bd6-9458-da24ad917f06")]
+    [System.Runtime.InteropServices.GuidAttribute("3ccc7af1-9996-48f1-a7aa-7bfeeabc6883")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ResponseType : IResponseType {
@@ -1862,7 +1872,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a308c4a6-8505-4501-8b8b-b44b63a17cf1")]
+    [System.Runtime.InteropServices.GuidAttribute("68e58a2e-0f07-4cf5-94d8-7024865a0ae8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayRequestType : IDisplayRequestType {
@@ -2077,8 +2087,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.displayOutputField.Length); j = (j + 1)) {
-                            array[j] = displayOutputField[j];
+                            array[k] = displayOutputField[j];
+                            k = (k + 1);
                         }
                         this.DisplayOutput = array;
                         return index;
@@ -2096,7 +2108,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("87fafe67-9cf5-413e-ba9b-7fdb3c32374e")]
+    [System.Runtime.InteropServices.GuidAttribute("873227c4-0416-42c7-bdf6-f2a75d92b16d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DisplayOutputType : IDisplayOutputType {
@@ -2579,8 +2591,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.menuEntryField.Length); j = (j + 1)) {
-                            array[j] = menuEntryField[j];
+                            array[k] = menuEntryField[j];
+                            k = (k + 1);
                         }
                         this.MenuEntry = array;
                         return index;
@@ -2735,8 +2749,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputSignatureField.Length); j = (j + 1)) {
-                            array[j] = outputSignatureField[j];
+                            array[k] = outputSignatureField[j];
+                            k = (k + 1);
                         }
                         this.OutputSignature = array;
                         return index;
@@ -2754,7 +2770,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b87f448a-2cb4-4171-b272-af978f949966")]
+    [System.Runtime.InteropServices.GuidAttribute("b98684c7-57c4-4f63-848e-79dce03c50db")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputContentType : IOutputContentType {
@@ -3129,8 +3145,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputTextField.Length); j = (j + 1)) {
-                            array[j] = outputTextField[j];
+                            array[k] = outputTextField[j];
+                            k = (k + 1);
                         }
                         this.OutputText = array;
                         return index;
@@ -3285,8 +3303,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputXHTMLField.Length); j = (j + 1)) {
-                            array[j] = outputXHTMLField[j];
+                            array[k] = outputXHTMLField[j];
+                            k = (k + 1);
                         }
                         this.OutputXHTML = array;
                         return index;
@@ -3304,7 +3324,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("00449753-c8ca-4978-a690-54c51c64d089")]
+    [System.Runtime.InteropServices.GuidAttribute("c4eefc11-0cf0-4079-bffa-652f71554e6a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PredefinedContentType : IPredefinedContentType {
@@ -3422,7 +3442,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a087b937-1b39-48f9-b308-401f5919fbb3")]
+    [System.Runtime.InteropServices.GuidAttribute("4ffd5fd9-3abf-4d8d-acdd-2a12770714f2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputTextType : IOutputTextType {
@@ -3914,7 +3934,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("71fb941a-6c09-4016-97b0-ab627a5a3f53")]
+    [System.Runtime.InteropServices.GuidAttribute("6f3e169e-0498-4b81-ae17-d858b8594866")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OutputBarcodeType : IOutputBarcodeType {
@@ -4046,7 +4066,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("728c68ba-bb75-4586-86a4-df0010b4b2e2")]
+    [System.Runtime.InteropServices.GuidAttribute("8ee296df-1cdd-4850-8893-093a29e495b3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MenuEntryType : IMenuEntryType {
@@ -4489,8 +4509,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputTextField.Length); j = (j + 1)) {
-                            array[j] = outputTextField[j];
+                            array[k] = outputTextField[j];
+                            k = (k + 1);
                         }
                         this.OutputText = array;
                         return index;
@@ -4645,8 +4667,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputXHTMLField.Length); j = (j + 1)) {
-                            array[j] = outputXHTMLField[j];
+                            array[k] = outputXHTMLField[j];
+                            k = (k + 1);
                         }
                         this.OutputXHTML = array;
                         return index;
@@ -4664,7 +4688,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1a35a15b-7388-44e8-a1a7-2a29e44a6cc1")]
+    [System.Runtime.InteropServices.GuidAttribute("7438d134-29db-4cab-a0e0-acb3054d882a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AlgorithmIdentifier : IAlgorithmIdentifier {
@@ -4782,7 +4806,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d340feaa-3906-4b2c-851d-e81d5eab5430")]
+    [System.Runtime.InteropServices.GuidAttribute("ceea7d6d-3973-41e0-9797-ab5a4e09084d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ParameterType : IParameterType {
@@ -4997,8 +5021,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.initialisationVectorField.Length); j = (j + 1)) {
-                            array[j] = initialisationVectorField[j];
+                            array[k] = initialisationVectorField[j];
+                            k = (k + 1);
                         }
                         this.InitialisationVector = array;
                         return index;
@@ -5016,7 +5042,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("df9b3570-e450-4730-b452-883ac1676693")]
+    [System.Runtime.InteropServices.GuidAttribute("91d566dd-318c-4ad9-92e7-544dfadb0620")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class KeyTransportType : IKeyTransportType {
@@ -5365,8 +5391,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.encryptedKeyField.Length); j = (j + 1)) {
-                            array[j] = encryptedKeyField[j];
+                            array[k] = encryptedKeyField[j];
+                            k = (k + 1);
                         }
                         this.EncryptedKey = array;
                         return index;
@@ -5384,7 +5412,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ac49851d-bedf-496f-aef3-1f4c9eaa215a")]
+    [System.Runtime.InteropServices.GuidAttribute("3685a94e-5810-48ea-92ed-8925c3e254fd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RecipientIdentifierType : IRecipientIdentifierType {
@@ -5462,7 +5490,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0fd30a70-edf3-43f9-a1a6-0b031f654939")]
+    [System.Runtime.InteropServices.GuidAttribute("aefdaae5-1596-428d-9f81-d4a177dcaeeb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class IssuerAndSerialNumberType : IIssuerAndSerialNumberType {
@@ -5718,8 +5746,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.issuerField.Length); j = (j + 1)) {
-                            array[j] = issuerField[j];
+                            array[k] = issuerField[j];
+                            k = (k + 1);
                         }
                         this.Issuer = array;
                         return index;
@@ -5737,7 +5767,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8b4f187b-8b85-48bc-bd90-1ff4a62ec667")]
+    [System.Runtime.InteropServices.GuidAttribute("2ef809bb-8b3c-4b67-8a63-699249fae031")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RelativeDistinguishedNameType : IRelativeDistinguishedNameType {
@@ -5855,7 +5885,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("dff16153-671c-492f-bf87-d250e4c75e91")]
+    [System.Runtime.InteropServices.GuidAttribute("62efab19-0338-456f-919b-621eee8d9738")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EncapsulatedContentType : IEncapsulatedContentType {
@@ -6110,8 +6140,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.contentField.Length); j = (j + 1)) {
-                            array[j] = contentField[j];
+                            array[k] = contentField[j];
+                            k = (k + 1);
                         }
                         this.Content = array;
                         return index;
@@ -6157,7 +6189,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("15376923-39f5-435f-9380-9aa007ee6577")]
+    [System.Runtime.InteropServices.GuidAttribute("d9c6aeef-01d1-4e2a-8120-64a9ee6e19f3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DigestedDataType : IDigestedDataType {
@@ -6492,8 +6524,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.digestField.Length); j = (j + 1)) {
-                            array[j] = digestField[j];
+                            array[k] = digestField[j];
+                            k = (k + 1);
                         }
                         this.Digest = array;
                         return index;
@@ -6511,7 +6545,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c1d9e1ad-2478-4aa4-8014-8b30ea8ea137")]
+    [System.Runtime.InteropServices.GuidAttribute("ebe0d01b-6e88-43e9-a21e-1505a9a2eae6")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EncryptedContentType : IEncryptedContentType {
@@ -6806,8 +6840,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.encryptedDataField.Length); j = (j + 1)) {
-                            array[j] = encryptedDataField[j];
+                            array[k] = encryptedDataField[j];
+                            k = (k + 1);
                         }
                         this.EncryptedData = array;
                         return index;
@@ -6825,7 +6861,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("869cac65-845d-4d88-ae29-a7cd182223cb")]
+    [System.Runtime.InteropServices.GuidAttribute("faa6c8e7-2ff6-447b-99f5-3243803e36c4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EnvelopedDataType : IEnvelopedDataType {
@@ -7135,8 +7171,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.itemsField.Length); j = (j + 1)) {
-                            array[j] = itemsField[j];
+                            array[k] = itemsField[j];
+                            k = (k + 1);
                         }
                         this.Items = array;
                         return index;
@@ -7154,7 +7192,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("79b5f408-47eb-4db6-b935-3c6182cbd2c2")]
+    [System.Runtime.InteropServices.GuidAttribute("5adddf88-78c8-4b23-ac1c-7945c79c254f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class IssuerType : IIssuerType {
@@ -7369,8 +7407,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.relativeDistinguishedNameField.Length); j = (j + 1)) {
-                            array[j] = relativeDistinguishedNameField[j];
+                            array[k] = relativeDistinguishedNameField[j];
+                            k = (k + 1);
                         }
                         this.RelativeDistinguishedName = array;
                         return index;
@@ -7388,7 +7428,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a84f7228-29a8-48c1-b877-00b36c41b5d8")]
+    [System.Runtime.InteropServices.GuidAttribute("c41f9270-c32a-458c-bd61-7e2cc9556129")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class NamedKeyEncryptedDataType : INamedKeyEncryptedDataType {
@@ -7560,7 +7600,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3756df05-9928-499d-a0e1-a73b9630d0bf")]
+    [System.Runtime.InteropServices.GuidAttribute("32d0c02f-88d5-4f0c-a790-d485c2b9dbc7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SignedDataType : ISignedDataType {
@@ -7949,8 +7989,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.digestAlgorithmField.Length); j = (j + 1)) {
-                            array[j] = digestAlgorithmField[j];
+                            array[k] = digestAlgorithmField[j];
+                            k = (k + 1);
                         }
                         this.DigestAlgorithm = array;
                         return index;
@@ -8105,8 +8147,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.certificateField.Length); j = (j + 1)) {
-                            array[j] = certificateField[j];
+                            array[k] = certificateField[j];
+                            k = (k + 1);
                         }
                         this.Certificate = array;
                         return index;
@@ -8261,8 +8305,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.signerField.Length); j = (j + 1)) {
-                            array[j] = signerField[j];
+                            array[k] = signerField[j];
+                            k = (k + 1);
                         }
                         this.Signer = array;
                         return index;
@@ -8280,7 +8326,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("32cb9436-8864-46a9-8b5b-aa90131a640e")]
+    [System.Runtime.InteropServices.GuidAttribute("68004413-0ebc-4255-a921-d3b3a65f9656")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SignerType : ISignerType {
@@ -8669,8 +8715,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.signatureField.Length); j = (j + 1)) {
-                            array[j] = signatureField[j];
+                            array[k] = signatureField[j];
+                            k = (k + 1);
                         }
                         this.Signature = array;
                         return index;
@@ -8688,7 +8736,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d415d18b-e1dd-4854-aebb-1fa3cf8bd9b5")]
+    [System.Runtime.InteropServices.GuidAttribute("245a698a-f39e-42b5-ab1d-98be54974156")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SignerIdentifierType : ISignerIdentifierType {
@@ -8788,7 +8836,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("dec168fc-e932-4a0b-abf9-098a02ffcc7b")]
+    [System.Runtime.InteropServices.GuidAttribute("97976172-4495-4ec8-818c-11510cc76386")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ContentInformationType : IContentInformationType {
@@ -8910,7 +8958,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("905e8a28-3e55-4652-83bb-13fcd6ffd5a1")]
+    [System.Runtime.InteropServices.GuidAttribute("06be6327-2b98-4353-9e8f-8558ab5ec8d0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AbortRequestType : IAbortRequestType {
@@ -9068,7 +9116,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a12f776a-4af8-47fe-b1ee-892ca51d0bd6")]
+    [System.Runtime.InteropServices.GuidAttribute("fa42eb53-990b-4180-845a-23e1b3f9827a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MessageReferenceType : IMessageReferenceType {
@@ -9332,7 +9380,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("358cb852-7668-4832-8db5-3dfc3f35e8a3")]
+    [System.Runtime.InteropServices.GuidAttribute("72d4b889-a2a1-43e7-bfe4-c195e4380576")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AdminRequestType : IAdminRequestType {
@@ -9410,7 +9458,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7b879078-d31e-4f71-9ab5-4a8219c7a26b")]
+    [System.Runtime.InteropServices.GuidAttribute("07f74fc5-924b-408e-be69-f0bfac471c2d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AdminResponseType : IAdminResponseType {
@@ -9506,7 +9554,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("82768584-8b3b-42d7-8ed4-b8340263413a")]
+    [System.Runtime.InteropServices.GuidAttribute("2e6853b5-e052-471d-b79c-5af0a2f3f6ae")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AllowedProductType : IAllowedProductType {
@@ -9704,7 +9752,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4270fe16-5abe-4748-8a6a-71199b7a0472")]
+    [System.Runtime.InteropServices.GuidAttribute("50b2b00d-7a46-47c9-9b51-07f0192fbcdf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountsReqType : IAmountsReqType {
@@ -10062,7 +10110,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a728f52b-7e1b-4690-b356-b2f97996a5b1")]
+    [System.Runtime.InteropServices.GuidAttribute("521257c6-29f8-4b08-ac40-15948063997b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountsRespType : IAmountsRespType {
@@ -10340,7 +10388,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("55c9fc5c-8556-474a-9bf1-e9b313ef69be")]
+    [System.Runtime.InteropServices.GuidAttribute("2d2ae78c-3840-416f-901a-1c575f2f717b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AreaSizeType : IAreaSizeType {
@@ -10490,7 +10538,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c8d37ffc-6553-4c76-9996-3e331218918b")]
+    [System.Runtime.InteropServices.GuidAttribute("c1b97659-265b-4e7a-b030-fb88bab79311")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BalanceInquiryRequestType : IBalanceInquiryRequestType {
@@ -10608,7 +10656,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ca3594b7-7a71-43ec-9981-c4ef3f3f067e")]
+    [System.Runtime.InteropServices.GuidAttribute("511a3e9b-aece-49ae-9513-3e0297de0229")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAccountReqType : IPaymentAccountReqType {
@@ -10780,7 +10828,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("efefd783-d2f4-4bb4-93b1-7f2bb6de5356")]
+    [System.Runtime.InteropServices.GuidAttribute("e0915f19-0614-44d0-b94b-4aa60120c0e4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionIdentificationType : ITransactionIdentificationType {
@@ -10898,7 +10946,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7d4fe427-f10c-49b5-afbc-94788f5109cc")]
+    [System.Runtime.InteropServices.GuidAttribute("c95c8c7e-6d34-4a32-835b-d465e44e1968")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentInstrumentDataType : IPaymentInstrumentDataType {
@@ -11096,7 +11144,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("190e8474-0046-4c2d-be65-53fef71b5de7")]
+    [System.Runtime.InteropServices.GuidAttribute("41f99634-0099-4ba9-80cf-ac209605ef12")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardDataType : ICardDataType {
@@ -11711,8 +11759,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedProductCodeField.Length); j = (j + 1)) {
-                            array[j] = allowedProductCodeField[j];
+                            array[k] = allowedProductCodeField[j];
+                            k = (k + 1);
                         }
                         this.AllowedProductCode = array;
                         return index;
@@ -11867,8 +11917,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedProductField.Length); j = (j + 1)) {
-                            array[j] = allowedProductField[j];
+                            array[k] = allowedProductField[j];
+                            k = (k + 1);
                         }
                         this.AllowedProduct = array;
                         return index;
@@ -12023,8 +12075,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.customerOrderField.Length); j = (j + 1)) {
-                            array[j] = customerOrderField[j];
+                            array[k] = customerOrderField[j];
+                            k = (k + 1);
                         }
                         this.CustomerOrder = array;
                         return index;
@@ -12179,8 +12233,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.entryModeField.Length); j = (j + 1)) {
-                            array[j] = entryModeField[j];
+                            array[k] = entryModeField[j];
+                            k = (k + 1);
                         }
                         this.EntryMode = array;
                         return index;
@@ -12198,7 +12254,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0626ec2b-5d39-4cf7-9802-4119ebaf3644")]
+    [System.Runtime.InteropServices.GuidAttribute("ba301e80-b266-40a9-85f4-966d40875904")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SensitiveCardDataType : ISensitiveCardDataType {
@@ -12533,8 +12589,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.trackDataField.Length); j = (j + 1)) {
-                            array[j] = trackDataField[j];
+                            array[k] = trackDataField[j];
+                            k = (k + 1);
                         }
                         this.TrackData = array;
                         return index;
@@ -12552,7 +12610,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("7454ed4a-28ac-4d00-866f-2682321ee152")]
+    [System.Runtime.InteropServices.GuidAttribute("f4605c41-1222-4f45-8e5a-a874b6f669af")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TrackDataType : ITrackDataType {
@@ -12738,7 +12796,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("62a5722b-b62e-409e-b9f5-2c254ec975d4")]
+    [System.Runtime.InteropServices.GuidAttribute("e0153ee4-eedd-4805-9b66-d4ae85ad3b9a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTokenType : IPaymentTokenType {
@@ -12896,7 +12954,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("28560f11-3ca1-40f1-92c2-6d2d8ba4aaae")]
+    [System.Runtime.InteropServices.GuidAttribute("5f281728-8560-4475-92f9-b191f573712d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CustomerOrderType : ICustomerOrderType {
@@ -13308,7 +13366,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("733533d4-2de5-45da-bf7b-f09fc762ec85")]
+    [System.Runtime.InteropServices.GuidAttribute("5cf0db0a-7da6-450b-b0a5-62d8dfd3d23d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CheckDataType : ICheckDataType {
@@ -13640,7 +13698,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9af1edc2-21f7-40cc-a122-71d3e15ce274")]
+    [System.Runtime.InteropServices.GuidAttribute("597ebbde-6ab0-490a-b4b5-032cffc6793f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MobileDataType : IMobileDataType {
@@ -13918,7 +13976,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5cd7fd52-8d5e-4952-99d4-1f3f94951631")]
+    [System.Runtime.InteropServices.GuidAttribute("2bdec86e-c451-4227-bbf2-8aab516da4cf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GeolocationType : IGeolocationType {
@@ -14036,7 +14094,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1e274174-f5db-49ae-aa66-ca76e49b29fb")]
+    [System.Runtime.InteropServices.GuidAttribute("8fe83120-1745-4f91-9961-840d24c389fe")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GeographicCoordinatesType : IGeographicCoordinatesType {
@@ -14154,7 +14212,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("915ebd9e-bf46-43b5-a76b-9fa458c166fd")]
+    [System.Runtime.InteropServices.GuidAttribute("9dff5664-5741-4c23-9653-05edba7b91f4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class UTMCoordinatesType : IUTMCoordinatesType {
@@ -14312,7 +14370,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1af1213e-261a-44cc-aaba-26ff345509c9")]
+    [System.Runtime.InteropServices.GuidAttribute("ab6cd46d-6666-41cc-8bf4-a22cc26b4160")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SensitiveMobileDataType : ISensitiveMobileDataType {
@@ -14470,7 +14528,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a2f070b5-9a72-4c36-9786-f2d005707722")]
+    [System.Runtime.InteropServices.GuidAttribute("0f4fc9d3-93a6-41c9-8e47-7a4cf6d37503")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountReqType : ILoyaltyAccountReqType {
@@ -14588,7 +14646,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2ce8e6b2-d8be-4340-b748-13f70164c2b4")]
+    [System.Runtime.InteropServices.GuidAttribute("16ce28a6-b865-47b2-be2d-85524838b4f0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountIDType : ILoyaltyAccountIDType {
@@ -14923,8 +14981,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.entryModeField.Length); j = (j + 1)) {
-                            array[j] = entryModeField[j];
+                            array[k] = entryModeField[j];
+                            k = (k + 1);
                         }
                         this.EntryMode = array;
                         return index;
@@ -14942,7 +15002,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2ae94cf3-ed53-4ddb-8882-cac1f4e77f78")]
+    [System.Runtime.InteropServices.GuidAttribute("5d79f356-f9fa-4ce3-bc43-5b816a764ea6")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BalanceInquiryResponseType : IBalanceInquiryResponseType {
@@ -15100,7 +15160,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e09063af-d46c-458d-9c11-10fc1f6f657d")]
+    [System.Runtime.InteropServices.GuidAttribute("b18b02ad-12e6-42e3-98be-41eb73be8be8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAccountStatusType : IPaymentAccountStatusType {
@@ -15338,7 +15398,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("95c7b57e-8aa7-44e8-90a5-ec7140e2898c")]
+    [System.Runtime.InteropServices.GuidAttribute("08e8a880-0ef4-4039-b1af-df4928c5f5dc")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentAcquirerDataType : IPaymentAcquirerDataType {
@@ -15576,7 +15636,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b5d7727c-8589-4095-aebe-5934e23552f0")]
+    [System.Runtime.InteropServices.GuidAttribute("174b5acb-4d35-48c0-ad49-e16a53d45695")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountStatusType : ILoyaltyAccountStatusType {
@@ -15788,7 +15848,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("81af5eb9-4614-4943-889b-23b8b17869a4")]
+    [System.Runtime.InteropServices.GuidAttribute("25412bc4-22da-44c8-a566-14b51e2251b8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAccountType : ILoyaltyAccountType {
@@ -15930,7 +15990,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0d46ae76-d40a-456e-8a21-77243e0581d2")]
+    [System.Runtime.InteropServices.GuidAttribute("be768128-89e0-4b5f-8bfa-9c7e61428f14")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BatchRequestType : IBatchRequestType {
@@ -16185,8 +16245,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.transactionToPerformField.Length); j = (j + 1)) {
-                            array[j] = transactionToPerformField[j];
+                            array[k] = transactionToPerformField[j];
+                            k = (k + 1);
                         }
                         this.TransactionToPerform = array;
                         return index;
@@ -16204,7 +16266,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c288b5ab-de7b-4289-811f-21496ab20e6c")]
+    [System.Runtime.InteropServices.GuidAttribute("7ef3c479-2697-4b20-864a-9083e99c1f4d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionToPerformType : ITransactionToPerformType {
@@ -16284,7 +16346,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d60bb991-6947-4f24-a5fe-b07e8fdce672")]
+    [System.Runtime.InteropServices.GuidAttribute("75e650e5-8781-4301-b69b-35e78b7ca43a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyRequestType : ILoyaltyRequestType {
@@ -16579,8 +16641,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyDataField.Length); j = (j + 1)) {
-                            array[j] = loyaltyDataField[j];
+                            array[k] = loyaltyDataField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyData = array;
                         return index;
@@ -16598,7 +16662,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a3e5181f-9194-49ca-b499-2b9061f5cb41")]
+    [System.Runtime.InteropServices.GuidAttribute("584b6a5c-a12c-4c96-a024-33d32f9904fd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleDataType : ISaleDataType {
@@ -17293,8 +17357,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.sponsoredMerchantField.Length); j = (j + 1)) {
-                            array[j] = sponsoredMerchantField[j];
+                            array[k] = sponsoredMerchantField[j];
+                            k = (k + 1);
                         }
                         this.SponsoredMerchant = array;
                         return index;
@@ -17449,8 +17515,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.customerOrderReqField.Length); j = (j + 1)) {
-                            array[j] = customerOrderReqField[j];
+                            array[k] = customerOrderReqField[j];
+                            k = (k + 1);
                         }
                         this.CustomerOrderReq = array;
                         return index;
@@ -17468,7 +17536,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("27139de6-16f6-4d9d-bf10-7944eef25f7f")]
+    [System.Runtime.InteropServices.GuidAttribute("bd38de03-2396-4515-aeab-142070bba28e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleTerminalDataType : ISaleTerminalDataType {
@@ -17666,7 +17734,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("958b94fb-d964-4b72-a489-3ed8f950b42f")]
+    [System.Runtime.InteropServices.GuidAttribute("fcf2e0f3-aee0-4512-b543-d1a8ee2bfcfa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleProfileType : ISaleProfileType {
@@ -17798,7 +17866,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("92d035e7-3d41-4b9e-a71b-6acd313b4967")]
+    [System.Runtime.InteropServices.GuidAttribute("1b1523d7-2e6c-490d-a4a2-c9bed4a2b9fa")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SponsoredMerchantType : ISponsoredMerchantType {
@@ -18036,7 +18104,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c0199c5e-b77e-4007-8eb6-049b7dc3407c")]
+    [System.Runtime.InteropServices.GuidAttribute("3224b693-e4a9-49c9-a3f2-44695025bf78")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToIssuerDataType : ISaleToIssuerDataType {
@@ -18114,7 +18182,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0937874b-9f7e-4361-90b8-65b7b8c04fe3")]
+    [System.Runtime.InteropServices.GuidAttribute("f9e22ae6-4a9a-4cf4-8c8d-0b5881aa1f4c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyTransactionType : ILoyaltyTransactionType {
@@ -18529,8 +18597,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.saleItemField.Length); j = (j + 1)) {
-                            array[j] = saleItemField[j];
+                            array[k] = saleItemField[j];
+                            k = (k + 1);
                         }
                         this.SaleItem = array;
                         return index;
@@ -18548,7 +18618,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5ce43765-44b2-4cf9-b29c-1c7c57238bac")]
+    [System.Runtime.InteropServices.GuidAttribute("ad6e6064-c98a-4543-a325-f869cd24512f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class OriginalPOITransactionType : IOriginalPOITransactionType {
@@ -18920,7 +18990,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("12a6b76e-40ae-4fa6-8edc-3d52150f0659")]
+    [System.Runtime.InteropServices.GuidAttribute("b7e9a0c2-506e-4848-adc2-687072630233")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionConditionsType : ITransactionConditionsType {
@@ -19497,8 +19567,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedPaymentBrandField.Length); j = (j + 1)) {
-                            array[j] = allowedPaymentBrandField[j];
+                            array[k] = allowedPaymentBrandField[j];
+                            k = (k + 1);
                         }
                         this.AllowedPaymentBrand = array;
                         return index;
@@ -19653,8 +19725,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.acquirerIDField.Length); j = (j + 1)) {
-                            array[j] = acquirerIDField[j];
+                            array[k] = acquirerIDField[j];
+                            k = (k + 1);
                         }
                         this.AcquirerID = array;
                         return index;
@@ -19809,8 +19883,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedLoyaltyBrandField.Length); j = (j + 1)) {
-                            array[j] = allowedLoyaltyBrandField[j];
+                            array[k] = allowedLoyaltyBrandField[j];
+                            k = (k + 1);
                         }
                         this.AllowedLoyaltyBrand = array;
                         return index;
@@ -19965,8 +20041,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.forceEntryModeField.Length); j = (j + 1)) {
-                            array[j] = forceEntryModeField[j];
+                            array[k] = forceEntryModeField[j];
+                            k = (k + 1);
                         }
                         this.ForceEntryMode = array;
                         return index;
@@ -19984,7 +20062,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c566969c-2dfd-48ae-b8c0-3781d79d04c8")]
+    [System.Runtime.InteropServices.GuidAttribute("e3e7a92d-317b-46bf-be75-3ab87809331d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleItemType : ISaleItemType {
@@ -20462,7 +20540,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8a15a6c9-36f0-4335-a7c2-4bd9243f8e6b")]
+    [System.Runtime.InteropServices.GuidAttribute("a20805b5-3926-4a82-a502-7153f6ad5c4b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyDataType : ILoyaltyDataType {
@@ -20620,7 +20698,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8c5f1d6f-80ba-4b28-9a41-761a05929bdf")]
+    [System.Runtime.InteropServices.GuidAttribute("3cc5e332-2573-46f9-bb9e-7a759de61b26")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAmountType : ILoyaltyAmountType {
@@ -20792,7 +20870,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2b150721-ac31-4f17-aa09-5c8838999b85")]
+    [System.Runtime.InteropServices.GuidAttribute("31fea5ba-7f2f-4433-bb0e-5c3625adb023")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentRequestType : IPaymentRequestType {
@@ -21127,8 +21205,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyDataField.Length); j = (j + 1)) {
-                            array[j] = loyaltyDataField[j];
+                            array[k] = loyaltyDataField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyData = array;
                         return index;
@@ -21146,7 +21226,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("74c19f37-856a-4783-9808-54bf74d83f97")]
+    [System.Runtime.InteropServices.GuidAttribute("ff3d91d5-a3f9-4e4f-80e2-53a5c3e7761b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTransactionType : IPaymentTransactionType {
@@ -21481,8 +21561,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.saleItemField.Length); j = (j + 1)) {
-                            array[j] = saleItemField[j];
+                            array[k] = saleItemField[j];
+                            k = (k + 1);
                         }
                         this.SaleItem = array;
                         return index;
@@ -21500,7 +21582,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a63c3acf-4c35-45ce-9981-8fb3503cb546")]
+    [System.Runtime.InteropServices.GuidAttribute("e62e4fae-87f4-4145-9b12-f8661a05202d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentDataType : IPaymentDataType {
@@ -21846,7 +21928,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("09c9354e-3def-4c29-a0a0-6d205acee30a")]
+    [System.Runtime.InteropServices.GuidAttribute("81e8ed5a-18eb-4041-9200-4d7b9a0e2cc1")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InstalmentType : IInstalmentType {
@@ -22284,7 +22366,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f944b1ea-6fd9-4d17-839c-cfc484332feb")]
+    [System.Runtime.InteropServices.GuidAttribute("18ef6c74-7a91-4487-91ff-af6c16adddf7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReversalRequestType : IReversalRequestType {
@@ -22522,7 +22604,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4b35c3ae-55fe-4fca-b011-46eaece97aaa")]
+    [System.Runtime.InteropServices.GuidAttribute("ef09dddd-01f9-4a11-acea-00d41ea8727c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class BatchResponseType : IBatchResponseType {
@@ -22777,8 +22859,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.performedTransactionField.Length); j = (j + 1)) {
-                            array[j] = performedTransactionField[j];
+                            array[k] = performedTransactionField[j];
+                            k = (k + 1);
                         }
                         this.PerformedTransaction = array;
                         return index;
@@ -22796,7 +22880,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("6718e9ad-c0b7-468f-b75e-db62c9d54865")]
+    [System.Runtime.InteropServices.GuidAttribute("3d391004-e347-49c3-a837-99b2c893ff03")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PerformedTransactionType : IPerformedTransactionType {
@@ -23211,8 +23295,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyResultField.Length); j = (j + 1)) {
-                            array[j] = loyaltyResultField[j];
+                            array[k] = loyaltyResultField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyResult = array;
                         return index;
@@ -23230,7 +23316,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4c4503bb-a934-4073-9224-e7fae806e78a")]
+    [System.Runtime.InteropServices.GuidAttribute("f45dbf8a-699e-49e4-9b45-4f85b007faed")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIDataType : IPOIDataType {
@@ -23348,7 +23434,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("bd78b755-b90a-4b11-aae5-aae63b4d8ac6")]
+    [System.Runtime.InteropServices.GuidAttribute("82fe56ef-8048-4285-aa61-7101ba6bf4c2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentResultType : IPaymentResultType {
@@ -24085,8 +24171,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.currencyConversionField.Length); j = (j + 1)) {
-                            array[j] = currencyConversionField[j];
+                            array[k] = currencyConversionField[j];
+                            k = (k + 1);
                         }
                         this.CurrencyConversion = array;
                         return index;
@@ -24241,8 +24329,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.authenticationMethodField.Length); j = (j + 1)) {
-                            array[j] = authenticationMethodField[j];
+                            array[k] = authenticationMethodField[j];
+                            k = (k + 1);
                         }
                         this.AuthenticationMethod = array;
                         return index;
@@ -24260,7 +24350,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("dacb94a7-aba7-4024-a7e5-43e2edfd7b20")]
+    [System.Runtime.InteropServices.GuidAttribute("54785021-635e-4a95-bfd3-dcc547b7eb40")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CurrencyConversionType : ICurrencyConversionType {
@@ -24552,7 +24642,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8317b1ae-9a95-428e-8b10-95d594d14500")]
+    [System.Runtime.InteropServices.GuidAttribute("9c14b120-9099-46b6-82c3-56de95746976")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class AmountType : IAmountType {
@@ -24670,7 +24760,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("93626d7b-f68f-4bb1-9571-4866e2d3f8ac")]
+    [System.Runtime.InteropServices.GuidAttribute("4805b139-b31b-4997-a627-bf488752174b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CapturedSignatureType : ICapturedSignatureType {
@@ -24925,8 +25015,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.signaturePointField.Length); j = (j + 1)) {
-                            array[j] = signaturePointField[j];
+                            array[k] = signaturePointField[j];
+                            k = (k + 1);
                         }
                         this.SignaturePoint = array;
                         return index;
@@ -24944,7 +25036,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f0a5977d-701f-4ef4-a921-ab3ef715461a")]
+    [System.Runtime.InteropServices.GuidAttribute("3b061d8e-24ac-4d6c-90cb-13114b1402dd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SignaturePointType : ISignaturePointType {
@@ -25062,7 +25154,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9b11ca14-4e50-48c7-9172-249c8687bac2")]
+    [System.Runtime.InteropServices.GuidAttribute("afe22d6d-7587-42c3-a35a-f05450641fa2")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyResultType : ILoyaltyResultType {
@@ -25300,7 +25392,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ce14c38c-1683-4301-b247-2e38431590c6")]
+    [System.Runtime.InteropServices.GuidAttribute("88f121dd-7a78-4544-a6e9-ab4a7dc8dc4c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyAcquirerDataType : ILoyaltyAcquirerDataType {
@@ -25498,7 +25590,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0ca27087-6697-4c61-9c6b-0d1a7f173ff8")]
+    [System.Runtime.InteropServices.GuidAttribute("e119f86c-d79e-4a60-80b2-473ef3386295")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RebatesType : IRebatesType {
@@ -25793,8 +25885,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.saleItemRebateField.Length); j = (j + 1)) {
-                            array[j] = saleItemRebateField[j];
+                            array[k] = saleItemRebateField[j];
+                            k = (k + 1);
                         }
                         this.SaleItemRebate = array;
                         return index;
@@ -25812,7 +25906,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d3ff0725-bb91-477a-aa3a-c97366770efc")]
+    [System.Runtime.InteropServices.GuidAttribute("074e5e58-d660-4973-b62a-0a84030f38d9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleItemRebateType : ISaleItemRebateType {
@@ -26130,7 +26224,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5de6d83f-fb6d-46ef-a3af-b020b576db51")]
+    [System.Runtime.InteropServices.GuidAttribute("e3077bf6-b454-4725-b744-03b7aa7bba29")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionRequestType : ICardAcquisitionRequestType {
@@ -26248,7 +26342,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("2b9c4a1e-873e-4c54-8f1b-1e6feb7420ab")]
+    [System.Runtime.InteropServices.GuidAttribute("00cecd7e-c3ec-4a80-a193-8f7971b72d94")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionTransactionType : ICardAcquisitionTransactionType {
@@ -26811,8 +26905,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedPaymentBrandField.Length); j = (j + 1)) {
-                            array[j] = allowedPaymentBrandField[j];
+                            array[k] = allowedPaymentBrandField[j];
+                            k = (k + 1);
                         }
                         this.AllowedPaymentBrand = array;
                         return index;
@@ -26967,8 +27063,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.allowedLoyaltyBrandField.Length); j = (j + 1)) {
-                            array[j] = allowedLoyaltyBrandField[j];
+                            array[k] = allowedLoyaltyBrandField[j];
+                            k = (k + 1);
                         }
                         this.AllowedLoyaltyBrand = array;
                         return index;
@@ -27123,8 +27221,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.forceEntryModeField.Length); j = (j + 1)) {
-                            array[j] = forceEntryModeField[j];
+                            array[k] = forceEntryModeField[j];
+                            k = (k + 1);
                         }
                         this.ForceEntryMode = array;
                         return index;
@@ -27142,7 +27242,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("13791085-a5d5-49e2-a1ab-8096a82ee95d")]
+    [System.Runtime.InteropServices.GuidAttribute("9b085d76-16f3-4b73-922a-c77f1ecb89c1")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardAcquisitionResponseType : ICardAcquisitionResponseType {
@@ -27597,8 +27697,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.paymentBrandField.Length); j = (j + 1)) {
-                            array[j] = paymentBrandField[j];
+                            array[k] = paymentBrandField[j];
+                            k = (k + 1);
                         }
                         this.PaymentBrand = array;
                         return index;
@@ -27753,8 +27855,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyAccountField.Length); j = (j + 1)) {
-                            array[j] = loyaltyAccountField[j];
+                            array[k] = loyaltyAccountField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyAccount = array;
                         return index;
@@ -27909,8 +28013,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.customerOrderField.Length); j = (j + 1)) {
-                            array[j] = customerOrderField[j];
+                            array[k] = customerOrderField[j];
+                            k = (k + 1);
                         }
                         this.CustomerOrder = array;
                         return index;
@@ -27928,7 +28034,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("143c5f52-b786-45fb-aa7a-f3a6fc7659a3")]
+    [System.Runtime.InteropServices.GuidAttribute("d3e7ff60-ce5b-4a4e-9c14-feb650c70ff4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardholderPINType : ICardholderPINType {
@@ -28086,7 +28192,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("594f705e-2b8b-4f0e-800f-81dc6e7c7ede")]
+    [System.Runtime.InteropServices.GuidAttribute("01c8e25f-a138-43b7-8cc0-0c6acda32dae")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderAPDURequestType : ICardReaderAPDURequestType {
@@ -28501,8 +28607,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUDataField.Length); j = (j + 1)) {
-                            array[j] = aPDUDataField[j];
+                            array[k] = aPDUDataField[j];
+                            k = (k + 1);
                         }
                         this.APDUData = array;
                         return index;
@@ -28657,8 +28765,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUClassField.Length); j = (j + 1)) {
-                            array[j] = aPDUClassField[j];
+                            array[k] = aPDUClassField[j];
+                            k = (k + 1);
                         }
                         this.APDUClass = array;
                         return index;
@@ -28813,8 +28923,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUInstructionField.Length); j = (j + 1)) {
-                            array[j] = aPDUInstructionField[j];
+                            array[k] = aPDUInstructionField[j];
+                            k = (k + 1);
                         }
                         this.APDUInstruction = array;
                         return index;
@@ -28969,8 +29081,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUPar1Field.Length); j = (j + 1)) {
-                            array[j] = aPDUPar1Field[j];
+                            array[k] = aPDUPar1Field[j];
+                            k = (k + 1);
                         }
                         this.APDUPar1 = array;
                         return index;
@@ -29125,8 +29239,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUPar2Field.Length); j = (j + 1)) {
-                            array[j] = aPDUPar2Field[j];
+                            array[k] = aPDUPar2Field[j];
+                            k = (k + 1);
                         }
                         this.APDUPar2 = array;
                         return index;
@@ -29281,8 +29397,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUExpectedLengthField.Length); j = (j + 1)) {
-                            array[j] = aPDUExpectedLengthField[j];
+                            array[k] = aPDUExpectedLengthField[j];
+                            k = (k + 1);
                         }
                         this.APDUExpectedLength = array;
                         return index;
@@ -29300,7 +29418,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("e2c68c05-2657-4ed1-9845-6c19dc6de3e1")]
+    [System.Runtime.InteropServices.GuidAttribute("11a34024-14b8-4980-9e30-0b8eae930ec3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderAPDUResponseType : ICardReaderAPDUResponseType {
@@ -29595,8 +29713,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aPDUDataField.Length); j = (j + 1)) {
-                            array[j] = aPDUDataField[j];
+                            array[k] = aPDUDataField[j];
+                            k = (k + 1);
                         }
                         this.APDUData = array;
                         return index;
@@ -29751,8 +29871,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.cardStatusWordsField.Length); j = (j + 1)) {
-                            array[j] = cardStatusWordsField[j];
+                            array[k] = cardStatusWordsField[j];
+                            k = (k + 1);
                         }
                         this.CardStatusWords = array;
                         return index;
@@ -29770,7 +29892,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("09a90c59-6d6e-44e1-b498-d7ff2c2814c4")]
+    [System.Runtime.InteropServices.GuidAttribute("a27b6cb8-f14e-4fa6-b599-d627198c27e7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderInitRequestType : ICardReaderInitRequestType {
@@ -30159,8 +30281,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.forceEntryModeField.Length); j = (j + 1)) {
-                            array[j] = forceEntryModeField[j];
+                            array[k] = forceEntryModeField[j];
+                            k = (k + 1);
                         }
                         this.ForceEntryMode = array;
                         return index;
@@ -30178,7 +30302,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("efa186ca-af0a-4ad8-8dfa-4c726d8165a8")]
+    [System.Runtime.InteropServices.GuidAttribute("edf2cbce-7466-4a56-89cd-57ee4ebd2f9b")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderInitResponseType : ICardReaderInitResponseType {
@@ -30513,8 +30637,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.trackDataField.Length); j = (j + 1)) {
-                            array[j] = trackDataField[j];
+                            array[k] = trackDataField[j];
+                            k = (k + 1);
                         }
                         this.TrackData = array;
                         return index;
@@ -30669,8 +30795,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.entryModeField.Length); j = (j + 1)) {
-                            array[j] = entryModeField[j];
+                            array[k] = entryModeField[j];
+                            k = (k + 1);
                         }
                         this.EntryMode = array;
                         return index;
@@ -30688,7 +30816,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("cdc092bf-1352-42e3-94d2-855dfc8b7a18")]
+    [System.Runtime.InteropServices.GuidAttribute("062115ef-44d1-4474-8b16-38c2af69da08")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ICCResetDataType : IICCResetDataType {
@@ -30943,8 +31071,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.aTRValueField.Length); j = (j + 1)) {
-                            array[j] = aTRValueField[j];
+                            array[k] = aTRValueField[j];
+                            k = (k + 1);
                         }
                         this.ATRValue = array;
                         return index;
@@ -31099,8 +31229,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.cardStatusWordsField.Length); j = (j + 1)) {
-                            array[j] = cardStatusWordsField[j];
+                            array[k] = cardStatusWordsField[j];
+                            k = (k + 1);
                         }
                         this.CardStatusWords = array;
                         return index;
@@ -31118,7 +31250,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fc3b2037-8e8c-4d96-9d8b-6df7d6343153")]
+    [System.Runtime.InteropServices.GuidAttribute("34c31b32-207f-4aee-a20b-dc53da626da7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderPowerOffRequestType : ICardReaderPowerOffRequestType {
@@ -31236,7 +31368,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a41b51bd-e8f2-48b3-99c8-182f9370ff5e")]
+    [System.Runtime.InteropServices.GuidAttribute("dfb4040e-b827-4e81-9961-16d15c292f00")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CardReaderPowerOffResponseType : ICardReaderPowerOffResponseType {
@@ -31314,7 +31446,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b1440d03-1e96-4cba-8ed0-6f9ea0bf30c2")]
+    [System.Runtime.InteropServices.GuidAttribute("7e916bc0-90ef-44b0-bba6-53dde5432167")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CashHandlingDeviceType : ICashHandlingDeviceType {
@@ -31609,8 +31741,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.coinsOrBillsField.Length); j = (j + 1)) {
-                            array[j] = coinsOrBillsField[j];
+                            array[k] = coinsOrBillsField[j];
+                            k = (k + 1);
                         }
                         this.CoinsOrBills = array;
                         return index;
@@ -31628,7 +31762,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("55fe03fa-3139-4183-a5b6-59f9f026e77e")]
+    [System.Runtime.InteropServices.GuidAttribute("3a4f3d13-53e6-4f22-990c-3ce0b304428c")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class CoinsOrBillsType : ICoinsOrBillsType {
@@ -31868,7 +32002,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f567a75a-c9d4-4e8c-befe-77d9359beaf8")]
+    [System.Runtime.InteropServices.GuidAttribute("bbdd6d59-cf39-45b6-aa20-04ab5dc3c1da")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DiagnosisRequestType : IDiagnosisRequestType {
@@ -32177,8 +32311,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.acquirerIDField.Length); j = (j + 1)) {
-                            array[j] = acquirerIDField[j];
+                            array[k] = acquirerIDField[j];
+                            k = (k + 1);
                         }
                         this.AcquirerID = array;
                         return index;
@@ -32196,7 +32332,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f2cbc94c-96d0-42bc-8ecb-e4800ab1f733")]
+    [System.Runtime.InteropServices.GuidAttribute("b09e089b-5fb9-4f9d-8313-41709d77a4eb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class DiagnosisResponseType : IDiagnosisResponseType {
@@ -32531,8 +32667,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loggedSaleIDField.Length); j = (j + 1)) {
-                            array[j] = loggedSaleIDField[j];
+                            array[k] = loggedSaleIDField[j];
+                            k = (k + 1);
                         }
                         this.LoggedSaleID = array;
                         return index;
@@ -32687,8 +32825,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.hostStatusField.Length); j = (j + 1)) {
-                            array[j] = hostStatusField[j];
+                            array[k] = hostStatusField[j];
+                            k = (k + 1);
                         }
                         this.HostStatus = array;
                         return index;
@@ -32706,7 +32846,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("6c3aba5d-f562-4077-b044-469058f26f84")]
+    [System.Runtime.InteropServices.GuidAttribute("c987e6a6-a789-4e65-80ce-8f7b705d41b9")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIStatusType : IPOIStatusType {
@@ -33201,8 +33341,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.cashHandlingDeviceField.Length); j = (j + 1)) {
-                            array[j] = cashHandlingDeviceField[j];
+                            array[k] = cashHandlingDeviceField[j];
+                            k = (k + 1);
                         }
                         this.CashHandlingDevice = array;
                         return index;
@@ -33220,7 +33362,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("89d1c886-ca0e-44eb-8c0c-b2728e42ac75")]
+    [System.Runtime.InteropServices.GuidAttribute("8dece4b9-2e96-45cd-9b0f-7f426e2ab9cd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class HostStatusType : IHostStatusType {
@@ -33374,7 +33516,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("1daf4b1e-2680-42d9-abc0-46443601c98b")]
+    [System.Runtime.InteropServices.GuidAttribute("0980fef8-971d-409a-810b-78464587968a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EnableServiceRequestType : IEnableServiceRequestType {
@@ -33532,7 +33674,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8f011cac-1915-4ea7-b345-5a03f373d7b7")]
+    [System.Runtime.InteropServices.GuidAttribute("15b138f9-6574-494c-8693-5dae76491420")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EnableServiceResponseType : IEnableServiceResponseType {
@@ -33686,7 +33828,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4166af0f-7cf8-4219-ad5a-4d8f5b14549d")]
+    [System.Runtime.InteropServices.GuidAttribute("25c43a2d-cc6d-46da-9b23-2089ac41747d")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class EventNotificationType : IEventNotificationType {
@@ -34155,8 +34297,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.rejectedMessageField.Length); j = (j + 1)) {
-                            array[j] = rejectedMessageField[j];
+                            array[k] = rejectedMessageField[j];
+                            k = (k + 1);
                         }
                         this.RejectedMessage = array;
                         return index;
@@ -34264,7 +34408,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("39309a2b-c933-4460-bd6c-5bef9b97c30c")]
+    [System.Runtime.InteropServices.GuidAttribute("ad82c18e-f96b-42f1-89ea-7901731ac2cf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GetTotalsRequestType : IGetTotalsRequestType {
@@ -34382,7 +34526,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("6d2b7ab7-89bf-4f02-94c4-a20f53a8799e")]
+    [System.Runtime.InteropServices.GuidAttribute("e07ee79d-843b-4802-8067-5f54ce1918bb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TotalFilterType : ITotalFilterType {
@@ -34620,7 +34764,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("da6dc8fd-4938-4e59-a209-e1c4b8664f80")]
+    [System.Runtime.InteropServices.GuidAttribute("23961042-4a1f-4d10-a3e0-eac49b0b2d44")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class GetTotalsResponseType : IGetTotalsResponseType {
@@ -34915,8 +35059,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.transactionTotalsField.Length); j = (j + 1)) {
-                            array[j] = transactionTotalsField[j];
+                            array[k] = transactionTotalsField[j];
+                            k = (k + 1);
                         }
                         this.TransactionTotals = array;
                         return index;
@@ -34934,7 +35080,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ed638b8b-06db-48a3-a0ce-f03d909ff8f0")]
+    [System.Runtime.InteropServices.GuidAttribute("e6ca00de-cd8c-4310-b005-423d3319657f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionTotalsType : ITransactionTotalsType {
@@ -35723,8 +35869,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.paymentTotalsField.Length); j = (j + 1)) {
-                            array[j] = paymentTotalsField[j];
+                            array[k] = paymentTotalsField[j];
+                            k = (k + 1);
                         }
                         this.PaymentTotals = array;
                         return index;
@@ -35879,8 +36027,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyTotalsField.Length); j = (j + 1)) {
-                            array[j] = loyaltyTotalsField[j];
+                            array[k] = loyaltyTotalsField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyTotals = array;
                         return index;
@@ -35898,7 +36048,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c3b5ca7b-0753-4920-8280-4e5c3d8ccd00")]
+    [System.Runtime.InteropServices.GuidAttribute("22635c29-d1fa-4e04-a54f-9798a48d03c3")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentTotalsType : IPaymentTotalsType {
@@ -36056,7 +36206,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("25821be5-3516-454d-b3bc-5b9b9ff8c560")]
+    [System.Runtime.InteropServices.GuidAttribute("b7cfbd0e-f3d6-455b-ad3e-1123b3ad09bf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyTotalsType : ILoyaltyTotalsType {
@@ -36300,7 +36450,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("96146c26-2484-44f8-a713-04a20ad6dd7e")]
+    [System.Runtime.InteropServices.GuidAttribute("bdf23174-1a3c-44c5-a91e-ed9372cc3e13")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputType : IInputType {
@@ -36646,7 +36796,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9289993d-222a-4e96-bc1a-0841c69b3407")]
+    [System.Runtime.InteropServices.GuidAttribute("06c14e10-913c-415e-a8c2-fb36d7bddf52")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputDataType : IInputDataType {
@@ -37638,7 +37788,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8da6dc94-3cd3-43d3-b35a-82603e7b5d32")]
+    [System.Runtime.InteropServices.GuidAttribute("9236977f-4a2b-4f4c-8cf4-dd90e6f31d74")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputRequestType : IInputRequestType {
@@ -37756,7 +37906,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("82b48fca-a323-409b-989b-94e377fec1a3")]
+    [System.Runtime.InteropServices.GuidAttribute("abf7ed43-77bb-4743-93c3-ce78d18b225e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputResponseType : IInputResponseType {
@@ -37874,7 +38024,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5dca93d9-5421-4cc1-9bd5-ceb85546dffc")]
+    [System.Runtime.InteropServices.GuidAttribute("8555d2b9-39d5-4f88-9586-bffa834f0f64")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputResultType : IInputResultType {
@@ -38072,7 +38222,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f4ebafb1-f4c0-442f-9d63-19ac61510d36")]
+    [System.Runtime.InteropServices.GuidAttribute("055e48b0-b8c4-4970-9bd0-2aa2fe3efc05")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class InputUpdateType : IInputUpdateType {
@@ -38527,8 +38677,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.menuEntryField.Length); j = (j + 1)) {
-                            array[j] = menuEntryField[j];
+                            array[k] = menuEntryField[j];
+                            k = (k + 1);
                         }
                         this.MenuEntry = array;
                         return index;
@@ -38683,8 +38835,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputSignatureField.Length); j = (j + 1)) {
-                            array[j] = outputSignatureField[j];
+                            array[k] = outputSignatureField[j];
+                            k = (k + 1);
                         }
                         this.OutputSignature = array;
                         return index;
@@ -38718,7 +38872,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("fa7fb978-3b3e-4a18-b93b-7c91d698909c")]
+    [System.Runtime.InteropServices.GuidAttribute("e54847fd-a820-4475-b4e7-3595e70ea849")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoginRequestType : ILoginRequestType {
@@ -39307,8 +39461,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.customerOrderReqField.Length); j = (j + 1)) {
-                            array[j] = customerOrderReqField[j];
+                            array[k] = customerOrderReqField[j];
+                            k = (k + 1);
                         }
                         this.CustomerOrderReq = array;
                         return index;
@@ -39326,7 +39482,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("3de5bf2c-6b32-4a4b-941a-9db467d10f77")]
+    [System.Runtime.InteropServices.GuidAttribute("43b35ef5-8acd-42d0-81ff-4c4bd643d988")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleSoftwareType : ISaleSoftwareType {
@@ -39524,7 +39680,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("d6897ac7-e9d5-4b27-ab36-68a241739750")]
+    [System.Runtime.InteropServices.GuidAttribute("d3917080-58c6-4a1e-970f-0dde1a3d3216")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoginResponseType : ILoginResponseType {
@@ -39642,7 +39798,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("af18b2c5-e0c9-4f3b-a85b-fae17ffaf51b")]
+    [System.Runtime.InteropServices.GuidAttribute("4983d2b7-d92f-4154-b3bb-32246079c87f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POISystemDataType : IPOISystemDataType {
@@ -39840,7 +39996,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("03d4a88b-51d7-4ed7-831d-85b57b9b34a5")]
+    [System.Runtime.InteropServices.GuidAttribute("288dc51a-15e2-49b3-997f-d596721485a7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POISoftwareType : IPOISoftwareType {
@@ -40038,7 +40194,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("221df620-627f-46fa-baf9-8e82a3e33f9f")]
+    [System.Runtime.InteropServices.GuidAttribute("80be50a9-df26-4a6c-9243-00528d3b737f")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POITerminalDataType : IPOITerminalDataType {
@@ -40236,7 +40392,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("4cc8c298-6644-4213-9e3f-c9f89a374885")]
+    [System.Runtime.InteropServices.GuidAttribute("36f08531-0ed2-4cc8-a2ab-0121fde18cbb")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class POIProfileType : IPOIProfileType {
@@ -40368,7 +40524,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("747f502d-3e68-4673-9a06-3ae3028c4613")]
+    [System.Runtime.InteropServices.GuidAttribute("e36e940e-075b-41d4-8fcc-2ec5d38322f5")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LogoutRequestType : ILogoutRequestType {
@@ -40460,7 +40616,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("be706451-81de-4221-b515-659f33cca403")]
+    [System.Runtime.InteropServices.GuidAttribute("9a9f8523-ddc2-4d2d-98e3-d53558fb23b4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LogoutResponseType : ILogoutResponseType {
@@ -40558,7 +40714,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("63497b02-8eba-4ae0-b422-5b2ed5d03d05")]
+    [System.Runtime.InteropServices.GuidAttribute("8111398a-6af9-4c31-b531-089aad0e74cf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class LoyaltyResponseType : ILoyaltyResponseType {
@@ -40933,8 +41089,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyResultField.Length); j = (j + 1)) {
-                            array[j] = loyaltyResultField[j];
+                            array[k] = loyaltyResultField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyResult = array;
                         return index;
@@ -41089,8 +41247,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.paymentReceiptField.Length); j = (j + 1)) {
-                            array[j] = paymentReceiptField[j];
+                            array[k] = paymentReceiptField[j];
+                            k = (k + 1);
                         }
                         this.PaymentReceipt = array;
                         return index;
@@ -41108,7 +41268,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("542eefcd-9b08-4f84-a11b-7ec4856a9866")]
+    [System.Runtime.InteropServices.GuidAttribute("70e35c01-7a77-4382-83cc-7a70291cdf25")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentReceiptType : IPaymentReceiptType {
@@ -41470,7 +41630,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("173bfcb3-d24a-44b7-a781-a82cdbc5013f")]
+    [System.Runtime.InteropServices.GuidAttribute("e5c88f86-5592-492f-8ff4-16992a598451")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MessageHeaderType : IMessageHeaderType {
@@ -41882,7 +42042,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("f80eeab6-d0fd-47ac-a19e-02b0fe122476")]
+    [System.Runtime.InteropServices.GuidAttribute("f20b87cc-71f9-4b5a-9135-a04773ee3be1")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PaymentResponseType : IPaymentResponseType {
@@ -42337,8 +42497,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.loyaltyResultField.Length); j = (j + 1)) {
-                            array[j] = loyaltyResultField[j];
+                            array[k] = loyaltyResultField[j];
+                            k = (k + 1);
                         }
                         this.LoyaltyResult = array;
                         return index;
@@ -42493,8 +42655,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.paymentReceiptField.Length); j = (j + 1)) {
-                            array[j] = paymentReceiptField[j];
+                            array[k] = paymentReceiptField[j];
+                            k = (k + 1);
                         }
                         this.PaymentReceipt = array;
                         return index;
@@ -42649,8 +42813,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.customerOrderField.Length); j = (j + 1)) {
-                            array[j] = customerOrderField[j];
+                            array[k] = customerOrderField[j];
+                            k = (k + 1);
                         }
                         this.CustomerOrder = array;
                         return index;
@@ -42738,7 +42904,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0d1686a3-1a30-4183-9f5e-0f5a6171f1d6")]
+    [System.Runtime.InteropServices.GuidAttribute("d5bd0fb3-1d62-4eb2-9005-be2c69cc5025")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PINRequestType : IPINRequestType {
@@ -43112,7 +43278,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("522ebee1-80f2-4d00-aa91-987cd573bd61")]
+    [System.Runtime.InteropServices.GuidAttribute("f3f512c0-e78e-4f6b-806e-ddebe9d67f25")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PINResponseType : IPINResponseType {
@@ -43286,7 +43452,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("14bc0ba4-0431-48bf-8f23-40ef18029cdf")]
+    [System.Runtime.InteropServices.GuidAttribute("397861ee-8326-4988-b8ed-5c09d6b8fcd5")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintOutputType : IPrintOutputType {
@@ -43729,8 +43895,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.outputSignatureField.Length); j = (j + 1)) {
-                            array[j] = outputSignatureField[j];
+                            array[k] = outputSignatureField[j];
+                            k = (k + 1);
                         }
                         this.OutputSignature = array;
                         return index;
@@ -43748,7 +43916,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("477c47a2-3e34-44c9-8aef-764686cd522d")]
+    [System.Runtime.InteropServices.GuidAttribute("40d72bac-5519-4b25-b7d4-7ccb4e6d62b6")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintRequestType : IPrintRequestType {
@@ -43826,7 +43994,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("8e023bd4-f9ba-4379-84a9-e70937d758db")]
+    [System.Runtime.InteropServices.GuidAttribute("00a74035-8c48-4f61-b595-4ce590f129b8")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class PrintResponseType : IPrintResponseType {
@@ -43944,7 +44112,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("83273bda-8e17-4df6-8554-a72106d862e3")]
+    [System.Runtime.InteropServices.GuidAttribute("a26e8b93-6631-4ede-a4c5-6dc464db3303")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationRequestType : IReconciliationRequestType {
@@ -44239,8 +44407,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.acquirerIDField.Length); j = (j + 1)) {
-                            array[j] = acquirerIDField[j];
+                            array[k] = acquirerIDField[j];
+                            k = (k + 1);
                         }
                         this.AcquirerID = array;
                         return index;
@@ -44258,7 +44428,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("0a83c534-ee72-46c7-a09c-fcaf6c6e2f74")]
+    [System.Runtime.InteropServices.GuidAttribute("33be2564-3fe8-4795-bb09-1f6b9c65be9e")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReconciliationResponseType : IReconciliationResponseType {
@@ -44593,8 +44763,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.transactionTotalsField.Length); j = (j + 1)) {
-                            array[j] = transactionTotalsField[j];
+                            array[k] = transactionTotalsField[j];
+                            k = (k + 1);
                         }
                         this.TransactionTotals = array;
                         return index;
@@ -44630,7 +44802,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("28236da2-2dab-4100-90b1-35dd280354bc")]
+    [System.Runtime.InteropServices.GuidAttribute("30dbc778-2b2c-488f-9eec-fc3a94267dbd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class RepeatedMessageResponseType : IRepeatedMessageResponseType {
@@ -44753,7 +44925,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ad368c27-aa9e-43ef-b1a1-75290d6ba8be")]
+    [System.Runtime.InteropServices.GuidAttribute("65cd3722-a34d-4fba-8e35-650e9ae86dbe")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class ReversalResponseType : IReversalResponseType {
@@ -45168,8 +45340,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.paymentReceiptField.Length); j = (j + 1)) {
-                            array[j] = paymentReceiptField[j];
+                            array[k] = paymentReceiptField[j];
+                            k = (k + 1);
                         }
                         this.PaymentReceipt = array;
                         return index;
@@ -45187,7 +45361,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9d162af2-7d94-40eb-9140-dd944703086e")]
+    [System.Runtime.InteropServices.GuidAttribute("1083100f-b594-4542-a496-0e388a14d9a4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueResponseType : IStoredValueResponseType {
@@ -45522,8 +45696,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.storedValueResultField.Length); j = (j + 1)) {
-                            array[j] = storedValueResultField[j];
+                            array[k] = storedValueResultField[j];
+                            k = (k + 1);
                         }
                         this.StoredValueResult = array;
                         return index;
@@ -45541,7 +45717,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("22390539-69cf-4936-b52a-792bc810e271")]
+    [System.Runtime.InteropServices.GuidAttribute("90b08296-ce5b-474a-b48e-db1d36b154e0")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueResultType : IStoredValueResultType {
@@ -45859,7 +46035,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("56df3ab1-e7d4-4733-be31-3159ce0b1f0d")]
+    [System.Runtime.InteropServices.GuidAttribute("dab30f2f-abb5-492e-ba65-eb42c33ab39a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueAccountStatusType : IStoredValueAccountStatusType {
@@ -45977,7 +46153,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("b6619cf6-f942-4892-a8c5-d3f36010daa8")]
+    [System.Runtime.InteropServices.GuidAttribute("c8adeba2-d399-4c29-9c5c-7a6108c4216a")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueAccountIDType : IStoredValueAccountIDType {
@@ -46432,8 +46608,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.entryModeField.Length); j = (j + 1)) {
-                            array[j] = entryModeField[j];
+                            array[k] = entryModeField[j];
+                            k = (k + 1);
                         }
                         this.EntryMode = array;
                         return index;
@@ -46605,7 +46783,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("5a4c12af-7232-4f4a-a1a5-c5244bcdc167")]
+    [System.Runtime.InteropServices.GuidAttribute("c33dd3c1-6ade-4709-8716-a76a5674d368")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundContentType : ISoundContentType {
@@ -46803,7 +46981,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("ad356fad-3640-4023-8b63-fe894933b47d")]
+    [System.Runtime.InteropServices.GuidAttribute("da0ce10c-7fee-4883-801b-1545914225bf")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundRequestType : ISoundRequestType {
@@ -47015,7 +47193,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("497badbb-676c-4d44-9154-3adf6f623005")]
+    [System.Runtime.InteropServices.GuidAttribute("f244bd18-9cfa-4ebd-bb07-9910d3abb096")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SoundResponseType : ISoundResponseType {
@@ -47125,7 +47303,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("bce979bf-f239-4cdc-8bdb-230fec8c5269")]
+    [System.Runtime.InteropServices.GuidAttribute("2121274c-cc32-40ff-9503-6a7d0d2d07e4")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueDataType : IStoredValueDataType {
@@ -47483,7 +47661,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("9dd217fb-3b58-4cee-bcee-4b202da0b660")]
+    [System.Runtime.InteropServices.GuidAttribute("2c663e6d-c860-4eff-afb1-4addb216b911")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class StoredValueRequestType : IStoredValueRequestType {
@@ -47778,8 +47956,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.storedValueDataField.Length); j = (j + 1)) {
-                            array[j] = storedValueDataField[j];
+                            array[k] = storedValueDataField[j];
+                            k = (k + 1);
                         }
                         this.StoredValueData = array;
                         return index;
@@ -47895,7 +48075,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a39c4a30-98ec-4c4a-a751-f9628b4d195c")]
+    [System.Runtime.InteropServices.GuidAttribute("2e520450-41a7-4b2d-a4d5-b96daeef2532")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransmitRequestType : ITransmitRequestType {
@@ -48244,8 +48424,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.messageField.Length); j = (j + 1)) {
-                            array[j] = messageField[j];
+                            array[k] = messageField[j];
+                            k = (k + 1);
                         }
                         this.Message = array;
                         return index;
@@ -48263,7 +48445,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("c4055e03-6958-49a8-af20-c66180b37cda")]
+    [System.Runtime.InteropServices.GuidAttribute("482352f8-db07-4e6a-a906-12ec5f5d37fd")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransmitResponseType : ITransmitResponseType {
@@ -48518,8 +48700,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.messageField.Length); j = (j + 1)) {
-                            array[j] = messageField[j];
+                            array[k] = messageField[j];
+                            k = (k + 1);
                         }
                         this.Message = array;
                         return index;
@@ -48537,7 +48721,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("56192132-115a-4ffe-8008-b857a5772f35")]
+    [System.Runtime.InteropServices.GuidAttribute("9173db9a-f788-467b-bcc6-090e9be98627")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionStatusRequestType : ITransactionStatusRequestType {
@@ -48846,8 +49030,10 @@ namespace NEXO {
                         }
                         array[index] = value;
                         int j = 0;
+                        int k = (index + 1);
                         for (j = i; (j < this.documentQualifierField.Length); j = (j + 1)) {
-                            array[j] = documentQualifierField[j];
+                            array[k] = documentQualifierField[j];
+                            k = (k + 1);
                         }
                         this.DocumentQualifier = array;
                         return index;
@@ -48865,7 +49051,7 @@ namespace NEXO {
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    [System.Runtime.InteropServices.GuidAttribute("a20a427f-5b46-47e3-997d-4c0451837bf5")]
+    [System.Runtime.InteropServices.GuidAttribute("a6a22cc1-9193-415d-aacc-6a5367eac4ed")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class TransactionStatusResponseType : ITransactionStatusResponseType {
@@ -49134,7 +49320,7 @@ namespace NEXO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.GuidAttribute("59ff44df-91e7-47d3-9f9b-c29aeba66c46")]
+    [System.Runtime.InteropServices.GuidAttribute("ce9df440-c215-467e-bc22-385feb602580")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIRequest : ISaleToPOIRequest {
@@ -49319,7 +49505,7 @@ namespace NEXO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    [System.Runtime.InteropServices.GuidAttribute("aecdd426-7aca-45c3-9b5e-bb43f1e61f11")]
+    [System.Runtime.InteropServices.GuidAttribute("31b9e319-fa89-409d-bde3-b0f760d64ea7")]
     [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SaleToPOIResponse : ISaleToPOIResponse {
@@ -49495,7 +49681,7 @@ namespace NEXO {
             }
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0103bfdc-32bc-4284-b2db-9c428b641c21")]
+    [System.Runtime.InteropServices.GuidAttribute("2ce2cc43-4b32-471d-b095-0c10bcae737f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAuthenticatedDataType {
@@ -49591,7 +49777,7 @@ namespace NEXO {
         [DispId(24)]
         int MACInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("0f9468c5-8521-4795-b176-39e4cb0aa2a5")]
+    [System.Runtime.InteropServices.GuidAttribute("ed747233-340a-41a1-8e0e-9aef576c9941")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IKEKType {
@@ -49664,7 +49850,7 @@ namespace NEXO {
         [DispId(16)]
         int EncryptedKeyInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("e393981d-4a03-4470-a652-42796c5a88ec")]
+    [System.Runtime.InteropServices.GuidAttribute("af8cc137-c442-4972-969b-373e29aa473b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IKEKIdentifierType {
@@ -49722,7 +49908,7 @@ namespace NEXO {
         [DispId(13)]
         int DerivationIdentifierInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("2964aa38-522a-434b-855e-a7adaf012210")]
+    [System.Runtime.InteropServices.GuidAttribute("c23554b1-c18c-4867-b856-db1e609cdea4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayResponseType {
@@ -49758,7 +49944,7 @@ namespace NEXO {
         [DispId(9)]
         int OutputResultInsertItem(int index, OutputResultType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("7cbd2144-efad-4664-b867-f8a8a378887d")]
+    [System.Runtime.InteropServices.GuidAttribute("53752da9-5217-4f7f-b532-21cb70f1a8c2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputResultType {
@@ -49804,7 +49990,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d7fa969f-a143-4cd9-95df-364314075dbb")]
+    [System.Runtime.InteropServices.GuidAttribute("172dbb30-a4bb-4ada-84cb-a33d90a3d7ed")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IResponseType {
@@ -49850,7 +50036,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("cc90df52-6903-474b-8d91-68f601fc87e6")]
+    [System.Runtime.InteropServices.GuidAttribute("7d659799-73eb-4ce7-b09d-64c8ee7c0c70")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayRequestType {
@@ -49886,7 +50072,7 @@ namespace NEXO {
         [DispId(9)]
         int DisplayOutputInsertItem(int index, DisplayOutputType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("a9bd68a5-43c2-40d5-a66b-49989b155c71")]
+    [System.Runtime.InteropServices.GuidAttribute("566c57cc-bbce-4290-b09e-672ad4d8e9de")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDisplayOutputType {
@@ -50008,7 +50194,7 @@ namespace NEXO {
         [DispId(23)]
         int OutputSignatureInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("cb5b85b3-7b48-4926-b007-cb3467bc5b10")]
+    [System.Runtime.InteropServices.GuidAttribute("01c975fd-1504-465b-9588-ddc655820c07")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputContentType {
@@ -50100,7 +50286,7 @@ namespace NEXO {
         [DispId(21)]
         int OutputXHTMLInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("745f8dde-fae5-4fa0-b921-dfaff2d3b39f")]
+    [System.Runtime.InteropServices.GuidAttribute("ba939e4a-8e8c-4514-a638-c6ba5bf2ce9d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPredefinedContentType {
@@ -50135,7 +50321,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f9d4e60a-f87e-435f-8214-ea852c48338c")]
+    [System.Runtime.InteropServices.GuidAttribute("94492cfc-7498-4b37-86c3-09af0e7e0fe4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputTextType {
@@ -50273,7 +50459,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("020fa7c1-5f33-48c9-bfd0-d8092e6a74f4")]
+    [System.Runtime.InteropServices.GuidAttribute("9614e4ba-a161-4a3b-bc5d-252b89972882")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOutputBarcodeType {
@@ -50312,7 +50498,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("09ec084b-4a75-4536-8700-e5676eb15af9")]
+    [System.Runtime.InteropServices.GuidAttribute("500723c8-4acb-42cf-8b40-79d288335fe3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMenuEntryType {
@@ -50423,7 +50609,7 @@ namespace NEXO {
         [DispId(22)]
         int OutputXHTMLInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("8a6317c0-4ff8-4bc1-98c5-d9a2f3708e2b")]
+    [System.Runtime.InteropServices.GuidAttribute("99a2e623-d214-4940-a656-5923b3cf4203")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAlgorithmIdentifier {
@@ -50458,7 +50644,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("70fe73f6-e5da-4e62-a5b8-01109cee7387")]
+    [System.Runtime.InteropServices.GuidAttribute("5d0acd2c-42e1-43ca-8c44-5e07e17fc19f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IParameterType {
@@ -50494,7 +50680,7 @@ namespace NEXO {
         [DispId(9)]
         int InitialisationVectorInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("8f5666c4-aac4-4568-a157-0865637377fc")]
+    [System.Runtime.InteropServices.GuidAttribute("d4e6010c-e2f9-4b05-9112-a8041ce62321")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IKeyTransportType {
@@ -50567,7 +50753,7 @@ namespace NEXO {
         [DispId(16)]
         int EncryptedKeyInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("329b9102-f23e-4787-b431-ca045837af6c")]
+    [System.Runtime.InteropServices.GuidAttribute("49467f6b-2202-4b53-b719-0d6e3eed6bbb")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRecipientIdentifierType {
@@ -50591,7 +50777,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9d6d3284-81fa-41ea-9f7b-bef880b68523")]
+    [System.Runtime.InteropServices.GuidAttribute("196d9b21-abcf-4636-8d84-0ab650f30781")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IIssuerAndSerialNumberType {
@@ -50638,7 +50824,7 @@ namespace NEXO {
         [DispId(10)]
         int IssuerInsertItem(int index, RelativeDistinguishedNameType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("1d5912e4-7002-4c22-9068-a381b95a68c7")]
+    [System.Runtime.InteropServices.GuidAttribute("2ff1ace1-513a-4b15-9d45-5522c692712e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRelativeDistinguishedNameType {
@@ -50673,7 +50859,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("69f327ee-cbfb-4d8d-8338-03d5e5926f0b")]
+    [System.Runtime.InteropServices.GuidAttribute("3768434d-bdd1-4532-9c59-6d03faf39169")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEncapsulatedContentType {
@@ -50720,7 +50906,7 @@ namespace NEXO {
         [DispId(10)]
         int ContentInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("ff3454a9-51e5-468d-82bc-f06a926caeaa")]
+    [System.Runtime.InteropServices.GuidAttribute("2d8c49e1-cda6-4a11-97eb-7230c31b5217")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDigestedDataType {
@@ -50789,7 +50975,7 @@ namespace NEXO {
         [DispId(14)]
         int DigestInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("fe53185f-a040-4543-bfea-62ab2646e4b3")]
+    [System.Runtime.InteropServices.GuidAttribute("373ec025-795e-43b9-a848-ce8fd5822118")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEncryptedContentType {
@@ -50847,7 +51033,7 @@ namespace NEXO {
         [DispId(12)]
         int EncryptedDataInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b07ab1af-5e11-468f-aa32-574a45f3b00d")]
+    [System.Runtime.InteropServices.GuidAttribute("1d78f12a-815d-4600-b0e5-c91eeb62b9ee")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEnvelopedDataType {
@@ -50909,7 +51095,7 @@ namespace NEXO {
         [DispId(11)]
         int ItemsInsertItem(int index, object value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("14e31b84-625c-48a2-bd9c-335b9bf09771")]
+    [System.Runtime.InteropServices.GuidAttribute("41525cd2-f4d2-413d-961d-ccb6ca0557d4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IIssuerType {
@@ -50945,7 +51131,7 @@ namespace NEXO {
         [DispId(9)]
         int RelativeDistinguishedNameInsertItem(int index, RelativeDistinguishedNameType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("5e745556-663a-4a8a-b2c9-fe7235a60be9")]
+    [System.Runtime.InteropServices.GuidAttribute("7512f49a-7aa4-4cca-b2af-ccc12439411d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface INamedKeyEncryptedDataType {
@@ -50995,7 +51181,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7e13e64c-7695-4fba-82a7-4e4237122c07")]
+    [System.Runtime.InteropServices.GuidAttribute("af873b5c-f7ce-4ded-b382-fb19bd6606b8")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISignedDataType {
@@ -51103,7 +51289,7 @@ namespace NEXO {
         [DispId(28)]
         int SignerInsertItem(int index, SignerType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("f7c84837-871d-4278-84f1-6a0133fc8539")]
+    [System.Runtime.InteropServices.GuidAttribute("8e8ce7cc-5313-4362-83a0-23177cd3080b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISignerType {
@@ -51187,7 +51373,7 @@ namespace NEXO {
         [DispId(16)]
         int SignatureInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("48f3eb08-a25f-40df-88e1-6f08223ebff3")]
+    [System.Runtime.InteropServices.GuidAttribute("f4cfb260-9d1a-4783-b622-be251c699e1c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISignerIdentifierType {
@@ -51211,7 +51397,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4cbd5240-95a1-4f0e-9662-d37a66aaf4a4")]
+    [System.Runtime.InteropServices.GuidAttribute("a9d88186-440e-4904-a917-3f7c70400bcf")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IContentInformationType {
@@ -51246,7 +51432,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d93e3748-a956-4b97-89ee-cba96b248c35")]
+    [System.Runtime.InteropServices.GuidAttribute("3accafd2-f826-4db0-93c0-0a210cbec985")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAbortRequestType {
@@ -51292,7 +51478,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("e017d402-6316-4dd0-b8ef-894b1739382a")]
+    [System.Runtime.InteropServices.GuidAttribute("bbea1967-1573-4855-8345-cfbc175d6198")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMessageReferenceType {
@@ -51360,7 +51546,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a3e8f8fe-23cb-440e-982a-8e37f565b0e9")]
+    [System.Runtime.InteropServices.GuidAttribute("7ddfbffd-787f-4912-8105-e8e54cb4cd3f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAdminRequestType {
@@ -51384,7 +51570,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("12dd6e38-1996-429e-94a8-a0beafb692bd")]
+    [System.Runtime.InteropServices.GuidAttribute("295f98cb-c396-4107-a588-4c2750e66b23")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAdminResponseType {
@@ -51408,7 +51594,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("dfb251c8-07ca-4e08-883c-882efe14cf18")]
+    [System.Runtime.InteropServices.GuidAttribute("5a6b89fd-3f75-42bd-a784-084e3156bbfe")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAllowedProductType {
@@ -51465,7 +51651,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("bddbff81-1429-4458-a291-32ccab0a5c83")]
+    [System.Runtime.InteropServices.GuidAttribute("52fa396f-deca-4513-bca1-ef89d0e8ad15")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountsReqType {
@@ -51573,7 +51759,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4761c08b-82b5-4920-890e-3327a3a5a658")]
+    [System.Runtime.InteropServices.GuidAttribute("9f0e9e21-708a-444c-9087-413fa376dc77")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountsRespType {
@@ -51656,7 +51842,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6f8060ab-f530-4753-8fbd-404893852f36")]
+    [System.Runtime.InteropServices.GuidAttribute("040fd94a-4f30-4bc0-9a87-b44ca5a6fe22")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAreaSizeType {
@@ -51691,7 +51877,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4c22034d-5458-4cf9-a909-b28942f5a5b7")]
+    [System.Runtime.InteropServices.GuidAttribute("27facfd4-7e76-469b-acf4-558009071d7f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBalanceInquiryRequestType {
@@ -51726,7 +51912,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("3c99f363-f01a-43d6-aadf-223ded9b6fee")]
+    [System.Runtime.InteropServices.GuidAttribute("2f674875-d6c5-421c-9ba7-844b5c967a13")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAccountReqType {
@@ -51776,7 +51962,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("661750dc-9762-485a-b70c-930f0de1d0f0")]
+    [System.Runtime.InteropServices.GuidAttribute("761c6929-6c00-46bd-92ec-310e316423d7")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionIdentificationType {
@@ -51811,7 +51997,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d2995b18-6b09-44ae-a401-75ea05c580b7")]
+    [System.Runtime.InteropServices.GuidAttribute("f244df91-c609-4b7d-8d53-f937a7697779")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentInstrumentDataType {
@@ -51868,7 +52054,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("016c16fb-bc51-4303-b75f-6966323de3cd")]
+    [System.Runtime.InteropServices.GuidAttribute("10b8615b-08b0-41b9-8977-feeec7efb57d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardDataType {
@@ -52050,7 +52236,7 @@ namespace NEXO {
         [DispId(46)]
         int EntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("8157b029-07a4-4390-93f9-5cd23c447fe7")]
+    [System.Runtime.InteropServices.GuidAttribute("a804a6de-93e7-4739-8860-ed5d4e4db5fc")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISensitiveCardDataType {
@@ -52119,7 +52305,7 @@ namespace NEXO {
         [DispId(12)]
         int TrackDataInsertItem(int index, TrackDataType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("71c428ad-cb8c-41cd-af4f-a4c218878653")]
+    [System.Runtime.InteropServices.GuidAttribute("ec9dd552-8d49-42e5-95ff-b85405c33632")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITrackDataType {
@@ -52173,7 +52359,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0c551044-f6e2-47a9-bcfa-6f6fb43a6cb7")]
+    [System.Runtime.InteropServices.GuidAttribute("fb486b1e-fae6-4812-9d96-a288450fe940")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTokenType {
@@ -52220,7 +52406,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7fc6dea0-7948-4482-b493-7e81e3cf1cc1")]
+    [System.Runtime.InteropServices.GuidAttribute("03868e5d-a059-430c-9ff1-f5959bdb1b47")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICustomerOrderType {
@@ -52337,7 +52523,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7f1477f3-4d01-4034-952e-8093a94cb5f4")]
+    [System.Runtime.InteropServices.GuidAttribute("f963bc7e-656b-447e-a719-9dde564696ca")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICheckDataType {
@@ -52431,7 +52617,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d8bb76df-9cd9-47fe-918b-156de29214e7")]
+    [System.Runtime.InteropServices.GuidAttribute("a2c090f8-e6e4-42ce-98cf-d54f1b3c1f44")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMobileDataType {
@@ -52510,7 +52696,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("b6e87431-45bd-4d79-a606-7d9a0ad8d540")]
+    [System.Runtime.InteropServices.GuidAttribute("9d352567-4120-4e43-a6cd-dcda84b067c9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGeolocationType {
@@ -52545,7 +52731,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("75a95f94-3d54-44b0-a5a7-f87dfad484e6")]
+    [System.Runtime.InteropServices.GuidAttribute("4aea1180-11a1-42a2-a301-156b0efb23c0")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGeographicCoordinatesType {
@@ -52580,7 +52766,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("fc4de13c-dab4-44f7-ab26-2f00a02c28f3")]
+    [System.Runtime.InteropServices.GuidAttribute("edeedcdb-bff0-4db4-89ff-db77dbf1efac")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IUTMCoordinatesType {
@@ -52626,7 +52812,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d8b41024-8fdc-4851-bedf-905f4f13f63d")]
+    [System.Runtime.InteropServices.GuidAttribute("11cd0feb-68a4-4b6a-bb0d-04611add97d9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISensitiveMobileDataType {
@@ -52672,7 +52858,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f7b69384-a00d-493f-bfad-b7d82211788e")]
+    [System.Runtime.InteropServices.GuidAttribute("82a71907-300c-4a89-85be-7a4d9d894c5f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountReqType {
@@ -52707,7 +52893,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ae0ba3f9-3c53-412b-a668-90ba7ae626e4")]
+    [System.Runtime.InteropServices.GuidAttribute("6bb1f4f6-8b90-4bf7-828e-c55ab6e69029")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountIDType {
@@ -52776,7 +52962,7 @@ namespace NEXO {
         [DispId(12)]
         int EntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("3f09914b-781f-44b2-9edd-a795e0d3d693")]
+    [System.Runtime.InteropServices.GuidAttribute("aec7079c-ea9a-4441-826d-58edccde0d75")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBalanceInquiryResponseType {
@@ -52822,7 +53008,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("1448777e-7fc7-4432-8368-16c00291586c")]
+    [System.Runtime.InteropServices.GuidAttribute("33e64590-5407-4c1f-8d14-f9fac760f47e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAccountStatusType {
@@ -52891,7 +53077,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("baa66de0-094e-4342-b50c-8f0bc39490c0")]
+    [System.Runtime.InteropServices.GuidAttribute("0e64d591-59a8-4a6a-b0b5-a8b2a950d264")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentAcquirerDataType {
@@ -52959,7 +53145,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2418e103-b9ac-491e-b9c7-7df036148c4b")]
+    [System.Runtime.InteropServices.GuidAttribute("83efab67-1db6-419b-8b74-062eb7007b55")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountStatusType {
@@ -53021,7 +53207,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("529438d2-90ea-42e1-b5e9-cfebe746977d")]
+    [System.Runtime.InteropServices.GuidAttribute("02faa4f4-62c2-4e76-b8e3-bf6cf27c9c40")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAccountType {
@@ -53056,7 +53242,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0f0b4ef1-2596-45f9-a713-2a53bcfa5633")]
+    [System.Runtime.InteropServices.GuidAttribute("f81c3089-a3b9-4ac9-8e04-032065af9246")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBatchRequestType {
@@ -53104,7 +53290,7 @@ namespace NEXO {
         [DispId(11)]
         int TransactionToPerformInsertItem(int index, TransactionToPerformType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b3df8448-8f7b-4a31-8a79-85603ca6a76c")]
+    [System.Runtime.InteropServices.GuidAttribute("0c86fa56-561d-407d-a6f6-a7f2b7193d60")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionToPerformType {
@@ -53128,7 +53314,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c29b3caf-e468-4cbc-9e46-a9d723c5f649")]
+    [System.Runtime.InteropServices.GuidAttribute("702b4840-be88-4d00-91c8-fe3a1a9594c6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyRequestType {
@@ -53186,7 +53372,7 @@ namespace NEXO {
         [DispId(13)]
         int LoyaltyDataInsertItem(int index, LoyaltyDataType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("928037b8-9871-4f26-a6f1-d50d45fbdac3")]
+    [System.Runtime.InteropServices.GuidAttribute("43f4bf16-126e-4d81-9cab-924f480bedc4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleDataType {
@@ -53366,7 +53552,7 @@ namespace NEXO {
         [DispId(39)]
         int CustomerOrderReqInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("f7f55843-9015-458d-b055-0004fa36ebcb")]
+    [System.Runtime.InteropServices.GuidAttribute("a8ef3d7f-1f95-4c3e-a87f-baf64d4763a9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleTerminalDataType {
@@ -53423,7 +53609,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("47553bc4-8b70-45ba-86bb-f1b46e3d2ca0")]
+    [System.Runtime.InteropServices.GuidAttribute("d65f1cda-f811-479a-a37c-83a1c23b3620")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleProfileType {
@@ -53462,7 +53648,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2f3091a4-0db4-4ea1-8220-93537fb58258")]
+    [System.Runtime.InteropServices.GuidAttribute("e85c7262-e5dd-436a-92b1-02f4a4cae670")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISponsoredMerchantType {
@@ -53530,7 +53716,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("b8fd31ff-75c7-469b-916f-894cdfb09687")]
+    [System.Runtime.InteropServices.GuidAttribute("1bdd73e4-b0f2-4239-a3a1-b8b5d1c07115")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToIssuerDataType {
@@ -53554,7 +53740,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("53fdfff1-c31d-48a7-afd4-24f67b9a1c3d")]
+    [System.Runtime.InteropServices.GuidAttribute("2d2381d1-1729-4e5a-801f-038d30fb9bbb")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyTransactionType {
@@ -53646,7 +53832,7 @@ namespace NEXO {
         [DispId(17)]
         int SaleItemInsertItem(int index, SaleItemType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("d775a0cb-df82-4459-a11d-091b86b1a6ba")]
+    [System.Runtime.InteropServices.GuidAttribute("061b783b-4080-4a85-a52b-5c277377e357")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IOriginalPOITransactionType {
@@ -53751,7 +53937,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("133ddfc1-383c-4e72-8b7c-f8b688901137")]
+    [System.Runtime.InteropServices.GuidAttribute("47f8be79-f6d6-40f2-b053-13285b7f2593")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionConditionsType {
@@ -53923,7 +54109,7 @@ namespace NEXO {
         [DispId(38)]
         int ForceEntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("b99f918f-a4ab-4d1c-ac75-b9d54223d68a")]
+    [System.Runtime.InteropServices.GuidAttribute("3e722267-37af-4126-a841-08ca668fe23c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleItemType {
@@ -54059,7 +54245,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("75d37dd2-a2bc-444c-8372-f6f822bd238f")]
+    [System.Runtime.InteropServices.GuidAttribute("d3a824aa-34e8-4a35-93fd-b0f054c31eea")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyDataType {
@@ -54105,7 +54291,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c4443224-2fa0-4e9f-8a74-43eaddda34bc")]
+    [System.Runtime.InteropServices.GuidAttribute("eb24b6ef-51a9-4f62-acfc-7605d5e0fb90")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAmountType {
@@ -54155,7 +54341,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("4909f2a0-ece6-4938-81b2-ab9064d97565")]
+    [System.Runtime.InteropServices.GuidAttribute("308e3993-d297-4516-877b-e2680f70e997")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentRequestType {
@@ -54224,7 +54410,7 @@ namespace NEXO {
         [DispId(15)]
         int LoyaltyDataInsertItem(int index, LoyaltyDataType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("96ee7cc1-908d-4d89-b345-91069ebf6b22")]
+    [System.Runtime.InteropServices.GuidAttribute("f89a3553-0efe-46db-8dfc-536c36a8ec87")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTransactionType {
@@ -54293,7 +54479,7 @@ namespace NEXO {
         [DispId(15)]
         int SaleItemInsertItem(int index, SaleItemType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("af5206bf-b748-42af-81d4-465bc2a070f2")]
+    [System.Runtime.InteropServices.GuidAttribute("c3341bd8-fd76-49f9-8085-2f45f4c90a65")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentDataType {
@@ -54391,7 +54577,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("28a6109c-b874-475d-a715-02ad78c502a7")]
+    [System.Runtime.InteropServices.GuidAttribute("7a5c0d17-a678-4b1e-8b0a-44729bd7701b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInstalmentType {
@@ -54517,7 +54703,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d26baddf-73df-40d4-9249-0abd6eef8583")]
+    [System.Runtime.InteropServices.GuidAttribute("6478f36d-e89d-428a-af16-94174dad62ea")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReversalRequestType {
@@ -54586,7 +54772,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d59dbeac-5d3c-4ff2-8c31-c2a41faf7d90")]
+    [System.Runtime.InteropServices.GuidAttribute("57a97454-2dc8-4cc1-836d-e150aea9163a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IBatchResponseType {
@@ -54633,7 +54819,7 @@ namespace NEXO {
         [DispId(11)]
         int PerformedTransactionInsertItem(int index, PerformedTransactionType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("48b5f7e6-dff7-4017-b07b-1a9c62ff8537")]
+    [System.Runtime.InteropServices.GuidAttribute("e6f5686a-499d-4bf3-868e-4e856931abc2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPerformedTransactionType {
@@ -54725,7 +54911,7 @@ namespace NEXO {
         [DispId(19)]
         int LoyaltyResultInsertItem(int index, LoyaltyResultType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("a0bfa89e-5df1-4e5b-b27b-099f66afc393")]
+    [System.Runtime.InteropServices.GuidAttribute("ab1f9c61-ef73-43a1-90c1-944799f7495f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIDataType {
@@ -54760,7 +54946,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("051a8ecb-6f0c-4069-a1a6-d132c68704f7")]
+    [System.Runtime.InteropServices.GuidAttribute("f7f33479-b9dc-4c06-83e0-a6ef2b70fa3d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentResultType {
@@ -54952,7 +55138,7 @@ namespace NEXO {
         [DispId(41)]
         int AuthenticationMethodInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("4ca716eb-fe0b-4d07-b676-f6f12f86b8c3")]
+    [System.Runtime.InteropServices.GuidAttribute("ae4940cf-7b52-4ab7-b76c-e2081e577729")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICurrencyConversionType {
@@ -55038,7 +55224,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("97c3ad17-3c4b-4d44-b028-356ad3f37752")]
+    [System.Runtime.InteropServices.GuidAttribute("5bec0622-42b6-4562-8119-caec54de4ce9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IAmountType {
@@ -55073,7 +55259,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ccb780a0-6ced-421c-975b-af05cc625a8c")]
+    [System.Runtime.InteropServices.GuidAttribute("cf83f203-8bdc-4e0d-b4f5-78572cfb784d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICapturedSignatureType {
@@ -55120,7 +55306,7 @@ namespace NEXO {
         [DispId(11)]
         int SignaturePointInsertItem(int index, SignaturePointType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("85e59f11-91ed-42ff-a9a5-c34d937ab3e8")]
+    [System.Runtime.InteropServices.GuidAttribute("924c4cb8-b1e3-4a18-926f-3c6c3345c69a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISignaturePointType {
@@ -55155,7 +55341,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f155ac4b-5c1d-4e45-af77-c60c291e7e84")]
+    [System.Runtime.InteropServices.GuidAttribute("92f3b1f3-64ef-478e-a54c-8b45ea1714be")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyResultType {
@@ -55224,7 +55410,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("35a1c2ce-4e6a-4857-80a1-8308ebd18f65")]
+    [System.Runtime.InteropServices.GuidAttribute("ab465fbe-8ad4-4ac6-bff5-df7347e33bf5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyAcquirerDataType {
@@ -55281,7 +55467,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ac0ff447-76b9-48b3-aca1-b701af9cca3a")]
+    [System.Runtime.InteropServices.GuidAttribute("1546173a-430a-478b-8b3e-ad45804fb91c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRebatesType {
@@ -55340,7 +55526,7 @@ namespace NEXO {
         [DispId(13)]
         int SaleItemRebateInsertItem(int index, SaleItemRebateType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("f2b4cff7-9a9b-4d5e-938b-8b7206a0ada0")]
+    [System.Runtime.InteropServices.GuidAttribute("a2629b00-1109-4e9f-a898-ef742cf51ca3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleItemRebateType {
@@ -55432,7 +55618,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5e0d8d67-c7c2-46e8-9db2-8cd93766c483")]
+    [System.Runtime.InteropServices.GuidAttribute("061ac163-77ac-4f1e-8ff8-1dbb0f3f4bfe")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionRequestType {
@@ -55467,7 +55653,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("ca286ca8-16ec-4983-80da-94f7ab60bed2")]
+    [System.Runtime.InteropServices.GuidAttribute("63888bb5-ff2f-49e2-b8a4-7ef55f29a3d3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionTransactionType {
@@ -55625,7 +55811,7 @@ namespace NEXO {
         [DispId(33)]
         int ForceEntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("f77f3bdc-9594-434a-80c3-a58cf00131de")]
+    [System.Runtime.InteropServices.GuidAttribute("42253f0a-6543-43f3-97b4-800c98d7027e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardAcquisitionResponseType {
@@ -55751,7 +55937,7 @@ namespace NEXO {
         [DispId(33)]
         int CustomerOrderInsertItem(int index, CustomerOrderType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("04d615d7-5b0d-4e94-8a27-cf46fe90bbb3")]
+    [System.Runtime.InteropServices.GuidAttribute("7e284611-73b1-4f9d-9dc3-f9fb4845cf0d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardholderPINType {
@@ -55797,7 +55983,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("cf007910-c350-4607-a23b-91f05c4b6d0b")]
+    [System.Runtime.InteropServices.GuidAttribute("17fbe143-27fe-4d58-9e27-70365195c380")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderAPDURequestType {
@@ -55948,7 +56134,7 @@ namespace NEXO {
         [DispId(49)]
         int APDUExpectedLengthInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("2db25b97-bf82-435f-99a8-877fa2c29092")]
+    [System.Runtime.InteropServices.GuidAttribute("5070685e-4c92-472e-847c-9d4355343c5a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderAPDUResponseType {
@@ -56018,7 +56204,7 @@ namespace NEXO {
         [DispId(19)]
         int CardStatusWordsInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("ad946b05-fc15-47be-aa5e-09a7c25509aa")]
+    [System.Runtime.InteropServices.GuidAttribute("a781a66f-2f52-46c7-ac26-9c06e9ac21a1")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderInitRequestType {
@@ -56103,7 +56289,7 @@ namespace NEXO {
         [DispId(14)]
         int ForceEntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("35b0db41-b025-4778-b323-c24198ed8759")]
+    [System.Runtime.InteropServices.GuidAttribute("dfa3f7e8-3325-41fe-ac09-6b6c677fbdd0")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderInitResponseType {
@@ -56184,7 +56370,7 @@ namespace NEXO {
         [DispId(21)]
         int EntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("2d93d1aa-44c1-46ca-a390-2b19322d07b7")]
+    [System.Runtime.InteropServices.GuidAttribute("3e00f440-81de-4dfa-83e7-efaaf4d94b12")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IICCResetDataType {
@@ -56243,7 +56429,7 @@ namespace NEXO {
         [DispId(17)]
         int CardStatusWordsInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("6b383dd8-c8d5-44a9-98f1-d1c8f39bccc0")]
+    [System.Runtime.InteropServices.GuidAttribute("1a39257b-3017-47f7-8347-026e26ff16b9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderPowerOffRequestType {
@@ -56278,7 +56464,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("91322460-3578-4b03-9593-457f6c84f1c4")]
+    [System.Runtime.InteropServices.GuidAttribute("fafcd6be-6693-4edc-ae51-4cec18171925")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICardReaderPowerOffResponseType {
@@ -56302,7 +56488,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("11c6588e-7f40-494d-ad60-cc497176cd26")]
+    [System.Runtime.InteropServices.GuidAttribute("bef6e883-95b7-4528-92bf-450131a2f7ca")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICashHandlingDeviceType {
@@ -56360,7 +56546,7 @@ namespace NEXO {
         [DispId(11)]
         int CoinsOrBillsInsertItem(int index, CoinsOrBillsType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("4fae8fc8-7e75-4244-911f-bcdd67ce836a")]
+    [System.Runtime.InteropServices.GuidAttribute("d3978808-08f5-44d4-b450-8ea19488d84c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ICoinsOrBillsType {
@@ -56395,7 +56581,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0f133523-da58-43bc-8df7-4b3e0aab645d")]
+    [System.Runtime.InteropServices.GuidAttribute("86ce0b10-dc26-490d-844d-f14edce7e0af")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDiagnosisRequestType {
@@ -56457,7 +56643,7 @@ namespace NEXO {
         [DispId(11)]
         int AcquirerIDInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("82ff8bb4-2464-41ae-b6cd-840eb1088fe4")]
+    [System.Runtime.InteropServices.GuidAttribute("b6e9f52e-3056-4c77-8c88-9494e87edcbe")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IDiagnosisResponseType {
@@ -56538,7 +56724,7 @@ namespace NEXO {
         [DispId(21)]
         int HostStatusInsertItem(int index, HostStatusType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("f2e98977-d861-48b7-bb38-ef0a63f89266")]
+    [System.Runtime.InteropServices.GuidAttribute("c706a417-a604-4e96-bf1f-b4d8860e8f2f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIStatusType {
@@ -56656,7 +56842,7 @@ namespace NEXO {
         [DispId(21)]
         int CashHandlingDeviceInsertItem(int index, CashHandlingDeviceType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("ae1ac4dc-dc78-4182-97ba-ca72ad7a7c40")]
+    [System.Runtime.InteropServices.GuidAttribute("a8b24d19-0e09-46bb-919b-30acf87963c2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IHostStatusType {
@@ -56695,7 +56881,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("3070a5fd-c29d-445b-a59b-9cad9b47a3a4")]
+    [System.Runtime.InteropServices.GuidAttribute("b1370d95-ca29-4c39-a0b9-13d2a3117f4f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEnableServiceRequestType {
@@ -56741,7 +56927,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d1a24f83-dda3-42ca-90e7-896510211325")]
+    [System.Runtime.InteropServices.GuidAttribute("73b61b13-351c-4d69-9d76-0f49ec82931e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEnableServiceResponseType {
@@ -56765,7 +56951,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("07e7cd95-db29-4715-ba9d-5c2eafc6794d")]
+    [System.Runtime.InteropServices.GuidAttribute("f15dfb3d-f4fb-4058-917a-553e508de129")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IEventNotificationType {
@@ -56871,7 +57057,7 @@ namespace NEXO {
         [DispId(16)]
         int RejectedMessageInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("889c8943-7330-4bb3-a49d-dad06e0272c9")]
+    [System.Runtime.InteropServices.GuidAttribute("22202959-f880-43e3-a3ce-1b9ca4871520")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGetTotalsRequestType {
@@ -56906,7 +57092,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("68213f0f-3150-4e28-8c6a-f5fae854636e")]
+    [System.Runtime.InteropServices.GuidAttribute("486fac29-eae7-426e-a861-f200436b2497")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITotalFilterType {
@@ -56974,7 +57160,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("874a07df-469b-4e98-b91e-e6b0b12720b8")]
+    [System.Runtime.InteropServices.GuidAttribute("33b42e4b-3e17-4bac-96bd-c219550ad8e5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IGetTotalsResponseType {
@@ -57032,7 +57218,7 @@ namespace NEXO {
         [DispId(12)]
         int TransactionTotalsInsertItem(int index, TransactionTotalsType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("68910793-5ea2-4309-9f4a-830c9451bc97")]
+    [System.Runtime.InteropServices.GuidAttribute("f1991fbc-7113-429d-80c2-6dfff5f5dc06")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionTotalsType {
@@ -57238,7 +57424,7 @@ namespace NEXO {
         [DispId(30)]
         int LoyaltyTotalsInsertItem(int index, LoyaltyTotalsType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("75d39e45-a5ed-4ba4-b7b3-5f477414d419")]
+    [System.Runtime.InteropServices.GuidAttribute("2b700bcc-11da-4266-a6c1-f4ab6eaeae8a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentTotalsType {
@@ -57284,7 +57470,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("82c28d37-7499-46a7-b033-127d0b97c24c")]
+    [System.Runtime.InteropServices.GuidAttribute("19e17d75-5d2c-47a1-b8b0-dac383412580")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyTotalsType {
@@ -57330,7 +57516,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("fd31df8b-72ca-49f1-a226-7a6f35fa712e")]
+    [System.Runtime.InteropServices.GuidAttribute("31baeaaf-ae2c-484e-88b6-998207399fa9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputType {
@@ -57421,7 +57607,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5c98539a-61a0-42fb-b997-894650dffdaa")]
+    [System.Runtime.InteropServices.GuidAttribute("d5559853-e587-4b38-a225-a3423236229c")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputDataType {
@@ -57698,7 +57884,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("1ad04aef-fd79-4e1b-ac25-fa0756697193")]
+    [System.Runtime.InteropServices.GuidAttribute("93072595-70e4-4459-993b-ae553734cf80")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputRequestType {
@@ -57733,7 +57919,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("3d94cd95-987c-4fcf-a12e-6c78f0f39f58")]
+    [System.Runtime.InteropServices.GuidAttribute("5eb5086b-c889-4ea3-a2d7-e1b574b908ad")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputResponseType {
@@ -57768,7 +57954,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("3e961b38-e333-4c63-90ef-de823ddd6efc")]
+    [System.Runtime.InteropServices.GuidAttribute("d9e64c32-8fa8-4665-9e62-531768ef43c2")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputResultType {
@@ -57825,7 +58011,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("5fee78e4-19d3-469a-8289-e2c927788460")]
+    [System.Runtime.InteropServices.GuidAttribute("6fe5afdb-1bea-4bd2-97db-554200e841df")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IInputUpdateType {
@@ -57939,7 +58125,7 @@ namespace NEXO {
         [DispId(24)]
         int OutputSignatureInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("6c103e7c-cbab-4ecf-bd7d-d3a3ed5cc617")]
+    [System.Runtime.InteropServices.GuidAttribute("2324f7fc-4a86-4399-b0db-18a9d7ec8a58")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoginRequestType {
@@ -58078,7 +58264,7 @@ namespace NEXO {
         [DispId(27)]
         int CustomerOrderReqInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("4bd56095-e485-4db0-a985-4fb160fc3415")]
+    [System.Runtime.InteropServices.GuidAttribute("7d40eeaa-cf76-41cc-b19e-248bc87dc664")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleSoftwareType {
@@ -58135,7 +58321,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("511e650d-e483-4cd8-82d1-20ce93a4e2e4")]
+    [System.Runtime.InteropServices.GuidAttribute("a8aff0b4-100f-44cf-927c-4e5abf785c3e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoginResponseType {
@@ -58170,7 +58356,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("d6226e98-1e51-492e-904a-4d6af6cb305a")]
+    [System.Runtime.InteropServices.GuidAttribute("e1d95584-5acd-4d68-8e85-1c336947ddea")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOISystemDataType {
@@ -58227,7 +58413,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9968e83d-d609-4bd2-9904-3f5bf201ebfb")]
+    [System.Runtime.InteropServices.GuidAttribute("19cd36d2-0e17-49cc-b5c2-75439bf1f28d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOISoftwareType {
@@ -58284,7 +58470,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("0e309c97-c517-4a5a-a6f3-6568cd60dea0")]
+    [System.Runtime.InteropServices.GuidAttribute("9fe55164-ebfe-489b-9c73-bc131ef087f9")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOITerminalDataType {
@@ -58341,7 +58527,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7c6db8c6-1f8c-4157-96fa-b3b22137d8dd")]
+    [System.Runtime.InteropServices.GuidAttribute("aba76971-48a9-4fb9-98f7-9011f683d6bb")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPOIProfileType {
@@ -58380,7 +58566,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c515784e-39af-472c-b5d9-08d1653277ab")]
+    [System.Runtime.InteropServices.GuidAttribute("fd24347b-6827-47a7-89f5-4b83117fc269")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILogoutRequestType {
@@ -58408,7 +58594,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("849ab9f4-43d8-4db5-b0a7-915d380ab89c")]
+    [System.Runtime.InteropServices.GuidAttribute("9885a3fb-2506-4874-96a6-f811cecdbb5b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILogoutResponseType {
@@ -58432,7 +58618,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("a9653ac2-1361-4132-8725-f1f6784fca85")]
+    [System.Runtime.InteropServices.GuidAttribute("5c633f78-e104-479e-a135-1296a8ab1d71")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ILoyaltyResponseType {
@@ -58524,7 +58710,7 @@ namespace NEXO {
         [DispId(23)]
         int PaymentReceiptInsertItem(int index, PaymentReceiptType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("748651c3-36d4-4549-89f9-289f4a5e4a78")]
+    [System.Runtime.InteropServices.GuidAttribute("5e00082f-06ea-427b-805c-357982c21e9b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentReceiptType {
@@ -58589,7 +58775,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("54df973a-937c-4215-a6b2-d5d12c1e8437")]
+    [System.Runtime.InteropServices.GuidAttribute("8cd60db5-7a68-4d82-a811-66294e1233eb")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IMessageHeaderType {
@@ -58690,7 +58876,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6e6c8f03-1795-40ed-9272-66215979b95d")]
+    [System.Runtime.InteropServices.GuidAttribute("aca98f6a-91ff-4bbe-9c7c-63a85467689a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPaymentResponseType {
@@ -58816,7 +59002,7 @@ namespace NEXO {
         [DispId(33)]
         int CustomerOrderInsertItem(int index, CustomerOrderType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("91c77ce3-2021-45aa-af40-fb2ac5e74082")]
+    [System.Runtime.InteropServices.GuidAttribute("6d53265e-61ad-4fa5-9b5b-d21c5391ed26")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPINRequestType {
@@ -58917,7 +59103,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("2d042c76-b917-4cb4-a49a-75bcf03493ba")]
+    [System.Runtime.InteropServices.GuidAttribute("49a2d829-17c5-42da-b44b-64190b5d936f")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPINResponseType {
@@ -58952,7 +59138,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("cd1a7cdc-2e94-4163-bbde-184d575214c9")]
+    [System.Runtime.InteropServices.GuidAttribute("3e768df5-81d5-48de-b342-d37087b564e4")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintOutputType {
@@ -59051,7 +59237,7 @@ namespace NEXO {
         [DispId(15)]
         int OutputSignatureInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("43c3875c-c57b-4111-955b-728c48157233")]
+    [System.Runtime.InteropServices.GuidAttribute("3536b09b-cc61-4773-a865-64f794d802e3")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintRequestType {
@@ -59075,7 +59261,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("72bd5626-ccb3-46e9-96d6-b6bfa68b5368")]
+    [System.Runtime.InteropServices.GuidAttribute("0bb238e0-d5a0-4feb-8bbb-e0eb963d5321")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IPrintResponseType {
@@ -59110,7 +59296,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("7b016b80-f6c8-4997-8843-d1f23955bc46")]
+    [System.Runtime.InteropServices.GuidAttribute("eb7bf44f-3cf3-49b0-906b-87ba1932ae71")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReconciliationRequestType {
@@ -59168,7 +59354,7 @@ namespace NEXO {
         [DispId(11)]
         int AcquirerIDInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("c10c603c-deed-4b39-86e9-2229287e3fd2")]
+    [System.Runtime.InteropServices.GuidAttribute("b1880c2c-09f4-4db2-a90d-2f3db2acec22")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReconciliationResponseType {
@@ -59237,7 +59423,7 @@ namespace NEXO {
         [DispId(13)]
         int TransactionTotalsInsertItem(int index, TransactionTotalsType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("10e09274-9bbb-4eb6-b76c-267dcd654668")]
+    [System.Runtime.InteropServices.GuidAttribute("b36c867f-7c01-4d3f-a057-9522e953d448")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IRepeatedMessageResponseType {
@@ -59272,7 +59458,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6030420f-0fb4-4e08-81ab-cb51e516d81e")]
+    [System.Runtime.InteropServices.GuidAttribute("1c5d942b-de94-447e-b560-6f8794db03b6")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IReversalResponseType {
@@ -59364,7 +59550,7 @@ namespace NEXO {
         [DispId(18)]
         int PaymentReceiptInsertItem(int index, PaymentReceiptType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("3bfa916a-b48c-4780-acf9-a45a7ced5974")]
+    [System.Runtime.InteropServices.GuidAttribute("faef695b-d58a-4461-be24-4f565bc4d9f5")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueResponseType {
@@ -59433,7 +59619,7 @@ namespace NEXO {
         [DispId(15)]
         int StoredValueResultInsertItem(int index, StoredValueResultType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("bac06b76-2d47-4812-9136-69ef1d9fc265")]
+    [System.Runtime.InteropServices.GuidAttribute("8ac125bf-a644-40ef-8203-df4cdf4aa388")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueResultType {
@@ -59523,7 +59709,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9281c705-2dc0-4928-a78b-2a865ffbcaed")]
+    [System.Runtime.InteropServices.GuidAttribute("3b4adf20-fff5-4391-9706-f90567d58348")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueAccountStatusType {
@@ -59559,7 +59745,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("c38d5e21-2294-4d12-8d50-b986c77a69e5")]
+    [System.Runtime.InteropServices.GuidAttribute("b93c9fa1-aa16-48a4-a1cb-64bd3e2ec83e")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueAccountIDType {
@@ -59661,7 +59847,7 @@ namespace NEXO {
         [DispId(19)]
         int EntryModeInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("c1e19e70-7b28-4a45-b0f2-7bbd263896c1")]
+    [System.Runtime.InteropServices.GuidAttribute("c5b5a58d-d4cd-4983-a48b-826d7797966b")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundContentType {
@@ -59718,7 +59904,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6f65f431-0c07-4b3f-ba97-8ea228a0f3ac")]
+    [System.Runtime.InteropServices.GuidAttribute("6f4bf09c-4ad1-4493-b512-80deed01ba82")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundRequestType {
@@ -59779,7 +59965,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("9b29b4cc-c4f7-4c58-a2de-c0de7220af5f")]
+    [System.Runtime.InteropServices.GuidAttribute("023a4ed4-a48f-4c4b-ba1e-f8db69b4408d")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISoundResponseType {
@@ -59803,7 +59989,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("1f0727a8-5984-4015-84fb-dfdaac71544f")]
+    [System.Runtime.InteropServices.GuidAttribute("2380c4ae-818e-4e85-bd6c-76dbe16c0bca")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueDataType {
@@ -59904,7 +60090,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("86f6a0da-b826-4237-be3f-71ef0ce09875")]
+    [System.Runtime.InteropServices.GuidAttribute("27600256-3e85-481d-b93b-55623fcda325")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface IStoredValueRequestType {
@@ -59962,7 +60148,7 @@ namespace NEXO {
         [DispId(12)]
         int StoredValueDataInsertItem(int index, StoredValueDataType value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("2cf8a131-259d-47a7-972f-969d6d7d7972")]
+    [System.Runtime.InteropServices.GuidAttribute("f2f6e319-0f70-4d1b-8088-85fc4d31e537")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransmitRequestType {
@@ -60035,7 +60221,7 @@ namespace NEXO {
         [DispId(12)]
         int MessageInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("2e221958-bf24-43a8-b59c-27aa9a4aa026")]
+    [System.Runtime.InteropServices.GuidAttribute("51d6cb7f-e9a6-4e8b-b1a8-67b76d1ded02")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransmitResponseType {
@@ -60082,7 +60268,7 @@ namespace NEXO {
         [DispId(11)]
         int MessageInsertItem(int index, byte value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("43d0c839-89de-4a04-9428-63225e18c431")]
+    [System.Runtime.InteropServices.GuidAttribute("f92ae636-fba7-43c1-9d7d-0d15aba950af")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionStatusRequestType {
@@ -60144,7 +60330,7 @@ namespace NEXO {
         [DispId(12)]
         int DocumentQualifierInsertItem(int index, string value);
     }
-    [System.Runtime.InteropServices.GuidAttribute("7cc617ff-5f10-4377-be88-0e282989b68c")]
+    [System.Runtime.InteropServices.GuidAttribute("ba11f98f-99d7-4522-8c0a-f74f5e3d662a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ITransactionStatusResponseType {
@@ -60190,7 +60376,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("6c05f9cc-060b-462a-a69e-fbf3a639adf3")]
+    [System.Runtime.InteropServices.GuidAttribute("001a8556-fd18-49bb-8249-e99025d42f1a")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIRequest {
@@ -60236,7 +60422,7 @@ namespace NEXO {
             get;
         }
     }
-    [System.Runtime.InteropServices.GuidAttribute("f08f50d4-dbe3-4b0a-b225-7345f109a9c1")]
+    [System.Runtime.InteropServices.GuidAttribute("466e642f-5a7a-4e1a-b000-43f24574f023")]
     [System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsDual)]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public interface ISaleToPOIResponse {

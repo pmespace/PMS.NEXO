@@ -30,6 +30,7 @@ namespace NEXO
 		public static string AccessorSetItem = $"SetItem";
 		public static string AccessorRemoveItem = $"RemoveItem";
 		public static string AccessorInsertItem = $"InsertItem";
+		public static string Specified = $"Specified";
 	}
 
 	#region commented
@@ -113,7 +114,7 @@ namespace NEXO
 	//		}
 	//		catch (Exception ex)
 	//		{
-	//			CLog.AddException($"{MethodBase.GetCurrentMethod().Module.Name}.{MethodBase.GetCurrentMethod().DeclaringType.Name}.{MethodBase.GetCurrentMethod().Name}", ex, $"Object: {initial.GetType()} - Property name: {property}");
+	//			CLog.EXCEPT(ex, $"Object: {initial.GetType()} - Property name: {property}");
 	//		}
 	//		return false;
 	//	}

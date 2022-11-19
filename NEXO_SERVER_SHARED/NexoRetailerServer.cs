@@ -140,7 +140,7 @@ namespace NEXO.Server
 				return true;
 			if (!settings.IsValid)
 			{
-				CLog.Add("SERVER SETTINGS ARE INVALID, CAN'T START SERVER", TLog.ERROR);
+				CLog.Add($"SERVER SETTINGS ARE INVALID, CAN'T START SERVER", TLog.ERROR);
 				return false;
 			}
 			else if (UseDatabase)
@@ -153,7 +153,7 @@ namespace NEXO.Server
 					if (!Database.IsOpen)
 					{
 						// database is required but not available
-						CLog.Add("UNABLE TO CONNECT TO THE DATABASE, CHECK SETTINGS", TLog.ERROR);
+						CLog.Add($"UNABLE TO CONNECT TO THE DATABASE, CHECK SETTINGS", TLog.ERROR);
 						Database = null;
 						return false;
 					}
@@ -226,7 +226,7 @@ namespace NEXO.Server
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 				return false;
 			}
 		}
@@ -235,9 +235,10 @@ namespace NEXO.Server
 		/// </summary>
 		/// <param name="tcp"></param>
 		/// <param name="thread"></param>
-		/// <param name="o"></param>
+		/// <param name="parameters"></param>
+		/// <param name="privateData"></param>
 		/// <returns></returns>
-		private bool OnConnect(TcpClient tcp, CThread thread = null, object o = null)
+		private bool OnConnect(TcpClient tcp, CThread thread, object parameters, ref object privateData)
 		{
 			try
 			{
@@ -250,37 +251,38 @@ namespace NEXO.Server
 					try
 					{
 						if (null != Settings.OnConnect)
-							fOK = Settings.OnConnect(tcp, thread, o);
+							fOK = Settings.OnConnect(tcp, thread, parameters, ref privateData);
 					}
 					catch (Exception ex)
 					{
-						CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "OnConnect generated an exception");
+						CLog.EXCEPT(ex, "OnConnect generated an exception");
 					}
 					if (fOK)
 					{
 						ep.AddConnection(true);
-						CLog.Add($"{StreamServer.Description} EndPoint allowed to connect: {ep.Key}");
+						CLog.Add($"{StreamServer.Description} - EndPoint allowed to connect: {ep.Key}");
 						return true;
 					}
 					ep.AddConnection(false);
-					CLog.Add($"{StreamServer.Description} ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
+					CLog.Add($"{StreamServer.Description} - ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
 				}
 				else
-					CLog.Add($"{StreamServer.Description} ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
+					CLog.Add($"{StreamServer.Description} - ENDPOINT NOT ALLOWED TO CONNECT: {ep.Key}", TLog.ERROR);
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 			}
 			return false;
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnDisconnect"/>
 		/// </summary>
-		/// <param name="tcp"></param>
+		/// <param name="tcpclient"></param>
 		/// <param name="thread"></param>
-		/// <param name="o"></param>
-		private void OnDisconnect(string tcp, CThread thread = null, object o = null)
+		/// <param name="parameters"></param>
+		/// <param name="statistics"></param>
+		private void OnDisconnect(TcpClient tcpclient, CThread thread, object parameters, CStreamServerStatistics statistics)
 		{
 			try
 			{
@@ -288,19 +290,19 @@ namespace NEXO.Server
 				{
 					if (null != Settings.OnDisconnect)
 					{
-						Settings.OnDisconnect(tcp, thread, o);
+						Settings.OnDisconnect(tcpclient, thread, parameters, statistics);
 					}
 				}
 				catch (Exception ex)
 				{
-					CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "OnDisconnect generated an exception");
+					CLog.EXCEPT(ex, "OnDisconnect generated an exception");
 				}
-				NexoEndPoint ep = new NexoEndPoint(tcp);
+				NexoEndPoint ep = new NexoEndPoint(tcpclient);
 				Activity.RemoveEndPoint(ep);
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 			}
 		}
 		/// <summary>
@@ -311,9 +313,10 @@ namespace NEXO.Server
 		/// <param name="addBufferSize"></param>
 		/// <param name="thread"></param>
 		/// <param name="parameters"></param>
+		/// <param name="privateData"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThread thread = null, object parameters = null, object o = null)
+		private byte[] OnMessage(TcpClient tcp, byte[] request, out bool addBufferSize, CThread thread, object parameters, object privateData, object o)
 		{
 			addBufferSize = true;
 			byte[] reply = null;
@@ -364,7 +367,7 @@ namespace NEXO.Server
 					}
 					else
 					{
-						CLog.Add($"{StreamServer.Description} Unable to proces the received message, a notification is being sent", TLog.WARNG);
+						CLog.Add($"{StreamServer.Description} - Unable to proces the received message, a notification is being sent", TLog.WARNG);
 						// invalid message
 						toprocess.SuggestedAction = NexoNextAction.sendNotification;
 						toprocess.CanModifyAction = false;
@@ -382,7 +385,7 @@ namespace NEXO.Server
 
 					shortmessage = $"Received {item.Category.ToString().ToUpper()} {item.Type}";
 					fullmessage = $"{shortmessage} - Message [{xml.Length} bytes]: {xml}";
-					CLog.Add($"{StreamServer.Description} {fullmessage} - Suggested action: {toprocess.SuggestedAction} - Action: {toprocess.Action}");
+					CLog.Add($"{StreamServer.Description} - {fullmessage} - Suggested action: {toprocess.SuggestedAction} - Action: {toprocess.Action}");
 
 					/* arrived here, let's see what to do next
 					 * if no suggested action has been set or we must not pass the message to the app for further processing, we don't go through this */
@@ -408,7 +411,7 @@ namespace NEXO.Server
 						}
 						catch (Exception ex)
 						{
-							CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "Message analysis generated an exception");
+							CLog.EXCEPT(ex, "Message analysis generated an exception");
 							// unstable situation, we stop processing the message and send a notification instead
 							toprocess.Action = NexoNextAction.sendNotification;
 							toprocess.CanModifyAction = false;
@@ -421,7 +424,7 @@ namespace NEXO.Server
 						}
 						if (toprocess.Action != toprocess.SuggestedAction)
 						{
-							CLog.Add($"{StreamServer.Description} {shortmessage} - Action has been modified by the application: {toprocess.Action}", TLog.WARNG);
+							CLog.Add($"{StreamServer.Description} - {shortmessage} - Action has been modified by the application: {toprocess.Action}", TLog.WARNG);
 						}
 						//}
 					}
@@ -429,7 +432,7 @@ namespace NEXO.Server
 					/********************/
 					/* reply processing */
 
-					CLog.Add($"{StreamServer.Description} Decided action: {toprocess.Action}");
+					CLog.Add($"{StreamServer.Description} - Decided action: {toprocess.Action}");
 
 					try
 					{
@@ -459,7 +462,7 @@ namespace NEXO.Server
 						}
 						if (!string.IsNullOrEmpty(s))
 						{
-							CLog.Add($"{StreamServer.Description} Sending {c} {t} - Message[{s.Length} bytes]: {s}");
+							CLog.Add($"{StreamServer.Description} - Sending {c} {t} - Message[{s.Length} bytes]: {s}");
 							// set message to send (or not)
 							reply = Encoding.UTF8.GetBytes(s);
 							NexoItem itemToSend = new NexoItem(s);
@@ -470,7 +473,7 @@ namespace NEXO.Server
 							}
 							catch (Exception ex)
 							{
-								CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "OnSend generated an exception");
+								CLog.EXCEPT(ex, "OnSend generated an exception");
 							}
 							if (null != Database)
 							{
@@ -498,22 +501,22 @@ namespace NEXO.Server
 						}
 						else
 						{
-							CLog.Add($"{StreamServer.Description} NO MESSAGE COULD BE GENERATED TO SEND TO THE CLIENT", TLog.ERROR);
+							CLog.Add($"{StreamServer.Description} - NO MESSAGE COULD BE GENERATED TO SEND TO THE CLIENT", TLog.ERROR);
 						}
 					}
 					catch (Exception ex)
 					{
-						CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+						CLog.EXCEPT(ex);
 					}
 				}
 				else
 				{
-					CLog.Add($"{StreamServer.Description} Invalid message received", TLog.WARNG);
+					CLog.Add($"{StreamServer.Description} - Invalid message received", TLog.WARNG);
 				}
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 			}
 			return reply;
 		}
@@ -536,7 +539,7 @@ namespace NEXO.Server
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex);
+				CLog.EXCEPT(ex);
 			}
 		}
 		/// <summary>
@@ -547,7 +550,7 @@ namespace NEXO.Server
 		private RequestResponseType ProcessRequest(TcpClient tcp, NexoItem item)
 		{
 			string xml = item.ToString();
-			CLog.Add($"{StreamServer.Description} Processing request: {xml}");
+			CLog.Add($"{StreamServer.Description} - Processing request: {xml}");
 			RequestResponseType response = new RequestResponseType();
 			response.Action = item.ReplyRequired ? NexoNextAction.sendReply : NexoNextAction.noReply;
 			// validate XML against XSD
@@ -590,7 +593,7 @@ namespace NEXO.Server
 						}
 						else
 						{
-							CLog.Add($"{StreamServer.Description} SaleID {nxo.SaleID} has not been authorised to connect to {nxo.POIID}", TLog.ERROR);
+							CLog.Add($"{StreamServer.Description} - SaleID {nxo.SaleID} has not been authorised to connect to {nxo.POIID}", TLog.ERROR);
 							NexoErrors.GenericEror(response.Response, ResultEnumeration.Failure, ErrorConditionEnumeration.LoggedOut, $"SaleID : {mhex.SaleID.Value} not allowed to connect");
 							response.Action = NexoNextAction.sendReply;// sendReplyWithError;
 						}
@@ -646,11 +649,11 @@ namespace NEXO.Server
 					response.Response = mhex.Response;
 					response.Action = item.ReplyRequired ? NexoNextAction.sendReply /* sendReplyWithError */ : NexoNextAction.noReply;
 				}
-				CLog.Add($"{StreamServer.Description} Request is {(fOK ? "VALID" : "INVALID")} - Analysed next action: {response.Action}");
+				CLog.Add($"{StreamServer.Description} - Request is {(fOK ? "VALID" : "INVALID")} - Analysed next action: {response.Action}");
 			}
 			catch (Exception ex)
 			{
-				CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "PROCESSING ABORTED");
+				CLog.EXCEPT(ex, "PROCESSING ABORTED");
 			}
 			return response;
 		}
@@ -741,11 +744,11 @@ namespace NEXO.Server
 			//		NexoErrors.MessageFormatRepeatedMessage(response.Response, msg.Key);
 			//		response.Next = NexoNextAction.sendReplyWithError;
 			//	}
-			//	CLog.Add("Request is " + (fOK ? "VALID" : "INVALID") + " - Next action: " + response.Next.ToString());
+			//	CLog.Add($"Request is {(fOK ? "VALID" : "INVALID")} - Next action: {response.Next.ToString()}");
 			//}
 			//catch (Exception ex)
 			//{
-			//	CLog.AddException(MethodBase.GetCurrentMethod().Module.Name + "." + MethodBase.GetCurrentMethod().DeclaringType.Name + "." + MethodBase.GetCurrentMethod().Name, ex, "PROCESSING ABORTED");
+			//	CLog.EXCEPT(ex, "PROCESSING ABORTED");
 			//	response = null;
 			//}
 			//return response;

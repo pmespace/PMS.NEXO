@@ -147,6 +147,7 @@ namespace NEXO.Client
 			#region constructor
 			public Exchange(NexoItem item, int timer)
 			{
+				Incoming = null;
 				Outgoing = item;
 				Timer = (0 == timer ? Timeout.Infinite : timer * CStreamSettings.ONESECOND);
 			}
@@ -164,7 +165,7 @@ namespace NEXO.Client
 			/// <summary>
 			/// The received response
 			/// </summary>
-			public NexoItem Incoming { get; set; } = null;
+			public NexoItem Incoming { get; set; }
 			#endregion
 
 			#region methods
@@ -553,7 +554,8 @@ namespace NEXO.Client
 		/// <returns>An object if the message has been sent, null otherwise</returns>
 		public NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, NexoRetailerClientSettings settings = null, bool autoComplete = true)
 		{
-			if (Connected && null != msg && !InProgress)
+			//if (Connected && null != msg && !InProgress)
+			if (Connected && null != msg)
 			{
 				// set saleid and poiid if already given
 				if (!string.IsNullOrEmpty(SaleID))
@@ -571,8 +573,13 @@ namespace NEXO.Client
 						Monitor.Enter(myLock);
 						try
 						{
-							// save the exchange for later use
-							exchange = new Exchange(item, timer);
+							//<<<>>>
+							// if the exchanged message implies a reply let's save it, otherwise let's keep the previous reply
+							if (item.ReplyRequired)
+							{
+								// save the exchange for later use
+								exchange = new Exchange(item, timer);
+							}
 							lastRequestedObject = msg;
 						}
 						catch (Exception ex)

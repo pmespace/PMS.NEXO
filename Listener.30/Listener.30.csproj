@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Listener</RootNamespace>
+    <BaseOutputPath></BaseOutputPath>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyName>PMS.NEXO.$(MSBuildProjectName)</AssemblyName>
+    <Title>Nexo 3.0 Listener</Title>
+    <Authors>philippemp31</Authors>
+    <Company>PMS</Company>
+    <Version>4.8.0</Version>
+    <FileVersion>4.8.0</FileVersion>
+    <AssemblyVersion>4.8.0</AssemblyVersion>
+    <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <ItemGroup>
+      <NuSpecFiles Include="$(PackageOutputPath)\*.nupkg" Exclude="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" />
+    </ItemGroup>
+    <Delete Files="@(NuSpecFiles)" />
+    <MakeDir Directories="$(TestNugetPath)" Condition="!Exists('$(TestNugetPath)')" />
+    <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEXO.30\NEXO.30.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+</Project>

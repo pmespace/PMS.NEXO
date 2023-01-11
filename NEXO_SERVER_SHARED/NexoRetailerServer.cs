@@ -87,14 +87,9 @@ namespace NEXO.Server
 		/// </summary>
 		public bool DumpOnExit { get; set; } = false;
 		///// <summary>
-		///// This indicator set to true allows the application to change the result already decided by the server component (sent through OnRequest)
-		///// Changing the result might be tedious for the application and modifying this flag must be done with good Nexo knowledge
+		///// server startup datetime
 		///// </summary>
-		//public bool AllowChangingResults { get; set; } = false;
-		/// <summary>
-		/// server startup datetime
-		/// </summary>
-		private DateTime _startup;
+		//private DateTime _startup;
 		/// <summary>
 		/// Server activity while running
 		/// </summary>
@@ -113,7 +108,7 @@ namespace NEXO.Server
 		/// <summary>
 		/// Server stopping mutex
 		/// </summary>
-		private Mutex isStoppingMutex = new Mutex(false);
+		private readonly Mutex isStoppingMutex = new Mutex(false);
 		#endregion
 
 		#region public methods
@@ -127,7 +122,13 @@ namespace NEXO.Server
 			if (string.IsNullOrEmpty(databaseSettingsFileName))
 				return null;
 			CJson<NexoRetailerServerDatabaseSettings> json = new CJson<NexoRetailerServerDatabaseSettings>(databaseSettingsFileName);
-			return json.ReadSettings(out bool except, true);
+			NexoRetailerServerDatabaseSettings settings = default;
+				try
+			{
+				settings= json.ReadSettings();
+			}
+			catch (Exception)			{			}
+			return json.ReadSettings();
 		}
 		/// <summary>
 		/// Starts the Nexo server.
@@ -148,8 +149,7 @@ namespace NEXO.Server
 				if (null != settings.DatabaseSettings && settings.DatabaseSettings.IsValid())
 				{
 					// verify database connection
-					Database = new NexoRetailerServerDatabase();
-					Database.Settings = settings.DatabaseSettings;
+					Database = new NexoRetailerServerDatabase() { Settings = settings.DatabaseSettings, };
 					if (!Database.IsOpen)
 					{
 						// database is required but not available
@@ -184,8 +184,8 @@ namespace NEXO.Server
 			});
 			if (null != StreamServer)
 			{
-				// save startup time
-				_startup = DateTime.Now;
+				//// save startup time
+				//_startup = DateTime.Now;
 				// close all currently opened connections
 				if (null != Database)
 					Database.CloseAllConnections();

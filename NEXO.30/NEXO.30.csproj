@@ -5,7 +5,7 @@
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO30</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.7.1</Version>
+    <Version>4.8.0</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="6.3.3" />
+    <PackageReference Include="PMS.COMMON" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,8 +54,8 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.7.1</FileVersion>
-    <AssemblyVersion>4.7.1</AssemblyVersion>
+    <FileVersion>4.8.0</FileVersion>
+    <AssemblyVersion>4.8.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>pms.key.file.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>

@@ -13,13 +13,12 @@ Public Class FServerSettings
 	End Sub
 
 	Private Sub LoadSettings()
-		Dim except As Boolean
 		If IsNothing(Settings) Then
 			Dim json As CJson(Of NexoRetailerServerDatabaseSettings) = New CJson(Of NexoRetailerServerDatabaseSettings)(FSimulator.ServerSettingsFileName)
-			Settings = json.ReadSettings(except)
+			Settings = json.ReadSettings()
 			If IsNothing(Settings) Then
 				Settings = New NexoRetailerServerDatabaseSettings
-				json.WriteSettings(Settings, True)
+				json.WriteSettings(Settings)
 			End If
 		End If
 
@@ -49,7 +48,7 @@ Public Class FServerSettings
 		Settings.DelayBeforeAutoLogout = udDelayBeforeAutoLogout.Value
 
 		Dim json As CJson(Of NexoRetailerServerDatabaseSettings) = New CJson(Of NexoRetailerServerDatabaseSettings)(FSimulator.ServerSettingsFileName)
-		json.WriteSettings(Settings, True)
+		json.WriteSettings(Settings)
 		modified = False
 		SetButtons()
 	End Sub

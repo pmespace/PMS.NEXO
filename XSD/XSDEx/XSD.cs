@@ -122,10 +122,11 @@ namespace XSDEx
 				#region init parameters
 				// try to open the type conversino file
 				CJson<XSDParams> json = new CJson<XSDParams>(settings.xsdSettings.ParametersFileName);
-				XSDParams parameters = json.ReadSettings(out bool except);
-				if (null == parameters)
+				XSDParams parameters = default;
+				parameters = json.ReadSettings();
+				if (default == parameters)
 				{
-					parameters = new XSDParams();
+					parameters = parameters ?? new XSDParams();
 					json.WriteSettings(parameters);
 				}
 				if (null == parameters.TypeConversions)

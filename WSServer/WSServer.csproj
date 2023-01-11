@@ -3,12 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <Version>4.8.0</Version>
     <FileVersion>4.8.0</FileVersion>
     <AssemblyVersion>4.8.0</AssemblyVersion>
-    <RootNamespace>NexoListener</RootNamespace>
-    <AssemblyName>NexoListener30</AssemblyName>
-    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,9 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove=".~lock.Listener user guide.odt#" />
-    <None Remove="Listener user guide - v2.1 - revision marks.pdf" />
-    <None Remove="Listener user guide - v2.1.pdf" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+    <PackageReference Include="PMS.COMMON" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

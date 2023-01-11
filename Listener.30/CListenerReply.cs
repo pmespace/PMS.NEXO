@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NEXO;
 
-namespace NexoListener
+namespace Listener
 {
 	public enum ReplyStatus
 	{
@@ -25,6 +25,7 @@ namespace NexoListener
 		exchangeError,
 		timeout,
 		cancelled,
+		invalidPOIRequested,
 		unknownError,
 
 		asynchronousMessage = 100,
@@ -47,19 +48,54 @@ namespace NexoListener
 		endAbort,
 		beginOtherService = 600,
 		endOtherService,
+
+		nexoDeviceDisplay = 10000,
+		nexoNotification,
 	}
 
 	public class CListenerReply
 	{
+		/// <summary>
+		/// True if a notification message, false if a reply to a request
+		/// </summary>
 		public bool Notification { get; set; } = false;
-		public ReplyStatus Status { get; set; }
+		/// <summary>
+		/// Error code of the message
+		/// </summary>
+		public ReplyStatus Status { get => _status; set { _status = value; Label = _status.ToString(); } }
+		ReplyStatus _status = default;
+		/// <summary>
+		/// Error code description in clear text
+		/// </summary>
 		public string Label { get; set; }
+		/// <summary>
+		/// Message to send to the caller
+		/// </summary>
 		public string Message { get; set; }
+		/// <summary>
+		/// Nexo specific error (if a nexo message has been exchanged
+		/// </summary>
 		public string NexoError { get; set; }
+		/// <summary>
+		/// Nexo specific error information (if a nexo message has been exchanged
+		/// </summary>
 		public string NexoInformation { get; set; }
-		public double Amount { get; set; }
+		/// <summary>
+		/// Amount of the transaction (if an amount is involved)
+		/// </summary>
+		public double? Amount { get; set; }
+		/// <summary>
+		/// Transaction ID as returned by the nexo POI
+		/// </summary>
 		public TransactionIdentificationType POITransaction { get; set; }
+		/// <summary>
+		/// The original request as received from the caller
+		/// </summary>
 		public CListenerRequest Request { get; set; }
+		/// <summary>
+		/// The original request as a string as received from the caller
+		/// </summary>
+		public string RequestAsString { get; set; }
 		public override string ToString()
 		{
 			return Message;

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using NEXO;
 using COMMON;
+using Listener;
 
 namespace NexoListener
 {
@@ -20,7 +21,7 @@ namespace NexoListener
 		#endregion
 
 		#region const
-		private const string LISTENER_SETTINGS_FILE = "listener.settings.json";
+		private const string LISTENER_SETTINGS_FILE = CListener.LISTENER_DEFAULT_SETTINGS_FILE;
 		private const string LISTENER_TEST_FILE = "listener.request.json";
 		private const string LISTENER_LOG_FILE = "listener.log";
 
@@ -232,7 +233,7 @@ namespace NexoListener
 			//}
 
 			var json = new CJson<CListenerRequest>(type.FileToUse);
-			var request = json.ReadSettings(out bool except);
+			var request = json.ReadSettings();
 			if (null != request)
 			{
 				CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = type.Port, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
@@ -252,7 +253,7 @@ namespace NexoListener
 						CLogger.Add($"{request} (sent message, timeout is {clientSettings.ReceiveTimeout} seconds)");
 						while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out error)))
 						{
-							var reply = CJson<CListenerReply>.Deserialize(sreply, out except);
+							var reply = CJson<CListenerReply>.Deserialize(sreply);
 							CLogger.Add($"{reply.ToString()} (received message)");
 							if (!reply.Notification)
 								break;
@@ -302,22 +303,23 @@ namespace NexoListener
 			if (!fi.Exists || YesNo($"A test file called {fileToUse} already exists, do you want to override it ?"))
 			{
 				var json = new CJson<CListenerRequest>(fileToUse);
-				CListenerRequest req = json.ReadSettings(out bool except);
+				CListenerRequest req = json.ReadSettings();
 
-				string ip = Input("POI IP", (null != req ? req.IP : CStream.Localhost()), out isdef);
-				if (null == ip) return true;
+				//string ip = Input("POI to reach", (null != req ? req.IP : CStream.Localhost()), out isdef);
+				string poi = Input("POI to reach", string.Empty, out isdef);
+				if (poi.IsNullOrEmpty()) return true;
 
-				int port;
-				string sport = Input("POI Port", (null != req ? req.Port.ToString() : "2018"), out isdef);
-				if (null == sport) return true;
-				try
-				{
-					port = int.Parse(sport);
-				}
-				catch (Exception)
-				{
-					return true;
-				}
+				//int port;
+				//string sport = Input("POI Port", (null != req ? req.Port.ToString() : "2018"), out isdef);
+				//if (null == sport) return true;
+				//try
+				//{
+				//	port = int.Parse(sport);
+				//}
+				//catch (Exception)
+				//{
+				//	return true;
+				//}
 
 				string saleid = Input($"Sale ID", (null != req ? req.SaleID : "SaleID"), out isdef);
 				if (null == saleid) return true;
@@ -383,7 +385,7 @@ namespace NexoListener
 				var toReturn = new CListenerDataElements();
 				if (null != dtr)
 					toReturn.Add(dtr, new CListenerDataElement());
-				var request = new CListenerRequest() { Amount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, IP = ip, Port = port, Service = service, POIID = poiid, SaleID = saleid };
+				var request = new CListenerRequest() { Amount = (isPay ? amount : 0D), PaymentType = (isPay ? pt.ToString() : null), ElementsToSend = toSend, ElementsToReturn = toReturn, POI = poi, Service = service, POIID = poiid, SaleID = saleid };
 
 				json.WriteSettings(request);
 				Console.WriteLine();

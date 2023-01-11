@@ -76,7 +76,11 @@ namespace NEXO.Client
 		/// <summary>
 		/// Functions that will be called for pre-connection functionnalities
 		/// </summary>
-		public NexoRetailerClientConnectionSettings ConnectionSettings { get; set; } = null;
+		public NexoRetailerClientConnectionSettings ConnectionSettings { get; set; } = default;
+		/// <summary>
+		/// Reserved object to use only when calling <see cref="CStreamServer.Send1WayNotification(byte[], bool, string, object)"/>
+		/// </summary>
+		public object Reserved { get; set; }
 		#endregion
 
 		#region methods

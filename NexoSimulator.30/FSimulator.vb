@@ -259,8 +259,7 @@ Public Class FSimulator
 	End Sub
 
 	Private Sub LoadSettings()
-		Dim except As Boolean
-		Dim settings As Settings = json.ReadSettings(except)
+		Dim settings As Settings = json.ReadSettings()
 		If IsNothing(settings) Then settings = New Settings
 		If Not settings Is Nothing Then
 			cbAutostartServer.Checked = settings.Autostart
@@ -695,10 +694,9 @@ Public Class FSimulator
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = $"Trying to use {json.FileName}" & vbCrLf})
 
 		'get records from this file
-		Dim except As Boolean
 		Dim sr As SimulatorResponse
-		Dim data As SimulatorResponses = json.ReadSettings(except, True)
-		If IsNothing(data) AndAlso Not except Then
+		Dim data As SimulatorResponses = json.ReadSettings()
+		If IsNothing(data) Then
 			'no data at all, create a file with the fields inside for later update
 			Dim l As New SimulatorResponses
 			sr = New SimulatorResponse With
@@ -719,10 +717,10 @@ Public Class FSimulator
 				}
 			sr.Values = {New Criteria() With {.Name = "Name3", .Value = 1}, New Criteria() With {.Name = "Name4", .Value = "hello"}}
 			l.Add(sr)
-			json.WriteSettings(l, True, False)
+			json.WriteSettings(l, Nothing, False)
 			'nothing else is done, the server decides of the action and simply returns the received message with a failure
 			NoAnswer(toprocess)
-		ElseIf except Then
+		ElseIf Not IsNothing(json.LastException) Then
 			RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = $"INVALID {json.FileName} FILE" & vbCrLf})
 			NoAnswer(toprocess)
 		Else
@@ -841,10 +839,9 @@ Public Class FSimulator
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = direction, .position = position, .Evt = evt, .Message = $"Trying to use {json.FileName}{vbCrLf}"})
 
 		'get records from this file
-		Dim except As Boolean
 		Dim sr As SimulatorResponse
-		Dim data As SimulatorResponses = json.ReadSettings(except, True)
-		If IsNothing(data) AndAlso Not except Then
+		Dim data As SimulatorResponses = json.ReadSettings()
+		If IsNothing(data) Then
 			'no data at all, create a file with the fields inside for later update
 			Dim l As New SimulatorResponses
 			sr = New SimulatorResponse With
@@ -865,10 +862,10 @@ Public Class FSimulator
 				}
 			sr.Values = {New Criteria() With {.Name = "Name3", .Value = 1}, New Criteria() With {.Name = "Name4", .Value = "hello"}}
 			l.Add(sr)
-			json.WriteSettings(l, True, False)
+			json.WriteSettings(l)
 			'nothing else is done, the server decides of the action and simply returns the received message with a failure
 			NoAnswer(toprocess)
-		ElseIf except Then
+		ElseIf Not IsNothing(json.LastException) Then
 			RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.server, .Evt = ActivityEvent.receivedRequest, .Message = $"INVALID {json.FileName} FILE" & vbCrLf})
 			NoAnswer(toprocess)
 		Else

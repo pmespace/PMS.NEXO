@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using COMMON;
 
-namespace NexoListener
+namespace Listener
 {
-	static class CLogger
+	static public class CLogger
 	{
 		public static string Add(string text, TLog tlog = TLog.INFOR, bool display = true)
 		{

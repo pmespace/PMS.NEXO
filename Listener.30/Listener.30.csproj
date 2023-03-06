@@ -9,9 +9,9 @@
     <Title>Nexo 3.0 Listener</Title>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
-    <Version>4.8.0</Version>
-    <FileVersion>4.8.0</FileVersion>
-    <AssemblyVersion>4.8.0</AssemblyVersion>
+    <Version>4.9.0</Version>
+    <FileVersion>4.9.0</FileVersion>
+    <AssemblyVersion>4.9.0</AssemblyVersion>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
   </PropertyGroup>
 
@@ -42,5 +42,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Import Project="..\LISTENER_SHARED\LISTENER_SHARED.projitems" Label="Shared" />
   
 </Project>

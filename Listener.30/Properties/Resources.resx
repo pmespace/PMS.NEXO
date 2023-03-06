@@ -162,4 +162,55 @@
   <data name="Logout" xml:space="preserve">
     <value>Logging out SaleID {0} from POIID {1}</value>
   </data>
+  <data name="LoginSucceeded" xml:space="preserve">
+    <value>Logged to POI</value>
+  </data>
+  <data name="ErrorMessageCantBeConvertedToRequest" xml:space="preserve">
+    <value>Message can't be converted to a request [{0}]</value>
+  </data>
+  <data name="ErrorRequestedPOIDoesntExist" xml:space="preserve">
+    <value>Requested POI [{0}] doesn't exist, The request will not be carried out"</value>
+  </data>
+  <data name="ErrorInvalidRequestedService" xml:space="preserve">
+    <value>The requested service is invalid [{0}]"</value>
+  </data>
+  <data name="ErrorRequestedServiceNotAllowed" xml:space="preserve">
+    <value>The requested service is not allowed [{0}]</value>
+  </data>
+  <data name="ErrorInvalidRequestedIDs" xml:space="preserve">
+    <value>The request parameters are not set properly, SaleID: {0}, POIID: {1}</value>
+  </data>
+  <data name="IsMissing" xml:space="preserve">
+    <value>&lt;is missing&gt;</value>
+  </data>
+  <data name="ErrorFailedCreatingTheNexoObject" xml:space="preserve">
+    <value>Failed creating the nexo object {0}, no more processing will occur</value>
+  </data>
+  <data name="ProcessingConnectedToPOI" xml:space="preserve">
+    <value>Connected to POI</value>
+  </data>
+  <data name="ProcessingErrorWhileLogin" xml:space="preserve">
+    <value>An error has occurred while trying to log to the POI</value>
+  </data>
+  <data name="ProcessingErrorWhileExchange" xml:space="preserve">
+    <value>An error has occurred while trying to exchange the nexo retailer {0} order</value>
+  </data>
+  <data name="ProcessingErrorConnectingToPOI" xml:space="preserve">
+    <value>Error connecting to the POI at {0}, no more processing can be made</value>
+  </data>
+  <data name="ProcessingException" xml:space="preserve">
+    <value>An exception has occurred while processing the request [{0}]</value>
+  </data>
+  <data name="ProcessingTimeout" xml:space="preserve">
+    <value>Timeout receiving the response to {0} request</value>
+  </data>
+  <data name="ProcessingCancelled" xml:space="preserve">
+    <value>Operation manually cancelled while processing {0} service</value>
+  </data>
+  <data name="ProcessingResult" xml:space="preserve">
+    <value>Processing of service {0} ended up with {1} result {2}</value>
+  </data>
+  <data name="ProcessingUnknowError" xml:space="preserve">
+    <value>Unknown error while processing {0} service</value>
+  </data>
 </root>

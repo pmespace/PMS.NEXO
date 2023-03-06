@@ -1329,11 +1329,9 @@ Public Class FSimulator
 			settings.Port = udGatewayServerPort.Value
 		End If
 		'get the message as a string
-		Dim timeout As Boolean
-		Dim replySize As Integer
 		Dim xmlrequest As String = Encoding.UTF8.GetString(request)
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.forwardingRequest, .Message = "FORWARDING REQUEST FROM " & tcp.Client.RemoteEndPoint.ToString & " TO " & settings.FullIP & MessageLength(xmlrequest) & vbCrLf & xmlrequest})
-		Dim xmlreply As String = NexoRetailerClient.SendRawRequest(settings, xmlrequest, replySize, timeout)
+		Dim xmlreply As String = NexoRetailerClient.SendRawRequest(settings, xmlrequest)
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.receivingForwardedReply, .Message = "FORWARDING REPLY FROM " & settings.FullIP & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xmlrequest) & vbCrLf & xmlreply})
 		'do not forget, we're using nexo hence string messages, the system must add the buffer size when returning the reply
 		addBufferSize = True

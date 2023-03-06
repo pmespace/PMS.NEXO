@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NEXO;
 using Newtonsoft.Json.Linq;
+using System.Net;
+using Listener.Shared;
 
 namespace Listener
 {
@@ -52,19 +54,6 @@ namespace Listener
 			public override string ToString() { return $"Connection settings: {ConnectionSettings}"; }
 		}
 		/// <summary>
-		/// describe a POI sent to the server
-		/// </summary>
-		public class CSimplePOI
-		{
-			public string Name { get; set; }
-			public string FullIP { get; set; }
-			public string Label { get; set; }
-		}
-		/// <summary>
-		/// describe how simple POIs are sent to the server
-		/// </summary>
-		public class CSimplePOIs : CList<CSimplePOI> { }
-		/// <summary>
 		/// describes a list of POI known by the listener
 		/// </summary>
 		public class CPOIs : CDictionary<CPOI>
@@ -82,7 +71,6 @@ namespace Listener
 				return d;
 			}
 		}
-
 		#endregion
 
 		#region properties
@@ -110,6 +98,11 @@ namespace Listener
 		/// messages are displayed if true, not displayed otherwise
 		/// </summary>
 		public bool DisplayMessages { get; set; } = false;
+		/// <summary>
+		/// severity to log
+		/// </summary>
+		public string Severity { get => _severity.ToString(); set => _severity = (TLog)CMisc.GetEnumValue(typeof(TLog), value, _severity); }
+		internal TLog _severity = TLog.TRACE;
 		/// <summary>
 		/// the list of POIs known by the listener
 		/// </summary>
@@ -204,7 +197,9 @@ namespace Listener
 		/// <summary>
 		/// port to call to connect to the listener
 		/// </summary>
-		public uint Port { get; set; }
+		public uint Port { get => _port; set => _port = IPEndPoint.MinPort < value && IPEndPoint.MaxPort >= value ? value : _port; }
+		uint _port = DEFAULT_PORT;
+		public const uint DEFAULT_PORT = 41309;
 		/// <summary>
 		/// allowed IPs able to connect to the listener
 		/// </summary>
@@ -255,11 +250,20 @@ namespace Listener
 		uint _receptionbuffersize = MIN_RECEPTION_BUFFER_SIZE;
 		const uint MIN_RECEPTION_BUFFER_SIZE = 1024;
 		/// <summary>
-		/// Number of consecutive retries to connect to the server before an error is raised
+		/// Maximum number of connection attempts to the WS server, consecutive retries to connect to the server before an error is raised.
+		/// When the value is reached the listener stops trying to connect.
+		/// A value 0 indicates no maximum number of connect attempts, thus endless attempts.
 		/// </summary>
-		public uint RetryConnectCounter { get => _retryconnectcounter; set => _retryconnectcounter = Math.Max(_retryconnectcounter, MIN_RETRY_CONNECT_COUNTER); }
-		uint _retryconnectcounter = MIN_RETRY_CONNECT_COUNTER;
-		const uint MIN_RETRY_CONNECT_COUNTER = 3;
+		public uint RetryConnectCounter { get => _retryconnectcounter; set => _retryconnectcounter = Math.Max(_retryconnectcounter, DEFAULT_RETRY_CONNECT_COUNTER); }
+		uint _retryconnectcounter = DEFAULT_RETRY_CONNECT_COUNTER;
+		const uint DEFAULT_RETRY_CONNECT_COUNTER = 0;
+		/// <summary>
+		/// Delay between retries to connect to the WS server, it is expressed in seconds and can't be less than <see cref="MIN_DELAY_BETWEEN_RETRIES"/>
+		/// </summary>
+		public uint DelayBetwenRetries { get => _delaybetwenretries; set => _delaybetwenretries = Math.Min(Math.Max(_delaybetwenretries, MIN_DELAY_BETWEEN_RETRIES), MAX_DELAY_BETWEEN_RETRIES); }
+		uint _delaybetwenretries = MIN_DELAY_BETWEEN_RETRIES;
+		const uint MIN_DELAY_BETWEEN_RETRIES = 5;
+		const uint MAX_DELAY_BETWEEN_RETRIES = 60;
 		#endregion
 
 		#region methods

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using NEXO;
 using COMMON;
 
-namespace Listener
+namespace Listener.Shared
 {
 	public struct CListenerDataElement
 	{

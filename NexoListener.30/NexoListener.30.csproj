@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>4.8.0</Version>
-    <FileVersion>4.8.0</FileVersion>
-    <AssemblyVersion>4.8.0</AssemblyVersion>
+    <Version>4.9.0</Version>
+    <FileVersion>4.9.0</FileVersion>
+    <AssemblyVersion>4.9.0</AssemblyVersion>
     <RootNamespace>NexoListener</RootNamespace>
     <AssemblyName>NexoListener30</AssemblyName>
     <Nullable>disable</Nullable>
@@ -28,5 +28,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Listener.30\Listener.30.csproj" />
   </ItemGroup>
+
+  <!--
+  <Target Name="AfterBuild" Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <MSBuild Condition="'$(DeployOnBuild)'!='true'" Projects="$(MSBuildProjectFullPath)" Properties="DeployOnBuild=true;PublishProfile=FolderProfile;BuildingInsideVisualStudio=False"/>
+  </Target>
+  -->
 
 </Project>

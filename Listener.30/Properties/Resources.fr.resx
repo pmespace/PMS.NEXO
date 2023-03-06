@@ -162,4 +162,55 @@
   <data name="Logout" xml:space="preserve">
     <value>Déconnexion de la caisse {0} du terminal {1}</value>
   </data>
+  <data name="LoginSucceeded" xml:space="preserve">
+    <value>Connecté au terminal</value>
+  </data>
+  <data name="ErrorMessageCantBeConvertedToRequest" xml:space="preserve">
+    <value>Le message ne peut être traduit en une requête [{0}]</value>
+  </data>
+  <data name="ErrorRequestedPOIDoesntExist" xml:space="preserve">
+    <value>Le terminal demandé [{0}] n'existe pas. La requête ne sera pas traitée</value>
+  </data>
+  <data name="ErrorInvalidRequestedService" xml:space="preserve">
+    <value>Le service demandé est invalid [{0}]"</value>
+  </data>
+  <data name="ErrorRequestedServiceNotAllowed" xml:space="preserve">
+    <value>Le service demandé n'est pas autorisé [{0}]</value>
+  </data>
+  <data name="ErrorInvalidRequestedIDs" xml:space="preserve">
+    <value>Les paramètres d'identification sont invalides, SaleID: {0}, POIID: {1}</value>
+  </data>
+  <data name="IsMissing" xml:space="preserve">
+    <value>&lt;est manquant&gt;</value>
+  </data>
+  <data name="ErrorFailedCreatingTheNexoObject" xml:space="preserve">
+    <value>La création de l'objet nexo {0} a échouée, le traitement a été interrompu</value>
+  </data>
+  <data name="ProcessingConnectedToPOI" xml:space="preserve">
+    <value>Connecté au terminal</value>
+  </data>
+  <data name="ProcessingErrorWhileLogin" xml:space="preserve">
+    <value>Une erreur s'est produite lors de la connexion au terminal</value>
+  </data>
+  <data name="ProcessingErrorWhileExchange" xml:space="preserve">
+    <value>Une erreur s'est produite lors de l'échange du message nexo {0}</value>
+  </data>
+  <data name="ProcessingErrorConnectingToPOI" xml:space="preserve">
+    <value>Erreur de connexion au terminal à l'adresse {0}, le traitement ne peut se poursuivre</value>
+  </data>
+  <data name="ProcessingException" xml:space="preserve">
+    <value>Une exception s'est produite durant le traitement de la requête [{0}]</value>
+  </data>
+  <data name="ProcessingTimeout" xml:space="preserve">
+    <value>Timeout à la réception de la réponse à la requête {0}</value>
+  </data>
+  <data name="ProcessingCancelled" xml:space="preserve">
+    <value>L'opération a été annulée par l'opérateur durant le traitement du service {0}</value>
+  </data>
+  <data name="ProcessingResult" xml:space="preserve">
+    <value>Le traitement du service {0} s'est terminé avec un statut {1} {2}</value>
+  </data>
+  <data name="ProcessingUnknowError" xml:space="preserve">
+    <value>Erreur inconnue durant le traitement du service {0}</value>
+  </data>
 </root>

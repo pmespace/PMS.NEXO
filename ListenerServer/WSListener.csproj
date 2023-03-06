@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Listener.WS</RootNamespace>
+    <Version>4.9.0</Version>
+    <FileVersion>4.9.0</FileVersion>
+    <AssemblyVersion>4.9.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <!--
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+  </ItemGroup>
+  -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEXO.30\NEXO.30.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\LISTENER_SHARED\LISTENER_SHARED.projitems" Label="Shared" />
+
+</Project>

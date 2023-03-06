@@ -97,6 +97,60 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed creating the nexo object {0}, no more processing will occur.
+        /// </summary>
+        internal static string ErrorFailedCreatingTheNexoObject {
+            get {
+                return ResourceManager.GetString("ErrorFailedCreatingTheNexoObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The request parameters are not set properly, SaleID: {0}, POIID: {1}.
+        /// </summary>
+        internal static string ErrorInvalidRequestedIDs {
+            get {
+                return ResourceManager.GetString("ErrorInvalidRequestedIDs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested service is invalid [{0}]&quot;.
+        /// </summary>
+        internal static string ErrorInvalidRequestedService {
+            get {
+                return ResourceManager.GetString("ErrorInvalidRequestedService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message can&apos;t be converted to a request [{0}].
+        /// </summary>
+        internal static string ErrorMessageCantBeConvertedToRequest {
+            get {
+                return ResourceManager.GetString("ErrorMessageCantBeConvertedToRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested POI [{0}] doesn&apos;t exist, The request will not be carried out&quot;.
+        /// </summary>
+        internal static string ErrorRequestedPOIDoesntExist {
+            get {
+                return ResourceManager.GetString("ErrorRequestedPOIDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested service is not allowed [{0}].
+        /// </summary>
+        internal static string ErrorRequestedServiceNotAllowed {
+            get {
+                return ResourceManager.GetString("ErrorRequestedServiceNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid display device request [{0}].
         /// </summary>
         internal static string InvalidDisplayDevice {
@@ -106,11 +160,29 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;is missing&gt;.
+        /// </summary>
+        internal static string IsMissing {
+            get {
+                return ResourceManager.GetString("IsMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to log from SaleID {0} to POIID {1}.
         /// </summary>
         internal static string LoginFailedToLogTo {
             get {
                 return ResourceManager.GetString("LoginFailedToLogTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logged to POI.
+        /// </summary>
+        internal static string LoginSucceeded {
+            get {
+                return ResourceManager.GetString("LoginSucceeded", resourceCulture);
             }
         }
         
@@ -174,6 +246,87 @@ namespace Listener.Properties {
         internal static string POIIsAlreadyInUse {
             get {
                 return ResourceManager.GetString("POIIsAlreadyInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation manually cancelled while processing {0} service.
+        /// </summary>
+        internal static string ProcessingCancelled {
+            get {
+                return ResourceManager.GetString("ProcessingCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to POI.
+        /// </summary>
+        internal static string ProcessingConnectedToPOI {
+            get {
+                return ResourceManager.GetString("ProcessingConnectedToPOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error connecting to the POI at {0}, no more processing can be made.
+        /// </summary>
+        internal static string ProcessingErrorConnectingToPOI {
+            get {
+                return ResourceManager.GetString("ProcessingErrorConnectingToPOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occurred while trying to exchange the nexo retailer {0} order.
+        /// </summary>
+        internal static string ProcessingErrorWhileExchange {
+            get {
+                return ResourceManager.GetString("ProcessingErrorWhileExchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occurred while trying to log to the POI.
+        /// </summary>
+        internal static string ProcessingErrorWhileLogin {
+            get {
+                return ResourceManager.GetString("ProcessingErrorWhileLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exception has occurred while processing the request [{0}].
+        /// </summary>
+        internal static string ProcessingException {
+            get {
+                return ResourceManager.GetString("ProcessingException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing of service {0} ended up with {1} result {2}.
+        /// </summary>
+        internal static string ProcessingResult {
+            get {
+                return ResourceManager.GetString("ProcessingResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout receiving the response to {0} request.
+        /// </summary>
+        internal static string ProcessingTimeout {
+            get {
+                return ResourceManager.GetString("ProcessingTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error while processing {0} service.
+        /// </summary>
+        internal static string ProcessingUnknowError {
+            get {
+                return ResourceManager.GetString("ProcessingUnknowError", resourceCulture);
             }
         }
         

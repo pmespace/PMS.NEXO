@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using NEXO;
 using COMMON;
 using Listener;
+using Listener.Shared;
 
 namespace NexoListener
 {
@@ -21,7 +22,7 @@ namespace NexoListener
 		#endregion
 
 		#region const
-		private const string LISTENER_SETTINGS_FILE = CListener.LISTENER_DEFAULT_SETTINGS_FILE;
+		private const string LISTENER_SETTINGS_FILE = CListener.DEFAULT_SETTINGS_FILE_NAME;
 		private const string LISTENER_TEST_FILE = "listener.request.json";
 		private const string LISTENER_LOG_FILE = "listener.log";
 
@@ -46,6 +47,8 @@ namespace NexoListener
 			string settingsFile = null;
 			string autoPurge = null;
 			string numberOfFiles = null;
+
+			Console.Title = $"nexo Listener - v{CMisc.Version(CMisc.VersionType.assembly)}";
 
 			// take a list of strings (refer to PathToData) and add it to a dictionary of paths + save the value to use
 			Func<string, string, string, string> CheckOption = (string arg, string option, string data) =>
@@ -99,7 +102,7 @@ namespace NexoListener
 			}
 			CLog.LogFileName = logFile;
 
-			CLogger.Add($"Using settings file: {settingsFile}");
+			CLogger.TRACE($"Using settings file: {settingsFile}");
 
 			MenuList menu = new MenuList();
 			menu.Add(TEST_LISTENER, new CMenu() { Text = "Test listener", Fnc = TestListener });
@@ -162,7 +165,10 @@ namespace NexoListener
 		{
 			Console.WriteLine("");
 			foreach (KeyValuePair<char, CMenu> m in menu)
-				Console.WriteLine(m.Key + $"/ {m.Value.Text}");
+			{
+				Console.Write(m.Key + $"/ ");
+				Console.WriteLine($"{m.Value.Text}");
+			}
 			Console.WriteLine("");
 			Console.Write("=> ");
 			bool escape = false;
@@ -248,20 +254,19 @@ namespace NexoListener
 					//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 					if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 					{
-						bool error = false;
 						string sreply;
-						CLogger.Add($"{request} (sent message, timeout is {clientSettings.ReceiveTimeout} seconds)");
-						while (!string.IsNullOrEmpty(sreply = CStream.Receive(streamIO, out int announcedSize, out error)))
+						CLogger.TRACE($"{request} (sent message, timeout is {clientSettings.ReceiveTimeout} seconds)");
+						while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
 						{
 							var reply = CJson<CListenerReply>.Deserialize(sreply);
-							CLogger.Add($"{reply.ToString()} (received message)");
+							CLogger.TRACE($"{reply.ToString()} (received message)");
 							if (!reply.Notification)
 								break;
 						}
 					}
 					else
 					{
-						CLogger.Add($"Failed to send the request", TLog.ERROR);
+						CLogger.ERROR($"Failed to send the request");
 					}
 				}
 			}
@@ -439,7 +444,7 @@ namespace NexoListener
 			type.SettingsFile = Input("Settings file to load", type.SettingsFile, out bool isdef);
 			if (string.IsNullOrEmpty(type.SettingsFile))
 			{
-				CLogger.Add("No settings modified", TLog.WARNG);
+				CLogger.WARNING("No settings modified");
 				return true;
 			}
 			type.Listener.Stop();

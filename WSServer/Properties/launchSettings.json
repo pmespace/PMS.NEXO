@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "WSServer help": {
+      "commandName": "Project",
+      "commandLineArgs": "-?"
+    },
+    "WSServer no listener": {
+      "commandName": "Project"
+    },
+    "WSServer listener": {
+      "commandName": "Project",
+      "commandLineArgs": "-r"
+    }
+  }
+}

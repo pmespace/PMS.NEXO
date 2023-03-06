@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NEXO;
 
-namespace Listener
+namespace Listener.Shared
 {
 	public enum ReplyStatus
 	{
@@ -53,6 +53,28 @@ namespace Listener
 		nexoNotification,
 	}
 
+	public enum ReceiptType
+	{
+		None,
+		CashierReceipt,
+		CustomerReceipt,
+	}
+	public class CReceipts : Dictionary<ReceiptType, List<string>> { }
+	public class CPaymentData
+	{
+		/// <summary>
+		/// Brand of the card involved in the transaction, if one was made and if available, null otherwise
+		/// </summary>
+		public string CardBrand { get => _cardbrand; set => _cardbrand = string.Empty == value ? null : value; }
+		string _cardbrand = default;
+		/// <summary>
+		/// All available receipts received from the POI.
+		/// A receipt is a list of strings.
+		/// </summary>
+		public CReceipts Receipts { get => _receipts; set => _receipts = value ?? (0 == value.Count ? default : value); }
+		CReceipts _receipts = default;
+	}
+
 	public class CListenerReply
 	{
 		/// <summary>
@@ -89,9 +111,21 @@ namespace Listener
 		/// </summary>
 		public TransactionIdentificationType POITransaction { get; set; }
 		/// <summary>
+		/// Brand of the card involved in the transaction, if one was made and if available, null otherwise
+		/// </summary>
+		public CPaymentData PaymentData { get => _paymentdata; set => _paymentdata = value; }
+		CPaymentData _paymentdata = default;
+		/// <summary>
+		/// All available receipts received from the POI.
+		/// A receipt is a list of strings.
+		/// </summary>
+		public CReceipts Receipts { get => _receipts; set => _receipts = (null == value || 0 == value.Count ? default : value); }
+		CReceipts _receipts = default;
+		/// <summary>
 		/// The original request as received from the caller
 		/// </summary>
-		public CListenerRequest Request { get; set; }
+		public CListenerRequest Request
+		{ get; set; }
 		/// <summary>
 		/// The original request as a string as received from the caller
 		/// </summary>

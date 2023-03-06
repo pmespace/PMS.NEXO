@@ -1593,7 +1593,7 @@ namespace NEXO
 	public class NexoCertificationCode : NexoTextString, INexoTextString { public NexoCertificationCode() : base(TagsEnumeration.CertificationCode.ToString()) { Value = DefaultValue = "NOT CERTIFIED"; } }
 
 	[ComVisible(true)]
-	public class NexoSoftwareVersion : NexoTextString, INexoTextString { public NexoSoftwareVersion() : base(TagsEnumeration.SoftwareVersion.ToString()) { Value = DefaultValue = CMisc.Version(CMisc.VersionType.assemblyInfo); } }
+	public class NexoSoftwareVersion : NexoTextString, INexoTextString { public NexoSoftwareVersion() : base(TagsEnumeration.SoftwareVersion.ToString()) { Value = DefaultValue = CMisc.Version(CMisc.VersionType.executable); } }
 
 	[ComVisible(true)]
 	public class NexoApplicationName : NexoTextString, INexoTextString { public NexoApplicationName() : base(TagsEnumeration.ApplicationName.ToString()) { Value = DefaultValue = Assembly.GetExecutingAssembly().GetName().Name; } }

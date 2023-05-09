@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		description.txt = description.txt
+		pms.key.file.pfx = pms.key.file.pfx
 		README.md = README.md
 		release notes.txt = release notes.txt
 	EndProjectSection
@@ -53,6 +54,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSListener", "ListenerServer\WSListener.csproj", "{2D2567A8-5AF4-4280-8C81-ABE04439D192}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LISTENER_SHARED", "LISTENER_SHARED\LISTENER_SHARED.shproj", "{6700FD23-C5C9-4768-8C33-8DC23A219304}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListenerService.30", "ListenerService.30\ListenerService.30.csproj", "{2BA4930C-06DA-4309-9E95-0362AC8DA599}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NexoRetailerListenerService", "NexoRetailerListenerService\NexoRetailerListenerService.csproj", "{B0F19C74-E6C6-4292-80C2-4C183E435C5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +113,14 @@ Global
 		{2D2567A8-5AF4-4280-8C81-ABE04439D192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D2567A8-5AF4-4280-8C81-ABE04439D192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D2567A8-5AF4-4280-8C81-ABE04439D192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA4930C-06DA-4309-9E95-0362AC8DA599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA4930C-06DA-4309-9E95-0362AC8DA599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA4930C-06DA-4309-9E95-0362AC8DA599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA4930C-06DA-4309-9E95-0362AC8DA599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F19C74-E6C6-4292-80C2-4C183E435C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F19C74-E6C6-4292-80C2-4C183E435C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F19C74-E6C6-4292-80C2-4C183E435C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F19C74-E6C6-4292-80C2-4C183E435C5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +143,8 @@ Global
 		{C655CB64-D7F8-44FE-BD02-0C96CAEC1ADF} = {C98BA387-1895-47DD-BBBF-64EFDF800F0B}
 		{2D2567A8-5AF4-4280-8C81-ABE04439D192} = {F3A7AABA-EE1A-4FC8-8CD8-5AA2D32B8FCC}
 		{6700FD23-C5C9-4768-8C33-8DC23A219304} = {4704224D-13C2-4A6E-981C-013A32A4EC7F}
+		{2BA4930C-06DA-4309-9E95-0362AC8DA599} = {16D6D994-6D81-4F3B-9953-227995EEAC7D}
+		{B0F19C74-E6C6-4292-80C2-4C183E435C5C} = {F3A7AABA-EE1A-4FC8-8CD8-5AA2D32B8FCC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2D01539-A981-428F-8F33-F80B9CF47AE6}

@@ -32,13 +32,6 @@ namespace Listener.Shared
 		[JsonExtensionData]
 		public Dictionary<string, JToken> _extendedData;
 	}
-	///// <summary>
-	///// security settings to connect through a token
-	///// </summary>
-	//public class CListenerClientLoginRequestToken : CListenerClientLoginRequest
-	//{
-	//	public string Token { get; set; }
-	//}
 	/// <summary>
 	/// base data contained in any login response from a server
 	/// </summary>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NEXO;
 using COMMON;
 
@@ -44,12 +45,28 @@ namespace Listener.Shared
 		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
 		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();
 
+		[JsonExtensionData]
+		public Dictionary<string, JToken> ExtendedData;
+
 		public override string ToString()
 		{
 			string s = null;
-			s = $"Service: {Service}; POI to reach: {POI}; SaleID: {SaleID}; POIID: {POIID}; Currency: {Currency}; Timeout: {ReceiveTimeout}" + Chars.CRLF;
-			s += $"Elements to send: {ElementsToSend}";
-			s += $"Elements to return: {ElementsToReturn}";
+			List<string> ls = ToStringEx();
+			for (int i = 0; i < ls.Count; i++)
+			{
+				s += ls[i] + (i != ls.Count - 1 ? Chars.CRLF : string.Empty);
+			}
+			//s = $"Service: {Service}; POI to reach: {POI}; SaleID: {SaleID}; POIID: {POIID}; Currency: {Currency}; Timeout: {ReceiveTimeout}" + Chars.CRLF;
+			//s += $"Elements to send: {ElementsToSend}" + Chars.CRLF;
+			//s += $"Elements to return: {ElementsToReturn}";
+			return s;
+		}
+		public List<string> ToStringEx()
+		{
+			List<string> s = new List<string>();
+			s.Add($"Service: {Service}; POI to reach: {POI}; SaleID: {SaleID}; POIID: {POIID}; Currency: {Currency}; Timeout: {ReceiveTimeout}");
+			s.Add($"Elements to send: {ElementsToSend}");
+			s.Add($"Elements to return: {ElementsToReturn}");
 			return s;
 		}
 	}

@@ -36,6 +36,27 @@ namespace Listener
 		public CListener() { }
 		#endregion
 
+		#region delegates
+		public enum ListenerStatus
+		{
+			// main status
+			Starting,
+			Started,
+			Stopping,
+			Stopped,
+			// WS server status
+			ConnectingToWSServer,
+			ConnectedToWSServer,
+			ConnectionToWSServerPending,
+			DisconnectingFromWSServer,
+			DisconnectedFromWSServer,
+			LoginToWSServer,
+			LoginToWSServerDenied,
+			LoggedToWSServer,
+		}
+		public delegate void SetStatusDelegate(ListenerStatus sts, string msg = default);
+		#endregion
+
 		#region static
 		public const string DEFAULT_SETTINGS_FILE_NAME = "listener.settings.json";
 		public const uint DEFAULT_PORT = CSettingsServer.DEFAULT_PORT;
@@ -61,6 +82,7 @@ namespace Listener
 		CSynchronize Events = new CSynchronize();
 		bool ClientIsRunning = false;
 		CThread threadClient = default;
+		SetStatusDelegate setStatusFnc = default;
 		#endregion
 
 		#region properties
@@ -78,10 +100,14 @@ namespace Listener
 		/// </summary>
 		/// <param name="settingsFileName">Settings file name</param>
 		/// <returns>True if started, false otherwise</returns>
-		public bool Start(string settingsFileName)
+		public bool Start(string settingsFileName, SetStatusDelegate deleg = default)
 		{
 			if (!Started)
 			{
+				// save status update function
+				setStatusFnc = deleg;
+				setStatusFnc?.Invoke(ListenerStatus.Starting);
+
 				Func<bool> CheckSettings = () =>
 				{
 					if (null == Settings.Client) Settings.Client = new CSettingsClient();
@@ -177,6 +203,16 @@ namespace Listener
 						Stop();
 					}
 				}
+				else if (ok)
+				{
+					// no client mode
+					setStatusFnc?.Invoke(ListenerStatus.Started);
+				}
+				if (!ok)
+				{
+					// current status
+					setStatusFnc?.Invoke(ListenerStatus.Stopped);
+				}
 				Started = ok;
 			}
 			return Started;
@@ -195,7 +231,7 @@ namespace Listener
 			synch.Add(new ManualResetEvent(false)); // KO
 			synch.Add(new ManualResetEvent(false)); // end
 			int attempt = 0;
-			CLog.SetNewSharedGuid();
+			CLog.SetSharedGuid();
 			do
 			{
 				attempt++;
@@ -218,6 +254,7 @@ namespace Listener
 					}
 				}
 				synch[2].WaitOne();
+				setStatusFnc?.Invoke(ListenerStatus.ConnectionToWSServerPending);
 				Thread.Sleep((int)data.Delay * 1000);
 			}
 			while (0 == data.Retries || attempt < data.Retries);
@@ -263,7 +300,9 @@ namespace Listener
 				try
 				{
 					ClientIsRunning = false;
+					setStatusFnc?.Invoke(ListenerStatus.ConnectingToWSServer);
 					await WS.ConnectAsync(new Uri(Settings.Client.URI), Token);
+					setStatusFnc?.Invoke(ListenerStatus.ConnectedToWSServer);
 				}
 				catch (Exception ex)
 				{
@@ -281,6 +320,7 @@ namespace Listener
 							CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = CStream.Localhost(), Port = Settings.Server.Port, ReceiveTimeout = 0 };
 							if (null == (streamIO = CStream.Connect(clientSettings)))
 								throw new Exception($"failed to connect to listener, disconnecting from server");
+							setStatusFnc?.Invoke(ListenerStatus.LoginToWSServer);
 							action = WSAction.SendLoginRequest;
 							break;
 
@@ -332,15 +372,18 @@ namespace Listener
 														if (loginResponse.Granted)
 														{
 															CLog.INFORMATION($"connection has been granted [{order}]");
+															setStatusFnc?.Invoke(ListenerStatus.LoggedToWSServer);
 															action = WSAction.ReceiveRequestOrSettingsUpdate;
 														}
 														else
 														{
+															setStatusFnc?.Invoke(ListenerStatus.LoginToWSServerDenied);
 															throw new WSException($"connection denied, disconnecting from server");
 														}
 													}
 													else
 													{
+														setStatusFnc?.Invoke(ListenerStatus.DisconnectingFromWSServer);
 														throw new WSException($"invalid login response message received [{order}], disconnecting from server");
 													}
 												}
@@ -348,10 +391,14 @@ namespace Listener
 
 											case WSAction.ReceiveRequestOrSettingsUpdate:
 												{
-													CListenerRequest listenerRequest = CJson<CListenerRequest>.Deserialize(order);
+													CListenerRequestWS listenerRequest = CJson<CListenerRequestWS>.Deserialize(order);
 													if (null != listenerRequest)
 													{
 														CLog.INFORMATION($"received request from server [{order}]");
+														listenerRequest.Secured = true;
+														string norder = CJson<CListenerRequestWS>.Serialize(listenerRequest);
+														if (!norder.IsNullOrEmpty()) order = norder;
+
 														// a request has been received, post it to the listener server part
 														if (CStream.Send(streamIO, order))
 														{
@@ -387,6 +434,7 @@ namespace Listener
 				}
 				CLog.TRACE($"disconnecting from server {Settings.Client.URI}");
 				await WS.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
+				setStatusFnc?.Invoke(ListenerStatus.DisconnectedFromWSServer);
 				connected = false;
 				Source.Cancel();
 			}
@@ -400,6 +448,11 @@ namespace Listener
 				CLog.EXCEPT(ex);
 			}
 			synch[2].Set();
+		}
+		class CListenerRequestWS : CListenerRequest
+		{
+			public bool Secured { get => _secured; set => _secured = value; }
+			bool _secured = false;
 		}
 		class WSException : Exception
 		{
@@ -453,8 +506,28 @@ namespace Listener
 		/// </summary>
 		public void Stop()
 		{
-			if (null != StreamServer)
-				StreamServer.StopServer();
+			setStatusFnc?.Invoke(ListenerStatus.Stopping);
+			try
+			{
+				// disconnect from WS server
+				Source.Cancel();
+			}
+			catch (Exception ex)
+			{
+				CLog.EXCEPT(ex);
+			}
+			try
+			{
+				// stop listener server
+				if (null != StreamServer)
+					StreamServer.StopServer();
+			}
+			catch (Exception ex)
+			{
+				CLog.EXCEPT(ex);
+			}
+			Started = false;
+			setStatusFnc?.Invoke(ListenerStatus.Stopped);
 		}
 		/// <summary>
 		/// <see cref="CStreamSettings.OnMessageToLog"/>
@@ -573,7 +646,7 @@ namespace Listener
 			Stats.counterInvalidMessages++;
 			Stats.counterInvalidMessagesSinceLastStart++;
 
-			CListenerRequest listenerRequest = CJson<CListenerRequest>.Deserialize(srequest);
+			CListenerRequestWS listenerRequest = CJson<CListenerRequestWS>.Deserialize(srequest);
 			CListenerReply listenerReply = new CListenerReply() { Request = listenerRequest, };
 			if (null == listenerRequest)
 			{
@@ -595,6 +668,33 @@ namespace Listener
 				listenerReply.Status = ReplyStatus.invalidPOIRequested;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
+
+			// if coming from a secured connection let's see whether some data has been provided to overwrite existing ones
+			if (listenerRequest.Secured)
+			{
+				Func<string, object> ContainsKey = (string _kEY_) =>
+				{
+					if (listenerRequest.ExtendedData.ContainsKey(_kEY_))
+						return listenerRequest.ExtendedData[_kEY_];
+					return null;
+				};
+
+				object obj;
+				string s;
+				// has an IP been specified
+				if (null != (obj = ContainsKey("IP")))
+				{
+					s = obj.ToString();
+					if (!s.IsNullOrEmpty() && IPAddress.TryParse(s, out IPAddress addr))
+						poi.ConnectionSettings.IP = addr.ToString();
+				}
+				//if (null != (obj = ContainsKey("Port")))
+				//{
+				//	s = obj.ToString();
+				//	if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
+				//		poi.ConnectionSettings.Port = port;
+				//}
+			};
 
 			string path = null;
 			string tempName = null;
@@ -1483,9 +1583,8 @@ namespace Listener
 		{
 			if (default == nxo) return string.Empty;
 
-			string sz = null;
-			string cardBrand = null;
 
+			string cardBrand;
 			try
 			{
 				// look for brand returned by the POI
@@ -1519,7 +1618,7 @@ namespace Listener
 			catch (Exception ex)
 			{
 				CLog.EXCEPT(ex);
-				cardBrand = null;
+				cardBrand = default;
 			}
 			CLog.INFORMATION($"found transaction card brand: {cardBrand}");
 			return cardBrand;

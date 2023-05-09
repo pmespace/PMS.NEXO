@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("XSDEx")]
-[assembly: AssemblyDescription("XSDEx library to create NEXO retailer C# classes")]
+[assembly: AssemblyTitle("ListenerService.30")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PMS")]
-[assembly: AssemblyProduct("XSDEx")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("PMS")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ListenerService.30")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("27d1095d-9f93-4692-bce8-bec2b2ae2cd8")]
+[assembly: Guid("2ba4930c-06da-4309-9e95-0362ac8da599")]
 
 // Version information for an assembly consists of the following four values:
 //

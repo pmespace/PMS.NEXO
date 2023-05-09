@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net35;net47;net60</TargetFrameworks>
+    <TargetFramework>net47</TargetFramework>
     <RootNamespace>NEXO</RootNamespace>
-    <AssemblyName>PMS.NEXO31</AssemblyName>
+    <AssemblyName>PMS.NEXO30.32</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>4.9.1</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
@@ -18,41 +18,43 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="RETAILER 3.1\SAV\**" />
-    <EmbeddedResource Remove="RETAILER 3.1\SAV\**" />
-    <None Remove="RETAILER 3.1\SAV\**" />
+    <Compile Remove="RETAILER 3.0\SAV\**" />
+    <EmbeddedResource Remove="RETAILER 3.0\SAV\**" />
+    <None Remove="RETAILER 3.0\SAV\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="RETAILER 3.1\nexo  Sale to POI Protocol Specifications - V3.1.pdf" />
-    <None Remove="RETAILER 3.1\nexo Sale to POI Architectures and Models - V3.1.pdf" />
-    <None Remove="RETAILER 3.1\nexo Sale to POI Transport Protocols - V3.1.pdf" />
+    <None Remove="RETAILER 3.0\nexo_sale_to_poi_protocol_specifications_-_v3.0.pdf" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="7.5.2" />
+    <Compile Include="..\NEXO.30\Properties\Resources.Designer.cs" Link="Properties\Resources.Designer.cs" />
+    <Compile Include="..\NEXO.30\RETAILER 3.0\EpasSaleToPOIMessages.cs" Link="RETAILER 3.0\EpasSaleToPOIMessages.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="..\NEXO.30\Properties\Resources.resx" Link="Properties\Resources.resx" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="RETAILER 3.0\" />
   </ItemGroup>
 
-  <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />
+  <ItemGroup>
+    <None Include="..\NEXO.30\RETAILER 3.0\EpasCMS.xsd" Link="RETAILER 3.0\EpasCMS.xsd" />
+    <None Include="..\NEXO.30\RETAILER 3.0\EpasCommonTypes.xsd" Link="RETAILER 3.0\EpasCommonTypes.xsd" />
+    <None Include="..\NEXO.30\RETAILER 3.0\EpasSaleToPOIMessages.xsd" Link="RETAILER 3.0\EpasSaleToPOIMessages.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PMS.COMMON.32" Version="7.5.2" />
+  </ItemGroup>
+
+  <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
 
   <Import Project="..\NEXO_SERVER_SHARED\NEXO_SERVER_SHARED.projitems" Label="Shared" />
 
-  <Import Project="..\NEXO_SHARED\NEXO_SHARED.projitems" Label="Shared" />
+  <Import Project="..\NEXO_CLIENT_SHARED\NEXO_CLIENT_SHARED.projitems" Label="Shared" />
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
@@ -60,18 +62,20 @@
     <AssemblyVersion>4.9.1</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\pms.key.file.pfx</AssemblyOriginatorKeyFile>
+    <PlatformTarget>x86</PlatformTarget>
+    <UserSecretsId>cf009c35-6b77-47d0-9fe8-f2a6c33c3796</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;RETAILER31;RETAILER3X;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;RETAILER30;RETAILER3X;</DefineConstants>
     <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO31.xml</DocumentationFile>
+    <DocumentationFile>.\bin\PMS.NEXO30.32.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;RETAILER31;RETAILER3X;</DefineConstants>
+    <DefineConstants>TRACE;RETAILER30;RETAILER3X;</DefineConstants>
     <OutputPath>.\bin</OutputPath>
-    <DocumentationFile>.\bin\PMS.NEXO31.xml</DocumentationFile>
+    <DocumentationFile>.\bin\PMS.NEXO30.32.xml</DocumentationFile>
   </PropertyGroup>
 
   <Target Name="ResetPackages" BeforeTargets="DispatchToInnerBuilds">

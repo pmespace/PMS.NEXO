@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "NEXO.30": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\philippe\\Documents\\Dev\\NEXOSale\\bin\\NexoSaleTest.exe",
+      "workingDirectory": "C:\\Users\\philippe\\Documents\\Dev\\RETAILER3X\\bin\\net47"
+    }
+  }
+}

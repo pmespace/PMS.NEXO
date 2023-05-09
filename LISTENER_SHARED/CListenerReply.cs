@@ -71,7 +71,7 @@ namespace Listener.Shared
 		/// All available receipts received from the POI.
 		/// A receipt is a list of strings.
 		/// </summary>
-		public CReceipts Receipts { get => _receipts; set => _receipts = value ?? (0 == value.Count ? default : value); }
+		public CReceipts Receipts { get => _receipts; set => _receipts = default != value && 0 == value.Count ? default : value; }
 		CReceipts _receipts = default;
 	}
 

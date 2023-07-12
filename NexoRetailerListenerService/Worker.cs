@@ -70,7 +70,7 @@ namespace nexoRetailerListenerService
 						{
 							object? __o__ = reg.GetValue(_key_, _defkey_);
 							if (null == __o__) return string.Empty;
-							else return __o__.ToString();
+							else return __o__?.ToString();
 						};
 
 						settingsFileName = GetStrValue(REGISTRY_KEY_SETTINGS_FILE_NAME, REGISTRY_KEY_SETTINGS_FILE_NAME_DEFAULT);

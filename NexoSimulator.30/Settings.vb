@@ -57,6 +57,7 @@ Public Class Settings
 	Public Property AutomaticMode As Boolean
 	Public Property UseJson As Boolean = False
 	Public Property TLog As String
+	Public Property KeepConnected As Boolean
 End Class
 
 Public Class Commands

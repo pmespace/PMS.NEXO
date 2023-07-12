@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <RootNamespace>Listener</RootNamespace>
     <BaseOutputPath></BaseOutputPath>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -9,9 +9,9 @@
     <Title>Nexo 3.0 Listener</Title>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
-    <Version>4.9.1</Version>
-    <FileVersion>4.9.1</FileVersion>
-    <AssemblyVersion>4.9.1</AssemblyVersion>
+    <Version>4.9.3</Version>
+    <FileVersion>4.9.3</FileVersion>
+    <AssemblyVersion>4.9.3</AssemblyVersion>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
   </PropertyGroup>
 

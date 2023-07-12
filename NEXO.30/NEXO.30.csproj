@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net35;net47;net60</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net35;net47;net6.0</TargetFrameworks>
     <RootNamespace>NEXO</RootNamespace>
     <AssemblyName>PMS.NEXO30</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.9.1</Version>
+    <Version>4.9.3</Version>
     <Copyright>PMS - philippemp31 at outlook dot com - 2022</Copyright>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
@@ -28,7 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="7.5.2" />
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PMS.COMMON" Version="7.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,10 +61,13 @@
 
   <PropertyGroup>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
-    <FileVersion>4.9.1</FileVersion>
-    <AssemblyVersion>4.9.1</AssemblyVersion>
+    <FileVersion>4.9.3</FileVersion>
+    <AssemblyVersion>4.9.3</AssemblyVersion>
+    <!--
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\pms.key.file.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)pms.key.file.pfx</AssemblyOriginatorKeyFile>
+    -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -306,7 +306,7 @@ namespace Listener
 				}
 				catch (Exception ex)
 				{
-					CLog.EXCEPT(ex);
+					//CLog.EXCEPT(ex);
 					throw new WSException($"failed to connect to web socket [{Settings.Client.URI}]");
 				}
 				while (WebSocketState.Open == WS.State)
@@ -319,7 +319,7 @@ namespace Listener
 						case WSAction.Connect:
 							CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = CStream.Localhost(), Port = Settings.Server.Port, ReceiveTimeout = 0 };
 							if (null == (streamIO = CStream.Connect(clientSettings)))
-								throw new Exception($"failed to connect to listener, disconnecting from server");
+								throw new Exception($"failed to connect to listener (as client), disconnecting from WS server");
 							setStatusFnc?.Invoke(ListenerStatus.LoginToWSServer);
 							action = WSAction.SendLoginRequest;
 							break;
@@ -510,7 +510,7 @@ namespace Listener
 			try
 			{
 				// disconnect from WS server
-				Source.Cancel();
+				Source?.Cancel();
 			}
 			catch (Exception ex)
 			{
@@ -589,9 +589,11 @@ namespace Listener
 			CSettings settings = (CSettings)parameters;
 			try
 			{
-				if (settings.Server.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
+				if ((settings.RunAsClient && settings.Server.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
+					|| (!settings.RunAsClient && settings.Server.UseAllowedIP && settings.Server.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
+					|| (!settings.RunAsClient && !settings.Server.UseAllowedIP))
 				{
-					CLogger.TRACE($"Accepting connection from client {tcp.Client.RemoteEndPoint}");
+					CLogger.TRACE($"Accepting connection from client {tcp.Client.RemoteEndPoint}{(settings.Server.UseAllowedIP ? string.Empty : $" (not verifying calling IP)")}");
 					return true;
 				}
 				else
@@ -655,6 +657,27 @@ namespace Listener
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
 
+			Func<string, object> ContainsKey = (string _kEY_) =>
+			{
+				try
+				{
+					if (listenerRequest.ExtendedData.ContainsKey(_kEY_))
+						return listenerRequest.ExtendedData[_kEY_];
+				}
+				catch (Exception ex)
+				{
+					CLog.EXCEPT(ex);
+				}
+				return null;
+			};
+
+			object obj;
+			string s;
+			string specificIP = "IP";
+			string specificPort = "Port";
+			string specificConnectTimeout = "ConnectTimeout";
+			string specificReceiveTimeout = "ReceiveTimeout";
+
 			// verify the POI actually exists in the configuration
 			CSettings.CPOI poi = null;
 			try
@@ -663,38 +686,77 @@ namespace Listener
 			}
 			catch (Exception ex)
 			{
-				CLog.EXCEPT(ex);
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorRequestedPOIDoesntExist, listenerRequest.POI)));
-				listenerReply.Status = ReplyStatus.invalidPOIRequested;
-				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
-			}
+				bool ok = false;
 
-			// if coming from a secured connection let's see whether some data has been provided to overwrite existing ones
-			if (listenerRequest.Secured)
-			{
-				Func<string, object> ContainsKey = (string _kEY_) =>
-				{
-					if (listenerRequest.ExtendedData.ContainsKey(_kEY_))
-						return listenerRequest.ExtendedData[_kEY_];
-					return null;
-				};
-
-				object obj;
-				string s;
+				CSettings.CPOI spoi = new CSettings.CPOI() { };
 				// has an IP been specified
-				if (null != (obj = ContainsKey("IP")))
+				if (null != (obj = ContainsKey(specificIP)))
 				{
 					s = obj.ToString();
 					if (!s.IsNullOrEmpty() && IPAddress.TryParse(s, out IPAddress addr))
-						poi.ConnectionSettings.IP = addr.ToString();
+						spoi.ConnectionSettings.IP = addr.ToString();
 				}
-				//if (null != (obj = ContainsKey("Port")))
-				//{
-				//	s = obj.ToString();
-				//	if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
-				//		poi.ConnectionSettings.Port = port;
-				//}
-			};
+				// has a port been specified
+				if (null != (obj = ContainsKey(specificPort)))
+				{
+					s = obj.ToString();
+					if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
+						spoi.ConnectionSettings.Port = port;
+				}
+
+				// arrived here let's see if we can use the specified address or not
+				if (ok = spoi.ConnectionSettings.IsValid)
+				{
+					// has a receive timeout been specified
+					if (null != (obj = ContainsKey(specificReceiveTimeout)))
+					{
+						s = obj.ToString();
+						if (!s.IsNullOrEmpty() && int.TryParse(s, out int tm))
+							spoi.ConnectionSettings.ReceiveTimeout = tm;
+					}
+					// has a connect timeout been specified
+					if (null != (obj = ContainsKey(specificConnectTimeout)))
+					{
+						s = obj.ToString();
+						if (!s.IsNullOrEmpty() && int.TryParse(s, out int tm))
+							spoi.ConnectionSettings.ConnectTimeout = tm;
+					}
+
+					spoi.Label = $"dynamic POI ({spoi.ConnectionSettings.IP})";
+					poi = spoi;
+				}
+
+				// shall we continue or not
+				if (!ok)
+				{
+					CLog.EXCEPT(ex);
+					CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorRequestedPOIDoesntExist, listenerRequest.POI)));
+					listenerReply.Status = ReplyStatus.invalidPOIRequested;
+					return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
+				}
+			}
+			CLog.TRACE($"using {(poi.Label.IsNullOrEmpty() ? poi.FullIP : $"{poi.Label} at {poi.FullIP}")}");
+
+			/*
+			 * this has been commented because dynalic IP is now available to everybody
+			 */
+			//// if coming from a secured connection let's see whether some data has been provided to overwrite existing ones
+			//if (listenerRequest.Secured)
+			//{
+			//	// has an IP been specified
+			//	if (null != (obj = ContainsKey(specificIP)))
+			//	{
+			//		s = obj.ToString();
+			//		if (!s.IsNullOrEmpty() && IPAddress.TryParse(s, out IPAddress addr))
+			//			poi.ConnectionSettings.IP = addr.ToString();
+			//	}
+			//	//if (null != (obj = ContainsKey("Port")))
+			//	//{
+			//	//	s = obj.ToString();
+			//	//	if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
+			//	//		poi.ConnectionSettings.Port = port;
+			//	//}
+			//};
 
 			string path = null;
 			string tempName = null;
@@ -724,13 +786,13 @@ namespace Listener
 			Func<string> SupportedServices = delegate ()
 				{
 					int i = 0;
-					string s = null;
+					string _s_ = null;
 					foreach (MessageCategoryEnumeration cat in Settings.Nexo.AllowedCategories)
 					{
 						i++;
-						s += cat.ToString() + (Settings.Nexo.AllowedCategories.Count == i ? null : ", ");
+						_s_ += cat.ToString() + (Settings.Nexo.AllowedCategories.Count == i ? null : ", ");
 					}
-					return s;
+					return _s_;
 				};
 
 			if (!Settings.Nexo.AllowedCategories.Contains((MessageCategoryEnumeration)category))
@@ -791,74 +853,6 @@ namespace Listener
 			/*
 			 * set specific data
 			 */
-
-			#region code has been commented
-			//// take a list of strings (refer to PathToData) and add it to a dictionary of paths + save the value to use
-			//Func<List<string>, object, DataPath, bool> SavePathToData = (List<string> path, object value, DataPath dp) =>
-			//{
-			//	try
-			//	{
-
-			//		foreach (string s in path)
-			//		{
-			//			if (!dp.ContainsKey(s))
-			//			{
-			//				// add a new node
-			//				dp.Add(s, new DataPath());
-			//			}
-			//			dp = dp[s];
-			//		}
-			//		// arrived here the full path has been created, save the value
-			//		dp.Value = value;
-			//		return true;
-			//	}
-			//	catch (Exception) { }
-			//	return false;
-			//};
-
-			//Func<Dictionary<string, object>, DataPath, bool> CreatePathToData = (Dictionary<string, object> req, DataPath data) =>
-			//{
-			//	try
-			//	{
-			//		foreach (KeyValuePair<string, object> k in req)
-			//		{
-			//			List<string> l = PathToData(k.Key);
-			//			if (null != l)
-			//			{
-			//				DataPath dp = data;
-			//				foreach (string s in l)
-			//				{
-			//					if (!dp.ContainsKey(s))
-			//					{
-			//						// add a new node
-			//						dp.Add(s, new DataPath());
-			//					}
-			//					dp = dp[s];
-			//				}
-			//				// arrived here the full path has been created, save the value
-			//				dp.Value = k.Value;
-			//			}
-			//		}
-			//		return true;
-			//	}
-			//	catch (Exception) { }
-			//	return false;
-			//};
-
-			//DataPath tosend = new DataPath();
-			//if (!CreatePathToData(listenerRequest.ElementsToSend, tosend))
-			//{
-			//	CLogger.Add(error = $"Failed creating the list of objects to send, no more processing will occur", TLog.ERROR);
-			//	return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(new CListenerReply() { Status = ReplyStatus.mandatoryObjectNotSet, Message = error }));
-			//}
-
-			//DataPath toreturn = new DataPath();
-			//if (!CreatePathToData(listenerRequest.ElementsToSend, toreturn))
-			//{
-			//	CLogger.Add(error = $"Failed creating the list of objects to send, no more processing will occur", TLog.ERROR);
-			//	return Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(new CListenerReply() { Status = ReplyStatus.mandatoryObjectNotSet, Message = error }));
-			//}
-			#endregion
 
 			// search and set data to send
 			DataToExchangeList tosend = new DataToExchangeList();
@@ -937,7 +931,7 @@ namespace Listener
 									Message = string.Format(Resources.LoginTryingToLogWith, new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
 								})), tcp),
 								addBufferSize, action, reserved);
-							if (ok = client.SendRequestSync(login))
+							if (ok = client.SendRequestSync(login, poi.ConnectionSettings.GeneralTimer))
 							{
 								CLogger.TRACE(sclient + (listenerReply.Message = Resources.ProcessingConnectedToPOI));
 								StreamServer.Send1WayNotification(SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
@@ -1060,7 +1054,7 @@ namespace Listener
 									Message = string.Format(Resources.Logout, new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
 								})), tcp),
 								addBufferSize, action, reserved);
-							client.SendRequestSync(logout);
+							//client.SendRequestSync(logout, poi.ConnectionSettings.GeneralTimer);
 						}
 						client.Disconnect();
 					}
@@ -1285,7 +1279,8 @@ namespace Listener
 			Type type = NexoRetailer.GetRealObjectType(o);
 			foreach (PropertyInfo pinfo in type.GetProperties())
 			{
-				if (!pinfo.PropertyType.IsArray && MemberTypes.Property == pinfo.MemberType && pinfo.PropertyType.IsPublic)
+				//if (!pinfo.PropertyType.IsArray && MemberTypes.Property == pinfo.MemberType && pinfo.PropertyType.IsPublic)
+				if (MemberTypes.Property == pinfo.MemberType && pinfo.PropertyType.IsPublic)
 				{
 					Type pt = pinfo.PropertyType;
 					object pv = pinfo.GetValue(o, null);
@@ -1354,7 +1349,7 @@ namespace Listener
 		{
 			try
 			{
-				string sclient = $"[{tcp.Client.RemoteEndPoint}] ";
+				string sclient = $"[{tcp?.Client?.RemoteEndPoint}] ";
 				if (MessageCategoryEnumeration.Display == msg.Category)
 				{
 					string s = default;
@@ -1446,6 +1441,8 @@ namespace Listener
 			{
 				CLog.EXCEPT(ex);
 			}
+
+			//msg.Action = NexoNextAction.noReply;
 		}
 		void OnReceivedReply(string xml, NexoObjectToProcess msg, TcpClient tcp, CThread thread, object parameters) { }
 		/// <summary>
@@ -1460,7 +1457,7 @@ namespace Listener
 		{
 			try
 			{
-				string sclient = $"[{tcp.Client.RemoteEndPoint}] ";
+				string sclient = $"[{tcp?.Client?.RemoteEndPoint}] ";
 				string notification = default;
 				NexoEvent nxo = msg.CurrentObject as NexoEvent;
 				notification = $"[{nxo.EventToNotify}] {nxo.EventDetails}";

@@ -3,9 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>4.9.1</Version>
-    <FileVersion>4.9.1</FileVersion>
-    <AssemblyVersion>4.9.1</AssemblyVersion>
+    <Version>4.9.3</Version>
+    <FileVersion>4.9.3</FileVersion>
+    <AssemblyVersion>4.9.3</AssemblyVersion>
     <RootNamespace>NexoListener</RootNamespace>
     <AssemblyName>NexoListener30</AssemblyName>
     <Nullable>disable</Nullable>
@@ -29,10 +29,22 @@
     <ProjectReference Include="..\Listener.30\Listener.30.csproj" />
   </ItemGroup>
 
-  <!--
-  <Target Name="AfterBuild" Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <MSBuild Condition="'$(DeployOnBuild)'!='true'" Projects="$(MSBuildProjectFullPath)" Properties="DeployOnBuild=true;PublishProfile=FolderProfile;BuildingInsideVisualStudio=False"/>
+  <PropertyGroup>
+    <PublishProfile>true</PublishProfile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;osx-x64;osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Command="dotnet publish -p:PublishProfile=win-x64d --no-build" />
+
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -p:PublishProfile=win-x64 --no-build" />
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -c Release -p:PublishProfile=osx-x64 --no-build" />
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -c Release -p:PublishProfile=osx-arm64 --no-build" />
   </Target>
-  -->
 
 </Project>

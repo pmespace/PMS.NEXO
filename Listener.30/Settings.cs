@@ -35,6 +35,34 @@ namespace Listener
 			List<CListenerReply> Activity { get; set; }
 		}
 
+		public class CConnectionSettings : CStreamClientSettings
+		{
+
+			#region constructor
+			#endregion
+
+			#region properties
+			/// <summary>
+			/// This timer applies to all operations BUT payment (of any kind)/refund
+			/// Its value is in seconds
+			/// </summary>
+			public int GeneralTimer { get => _generaltimer; set => _generaltimer = 0 <= value ? value : Math.Abs(value); }
+			int _generaltimer = 10;
+			/// <summary>
+			/// This timer applies to payment (of any kind)/refund operations
+			/// Its value is in seconds
+			/// </summary>
+			public int PaymentTimer { get => _paymenttimer; set => _paymenttimer = 0 <= value ? value : Math.Abs(value); }
+			int _paymenttimer = NO_TIMEOUT;
+			#endregion
+
+			#region public methods
+			#endregion
+
+			#region internal private methods
+			#endregion
+		}
+
 		/// <summary>
 		/// describes an individual POI
 		/// </summary>
@@ -42,11 +70,11 @@ namespace Listener
 		{
 			public CPOI()
 			{
-				ConnectionSettings = new CStreamClientSettings();
+				ConnectionSettings = new CConnectionSettings();
 			}
 
 			public string Label { get; set; }
-			public CStreamClientSettings ConnectionSettings { get; set; }
+			public CConnectionSettings ConnectionSettings { get; set; }
 
 			[JsonIgnore]
 			public string FullIP { get => $"{ConnectionSettings.IP}:{ConnectionSettings.Port}"; }
@@ -204,11 +232,17 @@ namespace Listener
 		/// allowed IPs able to connect to the listener
 		/// </summary>
 		public CListSring AllowedIP { get; set; }
+		/// <summary>
+		/// indicates whether allowed IPs must be used or not
+		/// if false <see cref="AllowedIP"/> won't be used and anybody can connect to the listener
+		/// if true any connection is checked against declared IPs insode <see cref="AllowedIP"/> before granting access or not
+		/// </summary>
+		public bool UseAllowedIP { get; set; }
 
 		public override string ToString()
 		{
 			string s = $"Server port: {Port}{Chars.CRLF}";
-			s += $"AllowedIP:" + Chars.CRLF + AllowedIP.ToString() + Chars.CRLF;
+			s += (UseAllowedIP ? $"AllowedIP:" + Chars.CRLF + AllowedIP.ToString() + Chars.CRLF : string.Empty);
 			return s;
 		}
 	}

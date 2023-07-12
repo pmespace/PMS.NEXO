@@ -337,6 +337,8 @@ Public Class FSimulator
 				cbxLog.SelectedText = TLog.TRACE.ToString
 			End Try
 
+			cbKeepConnected.Checked = settings.KeepConnected
+
 			ConnectionSettings = settings.ConnectionSettings
 			If IsNothing(ConnectionSettings) Then ConnectionSettings = New SettingsConnectionSettings
 
@@ -393,6 +395,8 @@ Public Class FSimulator
 		settings.ConnectionSettings = ConnectionSettings
 
 		settings.TLog = cbxLog.SelectedText
+
+		settings.KeepConnected = cbKeepConnected.Checked
 
 		json.WriteSettings(settings)
 	End Sub
@@ -1177,6 +1181,7 @@ Public Class FSimulator
 		If NexoNextAction.nothing <> obj.SuggestedAction Then
 			Select Case obj.Type
 				Case MessageTypeEnumeration.Request
+					'Select Case 
 				Case MessageTypeEnumeration.Notification
 					xml = obj.CurrentObject.SerializedRequest
 					activity = ActivityEvent.receivedRequest
@@ -1306,7 +1311,8 @@ Public Class FSimulator
 				.OnStart = AddressOf GatewayOnStart,
 				.OnConnect = AddressOf GatewayOnConnect,
 				.OnDisconnect = AddressOf GatewayOnDisconnect,
-				.OnStop = AddressOf GatewayOnStop
+				.OnStop = AddressOf GatewayOnStop,
+				.Parameters = New GatewayParams With {.KeepConnected = cbKeepConnected.Checked}
 				}
 			'AddressOf GatewayOnStop)
 			If gateway.StartServer(startServerType) Then
@@ -1317,6 +1323,9 @@ Public Class FSimulator
 			SetButtons()
 		End If
 	End Sub
+	Structure GatewayParams
+		Public KeepConnected As Boolean
+	End Structure
 
 	Private Function GatewayOnMessage(tcp As TcpClient, request As Byte(), ByRef addBufferSize As Boolean, thread As CThread, parameters As Object, privateData As Object, reserved As Object) As Byte()
 		'the gateway received a request that must be forwarded to the distant server
@@ -1331,7 +1340,13 @@ Public Class FSimulator
 		'get the message as a string
 		Dim xmlrequest As String = Encoding.UTF8.GetString(request)
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.forwardingRequest, .Message = "FORWARDING REQUEST FROM " & tcp.Client.RemoteEndPoint.ToString & " TO " & settings.FullIP & MessageLength(xmlrequest) & vbCrLf & xmlrequest})
-		Dim xmlreply As String = NexoRetailerClient.SendRawRequest(settings, xmlrequest)
+		Dim xmlreply As String
+		If DirectCast(parameters, GatewayParams).KeepConnected Then
+			'<<<>>>
+			xmlreply = NexoRetailerClient.SendRawRequest(settings, xmlrequest)
+		Else
+			xmlreply = NexoRetailerClient.SendRawRequest(settings, xmlrequest)
+		End If
 		RichTextBox1.Invoke(myDelegate, New Activity() With {.position = Position.gateway, .Evt = ActivityEvent.receivingForwardedReply, .Message = "FORWARDING REPLY FROM " & settings.FullIP & " TO " & tcp.Client.RemoteEndPoint.ToString & MessageLength(xmlrequest) & vbCrLf & xmlreply})
 		'do not forget, we're using nexo hence string messages, the system must add the buffer size when returning the reply
 		addBufferSize = True

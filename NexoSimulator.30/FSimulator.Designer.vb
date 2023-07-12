@@ -29,6 +29,7 @@ Partial Class FSimulator
 		Me.pbClear = New System.Windows.Forms.Button()
 		Me.pbSaveContent = New System.Windows.Forms.Button()
 		Me.pbSaveSettings = New System.Windows.Forms.Button()
+		Me.cbxLog = New System.Windows.Forms.ComboBox()
 		Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
 		Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
 		Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
@@ -139,7 +140,7 @@ Partial Class FSimulator
 		Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
 		Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
 		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-		Me.cbxLog = New System.Windows.Forms.ComboBox()
+		Me.cbKeepConnected = New System.Windows.Forms.CheckBox()
 		Me.PanelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.TableLayoutPanel6.SuspendLayout()
@@ -279,6 +280,16 @@ Partial Class FSimulator
 		Me.pbSaveSettings.TabIndex = 1
 		Me.pbSaveSettings.Text = "Save settings"
 		Me.pbSaveSettings.UseVisualStyleBackColor = True
+		'
+		'cbxLog
+		'
+		Me.cbxLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.cbxLog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		Me.cbxLog.FormattingEnabled = True
+		Me.cbxLog.Location = New System.Drawing.Point(3, 4)
+		Me.cbxLog.Name = "cbxLog"
+		Me.cbxLog.Size = New System.Drawing.Size(121, 21)
+		Me.cbxLog.TabIndex = 5
 		'
 		'TableLayoutPanel6
 		'
@@ -646,7 +657,7 @@ Partial Class FSimulator
 		Me.serverToReachPanel14.Name = "serverToReachPanel14"
 		Me.serverToReachPanel14.RowCount = 1
 		Me.serverToReachPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.serverToReachPanel14.Size = New System.Drawing.Size(523, 38)
+		Me.serverToReachPanel14.Size = New System.Drawing.Size(612, 38)
 		Me.serverToReachPanel14.TabIndex = 0
 		'
 		'panelGatewayPort
@@ -716,7 +727,7 @@ Partial Class FSimulator
 		Me.panelGatewayServer.Name = "panelGatewayServer"
 		Me.panelGatewayServer.RowCount = 1
 		Me.panelGatewayServer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelGatewayServer.Size = New System.Drawing.Size(253, 32)
+		Me.panelGatewayServer.Size = New System.Drawing.Size(342, 32)
 		Me.panelGatewayServer.TabIndex = 1
 		'
 		'TableLayoutPanel12
@@ -726,16 +737,18 @@ Partial Class FSimulator
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.TableLayoutPanel12.AutoSize = True
 		Me.TableLayoutPanel12.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.TableLayoutPanel12.ColumnCount = 2
+		Me.TableLayoutPanel12.ColumnCount = 3
 		Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel12.Controls.Add(Me.Label6, 0, 0)
 		Me.TableLayoutPanel12.Controls.Add(Me.efGatewayServerIP, 1, 0)
+		Me.TableLayoutPanel12.Controls.Add(Me.cbKeepConnected, 2, 0)
 		Me.TableLayoutPanel12.Location = New System.Drawing.Point(3, 3)
 		Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
 		Me.TableLayoutPanel12.RowCount = 1
 		Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel12.Size = New System.Drawing.Size(114, 26)
+		Me.TableLayoutPanel12.Size = New System.Drawing.Size(203, 26)
 		Me.TableLayoutPanel12.TabIndex = 10
 		'
 		'Label6
@@ -768,7 +781,7 @@ Partial Class FSimulator
 		Me.panelGatewayDistantPort.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelGatewayDistantPort.Controls.Add(Me.udGatewayServerPort, 1, 0)
 		Me.panelGatewayDistantPort.Controls.Add(Me.Label11, 0, 0)
-		Me.panelGatewayDistantPort.Location = New System.Drawing.Point(123, 3)
+		Me.panelGatewayDistantPort.Location = New System.Drawing.Point(212, 3)
 		Me.panelGatewayDistantPort.Name = "panelGatewayDistantPort"
 		Me.panelGatewayDistantPort.RowCount = 1
 		Me.panelGatewayDistantPort.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -824,11 +837,11 @@ Partial Class FSimulator
 		Me.panelGatewayButtons.Controls.Add(Me.cbAutostartGateway, 2, 0)
 		Me.panelGatewayButtons.Controls.Add(Me.pbStopGateway, 0, 0)
 		Me.panelGatewayButtons.Controls.Add(Me.pbStartGateway, 0, 0)
-		Me.panelGatewayButtons.Location = New System.Drawing.Point(686, 3)
+		Me.panelGatewayButtons.Location = New System.Drawing.Point(775, 3)
 		Me.panelGatewayButtons.Name = "panelGatewayButtons"
 		Me.panelGatewayButtons.RowCount = 1
 		Me.panelGatewayButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelGatewayButtons.Size = New System.Drawing.Size(343, 38)
+		Me.panelGatewayButtons.Size = New System.Drawing.Size(254, 38)
 		Me.panelGatewayButtons.TabIndex = 0
 		'
 		'cbAutostartGateway
@@ -1164,11 +1177,11 @@ Partial Class FSimulator
 		Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel10.Controls.Add(Me.efDeviceID, 1, 0)
 		Me.TableLayoutPanel10.Controls.Add(Me.Label4, 0, 0)
-		Me.TableLayoutPanel10.Location = New System.Drawing.Point(405, 6)
+		Me.TableLayoutPanel10.Location = New System.Drawing.Point(415, 6)
 		Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
 		Me.TableLayoutPanel10.RowCount = 1
 		Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel10.Size = New System.Drawing.Size(137, 26)
+		Me.TableLayoutPanel10.Size = New System.Drawing.Size(107, 26)
 		Me.TableLayoutPanel10.TabIndex = 3
 		'
 		'efDeviceID
@@ -1176,7 +1189,7 @@ Partial Class FSimulator
 		Me.efDeviceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efDeviceID.Location = New System.Drawing.Point(64, 3)
 		Me.efDeviceID.Name = "efDeviceID"
-		Me.efDeviceID.Size = New System.Drawing.Size(70, 20)
+		Me.efDeviceID.Size = New System.Drawing.Size(40, 20)
 		Me.efDeviceID.TabIndex = 0
 		'
 		'Label4
@@ -1200,11 +1213,11 @@ Partial Class FSimulator
 		Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel4.Controls.Add(Me.efServiceID, 1, 0)
 		Me.TableLayoutPanel4.Controls.Add(Me.device, 0, 0)
-		Me.TableLayoutPanel4.Location = New System.Drawing.Point(260, 6)
+		Me.TableLayoutPanel4.Location = New System.Drawing.Point(300, 6)
 		Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
 		Me.TableLayoutPanel4.RowCount = 1
 		Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel4.Size = New System.Drawing.Size(139, 26)
+		Me.TableLayoutPanel4.Size = New System.Drawing.Size(109, 26)
 		Me.TableLayoutPanel4.TabIndex = 2
 		'
 		'efServiceID
@@ -1212,7 +1225,7 @@ Partial Class FSimulator
 		Me.efServiceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efServiceID.Location = New System.Drawing.Point(66, 3)
 		Me.efServiceID.Name = "efServiceID"
-		Me.efServiceID.Size = New System.Drawing.Size(70, 20)
+		Me.efServiceID.Size = New System.Drawing.Size(40, 20)
 		Me.efServiceID.TabIndex = 0
 		'
 		'device
@@ -1234,13 +1247,14 @@ Partial Class FSimulator
 		Me.TableLayoutPanel8.ColumnCount = 2
 		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+		Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
 		Me.TableLayoutPanel8.Controls.Add(Me.efPOIID, 1, 0)
 		Me.TableLayoutPanel8.Controls.Add(Me.Label2, 0, 0)
 		Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 6)
 		Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
 		Me.TableLayoutPanel8.RowCount = 1
 		Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel8.Size = New System.Drawing.Size(121, 26)
+		Me.TableLayoutPanel8.Size = New System.Drawing.Size(141, 26)
 		Me.TableLayoutPanel8.TabIndex = 0
 		'
 		'efPOIID
@@ -1248,7 +1262,7 @@ Partial Class FSimulator
 		Me.efPOIID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efPOIID.Location = New System.Drawing.Point(48, 3)
 		Me.efPOIID.Name = "efPOIID"
-		Me.efPOIID.Size = New System.Drawing.Size(70, 20)
+		Me.efPOIID.Size = New System.Drawing.Size(90, 20)
 		Me.efPOIID.TabIndex = 0
 		Me.efPOIID.Text = "myPOI"
 		'
@@ -1271,13 +1285,14 @@ Partial Class FSimulator
 		Me.TableLayoutPanel9.ColumnCount = 2
 		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel9.Controls.Add(Me.efSaleID, 1, 0)
+		Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
 		Me.TableLayoutPanel9.Controls.Add(Me.Label3, 0, 0)
-		Me.TableLayoutPanel9.Location = New System.Drawing.Point(130, 6)
+		Me.TableLayoutPanel9.Controls.Add(Me.efSaleID, 1, 0)
+		Me.TableLayoutPanel9.Location = New System.Drawing.Point(150, 6)
 		Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
 		Me.TableLayoutPanel9.RowCount = 1
 		Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel9.Size = New System.Drawing.Size(124, 26)
+		Me.TableLayoutPanel9.Size = New System.Drawing.Size(144, 26)
 		Me.TableLayoutPanel9.TabIndex = 1
 		'
 		'efSaleID
@@ -1285,7 +1300,7 @@ Partial Class FSimulator
 		Me.efSaleID.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efSaleID.Location = New System.Drawing.Point(51, 3)
 		Me.efSaleID.Name = "efSaleID"
-		Me.efSaleID.Size = New System.Drawing.Size(70, 20)
+		Me.efSaleID.Size = New System.Drawing.Size(90, 20)
 		Me.efSaleID.TabIndex = 0
 		Me.efSaleID.Text = "mySale"
 		'
@@ -1314,11 +1329,11 @@ Partial Class FSimulator
 		Me.TableLayoutPanel3.Controls.Add(Me.cbUseConnectionSettings, 0, 0)
 		Me.TableLayoutPanel3.Controls.Add(Me.efConnectionReply, 2, 0)
 		Me.TableLayoutPanel3.Controls.Add(Me.pbConnectionSettings, 1, 0)
-		Me.TableLayoutPanel3.Location = New System.Drawing.Point(548, 3)
+		Me.TableLayoutPanel3.Location = New System.Drawing.Point(528, 3)
 		Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
 		Me.TableLayoutPanel3.RowCount = 1
 		Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel3.Size = New System.Drawing.Size(345, 32)
+		Me.TableLayoutPanel3.Size = New System.Drawing.Size(365, 32)
 		Me.TableLayoutPanel3.TabIndex = 4
 		'
 		'cbUseConnectionSettings
@@ -1337,7 +1352,7 @@ Partial Class FSimulator
 		Me.efConnectionReply.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.efConnectionReply.Location = New System.Drawing.Point(189, 6)
 		Me.efConnectionReply.Name = "efConnectionReply"
-		Me.efConnectionReply.Size = New System.Drawing.Size(153, 20)
+		Me.efConnectionReply.Size = New System.Drawing.Size(173, 20)
 		Me.efConnectionReply.TabIndex = 2
 		'
 		'pbConnectionSettings
@@ -1785,15 +1800,16 @@ Partial Class FSimulator
 		Me.pbSendRequest.Text = "Send request"
 		Me.pbSendRequest.UseVisualStyleBackColor = True
 		'
-		'cbxLog
+		'cbKeepConnected
 		'
-		Me.cbxLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cbxLog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.cbxLog.FormattingEnabled = True
-		Me.cbxLog.Location = New System.Drawing.Point(3, 4)
-		Me.cbxLog.Name = "cbxLog"
-		Me.cbxLog.Size = New System.Drawing.Size(121, 21)
-		Me.cbxLog.TabIndex = 5
+		Me.cbKeepConnected.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbKeepConnected.AutoSize = True
+		Me.cbKeepConnected.Location = New System.Drawing.Point(117, 4)
+		Me.cbKeepConnected.Name = "cbKeepConnected"
+		Me.cbKeepConnected.Size = New System.Drawing.Size(83, 17)
+		Me.cbKeepConnected.TabIndex = 2
+		Me.cbKeepConnected.Text = "Keep active"
+		Me.cbKeepConnected.UseVisualStyleBackColor = True
 		'
 		'FSimulator
 		'
@@ -2000,4 +2016,5 @@ Partial Class FSimulator
 	Friend WithEvents ToolTip1 As ToolTip
 	Friend WithEvents panelCommandButtons As TableLayoutPanel
 	Friend WithEvents cbxLog As ComboBox
+	Friend WithEvents cbKeepConnected As CheckBox
 End Class

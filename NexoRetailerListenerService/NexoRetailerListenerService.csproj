@@ -18,11 +18,11 @@
 
     <PackageOutputPath></PackageOutputPath>
 
-    <Version>4.9.1</Version>
+    <Version>4.9.3</Version>
 
-    <FileVersion>4.9.1</FileVersion>
+    <FileVersion>4.9.3</FileVersion>
 
-    <AssemblyVersion>4.9.1</AssemblyVersion>
+    <AssemblyVersion>4.9.3</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>

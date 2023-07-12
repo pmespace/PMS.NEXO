@@ -78,9 +78,9 @@ namespace NEXO.Client
 		[DispId(102)]
 		void Disconnect();
 		[DispId(110)]
-		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, /*NexoRetailerClientSettings settings = null,*/ bool autoComplete = true);
+		NexoRetailerClientHandle SendRequest(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(111)]
-		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, /*NexoRetailerClientSettings settings = null,*/ bool autoComplete = true);
+		NexoRetailerClientHandle SendRequest(SaleToPOIRequest msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(120)]
 		bool SendRequestSync(NexoObject msg, int timer = CStreamClientSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(121)]
@@ -413,7 +413,7 @@ namespace NEXO.Client
 				// set no timeout on receive
 				if (f = (null != (StreamIO = CStream.Connect(settings.StreamClientSettings))))
 				{
-					StreamIO.Tcp.ReceiveTimeout = CStreamSettings.NO_TIMEOUT;
+					StreamIO.Tcp.ReceiveTimeout = Timeout.Infinite;
 					_id = ((IPEndPoint)StreamIO.Tcp.Client.LocalEndPoint).Port;
 				}
 			}
@@ -944,7 +944,7 @@ namespace NEXO.Client
 									try
 									{
 										// inform the application of the received message waiting for next step
-										onReceived(toprocess.Item.XML, toprocess, StreamIO.Tcp, thread, o);
+										onReceived(toprocess.Item.XML, toprocess, StreamIO?.Tcp, thread, o);
 									}
 									catch (Exception ex)
 									{

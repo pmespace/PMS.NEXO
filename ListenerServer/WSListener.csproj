@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Listener.WS</RootNamespace>
-    <Version>4.9.3</Version>
-    <FileVersion>4.9.3</FileVersion>
-    <AssemblyVersion>4.9.3</AssemblyVersion>
+    <Version>4.9.5</Version>
+    <FileVersion>4.9.5</FileVersion>
+    <AssemblyVersion>4.9.5</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

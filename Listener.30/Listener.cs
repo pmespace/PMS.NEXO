@@ -126,7 +126,7 @@ namespace Listener
 
 				// load settings
 				CJson<CSettings> json = new CJson<CSettings>(settingsFileName);
-				CLogger.TRACE($"Log file: {CLog.LogFileName}");
+				CLogger.TRACE($"Log file: {CLog.LogFilename}");
 				CLogger.TRACE($"Trying to read settings from {json.FileName}");
 
 				if (null == (Settings = json.ReadSettings()))

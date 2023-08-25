@@ -123,11 +123,11 @@ namespace NEXO.Server
 				return null;
 			CJson<NexoRetailerServerDatabaseSettings> json = new CJson<NexoRetailerServerDatabaseSettings>(databaseSettingsFileName);
 			NexoRetailerServerDatabaseSettings settings = default;
-				try
+			try
 			{
-				settings= json.ReadSettings();
+				settings = json.ReadSettings();
 			}
-			catch (Exception)			{			}
+			catch (Exception) { }
 			return json.ReadSettings();
 		}
 		/// <summary>

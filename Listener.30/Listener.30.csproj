@@ -9,9 +9,9 @@
     <Title>Nexo 3.0 Listener</Title>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
-    <Version>4.9.3</Version>
-    <FileVersion>4.9.3</FileVersion>
-    <AssemblyVersion>4.9.3</AssemblyVersion>
+    <Version>4.9.5</Version>
+    <FileVersion>4.9.5</FileVersion>
+    <AssemblyVersion>4.9.5</AssemblyVersion>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
   </PropertyGroup>
 

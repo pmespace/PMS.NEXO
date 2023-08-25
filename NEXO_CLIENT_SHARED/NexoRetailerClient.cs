@@ -88,7 +88,7 @@ namespace NEXO.Client
 		[DispId(200)]
 		bool SendReply(NexoObject msg, CThread thread, bool autoComplete = true);
 		[DispId(201)]
-		bool SendReply(SaleToPOIResponse msg, CThread thread, bool autoComplete = true);
+		bool SendReply(SaleToPOIResponse reply, SaleToPOIRequest request, CThread thread, bool autoComplete = true);
 		[DispId(300)]
 		NexoRetailerClientHandle SendRawRequest(string xml, int timer = CStreamSettings.NO_TIMEOUT, bool autoComplete = true);
 		[DispId(301)]
@@ -410,6 +410,7 @@ namespace NEXO.Client
 			Monitor.Enter(myLock);
 			try
 			{
+				if (default != receivedMessages) receivedMessages.Clear();
 				// set no timeout on receive
 				if (f = (null != (StreamIO = CStream.Connect(settings.StreamClientSettings))))
 				{
@@ -530,6 +531,7 @@ namespace NEXO.Client
 #endif
 				}
 			}
+			if (default != receivedMessages) receivedMessages.Clear();
 		}
 		/// <summary>
 		/// Send a REQUEST
@@ -558,9 +560,8 @@ namespace NEXO.Client
 						Monitor.Enter(myLock);
 						try
 						{
-							//<<<>>>
 							// if the exchanged message implies a reply let's save it, otherwise let's keep the previous reply
-							if (item.ReplyRequired)
+							if (item.ReplyRequired || msg.ResponseIsRequired)
 							{
 								// save the exchange for later use
 								exchange = new Exchange(item, timer);
@@ -668,15 +669,16 @@ namespace NEXO.Client
 			}
 			return false;
 		}
-		public bool SendReply(SaleToPOIResponse msg, CThread thread, bool autoComplete = true)
+		public bool SendReply(SaleToPOIResponse reply, SaleToPOIRequest request, CThread thread, bool autoComplete = true)
 		{
-			NexoItem item = new NexoItem(msg);
+			NexoItem item = new NexoItem(reply);
 			if (item.IsValid)
 			{
 				NexoObject nxo = (NexoObject)NexoItem.AllocateObject(item.Category);
 				if (null != nxo)
 				{
-					nxo.Reply = msg;
+					nxo.Request = request;
+					nxo.Reply = reply;
 					return SendReply(nxo, thread);
 				}
 			}
@@ -772,6 +774,8 @@ namespace NEXO.Client
 				// start receiving messages from the server
 				while (default != (xml = CStream.ReceiveAsString(StreamIO)))
 				{
+					CLog.DEBUG($"{ReceiverThread.Description} received {xml}");
+
 					// create the message to store for tracing
 					NexoAnyMessage anymessage = new NexoAnyMessage(xml);
 					Activity.AddReceivedMessage(anymessage);
@@ -793,6 +797,7 @@ namespace NEXO.Client
 							// *** EVENT, a notification event has been received
 							if (item.IsNotification)
 							{
+								CLog.DEBUG($"message is notification");
 								toprocess.SuggestedAction = NexoNextAction.noReply;
 								toprocess.CanModifyAction = false;
 							}
@@ -800,9 +805,11 @@ namespace NEXO.Client
 							// *** REPLY, a reply to a message has been received
 							else if (item.IsReply)
 							{
+								CLog.DEBUG($"message is reply");
 								// let's verify whether the reply is the one expected
 								if (null != exchange && exchange.Outgoing.MatchesRequest(item))
 								{
+									CLog.DEBUG($"message matches request");
 									// this is the reply or a previous request, we mark it as being processed
 									toprocess.SuggestedAction = NexoNextAction.final;
 									// add the original request 
@@ -813,15 +820,17 @@ namespace NEXO.Client
 								else
 								{
 									CLog.Add($"{ReceiverThread.Description} - Received reply not matching last request; message dismissed", TLog.WARNG);
+									toprocess.CanModifyAction = false;
+									toprocess.Action = NexoNextAction.nothing;
 								}
 							}
 
 							// *** REQUEST, it can only be a request which has been received
 							else if (item.IsRequestValidForClient)
 							{
-								//CLog.Add($"{ReceiverThread.Description} - Received valid request to process");
+								CLog.DEBUG($"message is valid request");
 								// next action depends on the message itself
-								if (item.ReplyRequired)
+								if (item.ReplyRequired || toprocess.CurrentObject.ResponseIsRequired)
 									toprocess.SuggestedAction = NexoNextAction.sendReply;
 								else
 									toprocess.SuggestedAction = NexoNextAction.noReply;
@@ -832,16 +841,20 @@ namespace NEXO.Client
 							else
 							{
 								// the message is not passed to the application
-								CLog.Add($"{ReceiverThread.Description} - Received invalid request to process; message dismised", TLog.WARNG);
+								CLog.Add($"{ReceiverThread.Description} - Received invalid request to process; message dismissed", TLog.WARNG);
 								toprocess.CanModifyAction = false;
+								toprocess.Action = NexoNextAction.nothing;
 							}
 
 							// arrived here we must verify what to do with the message (if there's a message)
 							if (null != toprocess)// && NexoNextAction.nothing != toprocess.SuggestedAction)
 							{
+								CLog.DEBUG($"posting {toprocess}");
 								// store the message inside the queue of received messages to be processed by the caller
 								Monitor.Enter(receivedMessages);
+								CLog.TRACE($"{ReceiverThread.Description} - enqueuing message to process {MessageDescription(toprocess.CurrentObject.ToString())}");
 								receivedMessages.Enqueue(toprocess);
+								CLog.DEBUG($"{ReceiverThread.Description} - {receivedMessages.Count}	items in the queue");
 								Monitor.Exit(receivedMessages);
 								evtReceived.Set();
 							}
@@ -919,6 +932,7 @@ namespace NEXO.Client
 							{
 								toprocess = receivedMessages.Dequeue();
 								CLog.TRACE($"{DispatchThread.Description} - Message to process {MessageDescription(toprocess.CurrentObject.ToString())}");
+								CLog.DEBUG($"{DispatchThread.Description} - dequeuing making {receivedMessages.Count}	items in the queue");
 							}
 							catch (Exception ex)
 							{
@@ -963,7 +977,7 @@ namespace NEXO.Client
 								{
 									case NexoNextAction.sendReply:
 										//case NexoNextAction.sendReplyWithError:
-										SendReply(toprocess.CurrentObject.Reply, thread);
+										SendReply(toprocess.CurrentObject.Reply, toprocess.CurrentObject.Request, thread);
 										break;
 									case NexoNextAction.final:
 									case NexoNextAction.sendRequest:

@@ -1,3 +1,6 @@
+4.9.5
+- Added a "ResponseIsRequired"^property to DeviceDisplay messages
+
 4.9.0
 - Added support for card brand + receipts returned directly inside a listener resply message
 

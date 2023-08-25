@@ -155,7 +155,7 @@ namespace ListenerService._30
 				var fldSettings = Directory.CreateDirectory(fld);
 
 				// create the listener object
-				CLog.LogFileName = $@"{fldLog.FullName}\{logFileName}";
+				CLog.Filename = $@"{fldLog.FullName}\{logFileName}";
 				listener = new CListener();
 				if (listener.Start($@"{fldSettings.FullName}\{settingsFileName}"))
 					return true;

@@ -18,11 +18,11 @@
 
     <PackageOutputPath></PackageOutputPath>
 
-    <Version>4.9.3</Version>
+    <Version>4.9.5</Version>
 
-    <FileVersion>4.9.3</FileVersion>
+    <FileVersion>4.9.5</FileVersion>
 
-    <AssemblyVersion>4.9.3</AssemblyVersion>
+    <AssemblyVersion>4.9.5</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

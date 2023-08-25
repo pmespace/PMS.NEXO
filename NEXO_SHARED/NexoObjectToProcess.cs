@@ -219,6 +219,10 @@ namespace NEXO
 		///// </summary>
 		//public NexoResponseType Response { get; private set; }
 		#endregion
+
+		#region methods
+		public override string ToString() => $"{Item}; CanModifyAction={CanModifyAction}; SuggestedAction={SuggestedAction}; Action={Action}";
+		#endregion
 	}
 
 	[ComVisible(false)]

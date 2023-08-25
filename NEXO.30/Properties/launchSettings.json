@@ -3,7 +3,12 @@
     "NEXO.30": {
       "commandName": "Executable",
       "executablePath": "C:\\Users\\philippe\\Documents\\Dev\\NEXOSale\\bin\\NexoSaleTest.exe",
-      "workingDirectory": "C:\\Users\\philippe\\Documents\\Dev\\RETAILER3X\\bin\\net47"
+      "workingDirectory": "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\bin\\net47"
+    },
+    "NEXO.30 standalone": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\bin\\net47\\NexoSaleTest.exe",
+      "workingDirectory": "C:\\Users\\philippe\\Documents\\Dev\\NEXO\\bin\\net47"
     }
   }
 }

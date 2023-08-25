@@ -119,6 +119,8 @@ namespace NEXO
 		string ResultAsString { get; }
 		[DispId(10076)]
 		string ErrorConditionAsString { get; }
+		[DispId(10077)]
+		bool ResponseIsRequired { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -377,6 +379,10 @@ namespace NEXO
 				if (null != response) response.AdditionalResponse = value;
 			}
 		}
+		/// <summary>
+		/// indicates whether a response is mandatory or not
+		/// </summary>
+		public virtual bool ResponseIsRequired { get => null != ReplyItem; }
 		#endregion
 
 		#region processing public properties

@@ -170,7 +170,7 @@ Public Class FSimulator
 	Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		Dim sfn As String = SettingsFileName()
 		json = New CJson(Of Settings)(sfn & SETTINGS_FILE_EXT)
-		CLog.LogFileName = sfn & LOG_FILE_EXT
+		CLog.Filename = sfn & LOG_FILE_EXT
 		CLog.SeverityToLog = TLog.TRACE
 
 		cbxLog.Items.Add(TLog.EXCPT.ToString)

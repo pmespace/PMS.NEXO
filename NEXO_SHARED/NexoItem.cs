@@ -246,15 +246,19 @@ namespace NEXO
 		{
 			SupportsAbort = false;
 			ReplyRequired = true;
+
 			//// by default every request accepts receiving a notification event in return
 			//Answers = new NexoAcceptedCommands();
-			Category = (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory);
-			Class = (MessageClassEnumeration)CMisc.GetEnumValue(typeof(MessageClassEnumeration), mh.MessageClass);
-			MessageTypeEnumeration mtype = (MessageTypeEnumeration)CMisc.GetEnumValue(typeof(MessageTypeEnumeration), mh.MessageType);
-			if ((MessageCategoryEnumeration)CMisc.UNKNOWN == Category
-				|| (MessageClassEnumeration)CMisc.UNKNOWN == Class
-				|| (MessageTypeEnumeration)CMisc.UNKNOWN == mtype)
-				return false;
+
+			Category = (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), mh.MessageCategory, CMisc.UNKNOWN);
+			Class = (MessageClassEnumeration)CMisc.GetEnumValue(typeof(MessageClassEnumeration), mh.MessageClass, CMisc.UNKNOWN);
+			MessageTypeEnumeration mtype = (MessageTypeEnumeration)CMisc.GetEnumValue(typeof(MessageTypeEnumeration), mh.MessageType, CMisc.UNKNOWN);
+
+			//if ((MessageCategoryEnumeration)CMisc.UNKNOWN == Category
+			//	|| (MessageClassEnumeration)CMisc.UNKNOWN == Class
+			//	|| (MessageTypeEnumeration)CMisc.UNKNOWN == mtype)
+			//	return false;
+
 			// verify category
 			switch (Category)
 			{
@@ -332,11 +336,15 @@ namespace NEXO
 					break;
 				case MessageCategoryEnumeration.Transmit:
 					break;
+
 				default:
 					Category = (MessageCategoryEnumeration)CMisc.UNKNOWN;
 					break;
 			}
-			return (MessageCategoryEnumeration)CMisc.UNKNOWN != Category;
+
+			return ((MessageCategoryEnumeration)CMisc.UNKNOWN != Category
+				&& (MessageClassEnumeration)CMisc.UNKNOWN != Class
+				&& (MessageTypeEnumeration)CMisc.UNKNOWN != mtype);
 		}
 		#endregion
 

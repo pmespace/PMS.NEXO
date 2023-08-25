@@ -100,7 +100,7 @@ namespace NexoListener
 			{
 				CLog.NumberOfFilesToKeep = 3;
 			}
-			CLog.LogFileName = logFile;
+			CLog.Filename = logFile;
 
 			CLogger.TRACE($"Using settings file: {settingsFile}");
 

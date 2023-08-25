@@ -17,7 +17,7 @@ Public Class FChooser
 		cbUseJson.Checked = UseJson
 		rbPayment.Checked = True
 
-		CLog.LogFileName = "nexo.builder.log"
+		CLog.Filename = "nexo.builder.log"
 
 		ToolTip1.SetToolTip(efCoded, "Enter a string compatible with storage inside a Json file" & vbCrLf & "All special characters must be escaped (ex: "" must be coded \"" ")
 		ToolTip1.SetToolTip(efTarget, "This is a string whose format is compliant with storage inside a Json file" & vbCrLf & "You can copy and paste it inside a Json file")

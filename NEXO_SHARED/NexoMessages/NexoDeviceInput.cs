@@ -110,6 +110,8 @@ namespace NEXO
 		string ResultAsString { get; }
 		[DispId(10076)]
 		string ErrorConditionAsString { get; }
+		[DispId(10077)]
+		bool ResponseIsRequired { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }

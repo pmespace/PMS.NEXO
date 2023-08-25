@@ -102,6 +102,8 @@ namespace NEXO
 		string ResultAsString { get; }
 		[DispId(10076)]
 		string ErrorConditionAsString { get; }
+		[DispId(10077)]
+		bool ResponseIsRequired { get; }
 
 		[DispId(10090)]
 		bool AddMilliseconds { get; set; }
@@ -180,6 +182,16 @@ namespace NEXO
 		#endregion
 
 		#region request inner properties
+		public override bool ResponseIsRequired
+		{
+			get
+			{
+				bool responseIsRequired = false;
+				foreach (DisplayOutputType dot in RequestData.DisplayOutput)
+					responseIsRequired = responseIsRequired || dot.ResponseRequiredFlag;
+				return responseIsRequired;
+			}
+		}
 		#endregion
 
 		#region reply inner properties

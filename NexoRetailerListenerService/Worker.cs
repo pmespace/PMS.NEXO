@@ -93,7 +93,7 @@ namespace nexoRetailerListenerService
 					var fldSettings = Directory.CreateDirectory(fld);
 
 					// create the listener object
-					CLog.LogFileName = $@"{fldLog.FullName}\{logFileName}";
+					CLog.Filename = $@"{fldLog.FullName}\{logFileName}";
 					listener = new CListener();
 					listener.Start($@"{fldSettings.FullName}\{settingsFileName}");
 				}
@@ -198,7 +198,7 @@ namespace nexoRetailerListenerService
 	//					var fldSettings = Directory.CreateDirectory(fld);
 
 	//					// create the listener object
-	//					CLog.LogFileName = $@"{fldLog.FullName}\{logFileName}";
+	//					CLog.LogFilename = $@"{fldLog.FullName}\{logFileName}";
 	//					listener = new CListener();
 	//					listener.Start($@"{fldSettings.FullName}\{settingsFileName}");
 	//				}

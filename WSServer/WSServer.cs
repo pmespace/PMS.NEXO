@@ -62,7 +62,7 @@ namespace WSServer
 				listenerSettingsFileName = option;
 			}
 
-			CLog.LogFileName = logFileName;
+			CLog.Filename = logFileName;
 
 			// eventually WS server
 			ManualResetEvent started = new ManualResetEvent(false), ended = new ManualResetEvent(false);

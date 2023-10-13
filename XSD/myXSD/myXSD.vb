@@ -174,6 +174,10 @@ Public Class myXSD
 		settings.UseNullableIntegralTypes = cbuseNullableIntegralTypes.Checked
 		settings.UseOptimizingFlag = cbOptimizing.Checked
 
+		settings.RemoveXmlAttribute = cbRemoveAttribute.Checked
+		settings.AttributeAsElement = cbCreateAsElement.Checked
+		settings.AdaptXmlText = cbAdaptXmlText.Checked
+		settings.UseListInsteadOfArray = cbUseList.Checked
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
@@ -236,6 +240,10 @@ Public Class myXSD
 		cbuseNullableIntegralTypes.Checked = settings.UseNullableIntegralTypes
 		cbOptimizing.Checked = settings.UseOptimizingFlag
 
+		cbRemoveAttribute.Checked = settings.RemoveXmlAttribute
+		cbCreateAsElement.Checked = settings.AttributeAsElement
+		cbAdaptXmlText.Checked = settings.AdaptXmlText
+		cbUseList.Checked = settings.UseListInsteadOfArray
 
 	End Sub
 

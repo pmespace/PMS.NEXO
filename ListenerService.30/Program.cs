@@ -17,7 +17,7 @@ namespace ListenerService._30
 			ServiceBase[] ServicesToRun;
 			ServicesToRun = new ServiceBase[]
 			{
-					 new ListenerService()
+				new ListenerService()
 			};
 			ServiceBase.Run(ServicesToRun);
 		}

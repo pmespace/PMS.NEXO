@@ -463,8 +463,10 @@ namespace NEXO
 					throw new Exception(EventsList());
 				return true;
 			}
-			catch (Exception ex) { 
-				CLog.EXCEPT(ex, $"{Chars.CRLF}=> XSD: {xsd}"); }
+			catch (Exception ex)
+			{
+				CLog.EXCEPT(ex, $"{Chars.CRLF}=> XSD: {xsd}");
+			}
 			return false;
 		}
 		private void ResetSchemaValidationState() { NbErrors = 0; NbWarnings = 0; Events.Clear(); }

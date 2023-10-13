@@ -1,4 +1,6 @@
-﻿#define S920
+﻿//#define ARRAYASLIST
+#define REGEXPATHS
+#define S920
 
 using System.Net.Sockets;
 using System.Reflection;
@@ -23,6 +25,7 @@ using Listener.Shared;
 using System.ComponentModel.Design;
 using System.Data.SqlTypes;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Listener
 {
@@ -60,14 +63,62 @@ namespace Listener
 		#region static
 		public const string DEFAULT_SETTINGS_FILE_NAME = "listener.settings.json";
 		public const uint DEFAULT_PORT = CSettingsServer.DEFAULT_PORT;
+
+		public const string VALUE_ID = "@ID@";
+		public const string VALUE_POIID = "@SPOIID@";
+		public const string VALUE_SALEID = "@SSALEID@";
+		public const string VALUE_DEVICEID = "@SDEVICEID@";
+		public const string VALUE_SERVICEID = "@SERVICEID@";
 		#endregion
 
 		#region private properties
-		private struct DataToExchange
+		/// <summary>
+		/// Such CNexoData allows detailing a nexo data such as:
+		/// Dataname[([numeric value])] where
+		/// - The whole entry is <see cref="CNexoData.Element"/>
+		/// - Dataname is <see cref="CNexoData.Name"/>
+		/// - The presence of "()" indicates it is an array (<see cref="CNexoData.isArray"/> = true)
+		/// - The presence of "numeric value" sets <see cref="CNexoData.Index"/>
+		/// </summary>
+		class CNexoData
+		{
+			public string Element = string.Empty;
+			public string Name = string.Empty;
+			public bool isArray { get => -1 != Index; }
+			public int Index = -1;
+			public bool IsValid => !Name.IsNullOrEmpty();
+		}
+		/// <summary>
+		/// Describes a serie of <see cref="CNexoData"/> to form an access to a particular data
+		/// </summary>
+		class CNexoPath : List<CNexoData>
+		{
+			public CNexoPath() { }
+			public CNexoPath(CNexoPath l) : base(l) { }
+			public bool IsEmpty => 0 == this.Count || ToString().IsNullOrEmpty();
+			public override string ToString()
+			{
+				string s = string.Empty;
+				for (int i = 0; i < this.Count; i++)
+					s += (0 == i ? string.Empty : ".") + this[i].Element;
+				return s;
+			}
+		}
+		/// <summary>
+		/// Describes a nexo path and its associated value(s)
+		/// </summary>
+		class DataToExchange
 		{
 			public string Path;
-			public List<string> LPath;
+#if REGEXPATHS
+			public CNexoPath NexoPath { get => _lpath; set => _lpath = null != value ? value : new CNexoPath(); }
+			CNexoPath _lpath = new CNexoPath();
 			public CListenerDataElement Data;
+#else
+			public List<string> NexoPath;
+			public CListenerDataElement Data;
+#endif
+			public string Message;
 		}
 		private class DataToExchangeList : List<DataToExchange> { }
 
@@ -680,32 +731,37 @@ namespace Listener
 
 			// verify the POI actually exists in the configuration
 			CSettings.CPOI poi = null;
+
+			#region parameters
 			try
 			{
 				poi = Settings.POIs[listenerRequest.POI];
 			}
 			catch (Exception ex)
 			{
-				bool ok = false;
+				bool ok = true;
+				obj = null;
 
 				CSettings.CPOI spoi = new CSettings.CPOI() { };
 				// has an IP been specified
-				if (null != (obj = ContainsKey(specificIP)))
+				if (ok = (ok && null != (obj = ContainsKey(specificIP))))
 				{
 					s = obj.ToString();
-					if (!s.IsNullOrEmpty() && IPAddress.TryParse(s, out IPAddress addr))
+					IPAddress addr = null;
+					if (ok = (ok && !s.IsNullOrEmpty() && IPAddress.TryParse(s, out addr)))
 						spoi.ConnectionSettings.IP = addr.ToString();
 				}
 				// has a port been specified
-				if (null != (obj = ContainsKey(specificPort)))
+				if (ok && null != (obj = ContainsKey(specificPort)))
 				{
 					s = obj.ToString();
-					if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
+					uint port = 0;
+					if (ok = (ok && !s.IsNullOrEmpty() && uint.TryParse(s, out port)))
 						spoi.ConnectionSettings.Port = port;
 				}
 
 				// arrived here let's see if we can use the specified address or not
-				if (ok = spoi.ConnectionSettings.IsValid)
+				if (ok = ok && spoi.ConnectionSettings.IsValid)
 				{
 					// has a receive timeout been specified
 					if (null != (obj = ContainsKey(specificReceiveTimeout)))
@@ -735,28 +791,14 @@ namespace Listener
 					return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 				}
 			}
-			CLog.TRACE($"using {(poi.Label.IsNullOrEmpty() ? poi.FullIP : $"{poi.Label} at {poi.FullIP}")}");
+			#endregion
 
-			/*
-			 * this has been commented because dynalic IP is now available to everybody
-			 */
-			//// if coming from a secured connection let's see whether some data has been provided to overwrite existing ones
-			//if (listenerRequest.Secured)
-			//{
-			//	// has an IP been specified
-			//	if (null != (obj = ContainsKey(specificIP)))
-			//	{
-			//		s = obj.ToString();
-			//		if (!s.IsNullOrEmpty() && IPAddress.TryParse(s, out IPAddress addr))
-			//			poi.ConnectionSettings.IP = addr.ToString();
-			//	}
-			//	//if (null != (obj = ContainsKey("Port")))
-			//	//{
-			//	//	s = obj.ToString();
-			//	//	if (!s.IsNullOrEmpty() && uint.TryParse(s, out uint port))
-			//	//		poi.ConnectionSettings.Port = port;
-			//	//}
-			//};
+			CLogger.TRACE($"Using {(poi.Label.IsNullOrEmpty() ? poi.FullIP : $"{poi.Label} at {poi.FullIP}")}");
+
+			if (listenerReply.Request.SaleID.IsNullOrEmpty())
+				listenerReply.Request.SaleID = CStream.Localhost();
+			if (listenerReply.Request.POIID.IsNullOrEmpty())
+				listenerReply.Request.POIID = poi.FullIP;
 
 			string path = null;
 			string tempName = null;
@@ -858,14 +900,22 @@ namespace Listener
 			DataToExchangeList tosend = new DataToExchangeList();
 			foreach (KeyValuePair<string, CListenerDataElement> k in listenerRequest.ElementsToSend)
 			{
-				DataToExchange dte = new DataToExchange() { Path = k.Key, LPath = PathToData(k.Key), Data = new CListenerDataElement() { Value = k.Value.Value, Status = false } };
-				if (null != dte.Path)
+				// create the data to analyse the current requested value to set
+				DataToExchange dte = new DataToExchange()
 				{
-					if (!(dte.Data.Status = SearchAndProcessProperty(nexo.Request, dte.LPath, ref dte.Data.Value, true)))
-						CLogger.ERROR(dte.Data.Message = sclient + $"Failed settings data {dte.Path} with {dte.Data.Value}");
+					Path = k.Key,
+					NexoPath = PathToData(k.Key, false),
+					Data = new CListenerDataElement() { Value = k.Value.Value, Status = false },
+				};
+				// try settings this data within the nexo message
+				if (!dte.Path.IsNullOrEmpty() && 0 != dte.NexoPath.Count)
+				{
+					CListenerDataElement ldt = dte.Data;
+					if (!(ldt.Status = SearchAndProcessProperty(nexo.Request, dte.NexoPath, ref ldt.Value)))
+						CLogger.ERROR(dte.Message = sclient + $"Failed settings data {dte.Path} with {ldt.Value}");
 				}
 				else
-					CLogger.ERROR(dte.Data.Message = sclient + $"Failed creating the send data path {k.Key}, that data won't be set");
+					CLogger.ERROR(dte.Message = sclient + $"Failed creating the send data path {k.Key}, that data won't be set");
 				tosend.Add(dte);
 			}
 
@@ -874,8 +924,8 @@ namespace Listener
 			 */
 
 			// if concurrency access is activated check whether an access to the requested resource is already active
+			NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
 			string resourceName = $"{poi.FullIP}.mutex";
-			bool timedout = false, cancelled = false, received = false;
 			{
 				bool created = false;
 				Mutex mutex = null;
@@ -909,7 +959,6 @@ namespace Listener
 							addBufferSize, action, reserved);
 					}
 
-					NexoRetailerClient client = new NexoRetailerClient(listenerRequest.SaleID, listenerRequest.POIID);
 					CStreamClientSettings scs = new CStreamClientSettings() { IP = poi.ConnectionSettings.IP, Port = (uint)poi.ConnectionSettings.Port, ReceiveTimeout = listenerRequest.ReceiveTimeout };
 					NexoRetailerClientSettings clientSettings = new NexoRetailerClientSettings() { StreamClientSettings = scs, OnReceivedReply = OnReceivedReply, OnReceivedRequest = OnReceivedRequest, OnReceivedNotification = OnReceivedNotification, OnReceivedIgnoredMessage = OnReceivedIgnoredMessage, Reserved = reserved };
 
@@ -1023,8 +1072,17 @@ namespace Listener
 								addBufferSize, action, reserved);
 
 							// send the request synchronously
-							if (!client.SendRequestSync(nexo))
-								CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingErrorWhileExchange, serviceName)));
+							listenerRequest.NexoMessage = nexo.ToString();
+							try
+							{
+								if (!client.SendRequestSync(nexo))
+									CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingErrorWhileExchange, serviceName)));
+							}
+							catch (Exception ex)
+							{
+								CLog.EXCEPT(ex);
+							}
+							listenerReply.NexoMessage = nexo.ToString();
 
 							StreamServer.Send1WayNotification(SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
 								new CListenerReply()
@@ -1034,10 +1092,6 @@ namespace Listener
 									Message = string.Format(Resources.ServiceCompleted, new object[] { serviceName }),
 								})), tcp),
 								addBufferSize, action, reserved);
-
-							timedout = client.TimedOut;
-							cancelled = client.Cancelled;
-							received = client.Received;
 						}
 
 						// auto logout ?
@@ -1084,17 +1138,24 @@ namespace Listener
 			 */
 
 			bool nexoProcessed = false;
-			if (timedout)
+
+			if (client.TimedOut)
 			{
 				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingTimeout, nexo.MessageCategory.ToString())));
 				listenerReply.Status = ReplyStatus.timeout;
 			}
-			else if (cancelled)
+			else if (client.Cancelled)
 			{
 				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingCancelled, nexo.MessageCategory.ToString())));
 				listenerReply.Status = ReplyStatus.cancelled;
 			}
-			else if (received)
+			else if (client.NoMoreAction)
+			{
+				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingNoMoreAction, nexo.MessageCategory.ToString())));
+				listenerReply.Message += client.Outcome.IsNullOrEmpty() ? $" [{client.Outcome}]" : string.Empty;
+				listenerReply.Status = ReplyStatus.noMoreAction;
+			}
+			else if (client.Received)
 			{
 				nexoProcessed = true;
 				listenerReply.Status = (nexo.Success ? ReplyStatus.Success : nexo.Failure ? ReplyStatus.Failure : nexo.Partial ? ReplyStatus.Partial : ReplyStatus.unknownError);
@@ -1161,10 +1222,9 @@ namespace Listener
 			}
 			else if (listenerReply.Message.IsNullOrEmpty())
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingUnknowError, nexo.MessageCategory.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = string.Format($"{Resources.ProcessingUnknowError} [{client.Outcome}]", nexo.MessageCategory.ToString())));
 				listenerReply.Status = ReplyStatus.unknownError;
 			}
-
 			/*
 			 * retrieve specific data
 			 */
@@ -1172,14 +1232,20 @@ namespace Listener
 			DataToExchangeList toreturn = new DataToExchangeList();
 			foreach (KeyValuePair<string, CListenerDataElement> k in listenerRequest.ElementsToReturn)
 			{
-				DataToExchange dte = new DataToExchange() { Path = k.Key, LPath = PathToData(k.Key), Data = new CListenerDataElement() { Value = null, Status = false } };
-				if (null != dte.Path && nexoProcessed)
+				DataToExchange dte = new DataToExchange()
 				{
-					if (!(dte.Data.Status = SearchAndProcessProperty(nexo.Reply, dte.LPath, ref dte.Data.Value, false)))
-						CLogger.ERROR(dte.Data.Message = sclient + $"Failed fetching data {dte.Path}");
+					Path = k.Key,
+					NexoPath = PathToData(k.Key, true),
+					Data = new CListenerDataElement(), //{ new Value = null, Status = false } 
+				};
+				if (!dte.Path.IsNullOrEmpty() && 0 != dte.NexoPath.Count && nexoProcessed)
+				{
+					CListenerDataElement ldt = new CListenerDataElement();
+					if (!(ldt.Status = SearchAndProcessProperty(nexo.Reply, dte.NexoPath, ref ldt.Value, false)))
+						CLogger.ERROR(dte.Message = sclient + $"Failed fetching data {dte.Path}");
 				}
 				else
-					CLogger.ERROR(dte.Data.Message = sclient + $"Failed creating the return data path {k.Key}, that data won't be fetched");
+					CLogger.ERROR(dte.Message = sclient + $"Failed creating the return data path {k.Key}, that data won't be fetched");
 				toreturn.Add(dte);
 			}
 
@@ -1191,7 +1257,10 @@ namespace Listener
 				listenerReply.Request.ElementsToSend.Add(dte.Path, dte.Data);
 			listenerReply.Request.ElementsToReturn.Clear();
 			foreach (DataToExchange dte in toreturn)
-				listenerReply.Request.ElementsToReturn.Add(dte.Path, dte.Data);
+			{
+				if (!dte.NexoPath.IsEmpty)
+					listenerReply.Request.ElementsToReturn.Add(dte.Path, dte.Data);
+			}
 			listenerReply.Label = listenerReply.Status.ToString();
 
 			// log reply if requested
@@ -1231,8 +1300,43 @@ namespace Listener
 			}
 			return reply;
 		}
+
+#if REGEXPATHS
 		/// <summary>
-		/// Converts a "aaa.bbb.ccc" string to a list of strings [0]=aaa, [1]=bbb,...
+		/// Converts a "aaa[(N)].bbb.ccc[(N)]" string to a list of <see cref="CNexoData"/> objects
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		private static CNexoPath PathToData(string value, bool set)
+		{
+			value.Trim();
+			CNexoPath paths = new CNexoPath();
+			// names of the groups to locate that will indicate which part is included
+			string selement = "element", sname = "name", sarray = "array", sindex = "index", sseparator = "separator";
+			// the regex pattern to use
+			// (?<element>(?<name>[A-Z-a-z0-9]+)(?<array>(\({1}(?<index>[0-9]+)\){1})?))(?<separator>\.?)
+			string pattern = $"(?<{selement}>(?<{sname}>[A-Z-a-z0-9]+)(?<{sarray}>(\\({1}(?<{sindex}>[0-9]{(set ? "+" : "*")})\\){1})?))(?<{sseparator}>\\.?)";
+			Regex regex = new Regex(pattern);
+
+			MatchCollection mc = Regex.Matches(value, pattern);
+			foreach (Match match in mc)
+			{
+				CNexoData o = match.Groups[sname].Value.IsNullOrEmpty() ? null : new CNexoData() { Name = match.Groups[sname].Value };
+				if (null != o && o.IsValid)
+				{
+					o.Element = match.Groups[selement].Value;
+					if (!match.Groups[sarray].Value.IsNullOrEmpty())
+						int.TryParse(match.Groups[sindex].Value, out o.Index);
+					paths.Add(o);
+				}
+			}
+			if (!value.Compare(paths.ToString()))
+				paths.Clear();
+			return paths;
+		}
+#else
+		/// <summary>
+		/// Converts a "aaa.bbb.ccc(n)" string to a list of strings [0]=aaa, [1]=bbb,...
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
@@ -1262,6 +1366,8 @@ namespace Listener
 			if (0 == l.Count) return null;
 			return l;
 		}
+#endif
+
 		/// <summary>
 		/// Search a type for a specific property to set or retrieve
 		/// </summary>
@@ -1270,6 +1376,98 @@ namespace Listener
 		/// <param name="value">The value to assign to the property or the value that will be fetched from the property</param>
 		/// <param name="set">Set to true indicates the property must be set, false indicates the property value must be retrieved</param>
 		/// <returns>True if set/retrieved, false otherwise</returns>
+#if REGEXPATHS
+		private static bool SearchAndProcessProperty(object o, CNexoPath list, ref List<object> values, bool set = true)
+		{
+			if (list.ToString().IsNullOrEmpty()) return false;
+			if (set && 1 > values.Count)
+				return false;
+
+			// <<<>>> verify
+			if (!set) values = new List<object>();
+
+			CNexoPath llist = new CNexoPath(list);
+			Type type = NexoRetailer.GetRealObjectType(o);
+			foreach (PropertyInfo pinfo in type.GetProperties())
+			{
+				//if (!pinfo.PropertyType.IsArray && MemberTypes.Property == pinfo.MemberType && pinfo.PropertyType.IsPublic)
+				if (MemberTypes.Property == pinfo.MemberType && pinfo.PropertyType.IsPublic)
+				{
+					Type pt = pinfo.PropertyType;
+					object pv = pinfo.GetValue(o, null);
+					if (null != pv)
+					{
+						//pt = pv.GetType();
+						pt = NexoRetailer.GetRealObjectType(pv);
+					}
+					string itemName = (0 == string.Compare(pinfo.Name, "item", true) ? (pt.Name.EndsWith("Type") ? pt.Name.Substring(0, pt.Name.LastIndexOf("Type")) : pt.Name) : pinfo.Name);
+
+					// if final leaf
+					if (0 == string.Compare("System", pt.Namespace, true) && itemName.Compare(llist[0].Name) && 1 == llist.Count)
+					{
+						try
+						{
+							if (set)
+							{
+								string str = values[0].ToString();
+								if (str.Compare(VALUE_ID))
+									str = new NexoID().Value;
+								else if (str.Compare(VALUE_POIID))
+									str = new NexoPOIID().Value;
+								else if (str.Compare(VALUE_SALEID))
+									str = new NexoSaleID().Value;
+								else if (str.Compare(VALUE_DEVICEID))
+									str = new NexoDeviceID().Value;
+								else if (str.Compare(VALUE_SERVICEID))
+									str = new NexoServiceID().Value;
+
+								object obj = AdjustValue(str, pinfo.PropertyType);
+								if (!pinfo.PropertyType.IsArray)
+									pinfo.SetValue(o, obj, null);
+								else
+									try
+									{
+										pinfo.SetValue(o, obj, new object[] { llist[0].isArray ? (int)llist[0].Index : (int)0 });
+									}
+									catch (Exception ex)
+									{
+										CLog.EXCEPT(ex);
+										return false;
+									}
+							}
+							else
+							{
+								if (!pinfo.PropertyType.IsArray)
+								{
+									values.Add(pinfo.GetValue(o, null));
+								}
+								else
+								{
+
+								}
+							}
+							return true;
+						}
+						catch (Exception ex)
+						{
+							CLog.EXCEPT(ex);
+						}
+						return false;
+					}
+					else if (0 != string.Compare("System", pt.Namespace, true) && 0 == string.Compare(itemName, llist[0].Name, true) && null != pv)
+					{
+						llist.RemoveAt(0);
+						return SearchAndProcessProperty(pv, llist, ref values, set);
+					}
+					//else if (0 != string.Compare("System", pt.Namespace, true))
+					//{
+					//	return SearchAndProcessProperty(pv, llist, ref value, set);
+					//}
+				}
+			}
+			return false;
+		}
+#else
 		private static bool SearchAndProcessProperty(object o, List<string> list, ref object value, bool set)
 		{
 			List<string> llist = new List<string>(list);
@@ -1297,12 +1495,21 @@ namespace Listener
 						try
 						{
 							if (set)
-								pinfo.SetValue(o, value, null);
+							{
+								string str = value.ToString();
+								object obj = AdjustValue(str, pinfo.PropertyType);
+								pinfo.SetValue(o, obj, null);
+							}
 							else
+							{
 								value = pinfo.GetValue(o, null);
+							}
 							return true;
 						}
-						catch (Exception) { }
+						catch (Exception ex)
+						{
+							CLog.EXCEPT(ex);
+						}
 						return false;
 					}
 					else if (0 != string.Compare("System", pt.Namespace, true) && 0 == string.Compare(itemName, name, true) && null != pv)
@@ -1317,6 +1524,26 @@ namespace Listener
 				}
 			}
 			return false;
+		}
+#endif
+
+		static object AdjustValue(string value, Type targetType)
+		{
+			if (typeof(string) == targetType) { return value; }
+			else if (typeof(bool) == targetType) { if (bool.TryParse(value, out bool o)) return o; }
+			else if (typeof(Int16) == targetType) { if (Int16.TryParse(value, out Int16 o)) return o; }
+			else if (typeof(Int32) == targetType) { if (Int32.TryParse(value, out Int32 o)) return o; }
+			else if (typeof(Int64) == targetType) { if (Int64.TryParse(value, out Int64 o)) return o; }
+			else if (typeof(UInt16) == targetType) { if (UInt16.TryParse(value, out UInt16 o)) return o; }
+			else if (typeof(UInt32) == targetType) { if (UInt32.TryParse(value, out UInt32 o)) return o; }
+			else if (typeof(UInt64) == targetType) { if (UInt64.TryParse(value, out UInt64 o)) return o; }
+			else if (typeof(Single) == targetType) { if (Single.TryParse(value, out Single o)) return o; }
+			else if (typeof(Double) == targetType) { if (Double.TryParse(value, out Double o)) return o; }
+			else if (typeof(Decimal) == targetType) { if (Decimal.TryParse(value, out Decimal o)) return o; }
+			else if (typeof(Byte) == targetType) { if (Byte.TryParse(value, out Byte o)) return o; }
+			else if (typeof(SByte) == targetType) { if (SByte.TryParse(value, out SByte o)) return o; }
+			else if (typeof(Char) == targetType) { if (Char.TryParse(value, out Char o)) return o; }
+			return null;
 		}
 		/// <summary>
 		/// 
@@ -1356,7 +1583,7 @@ namespace Listener
 					// processing display message
 					NexoDeviceDisplay nxo = msg.CurrentObject as NexoDeviceDisplay;
 					// fetch the message to display, initialising it to nothing to display and looping on all messages to display
-					for (int i = 0; nxo.RequestData.DisplayOutputLength() - 1 >= i; i++)
+					for (int i = 0; nxo.RequestData.DisplayOutputCount() - 1 >= i; i++)
 					{
 						OutputResultType ort = new OutputResultType() { Device = nxo.RequestData.DisplayOutput[i].Device, InfoQualify = nxo.RequestData.DisplayOutput[i].InfoQualify, Response = new ResponseType() { Result = ResultEnumeration.Success.ToString() } };
 						// if a message to display to the cashier or the customer
@@ -1365,11 +1592,11 @@ namespace Listener
 						{
 							// if there's some text to process
 							if (nxo.RequestData.DisplayOutput[i].OutputContent.OutputFormat.Compare(OutputFormatEnumeration.Text.ToString())
-								&& 0 != nxo.RequestData.DisplayOutput[i].OutputContent.OutputTextLength())
+								&& 0 != nxo.RequestData.DisplayOutput[i].OutputContent.OutputTextCount())
 							{
 								// loop on all lines to display
 								string sl = default;
-								for (int j = 0; nxo.RequestData.DisplayOutput[i].OutputContent.OutputTextLength() - 1 >= j; j++)
+								for (int j = 0; nxo.RequestData.DisplayOutput[i].OutputContent.OutputTextCount() - 1 >= j; j++)
 								{
 									if (!nxo.RequestData.DisplayOutput[i].OutputContent.OutputText[j].Value.IsNullOrEmpty())
 									{
@@ -1435,6 +1662,9 @@ namespace Listener
 							})), tcp),
 							true, "DeviceDisplay processing", (parameters as NexoRetailerClientSettings).Reserved);
 					}
+					// if no reply to send dismiss it
+					if (!nxo.ResponseIsRequired)
+						msg.Action = NexoNextAction.noReply;
 				}
 			}
 			catch (Exception ex)
@@ -1461,7 +1691,7 @@ namespace Listener
 				string notification = default;
 				NexoEvent nxo = msg.CurrentObject as NexoEvent;
 				notification = $"[{nxo.EventToNotify}] {nxo.EventDetails}";
-				for (int i = 0; nxo.RequestData.DisplayOutput.OutputContent.OutputTextLength() > i; i++)
+				for (int i = 0; nxo.RequestData.DisplayOutput.OutputContent.OutputTextCount() > i; i++)
 				{
 					if (!nxo.RequestData.DisplayOutput.OutputContent.OutputTextGetItem(i).Value.IsNullOrEmpty())
 					{
@@ -1588,16 +1818,19 @@ namespace Listener
 				cardBrand = TryDeterminingScheme(nxo.ReplyPaymentBrand);
 
 				// if no scheme returned by the POI, look inside the receipts thenselves
-				if (cardBrand.IsNullOrEmpty() && default != nxo.ReplyData && 0 != nxo.ReplyData.PaymentReceiptLength())
+				if (cardBrand.IsNullOrEmpty()
+					&& default != nxo.ReplyData
+					&& 0 != nxo.ReplyData.PaymentReceiptCount()
+					)
 				{
 					// loop on all available receipts
-					for (int i = 0; i < nxo.ReplyData.PaymentReceiptLength(); i++)
+					for (int i = 0; i < nxo.ReplyData.PaymentReceiptCount(); i++)
 					{
 						var receipt = nxo.ReplyData.PaymentReceiptGetItem(i);
-						if (default != receipt && default != receipt.OutputContent && 0 != receipt.OutputContent.OutputTextLength())
+						if (default != receipt && default != receipt.OutputContent && 0 != receipt.OutputContent.OutputTextCount())
 						{
 							// loop on all available lines inside the receipt
-							for (int j = 0; j < receipt.OutputContent.OutputTextLength(); j++)
+							for (int j = 0; j < receipt.OutputContent.OutputTextCount(); j++)
 							{
 								var outputtext = receipt.OutputContent.OutputTextGetItem(j);
 								// try determining the scheme
@@ -1627,11 +1860,20 @@ namespace Listener
 		/// <returns></returns>
 		CReceipts GetReceipts(NexoPayment nxo)
 		{
-			if (default == nxo || default == nxo.ReplyData || default == nxo.ReplyData.PaymentReceipt || 0 == nxo.ReplyData.PaymentReceipt.Length) return default;
+			if (default == nxo
+				|| default == nxo.ReplyData
+				|| default == nxo.ReplyData.PaymentReceipt
+#if ARRAYASLIST
+				|| 0 == nxo.ReplyData.PaymentReceipt.Count
+#else
+				|| 0 == nxo.ReplyData.PaymentReceipt.Length
+#endif
+				)
+				return default;
 			CReceipts receipts = new CReceipts();
 			try
 			{
-				for (int i = 0; i < nxo.ReplyData.PaymentReceipt.Length; i++)
+				for (int i = 0; i < nxo.ReplyData.PaymentReceiptCount(); i++)
 				{
 					Func<string, ReceiptType> GetType = (string qualifier) =>
 					{
@@ -1642,12 +1884,23 @@ namespace Listener
 
 					PaymentReceiptType rect = nxo.ReplyData.PaymentReceipt[i];
 					ReceiptType rectyp = GetType(rect.DocumentQualifier);
-					if (ReceiptType.None != rectyp && default != rect.OutputContent && default != rect.OutputContent.OutputText && 0 != rect.OutputContent.OutputText.Length)
+					if (ReceiptType.None != rectyp && default != rect.OutputContent && default != rect.OutputContent.OutputText && 0 != rect.OutputContent.OutputTextCount())
 					{
+#if ARRAYASLIST
+						List<OutputTextType> content = rect.OutputContent.OutputText;
+#else
 						OutputTextType[] content = rect.OutputContent.OutputText;
+#endif
+
 						// create a receipt then add all lines to the receipt to return
 						List<string> ls = new List<string>();
-						for (int j = 0; j < content.Length; j++)
+						for (int j = 0;
+#if ARRAYASLIST
+							j < content.Count;
+#else
+							j < content.Length;
+#endif
+							j++)
 						{
 							Func<string, int> ExtractLines = (string _s_) =>
 							{
@@ -1692,8 +1945,7 @@ namespace Listener
 			return receipts;
 		}
 
-
-		//#region pdf
+		#region pdf
 		//class SurroundingClass
 		//{
 		//	private HPDFSizeStruct GetReceiptRect(PaymentReceiptType receipt, HPDFPage page)
@@ -2210,7 +2462,7 @@ namespace Listener
 		//		return false;
 		//	}
 		//}
-		//#endregion
+		#endregion
 
 		#endregion
 	}

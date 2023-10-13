@@ -109,7 +109,12 @@ Public Class FBuilder
 				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoDefaultValueForProperty) _
 				AndAlso 0 <> String.Compare(p.Name, NexoXSDStrings.NexoOptimizingProperty) _
 				AndAlso p.CanWrite Then
-				Dim value As Object = p.GetValue(o, Nothing)
+
+				'Dim oindex As Object() = Nothing
+				'If p.PropertyType.IsArray Then
+				'	oindex = New Object() {0}
+				'End If
+				Dim value As Object = p.GetValue(o) ', oindex)
 				Dim valuetype As Type = p.PropertyType
 				Dim target As Object = value
 				If Not IsNothing(value) Then

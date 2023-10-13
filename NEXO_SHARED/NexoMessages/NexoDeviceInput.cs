@@ -247,10 +247,12 @@ namespace NEXO
 		protected override void SetReplyFromRequest() { }
 		protected override InternalAction AutoCompleteRequest()
 		{
+			base.AutoCompleteRequest();
 			return InternalAction.noError;
 		}
 		protected override InternalAction AutoCompleteReply()
 		{
+			base.AutoCompleteReply();
 			return InternalAction.noError;
 		}
 		#endregion

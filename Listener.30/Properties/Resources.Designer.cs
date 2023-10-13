@@ -304,6 +304,24 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Service {0} ended with a noMoreAction status.
+        /// </summary>
+        internal static string ProcessingNoMoreAction {
+            get {
+                return ResourceManager.GetString("ProcessingNoMoreAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received an reply for service {0}.
+        /// </summary>
+        internal static string ProcessingReceived {
+            get {
+                return ResourceManager.GetString("ProcessingReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processing of service {0} ended up with {1} result {2}.
         /// </summary>
         internal static string ProcessingResult {

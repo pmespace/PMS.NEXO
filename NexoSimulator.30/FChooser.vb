@@ -179,7 +179,7 @@ Public Class FChooser
 		Try
 			Dim nxo As NexoObject = Nothing
 			Dim item As NexoItem = Nothing
-			efNotation.Text = efNotation.Text.Replace("""", "")
+			'efNotation.Text = efNotation.Text.Replace("""", "")
 			efNotation.Text = Trim(efNotation.Text)
 			CLog.TRACE($"Processing: {efNotation.Text}")
 			If Not String.IsNullOrEmpty(efNotation.Text) Then

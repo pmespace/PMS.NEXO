@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using COMMON;
 using Newtonsoft.Json;
 using NEXO;
 
@@ -27,6 +28,7 @@ namespace Listener.Shared
 		cancelled,
 		invalidPOIRequested,
 		unknownError,
+		noMoreAction,
 
 		asynchronousMessage = 100,
 		waitingToGainAccessToPOI,
@@ -130,9 +132,27 @@ namespace Listener.Shared
 		/// The original request as a string as received from the caller
 		/// </summary>
 		public string RequestAsString { get; set; }
+
+		public string NexoMessage { get; internal set; }
+
 		public override string ToString()
 		{
-			return Message;
+			string s = null;
+			List<string> ls = ToStringEx();
+			for (int i = 0; i < ls.Count; i++)
+			{
+				s += ls[i] + (i != ls.Count - 1 ? Chars.CRLF : string.Empty);
+			}
+			//s = $"Service: {Service}; POI to reach: {POI}; SaleID: {SaleID}; POIID: {POIID}; Currency: {Currency}; Timeout: {ReceiveTimeout}" + Chars.CRLF;
+			//s += $"Elements to send: {ElementsToSend}" + Chars.CRLF;
+			//s += $"Elements to return: {ElementsToReturn}";
+			return s;
+		}
+		public List<string> ToStringEx()
+		{
+			List<string> s = new List<string>();
+			s.Add($"Reply => Request: {Request}; Notification: {Notification}; Status: {Status}; Nexo error: {NexoError}");
+			return s;
 		}
 	}
 }

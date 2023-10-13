@@ -7,7 +7,7 @@
     <ProjectGuid>{2BA4930C-06DA-4309-9E95-0362AC8DA599}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ListenerService</RootNamespace>
-    <AssemblyName>ListenerService.30</AssemblyName>
+    <AssemblyName>NexoListenerService.30</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PMS.COMMON">
-      <Version>7.6.2</Version>
+      <Version>7.6.6</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

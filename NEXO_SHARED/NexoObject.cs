@@ -775,7 +775,23 @@ namespace NEXO
 	[ComVisible(false)]
 	public abstract class NexoDevice : NexoObject
 	{
+		//public bool AddServiceID { get => !ServiceID.IsNullOrEmpty() || _addserviceid; set => _addserviceid = value; }
+		//bool _addserviceid = false;
 		protected NexoDevice(MessageCategoryEnumeration category) : base(category) { MessageClass = MessageClassEnumeration.Device; }
+		protected override InternalAction AutoCompleteRequest()
+		{
+			DeviceID = SetDefaultStringValue(DeviceID, new NexoDeviceID().DefaultValue);
+			//if (AddServiceID)
+			//ServiceID = SetDefaultStringValue(ServiceID, string.Empty);
+			return InternalAction.noError;
+		}
+		protected override InternalAction AutoCompleteReply()
+		{
+			DeviceID = SetDefaultStringValue(DeviceID, Request.MessageHeader.DeviceID);
+			//if (AddServiceID)
+			ServiceID = SetDefaultStringValue(ServiceID, string.Empty);
+			return InternalAction.noError;
+		}
 	}
 
 	[ComVisible(false)]

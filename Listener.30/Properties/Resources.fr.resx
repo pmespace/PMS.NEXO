@@ -213,4 +213,10 @@
   <data name="ProcessingUnknowError" xml:space="preserve">
     <value>Erreur inconnue durant le traitement du service {0}</value>
   </data>
+  <data name="ProcessingNoMoreAction" xml:space="preserve">
+    <value>Le service {0} s'est terminé avec un statut noMoreAction</value>
+  </data>
+  <data name="ProcessingReceived" xml:space="preserve">
+    <value>Réception d'une réponse pour le service {0}</value>
+  </data>
 </root>

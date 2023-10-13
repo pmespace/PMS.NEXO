@@ -2,6 +2,8 @@
 using System.Reflection;
 using System;
 using COMMON;
+using System.Collections.Generic;
+using System.Text;
 
 namespace NEXO
 {
@@ -20,7 +22,9 @@ namespace NEXO
 		[DispId(4)]
 		string EventDetails { get; set; }
 		[DispId(5)]
-		NexoByteSequence EventRejectedMessage { get; set; }
+		string EventRejectedMessage { get; set; }
+		//List<byte> EventRejectedMessage { get; set; }
+		//NexoByteSequence EventRejectedMessage { get; set; }
 		[DispId(6)]
 		bool EventMaintenanceRequiredFlag { get; set; }
 		[DispId(7)]
@@ -212,10 +216,17 @@ namespace NEXO
 			get => CMisc.Trimmed(RequestData.EventDetails);
 			set => RequestData.EventDetails = value;
 		}
-		public NexoByteSequence EventRejectedMessage
+		//public string EventRejectedMessage
+		////public NexoByteSequence EventRejectedMessage
+		////public List<byte> EventRejectedMessage
+		//{
+		//	get => CMisc.AsHexString(RequestData.RejectedMessage.ToArray()); /*new NexoByteSequence() { Value = RequestData.RejectedMessage };*/
+		//	set => RequestData.RejectedMessage = new List<byte>() { CMisc.HexToBin(value, out bool padded) }; /*RequestData.RejectedMessage = value.Value;*/
+		//}
+		public string EventRejectedMessage
 		{
-			get => new NexoByteSequence() { Value = RequestData.RejectedMessage };
-			set => RequestData.RejectedMessage = value.Value;
+			get => CMisc.Trimmed(Encoding.UTF8.GetString(RequestData.RejectedMessage));
+			set => RequestData.RejectedMessage = Encoding.UTF8.GetBytes(value);
 		}
 		public bool EventMaintenanceRequiredFlag
 		{

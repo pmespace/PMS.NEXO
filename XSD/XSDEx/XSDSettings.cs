@@ -184,5 +184,13 @@ namespace XSDEx
 		/// </summary>
 		public bool UseNullableIntegralTypes { get; set; } = true;
 		public bool UseOptimizingFlag { get; set; } = true;
+
+		public bool RemoveXmlAttribute { get; set; } = false;
+
+		public bool AttributeAsElement { get; set; } = true;
+
+		public bool AdaptXmlText { get; set; } = true;
+
+		public bool UseListInsteadOfArray { get; set; } = true;
 	}
 }

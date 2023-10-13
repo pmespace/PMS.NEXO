@@ -201,7 +201,7 @@ namespace NEXO
 		protected override ResponseType GetResponse() { return null; }
 		protected override void SetResponse(ResponseType r)
 		{
-			for (int i = 0; i < RequestData.DisplayOutputLength(); i++)
+			for (int i = 0; i < RequestData.DisplayOutputCount(); i++)
 			{
 				DisplayOutputType dot = RequestData.DisplayOutputGetItem(i);
 				ReplyData.OutputResultAddItem(new OutputResultType() { Device = dot.Device, InfoQualify = dot.InfoQualify, Response = r });
@@ -209,7 +209,12 @@ namespace NEXO
 		}
 		protected override InternalAction AutoCompleteRequest()
 		{
-			DeviceID = SetDefaultStringValue(DeviceID, new NexoID().DefaultValue);
+			base.AutoCompleteRequest();
+			return InternalAction.noError;
+		}
+		protected override InternalAction AutoCompleteReply()
+		{
+			base.AutoCompleteReply();
 			return InternalAction.noError;
 		}
 		#endregion

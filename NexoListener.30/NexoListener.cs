@@ -259,9 +259,12 @@ namespace NexoListener
 						while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
 						{
 							var reply = CJson<CListenerReply>.Deserialize(sreply);
-							CLogger.TRACE($"{reply.ToString()} (received message)");
+							CLogger.TRACE($"{reply.Message} (received message)");
 							if (!reply.Notification)
+							{
+								CLogger.TRACE($"{reply}");
 								break;
+							}
 						}
 					}
 					else
@@ -269,6 +272,11 @@ namespace NexoListener
 						CLogger.ERROR($"Failed to send the request");
 					}
 				}
+			}
+			else
+			{
+				request = new CListenerRequest() { ElementsToSend = new CListenerDataElements() { { "test", new CListenerDataElement() { Value = new List<object>() { "test1", "test2" } } } } };
+				json.WriteSettings(request, null, false);
 			}
 			return true;
 		}
@@ -386,7 +394,7 @@ namespace NexoListener
 
 				var toSend = new CListenerDataElements();
 				if (null != dts)
-					toSend.Add(dts, new CListenerDataElement() { Value = value });
+					toSend.Add(dts, new CListenerDataElement() { Value = new List<object>() { value } });
 				var toReturn = new CListenerDataElements();
 				if (null != dtr)
 					toReturn.Add(dtr, new CListenerDataElement());

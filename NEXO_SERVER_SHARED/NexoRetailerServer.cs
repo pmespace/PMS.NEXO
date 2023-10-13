@@ -375,7 +375,7 @@ namespace NEXO.Server
 						// cerate the notification to send containing the rejected message
 						NexoEvent evt = new NexoEvent();
 						evt.EventToNotify = EventToNotifyEnumeration.Reject;
-						evt.EventRejectedMessage = new NexoByteSequence() { Value = request };
+						evt.EventRejectedMessage = BitConverter.ToString(request);// new NexoByteSequence() { Value = request };
 						evt.EventDetails = "Unrecognized message";
 						toprocess.NextObject = evt;
 					}

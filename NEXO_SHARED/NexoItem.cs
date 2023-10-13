@@ -76,7 +76,7 @@ namespace NEXO
 			{
 				Request = msg;
 				XML = Serialize(Request);
-				SaleToPOI = AllocateObject(Category);
+				//SaleToPOI = AllocateObject(Category);
 			}
 		}
 		/// <summary>
@@ -92,7 +92,7 @@ namespace NEXO
 			{
 				Reply = msg;
 				XML = Serialize(Reply);
-				SaleToPOI = AllocateObject(Category);
+				//SaleToPOI = AllocateObject(Category);
 			}
 		}
 		/// <summary>
@@ -108,7 +108,7 @@ namespace NEXO
 			{
 				Request = request;
 				XML = xml;
-				SaleToPOI = AllocateObject(Category);
+				//SaleToPOI = AllocateObject(Category);
 			}
 			else
 			{
@@ -121,7 +121,7 @@ namespace NEXO
 				{
 					Reply = reply;
 					XML = xml;
-					SaleToPOI = AllocateObject(Category);
+					//SaleToPOI = AllocateObject(Category);
 				}
 			}
 		}
@@ -144,7 +144,7 @@ namespace NEXO
 		/// Request and Response (Reply) to manipulate
 		/// </summary>
 		//public object Item { get => (IsRequest ? (object)SaleToPOI.Request : (IsReply ? (object)SaleToPOI.Reply : null)); }
-		private NexoObject SaleToPOI { get; set; } = null;
+		//private NexoObject SaleToPOI { get; set; } = null;
 		public object Item { get => (IsRequest ? (object)Request : (IsReply ? (object)Reply : null)); }
 		private SaleToPOIRequest Request = null;
 		private SaleToPOIResponse Reply = null;
@@ -287,6 +287,7 @@ namespace NEXO
 				case MessageCategoryEnumeration.Diagnosis:
 					break;
 				case MessageCategoryEnumeration.Display:
+					ReplyRequired = false;
 					break;
 				case MessageCategoryEnumeration.EnableService:
 					break;

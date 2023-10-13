@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define REGEXPATHS
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +15,8 @@ namespace Listener.Shared
 {
 	public struct CListenerDataElement
 	{
-		public object Value;
+		public List<object> Value;
 		public bool Status;
-		public string Message;
 	}
 	public class CListenerDataElements : Dictionary<string, CListenerDataElement>
 	{
@@ -45,6 +46,8 @@ namespace Listener.Shared
 		public TransactionIdentificationType POITransaction { get; set; }
 		public CListenerDataElements ElementsToSend { get; set; } = new CListenerDataElements();
 		public CListenerDataElements ElementsToReturn { get; set; } = new CListenerDataElements();
+
+		public string NexoMessage { get; internal set; }
 
 		[JsonExtensionData]
 		public Dictionary<string, JToken> ExtendedData;

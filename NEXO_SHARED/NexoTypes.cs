@@ -1372,6 +1372,7 @@ namespace NEXO
 		/// </summary>
 		[DispId(2)]
 		byte[] Value { get; set; }
+		//byte[] Value { get; set; }
 		/// <summary>
 		/// Size of buffer
 		/// </summary>
@@ -1390,7 +1391,7 @@ namespace NEXO
 		/// <summary>
 		/// Variable value as an array of bytes
 		/// </summary>
-		public virtual byte[] Value { get; set; } = null;
+		public virtual byte[] Value { get; set; } = new byte[0];
 		/// <summary>
 		/// Buffer size
 		/// </summary>
@@ -1563,16 +1564,16 @@ namespace NEXO
 	}
 
 	[ComVisible(true)]
-	public class NexoServiceID : NexoID { public NexoServiceID(string v = "") : base(TagsEnumeration.ServiceID.ToString()) { Value = v; } }
+	public class NexoServiceID : NexoID { public NexoServiceID(string v = "") : base(TagsEnumeration.ServiceID.ToString()) { Value = v.IsNullOrEmpty() ? NexoAutoID.ID() : v; } }
 
 	[ComVisible(true)]
-	public class NexoDeviceID : NexoID { public NexoDeviceID(string v = "") : base(TagsEnumeration.DeviceID.ToString()) { Value = v; } }
+	public class NexoDeviceID : NexoID { public NexoDeviceID(string v = "") : base(TagsEnumeration.DeviceID.ToString()) { Value = v.IsNullOrEmpty() ? NexoAutoID.ID() : v; } }
 
 	[ComVisible(true)]
-	public class NexoPOIID : NexoTextString, INexoTextString { public NexoPOIID(string v) : base(TagsEnumeration.POIID.ToString()) { Value = v; } }
+	public class NexoPOIID : NexoTextString, INexoTextString { public NexoPOIID(string v = "") : base(TagsEnumeration.POIID.ToString()) { Value = v.IsNullOrEmpty() ? NexoAutoID.ID() : v; } }
 
 	[ComVisible(true)]
-	public class NexoSaleID : NexoTextString, INexoTextString { public NexoSaleID(string v) : base(TagsEnumeration.SaleID.ToString()) { Value = v; } }
+	public class NexoSaleID : NexoTextString, INexoTextString { public NexoSaleID(string v = "") : base(TagsEnumeration.SaleID.ToString()) { Value = v.IsNullOrEmpty() ? NexoAutoID.ID() : v; } }
 
 	[ComVisible(true)]
 	public class NexoOperatorLanguage : NexoISOLanguage2A, INexoISOData { public NexoOperatorLanguage() : base(TagsEnumeration.OperatorLanguage.ToString()) { Value = DefaultValue; } }

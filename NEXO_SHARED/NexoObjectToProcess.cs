@@ -33,6 +33,10 @@ namespace NEXO
 		/// a REQUEST or a REPLY has been received, a NOIFICATION should be sent back
 		/// </summary>
 		sendNotification,
+		/// <summary>
+		/// a ReEQUEST has been sent, a REPLY is expected
+		/// </summary>
+		waitReply,
 	}
 
 	[Guid("4DA003CE-49BF-4831-83EB-3DAEA2072370")]
@@ -206,13 +210,13 @@ namespace NEXO
 		}
 		private NexoNextAction _action = NexoNextAction.nothing;
 		/// <summary>
-		/// Fllag indicating whether the message must be sent to the calling app for further processing
+		/// Flag indicating whether the message must be sent to the calling app for further processing
 		/// </summary>
 		internal bool PassToApp = true;
 		/// <summary>
 		/// Indicates if an error has occured somewhere
 		/// </summary>
-		public bool ActionError { get; private set; } = false;
+		public bool ActionError { get; internal set; } = false;
 		///// <summary>
 		///// The object which will contain the reponse returned to the caller
 		///// That object will be used to set the reply message response data, overwriting it

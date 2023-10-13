@@ -24,13 +24,17 @@ namespace NEXO
 		public static string EnumNone = $"_none";
 		public static string EnumBegin = $"_begin";
 		public static string EnumEnd = $"_end";
-		public static string AccessorLength = $"Length";
+		public static string AccessorCount = $"Count";
 		public static string AccessorAddItem = $"AddItem";
 		public static string AccessorGetItem = $"GetItem";
 		public static string AccessorSetItem = $"SetItem";
 		public static string AccessorRemoveItem = $"RemoveItem";
 		public static string AccessorInsertItem = $"InsertItem";
 		public static string Specified = $"Specified";
+		public static string AsElement = $"AsElement";
+		public static string AsAttribute = $"AsAttribute";
+		public static string AsNumeric = $"AsNumeric";
+		public static string UserDataKey = $"DummyElement";
 	}
 
 	#region commented

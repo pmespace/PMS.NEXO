@@ -85,10 +85,14 @@ Partial Class myXSD
 		Me.cbAddDefaultToEnum = New System.Windows.Forms.CheckBox()
 		Me.cbAddBeginEnd = New System.Windows.Forms.CheckBox()
 		Me.cbuseNullableIntegralTypes = New System.Windows.Forms.CheckBox()
+		Me.cbOptimizing = New System.Windows.Forms.CheckBox()
+		Me.cbRemoveAttribute = New System.Windows.Forms.CheckBox()
+		Me.cbCreateAsElement = New System.Windows.Forms.CheckBox()
+		Me.cbAdaptXmlText = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.cbOptimizing = New System.Windows.Forms.CheckBox()
+		Me.cbUseList = New System.Windows.Forms.CheckBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelGenerateButtons.SuspendLayout()
@@ -177,7 +181,7 @@ Partial Class myXSD
 		Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.status.Location = New System.Drawing.Point(3, 9)
 		Me.status.Name = "status"
-		Me.status.Size = New System.Drawing.Size(55, 16)
+		Me.status.Size = New System.Drawing.Size(54, 16)
 		Me.status.TabIndex = 0
 		Me.status.Text = "Label4"
 		'
@@ -185,9 +189,9 @@ Partial Class myXSD
 		'
 		Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.Label5.AutoSize = True
-		Me.Label5.Location = New System.Drawing.Point(64, 11)
+		Me.Label5.Location = New System.Drawing.Point(63, 11)
 		Me.Label5.Name = "Label5"
-		Me.Label5.Size = New System.Drawing.Size(527, 13)
+		Me.Label5.Size = New System.Drawing.Size(528, 13)
 		Me.Label5.TabIndex = 1
 		Me.Label5.Text = "Label5"
 		'
@@ -867,6 +871,10 @@ Partial Class myXSD
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbAddBeginEnd)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbuseNullableIntegralTypes)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbOptimizing)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbRemoveAttribute)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbCreateAsElement)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbAdaptXmlText)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbUseList)
 		Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 149)
 		Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
@@ -961,6 +969,47 @@ Partial Class myXSD
 		Me.cbuseNullableIntegralTypes.Text = "Use nullable integral types"
 		Me.cbuseNullableIntegralTypes.UseVisualStyleBackColor = True
 		'
+		'cbOptimizing
+		'
+		Me.cbOptimizing.AutoSize = True
+		Me.cbOptimizing.Location = New System.Drawing.Point(302, 26)
+		Me.cbOptimizing.Name = "cbOptimizing"
+		Me.cbOptimizing.Size = New System.Drawing.Size(94, 17)
+		Me.cbOptimizing.TabIndex = 12
+		Me.cbOptimizing.Text = "Use optimizing"
+		Me.cbOptimizing.UseVisualStyleBackColor = True
+		'
+		'cbRemoveAttribute
+		'
+		Me.cbRemoveAttribute.AutoSize = True
+		Me.cbRemoveAttribute.Enabled = False
+		Me.cbRemoveAttribute.Location = New System.Drawing.Point(402, 26)
+		Me.cbRemoveAttribute.Name = "cbRemoveAttribute"
+		Me.cbRemoveAttribute.Size = New System.Drawing.Size(125, 17)
+		Me.cbRemoveAttribute.TabIndex = 13
+		Me.cbRemoveAttribute.Text = "Remove XmlAttribute"
+		Me.cbRemoveAttribute.UseVisualStyleBackColor = True
+		'
+		'cbCreateAsElement
+		'
+		Me.cbCreateAsElement.AutoSize = True
+		Me.cbCreateAsElement.Location = New System.Drawing.Point(533, 26)
+		Me.cbCreateAsElement.Name = "cbCreateAsElement"
+		Me.cbCreateAsElement.Size = New System.Drawing.Size(119, 17)
+		Me.cbCreateAsElement.TabIndex = 14
+		Me.cbCreateAsElement.Text = "Attribute as element"
+		Me.cbCreateAsElement.UseVisualStyleBackColor = True
+		'
+		'cbAdaptXmlText
+		'
+		Me.cbAdaptXmlText.AutoSize = True
+		Me.cbAdaptXmlText.Location = New System.Drawing.Point(658, 26)
+		Me.cbAdaptXmlText.Name = "cbAdaptXmlText"
+		Me.cbAdaptXmlText.Size = New System.Drawing.Size(95, 17)
+		Me.cbAdaptXmlText.TabIndex = 15
+		Me.cbAdaptXmlText.Text = "Adapt XmlText"
+		Me.cbAdaptXmlText.UseVisualStyleBackColor = True
+		'
 		'result
 		'
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -983,15 +1032,15 @@ Partial Class myXSD
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
 		'
-		'cbOptimizing
+		'cbUseList
 		'
-		Me.cbOptimizing.AutoSize = True
-		Me.cbOptimizing.Location = New System.Drawing.Point(302, 26)
-		Me.cbOptimizing.Name = "cbOptimizing"
-		Me.cbOptimizing.Size = New System.Drawing.Size(94, 17)
-		Me.cbOptimizing.TabIndex = 12
-		Me.cbOptimizing.Text = "Use optimizing"
-		Me.cbOptimizing.UseVisualStyleBackColor = True
+		Me.cbUseList.AutoSize = True
+		Me.cbUseList.Location = New System.Drawing.Point(759, 26)
+		Me.cbUseList.Name = "cbUseList"
+		Me.cbUseList.Size = New System.Drawing.Size(64, 17)
+		Me.cbUseList.TabIndex = 16
+		Me.cbUseList.Text = "Use List"
+		Me.cbUseList.UseVisualStyleBackColor = True
 		'
 		'myXSD
 		'
@@ -1107,4 +1156,8 @@ Partial Class myXSD
 	Friend WithEvents rbTMS As RadioButton
 	Friend WithEvents cbuseNullableIntegralTypes As CheckBox
 	Friend WithEvents cbOptimizing As CheckBox
+	Friend WithEvents cbRemoveAttribute As CheckBox
+	Friend WithEvents cbCreateAsElement As CheckBox
+	Friend WithEvents cbAdaptXmlText As CheckBox
+	Friend WithEvents cbUseList As CheckBox
 End Class

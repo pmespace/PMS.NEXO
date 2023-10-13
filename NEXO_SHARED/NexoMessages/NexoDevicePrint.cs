@@ -221,6 +221,12 @@ namespace NEXO
 		protected override void SetResponse(ResponseType r) { ReplyData.Response = r; }
 		protected override InternalAction AutoCompleteRequest()
 		{
+			base.AutoCompleteRequest();
+			return InternalAction.noError;
+		}
+		protected override InternalAction AutoCompleteReply()
+		{
+			base.AutoCompleteReply();
 			return InternalAction.noError;
 		}
 		#endregion

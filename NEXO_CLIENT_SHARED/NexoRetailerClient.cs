@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using NEXO;
 using System.Net;
 using System.IO;
+using System.ComponentModel.Design;
 
 namespace NEXO.Client
 {
@@ -70,6 +71,10 @@ namespace NEXO.Client
 		bool InProgress { get; }
 		[DispId(17)]
 		bool DisconnectOnLogout { get; set; }
+		[DispId(18)]
+		bool NoMoreAction { get; }
+		[DispId(19)]
+		string Outcome { get; }
 
 		[DispId(100)]
 		string ToString();
@@ -243,6 +248,10 @@ namespace NEXO.Client
 		/// </summary>
 		public NexoRetailerClientActivity Activity { get; private set; } = new NexoRetailerClientActivity();
 		/// <summary>
+		/// Description of the final result
+		/// </summary>
+		public string Outcome { get; private set; }
+		/// <summary>
 		/// Response received indicator, true means a response to the request has been received
 		/// </summary>
 		public bool Received
@@ -250,15 +259,38 @@ namespace NEXO.Client
 			get => _received;
 			private set
 			{
-				if (value && !_timedout && !_cancelled && !_error)
+				lock (myLockEvent)
 				{
-					ActivateTimeoutTimer = false;
-					_received = value;
-					evtFinished.Set();
+					if (value && !evtFinished.WaitOne(0))// !_timedout && !_cancelled && !_error && !_nomoreaction)
+					{
+						ActivateTimeoutTimer = false;
+						_received = value;
+						evtFinished.Set();
+					}
 				}
 			}
 		}
 		private bool _received = false;
+		/// <summary>
+		/// No more response to expect, true means the process is over without a response
+		/// </summary>
+		public bool NoMoreAction
+		{
+			get => _nomoreaction;
+			private set
+			{
+				lock (myLockEvent)
+				{
+					if (value && !evtFinished.WaitOne(0))// !_received && !_timedout && !_cancelled && !_error)
+					{
+						ActivateTimeoutTimer = false;
+						_nomoreaction = value;
+						evtFinished.Set();
+					}
+				}
+			}
+		}
+		private bool _nomoreaction = false;
 		/// <summary>
 		/// Timeout indicator, true means a timeout occurred while waiting the response
 		/// </summary>
@@ -267,10 +299,13 @@ namespace NEXO.Client
 			get => _timedout;
 			private set
 			{
-				if (value && !_received && !_cancelled && !_error)
+				lock (myLockEvent)
 				{
-					_timedout = value;
-					evtFinished.Set();
+					if (value && !evtFinished.WaitOne(0))//!_received && !_cancelled && !_error && !_nomoreaction)
+					{
+						_timedout = value;
+						evtFinished.Set();
+					}
 				}
 			}
 		}
@@ -283,10 +318,13 @@ namespace NEXO.Client
 			get => _cancelled;
 			private set
 			{
-				if (value && !_received && !_timedout && !_error)
+				lock (myLockEvent)
 				{
-					_cancelled = value;
-					evtFinished.Set();
+					if (value && !evtFinished.WaitOne(0))//!_received && !_timedout && !_error && !_nomoreaction)
+					{
+						_cancelled = value;
+						evtFinished.Set();
+					}
 				}
 			}
 		}
@@ -300,14 +338,21 @@ namespace NEXO.Client
 			get => _error;
 			set
 			{
-				_error = value;
+				lock (myLockEvent)
+				{
+					if (value && !evtFinished.WaitOne(0))
+					{
+						_error = value;
+						evtFinished.Set();
+					}
+				}
 			}
 		}
 		private bool _error = false;
 		/// <summary>
 		/// Response still expected indicator, true means a response is still expected, no timeout and no cancellation yet
 		/// </summary>
-		public bool InProgress { get => null != exchange && !Error && !TimedOut && !Cancelled && !Received; }
+		public bool InProgress { get => null != exchange && !evtFinished.WaitOne(0) /*!Error && !TimedOut && !Cancelled && !Received && !NoMoreAction*/; }
 		/// <summary>
 		/// Indicates whether disconnecting or not when receiving a logout acknowledgement
 		/// </summary>
@@ -319,6 +364,7 @@ namespace NEXO.Client
 		/// private properties
 		/// </summary>
 		private object myLock = new object();
+		private object myLockEvent = new object();
 		private CThread ReceiverThread = null;
 		private CThreadEvents ReceiverEvents = new CThreadEvents();
 		private CThread DispatchThread = null;
@@ -561,7 +607,7 @@ namespace NEXO.Client
 						try
 						{
 							// if the exchanged message implies a reply let's save it, otherwise let's keep the previous reply
-							if (item.ReplyRequired || msg.ResponseIsRequired)
+							if (item.ReplyRequired && msg.ResponseIsRequired)
 							{
 								// save the exchange for later use
 								exchange = new Exchange(item, timer);
@@ -798,8 +844,19 @@ namespace NEXO.Client
 							if (item.IsNotification)
 							{
 								CLog.DEBUG($"message is notification");
-								toprocess.SuggestedAction = NexoNextAction.noReply;
-								toprocess.CanModifyAction = false;
+								NexoEvent nxo = toprocess.CurrentObject as NexoEvent;
+								switch (nxo.EventToNotify)
+								{
+									case EventToNotifyEnumeration.Reject:
+									case EventToNotifyEnumeration.Abort:
+										toprocess.SuggestedAction = NexoNextAction.nothing;
+										toprocess.CanModifyAction = false;
+										break;
+									default:
+										toprocess.SuggestedAction = NexoNextAction.noReply;
+										toprocess.CanModifyAction = true;
+										break;
+								}
 							}
 
 							// *** REPLY, a reply to a message has been received
@@ -830,7 +887,7 @@ namespace NEXO.Client
 							{
 								CLog.DEBUG($"message is valid request");
 								// next action depends on the message itself
-								if (item.ReplyRequired || toprocess.CurrentObject.ResponseIsRequired)
+								if (item.ReplyRequired && toprocess.CurrentObject.ResponseIsRequired)
 									toprocess.SuggestedAction = NexoNextAction.sendReply;
 								else
 									toprocess.SuggestedAction = NexoNextAction.noReply;
@@ -884,10 +941,12 @@ namespace NEXO.Client
 				}
 				else
 				{
+					Error = true;
 					CLog.EXCEPT(ex);
 					res = (int)ThreadResult.Exception;
 				}
 			}
+			NoMoreAction = true;
 			ReceiverEvents.SetStopped();
 			Disconnect();
 			return res;
@@ -920,6 +979,8 @@ namespace NEXO.Client
 					}
 					else
 					{
+						Outcome = string.Empty;
+
 						// a message is ready to process
 						// dequeue the older message
 						NexoObjectToProcess toprocess = null;
@@ -938,10 +999,11 @@ namespace NEXO.Client
 							{
 								CLog.EXCEPT(ex, "No message will be processed");
 								toprocess = null;
+								//Error = true;
 							}
 							finally { Monitor.Exit(myLock); }
 							// if an action is to be performed...
-							if (null != toprocess && NexoNextAction.nothing != toprocess.Action)
+							if (!Error && null != toprocess && NexoNextAction.nothing != toprocess.Action)
 							{
 								// send that message to the caller for information or action
 								if (toprocess.Item.IsNotification)
@@ -959,19 +1021,15 @@ namespace NEXO.Client
 									{
 										// inform the application of the received message waiting for next step
 										onReceived(toprocess.Item.XML, toprocess, StreamIO?.Tcp, thread, o);
+										//Error = toprocess.ActionError;
 									}
 									catch (Exception ex)
 									{
 										CLog.EXCEPT(ex, $"{(toprocess.Item.IsReply ? "OnReceivedReply" : toprocess.Item.IsRequest ? "OnReceivedRequest" : "OnReceivedNotification")} exception");
+										//Error = true;
 									}
 								}
-								// check what really happened on receiving the message
-								bool hasBeenReceived = NexoNextAction.final == toprocess.SuggestedAction;
-								if (hasBeenReceived)
-								{
-									lastRequestedObject.Reply = toprocess.CurrentObject.Reply;
-									Received = true;
-								}
+
 								// on return check whether a new message must be sent or not
 								switch (toprocess.Action)
 								{
@@ -982,6 +1040,11 @@ namespace NEXO.Client
 									case NexoNextAction.final:
 									case NexoNextAction.sendRequest:
 									case NexoNextAction.sendNotification:
+										if (NexoNextAction.final == toprocess.SuggestedAction)
+										{
+											lastRequestedObject.Reply = toprocess.CurrentObject.Reply;
+											Received = true;
+										}
 										// if received message is a Logout success nothing else can happen
 										if (MessageCategoryEnumeration.Logout == toprocess.Category &&
 											toprocess.Item.IsReply &&
@@ -1001,7 +1064,11 @@ namespace NEXO.Client
 											SendRequest(toprocess.NextObject.Request, toprocess.NextTimer);
 										}
 										break;
+									case NexoNextAction.noReply:
+										break;
 									default:
+										Outcome = "no reply or any additional processing to perform";
+										NoMoreAction = true;
 										break;
 								}
 							}
@@ -1018,7 +1085,10 @@ namespace NEXO.Client
 									catch (Exception ex)
 									{
 										CLog.EXCEPT(ex, "OnReceivedIgnoredMessage exception");
+										//Error = true;
 									}
+								Outcome = $"received message has been dismissed{(toprocess.Item.IsNotification ? " [received an Event]" : string.Empty)}";
+								NoMoreAction = true;
 							}
 						}
 						// timeout or cancel (of a request)
@@ -1044,6 +1114,7 @@ namespace NEXO.Client
 								catch (Exception ex)
 								{
 									CLog.EXCEPT(ex, "OnSentRequestStatusChanged exception");
+									//Error = true;
 								}
 							}
 							// indicate which action has occurred
@@ -1062,9 +1133,11 @@ namespace NEXO.Client
 			}
 			catch (Exception ex)
 			{
+				Error = true;
 				CLog.EXCEPT(ex);
 				res = (int)ThreadResult.Exception;
 			}
+			NoMoreAction = true;
 			DispatchEvents.SetStopped();
 			Disconnect();
 			return res;

@@ -54,12 +54,12 @@ namespace ListenerService._30
 		#region constants
 		const string LOG_FOLDER = "Log";
 		const string SETTINGS_FOLDER = "Settings";
-		const string EVENT_LOG_SOURCE = "nexo Retailer v3.0 Listener";
-		const string REGISTRY_KEY = @"SYSTEM\CurrentControlSet\Services\nexoRetailer30Listener\Parameters";
+		const string EVENT_LOG_SOURCE = "nexoListenerService.30";
+		readonly string REGISTRY_KEY = $"SYSTEM\\CurrentControlSet\\Services\\{EVENT_LOG_SOURCE}\\Parameters";
 		const string REGISTRY_KEY_SETTINGS_FILE_NAME = @"Settings";
-		const string REGISTRY_KEY_SETTINGS_FILE_NAME_DEFAULT = @"nexo.30.listener.settings.json";
+		const string REGISTRY_KEY_SETTINGS_FILE_NAME_DEFAULT = @"nexo.listener.service.30.settings.json";
 		const string REGISTRY_KEY_LOG_FILE_NAME = @"Log";
-		const string REGISTRY_KEY_LOG_FILE_NAME_DEFAULT = @"nexo.30.listener.log";
+		const string REGISTRY_KEY_LOG_FILE_NAME_DEFAULT = @"nexo.listener.service.30.log";
 		#endregion
 
 		#region properties
@@ -84,7 +84,7 @@ namespace ListenerService._30
 
 		protected override void OnStart(string[] args)
 		{
-			eventLog.WriteEntry($"starting service");
+			//eventLog.WriteEntry($"starting service");
 
 			//// Update the service state to Start Pending
 			//ServiceStatus serviceStatus = new ServiceStatus();
@@ -94,7 +94,7 @@ namespace ListenerService._30
 
 			if (Start()) return;
 
-			eventLog.WriteEntry($"failed to start service");
+			//eventLog.WriteEntry($"failed to start service");
 		}
 
 		protected override void OnStop()

@@ -36,6 +36,7 @@
 			this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
 			this.serviceProcessInstaller1.Password = null;
 			this.serviceProcessInstaller1.Username = null;
+			this.serviceProcessInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
 			// 
 			// serviceInstaller1
 			// 
@@ -43,6 +44,7 @@
 			this.serviceInstaller1.DisplayName = "nexo Retailer v3.0 Listener";
 			this.serviceInstaller1.ServiceName = "nexoRetailerListenerService";
 			this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+			this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
 			// 
 			// ProjectInstaller
 			// 

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using COMMON;
 
-namespace Listener.WS
+namespace WSServer
 {
 	internal class CSettings
 	{

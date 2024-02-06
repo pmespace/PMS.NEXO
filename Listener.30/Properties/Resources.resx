@@ -219,4 +219,184 @@
   <data name="ProcessingReceived" xml:space="preserve">
     <value>Received an reply for service {0}</value>
   </data>
+  <data name="WSInterfaceFailedToConnectToListener" xml:space="preserve">
+    <value>Failed connecting to the processing server</value>
+  </data>
+  <data name="WSInterfaceFailedSendingDataToListener" xml:space="preserve">
+    <value>Failed sending data to the listener</value>
+  </data>
+  <data name="ConnectionHasBeenCancelled" xml:space="preserve">
+    <value>Connection has been cancelled</value>
+  </data>
+  <data name="WSInterfaceIncomingConnection" xml:space="preserve">
+    <value>Incoming connection</value>
+  </data>
+  <data name="WSInterfaceWaitingSecurityDetails" xml:space="preserve">
+    <value>Waiting security details</value>
+  </data>
+  <data name="WSInterfaceReceivedSecurityDetails" xml:space="preserve">
+    <value>Received security details: {0}</value>
+  </data>
+  <data name="WSInterfaceLoginOK" xml:space="preserve">
+    <value>Login to WS interface granted</value>
+  </data>
+  <data name="SendingLoginResult" xml:space="preserve">
+    <value>Sending login result: {0}</value>
+  </data>
+  <data name="WSInterfaceConnectedToListener" xml:space="preserve">
+    <value>Connected to listener at {0}</value>
+  </data>
+  <data name="ReceivedMessage" xml:space="preserve">
+    <value>received message</value>
+  </data>
+  <data name="ThreadNameWS" xml:space="preserve">
+    <value>WS Process</value>
+  </data>
+  <data name="ThreadNameHTTP" xml:space="preserve">
+    <value>HTTP Process</value>
+  </data>
+  <data name="WSInterfaceNotWSRequest" xml:space="preserve">
+    <value>Received HTTP request, connection is being closed with status {0}</value>
+  </data>
+  <data name="WSInterfaceStopped" xml:space="preserve">
+    <value>The listener WS interface stopped with result code {0}</value>
+  </data>
+  <data name="POISConnectionSettings" xml:space="preserve">
+    <value>Connection settings</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>&lt;none&gt;</value>
+  </data>
+  <data name="DisplayLogFile" xml:space="preserve">
+    <value>Log file</value>
+  </data>
+  <data name="DisplayStarting" xml:space="preserve">
+    <value>Trying to read settings from</value>
+  </data>
+  <data name="DisplayFailedToReadSettings" xml:space="preserve">
+    <value>Failed to read settings</value>
+  </data>
+  <data name="DisplayAddress" xml:space="preserve">
+    <value>IP address</value>
+  </data>
+  <data name="DisplayFailedToConnectToEListener" xml:space="preserve">
+    <value>Listener connection to EListener server process failed to start, shutting down</value>
+  </data>
+  <data name="DisplayFailedToStartWSInterface" xml:space="preserve">
+    <value>listener WS interface failed to start, shutting down</value>
+  </data>
+  <data name="WSInterfaceWaitingForIncomingData" xml:space="preserve">
+    <value>Waiting incoming data</value>
+  </data>
+  <data name="WSInterfaceConnectionHasBeenClosed" xml:space="preserve">
+    <value>Connection from {0} has been closed</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="ERROR_FailedToAddWSClient" xml:space="preserve">
+    <value>Failed to insert {0} in the list of current clients</value>
+  </data>
+  <data name="INFOR_StartingWSInterface" xml:space="preserve">
+    <value>Starting listener WS interface</value>
+  </data>
+  <data name="TRACE_WSInterfaceStarted" xml:space="preserve">
+    <value>Listener WS interface started</value>
+  </data>
+  <data name="ERROR_WSInterfaceNotStarted" xml:space="preserve">
+    <value>Listener WS interface failed to start</value>
+  </data>
+  <data name="ERROR_WSClientHasStopped" xml:space="preserve">
+    <value>The listener process connected to WS server has terminated, shutting down</value>
+  </data>
+  <data name="WSClientConnectingToServer" xml:space="preserve">
+    <value>Client listener trying to connect to {0} (attempt {1})"</value>
+  </data>
+  <data name="WSClientIsConnected" xml:space="preserve">
+    <value>Client listener is connected to {0}</value>
+  </data>
+  <data name="WSClientFailedToConnect" xml:space="preserve">
+    <value>Client listener failed to connect to the WS server at {0}, another attempt will be made in {1} seconds</value>
+  </data>
+  <data name="WSClientTerminated" xml:space="preserve">
+    <value>Client listener has been terminated, shutting down</value>
+  </data>
+  <data name="WSInterfaceLoginKO" xml:space="preserve">
+    <value>Login to WS interface denied</value>
+  </data>
+  <data name="WSInterfaceDisconnected" xml:space="preserve">
+    <value>WS interface disconnected</value>
+  </data>
+  <data name="FailedInsertingConnectedClient" xml:space="preserve">
+    <value>Failed saving incoming connection to list of current clients</value>
+  </data>
+  <data name="InputDataFailedToSetData" xml:space="preserve">
+    <value>Failed settings data {0} to value {1}</value>
+  </data>
+  <data name="InputDataFailedCreatingPath" xml:space="preserve">
+    <value>Failed creating the data path {0}, that data won't be set</value>
+  </data>
+  <data name="ProcessingPerformingAutoLogin" xml:space="preserve">
+    <value>Performing auto-login</value>
+  </data>
+  <data name="ProcessingPerformingAutoLogout" xml:space="preserve">
+    <value>Performing auto-logout</value>
+  </data>
+  <data name="OutputDataFailedFetchingData" xml:space="preserve">
+    <value>Failed fetching output data {0}</value>
+  </data>
+  <data name="OutputDataFailedCreatingPath" xml:space="preserve">
+    <value>Failed creating return data path for {0}, that data won't be fetched</value>
+  </data>
+  <data name="ProcessingSendingAnswerToServer" xml:space="preserve">
+    <value>Sending message to eListener [{0}]</value>
+  </data>
+  <data name="ProcessingFoundCardBrand" xml:space="preserve">
+    <value>Found card brand: {0}</value>
+  </data>
+  <data name="NeptingTimeoutReceiving" xml:space="preserve">
+    <value>Timeout receiving a message</value>
+  </data>
+  <data name="NeptingIsNotReady" xml:space="preserve">
+    <value>The Nepting link is not ready, function {0} can't be executed</value>
+  </data>
+  <data name="NeptingInvalidPath" xml:space="preserve">
+    <value>Invalid path or not writeable ({0})</value>
+  </data>
+  <data name="NeptingError" xml:space="preserve">
+    <value>Error while running {0}</value>
+  </data>
+  <data name="NeptingIsReady" xml:space="preserve">
+    <value>The Nepting link is already setup, function {0} can't be executed</value>
+  </data>
+  <data name="NeptingInvalidLogLevel" xml:space="preserve">
+    <value>The specified log level is invalid ({0})</value>
+  </data>
+  <data name="NeptingInvalidLogFileSize" xml:space="preserve">
+    <value>Invalid log file size({0})</value>
+  </data>
+  <data name="NeptingInvalidConnectionType" xml:space="preserve">
+    <value>Invalid connection type specified ({0})</value>
+  </data>
+  <data name="NeptingNoMessage" xml:space="preserve">
+    <value>No message has been created</value>
+  </data>
+  <data name="NeptingNoFieldName" xml:space="preserve">
+    <value>No field name was specified to add to the message</value>
+  </data>
+  <data name="NeptingNoFieldValue" xml:space="preserve">
+    <value>No field value was specified to add to the message for field {0}</value>
+  </data>
+  <data name="NeptingIsNotConnected" xml:space="preserve">
+    <value>No active connection to a Nepting terminal</value>
+  </data>
+  <data name="NeptingFieldNotPresent" xml:space="preserve">
+    <value>The requested field {0} was not found in the message</value>
+  </data>
+  <data name="NeptingFieldIndexNotPresent" xml:space="preserve">
+    <value>The requested field {0} with index {1} was not found in the message</value>
+  </data>
+  <data name="NeptingFailedCreatingMessage" xml:space="preserve">
+    <value>Failed creating a Nepting message</value>
+  </data>
 </root>

@@ -32,7 +32,7 @@ Public Class FSimulator
 		right
 	End Enum
 	Private Const REGISTRY_KEY As String = "HKEY_CURRENT_USER\Software\PMS\NEXO\Simulator"
-	Private Const REGISTRY_VALUE_SETTINGS As String = "Settings"
+	Private Const REGISTRY_VALUE_SETTINGS As String = "SettingsFileDir"
 	Private Const SERVER_SETTINGS_FILE_NAME As String = "server.database.json"
 	Private Const SETTINGS_FILE_NAME As String = "nexo.simulator"
 	Private Const SETTINGS_FILE_EXT As String = ".json"
@@ -168,6 +168,10 @@ Public Class FSimulator
 
 #Region "window management"
 	Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+		Me.StartPosition = FormStartPosition.Manual
+		Me.Location = Screen.PrimaryScreen.WorkingArea.Location
+
 		Dim sfn As String = SettingsFileName()
 		json = New CJson(Of Settings)(sfn & SETTINGS_FILE_EXT)
 		CLog.Filename = sfn & LOG_FILE_EXT
@@ -288,9 +292,11 @@ Public Class FSimulator
 			Catch ex As Exception
 				udTimeout.Value = 30
 			End Try
+
 			If Not IsNothing(settings.WindowState) Then Me.WindowState = settings.WindowState
 			If Not IsNothing(settings.Location) Then Me.Location = settings.Location
 			If Not IsNothing(settings.Size) Then Me.Size = settings.Size
+
 
 			'available free commands
 			cbxCommands.Items.AddRange(settings.Commands.ToArray)
@@ -1597,9 +1603,9 @@ Public Class FSimulator
 		o.POIID = FullPOIID()
 		o.ServiceID = CMisc.Trimmed(efServiceID.Text)
 		o.DeviceID = CMisc.Trimmed(efDeviceID.Text)
-		o.RequestDevice = DeviceEnumeration.CashierInput
-		o.RequestInfoQualify = InfoQualifyEnumeration.Document
-		o.RequestInputCommand = InputCommandEnumeration.TextString
+		o.RequestInputDataDevice = DeviceEnumeration.CashierInput
+		o.RequestInputDataInfoQualify = InfoQualifyEnumeration.Document
+		o.RequestInputDataInputCommand = InputCommandEnumeration.TextString
 		Dim deviceTimeout As Integer = udTimeout.Value
 		If cbInfinite.Checked Then
 			deviceTimeout = 30

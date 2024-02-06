@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Authors>PMS</Authors>
+    <Description>PMS - nexo Retailer v3.0 Listener as a Windows App</Description>
+    <Version>5.1.2</Version>
+    <FileVersion>5.1.2</FileVersion>
+    <AssemblyVersion>5.1.2</AssemblyVersion>
+    <RootNamespace>Listener.App</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".~lock.Listener user guide.odt#" />
+    <None Remove="Listener user guide - v2.1 - revision marks.pdf" />
+    <None Remove="Listener user guide - v2.1.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Listener.30\Listener.30.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PublishProfile>true</PublishProfile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;osx-x64;osx-arm64</RuntimeIdentifiers>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <Import Project="..\LISTENER_REGISTRY\LISTENER_REGISTRY.projitems" Label="Shared" />
+
+  <!--
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Command="dotnet publish -p:PublishProfile=win-x64d -no-build" />
+
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -p:PublishProfile=win-x64 -no-build" />
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -c Release -p:PublishProfile=osx-x64 -no-build" />
+    <Exec Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Command="dotnet publish -c Release -p:PublishProfile=osx-arm64 -no-build" />
+  </Target>
+  -->
+
+</Project>

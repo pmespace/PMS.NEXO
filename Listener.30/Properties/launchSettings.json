@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Listener.30": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53467;http://localhost:53468"
+    }
+  }
+}

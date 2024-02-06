@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CListenerClientLogin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CListenerDataElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CListenerOrderRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CListenerReply.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CListenerRequest.cs" />

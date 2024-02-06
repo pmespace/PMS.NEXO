@@ -1,0 +1,20 @@
+{
+  "IP": "192.168.0.225",
+  "Port": 2018,
+  "Service": "Login",
+  "SaleID": "SaleID",
+  "POIID": "POIID",
+  "RequestedAmount": 0.0,
+  "AutoLoginLogout": true,
+  "ElementsToSend": {
+    "LoginRequest.SaleSoftware.ManufacturerID": {
+      "Value": "TEST",
+      "Status": false
+    }
+  },
+  "ElementsToReturn": {
+    "LoginResponse.POISystemData.POISoftware.ManufacturerID": {
+      "Status": false
+    }
+  }
+}

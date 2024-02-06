@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ESC" xml:space="preserve">
+    <value>Echap</value>
+  </data>
+  <data name="TestFileToUse" xml:space="preserve">
+    <value>Fichier de paramètres à utiliser</value>
+  </data>
+  <data name="InvalidTestFile" xml:space="preserve">
+    <value>Fichier de test invalide</value>
+  </data>
+  <data name="ListenerIP" xml:space="preserve">
+    <value>IP du listener</value>
+  </data>
+  <data name="InvalidIP" xml:space="preserve">
+    <value>IP invalide</value>
+  </data>
+  <data name="UseWS" xml:space="preserve">
+    <value>Utilisation des WS pour joindre le listener ?</value>
+  </data>
+  <data name="WSMap" xml:space="preserve">
+    <value>Extension WS</value>
+  </data>
+  <data name="InvalidWSMap" xml:space="preserve">
+    <value>Extension WS invalide</value>
+  </data>
+  <data name="ListenerPort" xml:space="preserve">
+    <value>Port du listener à joindre</value>
+  </data>
+  <data name="InvalidPort" xml:space="preserve">
+    <value>Port invalide</value>
+  </data>
+  <data name="SentMessage" xml:space="preserve">
+    <value>message envoyé au listener, timeout est de {0} secondes</value>
+  </data>
+  <data name="ReceivedMessage" xml:space="preserve">
+    <value>message reçu du listener</value>
+  </data>
+  <data name="FailedSendingRequest" xml:space="preserve">
+    <value>L'envoi de la requête a échoué</value>
+  </data>
+  <data name="UsingSettingsFile" xml:space="preserve">
+    <value>Fichier de paramètres utilisé: {0}</value>
+  </data>
+  <data name="MenuTestListener" xml:space="preserve">
+    <value>Tester le listener</value>
+  </data>
+  <data name="MenuGenerateListenerTestFile" xml:space="preserve">
+    <value>Génération d'un fichier de test du listener</value>
+  </data>
+  <data name="MenuDisplaySettings" xml:space="preserve">
+    <value>Affichage des paramètres</value>
+  </data>
+  <data name="MenuReloadSettings" xml:space="preserve">
+    <value>Recharger les paramètres</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Sortir</value>
+  </data>
+  <data name="ConfirmExit" xml:space="preserve">
+    <value>Confirmer la sortie du programme ?</value>
+  </data>
+  <data name="YesL" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="YesS" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="NoL" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="NoS" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="MenuStartListener" xml:space="preserve">
+    <value>Démarrer le Listener</value>
+  </data>
+  <data name="MenuStopListener" xml:space="preserve">
+    <value>Arrêter le Listener</value>
+  </data>
+  <data name="FailedReadRegistry" xml:space="preserve">
+    <value>La lecture de la base de registres a échoué</value>
+  </data>
+  <data name="FailedReadListenerSettings" xml:space="preserve">
+    <value>La lecture des paramètres du listener a échoué ({0})</value>
+  </data>
+  <data name="FileToUse" xml:space="preserve">
+    <value>Fichier à utiliser</value>
+  </data>
+  <data name="TestFileAlreadyExists" xml:space="preserve">
+    <value>Un fichier de test nommé {0} existe déjà, voulez-vous le remplacer ?</value>
+  </data>
+  <data name="POIToReach" xml:space="preserve">
+    <value>POI à atteindre</value>
+  </data>
+  <data name="SaleID" xml:space="preserve">
+    <value>Sale ID</value>
+  </data>
+  <data name="POIID" xml:space="preserve">
+    <value>POI ID</value>
+  </data>
+  <data name="RetailerServiceToCall" xml:space="preserve">
+    <value>Service nexo retailer à appeler</value>
+  </data>
+  <data name="NormalPaymentOrRefund" xml:space="preserve">
+    <value>Paiement normal (sinon cela sera un Remboursement)</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="DataToSend" xml:space="preserve">
+    <value>Données à envoyer</value>
+  </data>
+  <data name="DataToReturn" xml:space="preserve">
+    <value>Données à recevoir</value>
+  </data>
+  <data name="ValueFor" xml:space="preserve">
+    <value>Valeur de {0}</value>
+  </data>
+</root>

@@ -1,11 +1,19 @@
-﻿using System;
+﻿#define USEWSINTERFACE
+#define RES
+
+using System;
 using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 using NEXO;
 using COMMON;
+using NexoListener.Properties;
 using Listener;
 using Listener.Shared;
+using System.Net.WebSockets;
+using System.Threading.Tasks;
+using System.Text;
+using System.Threading;
 
 namespace NexoListener
 {
@@ -14,10 +22,12 @@ namespace NexoListener
 		#region menu
 		private class MenuList : SortedDictionary<char, CMenu> { }
 		private delegate bool DFnc(MenuList menu, CMenu entry, char option, object o);
+		private delegate Task<bool> DAFnc(MenuList menu, CMenu entry, char option, object o);
 		class CMenu
 		{
 			public string Text { get; set; }
-			public DFnc Fnc { get; set; }
+			public DFnc Fnc { get; set; } = null;
+			public DAFnc AFnc { get; set; } = null;
 		}
 		#endregion
 
@@ -102,20 +112,48 @@ namespace NexoListener
 			}
 			CLog.Filename = logFile;
 
-			CLogger.TRACE($"Using settings file: {settingsFile}");
+#if RES
+			CLogger.TRACE(string.Format(Resources.UsingSettingsFile, new object[] { settingsFile }));
+#else
+			CLogger.TRACE(string.Format($"Usings settings file {0}", new object[] { settingsFile }));
+#endif
 
 			MenuList menu = new MenuList();
-			menu.Add(TEST_LISTENER, new CMenu() { Text = "Test listener", Fnc = TestListener });
+
+#if RES
+			menu.Add(TEST_LISTENER, new CMenu() { Text = Resources.MenuTestListener, AFnc = TestListener });
+#else
+			menu.Add(TEST_LISTENER, new CMenu() { Text = "Test listener", AFnc = TestListener });
+#endif
+#if RES
+			menu.Add(TEST_LISTENER_CREATE, new CMenu() { Text = Resources.MenuGenerateListenerTestFile, Fnc = TestListenerCreate });
+#else
 			menu.Add(TEST_LISTENER_CREATE, new CMenu() { Text = "Generate listener test file", Fnc = TestListenerCreate });
+#endif
+#if RES
+			menu.Add(DISPLAY_SETTINGS, new CMenu() { Text = Resources.MenuDisplaySettings, Fnc = DisplaySettings });
+#else
 			menu.Add(DISPLAY_SETTINGS, new CMenu() { Text = "Display settings", Fnc = DisplaySettings });
+#endif
+#if RES
+			menu.Add(RELOAD_SETTINGS, new CMenu() { Text = Resources.MenuReloadSettings, Fnc = ReloadSettings });
+#else
 			menu.Add(RELOAD_SETTINGS, new CMenu() { Text = "Reload settings", Fnc = ReloadSettings });
+#endif
+#if RES
 			//menu.Add(i++.ToString()[0], new CMenu() { Text = ACTIVATE_DISPLAY, Fnc = ActivityDisplay });
+#else
+#endif
+#if RES
+			menu.Add('X', new CMenu() { Text = Resources.MenuExit, Fnc = Exit });
+#else
 			menu.Add('X', new CMenu() { Text = "Exit", Fnc = Exit });
+#endif
 
 			// Start listener
 			CListener listener = new CListener();
 			bool ok = listener.Start(settingsFile);
-			TestListenerType testListenerType = new TestListenerType() { FileToUse = LISTENER_TEST_FILE, Port = listener.Port, IP = listener.IP };
+			TestListenerType testListenerType = new TestListenerType() { FileToUse = LISTENER_TEST_FILE, Port = listener.Port, IP = listener.IP, WSMap = listener.WSMap, WSPort = listener.WSPort };
 			while (ok)
 			{
 				CMenu entry = DisplayMenu(menu, out char option);
@@ -135,7 +173,9 @@ namespace NexoListener
 
 						case TEST_LISTENER:
 							{
-								ok = entry.Fnc(menu, entry, option, testListenerType);
+								//ok = entry.Fnc(menu, entry, option, testListenerType);
+								var res = entry.AFnc(menu, entry, option, testListenerType);
+								ok = true;
 								break;
 							}
 
@@ -180,7 +220,11 @@ namespace NexoListener
 				option = c;
 				escape = ConsoleKey.Escape == keyInfo.Key;
 			} while (!menu.ContainsKey(option) && !escape);
+#if RES
+			Console.WriteLine(escape ? Resources.ESC : c.ToString());
+#else
 			Console.WriteLine(escape ? "ESC" : c.ToString());
+#endif
 			return escape ? null : menu[option];
 		}
 		/// <summary>
@@ -191,35 +235,88 @@ namespace NexoListener
 		/// <param name="option"></param>
 		/// <param name="o"></param>
 		/// <returns></returns>
-		static bool TestListener(MenuList menu, CMenu entry, char option, object o)
+		static async Task<bool> TestListener(MenuList menu, CMenu entry, char option, object o)
 		{
 			TestListenerType type = (TestListenerType)o;
 
-			type.FileToUse = Input("File to use", LISTENER_TEST_FILE, out bool isdef);
+#if RES
+			type.FileToUse = Input(Resources.TestFileToUse, LISTENER_TEST_FILE, out bool isdef);
+#else
+			type.FileToUse = Input("Test file to use", LISTENER_TEST_FILE, out bool isdef);
+#endif
 			if (string.IsNullOrEmpty(type.FileToUse))
 			{
+#if RES
+				Console.WriteLine(Resources.InvalidTestFile);
+#else
 				Console.WriteLine("Invalid test file");
+#endif
 				return true;
 			}
 
+#if RES
+			type.IP = Input(Resources.ListenerIP, CStream.Localhost(), out isdef);
+#else
 			type.IP = Input("Listener IP", CStream.Localhost(), out isdef);
+#endif
 			if (string.IsNullOrEmpty(type.IP))
 			{
+#if RES
+				Console.WriteLine(Resources.InvalidIP);
+#else
 				Console.WriteLine("Invalid IP");
+#endif
 				return true;
 			}
 
-			string sport = Input("Listener port to reach", type.Port.ToString(), out isdef);
+			bool useWS = false;
+#if USEWSINTERFACE
+#if RES
+			useWS = CMisc.YesNo(Resources.UseWS, true, true, true, new string[] { Resources.YesL, Resources.YesS }, new string[] { Resources.NoL, Resources.NoS }, true, true);
+#else
+			useWS = CMisc.YesNo("Use WS", true, true, true, new string[] { "Yes", "Y" }, new string[] { "No", "N" }, true, true);
+#endif
+			if (useWS)
+			{
+#if RES
+				type.WSMap = Input(Resources.WSMap, type.WSMap, out isdef);
+#else
+				type.WSMap = Input("WSMap", type.WSMap, out isdef);
+#endif
+				if (string.IsNullOrEmpty(type.WSMap))
+				{
+#if RES
+					Console.WriteLine(Resources.InvalidWSMap);
+#else
+					Console.WriteLine("Invalid WSMap");
+#endif
+					return true;
+				}
+			}
+#endif
+
+			uint uport = 0;
+			string sport =
+#if RES
+					Input(Resources.ListenerPort, useWS ? type.WSPort.ToString() : type.Port.ToString(), out isdef);
+#else
+					Input("Listener port", useWS ? type.WSPort.ToString() : type.Port.ToString(), out isdef);
+#endif
 			if (string.IsNullOrEmpty(sport)) return true;
 			try
 			{
-				type.Port = uint.Parse(sport);
+				uport = uint.Parse(sport);
 			}
 			catch (Exception)
 			{
-				Console.WriteLine("Invalid port number");
+#if RES
+				Console.WriteLine(Resources.InvalidPort);
+#else
+				Console.WriteLine("Invalid port");
+#endif
 				return true;
 			}
+
 
 			//bool useasync = CMisc.YesNo("Use asynchronous communication", true, false, false, null, null, false);
 
@@ -242,36 +339,97 @@ namespace NexoListener
 			var request = json.ReadSettings();
 			if (null != request)
 			{
-				CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = type.Port, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
-				CStreamClientIO streamIO = CStream.Connect(clientSettings);
-				if (null != streamIO)
+#if USEWSINTERFACE
+				if (!useWS)
 				{
-					//CThread thread = null;
-					//if (useasync && (null != (thread = CStream.SendAsync(new CStream.SendAsyncType() { OnReply = OnReply, Settings = clientSettings, Parameters = null, ThreadData = null, }, CJson<CListenerRequest>.Serialize(request)))))
-					//{
-					//	CLogger.Add($"{request} (sent message, asynchronously)");
-					//}
-					//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
-					if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
+#endif
+					CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = uport, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
+					CStreamClientIO streamIO = CStream.Connect(clientSettings);
+					if (null != streamIO)
 					{
-						string sreply;
-						CLogger.TRACE($"{request} (sent message, timeout is {clientSettings.ReceiveTimeout} seconds)");
-						while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
+						//CThread thread = null;
+						//if (useasync && (null != (thread = CStream.SendAsync(new CStream.SendAsyncType() { OnReply = OnReply, Settings = clientSettings, Parameters = null, ThreadData = null, }, CJson<CListenerRequest>.Serialize(request)))))
+						//{
+						//	CLogger.Add($"{request} (sent message, asynchronously)");
+						//}
+						//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
+						if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 						{
-							var reply = CJson<CListenerReply>.Deserialize(sreply);
-							CLogger.TRACE($"{reply.Message} (received message)");
-							if (!reply.Notification)
+							string sreply;
+#if RES
+							CLogger.TRACE($"{request} ({string.Format(Resources.SentMessage, new object[] { clientSettings.ReceiveTimeout })})");
+#else
+							CLogger.TRACE($"{request} ({string.Format("message sent to listener, timeout is { 0 } seconds", new object[] { clientSettings.ReceiveTimeout })})");
+#endif
+							while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
 							{
-								CLogger.TRACE($"{reply}");
-								break;
+								var reply = CJson<CListenerReply>.Deserialize(sreply);
+#if RES
+								CLogger.TRACE($"{reply.Message} ({Resources.ReceivedMessage})");
+#else
+								CLogger.TRACE($"{reply.Message} (received message from the listener)");
+#endif
+								if (!reply.Notification)
+								{
+									CLogger.TRACE($"{reply}");
+									break;
+								}
 							}
 						}
+						else
+						{
+#if RES
+							CLogger.ERROR(Resources.FailedSendingRequest);
+#else
+							CLogger.ERROR("Failed sending request");
+#endif
+						}
+					}
+
+#if USEWSINTERFACE
+				}
+				else
+				{
+					CancellationTokenSource innerSource = new CancellationTokenSource();
+					CancellationToken innerToken = innerSource.Token;
+					ClientWebSocket WS = new ClientWebSocket();
+					string su = $"ws://{type.IP}:{type.Port}{type.WSMap}";
+					await WS.ConnectAsync(new Uri(su), innerToken);
+					if (WebSocketState.Open == WS.State)
+					{
+						await WS.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(CJson<CListenerRequest>.Serialize(request))), WebSocketMessageType.Text, true, innerToken);
+						do
+						{
+							var res = await CWSListener.ReceiveAsync(WS, innerToken);
+							if (!res.IsNullOrEmpty())
+							{
+								var reply = CJson<CListenerReply>.Deserialize(res);
+#if RES
+								CLogger.TRACE($"{reply.Message} ({Resources.ReceivedMessage})");
+#else
+								CLogger.TRACE($"{reply.Message} (received message from the listener message)");
+#endif
+								if (!reply.Notification)
+								{
+									CLogger.TRACE($"{reply}");
+									innerSource.Cancel();
+								}
+							}
+							else
+								innerSource.Cancel();
+						}
+						while (!innerToken.IsCancellationRequested);
 					}
 					else
 					{
-						CLogger.ERROR($"Failed to send the request");
+#if RES
+						CLogger.ERROR(Resources.FailedSendingRequest);
+#else
+						CLogger.ERROR("Failed sending request");
+#endif
 					}
 				}
+#endif
 			}
 			else
 			{
@@ -285,6 +443,8 @@ namespace NexoListener
 			public uint Port;
 			public string FileToUse;
 			public string IP;
+			public string WSMap;
+			public uint WSPort;
 		}
 		//private static bool OnReply(byte[] reply, bool error, CThread thread, object parameters)
 		//{
@@ -313,7 +473,7 @@ namespace NexoListener
 			if (string.IsNullOrEmpty(fileToUse)) return true;
 
 			FileInfo fi = new FileInfo(fileToUse);
-			if (!fi.Exists || YesNo($"A test file called {fileToUse} already exists, do you want to override it ?"))
+			if (!fi.Exists || CMisc.YesNo($"A test file called {fileToUse} already exists, do you want to override it ?", true, false, true, new string[] { "Yes", "Y" }, new string[] { "No", "N" }, true, true))
 			{
 				var json = new CJson<CListenerRequest>(fileToUse);
 				CListenerRequest req = json.ReadSettings();
@@ -358,7 +518,7 @@ namespace NexoListener
 				PaymentTypeEnumeration pt = PaymentTypeEnumeration.Normal;
 				if (isPay)
 				{
-					if (!YesNo("Normal Payment (otherwise it will be a Refund)"))
+					if (!CMisc.YesNo("Normal Payment (otherwise it will be a Refund)", true, true, true, new string[] { "Tes", "Y" }, new string[] { "No", "N" }, true, true))
 						pt = PaymentTypeEnumeration.Refund;
 
 					try
@@ -416,7 +576,11 @@ namespace NexoListener
 		/// <returns></returns>
 		static bool Exit(MenuList menu, CMenu entry, char option, object o)
 		{
-			return !YesNo("Confirm exit ?");
+#if RES
+			return !CMisc.YesNo(Resources.ConfirmExit, true, true, true, new string[] { "Yes", "Y" }, new string[] { "No", "N" }, true, true);
+#else
+			return CMisc.YesNo("Confirm exit", true, true, true, new string[] { "Yes", "Y" }, new string[] { "No", "N" }, true, true);
+#endif
 		}
 		/// <summary>
 		/// 
@@ -477,25 +641,25 @@ namespace NexoListener
 			Console.WriteLine(o.ToString());
 			return true;
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="msg"></param>
-		/// <returns>True if YES, false if NO</returns>
-		static bool YesNo(string msg)
-		{
-			Console.WriteLine();
-			Console.Write(msg + " [Y/N] ");
-			string yes = "Yy", no = "Nn";
-			string confirm = yes + no;
-			char c;
-			do
-			{
-				ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-				c = keyInfo.KeyChar.ToString().ToUpper()[0];
-			} while (!confirm.Contains(c));
-			return yes.Contains(c);
-		}
+		///// <summary>
+		///// 
+		///// </summary>
+		///// <param name="msg"></param>
+		///// <returns>True if YES, false if NO</returns>
+		//static bool YesNo(string msg)
+		//{
+		//	Console.WriteLine();
+		//	Console.Write(msg + " [Y/N] ");
+		//	string yes = "Yy", no = "Nn";
+		//	string confirm = yes + no;
+		//	char c;
+		//	do
+		//	{
+		//		ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+		//		c = keyInfo.KeyChar.ToString().ToUpper()[0];
+		//	} while (!confirm.Contains(c));
+		//	return yes.Contains(c);
+		//}
 		static string Input(string msg, string defv, out bool isdef)
 		{
 			Console.WriteLine();

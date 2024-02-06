@@ -5,9 +5,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <Version>4.9.7</Version>
-    <FileVersion>4.9.7</FileVersion>
-    <AssemblyVersion>4.9.7</AssemblyVersion>
+    <Version>5.1.2</Version>
+    <FileVersion>5.1.2</FileVersion>
+    <AssemblyVersion>5.1.2</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,12 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PMS.COMMON" Version="7.6.6" />
+    <PackageReference Include="PMS.COMMON" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Listener.30\Listener.30.csproj" />
-    <ProjectReference Include="..\ListenerServer\WSListener.csproj" />
   </ItemGroup>
 
 </Project>

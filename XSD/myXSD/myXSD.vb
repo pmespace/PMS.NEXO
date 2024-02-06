@@ -389,6 +389,10 @@ Public Class myXSD
 		Label5.Text = String.Empty
 	End Sub
 
+	Private Sub cbUseList_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseList.CheckedChanged
+		cbUseList.Checked = False
+	End Sub
+
 	Private Sub convertTypes_CheckedChanged(sender As Object, e As EventArgs) Handles convertTypes.CheckedChanged
 		panelTypes.Enabled = convertTypes.Checked
 	End Sub

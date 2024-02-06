@@ -698,7 +698,7 @@ namespace NEXO
 				valueToStore = Labels[value].Label;
 				// arrived here the value is valid and is accepted
 			}
-			catch (Exception ex)
+			catch (Exception /*ex*/)
 			{
 				//CLog.EXCEPT(ex);
 				// arrived here the value is not valid, we ignore it

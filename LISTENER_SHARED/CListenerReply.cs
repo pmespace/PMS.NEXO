@@ -126,33 +126,30 @@ namespace Listener.Shared
 		/// <summary>
 		/// The original request as received from the caller
 		/// </summary>
-		public CListenerRequest Request
-		{ get; set; }
+		public CListenerRequest Request { get; set; }
 		/// <summary>
 		/// The original request as a string as received from the caller
 		/// </summary>
 		public string RequestAsString { get; set; }
-
-		public string NexoMessage { get; internal set; }
-
-		public override string ToString()
-		{
-			string s = null;
-			List<string> ls = ToStringEx();
-			for (int i = 0; i < ls.Count; i++)
-			{
-				s += ls[i] + (i != ls.Count - 1 ? Chars.CRLF : string.Empty);
-			}
-			//s = $"Service: {Service}; POI to reach: {POI}; SaleID: {SaleID}; POIID: {POIID}; Currency: {Currency}; Timeout: {ReceiveTimeout}" + Chars.CRLF;
-			//s += $"Elements to send: {ElementsToSend}" + Chars.CRLF;
-			//s += $"Elements to return: {ElementsToReturn}";
-			return s;
-		}
-		public List<string> ToStringEx()
-		{
-			List<string> s = new List<string>();
-			s.Add($"Reply => Request: {Request}; Notification: {Notification}; Status: {Status}; Nexo error: {NexoError}");
-			return s;
-		}
 	}
+	//public class CListenerReplyEx : CListenerReply
+	//{
+	//	public CListenerReplyEx() { }
+	//	public CListenerReplyEx(CListenerReply reply) => Clone(reply);
+	//	void Clone(CListenerReply reply)
+	//	{
+	//		Notification = reply.Notification;
+	//		Status = reply.Status;
+	//		Label = reply.Label;
+	//		Message = reply.Message;
+	//		NexoError = reply.NexoError;
+	//		NexoInformation = reply.NexoInformation;
+	//		Amount = reply.Amount;
+	//		POITransaction = reply.POITransaction;
+	//		PaymentData = reply.PaymentData;
+	//		Receipts = reply.Receipts;
+	//		Request = reply.Request;
+	//		RequestAsString = reply.RequestAsString;
+	//	}
+	//}
 }

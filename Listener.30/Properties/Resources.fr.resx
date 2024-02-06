@@ -219,4 +219,184 @@
   <data name="ProcessingReceived" xml:space="preserve">
     <value>Réception d'une réponse pour le service {0}</value>
   </data>
+  <data name="WSInterfaceFailedToConnectToListener" xml:space="preserve">
+    <value>Impossible de se connecter au serveur</value>
+  </data>
+  <data name="WSInterfaceFailedSendingDataToListener" xml:space="preserve">
+    <value>L'envoi des données au listener a échoué</value>
+  </data>
+  <data name="ConnectionHasBeenCancelled" xml:space="preserve">
+    <value>Déconnexion en cours</value>
+  </data>
+  <data name="WSInterfaceIncomingConnection" xml:space="preserve">
+    <value>Connexion entrante</value>
+  </data>
+  <data name="WSInterfaceWaitingSecurityDetails" xml:space="preserve">
+    <value>En attente des éléments d'authentification</value>
+  </data>
+  <data name="WSInterfaceReceivedSecurityDetails" xml:space="preserve">
+    <value>Réception des éléments d'authentification: {0}</value>
+  </data>
+  <data name="WSInterfaceLoginOK" xml:space="preserve">
+    <value>Login à l'interface WS accordé</value>
+  </data>
+  <data name="SendingLoginResult" xml:space="preserve">
+    <value>Résultat de l'authentification: {0}</value>
+  </data>
+  <data name="WSInterfaceConnectedToListener" xml:space="preserve">
+    <value>Connecté au listener à l'adresse {0}</value>
+  </data>
+  <data name="ReceivedMessage" xml:space="preserve">
+    <value>message reçu</value>
+  </data>
+  <data name="ThreadNameWS" xml:space="preserve">
+    <value>WS Process</value>
+  </data>
+  <data name="ThreadNameHTTP" xml:space="preserve">
+    <value>HTTP Process</value>
+  </data>
+  <data name="WSInterfaceNotWSRequest" xml:space="preserve">
+    <value>Réception d'une requête HTTP, la connexion va être fermée avec le code retour {0}</value>
+  </data>
+  <data name="WSInterfaceStopped" xml:space="preserve">
+    <value>L'interface WS du listener s'est arrêtée avec le code d'erreur {0}</value>
+  </data>
+  <data name="POISConnectionSettings" xml:space="preserve">
+    <value>Paramètres de connexion</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>&lt;aucun&gt;</value>
+  </data>
+  <data name="DisplayLogFile" xml:space="preserve">
+    <value>Fichier log</value>
+  </data>
+  <data name="DisplayStarting" xml:space="preserve">
+    <value>Tentative de lecture des paramètres depuis</value>
+  </data>
+  <data name="DisplayFailedToReadSettings" xml:space="preserve">
+    <value>La lecture des paramètres a échoué</value>
+  </data>
+  <data name="DisplayAddress" xml:space="preserve">
+    <value>Adresse IP</value>
+  </data>
+  <data name="DisplayFailedToConnectToEListener" xml:space="preserve">
+    <value>Le processus de connexion au EListener n'a pas pu se lancer, arrêt du listener</value>
+  </data>
+  <data name="DisplayFailedToStartWSInterface" xml:space="preserve">
+    <value>L'interface WS n'a pas pu être démarrée, arrêt du listener</value>
+  </data>
+  <data name="WSInterfaceWaitingForIncomingData" xml:space="preserve">
+    <value>En attente de données à recevoir</value>
+  </data>
+  <data name="WSInterfaceConnectionHasBeenClosed" xml:space="preserve">
+    <value>La connexion depuis {0} a été fermée</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Erreur inconnue</value>
+  </data>
+  <data name="ERROR_FailedToAddWSClient" xml:space="preserve">
+    <value>L'enregistrement de la connexion depuis {0}</value>
+  </data>
+  <data name="INFOR_StartingWSInterface" xml:space="preserve">
+    <value>Démarrage de l'interface WS du listener</value>
+  </data>
+  <data name="TRACE_WSInterfaceStarted" xml:space="preserve">
+    <value>L'interface WS du listener démarrée</value>
+  </data>
+  <data name="ERROR_WSInterfaceNotStarted" xml:space="preserve">
+    <value>L'interface WS du listener n'a pas pu être démarrée</value>
+  </data>
+  <data name="ERROR_WSClientHasStopped" xml:space="preserve">
+    <value>Le processus listener connecté au WS server s'est arrêté, arrêt du listener</value>
+  </data>
+  <data name="WSClientConnectingToServer" xml:space="preserve">
+    <value>Tentative de connexion du listener client à {0} (tentative {1})</value>
+  </data>
+  <data name="WSClientIsConnected" xml:space="preserve">
+    <value>Le listener client est connecté à {0}</value>
+  </data>
+  <data name="WSClientFailedToConnect" xml:space="preserve">
+    <value>Le listener client n'a pas pu se connecter au serveur à l'adresse {0}, une nouvelle tentative sera faite dans {1} secondes</value>
+  </data>
+  <data name="WSClientTerminated" xml:space="preserve">
+    <value>Le listener client s'est arrêté, arrêt du listener</value>
+  </data>
+  <data name="WSInterfaceLoginKO" xml:space="preserve">
+    <value>Login à l'interface WS refusé</value>
+  </data>
+  <data name="WSInterfaceDisconnected" xml:space="preserve">
+    <value>L'interface WS a été déconnectée</value>
+  </data>
+  <data name="FailedInsertingConnectedClient" xml:space="preserve">
+    <value>L'enregistrement de la connexion entrante a échoué</value>
+  </data>
+  <data name="InputDataFailedToSetData" xml:space="preserve">
+    <value>Attribuer la valeur {1} à la donnée {0} a échoué</value>
+  </data>
+  <data name="InputDataFailedCreatingPath" xml:space="preserve">
+    <value>La création du chemin d'accès de la donnée {0} a échoué, cette donnée ne sera pas valorisée</value>
+  </data>
+  <data name="ProcessingPerformingAutoLogin" xml:space="preserve">
+    <value>Auto-login en cours</value>
+  </data>
+  <data name="ProcessingPerformingAutoLogout" xml:space="preserve">
+    <value>Auto-logout en cours</value>
+  </data>
+  <data name="OutputDataFailedFetchingData" xml:space="preserve">
+    <value>La récupération en sortie de la donnée {0} a échoué</value>
+  </data>
+  <data name="OutputDataFailedCreatingPath" xml:space="preserve">
+    <value>La création du chemin de la donnée {0} a échoué, cette donnée ne sera pas récupérée</value>
+  </data>
+  <data name="ProcessingSendingAnswerToServer" xml:space="preserve">
+    <value>Envoi d'un message au eListener [{0}]</value>
+  </data>
+  <data name="ProcessingFoundCardBrand" xml:space="preserve">
+    <value>Réseau de la carte utilisée: {0}</value>
+  </data>
+  <data name="NeptingTimeoutReceiving" xml:space="preserve">
+    <value>Timeout lors de la réception d'un message</value>
+  </data>
+  <data name="NeptingIsNotReady" xml:space="preserve">
+    <value>Le lien Nepting n'est pas actif, la fonction {0} ne peut être exécutée</value>
+  </data>
+  <data name="NeptingInvalidPath" xml:space="preserve">
+    <value>Chemin invalide ou impossible d'écrire dans le répertoire ({0})</value>
+  </data>
+  <data name="NeptingError" xml:space="preserve">
+    <value>Erreur en exécutant {0}</value>
+  </data>
+  <data name="NeptingIsReady" xml:space="preserve">
+    <value>Le lien Nepting est déjà actif, la fonction {0} ne peut être exécutée</value>
+  </data>
+  <data name="NeptingInvalidLogLevel" xml:space="preserve">
+    <value>Le niveau de log spécifié est invalide ({0})</value>
+  </data>
+  <data name="NeptingInvalidLogFileSize" xml:space="preserve">
+    <value>Taille du fichier log invalide ({0})</value>
+  </data>
+  <data name="NeptingInvalidConnectionType" xml:space="preserve">
+    <value>Type de connexion invalide ({0})</value>
+  </data>
+  <data name="NeptingNoMessage" xml:space="preserve">
+    <value>Aucun message n'a été créé</value>
+  </data>
+  <data name="NeptingNoFieldName" xml:space="preserve">
+    <value>Aucun nom de donnée n'a été spécifié lors de l'ajout au message</value>
+  </data>
+  <data name="NeptingNoFieldValue" xml:space="preserve">
+    <value>Aucun nom de donnée n'a été spécifié lors de l'ajout de la donnée {0} au message</value>
+  </data>
+  <data name="NeptingIsNotConnected" xml:space="preserve">
+    <value>Aucune connexion active à un terminal Nepting</value>
+  </data>
+  <data name="NeptingFieldNotPresent" xml:space="preserve">
+    <value>La donnée {0} n'a pas été trouvée dans le message</value>
+  </data>
+  <data name="NeptingFieldIndexNotPresent" xml:space="preserve">
+    <value>La donnée {0} d'index {1} n'a pas été trouvée dans le message</value>
+  </data>
+  <data name="NeptingFailedCreatingMessage" xml:space="preserve">
+    <value>La création du message Nepting a échoué</value>
+  </data>
 </root>

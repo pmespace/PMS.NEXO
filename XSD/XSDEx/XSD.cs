@@ -273,17 +273,20 @@ namespace XSDEx
 
 				// if preprocessor variable to use, add it
 				string beginPreprocessor = null, endPreprocessor = null;
+				string pragmaWaring = null;
 				if (!string.IsNullOrEmpty(settings.Preprocessor))
 				{
 					if (enumLanguage.csharp == settings.Language)
 					{
 						beginPreprocessor = $"#if {settings.Preprocessor}";
 						endPreprocessor = $"#endif";
+						pragmaWaring = @"#pragma warning disable CS0168";
 					}
 					else if (enumLanguage.vb == settings.Language)
 					{
 						beginPreprocessor = $"#If {settings.Preprocessor} Then";
 						endPreprocessor = $"#End If";
+						pragmaWaring = @"#Disable Warning CS0168";
 					}
 				}
 
@@ -328,6 +331,8 @@ namespace XSDEx
 				msg.Text = "Generating code";
 
 				Code = GenerateCode(settings, newCodeNamespace);
+
+				Code = pragmaWaring + Chars.CRLF + Code;
 
 				// add preprocessor around the code
 				//if (!string.IsNullOrEmpty(beginPreprocessor))
@@ -386,7 +391,7 @@ namespace XSDEx
 				 isIndex = "index",
 				 isValue = "value",
 				 isList = "isList",
-				 toString = "ToString",
+				 //toString = "ToString",
 				 isByteSequence = "isByteSequence",
 				 isArrayElementType = "isArrayElementType",
 				 bXSD = "BEGIN ADDED BY XSD",

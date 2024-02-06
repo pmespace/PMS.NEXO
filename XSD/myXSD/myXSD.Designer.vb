@@ -89,10 +89,10 @@ Partial Class myXSD
 		Me.cbRemoveAttribute = New System.Windows.Forms.CheckBox()
 		Me.cbCreateAsElement = New System.Windows.Forms.CheckBox()
 		Me.cbAdaptXmlText = New System.Windows.Forms.CheckBox()
+		Me.cbUseList = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.cbUseList = New System.Windows.Forms.CheckBox()
 		Me.panelMain.SuspendLayout()
 		Me.panelButtons.SuspendLayout()
 		Me.panelGenerateButtons.SuspendLayout()
@@ -1010,6 +1010,17 @@ Partial Class myXSD
 		Me.cbAdaptXmlText.Text = "Adapt XmlText"
 		Me.cbAdaptXmlText.UseVisualStyleBackColor = True
 		'
+		'cbUseList
+		'
+		Me.cbUseList.AutoSize = True
+		Me.cbUseList.Enabled = False
+		Me.cbUseList.Location = New System.Drawing.Point(759, 26)
+		Me.cbUseList.Name = "cbUseList"
+		Me.cbUseList.Size = New System.Drawing.Size(64, 17)
+		Me.cbUseList.TabIndex = 16
+		Me.cbUseList.Text = "Use List"
+		Me.cbUseList.UseVisualStyleBackColor = True
+		'
 		'result
 		'
 		Me.result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1031,16 +1042,6 @@ Partial Class myXSD
 		'SaveFileDialog1
 		'
 		Me.SaveFileDialog1.RestoreDirectory = True
-		'
-		'cbUseList
-		'
-		Me.cbUseList.AutoSize = True
-		Me.cbUseList.Location = New System.Drawing.Point(759, 26)
-		Me.cbUseList.Name = "cbUseList"
-		Me.cbUseList.Size = New System.Drawing.Size(64, 17)
-		Me.cbUseList.TabIndex = 16
-		Me.cbUseList.Text = "Use List"
-		Me.cbUseList.UseVisualStyleBackColor = True
 		'
 		'myXSD
 		'

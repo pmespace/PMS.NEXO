@@ -61,11 +61,56 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection has been cancelled.
+        /// </summary>
+        internal static string ConnectionHasBeenCancelled {
+            get {
+                return ResourceManager.GetString("ConnectionHasBeenCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No error DeviceDisplay.
         /// </summary>
         internal static string DeviceDisplayAlwaysSucceed {
             get {
                 return ResourceManager.GetString("DeviceDisplayAlwaysSucceed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP address.
+        /// </summary>
+        internal static string DisplayAddress {
+            get {
+                return ResourceManager.GetString("DisplayAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listener connection to EListener server process failed to start, shutting down.
+        /// </summary>
+        internal static string DisplayFailedToConnectToEListener {
+            get {
+                return ResourceManager.GetString("DisplayFailedToConnectToEListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to read settings.
+        /// </summary>
+        internal static string DisplayFailedToReadSettings {
+            get {
+                return ResourceManager.GetString("DisplayFailedToReadSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener WS interface failed to start, shutting down.
+        /// </summary>
+        internal static string DisplayFailedToStartWSInterface {
+            get {
+                return ResourceManager.GetString("DisplayFailedToStartWSInterface", resourceCulture);
             }
         }
         
@@ -93,6 +138,51 @@ namespace Listener.Properties {
         internal static string DisplayingXHTMLContent {
             get {
                 return ResourceManager.GetString("DisplayingXHTMLContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log file.
+        /// </summary>
+        internal static string DisplayLogFile {
+            get {
+                return ResourceManager.GetString("DisplayLogFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trying to read settings from.
+        /// </summary>
+        internal static string DisplayStarting {
+            get {
+                return ResourceManager.GetString("DisplayStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to insert {0} in the list of current clients.
+        /// </summary>
+        internal static string ERROR_FailedToAddWSClient {
+            get {
+                return ResourceManager.GetString("ERROR_FailedToAddWSClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The listener process connected to WS server has terminated, shutting down.
+        /// </summary>
+        internal static string ERROR_WSClientHasStopped {
+            get {
+                return ResourceManager.GetString("ERROR_WSClientHasStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listener WS interface failed to start.
+        /// </summary>
+        internal static string ERROR_WSInterfaceNotStarted {
+            get {
+                return ResourceManager.GetString("ERROR_WSInterfaceNotStarted", resourceCulture);
             }
         }
         
@@ -151,6 +241,42 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed saving incoming connection to list of current clients.
+        /// </summary>
+        internal static string FailedInsertingConnectedClient {
+            get {
+                return ResourceManager.GetString("FailedInsertingConnectedClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting listener WS interface.
+        /// </summary>
+        internal static string INFOR_StartingWSInterface {
+            get {
+                return ResourceManager.GetString("INFOR_StartingWSInterface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed creating the data path {0}, that data won&apos;t be set.
+        /// </summary>
+        internal static string InputDataFailedCreatingPath {
+            get {
+                return ResourceManager.GetString("InputDataFailedCreatingPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed settings data {0} to value {1}.
+        /// </summary>
+        internal static string InputDataFailedToSetData {
+            get {
+                return ResourceManager.GetString("InputDataFailedToSetData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid display device request [{0}].
         /// </summary>
         internal static string InvalidDisplayDevice {
@@ -205,6 +331,150 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while running {0}.
+        /// </summary>
+        internal static string NeptingError {
+            get {
+                return ResourceManager.GetString("NeptingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed creating a Nepting message.
+        /// </summary>
+        internal static string NeptingFailedCreatingMessage {
+            get {
+                return ResourceManager.GetString("NeptingFailedCreatingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested field {0} with index {1} was not found in the message.
+        /// </summary>
+        internal static string NeptingFieldIndexNotPresent {
+            get {
+                return ResourceManager.GetString("NeptingFieldIndexNotPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The requested field {0} was not found in the message.
+        /// </summary>
+        internal static string NeptingFieldNotPresent {
+            get {
+                return ResourceManager.GetString("NeptingFieldNotPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid connection type specified ({0}).
+        /// </summary>
+        internal static string NeptingInvalidConnectionType {
+            get {
+                return ResourceManager.GetString("NeptingInvalidConnectionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid log file size({0}).
+        /// </summary>
+        internal static string NeptingInvalidLogFileSize {
+            get {
+                return ResourceManager.GetString("NeptingInvalidLogFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified log level is invalid ({0}).
+        /// </summary>
+        internal static string NeptingInvalidLogLevel {
+            get {
+                return ResourceManager.GetString("NeptingInvalidLogLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid path or not writeable ({0}).
+        /// </summary>
+        internal static string NeptingInvalidPath {
+            get {
+                return ResourceManager.GetString("NeptingInvalidPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active connection to a Nepting terminal.
+        /// </summary>
+        internal static string NeptingIsNotConnected {
+            get {
+                return ResourceManager.GetString("NeptingIsNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Nepting link is not ready, function {0} can&apos;t be executed.
+        /// </summary>
+        internal static string NeptingIsNotReady {
+            get {
+                return ResourceManager.GetString("NeptingIsNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Nepting link is already setup, function {0} can&apos;t be executed.
+        /// </summary>
+        internal static string NeptingIsReady {
+            get {
+                return ResourceManager.GetString("NeptingIsReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No field name was specified to add to the message.
+        /// </summary>
+        internal static string NeptingNoFieldName {
+            get {
+                return ResourceManager.GetString("NeptingNoFieldName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No field value was specified to add to the message for field {0}.
+        /// </summary>
+        internal static string NeptingNoFieldValue {
+            get {
+                return ResourceManager.GetString("NeptingNoFieldValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No message has been created.
+        /// </summary>
+        internal static string NeptingNoMessage {
+            get {
+                return ResourceManager.GetString("NeptingNoMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout receiving a message.
+        /// </summary>
+        internal static string NeptingTimeoutReceiving {
+            get {
+                return ResourceManager.GetString("NeptingTimeoutReceiving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;none&gt;.
+        /// </summary>
+        internal static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abort request has not been processed.
         /// </summary>
         internal static string NotificationAbortHasNotBeenProcessed {
@@ -232,6 +502,24 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed creating return data path for {0}, that data won&apos;t be fetched.
+        /// </summary>
+        internal static string OutputDataFailedCreatingPath {
+            get {
+                return ResourceManager.GetString("OutputDataFailedCreatingPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed fetching output data {0}.
+        /// </summary>
+        internal static string OutputDataFailedFetchingData {
+            get {
+                return ResourceManager.GetString("OutputDataFailedFetchingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to POI access has been granted.
         /// </summary>
         internal static string POIAccessHasBeenGranted {
@@ -246,6 +534,15 @@ namespace Listener.Properties {
         internal static string POIIsAlreadyInUse {
             get {
                 return ResourceManager.GetString("POIIsAlreadyInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection settings.
+        /// </summary>
+        internal static string POISConnectionSettings {
+            get {
+                return ResourceManager.GetString("POISConnectionSettings", resourceCulture);
             }
         }
         
@@ -304,11 +601,38 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found card brand: {0}.
+        /// </summary>
+        internal static string ProcessingFoundCardBrand {
+            get {
+                return ResourceManager.GetString("ProcessingFoundCardBrand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Service {0} ended with a noMoreAction status.
         /// </summary>
         internal static string ProcessingNoMoreAction {
             get {
                 return ResourceManager.GetString("ProcessingNoMoreAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performing auto-login.
+        /// </summary>
+        internal static string ProcessingPerformingAutoLogin {
+            get {
+                return ResourceManager.GetString("ProcessingPerformingAutoLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performing auto-logout.
+        /// </summary>
+        internal static string ProcessingPerformingAutoLogout {
+            get {
+                return ResourceManager.GetString("ProcessingPerformingAutoLogout", resourceCulture);
             }
         }
         
@@ -331,6 +655,15 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sending message to eListener [{0}].
+        /// </summary>
+        internal static string ProcessingSendingAnswerToServer {
+            get {
+                return ResourceManager.GetString("ProcessingSendingAnswerToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Timeout receiving the response to {0} request.
         /// </summary>
         internal static string ProcessingTimeout {
@@ -349,6 +682,24 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to received message.
+        /// </summary>
+        internal static string ReceivedMessage {
+            get {
+                return ResourceManager.GetString("ReceivedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending login result: {0}.
+        /// </summary>
+        internal static string SendingLoginResult {
+            get {
+                return ResourceManager.GetString("SendingLoginResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Service {0} completed.
         /// </summary>
         internal static string ServiceCompleted {
@@ -363,6 +714,195 @@ namespace Listener.Properties {
         internal static string ServiceStarting {
             get {
                 return ResourceManager.GetString("ServiceStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTTP Process.
+        /// </summary>
+        internal static string ThreadNameHTTP {
+            get {
+                return ResourceManager.GetString("ThreadNameHTTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WS Process.
+        /// </summary>
+        internal static string ThreadNameWS {
+            get {
+                return ResourceManager.GetString("ThreadNameWS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listener WS interface started.
+        /// </summary>
+        internal static string TRACE_WSInterfaceStarted {
+            get {
+                return ResourceManager.GetString("TRACE_WSInterfaceStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error.
+        /// </summary>
+        internal static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client listener trying to connect to {0} (attempt {1})&quot;.
+        /// </summary>
+        internal static string WSClientConnectingToServer {
+            get {
+                return ResourceManager.GetString("WSClientConnectingToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client listener failed to connect to the WS server at {0}, another attempt will be made in {1} seconds.
+        /// </summary>
+        internal static string WSClientFailedToConnect {
+            get {
+                return ResourceManager.GetString("WSClientFailedToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client listener is connected to {0}.
+        /// </summary>
+        internal static string WSClientIsConnected {
+            get {
+                return ResourceManager.GetString("WSClientIsConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client listener has been terminated, shutting down.
+        /// </summary>
+        internal static string WSClientTerminated {
+            get {
+                return ResourceManager.GetString("WSClientTerminated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to listener at {0}.
+        /// </summary>
+        internal static string WSInterfaceConnectedToListener {
+            get {
+                return ResourceManager.GetString("WSInterfaceConnectedToListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection from {0} has been closed.
+        /// </summary>
+        internal static string WSInterfaceConnectionHasBeenClosed {
+            get {
+                return ResourceManager.GetString("WSInterfaceConnectionHasBeenClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WS interface disconnected.
+        /// </summary>
+        internal static string WSInterfaceDisconnected {
+            get {
+                return ResourceManager.GetString("WSInterfaceDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed sending data to the listener.
+        /// </summary>
+        internal static string WSInterfaceFailedSendingDataToListener {
+            get {
+                return ResourceManager.GetString("WSInterfaceFailedSendingDataToListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed connecting to the processing server.
+        /// </summary>
+        internal static string WSInterfaceFailedToConnectToListener {
+            get {
+                return ResourceManager.GetString("WSInterfaceFailedToConnectToListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming connection.
+        /// </summary>
+        internal static string WSInterfaceIncomingConnection {
+            get {
+                return ResourceManager.GetString("WSInterfaceIncomingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login to WS interface denied.
+        /// </summary>
+        internal static string WSInterfaceLoginKO {
+            get {
+                return ResourceManager.GetString("WSInterfaceLoginKO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login to WS interface granted.
+        /// </summary>
+        internal static string WSInterfaceLoginOK {
+            get {
+                return ResourceManager.GetString("WSInterfaceLoginOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received HTTP request, connection is being closed with status {0}.
+        /// </summary>
+        internal static string WSInterfaceNotWSRequest {
+            get {
+                return ResourceManager.GetString("WSInterfaceNotWSRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received security details: {0}.
+        /// </summary>
+        internal static string WSInterfaceReceivedSecurityDetails {
+            get {
+                return ResourceManager.GetString("WSInterfaceReceivedSecurityDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The listener WS interface stopped with result code {0}.
+        /// </summary>
+        internal static string WSInterfaceStopped {
+            get {
+                return ResourceManager.GetString("WSInterfaceStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting incoming data.
+        /// </summary>
+        internal static string WSInterfaceWaitingForIncomingData {
+            get {
+                return ResourceManager.GetString("WSInterfaceWaitingForIncomingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting security details.
+        /// </summary>
+        internal static string WSInterfaceWaitingSecurityDetails {
+            get {
+                return ResourceManager.GetString("WSInterfaceWaitingSecurityDetails", resourceCulture);
             }
         }
     }

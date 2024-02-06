@@ -16,13 +16,17 @@ namespace NEXO
 		[DispId(2)]
 		InputResponseType ReplyData { get; }
 		[DispId(3)]
-		DeviceEnumeration RequestDevice { get; set; }
+		DeviceEnumeration RequestInputDataDevice { get; set; }
 		[DispId(4)]
-		InfoQualifyEnumeration RequestInfoQualify { get; set; }
+		InfoQualifyEnumeration RequestInputDataInfoQualify { get; set; }
 		[DispId(5)]
-		InputCommandEnumeration RequestInputCommand { get; set; }
+		InputCommandEnumeration RequestInputDataInputCommand { get; set; }
 		[DispId(6)]
-		int RequestMaxInputTime { get; set; }
+		DeviceEnumeration ReplyInputResultDevice { get; set; }
+		[DispId(7)]
+		InfoQualifyEnumeration ReplyInputResultInfoQualify { get; set; }
+		[DispId(8)]
+		InputCommandEnumeration ReplyInputResultInputCommand { get; set; }
 		#endregion
 
 		#region inherited from NexoObject
@@ -190,61 +194,60 @@ namespace NEXO
 		#endregion
 
 		#region request inner properties
-		public DeviceEnumeration RequestDevice
+		public DeviceEnumeration RequestInputDataDevice
 		{
 			get => (DeviceEnumeration)CMisc.GetEnumValue(typeof(DeviceEnumeration), CMisc.Trimmed(RequestData.InputData.Device), NexoValues.None);
 			set => RequestData.InputData.Device = CMisc.GetEnumName(typeof(DeviceEnumeration), value);
 		}
-		public InfoQualifyEnumeration RequestInfoQualify
+		public InfoQualifyEnumeration RequestInputDataInfoQualify
 		{
 			get => (InfoQualifyEnumeration)CMisc.GetEnumValue(typeof(InfoQualifyEnumeration), CMisc.Trimmed(RequestData.InputData.InfoQualify), NexoValues.None);
 			set => RequestData.InputData.InfoQualify = CMisc.GetEnumName(typeof(InfoQualifyEnumeration), value);
 		}
-		public InputCommandEnumeration RequestInputCommand
+		public InputCommandEnumeration RequestInputDataInputCommand
 		{
 			get => (InputCommandEnumeration)CMisc.GetEnumValue(typeof(InputCommandEnumeration), CMisc.Trimmed(RequestData.InputData.InputCommand), NexoValues.None);
 			set => RequestData.InputData.InputCommand = CMisc.GetEnumName(typeof(InputCommandEnumeration), value);
 		}
-		public int RequestMaxInputTime
-		{
-			//get => (int)CMisc.StrToLong(CMisc.Trimmed(RequestData.InputData.MaxInputTime), 0, true);
-			//set => RequestData.InputData.MaxInputTime = value;//.ToString();
-			get => RequestData.InputData.MaxInputTime;
-			set => RequestData.InputData.MaxInputTime = value;
-		}
 		#endregion
 
 		#region reply inner properties
+		public DeviceEnumeration ReplyInputResultDevice
+		{
+			get => (DeviceEnumeration)CMisc.GetEnumValue(typeof(DeviceEnumeration), CMisc.Trimmed(ReplyData.InputResult.Device), NexoValues.None);
+			set => ReplyData.InputResult.Device = CMisc.GetEnumName(typeof(DeviceEnumeration), value);
+		}
+		public InfoQualifyEnumeration ReplyInputResultInfoQualify
+		{
+			get => (InfoQualifyEnumeration)CMisc.GetEnumValue(typeof(InfoQualifyEnumeration), CMisc.Trimmed(ReplyData.InputResult.InfoQualify), NexoValues.None);
+			set => ReplyData.InputResult.InfoQualify = CMisc.GetEnumName(typeof(InfoQualifyEnumeration), value);
+		}
+		public InputCommandEnumeration ReplyInputResultInputCommand
+		{
+			get => (InputCommandEnumeration)CMisc.GetEnumValue(typeof(InputCommandEnumeration), CMisc.Trimmed(ReplyData.InputResult.Input.InputCommand), NexoValues.None);
+			set => ReplyData.InputResult.Input.InputCommand = CMisc.GetEnumName(typeof(InputCommandEnumeration), value);
+		}
 		#endregion
 
 		#region methods
 		protected override ResponseType GetResponse() { return ReplyData.InputResult.Response; }
 		protected override void SetResponse(ResponseType r)
 		{
-			if (null != RequestData.DisplayOutput)
+			//if (RequestData.DisplayOutputSpecified)// && RequestData.DisplayOutput.ResponseRequiredFlagSpecified && RequestData.DisplayOutput.ResponseRequiredFlag)
+			//	ReplyData.OutputResult.Response = r;
+			ReplyData.InputResult.Response = r;
+		}
+		protected override void SetReplyFromRequest()
+		{
+			if (RequestData.DisplayOutputSpecified)// && RequestData.DisplayOutput.ResponseRequiredFlagSpecified && RequestData.DisplayOutput.ResponseRequiredFlag)
 			{
 				ReplyData.OutputResult.Device = RequestData.DisplayOutput.Device;
 				ReplyData.OutputResult.InfoQualify = RequestData.DisplayOutput.InfoQualify;
-				ReplyData.OutputResult.Response = r;
 			}
-			ReplyData.InputResult.Device = RequestData.InputData.Device;
-			ReplyData.InputResult.InfoQualify = RequestData.InputData.InfoQualify;
-			ReplyData.InputResult.Response = r;
-			//if (ReplyData.InputResult.Response.Result.IsSuccess())
-			//{
-			//	ReplyData.InputResult.Input.InputCommand = RequestData.InputData.InputCommand;
-			//	switch (CMisc.GetEnumValue(typeof(InputCommandEnumeration), ReplyData.InputResult.Input.InputCommand))
-			//	{
-			//		case InputCommandEnumeration.TextString:
-			//		case InputCommandEnumeration.DecimalString:
-			//			ReplyData.InputResult.Input.TextInput= = RequestData.InputData.InputCommand;
-
-			//		default:
-			//			break;
-			//	}
-			//}
+			ReplyInputResultDevice = RequestInputDataDevice;
+			ReplyInputResultInfoQualify = RequestInputDataInfoQualify;
+			ReplyInputResultInputCommand = RequestInputDataInputCommand;
 		}
-		protected override void SetReplyFromRequest() { }
 		protected override InternalAction AutoCompleteRequest()
 		{
 			base.AutoCompleteRequest();

@@ -347,3 +347,5 @@ Nuget/
 NexoListener/
 *.pdf
 *.odt
+
+*.log

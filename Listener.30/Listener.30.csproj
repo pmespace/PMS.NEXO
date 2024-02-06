@@ -1,18 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>Listener</RootNamespace>
     <BaseOutputPath></BaseOutputPath>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyName>PMS.NEXO.$(MSBuildProjectName)</AssemblyName>
+    <AssemblyName>PMS.$(MSBuildProjectName)</AssemblyName>
     <Title>Nexo 3.0 Listener</Title>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
-    <Version>4.9.7</Version>
-    <FileVersion>4.9.7</FileVersion>
-    <AssemblyVersion>4.9.7</AssemblyVersion>
+    <Version>5.1.2</Version>
+    <FileVersion>5.1.2</FileVersion>
+    <AssemblyVersion>5.1.2</AssemblyVersion>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);USEWSINTERFACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants); USEWSINTERFACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <Target Name="CopyPackage" AfterTargets="Pack">
@@ -23,6 +39,17 @@
     <MakeDir Directories="$(TestNugetPath)" Condition="!Exists('$(TestNugetPath)')" />
     <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
   </Target>
+
+  <ItemGroup>
+    <Compile Remove="CNepting.cs" />
+  </ItemGroup>
+
+  <!--
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+  -->
+  <ItemGroup Condition="'$(TargetFramework)|$(Platform)'=='net6.0|AnyCPU'">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NEXO.30\NEXO.30.csproj" />
@@ -44,5 +71,5 @@
   </ItemGroup>
 
   <Import Project="..\LISTENER_SHARED\LISTENER_SHARED.projitems" Label="Shared" />
-  
+
 </Project>

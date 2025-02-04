@@ -766,6 +766,26 @@ namespace NEXO.Client
 
 		#region private methods
 		/// <summary>
+		/// Verified whether an given exception is the received exception or whether that given exception is part of an <see cref="AggregateException"/> object
+		/// </summary>
+		/// <param name="ex">An exception to inspect</param>
+		/// <param name="except">The exception we are looking for</param>
+		/// <returns>
+		/// True if the given exception is contained inside the received exception,
+		/// false otherwise
+		/// </returns>
+		bool ContainsException(Exception ex, Type except)
+		{
+			if (ex.GetType() == except) return true;
+			else if (ex is AggregateException)
+			{
+				foreach (Exception k in (ex as AggregateException).InnerExceptions)
+					if (k is IOException)
+						return true;
+			}
+			return false;
+		}
+		/// <summary>
 		/// Stops the receiver thread
 		/// </summary>
 		private void StopReceiverThread()
@@ -935,7 +955,7 @@ namespace NEXO.Client
 			}
 			catch (Exception ex)
 			{
-				if (ex is IOException)
+				if (ContainsException(ex, typeof(IOException)))
 				{
 					res = (int)ThreadResult.OK;
 				}
@@ -1133,9 +1153,16 @@ namespace NEXO.Client
 			}
 			catch (Exception ex)
 			{
-				Error = true;
-				CLog.EXCEPT(ex);
-				res = (int)ThreadResult.Exception;
+				if (ContainsException(ex, typeof(IOException)))
+				{
+					res = (int)ThreadResult.OK;
+				}
+				else
+				{
+					Error = true;
+					CLog.EXCEPT(ex);
+					res = (int)ThreadResult.Exception;
+				}
 			}
 			NoMoreAction = true;
 			DispatchEvents.SetStopped();

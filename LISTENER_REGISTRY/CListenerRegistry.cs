@@ -25,19 +25,20 @@ namespace Listener.Registry
 		#endregion
 
 		#region constants
-		public const string BASE_PMS= "PMS";
+		public const string BASE_PMS = "PMS";
 		public const string BASE_NAME = "Listener";
-		public const string BASE_FOLDER = $"{BASE_PMS}.{BASE_NAME}";
-		public const string LOG_FOLDER = $@"{BASE_FOLDER}\Log";
-		public const string SETTINGS_FOLDER = $@"{BASE_FOLDER}\Settings";
-		public const string EVENT_LOG_SOURCE = BASE_FOLDER;
+		public static string BASE_SERVICE_NAME = $"{BASE_PMS}.{BASE_NAME}";
+		public static string BASE_FOLDER = BASE_SERVICE_NAME;
+		public static string LOG_FOLDER = $@"{BASE_FOLDER}\Log";
+		public static string SETTINGS_FOLDER = $@"{BASE_FOLDER}\Settings";
+		public static string EVENT_LOG_SOURCE = BASE_SERVICE_NAME;
 
 #if DEBUG
-		public const string REGISTRY_KEY_SHORT = $@"Software\{BASE_PMS}\{BASE_NAME}";
+		public static string REGISTRY_KEY_SHORT = $@"Software\{BASE_PMS}\{BASE_NAME}";
 #else
-		public const string REGISTRY_KEY_SHORT = $@"SYSTEM\CurrentControlSet\Services\{BASE_FOLDER}";
+		public static string REGISTRY_KEY_SHORT = $@"SYSTEM\CurrentControlSet\Services\{BASE_FOLDER}";
 #endif
-		public const string REGISTRY_KEY = $@"{REGISTRY_KEY_SHORT}\Parameters";
+		public static string REGISTRY_KEY = $@"{REGISTRY_KEY_SHORT}\Parameters";
 
 		public const string REGISTRY_KEY_SETTINGS_FILE_NAME = @"SettingsFilename";
 		public static readonly string REGISTRY_KEY_SETTINGS_FILE_NAME_DEFAULT = $@"{BASE_FOLDER.ToLower()}.settings.json";
@@ -172,6 +173,10 @@ namespace Listener.Registry
 					/*
 					 * final result
 					 */
+					CLog.Filename = regSettings.FullLogFilename;
+					CLog.SeverityToLog = regSettings.SeverityToLog;
+					CLog.NumberOfFilesToKeep = regSettings.NumberOfFilesToKeep;
+
 					FileInfo fi = new FileInfo(regSettings.FullSettingsFilename);
 					return fi.Exists ? regSettings : null;
 				}

@@ -61,6 +61,96 @@ namespace Listener.Service.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to listener is connected to WS server {0}.
+        /// </summary>
+        internal static string WorkerConnectedToWSServer {
+            get {
+                return ResourceManager.GetString("WorkerConnectedToWSServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener is trying to connect to WS server {0}.
+        /// </summary>
+        internal static string WorkerConnectingToWSServer {
+            get {
+                return ResourceManager.GetString("WorkerConnectingToWSServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener connection to WS {0} is pending.
+        /// </summary>
+        internal static string WorkerConnectionToWSServerIsPending {
+            get {
+                return ResourceManager.GetString("WorkerConnectionToWSServerIsPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener is disconnected from WS server {0}.
+        /// </summary>
+        internal static string WorkerDisconnectedFromWSServer {
+            get {
+                return ResourceManager.GetString("WorkerDisconnectedFromWSServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener is logged to WS server {0}.
+        /// </summary>
+        internal static string WorkerLogged {
+            get {
+                return ResourceManager.GetString("WorkerLogged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to login in to WS server {0} has been denied.
+        /// </summary>
+        internal static string WorkerLoginDenied {
+            get {
+                return ResourceManager.GetString("WorkerLoginDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener is trying to log to WS server {0}.
+        /// </summary>
+        internal static string WorkerLoginToWSServer {
+            get {
+                return ResourceManager.GetString("WorkerLoginToWSServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener process not started.
+        /// </summary>
+        internal static string WorkerProcessesNotStarted {
+            get {
+                return ResourceManager.GetString("WorkerProcessesNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener processes started.
+        /// </summary>
+        internal static string WorkerProcessesStarted {
+            get {
+                return ResourceManager.GetString("WorkerProcessesStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener processes stopped.
+        /// </summary>
+        internal static string WorkerProcessesStopped {
+            get {
+                return ResourceManager.GetString("WorkerProcessesStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to service did not start successfully and is stopping.
         /// </summary>
         internal static string WorkerServiceDidNotStart {
@@ -111,6 +201,33 @@ namespace Listener.Service.Properties {
         internal static string WorkerServiceNotStarted {
             get {
                 return ResourceManager.GetString("WorkerServiceNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to starting listener processes.
+        /// </summary>
+        internal static string WorkerStartingProcesses {
+            get {
+                return ResourceManager.GetString("WorkerStartingProcesses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to stopping listener processes.
+        /// </summary>
+        internal static string WorkerStoppingProcesses {
+            get {
+                return ResourceManager.GetString("WorkerStoppingProcesses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to listener is disconnecting from WS server {0}.
+        /// </summary>
+        internal static string WorketDisconnectingFromWSServer {
+            get {
+                return ResourceManager.GetString("WorketDisconnectingFromWSServer", resourceCulture);
             }
         }
     }

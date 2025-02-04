@@ -18,6 +18,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using COMMON;
+using System.Linq.Expressions;
 
 namespace NEXO
 {
@@ -764,6 +765,72 @@ namespace NEXO
 			return null;
 		}
 		#endregion
+
+		public string Serialize()
+		{
+			string serialized = default;
+			try
+			{
+				//serialized = XmlSerialize<NxT>((NxT)Document, toJSON);
+
+
+				MethodInfo method = typeof(NexoRetailer).GetMethod("XmlSerialize", BindingFlags.Static | BindingFlags.Public);
+				MethodInfo generic = method.MakeGenericMethod(typeof(SaleToPOIRequest));
+				serialized = (string)generic.Invoke(this, new object[] { Request, false, false, false });
+
+
+				//Type fieldType = typeof(SaleToPOIRequest);
+				//Type genericType = typeof(NexoObject).MakeGenericType(fieldType);
+				//Type genericObject = typeof(NexoMessage);
+				//MethodInfo genericObjectMethod = genericObject.GetMethod("XmlSerialize");
+				//MethodInfo genericObjectMethodConstructed = genericObjectMethod.MakeGenericMethod(fieldType, typeof(bool), typeof(bool), typeof(bool));
+				//object[] args = { Request, false, false, false };
+				//genericObjectMethodConstructed.Invoke(null, args);
+
+				//MakeGenericMethod(new Type[] { genericType, typeof(bool), typeof(bool), typeof(bool) });
+
+				//object genericTypeInstance = Activator.CreateInstance(genericType);
+				////public static string XmlSerialize<NxT>(NxT data, bool toJson, bool bom = false, bool ns = false)
+				//parameters = genericMethod.GetParameters();
+				//MethodInfo mi = genericType.GetMethod("Serialize", BindingFlags.Static | BindingFlags.Public);
+				//var value = Expression.Constant(instance, fieldType);
+				//var lambda = Expression.Lambda<Func<int>>(Expression.Call(Expression.Constant(genericTypeInstance), mi, value));
+				//var answer = lambda.Compile()();
+
+
+
+				//Type fieldType = typeof(SaleToPOIRequest);
+				//Type genericType = typeof(NexoObject).MakeGenericType(fieldType);
+				//object genericTypeInstance = Activator.CreateInstance(genericType);
+				////public static string XmlSerialize<NxT>(NxT data, bool toJson, bool bom = false, bool ns = false)
+				//MethodInfo genericMethod = MethodInfo.MakeGenericMethod(new Type[] { genericType, typeof(bool), typeof(bool), typeof(bool) });
+				//parameters = genericMethod.GetParameters();
+				//MethodInfo mi = genericType.GetMethod("Serialize", BindingFlags.Static | BindingFlags.Public);
+				//var value = Expression.Constant(instance, fieldType);
+				//var lambda = Expression.Lambda<Func<int>>(Expression.Call(Expression.Constant(genericTypeInstance), mi, value));
+				//var answer = lambda.Compile()();
+
+
+				//var parameterExpression = Expression.Parameter(GetDocumentType());
+
+				//"ExpressionTreeTests.Person"), "person");
+				//Func<NxT, string> aa = (NxT o) => Serialize<NxT>(o, toJSON);
+				//Func<string> aaa = () => Serialize<NxT>((NxT)Document, toJSON);
+
+
+				//serialized = Serialize < fieldType.GetType() > ((NxT)Document, toJSON);
+			}
+			catch (Exception ex)
+			{
+				CLog.EXCEPT(ex, System.Reflection.MethodInfo.GetCurrentMethod().Name);
+			}
+			finally
+			{
+				//request.XSD_Optimizing = false;
+				//SetObjectProperty(request.Item, NexoXSDStrings.NexoOptimizingProperty, request.XSD_Optimizing);
+			}
+			return serialized;
+		}
 	}
 
 	[ComVisible(false)]

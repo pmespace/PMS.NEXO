@@ -135,4 +135,43 @@
   <data name="WorkerServiceIsStopped" xml:space="preserve">
     <value>service is stopped</value>
   </data>
+  <data name="WorkerStartingProcesses" xml:space="preserve">
+    <value>starting listener processes</value>
+  </data>
+  <data name="WorkerProcessesStarted" xml:space="preserve">
+    <value>listener processes started</value>
+  </data>
+  <data name="WorkerProcessesNotStarted" xml:space="preserve">
+    <value>listener process not started</value>
+  </data>
+  <data name="WorkerStoppingProcesses" xml:space="preserve">
+    <value>stopping listener processes</value>
+  </data>
+  <data name="WorkerProcessesStopped" xml:space="preserve">
+    <value>listener processes stopped</value>
+  </data>
+  <data name="WorkerConnectingToWSServer" xml:space="preserve">
+    <value>listener is trying to connect to WS server {0}</value>
+  </data>
+  <data name="WorkerConnectedToWSServer" xml:space="preserve">
+    <value>listener is connected to WS server {0}</value>
+  </data>
+  <data name="WorkerConnectionToWSServerIsPending" xml:space="preserve">
+    <value>listener connection to WS {0} is pending</value>
+  </data>
+  <data name="WorketDisconnectingFromWSServer" xml:space="preserve">
+    <value>listener is disconnecting from WS server {0}</value>
+  </data>
+  <data name="WorkerDisconnectedFromWSServer" xml:space="preserve">
+    <value>listener is disconnected from WS server {0}</value>
+  </data>
+  <data name="WorkerLoginToWSServer" xml:space="preserve">
+    <value>listener is trying to log to WS server {0}</value>
+  </data>
+  <data name="WorkerLoginDenied" xml:space="preserve">
+    <value>login in to WS server {0} has been denied</value>
+  </data>
+  <data name="WorkerLogged" xml:space="preserve">
+    <value>listener is logged to WS server {0}</value>
+  </data>
 </root>

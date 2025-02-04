@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 #else
-//using Microsoft.AspNet.Hosting;
-//using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 #endif
 
 using COMMON;
@@ -32,16 +32,24 @@ namespace Listener
 		#region constructor
 		#endregion
 
-		#region properties
-		public static bool IsStarted { get; private set; } = false;
-		static public WebSocket WS { get; private set; } = null;
-		public static CancellationTokenSource Source { get; private set; }
-		static CancellationToken token = CancellationToken.None;
+		#region consts
 		#endregion
 
-		#region private properties
-		static CWSClients WSClients = new CWSClients();
-		static object mylock = new object();
+		#region enums
+		enum WSAction
+		{
+			Error = -1,
+			Connection,
+			Login,
+			LoginOK,
+			LoginKO,
+			Connect,
+			ReceiveAsync,
+			ReceivedReply,
+			ReceivedNotification,
+			Disconnect,
+			Stop,
+		}
 		#endregion
 
 		#region classes
@@ -97,22 +105,19 @@ namespace Listener
 		class WSMessageException : Exception { }
 		#endregion
 
-		#region methods
-		enum WSAction
-		{
-			Error = -1,
-			Connection,
-			Login,
-			LoginOK,
-			LoginKO,
-			Connect,
-			ReceiveAsync,
-			ReceivedReply,
-			ReceivedNotification,
-			Disconnect,
-			Stop,
-		}
+		#region properties
+		public static bool IsStarted { get; private set; } = false;
+		public static WebSocket WS { get; private set; } = null;
+		public static CancellationTokenSource Source { get; private set; }
+		static CancellationToken token = CancellationToken.None;
+		#endregion
 
+		#region private properties
+		static CWSClients WSClients = new CWSClients();
+		static object mylock = new object();
+		#endregion
+
+		#region methods
 		/// <summary>
 		/// Starts the listener WS interface
 		/// The interface is used to receive receive monitoring orders and eventually orders from a sale system; it can be started for both or only orders

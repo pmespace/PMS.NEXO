@@ -1,4 +1,4 @@
-﻿#define USEWSINTERFACE
+﻿//#define USEWSINTERFACE
 #define RES
 
 using System;
@@ -152,7 +152,7 @@ namespace NexoListener
 
 			// Start listener
 			CListener listener = new CListener();
-			bool ok = listener.Start(settingsFile);
+			bool ok = listener.Start(settingsFile).Result;
 			TestListenerType testListenerType = new TestListenerType() { FileToUse = LISTENER_TEST_FILE, Port = listener.Port, IP = listener.IP, WSMap = listener.WSMap, WSPort = listener.WSPort };
 			while (ok)
 			{
@@ -343,48 +343,48 @@ namespace NexoListener
 				if (!useWS)
 				{
 #endif
-					CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = uport, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
-					CStreamClientIO streamIO = CStream.Connect(clientSettings);
-					if (null != streamIO)
+				CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = type.IP, Port = uport, ReceiveTimeout = /*useasync ? 0 :*/ 60, };
+				CStreamClientIO streamIO = CStream.Connect(clientSettings);
+				if (null != streamIO)
+				{
+					//CThread thread = null;
+					//if (useasync && (null != (thread = CStream.SendAsync(new CStream.SendAsyncType() { OnReply = OnReply, Settings = clientSettings, Parameters = null, ThreadData = null, }, CJson<CListenerRequest>.Serialize(request)))))
+					//{
+					//	CLogger.Add($"{request} (sent message, asynchronously)");
+					//}
+					//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
+					if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
 					{
-						//CThread thread = null;
-						//if (useasync && (null != (thread = CStream.SendAsync(new CStream.SendAsyncType() { OnReply = OnReply, Settings = clientSettings, Parameters = null, ThreadData = null, }, CJson<CListenerRequest>.Serialize(request)))))
-						//{
-						//	CLogger.Add($"{request} (sent message, asynchronously)");
-						//}
-						//else if (!useasync && CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
-						if (CStream.Send(streamIO, CJson<CListenerRequest>.Serialize(request)))
-						{
-							string sreply;
+						string sreply;
 #if RES
-							CLogger.TRACE($"{request} ({string.Format(Resources.SentMessage, new object[] { clientSettings.ReceiveTimeout })})");
+						CLogger.TRACE($"{request} ({string.Format(Resources.SentMessage, new object[] { clientSettings.ReceiveTimeout })})");
 #else
 							CLogger.TRACE($"{request} ({string.Format("message sent to listener, timeout is { 0 } seconds", new object[] { clientSettings.ReceiveTimeout })})");
 #endif
-							while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
-							{
-								var reply = CJson<CListenerReply>.Deserialize(sreply);
+						while (!string.IsNullOrEmpty(sreply = CStream.ReceiveAsString(streamIO)))
+						{
+							var reply = CJson<CListenerReply>.Deserialize(sreply);
 #if RES
-								CLogger.TRACE($"{reply.Message} ({Resources.ReceivedMessage})");
+							CLogger.TRACE($"{reply.Message} ({Resources.ReceivedMessage})");
 #else
 								CLogger.TRACE($"{reply.Message} (received message from the listener)");
 #endif
-								if (!reply.Notification)
-								{
-									CLogger.TRACE($"{reply}");
-									break;
-								}
+							if (!reply.Notification)
+							{
+								CLogger.TRACE($"{reply}");
+								break;
 							}
 						}
-						else
-						{
+					}
+					else
+					{
 #if RES
-							CLogger.ERROR(Resources.FailedSendingRequest);
+						CLogger.ERROR(Resources.FailedSendingRequest);
 #else
 							CLogger.ERROR("Failed sending request");
 #endif
-						}
 					}
+				}
 
 #if USEWSINTERFACE
 				}
@@ -621,7 +621,7 @@ namespace NexoListener
 			}
 			type.Listener.Stop();
 			type.Listener = new CListener();
-			return type.Listener.Start(type.SettingsFile);
+			return type.Listener.Start(type.SettingsFile).Result;
 		}
 		class ReloadSettingsType
 		{

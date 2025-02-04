@@ -1,38 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>PMS</Authors>
-    <Description>PMS - nexo Retailer v3.0 Listener as a Windows Service</Description>
-    <Copyright>PMS 2024</Copyright>
-    <Version>5.1.2</Version>
-    <FileVersion>5.1.2</FileVersion>
-    <AssemblyVersion>5.1.2</AssemblyVersion>
+    <Description>PMS - nexo Retailer v3.0 Listener as a Windows App</Description>
+    <Version>5.1.3</Version>
+    <FileVersion>5.1.3</FileVersion>
+    <AssemblyVersion>5.1.3</AssemblyVersion>
     <RootNamespace>Listener.Service</RootNamespace>
-    <SelfContained>true</SelfContained>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
-    <!--
-    <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
-    -->
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
     <OutputPath>..\bin</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>portable</DebugType>
     <OutputPath>..\bin</OutputPath>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <ServerGarbageCollection>true</ServerGarbageCollection>
-    <BaseOutputPath>..\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -58,6 +45,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
+  
   <Import Project="..\LISTENER_REGISTRY\LISTENER_REGISTRY.projitems" Label="Shared" />
+
 </Project>

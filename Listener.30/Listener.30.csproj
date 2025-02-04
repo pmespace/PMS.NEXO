@@ -9,18 +9,18 @@
     <Title>Nexo 3.0 Listener</Title>
     <Authors>philippemp31</Authors>
     <Company>PMS</Company>
-    <Version>5.1.2</Version>
-    <FileVersion>5.1.2</FileVersion>
-    <AssemblyVersion>5.1.2</AssemblyVersion>
+    <Version>5.1.3</Version>
+    <FileVersion>5.1.3</FileVersion>
+    <AssemblyVersion>5.1.3</AssemblyVersion>
     <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants);USEWSINTERFACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);USEWSINTERFACE;USEHTTPINTERFACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants); USEWSINTERFACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);USEWSINTERFACE;USEHTTPINTERFACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
@@ -45,10 +45,10 @@
   </ItemGroup>
 
   <!--
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
   -->
   <ItemGroup Condition="'$(TargetFramework)|$(Platform)'=='net6.0|AnyCPU'">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>

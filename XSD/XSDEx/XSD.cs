@@ -18,6 +18,7 @@ using System.Windows.Forms;
 
 using NEXO;
 using System.Security.Cryptography;
+using System.Diagnostics.Eventing.Reader;
 
 namespace XSDEx
 {
@@ -100,6 +101,8 @@ namespace XSDEx
 		class MyCodeTypeDeclarations : SortedDictionary<string, CodeTypeDeclaration> { }
 		private MyCodeTypeDeclarations typesDeclaredInsideNamespace = new MyCodeTypeDeclarations();
 		private MyCodeTypeDeclarations enumsDeclaredInsideNamespace = new MyCodeTypeDeclarations();
+		private CodeTypeDeclaration Document = new CodeTypeDeclaration();
+		const string DocumentName = "Document";
 		#endregion
 
 		#region methods
@@ -212,6 +215,12 @@ namespace XSDEx
 				{
 					// each XSD generates 1 file
 					bool fOK = true;
+
+					// create the context
+					if (string.IsNullOrEmpty(settings.xsdSettings.Nmspace))
+						settings.xsdSettings.Nmspace = "XSD";
+					settings.xsdSettings.Nmspace += (XSDSettings.NameSpace.None == settings.xsdSettings.NamespaceToDeclare ? null : $".{settings.xsdSettings.NamespaceToDeclare}");
+
 					// load all selected files into a schema and compile
 					for (int i = 0; i < settings.xsdSettings.Files.Count; i++)
 					{
@@ -224,6 +233,7 @@ namespace XSDEx
 						}
 						xsds.Add(xsd);
 						xsds.Compile(null, true);
+
 						// allow special processing for the last file
 						fOK = fOK && ProcessFile(settings.xsdSettings, parameters, xsds, fileName, i == settings.xsdSettings.Files.Count - 1, msg, true);
 					}
@@ -263,10 +273,10 @@ namespace XSDEx
 			{
 				msg.Header = fileName;
 
-				// create the context
-				if (string.IsNullOrEmpty(settings.Nmspace))
-					settings.Nmspace = "XSD";
-				settings.Nmspace += (XSDSettings.NameSpace.None == settings.NamespaceToDeclare ? null : $".{settings.NamespaceToDeclare}");
+				//// create the context
+				//if (string.IsNullOrEmpty(settings.Nmspace))
+				//	settings.Nmspace = "XSD";
+				//settings.Nmspace += (XSDSettings.NameSpace.None == settings.NamespaceToDeclare ? null : $".{settings.NamespaceToDeclare}");
 
 				XmlSchemaImporter schemaImporter = new XmlSchemaImporter(xsds);
 				CodeNamespace codeNamespace = new CodeNamespace(settings.Nmspace);
@@ -403,17 +413,46 @@ namespace XSDEx
 				// create file specific list of types
 				CodeTypeDeclarationCollection thisFileTypes = new CodeTypeDeclarationCollection();
 
+				// 
+				bool DocumentIsBeingDeclared = false;
+
 				// prepare a list of all types declared inside the namespace (specific types)
 				foreach (CodeTypeDeclaration codeType in codeNamespace.Types)
 				{
 					try
 					{
-						// add this type to the list of types to generate
-						typesDeclaredInsideNamespace.Add(codeType.Name, codeType);
-						if (codeType.IsEnum)
-							enumsDeclaredInsideNamespace.Add(codeType.Name, codeType);
-						// add this type to the list of types to declare in this file (for multi-files XSD)
-						thisFileTypes.Add(codeType);
+						/*
+						 * verify whether it is the first time the object Document is declared
+						 */
+						if (codeType.Name.Compare(DocumentName))
+						{
+							if (!lastFile)
+							{
+								foreach (CodeTypeMember k in codeType.Members)
+									if (k is CodeMemberProperty || k is CodeMemberField)
+										Document.Members.Add(k);
+							}
+							else
+							{
+								foreach (CodeTypeMember k in Document.Members)
+									codeType.Members.Add(k);
+								// add this type to the list of types to generate
+								typesDeclaredInsideNamespace.Add(codeType.Name, codeType);
+								// add this type to the list of types to declare in this file (for multi-files XSD)
+								thisFileTypes.Add(codeType);
+							}
+						}
+						else
+						{
+							// add this type to the list of types to generate
+							typesDeclaredInsideNamespace.Add(codeType.Name, codeType);
+
+							if (codeType.IsEnum)
+								enumsDeclaredInsideNamespace.Add(codeType.Name, codeType);
+
+							// add this type to the list of types to declare in this file (for multi-files XSD)
+							thisFileTypes.Add(codeType);
+						}
 					}
 					catch (Exception ex)
 					{
@@ -453,6 +492,11 @@ namespace XSDEx
 
 					try
 					{
+						#region Document object management
+						if (codeType.Name.Compare(DocumentName) && !lastFile)
+						{ }
+						#endregion
+
 						#region codetype management
 						string b = $"{bXSD}";
 						string e = $"{eXSD}";
@@ -1279,7 +1323,8 @@ namespace XSDEx
 										// the field is an array, provide an initializer if no exception to it is set
 										if (IsArray(property.Type))
 										{
-											propertyField.InitExpression = new CodeArrayCreateExpression(propertyField.Type.BaseType, 0);
+											//propertyField.InitExpression = new CodeArrayCreateExpression(propertyField.Type.BaseType, 0);
+											propertyField.InitExpression = new CodeArrayCreateExpression(propertyField.Type, 0);
 											arraysToProcessInHadBeenSet.Add(property);
 										}
 										// the field is a List of something...
@@ -1498,7 +1543,14 @@ namespace XSDEx
 										cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 										cmm.Name = property.Name + addenda;
 										//cmm.ReturnType = new CodeTypeReference(property.Type.BaseType);
-										cmm.ReturnType = IsArray(property.Type) ? new CodeTypeReference(property.Type.BaseType) : new CodeTypeReference(property.UserData[isArrayElementType].ToString());
+										//cmm.ReturnType = IsArray(property.Type) ? new CodeTypeReference(property.Type.BaseType) : new CodeTypeReference(property.UserData[isArrayElementType].ToString());
+
+										/*
+										 *
+										 */
+										CodeTypeReference aaaa = new CodeDefaultValueExpression(property.Type).Type;
+										cmm.ReturnType = IsArray(property.Type) ? aaaa : new CodeTypeReference(property.UserData[isArrayElementType].ToString());
+
 										cpde = new CodeParameterDeclarationExpression(
 											new CodeTypeReference(typeof(int)), isIndex);
 										cmm.Parameters.Add(cpde);
@@ -1518,7 +1570,7 @@ namespace XSDEx
 														new CodeStatement[]
 														{
 															new CodeMethodReturnStatement(
-																new CodeDefaultValueExpression(cmm.ReturnType)),
+																new CodeDefaultValueExpression(/*cmm.ReturnType*/)),
 														},
 														// else
 														new CodeStatement[]
@@ -1533,7 +1585,7 @@ namespace XSDEx
 																new CodeStatement[]
 																{
 																	new CodeMethodReturnStatement(
-																		new CodeDefaultValueExpression(cmm.ReturnType)),
+																		new CodeDefaultValueExpression(/*cmm.ReturnType*/)),
 																},
 																// else
 																new CodeStatement[]
@@ -1552,7 +1604,7 @@ namespace XSDEx
 																		new CodeStatement[]
 																		{
 																			new CodeMethodReturnStatement(
-																				new CodeDefaultValueExpression(cmm.ReturnType)),
+																				new CodeDefaultValueExpression(/*cmm.ReturnType*/)),
 																		},
 																		// else
 																		new CodeStatement[]
@@ -1573,7 +1625,7 @@ namespace XSDEx
 														isEx,
 														new CodeTypeReference(typeof(Exception)),
 														new CodeMethodReturnStatement(
-															new CodeDefaultValueExpression(cmm.ReturnType)))
+															new CodeDefaultValueExpression(/*cmm.ReturnType*/)))
 											  });
 										cmm.Statements.Add(new CodeCommentStatement($"{bXSD} - array {addenda} accessor"));
 										cmm.Statements.Add(ctcf);
@@ -2497,7 +2549,7 @@ namespace XSDEx
 								catch (Exception ex)
 								{
 									settings.Exception = ex.Message;
-									MessageBox.Show(ex.Message);
+									//MessageBox.Show(ex.Message);
 								}
 							}
 							#endregion

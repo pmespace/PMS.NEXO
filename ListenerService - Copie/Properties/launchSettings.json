@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ListenerService": {
+      "commandName": "Project",
+      "workingDirectory": "..\\bin"
+    }
+  }
+}

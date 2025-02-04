@@ -42,7 +42,7 @@
 			// 
 			this.serviceInstaller1.Description = "nexo Retailer v3.0 Listener service";
 			this.serviceInstaller1.DisplayName = "nexo Retailer v3.0 Listener";
-			this.serviceInstaller1.ServiceName = "nexoRetailerListenerService";
+			this.serviceInstaller1.ServiceName = "listenerServiceInstaller";
 			this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
 			this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
 			// 

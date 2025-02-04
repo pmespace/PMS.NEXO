@@ -136,7 +136,7 @@ namespace WSServer
 										string s = string.Empty;
 										byte[] ab = new byte[1024 * 5];
 										CListenerReply reply;
-										CListenerRequest request;
+										//CListenerRequest request;
 										CListenerClientLoginRequest loginRequest;
 										CListenerClientLoginResponse loginResponse = new CListenerClientLoginResponse();
 										while (WebSocketState.Open == webSocket.State && !token.IsCancellationRequested)

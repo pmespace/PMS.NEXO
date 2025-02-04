@@ -94,7 +94,9 @@ namespace Listener
 		CSynchronize Waits = null;
 		int WaitsStopIndex = 0;
 
-		bool Started = false;
+		bool Started { get => _started.WaitOne(0); set { if (value) _started.Set(); else _started.Reset(); } }
+		ManualResetEvent _started = new ManualResetEvent(false);
+
 		CListenerSettings Settings;
 		CStreamServer StreamServer = null;
 		CListenerStats Stats = new CListenerStats();
@@ -119,6 +121,7 @@ namespace Listener
 		public uint WSPort { get => Settings.Server.WSServer.WSPort; }
 		CancellationTokenSource MainSource = null;
 		public CancellationToken MainToken;
+		public ManualResetEvent StoppedEvent { get; private set; } = new ManualResetEvent(false);
 		#endregion
 
 		#region methods
@@ -155,11 +158,11 @@ namespace Listener
 
 			// load settings
 			CJson<CListenerSettings> json = new CJson<CListenerSettings>(settingsFileName);
-			CLogger.TRACE($"{Resources.DisplayStarting} {json.FileName}");
+			CLogger.TRACE(Resources.DisplayStarting.Format(json.FileName));
 
 			if (null == (settings = json.ReadSettings()))
 			{
-				CLogger.ERROR($"{Resources.DisplayFailedToReadSettings}");
+				CLogger.ERROR(Resources.DisplayFailedToReadSettings);
 				settings = new CListenerSettings();
 				CheckSettings();
 				json.WriteSettings(settings, default, false);
@@ -177,9 +180,9 @@ namespace Listener
 				if (rewrite)
 					json.WriteSettings(settings);
 
-				settings.Nexo.AllowedServices.Add("Login");
-				settings.Nexo.AllowedServices.Add("Logout");
-				settings.Nexo.AllowedServices.Add("Payment");
+				settings.Nexo.AllowedServices.Add(MessageCategoryEnumeration.Login.ToString());
+				settings.Nexo.AllowedServices.Add(MessageCategoryEnumeration.Logout.ToString());
+				settings.Nexo.AllowedServices.Add(MessageCategoryEnumeration.Payment.ToString());
 			}
 			return settings;
 		}
@@ -187,11 +190,17 @@ namespace Listener
 		/// Start the listener server on settings as deszcribed in <see cref="Settings"/>
 		/// </summary>
 		/// <param name="settingsFileName">Settings file name</param>
-		/// <returns>True if started, false otherwise</returns>
-		public bool Start(string settingsFileName, SetStatusDelegate deleg = default)
+		/// <param name="deleg">A <see cref="SetStatusDelegate"/> function that will be used to update the service status</param>
+		/// <returns>
+		/// True if started, false otherwise
+		/// </returns>
+		public async Task<bool> Start(string settingsFileName, SetStatusDelegate deleg = default)
 		{
 			if (!Started)
 			{
+				// create the stopped event to wait on if needing to know when the listener stopped
+				StoppedEvent = new ManualResetEvent(false);
+
 				// save status update function
 				setStatusFnc = deleg;
 				setStatusFnc?.Invoke(ListenerStatus.Starting);
@@ -203,7 +212,7 @@ namespace Listener
 				}
 				CLog.SeverityToLog = Settings._severity;
 				CLog.NumberOfFilesToKeep = Settings.NumberOfFilesToKeep;
-				CLogger.Display($"{Resources.DisplayLogFile}: {CLog.LogFilename}");
+				CLogger.Display(Resources.DisplayLogFile.Format(CLog.LogFilename));
 				CLogger.TRACE(Settings.ToString());
 
 				// start server
@@ -213,7 +222,7 @@ namespace Listener
 				foreach (IPAddress addr in addresses)
 				{
 					i++;
-					CLogger.TRACE($"{Resources.DisplayAddress} {i.ToString("00")} = {addr} ({(IPAddress.IsLoopback(addr) ? "loopback" : "internet")})");
+					CLogger.TRACE(Resources.DisplayAddress.Format(new object[] { i.ToString("00"), addr, (IPAddress.IsLoopback(addr) ? "loopback" : "internet") }));
 				}
 
 				// reset server stats
@@ -264,10 +273,9 @@ namespace Listener
 								Delay = Settings.Client.DelayBetwenRetries,
 							}))
 					{
-						CLogger.TRACE($"{Resources.DisplayFailedToConnectToEListener}");
+						CLogger.TRACE(Resources.DisplayFailedToConnectToEListener);
 						ok = false;
 						Stop();
-
 					}
 				}
 				else if (ok)
@@ -299,15 +307,14 @@ namespace Listener
 						}
 						))
 					{
-						CLogger.TRACE($"{Resources.DisplayFailedToStartWSInterface}");
+						CLogger.TRACE(Resources.DisplayFailedToStartWSInterface);
 						ok = false;
 						Stop();
 					}
 #endif
 				}
 
-				Started = ok;
-				if (Started)
+				if (Started = ok)
 				{
 					MainSource = new CancellationTokenSource();
 					MainToken = MainSource.Token;
@@ -316,33 +323,38 @@ namespace Listener
 			return Started;
 		}
 		/// <summary>
-		/// Stop the listener
+		/// Stops the listener
 		/// </summary>
+		/// <param name="token"></param>
 		public void Stop()
 		{
-			setStatusFnc?.Invoke(ListenerStatus.Stopping);
-			try
+			if (Started)
 			{
-				// stop any connection attempt to the WS server
-				Synch?[SynchStopIndex].Set();
+				Started = false;
+				setStatusFnc?.Invoke(ListenerStatus.Stopping);
+				try
+				{
+					// stop any connection attempt to the WS server
+					Synch?[SynchStopIndex].Set();
 
-				// stop WS interface
-				Waits?[WaitsStopIndex].Set();
+					// stop WS interface
+					Waits?[WaitsStopIndex].Set();
 
-				// disconnect from WS server
-				WSClientSource?.Cancel();
+					// disconnect from WS server
+					WSClientSource?.Cancel();
 
-				// stop listener server
-				StreamServer?.StopServer();
+					// stop listener server
+					StreamServer?.StopServer();
+				}
+				catch (Exception ex)
+				{
+					CLog.EXCEPT(ex);
+				}
+				setStatusFnc?.Invoke(ListenerStatus.Stopped);
+				// indicate the process is stopping
+				MainSource.Cancel();
+				StoppedEvent.Set();
 			}
-			catch (Exception ex)
-			{
-				CLog.EXCEPT(ex);
-			}
-			Started = false;
-			setStatusFnc?.Invoke(ListenerStatus.Stopped);
-			// indicate the process is stopping
-			MainSource.Cancel();
 		}
 		/// <summary>
 		/// Get the MAC address
@@ -484,8 +496,7 @@ namespace Listener
 				}
 				catch (Exception /*ex*/)
 				{
-					//CLog.EXCEPT(ex);
-					throw new WSClientModeException($"failed to connect to web socket [{Settings.Client.URI}]");
+					throw new WSClientModeException(Resources.FailedToConnectToWSServer.Format(Settings.Client.URI));
 				}
 				while (WebSocketState.Open == WS.State)
 				{
@@ -497,7 +508,7 @@ namespace Listener
 						case WSClientModeAction.Connect:
 							CStreamClientSettings clientSettings = new CStreamClientSettings() { IP = CStream.Localhost(), Port = Settings.Server.Port, ReceiveTimeout = 0 };
 							if (null == (streamIO = CStream.Connect(clientSettings)))
-								throw new Exception($"failed to connect to listener (as client), disconnecting from WS server");
+								throw new Exception(Resources.FailedToConnectToListenerAsClient);
 							setStatusFnc?.Invoke(ListenerStatus.LoginToWSServer);
 							action = WSClientModeAction.SendLoginRequest;
 							break;
@@ -511,18 +522,18 @@ namespace Listener
 							string s = CJson<CListenerClientLoginRequest>.Serialize(loginRequest);
 							if (!s.IsNullOrEmpty())
 							{
-								CLog.INFORMATION($"sending login request to server [{s}]");
+								CLog.INFORMATION(Resources.SendingLoginRequest.Format(s));
 								byte[] abs = Encoding.UTF8.GetBytes(s);
 								ArraySegment<byte> ar = new ArraySegment<byte>(abs);
 								await WS.SendAsync(ar, WebSocketMessageType.Text, true, WSClientToken);
 								action = WSClientModeAction.ReceiveLoginResponse;
 								order = string.Empty;
 								// message is ready to be processed
-								CLog.TRACE("ready to receive incoming requests");
+								CLog.TRACE(Resources.ReadyToReceiveIncomingRequests);
 								synch[0].Set();
 							}
 							else
-								throw new WSClientModeException("failed to create security chain, disconnecting from server");
+								throw new WSClientModeException(Resources.FailedCreatingSecurityChain);
 							break;
 
 						case WSClientModeAction.ReceiveLoginResponse:
@@ -548,20 +559,20 @@ namespace Listener
 														// connected and a login response has been received, we can reset the attempt counter
 														if (loginResponse.Granted)
 														{
-															CLog.INFORMATION($"connection has been granted [{order}]");
+															CLog.INFORMATION(Resources.ConnectionHasBeenCancelled.Format(order));
 															setStatusFnc?.Invoke(ListenerStatus.LoggedToWSServer);
 															action = WSClientModeAction.ReceiveRequestOrSettingsUpdate;
 														}
 														else
 														{
 															setStatusFnc?.Invoke(ListenerStatus.LoginToWSServerDenied);
-															throw new WSClientModeException($"connection denied, disconnecting from server");
+															throw new WSClientModeException(Resources.ConnectionDenied);
 														}
 													}
 													else
 													{
 														setStatusFnc?.Invoke(ListenerStatus.DisconnectingFromWSServer);
-														throw new WSClientModeException($"invalid login response message received [{order}], disconnecting from server");
+														throw new WSClientModeException(Resources.InvalidLoginResponse.Format(order));
 													}
 												}
 												break;
@@ -571,7 +582,7 @@ namespace Listener
 													CListenerRequestWS listenerRequest = CJson<CListenerRequestWS>.Deserialize(order);
 													if (null != listenerRequest)
 													{
-														CLog.INFORMATION($"received request from server [{order}]");
+														CLog.INFORMATION(Resources.ReceivedRequestFromWSServer.Format(order));
 														listenerRequest.Secured = true;
 														string norder = CJson<CListenerRequestWS>.Serialize(listenerRequest);
 														if (!norder.IsNullOrEmpty()) order = norder;
@@ -579,11 +590,11 @@ namespace Listener
 														// a request has been received, post it to the listener server part
 														if (CStream.Send(streamIO, order))
 														{
-															CLog.INFORMATION($"request sent to the listener");
+															CLog.INFORMATION(Resources.RequestSentToTheListener);
 														}
 														else
 														{
-															CLog.ERROR($"request failed to be sent to the listener");
+															CLog.ERROR(Resources.FailedSendingRequestToListener);
 														}
 													}
 													else
@@ -685,7 +696,7 @@ namespace Listener
 		void WSInterfaceThreadTerminates(int id, string name, int uniqueId, int result)
 		{
 			CLog.ERROR(Resources.ERROR_WSClientHasStopped);
-			Stop();
+			//Stop();
 		}
 		/// <summary>
 		/// Function called when the WS interface stops
@@ -744,11 +755,11 @@ namespace Listener
 			}
 			if (0 == settings.Nexo.AllowedCategories.Count)
 			{
-				CLogger.ERROR($"listener can't start, no service is supported");
+				CLogger.ERROR(Resources.OnStartNoServiceActivated);
 				return false;
 			}
 
-			CLogger.TRACE($"starting listener");
+			CLogger.INFORMATION(Resources.OnStartListenerStarted);
 			return true;
 		}
 		/// <summary>
@@ -758,7 +769,7 @@ namespace Listener
 		/// <param name="o"></param>
 		private static void OnStop(CThreadData threadData = null, object o = null)
 		{
-			CLogger.TRACE($"stopping listener");
+			CLogger.TRACE(Resources.OnStopStoppingListener);
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnConnect"/>
@@ -777,17 +788,17 @@ namespace Listener
 					|| (!settings.RunAsClient && settings.Server.UseAllowedIP && settings.Server.AllowedIP.Contains(((IPEndPoint)tcp.Client.RemoteEndPoint).Address.ToString()))
 					|| (!settings.RunAsClient && !settings.Server.UseAllowedIP))
 				{
-					CLogger.TRACE($"accepting connection from client {tcp.Client.RemoteEndPoint}{(settings.Server.UseAllowedIP ? string.Empty : $" (not verifying calling IP)")}");
+					CLogger.TRACE(Resources.OnConnectAcceptingConnection.Format(new object[] { tcp.Client.RemoteEndPoint, (settings.Server.UseAllowedIP ? string.Empty : Resources.OnConnectNotVerifyingIP) }));
 					return true;
 				}
 				else
 				{
-					CLogger.ERROR($"connection from client {tcp.Client.RemoteEndPoint} has been declined");
+					CLogger.ERROR(Resources.OnConnectConnectionDeclined.Format(tcp.Client.RemoteEndPoint));
 				}
 			}
 			catch (Exception ex)
 			{
-				CLogger.EXCEPT(ex, $"exception while connecting client {tcp.Client.RemoteEndPoint}, connection declined");
+				CLogger.EXCEPT(ex, Resources.OnConnectException.Format(tcp.Client.RemoteEndPoint));
 			}
 			return false;
 		}
@@ -800,7 +811,7 @@ namespace Listener
 		/// <param name="statistics"></param>
 		private static void OnDisconnect(TcpClient tcp, CThread thread, object parameters, CStreamServerStatistics statistics)
 		{
-			CLogger.TRACE($"[{tcp}] client has been disconnected");
+			CLogger.TRACE(Resources.OnDisconnectClientDisconnected.Format(tcp));
 		}
 		/// <summary>
 		/// <see cref="CStreamServerStartSettings.OnMessage"/>
@@ -819,7 +830,7 @@ namespace Listener
 
 			string srequest = Encoding.ASCII.GetString(request);
 			string sclient = $"[{tcp.Client.RemoteEndPoint}] ";
-			CLogger.INFORMATION(sclient + $"request from client [{request.Length} bytes] {srequest}", Settings.DisplayMessages);
+			CLogger.INFORMATION(sclient + Resources.OnMessageReceivedRequest.Format(new object[] { request.Length, srequest }), Settings.DisplayMessages);
 
 			/*
 			 * process settings
@@ -836,7 +847,7 @@ namespace Listener
 			CListenerReply listenerReply = new CListenerReply() { Request = listenerRequest, };
 			if (null == listenerRequest)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorMessageCantBeConvertedToRequest, srequest)));
+				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorMessageCantBeConvertedToRequest.Format(srequest))));
 				listenerReply.Status = ReplyStatus.invalidRequest;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
@@ -857,9 +868,9 @@ namespace Listener
 
 			object obj;
 			string s;
-			string specificProtocole = "Protocole";
 			string specificIP = "IP";
 			string specificPort = "Port";
+			string specificProtocole = "Protocole";
 			string specificConnectTimeout = "ConnectTimeout";
 			string specificReceiveTimeout = "ReceiveTimeout";
 
@@ -912,7 +923,7 @@ namespace Listener
 							spoi.ConnectionSettings.ConnectTimeout = tm;
 					}
 
-					spoi.Label = $"dynamic POI ({spoi.ConnectionSettings.IP})";
+					spoi.Label = Resources.OnMessageDynamicPOI.Format(spoi.ConnectionSettings.IP);
 					poi = spoi;
 				}
 
@@ -920,14 +931,14 @@ namespace Listener
 				if (!ok)
 				{
 					CLog.EXCEPT(ex);
-					CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorRequestedPOIDoesntExist, listenerRequest.POI)));
+					CLogger.ERROR(sclient + (listenerReply.Message = Resources.ErrorRequestedPOIDoesntExist.Format(new object[] { listenerRequest.POI })));
 					listenerReply.Status = ReplyStatus.invalidPOIRequested;
 					return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 				}
 			}
 			#endregion
 
-			CLogger.TRACE($"Using {(poi.Label.IsNullOrEmpty() ? poi.FullIP : $"{poi.Label} at {poi.FullIP}")}");
+			CLogger.TRACE(Resources.UsingPOI.Format(poi.Label.IsNullOrEmpty() ? poi.FullIP : $"{poi.Label}/{poi.FullIP}"));
 
 			if (listenerReply.Request.SaleID.IsNullOrEmpty())
 				listenerReply.Request.SaleID = CStream.Localhost();
@@ -954,7 +965,7 @@ namespace Listener
 			MessageCategoryEnumeration? category = (MessageCategoryEnumeration)CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), listenerRequest.Service);
 			if (null == category)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorInvalidRequestedService, listenerRequest.Service)));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ErrorInvalidRequestedService.Format(listenerRequest.Service)));
 				listenerReply.Status = ReplyStatus.invalidService;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
@@ -973,7 +984,7 @@ namespace Listener
 
 			if (!Settings.Nexo.AllowedCategories.Contains((MessageCategoryEnumeration)category))
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorRequestedServiceNotAllowed, listenerRequest.Service)));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ErrorRequestedServiceNotAllowed.Format(listenerRequest.Service)));
 				listenerReply.Status = ReplyStatus.serviceNotSupported;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
@@ -981,7 +992,7 @@ namespace Listener
 			// test parameters
 			if (string.IsNullOrEmpty(listenerRequest.SaleID) || string.IsNullOrEmpty(listenerRequest.POIID))
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorInvalidRequestedIDs, new object[] { (listenerRequest.SaleID.IsNullOrEmpty() ? Resources.IsMissing : listenerRequest.SaleID), (listenerRequest.POIID.IsNullOrEmpty() ? Resources.IsMissing : listenerRequest.POIID) })));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ErrorInvalidRequestedIDs.Format(new object[] { (listenerRequest.SaleID.IsNullOrEmpty() ? Resources.IsMissing : listenerRequest.SaleID), (listenerRequest.POIID.IsNullOrEmpty() ? Resources.IsMissing : listenerRequest.POIID) })));
 				listenerReply.Status = ReplyStatus.mandatoryObjectNotSet;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
@@ -1003,7 +1014,7 @@ namespace Listener
 			NexoObject nexo = NexoItem.AllocateObject((MessageCategoryEnumeration)category);
 			if (null == nexo)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ErrorFailedCreatingTheNexoObject, category.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ErrorFailedCreatingTheNexoObject.Format(category.ToString())));
 				listenerReply.Status = ReplyStatus.unknownError;
 				return SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(listenerReply)), tcp);
 			}
@@ -1046,10 +1057,10 @@ namespace Listener
 				{
 					CListenerDataElement ldt = dte.Data;
 					if (!(ldt.Status = SearchAndProcessProperty(nexo.Request, dte.LPath, ref ldt.Value)))
-						CLogger.ERROR(dte.Message = sclient + string.Format(Resources.InputDataFailedToSetData, new object[] { dte.Path, ldt.Value }));
+						CLogger.ERROR(dte.Message = sclient + Resources.InputDataFailedToSetData.Format(new object[] { dte.Path, ldt.Value }));
 				}
 				else
-					CLogger.ERROR(dte.Message = sclient + string.Format(Resources.InputDataFailedCreatingPath, new object[] { k.Key }));
+					CLogger.ERROR(dte.Message = sclient + Resources.InputDataFailedCreatingPath.Format(new object[] { k.Key }));
 				tosend.Add(dte);
 			}
 
@@ -1111,7 +1122,7 @@ namespace Listener
 								{
 									Notification = true,
 									Status = sts,
-									Message = string.Format(Resources.LoginTryingToLogWith, new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
+									Message = Resources.LoginTryingToLogWith.Format(new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
 								})), tcp),
 								addBufferSize, action, reserved);
 							if (ok = client.SendRequestSync(login, poi.ConnectionSettings.GeneralTimer))
@@ -1134,7 +1145,7 @@ namespace Listener
 									{
 										Notification = true,
 										Status = sts,
-										Message = string.Format(Resources.LoginFailedToLogTo, new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
+										Message = Resources.LoginFailedToLogTo.Format(new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
 									})), tcp),
 									addBufferSize, action, reserved);
 							}
@@ -1201,16 +1212,20 @@ namespace Listener
 								{
 									Notification = true,
 									Status = sts,
-									Message = string.Format(Resources.ServiceStarting, new object[] { serviceName }),
+									Message = Resources.ServiceStarting.Format(new object[] { serviceName }),
 								})), tcp),
 								addBufferSize, action, reserved);
 
 							// send the request synchronously
 							listenerRequest.NexoMessage = nexo.ToString();
+							bool tout = false;
 							try
 							{
-								if (!client.SendRequestSync(nexo))
-									CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingErrorWhileExchange, serviceName)));
+								if (!client.SendRequestSync(nexo, poi.ConnectionSettings.PaymentTimer))
+								{
+									tout = true;
+									CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingErrorWhileExchange.Format(serviceName)));
+								}
 							}
 							catch (Exception ex)
 							{
@@ -1218,14 +1233,29 @@ namespace Listener
 							}
 							//listenerReply.NexoMessage = nexo.ToString();
 
-							StreamServer.Send1WayNotification(SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
-								new CListenerReply()
-								{
-									Notification = true,
-									Status = sts2,
-									Message = string.Format(Resources.ServiceCompleted, new object[] { serviceName }),
-								})), tcp),
-								addBufferSize, action, reserved);
+							if (tout)
+							{
+								StreamServer.Send1WayNotification(SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+									new CListenerReply()
+									{
+										Notification = true,
+										Status = sts2,
+										Message = Resources.ServiceTimeout.Format(new object[] { serviceName }),
+									})), tcp),
+									addBufferSize, action, reserved);
+
+							}
+							else
+							{
+								StreamServer.Send1WayNotification(SendAnswer(Encoding.UTF8.GetBytes(CJson<CListenerReply>.Serialize(
+									new CListenerReply()
+									{
+										Notification = true,
+										Status = sts2,
+										Message = Resources.ServiceCompleted.Format(new object[] { serviceName }),
+									})), tcp),
+									addBufferSize, action, reserved);
+							}
 						}
 
 						// auto logout ?
@@ -1239,7 +1269,7 @@ namespace Listener
 								{
 									Notification = true,
 									Status = sts,
-									Message = string.Format(Resources.Logout, new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
+									Message = Resources.Logout.Format(new object[] { listenerRequest.SaleID, listenerRequest.POIID }),
 								})), tcp),
 								addBufferSize, action, reserved);
 						}
@@ -1247,13 +1277,13 @@ namespace Listener
 					}
 					else
 					{
-						CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingErrorConnectingToPOI, clientSettings.StreamClientSettings.IP)));
+						CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingErrorConnectingToPOI.Format(clientSettings.StreamClientSettings.IP)));
 						listenerReply.Status = ReplyStatus.failedToConnectToPOI;
 					}
 				}
 				catch (Exception ex)
 				{
-					CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingException, ex.Message)));
+					CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingException.Format(ex.Message)));
 					listenerReply.Status = ReplyStatus.unknownError;
 				}
 				finally
@@ -1274,17 +1304,17 @@ namespace Listener
 
 			if (client.TimedOut)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingTimeout, nexo.MessageCategory.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingTimeout.Format(nexo.MessageCategory.ToString())));
 				listenerReply.Status = ReplyStatus.timeout;
 			}
 			else if (client.Cancelled)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingCancelled, nexo.MessageCategory.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingCancelled.Format(nexo.MessageCategory.ToString())));
 				listenerReply.Status = ReplyStatus.cancelled;
 			}
 			else if (client.NoMoreAction)
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format(Resources.ProcessingNoMoreAction, nexo.MessageCategory.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingNoMoreAction.Format(nexo.MessageCategory.ToString())));
 				listenerReply.Message += client.Outcome.IsNullOrEmpty() ? $" [{client.Outcome}]" : string.Empty;
 				listenerReply.Status = ReplyStatus.noMoreAction;
 			}
@@ -1349,13 +1379,13 @@ namespace Listener
 					default:
 						break;
 				}
-				CLogger.TRACE(sclient + (listenerReply.Message = string.Format(Resources.ProcessingResult, new object[] { nexo.MessageCategory.ToString(), listenerReply.Status.ToString().ToUpper(), (nexo.AdditionalResponse.IsNullOrEmpty() ? string.Empty : nexo.AdditionalResponse) })));
+				CLogger.TRACE(sclient + (listenerReply.Message = Resources.ProcessingResult.Format(new object[] { nexo.MessageCategory.ToString(), listenerReply.Status.ToString().ToUpper(), (nexo.AdditionalResponse.IsNullOrEmpty() ? string.Empty : nexo.AdditionalResponse) })));
 				listenerReply.NexoError = nexo.ErrorCondition.ToString();
 				listenerReply.NexoInformation = nexo.AdditionalResponse;
 			}
 			else if (listenerReply.Message.IsNullOrEmpty())
 			{
-				CLogger.ERROR(sclient + (listenerReply.Message = string.Format($"{Resources.ProcessingUnknowError} [{client.Outcome}]", nexo.MessageCategory.ToString())));
+				CLogger.ERROR(sclient + (listenerReply.Message = Resources.ProcessingUnknowError.Format(new object[] { client.Outcome, nexo.MessageCategory.ToString() })));
 				listenerReply.Status = ReplyStatus.unknownError;
 			}
 			/*
@@ -1378,7 +1408,7 @@ namespace Listener
 						CLog.ERROR(dte.Message = sclient + Resources.OutputDataFailedFetchingData);
 				}
 				else
-					CLog.ERROR(dte.Message = sclient + string.Format(Resources.OutputDataFailedCreatingPath, new object[] { k.Key }));
+					CLog.ERROR(dte.Message = sclient + Resources.OutputDataFailedCreatingPath.Format(new object[] { k.Key }));
 				toreturn.Add(dte);
 			}
 
@@ -1405,7 +1435,7 @@ namespace Listener
 
 			string sreply = CJson<CListenerReply>.Serialize(listenerReply);
 			byte[] breply = Encoding.UTF8.GetBytes(sreply);
-			CLogger.INFORMATION(sclient + $"reply to client [{breply.Length} bytes] {sreply}", Settings.DisplayMessages);
+			CLogger.INFORMATION(sclient + Resources.ReplyToClientMessage.Format(new object[] { breply.Length.ToString(), sreply }), Settings.DisplayMessages);
 
 			return SendAnswer(breply, tcp);
 		}
@@ -1421,7 +1451,7 @@ namespace Listener
 			{
 				try
 				{
-					CLogger.INFORMATION(string.Format(Resources.ProcessingSendingAnswerToServer, new object[] { Encoding.UTF8.GetString(reply) }));
+					CLogger.INFORMATION(Resources.ProcessingSendingAnswerToServer.Format(new object[] { Encoding.UTF8.GetString(reply) }));
 					WS.SendAsync(new ArraySegment<byte>(reply), WebSocketMessageType.Text, true, WSClientToken);
 				}
 				catch (Exception ex)

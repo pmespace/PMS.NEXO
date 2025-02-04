@@ -166,16 +166,16 @@
     <value>Logged to POI</value>
   </data>
   <data name="ErrorMessageCantBeConvertedToRequest" xml:space="preserve">
-    <value>Message can't be converted to a request [{0}]</value>
+    <value>message can't be converted to a request {0}</value>
   </data>
   <data name="ErrorRequestedPOIDoesntExist" xml:space="preserve">
-    <value>Requested POI [{0}] doesn't exist, The request will not be carried out"</value>
+    <value>requested POI {0} does not exist, the request will not be carried out</value>
   </data>
   <data name="ErrorInvalidRequestedService" xml:space="preserve">
     <value>The requested service is invalid [{0}]"</value>
   </data>
   <data name="ErrorRequestedServiceNotAllowed" xml:space="preserve">
-    <value>The requested service is not allowed [{0}]</value>
+    <value>The requested service is not allowed {0}</value>
   </data>
   <data name="ErrorInvalidRequestedIDs" xml:space="preserve">
     <value>The request parameters are not set properly, SaleID: {0}, POIID: {1}</value>
@@ -211,7 +211,7 @@
     <value>Processing of service {0} ended up with {1} result {2}</value>
   </data>
   <data name="ProcessingUnknowError" xml:space="preserve">
-    <value>Unknown error while processing {0} service</value>
+    <value>Unknown error while processing service {0} ({1})</value>
   </data>
   <data name="ProcessingNoMoreAction" xml:space="preserve">
     <value>Service {0} ended with a noMoreAction status</value>
@@ -268,16 +268,16 @@
     <value>&lt;none&gt;</value>
   </data>
   <data name="DisplayLogFile" xml:space="preserve">
-    <value>Log file</value>
+    <value>Log file: {0}</value>
   </data>
   <data name="DisplayStarting" xml:space="preserve">
-    <value>Trying to read settings from</value>
+    <value>Trying to read settings from {0}</value>
   </data>
   <data name="DisplayFailedToReadSettings" xml:space="preserve">
     <value>Failed to read settings</value>
   </data>
   <data name="DisplayAddress" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP address {0}: {1} ({2})</value>
   </data>
   <data name="DisplayFailedToConnectToEListener" xml:space="preserve">
     <value>Listener connection to EListener server process failed to start, shutting down</value>
@@ -398,5 +398,80 @@
   </data>
   <data name="NeptingFailedCreatingMessage" xml:space="preserve">
     <value>Failed creating a Nepting message</value>
+  </data>
+  <data name="OnStartNoServiceActivated" xml:space="preserve">
+    <value>[OnStart] listener can't start, no service is supported</value>
+  </data>
+  <data name="OnStartListenerStarted" xml:space="preserve">
+    <value>[OnStart] listener has started</value>
+  </data>
+  <data name="OnStopStoppingListener" xml:space="preserve">
+    <value>[OnStop] stopping listener</value>
+  </data>
+  <data name="OnConnectAcceptingConnection" xml:space="preserve">
+    <value>[OnConnect] accepting connection from {0} {1}</value>
+  </data>
+  <data name="OnConnectNotVerifyingIP" xml:space="preserve">
+    <value>[OnConnect] not verifying incoming IP</value>
+  </data>
+  <data name="OnConnectConnectionDeclined" xml:space="preserve">
+    <value>[OnConnect] connection from {0} declined</value>
+  </data>
+  <data name="OnConnectException" xml:space="preserve">
+    <value>[OnConnect] exception while connecting client {0}, connection declined</value>
+  </data>
+  <data name="OnDisconnectClientDisconnected" xml:space="preserve">
+    <value>[OnDisconnect] {0} has been disconnected</value>
+  </data>
+  <data name="OnMessageReceivedRequest" xml:space="preserve">
+    <value>received request of {0} bytes [{1}]</value>
+  </data>
+  <data name="OnMessageDynamicPOI" xml:space="preserve">
+    <value>[OnMessage] dynamic POI {0}</value>
+  </data>
+  <data name="UsingPOI" xml:space="preserve">
+    <value>using {0}</value>
+  </data>
+  <data name="ReplyToClientMessage" xml:space="preserve">
+    <value>reply to client [{0} bytes] {1}</value>
+  </data>
+  <data name="FailedToConnectToWSServer" xml:space="preserve">
+    <value>failed to connect to WS server [{0}]</value>
+  </data>
+  <data name="FailedToConnectToListenerAsClient" xml:space="preserve">
+    <value>failed to connect to listener as client, disconnecting from WS server</value>
+  </data>
+  <data name="SendingLoginRequest" xml:space="preserve">
+    <value>sending login request to WS server [{0}]</value>
+  </data>
+  <data name="ReadyToReceiveIncomingRequests" xml:space="preserve">
+    <value>ready to receive incoming requests from WS server</value>
+  </data>
+  <data name="FailedCreatingSecurityChain" xml:space="preserve">
+    <value>failed to create security chain, disconnecting from WS server</value>
+  </data>
+  <data name="ConnectionHasBeenGranted" xml:space="preserve">
+    <value>connection has been granted [{0}]</value>
+  </data>
+  <data name="ConnectionDenied" xml:space="preserve">
+    <value>connection denied, disconnecting from WS server</value>
+  </data>
+  <data name="InvalidLoginResponse" xml:space="preserve">
+    <value>invalid login response message received [{0}], disconnecting from server")</value>
+  </data>
+  <data name="ReceivedRequestFromWSServer" xml:space="preserve">
+    <value>received request from WS server [{0}]</value>
+  </data>
+  <data name="RequestSentToTheListener" xml:space="preserve">
+    <value>request sent to the listener</value>
+  </data>
+  <data name="FailedSendingRequestToListener" xml:space="preserve">
+    <value>failed sending request to the listener</value>
+  </data>
+  <data name="InvalidRequestFromWSServer" xml:space="preserve">
+    <value>received invalid request received from the server [{order}], still listening</value>
+  </data>
+  <data name="ServiceTimeout" xml:space="preserve">
+    <value>Service {0} timed out</value>
   </data>
 </root>

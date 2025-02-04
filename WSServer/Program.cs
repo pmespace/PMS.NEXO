@@ -76,7 +76,7 @@ namespace WSServer
 				if (runListener)
 				{
 					listener = new CListener();
-					listenerIsRunning = listener.Start(listenerSettingsFileName);
+					listenerIsRunning = listener.Start(listenerSettingsFileName).Result;
 				}
 
 				ConsoleKeyInfo key;

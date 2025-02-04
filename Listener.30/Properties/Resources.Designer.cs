@@ -61,11 +61,29 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to connection denied, disconnecting from WS server.
+        /// </summary>
+        internal static string ConnectionDenied {
+            get {
+                return ResourceManager.GetString("ConnectionDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection has been cancelled.
         /// </summary>
         internal static string ConnectionHasBeenCancelled {
             get {
                 return ResourceManager.GetString("ConnectionHasBeenCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to connection has been granted [{0}].
+        /// </summary>
+        internal static string ConnectionHasBeenGranted {
+            get {
+                return ResourceManager.GetString("ConnectionHasBeenGranted", resourceCulture);
             }
         }
         
@@ -79,7 +97,7 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IP address.
+        ///   Looks up a localized string similar to IP address {0}: {1} ({2}).
         /// </summary>
         internal static string DisplayAddress {
             get {
@@ -142,7 +160,7 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log file.
+        ///   Looks up a localized string similar to Log file: {0}.
         /// </summary>
         internal static string DisplayLogFile {
             get {
@@ -151,7 +169,7 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trying to read settings from.
+        ///   Looks up a localized string similar to Trying to read settings from {0}.
         /// </summary>
         internal static string DisplayStarting {
             get {
@@ -214,7 +232,7 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message can&apos;t be converted to a request [{0}].
+        ///   Looks up a localized string similar to message can&apos;t be converted to a request {0}.
         /// </summary>
         internal static string ErrorMessageCantBeConvertedToRequest {
             get {
@@ -223,7 +241,7 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested POI [{0}] doesn&apos;t exist, The request will not be carried out&quot;.
+        ///   Looks up a localized string similar to requested POI {0} does not exist, the request will not be carried out.
         /// </summary>
         internal static string ErrorRequestedPOIDoesntExist {
             get {
@@ -232,11 +250,20 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The requested service is not allowed [{0}].
+        ///   Looks up a localized string similar to The requested service is not allowed {0}.
         /// </summary>
         internal static string ErrorRequestedServiceNotAllowed {
             get {
                 return ResourceManager.GetString("ErrorRequestedServiceNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to failed to create security chain, disconnecting from WS server.
+        /// </summary>
+        internal static string FailedCreatingSecurityChain {
+            get {
+                return ResourceManager.GetString("FailedCreatingSecurityChain", resourceCulture);
             }
         }
         
@@ -246,6 +273,33 @@ namespace Listener.Properties {
         internal static string FailedInsertingConnectedClient {
             get {
                 return ResourceManager.GetString("FailedInsertingConnectedClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to failed sending request to the listener.
+        /// </summary>
+        internal static string FailedSendingRequestToListener {
+            get {
+                return ResourceManager.GetString("FailedSendingRequestToListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to failed to connect to listener as client, disconnecting from WS server.
+        /// </summary>
+        internal static string FailedToConnectToListenerAsClient {
+            get {
+                return ResourceManager.GetString("FailedToConnectToListenerAsClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to failed to connect to WS server [{0}].
+        /// </summary>
+        internal static string FailedToConnectToWSServer {
+            get {
+                return ResourceManager.GetString("FailedToConnectToWSServer", resourceCulture);
             }
         }
         
@@ -282,6 +336,24 @@ namespace Listener.Properties {
         internal static string InvalidDisplayDevice {
             get {
                 return ResourceManager.GetString("InvalidDisplayDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to invalid login response message received [{0}], disconnecting from server&quot;).
+        /// </summary>
+        internal static string InvalidLoginResponse {
+            get {
+                return ResourceManager.GetString("InvalidLoginResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to received invalid request received from the server [{order}], still listening.
+        /// </summary>
+        internal static string InvalidRequestFromWSServer {
+            get {
+                return ResourceManager.GetString("InvalidRequestFromWSServer", resourceCulture);
             }
         }
         
@@ -502,6 +574,96 @@ namespace Listener.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [OnConnect] accepting connection from {0} {1}.
+        /// </summary>
+        internal static string OnConnectAcceptingConnection {
+            get {
+                return ResourceManager.GetString("OnConnectAcceptingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnConnect] connection from {0} declined.
+        /// </summary>
+        internal static string OnConnectConnectionDeclined {
+            get {
+                return ResourceManager.GetString("OnConnectConnectionDeclined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnConnect] exception while connecting client {0}, connection declined.
+        /// </summary>
+        internal static string OnConnectException {
+            get {
+                return ResourceManager.GetString("OnConnectException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnConnect] not verifying incoming IP.
+        /// </summary>
+        internal static string OnConnectNotVerifyingIP {
+            get {
+                return ResourceManager.GetString("OnConnectNotVerifyingIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnDisconnect] {0} has been disconnected.
+        /// </summary>
+        internal static string OnDisconnectClientDisconnected {
+            get {
+                return ResourceManager.GetString("OnDisconnectClientDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnMessage] dynamic POI {0}.
+        /// </summary>
+        internal static string OnMessageDynamicPOI {
+            get {
+                return ResourceManager.GetString("OnMessageDynamicPOI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to received request of {0} bytes [{1}].
+        /// </summary>
+        internal static string OnMessageReceivedRequest {
+            get {
+                return ResourceManager.GetString("OnMessageReceivedRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnStart] listener has started.
+        /// </summary>
+        internal static string OnStartListenerStarted {
+            get {
+                return ResourceManager.GetString("OnStartListenerStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnStart] listener can&apos;t start, no service is supported.
+        /// </summary>
+        internal static string OnStartNoServiceActivated {
+            get {
+                return ResourceManager.GetString("OnStartNoServiceActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [OnStop] stopping listener.
+        /// </summary>
+        internal static string OnStopStoppingListener {
+            get {
+                return ResourceManager.GetString("OnStopStoppingListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed creating return data path for {0}, that data won&apos;t be fetched.
         /// </summary>
         internal static string OutputDataFailedCreatingPath {
@@ -673,11 +835,20 @@ namespace Listener.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown error while processing {0} service.
+        ///   Looks up a localized string similar to Unknown error while processing service {0} ({1}).
         /// </summary>
         internal static string ProcessingUnknowError {
             get {
                 return ResourceManager.GetString("ProcessingUnknowError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ready to receive incoming requests from WS server.
+        /// </summary>
+        internal static string ReadyToReceiveIncomingRequests {
+            get {
+                return ResourceManager.GetString("ReadyToReceiveIncomingRequests", resourceCulture);
             }
         }
         
@@ -687,6 +858,42 @@ namespace Listener.Properties {
         internal static string ReceivedMessage {
             get {
                 return ResourceManager.GetString("ReceivedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to received request from WS server [{0}].
+        /// </summary>
+        internal static string ReceivedRequestFromWSServer {
+            get {
+                return ResourceManager.GetString("ReceivedRequestFromWSServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to reply to client [{0} bytes] {1}.
+        /// </summary>
+        internal static string ReplyToClientMessage {
+            get {
+                return ResourceManager.GetString("ReplyToClientMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to request sent to the listener.
+        /// </summary>
+        internal static string RequestSentToTheListener {
+            get {
+                return ResourceManager.GetString("RequestSentToTheListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sending login request to WS server [{0}].
+        /// </summary>
+        internal static string SendingLoginRequest {
+            get {
+                return ResourceManager.GetString("SendingLoginRequest", resourceCulture);
             }
         }
         
@@ -714,6 +921,15 @@ namespace Listener.Properties {
         internal static string ServiceStarting {
             get {
                 return ResourceManager.GetString("ServiceStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service {0} timed out.
+        /// </summary>
+        internal static string ServiceTimeout {
+            get {
+                return ResourceManager.GetString("ServiceTimeout", resourceCulture);
             }
         }
         
@@ -750,6 +966,15 @@ namespace Listener.Properties {
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using {0}.
+        /// </summary>
+        internal static string UsingPOI {
+            get {
+                return ResourceManager.GetString("UsingPOI", resourceCulture);
             }
         }
         

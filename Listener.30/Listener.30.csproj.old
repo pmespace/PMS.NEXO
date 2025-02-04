@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>Listener</RootNamespace>
+    <BaseOutputPath></BaseOutputPath>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyName>PMS.$(MSBuildProjectName)</AssemblyName>
+    <Title>Nexo 3.0 Listener</Title>
+    <Authors>philippemp31</Authors>
+    <Company>PMS</Company>
+    <Version>5.1.2</Version>
+    <FileVersion>5.1.2</FileVersion>
+    <AssemblyVersion>5.1.2</AssemblyVersion>
+    <TestNugetPath>$(SolutionDir)..\nuget\test</TestNugetPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);USEWSINTERFACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);USEWSINTERFACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <ItemGroup>
+      <NuSpecFiles Include="$(PackageOutputPath)\*.nupkg" Exclude="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" />
+    </ItemGroup>
+    <Delete Files="@(NuSpecFiles)" />
+    <MakeDir Directories="$(TestNugetPath)" Condition="!Exists('$(TestNugetPath)')" />
+    <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(TestNugetPath)" />
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="CNepting.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PMS.COMMON" Version="8.0.3" />
+  </ItemGroup>
+
+  <!--
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+  -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\NEXO.30\NEXO.30.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Import Project="..\LISTENER_SHARED\LISTENER_SHARED.projitems" Label="Shared" />
+
+</Project>

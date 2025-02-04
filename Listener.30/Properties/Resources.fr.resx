@@ -166,16 +166,16 @@
     <value>Connecté au terminal</value>
   </data>
   <data name="ErrorMessageCantBeConvertedToRequest" xml:space="preserve">
-    <value>Le message ne peut être traduit en une requête [{0}]</value>
+    <value>le message ne peut être traduit en une requête {0}</value>
   </data>
   <data name="ErrorRequestedPOIDoesntExist" xml:space="preserve">
-    <value>Le terminal demandé [{0}] n'existe pas. La requête ne sera pas traitée</value>
+    <value>le terminal demandé {0} n'existe pas, la requête ne sera pas traitée</value>
   </data>
   <data name="ErrorInvalidRequestedService" xml:space="preserve">
     <value>Le service demandé est invalid [{0}]"</value>
   </data>
   <data name="ErrorRequestedServiceNotAllowed" xml:space="preserve">
-    <value>Le service demandé n'est pas autorisé [{0}]</value>
+    <value>Le service demandé n'est pas autorisé {0}</value>
   </data>
   <data name="ErrorInvalidRequestedIDs" xml:space="preserve">
     <value>Les paramètres d'identification sont invalides, SaleID: {0}, POIID: {1}</value>
@@ -211,7 +211,7 @@
     <value>Le traitement du service {0} s'est terminé avec un statut {1} {2}</value>
   </data>
   <data name="ProcessingUnknowError" xml:space="preserve">
-    <value>Erreur inconnue durant le traitement du service {0}</value>
+    <value>Erreur inconnue durant le traitement du service {0} ({1})</value>
   </data>
   <data name="ProcessingNoMoreAction" xml:space="preserve">
     <value>Le service {0} s'est terminé avec un statut noMoreAction</value>
@@ -268,16 +268,16 @@
     <value>&lt;aucun&gt;</value>
   </data>
   <data name="DisplayLogFile" xml:space="preserve">
-    <value>Fichier log</value>
+    <value>Fichier log: {0}</value>
   </data>
   <data name="DisplayStarting" xml:space="preserve">
-    <value>Tentative de lecture des paramètres depuis</value>
+    <value>Tentative de lecture des paramètres depuis {0}</value>
   </data>
   <data name="DisplayFailedToReadSettings" xml:space="preserve">
     <value>La lecture des paramètres a échoué</value>
   </data>
   <data name="DisplayAddress" xml:space="preserve">
-    <value>Adresse IP</value>
+    <value>Adresse IP {0}: {1} ({2})</value>
   </data>
   <data name="DisplayFailedToConnectToEListener" xml:space="preserve">
     <value>Le processus de connexion au EListener n'a pas pu se lancer, arrêt du listener</value>
@@ -398,5 +398,77 @@
   </data>
   <data name="NeptingFailedCreatingMessage" xml:space="preserve">
     <value>La création du message Nepting a échoué</value>
+  </data>
+  <data name="OnStartNoServiceActivated" xml:space="preserve">
+    <value>[OnStart] le listener ne peut démarrer, aucun service n'est supporté</value>
+  </data>
+  <data name="OnStartListenerStarted" xml:space="preserve">
+    <value>[OnStart] le listener a démarré</value>
+  </data>
+  <data name="OnStopStoppingListener" xml:space="preserve">
+    <value>[OnStop] le listener est en cours d'arrêt</value>
+  </data>
+  <data name="OnConnectAcceptingConnection" xml:space="preserve">
+    <value>[OnConnect] connexion acceptée depuis {0} {1}</value>
+  </data>
+  <data name="OnConnectNotVerifyingIP" xml:space="preserve">
+    <value>[OnConnect] sans vérification de l'IP entrante</value>
+  </data>
+  <data name="OnConnectConnectionDeclined" xml:space="preserve">
+    <value>[OnConnect] la connexion depuis {0} a été refusée</value>
+  </data>
+  <data name="OnConnectException" xml:space="preserve">
+    <value>[OnConnect] exception lors de la connexion depuis {0}, connexion refusée</value>
+  </data>
+  <data name="OnDisconnectClientDisconnected" xml:space="preserve">
+    <value>[OnDisconnect] {0} a été déconnectée</value>
+  </data>
+  <data name="OnMessageDynamicPOI" xml:space="preserve">
+    <value>[OnMessage] POI dynamique {0}</value>
+  </data>
+  <data name="OnMessageReceivedRequest" xml:space="preserve">
+    <value>réception d'une requête de {0} bytes [{1}]</value>
+  </data>
+  <data name="UsingPOI" xml:space="preserve">
+    <value>utilisation de {0}</value>
+  </data>
+  <data name="ReplyToClientMessage" xml:space="preserve">
+    <value>réponse au client [{0} octets] {1}</value>
+  </data>
+  <data name="FailedToConnectToWSServer" xml:space="preserve">
+    <value>la connexion au serveur WS a échouée [{0}]</value>
+  </data>
+  <data name="FailedToConnectToListenerAsClient" xml:space="preserve">
+    <value>la connexion au listener en tant que client a échouée, déconnexion du serveur WS</value>
+  </data>
+  <data name="SendingLoginRequest" xml:space="preserve">
+    <value>envoi de la requête de connexion au server WS [{0}]</value>
+  </data>
+  <data name="ReadyToReceiveIncomingRequests" xml:space="preserve">
+    <value>prêt à recevoir des requêtes en provenance du serveur WS</value>
+  </data>
+  <data name="FailedCreatingSecurityChain" xml:space="preserve">
+    <value>la création de la chaine de sécurité a échouée, déconnexion du serveur WS</value>
+  </data>
+  <data name="ConnectionHasBeenGranted" xml:space="preserve">
+    <value>la connexion a été autorisée [{0}]</value>
+  </data>
+  <data name="ConnectionDenied" xml:space="preserve">
+    <value>la connexion a été refusée, déconnexion du serveur WS</value>
+  </data>
+  <data name="InvalidLoginResponse" xml:space="preserve">
+    <value>réception d'une réponse de login invalide [{0}], déconnexion du serveur WS</value>
+  </data>
+  <data name="ReceivedRequestFromWSServer" xml:space="preserve">
+    <value>réception d'une requête du server WS [{0}]</value>
+  </data>
+  <data name="RequestSentToTheListener" xml:space="preserve">
+    <value>la requête a été transmise au listener</value>
+  </data>
+  <data name="FailedSendingRequestToListener" xml:space="preserve">
+    <value>l'envoi de la requête au listener a échoué</value>
+  </data>
+  <data name="ServiceTimeout" xml:space="preserve">
+    <value>Time out sur le service {0]</value>
   </data>
 </root>

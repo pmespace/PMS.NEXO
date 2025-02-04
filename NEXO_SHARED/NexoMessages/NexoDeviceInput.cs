@@ -239,7 +239,7 @@ namespace NEXO
 		}
 		protected override void SetReplyFromRequest()
 		{
-			if (RequestData.DisplayOutputSpecified)// && RequestData.DisplayOutput.ResponseRequiredFlagSpecified && RequestData.DisplayOutput.ResponseRequiredFlag)
+			if (RequestData.DisplayOutputSpecified && RequestData.DisplayOutput.ResponseRequiredFlagSpecified && RequestData.DisplayOutput.ResponseRequiredFlag)
 			{
 				ReplyData.OutputResult.Device = RequestData.DisplayOutput.Device;
 				ReplyData.OutputResult.InfoQualify = RequestData.DisplayOutput.InfoQualify;

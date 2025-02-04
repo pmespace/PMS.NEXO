@@ -1,4 +1,4 @@
-﻿#define USEWSINTERFACE
+﻿//#define USEWSINTERFACE
 
 using System;
 using System.IO;
@@ -497,7 +497,7 @@ namespace Listener.App
 
 			// Start listener
 			listener = new CListener();
-			return started = listener.Start(RegSettings.FullSettingsFilename);
+			return started = listener.Start(RegSettings.FullSettingsFilename).Result;
 		}
 		/// <summary>
 		/// 

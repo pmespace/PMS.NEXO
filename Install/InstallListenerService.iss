@@ -73,8 +73,8 @@ Filename: {sys}\sc.exe; Parameters: "create {#ServiceName} start= auto binPath= 
 Filename: {sys}\sc.exe; Parameters: "start {#ServiceName}" ; Flags: runhidden; StatusMsg: "Démarrage du service {#ServiceName}..."
 
 [UninstallRun]
-Filename: {sys}\net.exe; Parameters: "stop {#ServiceName}" ; Flags: runhidden
-Filename: {sys}\sc.exe; Parameters: "delete {#ServiceName}" ; Flags: runhidden
+Filename: {sys}\net.exe; Parameters: "stop {#ServiceName}" ; Flags: runhidden ; RunOnceId: "stopService"
+Filename: {sys}\sc.exe; Parameters: "delete {#ServiceName}" ; Flags: runhidden ; RunOnceId: "deleteService"
 
 [Registry]
 Root: HKCU; Subkey: "{#MyRegistry}"; ValueName: "{#MyRegistryKey}"; ValueType: string; ValueData: "{commonappdata}\{#MyAppKey}\{#MySettings}\{#MySettingsFileName}"; Flags: createvalueifdoesntexist 
@@ -142,4 +142,44 @@ end;
 function HasCPOSDllManagerDirBeenFound(): boolean;
 begin
   result := DirFound <> ''
+end;
+
+function IsDotNet6Installed: Boolean;
+var
+  regVersion: Cardinal;
+begin
+  Result := RegQueryDWordValue(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v6.0', 'Version', regVersion);
+end;
+
+function XInitializeSetup: Boolean;
+var
+  dotNet6Installed: Boolean;
+  dotNetDownloaderPath: string;
+  dotNetDownloaderArgs: string;
+  downloadResultCode: Integer;
+begin
+  Result := True;
+  
+  dotNet6Installed := IsDotNet6Installed;
+
+  if not dotNet6Installed then
+  begin
+    MsgBox('The .NET 6 runtime is required. Downloading and installing it now.', mbInformation, MB_OK);
+
+    dotNetDownloaderPath := ExpandConstant('{tmp}\dotnet-runtime-downloader.exe');
+    dotNetDownloaderArgs := 'https://path/to/dotnet-runtime-x86-6.0.0-win.exe,https://path/to/dotnet-runtime-x64-6.0.0-win.exe';
+
+    ExtractTemporaryFile('dotnet-runtime-downloader.exe');
+
+    // Run the downloader to fetch the .NET 6 runtime installers
+    Exec(dotNetDownloaderPath, dotNetDownloaderArgs, '', SW_HIDE, ewWaitUntilTerminated, downloadResultCode);
+
+    dotNet6Installed := IsDotNet6Installed;
+
+    if not dotNet6Installed then
+    begin
+      MsgBox('Failed to download and install the .NET 6 runtime. Setup will now exit.', mbError, MB_OK);
+      Result := False;
+    end;
+  end;
 end;

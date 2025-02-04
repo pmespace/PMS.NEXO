@@ -1,4 +1,5 @@
 ﻿using COMMON;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,21 +11,31 @@ namespace Listener.Service
 {
 	static internal class Logger
 	{
-		public static string Log(EventLog eventLog, string msg, TLog tlog = TLog.DEBUG)
+		public static string Log(ILogger<Worker> logger, string msg, TLog tlog = TLog.DEBUG)
 		{
-			eventLog.WriteEntry(msg, FromTLog(tlog));
+			try { logger.Log(FromTLog(tlog), msg, null); }
+			catch (Exception) { }
 			return CLog.Add(msg, tlog);
 		}
-		static EventLogEntryType FromTLog(TLog tlog)
+		static LogLevel FromTLog(TLog tlog)
 		{
 			switch (tlog)
 			{
 				case TLog.ERROR:
+					return LogLevel.Critical;
 				case TLog.EXCPT:
-					return EventLogEntryType.Error;
+					return LogLevel.Error;
 				case TLog.WARNG:
-					return EventLogEntryType.Warning;
-				default: return EventLogEntryType.Information;
+					return LogLevel.Warning;
+				case TLog.TRACE:
+					return LogLevel.Trace;
+				case TLog.DEBUG:
+					return LogLevel.Debug;
+				case TLog.DISPL:
+					return LogLevel.None;
+				case TLog.INFOR:
+				default:
+					return LogLevel.Information;
 			}
 		}
 	}

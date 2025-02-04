@@ -157,7 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PMS.COMMON">
-      <Version>8.0.2</Version>
+      <Version>8.0.5</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

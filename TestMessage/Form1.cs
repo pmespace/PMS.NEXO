@@ -60,5 +60,13 @@ namespace TestMessage
 			}
 
 		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			NexoLogin login = new NexoLogin();
+			string s = login.Serialize();
+			s = (new NexoPayment()).Serialize();
+			MessageBox.Show(s);
+		}
 	}
 }

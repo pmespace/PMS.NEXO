@@ -135,4 +135,43 @@
   <data name="WorkerServiceIsStopped" xml:space="preserve">
     <value>le service est arrêté</value>
   </data>
+  <data name="WorkerStartingProcesses" xml:space="preserve">
+    <value>démarrage des processus du listener</value>
+  </data>
+  <data name="WorkerProcessesStarted" xml:space="preserve">
+    <value>les processus du listener ont démarré</value>
+  </data>
+  <data name="WorkerProcessesNotStarted" xml:space="preserve">
+    <value>les processus du listener n'ont pas démarré</value>
+  </data>
+  <data name="WorkerStoppingProcesses" xml:space="preserve">
+    <value>arrêt des processus du listener</value>
+  </data>
+  <data name="WorkerProcessesStopped" xml:space="preserve">
+    <value>les processus du listener ont été arrêtés</value>
+  </data>
+  <data name="WorkerConnectingToWSServer" xml:space="preserve">
+    <value>le listener tente de se connecter au serveur web socket {0}</value>
+  </data>
+  <data name="WorkerConnectedToWSServer" xml:space="preserve">
+    <value>le listener est connecté au serveur web socket {0}</value>
+  </data>
+  <data name="WorkerConnectionToWSServerIsPending" xml:space="preserve">
+    <value>la connexion du listener au serveur web socket {0} est en cours</value>
+  </data>
+  <data name="WorketDisconnectingFromWSServer" xml:space="preserve">
+    <value>le listener est en cours de déconnection du serveur web socket {0}</value>
+  </data>
+  <data name="WorkerDisconnectedFromWSServer" xml:space="preserve">
+    <value>le listener est déconnecté du serveur web socket {0}</value>
+  </data>
+  <data name="WorkerLoginToWSServer" xml:space="preserve">
+    <value>le listener tente de se connecter au serveur web socket {0}</value>
+  </data>
+  <data name="WorkerLoginDenied" xml:space="preserve">
+    <value>la connexion au serveur web socket {0} a été refusée</value>
+  </data>
+  <data name="WorkerLogged" xml:space="preserve">
+    <value>le listener est connecté au server web socket {0}</value>
+  </data>
 </root>

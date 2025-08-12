@@ -6,8 +6,8 @@
     }
   },
   "ArrayConversions": {
-    "System.Byte": {
-      "TargetType": "System.Byte",
+    "System.ByteX": {
+      "TargetType": "System.XByteX",
       "Rank": 1
     },
     "SearchANDType": {
@@ -24,7 +24,8 @@
     "myDummyArrayType1",
     "myDummyArrayType2"
   ],
-  "ArrayTypesWithoutAccessors": [
-    "myDummyArrayType2"
-  ]
+   "ArrayTypesWithoutAccessors": [
+      "SearchOr1",
+      "SearchAnd1"
+   ]
 }

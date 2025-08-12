@@ -16,7 +16,7 @@ Imports XSDEx
 
 Public Class myXSD
 
-	Private Const MYXSD_SETTINGS As String = "myxsd.json"
+	Private Const MYXSD_SETTINGS As String = "myxsd.settings.json"
 	Private Const XSD_SETTINGS As String = "xsd.settings.json"
 	Private xsdex As New XSD
 	Private statusText As String, updateStatusText As String
@@ -92,11 +92,13 @@ Public Class myXSD
 		Me.Cursor = Cursors.Default
 		Dim ts As TimeSpan = DateTime.Now - started
 		SetStatus($"Completed ({ts})")
+		Beep()
 	End Sub
 
 	Private Sub SetButtons()
 		pbGenerate.Enabled = (0 <> files.Items.Count)
 		pbSave.Enabled = 0 <> result.TextLength
+		efVersion.Enabled = Not cbNoVersion.Checked
 		SetStatus(String.Empty)
 	End Sub
 
@@ -179,6 +181,12 @@ Public Class myXSD
 		settings.AdaptXmlText = cbAdaptXmlText.Checked
 		settings.UseListInsteadOfArray = cbUseList.Checked
 
+		settings.UseVersion = Not cbNoVersion.Checked
+		settings.Version = efVersion.Text
+
+		settings.EnumAsString = True 'cbEnumAsString.Checked
+		settings.EnumNoInvalidValues = False 'cbEnumNoInvalidValues.Checked
+
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
 		json.WriteSettings(settings)
 		Return settings
@@ -224,7 +232,8 @@ Public Class myXSD
 		cbStringToIntegral.Checked = settings.ConvertStringIntegralToIntegral
 		cbUseDefaultValueForHasBeenModified.Checked = settings.UseDefaultValueForHasBeenModified
 		cbAddDefaultToEnum.Checked = settings.AddDefaultAttributesToEnum
-		cbAddBeginEnd.Checked = settings.UseEnumBeginEnd
+		' _begin and _end are mandatory to allow default values
+		cbAddBeginEnd.Checked = True 'settings.UseEnumBeginEnd
 
 		Select Case settings.NamespaceToDeclare
 			Case XSDSettings.NameSpace.Retailer
@@ -244,6 +253,12 @@ Public Class myXSD
 		cbCreateAsElement.Checked = settings.AttributeAsElement
 		cbAdaptXmlText.Checked = settings.AdaptXmlText
 		cbUseList.Checked = settings.UseListInsteadOfArray
+
+		cbNoVersion.Checked = Not settings.UseVersion
+		efVersion.Text = settings.Version
+
+		cbEnumAsString.Checked = True 'settings.EnumAsString
+		cbEnumNoInvalidValues.Checked = False 'settings.EnumNoInvalidValues
 
 	End Sub
 
@@ -391,6 +406,10 @@ Public Class myXSD
 
 	Private Sub cbUseList_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseList.CheckedChanged
 		cbUseList.Checked = False
+	End Sub
+
+	Private Sub cbNoVersion_CheckedChanged(sender As Object, e As EventArgs) Handles cbNoVersion.CheckedChanged
+		SetButtons()
 	End Sub
 
 	Private Sub convertTypes_CheckedChanged(sender As Object, e As EventArgs) Handles convertTypes.CheckedChanged

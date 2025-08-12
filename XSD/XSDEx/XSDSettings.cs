@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace XSDEx
 {
@@ -74,6 +75,9 @@ namespace XSDEx
 			TMS,
 			None,
 		}
+		[JsonExtensionData]
+		public Dictionary<string, object> AdditionalProperties { get; set; }
+
 		public string Exception; // if an exception occurred it is reported here
 		public string ParametersFileName { get; set; }
 		public enumLanguage Language;
@@ -192,5 +196,11 @@ namespace XSDEx
 		public bool AdaptXmlText { get; set; } = true;
 
 		public bool UseListInsteadOfArray { get; set; } = true;
+
+		public bool UseVersion { get; set; } = false;
+		public string Version { get; set; } = string.Empty;
+
+		public bool EnumAsString { get; set; } = true;
+		public bool EnumNoInvalidValues { get; set; } = false;
 	}
 }

@@ -2,27 +2,27 @@
    "Exception": null,
    "Language": 0,
    "ParametersFileName": "xsd.params.json",
-   "FilesX": [
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.001.001.06.xsd"
-   ],
    "Files": [
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.001.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.002.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.003.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.004.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.005.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.006.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.007.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.008.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.009.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.010.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.011.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.012.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.013.001.02.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.014.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.015.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.016.001.06.xsd",
-      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer50\\XSD\\casp.017.001.06.xsd"
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.001.001.02.xsd"
+   ],
+   "FilesX": [
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.001.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.002.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.003.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.004.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.005.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.006.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.007.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.008.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.009.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.010.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.011.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.012.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.013.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.014.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.015.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.016.001.02.xsd",
+      "C:\\Users\\phili\\Documents\\Dev\\NEXO20022\\Retailer5.0\\XSD\\casp.017.001.02.xsd"
    ],
    "Nmspace": "NEXO.Retailer.v50",
    "UseTypes": true,
@@ -54,5 +54,6 @@
    "RemoveXmlAttribute": false,
    "AttributeAsElement": true,
    "AdaptXmlText": true,
-   "UseListInsteadOfArray": false
+   "UseListInsteadOfArray": true,
+   "EnumAsString":  false
 }

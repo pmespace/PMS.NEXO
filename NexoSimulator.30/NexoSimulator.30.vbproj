@@ -104,6 +104,12 @@
     <Compile Include="FConnectionSettings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FFreeText.Designer.vb">
+      <DependentUpon>FFreeText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FFreeText.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FInput.Designer.vb">
       <DependentUpon>FInput.vb</DependentUpon>
     </Compile>
@@ -200,6 +206,9 @@
     <EmbeddedResource Include="FConnectionSettings.resx">
       <DependentUpon>FConnectionSettings.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FFreeText.resx">
+      <DependentUpon>FFreeText.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FInput.resx">
       <DependentUpon>FInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -263,7 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PMS.COMMON">
-      <Version>8.0.5</Version>
+      <Version>8.2.6</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <Authors>PMS</Authors>
     <Description>PMS - nexo Retailer v3.0 Listener as a Windows App</Description>
-    <Version>5.1.3</Version>
-    <FileVersion>5.1.3</FileVersion>
-    <AssemblyVersion>5.1.3</AssemblyVersion>
+    <Version>6.0.1</Version>
+    <FileVersion>6.0.1</FileVersion>
+    <AssemblyVersion>6.0.1</AssemblyVersion>
     <RootNamespace>Listener.App</RootNamespace>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <Nullable>disable</Nullable>

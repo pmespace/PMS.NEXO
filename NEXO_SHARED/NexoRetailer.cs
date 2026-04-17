@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿//#define USECONVERTER
+#define USECONTRACT
+#define XSALE
+
+using System.Runtime.InteropServices;
 using System.Reflection;
 using System;
 using System.IO;
@@ -20,9 +24,40 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using COMMON;
 using NEXO.Properties;
+using Newtonsoft.Json.Serialization;
+using System.Linq.Expressions;
 
 namespace NEXO
 {
+	public static partial class JsonExtensions
+	{
+		static readonly Func<JsonProperty, JsonProperty> ShallowClonePropertyFunc = CreateShallowCloneMethod<JsonProperty>();
+		public static JsonProperty ShallowClone(this JsonProperty property)
+		{
+			if (property == null)
+				throw new ArgumentNullException("property");
+			return ShallowClonePropertyFunc(property);
+		}
+
+		internal static Predicate<T> And<T>(this Predicate<T> first, Predicate<T> second)
+		{
+			if (second == null)
+				return first;
+			else if (first == null)
+				return second;
+			else return v => first(v) && second(v);
+		}
+
+		internal static Func<T, T> CreateShallowCloneMethod<T>()
+		{
+			var method = typeof(T).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+			if (method == null)
+				throw new ArgumentException(string.Format("No MemberwiseClone() method was found for type {0}", typeof(T)));
+			var cloneUntyped = (Func<T, object>)Delegate.CreateDelegate(typeof(Func<T, object>), method);
+			return delegate (T obj) { return (T)cloneUntyped(obj); };
+		}
+	}
+
 	[ComVisible(true)]
 	public enum NexoSchemaEventType
 	{
@@ -218,108 +253,121 @@ namespace NEXO
 		{
 			try
 			{
+#if XSALE
 				if (UseJson)
 				{
 					XSaleToPOIRequest x = Deserialize<XSaleToPOIRequest>(xml);
-					if (null != x && null != x.SaleToPOIRequest)
+					if (null != x)
 					{
-						JObject tk = (JObject)x.SaleToPOIRequest.Item;
-						switch (CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), x.SaleToPOIRequest.MessageHeader.MessageCategory))
-						{
-							case MessageCategoryEnumeration.Abort:
-								x.SaleToPOIRequest.Item = Deserialize<AbortRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Admin:
-								x.SaleToPOIRequest.Item = Deserialize<AdminRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.BalanceInquiry:
-								x.SaleToPOIRequest.Item = Deserialize<BalanceInquiryRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Batch:
-								x.SaleToPOIRequest.Item = Deserialize<BatchRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.CardAcquisition:
-								x.SaleToPOIRequest.Item = Deserialize<CardAcquisitionRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.CardReaderAPDU:
-								x.SaleToPOIRequest.Item = Deserialize<CardReaderAPDURequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.CardReaderInit:
-								x.SaleToPOIRequest.Item = Deserialize<CardReaderInitRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.CardReaderPowerOff:
-								x.SaleToPOIRequest.Item = Deserialize<CardReaderPowerOffRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Diagnosis:
-								x.SaleToPOIRequest.Item = Deserialize<DiagnosisRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Display:
-								x.SaleToPOIRequest.Item = Deserialize<DisplayRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.EnableService:
-								x.SaleToPOIRequest.Item = Deserialize<EnableServiceRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Event:
-								x.SaleToPOIRequest.Item = Deserialize<EventNotificationType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.GetTotals:
-								x.SaleToPOIRequest.Item = Deserialize<GetTotalsRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Input:
-								x.SaleToPOIRequest.Item = Deserialize<InputRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.InputUpdate:
-								x.SaleToPOIRequest.Item = Deserialize<InputUpdateType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Login:
-								x.SaleToPOIRequest.Item = Deserialize<LoginRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Logout:
-								x.SaleToPOIRequest.Item = Deserialize<LogoutRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Loyalty:
-								x.SaleToPOIRequest.Item = Deserialize<LoyaltyRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Payment:
-								x.SaleToPOIRequest.Item = Deserialize<PaymentRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.PIN:
-								x.SaleToPOIRequest.Item = Deserialize<PINRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Print:
-								x.SaleToPOIRequest.Item = Deserialize<PrintRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Reconciliation:
-								x.SaleToPOIRequest.Item = Deserialize<ReconciliationRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Reversal:
-								x.SaleToPOIRequest.Item = Deserialize<ReversalRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Sound:
-								x.SaleToPOIRequest.Item = Deserialize<SoundRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.StoredValue:
-								x.SaleToPOIRequest.Item = Deserialize<StoredValueRequestType>(tk.ToString());
-								break;
-#if RETAILER31
-							case MessageCategoryEnumeration.TransactionReport:
-								x.SaleToPOIRequest.Item = Deserialize<TransactionReportRequestType>(tk.ToString());
-								break;
-#endif
-							case MessageCategoryEnumeration.TransactionStatus:
-								x.SaleToPOIRequest.Item = Deserialize<TransactionStatusRequestType>(tk.ToString());
-								break;
-							case MessageCategoryEnumeration.Transmit:
-								x.SaleToPOIRequest.Item = Deserialize<TransmitRequestType>(tk.ToString());
-								break;
-							default:
-								return null;
-						}
 						return x.SaleToPOIRequest;
 					}
 				}
 				else
 					return Deserialize<SaleToPOIRequest>(xml);
+#else
+				if (UseJson)
+				{
+					XSaleToPOIRequest x = Deserialize<XSaleToPOIRequest>(xml);
+					if (null != x && null != x)
+					{
+						JObject tk = (JObject)x.Item;
+						switch (CMisc.GetEnumValue(typeof(MessageCategoryEnumeration), x.MessageHeader.MessageCategory))
+						{
+							case MessageCategoryEnumeration.Abort:
+								x.Item = Deserialize<AbortRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Admin:
+								x.Item = Deserialize<AdminRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.BalanceInquiry:
+								x.Item = Deserialize<BalanceInquiryRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Batch:
+								x.Item = Deserialize<BatchRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardAcquisition:
+								x.Item = Deserialize<CardAcquisitionRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderAPDU:
+								x.Item = Deserialize<CardReaderAPDURequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderInit:
+								x.Item = Deserialize<CardReaderInitRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.CardReaderPowerOff:
+								x.Item = Deserialize<CardReaderPowerOffRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Diagnosis:
+								x.Item = Deserialize<DiagnosisRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Display:
+								x.Item = Deserialize<DisplayRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.EnableService:
+								x.Item = Deserialize<EnableServiceRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Event:
+								x.Item = Deserialize<EventNotificationType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.GetTotals:
+								x.Item = Deserialize<GetTotalsRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Input:
+								x.Item = Deserialize<InputRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.InputUpdate:
+								x.Item = Deserialize<InputUpdateType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Login:
+								x.Item = Deserialize<LoginRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Logout:
+								x.Item = Deserialize<LogoutRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Loyalty:
+								x.Item = Deserialize<LoyaltyRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Payment:
+								x.Item = Deserialize<PaymentRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.PIN:
+								x.Item = Deserialize<PINRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Print:
+								x.Item = Deserialize<PrintRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reconciliation:
+								x.Item = Deserialize<ReconciliationRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Reversal:
+								x.Item = Deserialize<ReversalRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Sound:
+								x.Item = Deserialize<SoundRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.StoredValue:
+								x.Item = Deserialize<StoredValueRequestType>(tk.ToString());
+								break;
+#if RETAILER31
+							case MessageCategoryEnumeration.TransactionReport:
+								x.Item = Deserialize<TransactionReportRequestType>(tk.ToString());
+								break;
+#endif
+							case MessageCategoryEnumeration.TransactionStatus:
+								x.Item = Deserialize<TransactionStatusRequestType>(tk.ToString());
+								break;
+							case MessageCategoryEnumeration.Transmit:
+								x.Item = Deserialize<TransmitRequestType>(tk.ToString());
+								break;
+							default:
+								return null;
+						}
+						return x;
+					}
+				}
+				else
+					return Deserialize<SaleToPOIRequest>(xml);
+#endif
 			}
 			catch (Exception) { }
 			return null;
@@ -339,6 +387,18 @@ namespace NEXO
 		{
 			try
 			{
+#if true
+				if (UseJson)
+				{
+					XSaleToPOIResponse x = Deserialize<XSaleToPOIResponse>(xml);
+					if (null != x && null != x.SaleToPOIResponse)
+					{
+						return x.SaleToPOIResponse;
+					}
+				}
+				else
+					return Deserialize<SaleToPOIResponse>(xml);
+#else
 				if (UseJson)
 				{
 					XSaleToPOIResponse x = Deserialize<XSaleToPOIResponse>(xml);
@@ -432,6 +492,7 @@ namespace NEXO
 				}
 				else
 					return Deserialize<SaleToPOIResponse>(xml);
+#endif
 			}
 			catch (Exception) { }
 			return null;
@@ -580,7 +641,11 @@ namespace NEXO
 				//finally
 				//{
 				if (UseJson)
+#if XSALE
 					serialized = Serialize<XSaleToPOIRequest>(new XSaleToPOIRequest() { SaleToPOIRequest = request });
+#else
+					serialized = Serialize<XSaleToPOIRequest>(request as XSaleToPOIRequest);
+#endif
 				else
 					serialized = Serialize<SaleToPOIRequest>(request);
 				//}
@@ -596,7 +661,11 @@ namespace NEXO
 			}
 			return serialized;
 		}
-		class XSaleToPOIRequest { public SaleToPOIRequest SaleToPOIRequest; }
+#if XSALE
+		class XSaleToPOIRequest { public SaleToPOIRequest SaleToPOIRequest { get; set; } }
+#else
+		class XSaleToPOIRequest : SaleToPOIRequest { }
+#endif
 		/// <summary>
 		/// Optimize and serialize response
 		/// </summary>
@@ -673,13 +742,25 @@ namespace NEXO
 			{
 				if (toJson)
 				{
+#if true
 					return JsonConvert.SerializeObject(data,
 						Newtonsoft.Json.Formatting.None,
 						new JsonSerializerSettings()
 						{
 							MissingMemberHandling = MissingMemberHandling.Ignore,
-							NullValueHandling = NullValueHandling.Ignore
+							NullValueHandling = NullValueHandling.Ignore,
+#if USECONVERTER
+							Converters = new List<JsonConverter> { new JsonPolymorphicAttribute() },
+#endif
+#if USECONTRACT
+							ContractResolver = JsonPropertyElementResolver.Instance,
+#endif
 						});
+#else
+					return JsonConvert.SerializeObject(data,
+						Newtonsoft.Json.Formatting.None,
+						new JsonPropertyNameFromTypeConverter());
+#endif
 				}
 				else
 				{
@@ -722,6 +803,9 @@ namespace NEXO
 			if (string.IsNullOrEmpty(data))
 				return null;
 
+			data.Replace(Chars.CR, "");
+			data.Replace(Chars.LF, "");
+
 			try
 			{
 				if (isJson)
@@ -730,7 +814,13 @@ namespace NEXO
 						new JsonSerializerSettings()
 						{
 							MissingMemberHandling = MissingMemberHandling.Ignore,
-							NullValueHandling = NullValueHandling.Ignore
+							NullValueHandling = NullValueHandling.Ignore,
+#if USECONVERTER
+							Converters = new List<JsonConverter> { new JsonPolymorphicAttribute() }
+#endif
+#if USECONTRACT
+							ContractResolver = JsonPropertyElementResolver.Instance,
+#endif
 						});
 				}
 				else
@@ -863,5 +953,132 @@ namespace NEXO
 			return type;
 		}
 		#endregion
+	}
+
+	/// <summary>
+	/// Source - https://stackoverflow.com/a/79900545
+	/// Posted by dbc, modified by community. See post 'Timeline' for change history
+	/// Retrieved 2026-03-04, License - CC BY-SA 4.0
+	/// </summary>
+	[ComVisible(false)]
+	public class JsonPropertyElementResolver : DefaultContractResolver
+	{
+		public static readonly JsonPropertyElementResolver Instance = new JsonPropertyElementResolver();
+
+		protected override JsonObjectContract CreateObjectContract(Type objectType)
+		{
+			var contract = base.CreateObjectContract(objectType);
+
+			for (int i = 0; i < contract.Properties.Count; i++)
+			{
+				var property = contract.Properties[i];
+				var valueProvider = property.ValueProvider;
+				var attributeProvider = property.AttributeProvider;
+
+				// ...
+				if (!property.PropertyName.IsNullOrEmpty() && default != contract.CreatorParameters.GetClosestMatchProperty(property.PropertyName))
+				{
+					// TODO: decide how to handle polymorphic property names in parameterized objects where the polymorphically named property needs to be passed to the constructor.  
+					// Unfortunately Json.NET matches constructor parameters to JSON properties by name which is inconsistent with polymorphic property naming.
+					throw new ArgumentException(string.Format("Polymorphically named properties are not supported for parameterized constructors: property \"{0}\", type \"{1}\"", property.PropertyName, contract.UnderlyingType));
+				}
+
+				// verify whether the property is valid and is serializable
+				if (
+					default == attributeProvider || default == valueProvider || property.Ignored
+#if SORT_READABLE
+						|| !property.Readable
+#endif
+#if SORT_WRITEABLE
+						|| !property.Writable
+#endif
+					)
+					continue;
+
+				// get its XmlElementAttribute
+				var xmlElementAttributes = attributeProvider.GetAttributes(typeof(XmlElementAttribute), true);
+				if (0 == xmlElementAttributes.Count)
+					continue;
+
+				// as there may be several times the same type with different names we must get the eventual XmlChoiceIdentifierAttribute to determine which XmlElementSttaribute to use
+				var xmlChoiceIdentifierAttribute = attributeProvider.GetAttributes(typeof(XmlChoiceIdentifierAttribute), true);
+				string memberName = default != xmlChoiceIdentifierAttribute && 0 != xmlChoiceIdentifierAttribute.Count ? (xmlChoiceIdentifierAttribute as XmlChoiceIdentifierAttribute).MemberName : default;
+				object choiceType = contract.Properties.Where(o => o.PropertyName == memberName).FirstOrDefault();
+
+				/*
+				 * create an set of FAKE properties each having the name (ElementName) attached to a type (Type) declared using XmlElementAttribute
+				 * none is serialized unless it's type matches the runtime type of the real property of the class, in that case that real property is not serialized and the matching one is,
+				 * allowing to serialize a property name as it is described by its type
+				 */
+				var polymorphicTypes = new HashSet<Type>();
+				foreach (var attribute in xmlElementAttributes.Cast<XmlElementAttribute>())
+				{
+					// if no name (ElementName) or no type (Type) is described in the XmlElementAttribute we do not process the property
+					if (default == attribute.Type || attribute.ElementName.IsNullOrEmpty(true))
+						continue;
+
+					/*
+					 * if the real property's type can't be assigned the type of the FAKE property described in the XmlElementAttribute, raise an exception
+					 * this could mostly happen onlyif the real property's type is not object
+					 */
+					if (default != property.PropertyType && !property.PropertyType.IsAssignableFrom(attribute.Type))
+					{
+						throw new ArgumentException(string.Format("JsonProperty.PropertyType {0} is not assignable from JsonPolymorphicNameAttribute.PolymorphicType {1}", property.PropertyType, attribute.Type));
+					}
+
+					// arrived here we can create a FAKE property using the XmlElementAttribute ElementName and Type
+					var newProperty = property.ShallowClone();
+					newProperty.PropertyName = attribute.ElementName;
+					newProperty.PropertyType = attribute.Type;
+#if !SORT_READABLE
+					if (property.Readable)
+					{
+#endif
+						// the real property can be read, we assign the FAKE property a predicate helping idenitifying whether it is that one that must be serialized or not
+						newProperty.ShouldSerialize = newProperty.ShouldSerialize.And(
+							 o =>
+							 {
+								 // get the value of the real property
+								 var value = valueProvider.GetValue(o);
+								 /*
+								  * the FAKE property must be serialized if:
+								  * - the value of the real property is not null
+								  * - and the runtgime type of the real property is the one of the FAKE property
+								  */
+								 return value != null && value.GetType() == attribute.Type && (default == choiceType || choiceType.ToString().Compare(attribute.ElementName));
+							 });
+#if !SORT_READABLE
+					}
+					else
+					{
+						// the real property can't be read, the FAKE property won't be serialized anyway
+						newProperty.ShouldSerialize = o => false;
+					}
+#endif
+					//newProperty.ShouldDeserialize = newProperty.ShouldSerialize;
+
+					// insert the FAKE property to the list of properties of this type
+					contract.Properties.Insert(++i, newProperty);
+					polymorphicTypes.Add(attribute.Type);
+				}
+				/*
+				 * determine whether the real property must be serialized or not
+				 * it won't be serialized if a FAKE property exists with the following attributes
+				 * - it is of the same type as the real property's runtime type
+				 */
+				property.ShouldSerialize = property.ShouldSerialize.And(
+					 o =>
+					 {
+						 var value = valueProvider.GetValue(o);
+						 /*
+						  * TODO: decide what to do if the value is null, since we can't get the concretetype.
+						  * for the time being we consider the 
+						  */
+						 return (default != value && !polymorphicTypes.Contains(value.GetType())) || (default == value && property.NullValueHandling == NullValueHandling.Include);
+					 });
+				//property.ShouldDeserialize = property.ShouldSerialize;
+			}
+			return contract;
+		}
 	}
 }

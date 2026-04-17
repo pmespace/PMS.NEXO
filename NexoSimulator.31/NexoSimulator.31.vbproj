@@ -143,6 +143,14 @@
       <Link>FConnectionSettings.vb</Link>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="..\NexoSimulator.30\FFreeText.Designer.vb">
+      <Link>FFreeText.Designer.vb</Link>
+      <DependentUpon>FFreeText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\NexoSimulator.30\FFreeText.vb">
+      <Link>FFreeText.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="..\NexoSimulator.30\FInput.designer.vb">
       <Link>FInput.designer.vb</Link>
       <DependentUpon>FInput.vb</DependentUpon>
@@ -259,6 +267,10 @@
       <Link>FConnectionSettings.resx</Link>
       <DependentUpon>FConnectionSettings.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\NexoSimulator.30\FFreeText.resx">
+      <Link>FFreeText.resx</Link>
+      <DependentUpon>FFreeText.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\NexoSimulator.30\FInput.resx">
       <Link>FInput.resx</Link>
       <DependentUpon>FInput.vb</DependentUpon>
@@ -326,7 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PMS.COMMON">
-      <Version>8.0.5</Version>
+      <Version>8.2.6</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

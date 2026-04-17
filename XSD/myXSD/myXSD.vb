@@ -184,7 +184,7 @@ Public Class myXSD
 		settings.UseVersion = Not cbNoVersion.Checked
 		settings.Version = efVersion.Text
 
-		settings.EnumAsString = True 'cbEnumAsString.Checked
+		settings.EnumAsString = cbEnumAsString.Checked
 		settings.EnumNoInvalidValues = False 'cbEnumNoInvalidValues.Checked
 
 		Dim json As New CJson(Of XSDSettings)(XSD_SETTINGS)
@@ -257,8 +257,8 @@ Public Class myXSD
 		cbNoVersion.Checked = Not settings.UseVersion
 		efVersion.Text = settings.Version
 
-		cbEnumAsString.Checked = True 'settings.EnumAsString
-		cbEnumNoInvalidValues.Checked = False 'settings.EnumNoInvalidValues
+		cbEnumAsString.Checked = settings.EnumAsString
+		'cbEnumNoInvalidValues.Checked = False 'settings.EnumNoInvalidValues
 
 	End Sub
 
@@ -405,7 +405,7 @@ Public Class myXSD
 	End Sub
 
 	Private Sub cbUseList_CheckedChanged(sender As Object, e As EventArgs) Handles cbUseList.CheckedChanged
-		cbUseList.Checked = False
+		'cbUseList.Checked = False
 	End Sub
 
 	Private Sub cbNoVersion_CheckedChanged(sender As Object, e As EventArgs) Handles cbNoVersion.CheckedChanged

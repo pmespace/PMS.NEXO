@@ -29,7 +29,6 @@ Partial Class FBuilder
 		Me.pbAccept = New System.Windows.Forms.Button()
 		Me.pbCancel = New System.Windows.Forms.Button()
 		Me.pbExpandAll = New System.Windows.Forms.Button()
-		Me.cbOptimize = New System.Windows.Forms.CheckBox()
 		Me.TreeView1 = New System.Windows.Forms.TreeView()
 		Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
 		Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -52,13 +51,14 @@ Partial Class FBuilder
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
 		Me.TableLayoutPanel1.Controls.Add(Me.TreeView1, 0, 0)
-		Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
+		Me.TableLayoutPanel1.Location = New System.Drawing.Point(18, 18)
+		Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 2
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(819, 459)
+		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31.0!))
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(1228, 706)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
 		'TableLayoutPanel2
@@ -77,12 +77,12 @@ Partial Class FBuilder
 		Me.TableLayoutPanel2.Controls.Add(Me.pbAccept, 3, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.pbCancel, 4, 0)
 		Me.TableLayoutPanel2.Controls.Add(Me.pbExpandAll, 0, 0)
-		Me.TableLayoutPanel2.Controls.Add(Me.cbOptimize, 1, 0)
-		Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 427)
+		Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 661)
+		Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
 		Me.TableLayoutPanel2.RowCount = 1
 		Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel2.Size = New System.Drawing.Size(813, 29)
+		Me.TableLayoutPanel2.Size = New System.Drawing.Size(1220, 40)
 		Me.TableLayoutPanel2.TabIndex = 1
 		'
 		'pbAccept
@@ -90,9 +90,10 @@ Partial Class FBuilder
 		Me.pbAccept.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbAccept.AutoSize = True
 		Me.pbAccept.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbAccept.Location = New System.Drawing.Point(703, 3)
+		Me.pbAccept.Location = New System.Drawing.Point(1071, 5)
+		Me.pbAccept.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.pbAccept.Name = "pbAccept"
-		Me.pbAccept.Size = New System.Drawing.Size(51, 23)
+		Me.pbAccept.Size = New System.Drawing.Size(69, 30)
 		Me.pbAccept.TabIndex = 2
 		Me.pbAccept.Text = "Accept"
 		Me.pbAccept.UseVisualStyleBackColor = True
@@ -102,9 +103,10 @@ Partial Class FBuilder
 		Me.pbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbCancel.AutoSize = True
 		Me.pbCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbCancel.Location = New System.Drawing.Point(760, 3)
+		Me.pbCancel.Location = New System.Drawing.Point(1148, 5)
+		Me.pbCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.pbCancel.Name = "pbCancel"
-		Me.pbCancel.Size = New System.Drawing.Size(50, 23)
+		Me.pbCancel.Size = New System.Drawing.Size(68, 30)
 		Me.pbCancel.TabIndex = 3
 		Me.pbCancel.Text = "Cancel"
 		Me.pbCancel.UseVisualStyleBackColor = True
@@ -116,26 +118,13 @@ Partial Class FBuilder
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.pbExpandAll.AutoSize = True
 		Me.pbExpandAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.pbExpandAll.Location = New System.Drawing.Point(3, 3)
+		Me.pbExpandAll.Location = New System.Drawing.Point(4, 5)
+		Me.pbExpandAll.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.pbExpandAll.Name = "pbExpandAll"
-		Me.pbExpandAll.Size = New System.Drawing.Size(66, 23)
+		Me.pbExpandAll.Size = New System.Drawing.Size(92, 30)
 		Me.pbExpandAll.TabIndex = 0
 		Me.pbExpandAll.Text = "Expand all"
 		Me.pbExpandAll.UseVisualStyleBackColor = True
-		'
-		'cbOptimize
-		'
-		Me.cbOptimize.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.cbOptimize.Checked = True
-		Me.cbOptimize.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.cbOptimize.Location = New System.Drawing.Point(75, 3)
-		Me.cbOptimize.Name = "cbOptimize"
-		Me.cbOptimize.Size = New System.Drawing.Size(81, 23)
-		Me.cbOptimize.TabIndex = 1
-		Me.cbOptimize.Text = "Optimize"
-		Me.cbOptimize.UseVisualStyleBackColor = True
 		'
 		'TreeView1
 		'
@@ -145,10 +134,11 @@ Partial Class FBuilder
 		Me.TreeView1.ImageIndex = 0
 		Me.TreeView1.ImageList = Me.ImageList1
 		Me.TreeView1.LabelEdit = True
-		Me.TreeView1.Location = New System.Drawing.Point(3, 3)
+		Me.TreeView1.Location = New System.Drawing.Point(4, 5)
+		Me.TreeView1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.TreeView1.Name = "TreeView1"
 		Me.TreeView1.SelectedImageIndex = 0
-		Me.TreeView1.Size = New System.Drawing.Size(813, 418)
+		Me.TreeView1.Size = New System.Drawing.Size(1220, 646)
 		Me.TreeView1.TabIndex = 0
 		'
 		'ImageList1
@@ -166,46 +156,48 @@ Partial Class FBuilder
 		'
 		'ContextMenuStrip1
 		'
+		Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
 		Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetValueToolStripMenuItem, Me.ResetvalueToolStripMenuItem, Me.AddItemToolStripMenuItem, Me.InsertItemToolStripMenuItem, Me.RemoveItemToolStripMenuItem})
 		Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-		Me.ContextMenuStrip1.Size = New System.Drawing.Size(145, 114)
+		Me.ContextMenuStrip1.Size = New System.Drawing.Size(189, 164)
 		'
 		'SetValueToolStripMenuItem
 		'
 		Me.SetValueToolStripMenuItem.Name = "SetValueToolStripMenuItem"
-		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+		Me.SetValueToolStripMenuItem.Size = New System.Drawing.Size(188, 32)
 		Me.SetValueToolStripMenuItem.Text = "Set value"
 		'
 		'ResetvalueToolStripMenuItem
 		'
 		Me.ResetvalueToolStripMenuItem.Name = "ResetvalueToolStripMenuItem"
-		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+		Me.ResetvalueToolStripMenuItem.Size = New System.Drawing.Size(188, 32)
 		Me.ResetvalueToolStripMenuItem.Text = "Reset value"
 		'
 		'AddItemToolStripMenuItem
 		'
 		Me.AddItemToolStripMenuItem.Name = "AddItemToolStripMenuItem"
-		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+		Me.AddItemToolStripMenuItem.Size = New System.Drawing.Size(188, 32)
 		Me.AddItemToolStripMenuItem.Text = "Add item"
 		'
 		'InsertItemToolStripMenuItem
 		'
 		Me.InsertItemToolStripMenuItem.Name = "InsertItemToolStripMenuItem"
-		Me.InsertItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+		Me.InsertItemToolStripMenuItem.Size = New System.Drawing.Size(188, 32)
 		Me.InsertItemToolStripMenuItem.Text = "Insert item"
 		'
 		'RemoveItemToolStripMenuItem
 		'
 		Me.RemoveItemToolStripMenuItem.Name = "RemoveItemToolStripMenuItem"
-		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+		Me.RemoveItemToolStripMenuItem.Size = New System.Drawing.Size(188, 32)
 		Me.RemoveItemToolStripMenuItem.Text = "Remove item"
 		'
 		'FBuilder
 		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(843, 483)
+		Me.ClientSize = New System.Drawing.Size(1264, 743)
 		Me.Controls.Add(Me.TableLayoutPanel1)
+		Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.MinimizeBox = False
 		Me.Name = "FBuilder"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -230,7 +222,6 @@ Partial Class FBuilder
 	Friend WithEvents ResetvalueToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents AddItemToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents RemoveItemToolStripMenuItem As ToolStripMenuItem
-	Friend WithEvents cbOptimize As CheckBox
 	Friend WithEvents InsertItemToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents ImageList1 As ImageList
 End Class

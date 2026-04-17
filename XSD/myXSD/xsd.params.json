@@ -1,6 +1,6 @@
 {
   "TypeConversions": {
-    "System.Decimal": {
+    "System.DecimalX": {
       "TargetType": "System.Double",
       "Rank": 0
     }

@@ -163,7 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="PMS.COMMON">
-      <Version>8.0.20</Version>
+      <Version>8.2.6</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

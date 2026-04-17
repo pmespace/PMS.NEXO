@@ -204,6 +204,8 @@ Public Class FChooser
 			Dim item As NexoItem = Nothing
 			efCoded.Text = Trim(efCoded.Text)
 			If Not String.IsNullOrEmpty(efCoded.Text) Then
+				efCoded.Text = efCoded.Text.Replace(vbCr, "")
+				efCoded.Text = efCoded.Text.Replace(vbLf, "")
 				If Not efCoded.Text.StartsWith("""") Then efCoded.Text = """" & efCoded.Text
 				If Not efCoded.Text.EndsWith("""") Then efCoded.Text = efCoded.Text & """"
 				CLog.TRACE($"Processing: {efCoded.Text}")
@@ -212,6 +214,7 @@ Public Class FChooser
 				Try
 					sz = JsonConvert.DeserializeObject(Of String)(efCoded.Text)
 				Catch ex As Exception
+					MsgBox($"{efCoded.Text} ==> {ex.Message}")
 				End Try
 				item = New NexoItem(sz)
 				If item.IsValid Then

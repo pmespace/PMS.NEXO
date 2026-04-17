@@ -99,6 +99,7 @@ Public Class FSimulator
 	End Class
 	Private Delegate Sub AddActivity(Activity As Activity)
 	Private myDelegate As New AddActivity(AddressOf ProcessUI)
+	Private lastPayment As NexoPayment = Nothing
 
 	Private Sub ProcessUI(activity As Activity)
 		If ActivityEvent.none <> activity.Evt Then
@@ -549,6 +550,8 @@ Public Class FSimulator
 		pbBuild.Enabled = 0 < cbxCommands.Items.Count
 
 		pbConnectionSettings.Enabled = cbUseConnectionSettings.Checked
+
+		pbAbort.Enabled = Not IsNothing(lastPayment)
 	End Sub
 
 	Private Sub SetProcessing()
@@ -1177,6 +1180,7 @@ Public Class FSimulator
 				s = f.PaymentType.ToString
 			End If
 		End If
+
 		Dim status As String = Nothing
 		If NexoNextAction.nothing = obj.SuggestedAction Then
 			status = " HAS BEEN IGNORED"
@@ -1200,6 +1204,7 @@ Public Class FSimulator
 					Dim result As ResultEnumeration = DirectCast(CMisc.GetEnumValue(GetType(ResultEnumeration), obj.CurrentObject.Response.Result), ResultEnumeration)
 					Select Case obj.CurrentObject.MessageCategory
 						Case MessageCategoryEnumeration.Login
+							lastPayment = Nothing
 							Dim nxo As NexoLogin = obj.CurrentObject
 							If Not IsNothing(nxo.Response) AndAlso nxo.Success Then
 								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS CONNECTED (" & nxo.SaleID & ")"})
@@ -1207,8 +1212,22 @@ Public Class FSimulator
 								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID IS NOT CONNECTED (" & nxo.SaleID & ")"})
 							End If
 						Case MessageCategoryEnumeration.Logout
+							lastPayment = Nothing
 							Dim nxo As NexoLogout = obj.CurrentObject
 							RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.updateConnected, .Message = "SALEID HAS BEEN DISCONNECTED (" & nxo.SaleID & ")"})
+
+						Case MessageCategoryEnumeration.Payment
+							'save last payment to be able to easily abort it
+							Dim f As New NexoPayment()
+							f.FromItem(obj.Item)
+							If ResultEnumeration.Success = f.Result Then
+								lastPayment = obj.CurrentObject
+								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.receivedReply, .Message = $"AN ACCEPTED {f.PaymentType} PAYMENT HAS BEEN RECEIVED AND SAVED FOR LATER USE"})
+							Else
+								lastPayment = Nothing
+								RichTextBox1.Invoke(myDelegate, New Activity() With {.direction = Direction.none, .position = Position.client, .Evt = ActivityEvent.receivedReply, .Message = $"A DECLINED {f.PaymentType} ({f.ResultAsString}{f.ErrorConditionAsString}) PAYMENT HAS BEEN RECEIVED AND HASN'T BEEN SAVED FOR LATER USE"})
+							End If
+
 					End Select
 			End Select
 		End If
@@ -1891,6 +1910,41 @@ Public Class FSimulator
 
 	Private Sub cbxLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxLog.SelectedIndexChanged
 		CLog.SeverityToLog = CMisc.GetEnumValue(GetType(TLog), cbxLog.SelectedItem)
+	End Sub
+
+	Private Sub pbAbort_Click(sender As Object, e As EventArgs) Handles pbAbort.Click
+		Dim freetext As New FFreeText
+		freetext.Caption = freetext.Invite = "Enter abort reason"
+		Select Case freetext.ShowDialog
+			Case DialogResult.OK
+				'create the NexoLogin object
+				Dim o As New NexoAbort()
+				'o.OptimizeXml = cbOptimize.Checked
+				o.SaleID = FullSaleID()
+				o.POIID = FullPOIID()
+				o.ServiceID = CMisc.Trimmed(efServiceID.Text)
+				o.RequestData.MessageReference.MessageCategory = lastPayment.Reply.MessageHeader.MessageCategory
+				o.RequestData.MessageReference.ServiceID = lastPayment.Reply.MessageHeader.ServiceID
+				o.RequestData.MessageReference.SaleID = lastPayment.Reply.MessageHeader.SaleID
+				o.RequestData.MessageReference.POIID = lastPayment.Reply.MessageHeader.POIID
+				o.RequestData.AbortReason = freetext.Freetext
+				Dim s As String = o.SerializedRequest
+				Dim client As NexoRetailerClient = CurrentClient()
+				Dim f As Boolean = True
+				If f = Not IsNothing(client) Then
+					If cbSynchronous.Checked Then
+						If client.SendRequestSync(o, GetTimeout()) Then
+							DisplaySynchronousExchange(client, o, client.KeyServer)
+						End If
+					Else
+						Dim t As Object = client.SendRequest(o, GetTimeout())
+						If f = Not IsNothing(t) Then
+						End If
+					End If
+				End If
+				If Not f Then AddLine(Position.client, Direction.none, "ERROR SENDING ABORT REQUEST" & MessageLength(s) & vbCrLf & s)
+				SetButtons()
+		End Select
 	End Sub
 
 #End Region

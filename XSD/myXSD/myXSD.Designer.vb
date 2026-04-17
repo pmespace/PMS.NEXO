@@ -74,6 +74,7 @@ Partial Class myXSD
 		Me.convertBoolean = New System.Windows.Forms.CheckBox()
 		Me.convertNumeric = New System.Windows.Forms.CheckBox()
 		Me.convertDateTime = New System.Windows.Forms.CheckBox()
+		Me.cbEnumAsString = New System.Windows.Forms.CheckBox()
 		Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Label2 = New System.Windows.Forms.Label()
 		Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
@@ -94,8 +95,7 @@ Partial Class myXSD
 		Me.cbCreateAsElement = New System.Windows.Forms.CheckBox()
 		Me.cbAdaptXmlText = New System.Windows.Forms.CheckBox()
 		Me.cbUseList = New System.Windows.Forms.CheckBox()
-		Me.cbEnumAsString = New System.Windows.Forms.CheckBox()
-		Me.cbEnumNoInvalidValues = New System.Windows.Forms.CheckBox()
+		Me.cbUseDecimal = New System.Windows.Forms.CheckBox()
 		Me.result = New System.Windows.Forms.TextBox()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -132,14 +132,14 @@ Partial Class myXSD
 		Me.panelMain.Controls.Add(Me.panelButtons, 0, 2)
 		Me.panelMain.Controls.Add(Me.panelSettings, 0, 0)
 		Me.panelMain.Controls.Add(Me.result, 0, 1)
-		Me.panelMain.Location = New System.Drawing.Point(18, 19)
+		Me.panelMain.Location = New System.Drawing.Point(18, 18)
 		Me.panelMain.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.panelMain.Name = "panelMain"
 		Me.panelMain.RowCount = 3
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
 		Me.panelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelMain.Size = New System.Drawing.Size(1383, 641)
+		Me.panelMain.Size = New System.Drawing.Size(1383, 642)
 		Me.panelMain.TabIndex = 0
 		'
 		'panelButtons
@@ -162,7 +162,7 @@ Partial Class myXSD
 		Me.panelButtons.Controls.Add(Me.status, 0, 0)
 		Me.panelButtons.Controls.Add(Me.Label5, 1, 0)
 		Me.panelButtons.Controls.Add(Me.panelGenerateButtons, 3, 0)
-		Me.panelButtons.Location = New System.Drawing.Point(4, 586)
+		Me.panelButtons.Location = New System.Drawing.Point(4, 587)
 		Me.panelButtons.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.panelButtons.Name = "panelButtons"
 		Me.panelButtons.RowCount = 1
@@ -436,7 +436,7 @@ Partial Class myXSD
 		'
 		Me.createInterface.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.createInterface.AutoSize = True
-		Me.createInterface.Location = New System.Drawing.Point(563, 12)
+		Me.createInterface.Location = New System.Drawing.Point(562, 12)
 		Me.createInterface.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.createInterface.Name = "createInterface"
 		Me.createInterface.Size = New System.Drawing.Size(151, 24)
@@ -468,13 +468,13 @@ Partial Class myXSD
 		Me.panelInterface.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelInterface.Controls.Add(Me.comInterface, 0, 0)
 		Me.panelInterface.Controls.Add(Me.addDispid, 1, 0)
-		Me.panelInterface.Location = New System.Drawing.Point(722, 5)
+		Me.panelInterface.Location = New System.Drawing.Point(721, 5)
 		Me.panelInterface.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.panelInterface.Name = "panelInterface"
 		Me.panelInterface.RowCount = 1
 		Me.panelInterface.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelInterface.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38.0!))
-		Me.panelInterface.Size = New System.Drawing.Size(457, 38)
+		Me.panelInterface.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52.0!))
+		Me.panelInterface.Size = New System.Drawing.Size(458, 38)
 		Me.panelInterface.TabIndex = 7
 		'
 		'comInterface
@@ -498,7 +498,7 @@ Partial Class myXSD
 		Me.addDispid.Location = New System.Drawing.Point(288, 7)
 		Me.addDispid.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.addDispid.Name = "addDispid"
-		Me.addDispid.Size = New System.Drawing.Size(165, 24)
+		Me.addDispid.Size = New System.Drawing.Size(166, 24)
 		Me.addDispid.TabIndex = 3
 		Me.addDispid.Text = "Add DispId"
 		Me.addDispid.UseVisualStyleBackColor = True
@@ -518,7 +518,7 @@ Partial Class myXSD
 		Me.panelCOM.Name = "panelCOM"
 		Me.panelCOM.RowCount = 1
 		Me.panelCOM.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.panelCOM.Size = New System.Drawing.Size(275, 38)
+		Me.panelCOM.Size = New System.Drawing.Size(274, 38)
 		Me.panelCOM.TabIndex = 8
 		'
 		'classInterface
@@ -532,7 +532,7 @@ Partial Class myXSD
 		Me.classInterface.Location = New System.Drawing.Point(4, 5)
 		Me.classInterface.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.classInterface.Name = "classInterface"
-		Me.classInterface.Size = New System.Drawing.Size(267, 28)
+		Me.classInterface.Size = New System.Drawing.Size(266, 28)
 		Me.classInterface.TabIndex = 2
 		'
 		'TableLayoutPanel1
@@ -746,7 +746,7 @@ Partial Class myXSD
 		Me.FlowLayoutPanel4.Controls.Add(Me.cbNoVersion)
 		Me.FlowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.FlowLayoutPanel4.Location = New System.Drawing.Point(631, 2)
-		Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(2)
+		Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
 		Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
 		Me.FlowLayoutPanel4.Size = New System.Drawing.Size(210, 42)
 		Me.FlowLayoutPanel4.TabIndex = 7
@@ -767,7 +767,7 @@ Partial Class myXSD
 		'
 		Me.efVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
 		Me.efVersion.Location = New System.Drawing.Point(73, 2)
-		Me.efVersion.Margin = New System.Windows.Forms.Padding(2)
+		Me.efVersion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
 		Me.efVersion.Name = "efVersion"
 		Me.efVersion.Size = New System.Drawing.Size(58, 26)
 		Me.efVersion.TabIndex = 1
@@ -777,7 +777,7 @@ Partial Class myXSD
 		Me.cbNoVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
 		Me.cbNoVersion.AutoSize = True
 		Me.cbNoVersion.Location = New System.Drawing.Point(135, 3)
-		Me.cbNoVersion.Margin = New System.Windows.Forms.Padding(2)
+		Me.cbNoVersion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
 		Me.cbNoVersion.Name = "cbNoVersion"
 		Me.cbNoVersion.Size = New System.Drawing.Size(73, 24)
 		Me.cbNoVersion.TabIndex = 2
@@ -824,19 +824,21 @@ Partial Class myXSD
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.panelTypes.AutoSize = True
 		Me.panelTypes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-		Me.panelTypes.ColumnCount = 3
+		Me.panelTypes.ColumnCount = 4
+		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelTypes.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 		Me.panelTypes.Controls.Add(Me.convertBoolean, 2, 0)
 		Me.panelTypes.Controls.Add(Me.convertNumeric, 1, 0)
 		Me.panelTypes.Controls.Add(Me.convertDateTime, 0, 0)
+		Me.panelTypes.Controls.Add(Me.cbEnumAsString, 3, 0)
 		Me.panelTypes.Location = New System.Drawing.Point(205, 5)
 		Me.panelTypes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.panelTypes.Name = "panelTypes"
 		Me.panelTypes.RowCount = 1
 		Me.panelTypes.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.panelTypes.Size = New System.Drawing.Size(315, 34)
+		Me.panelTypes.Size = New System.Drawing.Size(398, 34)
 		Me.panelTypes.TabIndex = 9
 		'
 		'convertBoolean
@@ -874,6 +876,17 @@ Partial Class myXSD
 		Me.convertDateTime.TabIndex = 0
 		Me.convertDateTime.Text = "DateTime"
 		Me.convertDateTime.UseVisualStyleBackColor = True
+		'
+		'cbEnumAsString
+		'
+		Me.cbEnumAsString.Anchor = System.Windows.Forms.AnchorStyles.Left
+		Me.cbEnumAsString.AutoSize = True
+		Me.cbEnumAsString.Location = New System.Drawing.Point(318, 5)
+		Me.cbEnumAsString.Name = "cbEnumAsString"
+		Me.cbEnumAsString.Size = New System.Drawing.Size(77, 24)
+		Me.cbEnumAsString.TabIndex = 17
+		Me.cbEnumAsString.Text = "Enum"
+		Me.cbEnumAsString.UseVisualStyleBackColor = True
 		'
 		'TableLayoutPanel3
 		'
@@ -983,8 +996,7 @@ Partial Class myXSD
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbCreateAsElement)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbAdaptXmlText)
 		Me.FlowLayoutPanel1.Controls.Add(Me.cbUseList)
-		Me.FlowLayoutPanel1.Controls.Add(Me.cbEnumAsString)
-		Me.FlowLayoutPanel1.Controls.Add(Me.cbEnumNoInvalidValues)
+		Me.FlowLayoutPanel1.Controls.Add(Me.cbUseDecimal)
 		Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.FlowLayoutPanel1.Location = New System.Drawing.Point(4, 227)
 		Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1136,7 +1148,6 @@ Partial Class myXSD
 		'cbUseList
 		'
 		Me.cbUseList.AutoSize = True
-		Me.cbUseList.Enabled = False
 		Me.cbUseList.Location = New System.Drawing.Point(1114, 39)
 		Me.cbUseList.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.cbUseList.Name = "cbUseList"
@@ -1145,27 +1156,15 @@ Partial Class myXSD
 		Me.cbUseList.Text = "Use List"
 		Me.cbUseList.UseVisualStyleBackColor = True
 		'
-		'cbEnumAsString
+		'cbUseDecimal
 		'
-		Me.cbEnumAsString.AutoSize = True
-		Me.cbEnumAsString.Enabled = False
-		Me.cbEnumAsString.Location = New System.Drawing.Point(1214, 37)
-		Me.cbEnumAsString.Name = "cbEnumAsString"
-		Me.cbEnumAsString.Size = New System.Drawing.Size(141, 24)
-		Me.cbEnumAsString.TabIndex = 17
-		Me.cbEnumAsString.Text = "Enum as string"
-		Me.cbEnumAsString.UseVisualStyleBackColor = True
-		'
-		'cbEnumNoInvalidValues
-		'
-		Me.cbEnumNoInvalidValues.AutoSize = True
-		Me.cbEnumNoInvalidValues.Enabled = False
-		Me.cbEnumNoInvalidValues.Location = New System.Drawing.Point(3, 71)
-		Me.cbEnumNoInvalidValues.Name = "cbEnumNoInvalidValues"
-		Me.cbEnumNoInvalidValues.Size = New System.Drawing.Size(195, 24)
-		Me.cbEnumNoInvalidValues.TabIndex = 18
-		Me.cbEnumNoInvalidValues.Text = "Enum no invalid values"
-		Me.cbEnumNoInvalidValues.UseVisualStyleBackColor = True
+		Me.cbUseDecimal.AutoSize = True
+		Me.cbUseDecimal.Location = New System.Drawing.Point(3, 71)
+		Me.cbUseDecimal.Name = "cbUseDecimal"
+		Me.cbUseDecimal.Size = New System.Drawing.Size(218, 24)
+		Me.cbUseDecimal.TabIndex = 17
+		Me.cbUseDecimal.Text = "Convert double to decimal"
+		Me.cbUseDecimal.UseVisualStyleBackColor = True
 		'
 		'result
 		'
@@ -1177,7 +1176,7 @@ Partial Class myXSD
 		Me.result.Multiline = True
 		Me.result.Name = "result"
 		Me.result.ScrollBars = System.Windows.Forms.ScrollBars.Both
-		Me.result.Size = New System.Drawing.Size(1375, 109)
+		Me.result.Size = New System.Drawing.Size(1375, 110)
 		Me.result.TabIndex = 0
 		'
 		'OpenFileDialog1
@@ -1195,7 +1194,7 @@ Partial Class myXSD
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.pbClose
-		Me.ClientSize = New System.Drawing.Size(1419, 681)
+		Me.ClientSize = New System.Drawing.Size(1419, 682)
 		Me.Controls.Add(Me.panelMain)
 		Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.Name = "myXSD"
@@ -1316,5 +1315,5 @@ Partial Class myXSD
 	Friend WithEvents efVersion As TextBox
 	Friend WithEvents cbNoVersion As CheckBox
 	Friend WithEvents cbEnumAsString As CheckBox
-	Friend WithEvents cbEnumNoInvalidValues As CheckBox
+	Friend WithEvents cbUseDecimal As CheckBox
 End Class
